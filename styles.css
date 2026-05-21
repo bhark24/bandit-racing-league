@@ -102,6 +102,7 @@ a {
     list-style: none;
     display: flex;
     gap: 30px;
+    align-items: center;
 }
 
 .nav-links a {
@@ -128,6 +129,23 @@ a {
 
 .nav-links a:hover::after, .nav-links a.active::after {
     width: 100%;
+}
+
+.nav-links a.btn-secondary::after {
+    display: none;
+}
+
+.nav-links a.btn-secondary:hover {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+.nav-links a.btn-secondary.active {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+    background-color: rgba(0, 255, 0, 0.05);
 }
 
 /* Mobile Navigation Header */
