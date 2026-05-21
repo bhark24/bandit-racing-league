@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drivers Roster | Bandit Racing League</title>
+    <title>Driver Roster | Bandit Racing League</title>
+    <!-- SEO & Page Previews -->
+    <meta name="description" content="Meet the drivers of the Bandit Racing League. Browse the official active roster, car numbers, and driver statuses!">
+    <meta name="keywords" content="Bandit Racing League, Roster, iRacing Drivers, NASCAR Car Numbers">
+    
+    <!-- Open Graph / Discord Previews -->
+    <meta property="og:title" content="Bandit Racing League - Driver Roster">
+    <meta property="og:description" content="Meet the drivers of the Bandit Racing League. Browse the official active roster, car numbers, and driver statuses!">
+    <meta property="og:image" content="https://banditracingleague.net/assets/main-logo.png">
+    <meta property="og:url" content="https://banditracingleague.net/drivers.html">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#00ff00">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -13,12 +25,20 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
+            <!-- Mobile Header (Visible only on mobile) -->
+            <div class="nav-mobile-header">
+                <a href="/index.html" class="nav-brand-mobile">BANDIT RACING LEAGUE</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+            
             <ul class="nav-links">
-                <li><a href='/'>Home</a></li>
-                <li><a href='/standings'>Standings</a></li>
-                <li><a href='/schedule'>Schedule</a></li>
-                <li><a href='/results'>Results</a></li>
-                <li><a class='active' href='/drivers'>Drivers</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/standings.html">Standings</a></li>
+                <li><a href="/schedule.html">Schedule</a></li>
+                <li><a href="/results.html">Results</a></li>
+                <li><a class="active" href="/drivers.html">Drivers</a></li>
                 <li><a href="/fantasy.html">Fantasy League</a></li>
                 <li><a href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"></a></li>
                 <li><a href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"></a></li>
@@ -91,6 +111,18 @@
                 grid.appendChild(card);
             });
         }
+
+        // Toggle mobile navigation menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.querySelector('.nav-toggle');
+            const navContainer = document.querySelector('.nav-container');
+            
+            if (toggleBtn && navContainer) {
+                toggleBtn.addEventListener('click', function() {
+                    navContainer.classList.toggle('nav-open');
+                });
+            }
+        });
     </script>
     </section>
 

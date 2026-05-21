@@ -130,9 +130,127 @@ a {
     width: 100%;
 }
 
-.nav-links a:has(img)::after {
-    display: none !important;
+/* Mobile Navigation Header */
+.nav-mobile-header {
+    display: none;
 }
+
+.nav-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.hamburger {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--text-light);
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--text-light);
+    position: absolute;
+    left: 0;
+    transition: transform 0.3s ease, top 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    top: 8px;
+}
+
+/* Open states for Hamburger animation */
+.nav-open .hamburger {
+    background: transparent;
+}
+
+.nav-open .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+    background: var(--neon-green);
+}
+
+.nav-open .hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+    background: var(--neon-green);
+}
+
+/* Media Query for Mobile Responsive Nav */
+@media (max-width: 992px) {
+    .nav-mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .nav-toggle {
+        display: flex;
+    }
+    
+    .nav-brand-mobile {
+        font-family: var(--font-heading);
+        font-size: 1.2rem;
+        font-weight: 900;
+        font-style: italic;
+        color: var(--text-light);
+        letter-spacing: 1px;
+    }
+    
+    .nav-brand-mobile:hover {
+        color: var(--neon-green);
+    }
+    
+    .nav-links {
+        display: none !important;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+        align-items: center;
+        padding: 20px 0;
+        border-top: 1px solid #1a1a1a;
+    }
+    
+    .nav-actions {
+        display: none !important;
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        align-items: center;
+        padding-bottom: 20px;
+    }
+    
+    /* When navigation is open */
+    .nav-container.nav-open {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .nav-container.nav-open .nav-links {
+        display: flex !important;
+    }
+    
+    .nav-container.nav-open .nav-actions {
+        display: flex !important;
+    }
+}
+
 
 /* QR Code Popup */
 .qr-container {
