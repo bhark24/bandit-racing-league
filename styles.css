@@ -131,6 +131,70 @@ a {
     width: 100%;
 }
 
+.nav-links a[data-tooltip] {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-links a[data-tooltip]::after {
+    display: none !important; /* Disable standard green underline for icon links */
+}
+
+.nav-icon-label {
+    display: none; /* Hidden on desktop */
+}
+
+/* Tooltip style on desktop */
+@media (min-width: 993px) {
+    .nav-links a[data-tooltip]::before {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: -45px;
+        left: 50%;
+        transform: translateX(-50%) translateY(5px);
+        background-color: rgba(11, 11, 11, 0.95);
+        color: var(--text-light);
+        border: 1.5px solid var(--neon-green);
+        border-radius: 4px;
+        padding: 6px 12px;
+        font-size: 0.75rem;
+        font-family: var(--font-heading);
+        font-weight: bold;
+        text-transform: uppercase;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--transition-fast) ease, transform var(--transition-fast) ease;
+        z-index: 1000;
+        box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+    }
+
+    .nav-links a[data-tooltip]:hover::before {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Mobile responsive labels for navigation drawer */
+@media (max-width: 992px) {
+    .nav-links a[data-tooltip] {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .nav-icon-label {
+        display: inline-block;
+        font-size: 1.1rem;
+        font-weight: 700;
+        font-family: var(--font-heading);
+        color: var(--text-light);
+    }
+}
+
 .nav-links a.btn-secondary::after {
     display: none;
 }
