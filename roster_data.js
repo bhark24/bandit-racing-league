@@ -79,6 +79,14 @@ const rosterData = {
     "driver": "MICHAEL RAMOS",
     "status": "full-time"
   },
+  "30": {
+    "driver": "CARTER PHILLIPS",
+    "status": "full-time"
+  },
+  "31": {
+    "driver": "CONNOR GIBSON",
+    "status": "full-time"
+  },
   "32": {
     "driver": "chad hartle",
     "status": "part-time"
@@ -98,6 +106,14 @@ const rosterData = {
   "62": {
     "driver": "TY CORINO",
     "status": "full-time"
+  },
+  "63": {
+    "driver": "TRE ELLIS",
+    "status": "part-time"
+  },
+  "64": {
+    "driver": "ADAM CLARK",
+    "status": "part-time"
   },
   "73": {
     "driver": "BRANDON GEERS",
