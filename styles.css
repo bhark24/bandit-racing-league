@@ -209,6 +209,12 @@ a {
     background: var(--neon-green);
 }
 
+@media (min-width: 993px) {
+    .nav-actions {
+        margin-left: 40px; /* Clear gap between SimTrax and the Join Discord button */
+    }
+}
+
 /* Media Query for Mobile Responsive Nav */
 @media (max-width: 992px) {
     .nav-mobile-header {
