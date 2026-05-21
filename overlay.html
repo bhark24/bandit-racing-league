@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&family=Oswald:wght@700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    width: 1024px;
+    height: 576px;
+    background-image: url('car_bg.jpg');
+    background-size: 1024px 576px;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* 1. Add "SEASON 16" under Bandit Racing League logo (x~0-240, y~0-140) */
+  .season-16 {
+    position: absolute;
+    top: 130px;
+    left: 20px;
+    color: #a3ff00; /* matching neon green */
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  }
+  
+  /* 2. Hide other top logos and add NICK NICKERSON SEASON 16 CHAMPION */
+  .top-banner {
+    position: absolute;
+    top: 0;
+    left: 260px;
+    width: 764px;
+    height: 140px;
+    background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0.95) 100%);
+    backdrop-filter: blur(4px);
+  }
+  .champion-text {
+    position: absolute;
+    top: 15px;
+    left: 320px;
+    color: white;
+    font-size: 55px;
+    font-style: italic;
+    font-weight: 900;
+    line-height: 1.0;
+    text-shadow: 3px 3px 0 #000, 4px 4px 5px rgba(0,0,0,0.8);
+    transform: skewX(-5deg);
+  }
+  .champion-text span {
+    color: #a3ff00;
+    font-size: 42px;
+  }
+  
+  /* 3. Remove "LATE CANG" on front bumper (approx x: 195, y: 410) */
+  .bumper-patch {
+    position: absolute;
+    top: 416px;
+    left: 190px;
+    width: 20px;
+    height: 18px;
+    background: #111; /* dark grey to match bumper */
+    border-radius: 2px;
+    transform: rotate(-3deg);
+  }
+  
+  /* 4. Replace bottom text with new text */
+  .bottom-banner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1024px;
+    height: 85px;
+    /* We sample a clean strip of track background */
+    background-image: url('car_bg.jpg');
+    background-position: 0 -380px; 
+    background-size: 1024px 576px;
+    filter: brightness(0.9);
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .bottom-text {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 1024px;
+    text-align: center;
+    color: #a3ff00;
+    font-size: 44px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 3px 3px 5px rgba(0,0,0,0.8);
+  }
+</style>
+</head>
+<body>
+  <!-- Cover top right logos -->
+  <div class="top-banner"></div>
+  
+  <!-- Add top text -->
+  <div class="season-16">SEASON 16</div>
+  <div class="champion-text">
+    NICK NICKERSON<br>
+    <span>SEASON 16 CHAMPION</span>
+  </div>
+
+  <!-- Patch bumper -->
+  <div class="bumper-patch"></div>
+
+  <!-- Cover bottom text and add new text -->
+  <div class="bottom-banner"></div>
+  <div class="bottom-text">4X BANDIT RACING LEAGUE CHAMPION</div>
+</body>
+</html>

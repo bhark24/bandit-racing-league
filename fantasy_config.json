@@ -1,0 +1,84 @@
+{
+  "season_id": "28135",
+  "google_sheet_csv_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRIxc1JpJGMJjj83VAYSxkIavPKF4gICZxiKNCHeFpzIfZe9SYEbKOWkg1w1x_bW_RpFPiMbHVtZwky/pub?gid=1032270024&single=true&output=csv",
+  "google_form_url": "https://docs.google.com/forms/d/e/1FAIpQLScgUSQNAfVpdD0BHqH4afJdEMV9xNvorSkQ-ZTumX9RrxLYKw/formResponse",
+  "google_form_fields": {
+    "name": "entry.600556052",
+    "tier_a": "entry.660537648",
+    "tier_b1": "entry.1220374346",
+    "tier_b2": "entry.202307613",
+    "tier_c": "entry.1542867592",
+    "tiebreaker": "entry.900395544"
+  },
+  "scoring": {
+    "finish_points": {
+      "1": 40,
+      "2": 35,
+      "3": 32,
+      "4": 30,
+      "5": 28,
+      "6": 26,
+      "7": 24,
+      "8": 22,
+      "9": 20,
+      "10": 18,
+      "11": 16,
+      "12": 14,
+      "13": 12,
+      "14": 10,
+      "15": 8
+    },
+    "default_finish_points": 8,
+    "pole_bonus": 5,
+    "most_laps_led_bonus": 5,
+    "clean_race_bonus": 3,
+    "dnf_penalty": -10
+  },
+  "tiers": {
+    "A": [
+      "NICK NICKERSON",
+      "JONATHON PLATT",
+      "KEVIN FOSTER",
+      "DAVID LEAKEY",
+      "LOGAN MURRAY",
+      "BENJAMIN LACY",
+      "RICKY HART",
+      "BRET GUZIK"
+    ],
+    "B": [
+      "BILL HARKINS",
+      "NICOLE KRIESEL",
+      "SEAN BRITT",
+      "JASON ALLEGRINI",
+      "MATT CROCKETT",
+      "JOSH ADAMS",
+      "JOSHUA ADAMS",
+      "MICHAEL RAMOS",
+      "TY CORINO",
+      "TYSON KOPF",
+      "BOB BERRY",
+      "JASON GREENWELL",
+      "JOSH BILLITER",
+      "JOSHUA BILLITER",
+      "JACKSON KNAAK"
+    ],
+    "C": [
+      "DIONTE RADER",
+      "DIANTE RODER",
+      "MATT BAILEY",
+      "NATHAN SANTOS",
+      "DYLAN NICASTRO",
+      "ETHAN SIKORSKI",
+      "REAGAN FRUGE",
+      "CHAD HARTLE",
+      "MICHAEL RAKES",
+      "CURTIS YANCEY",
+      "BRANDON GEERS",
+      "MARK ALAN BIVENS",
+      "DAVID WESTOVER JR",
+      "BRANDON JACKSON",
+      "EDDIE HAGIGH",
+      "NOLAN GROSS"
+    ]
+  }
+}

@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandit Racing League Roster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        
+                :root { --bg-dark: #0a0a0c; --bg-card: #15161a; --neon-green: #39ff14; --text-primary: #ffffff; --text-secondary: #9ba1a6; --border-color: #2a2c33; --status-available: #39ff14; --status-fulltime: #00e5ff; --status-parttime: #ffea00; --status-reserved: #ff1744; --status-pastchampion: #ffd700; }
+                body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-primary); margin:0; padding:2rem; }
+                .app-container { max-width: 1400px; margin: 0 auto; }
+                header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; }
+                .logo-area h1 { font-family: 'Teko', sans-serif; font-size: 3.5rem; margin:0; }
+                .logo-area p { color: var(--neon-green); font-size: 0.9rem; margin:0; letter-spacing: 2px; text-transform: uppercase;}
+                .roster-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+                .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; }
+                .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+                .car-number { font-family: 'Teko', sans-serif; font-size: 4rem; line-height: 0.8; font-style: italic; }
+                .status-select { background: rgba(0,0,0,0.3); padding: 0.4rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; color: var(--text-secondary); }
+                .input-group label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; display: block; margin-bottom: 0.5rem; }
+                .driver-input { color: var(--neon-green); font-size: 1.5rem; font-weight: bold; text-transform: uppercase; }
+            
+        /* Hide actions on the public page */
+        .actions { display: none !important; }
+        .status-select { background: rgba(0,0,0,0.3); padding: 0.4rem; border-radius: 4px; }
+        .card:hover { transform: none; box-shadow: none; border-color: var(--border-color); }
+        .card[data-status="available"] .status-select { color: var(--status-available); }
+        .card[data-status="full-time"] .status-select { color: var(--status-fulltime); }
+        .card[data-status="part-time"] .status-select { color: var(--status-parttime); }
+        .card[data-status="reserved"] .status-select { color: var(--status-reserved); }
+        .card[data-status="past-champion"] .status-select { color: var(--status-pastchampion); }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo-area">
+                <h1>BANDIT RACING LEAGUE</h1>
+                <p>OFFICIAL ROSTER</p>
+            </div>
+        </header>
+        <main class="roster-grid">
+            
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#00</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">Jackson Knaak</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#01</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#02</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NOLAN GROSS</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#03</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="past-champion">
+                <div class="card-header">
+                    <span class="car-number">#04</span>
+                    <span class="status-select">Past Champion Reserved</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRET GUZIK</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#05</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#06</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#07</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#08</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#09</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#0</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="past-champion">
+                <div class="card-header">
+                    <span class="car-number">#1</span>
+                    <span class="status-select">Past Champion Reserved</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">RICKY HART</div>
+                </div>
+            </div>
+            <div class="card" data-status="past-champion">
+                <div class="card-header">
+                    <span class="car-number">#2</span>
+                    <span class="status-select">Past Champion Reserved</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NICK NICKERSON</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#3</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#4</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">LOGAN MURRAY</div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#5</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">SEAN BRITT</div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#6</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NICOLE KRIESEL</div>
+                </div>
+            </div>
+            <div class="card" data-status="past-champion">
+                <div class="card-header">
+                    <span class="car-number">#7</span>
+                    <span class="status-select">Past Champion Reserved</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BENJAMIN LACY</div>
+                </div>
+            </div>
+            <div class="card" data-status="past-champion">
+                <div class="card-header">
+                    <span class="car-number">#8</span>
+                    <span class="status-select">Past Champion Reserved</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">KEVIN FOSTER</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#9</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#10</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#11</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#12</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BILL HARKINS</div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#13</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JONATHON PLATT</div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#14</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JASON ALLEGRINI</div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#15</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MATT CROCKETT</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#16</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#17</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DIANTE RODER</div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#18</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">VICTOR WEAVER</div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#19</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MATT BAILEY</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#20</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#21</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NATHAN SANTOS</div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#22</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSH ADAMS</div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#23</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DYLAN NICASTRO</div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#24</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">ETHAN SIKORSKI</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#25</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#26</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#27</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MICHAEL RAMOS</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#28</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#29</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#30</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#31</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#32</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#33</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#34</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#35</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#36</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#37</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#38</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#39</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#40</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#41</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#42</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="past-champion">
+                <div class="card-header">
+                    <span class="car-number">#43</span>
+                    <span class="status-select">Past Champion Reserved</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JONATHON PLATT</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#44</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#45</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#46</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#47</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MICHAEL RAKES</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#48</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#49</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#50</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#51</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CURTIS YANCEY</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#52</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#53</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#54</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#55</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#56</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#57</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#58</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#59</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#60</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#61</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#62</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TY CORINO</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#63</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#64</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#65</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#66</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#67</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#68</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#69</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#70</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#71</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#72</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#73</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRANDON GEERS</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#74</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#75</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BOB BERRY</div>
+                </div>
+            </div>
+            <div class="card" data-status="past-champion">
+                <div class="card-header">
+                    <span class="car-number">#76</span>
+                    <span class="status-select">Past Champion Reserved</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MARK ALAN BIVENS</div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#77</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TYSON KOPF</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#78</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#79</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#80</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#81</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#82</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#83</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JASON GREENWELL</div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#84</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVID LEAKEY</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#85</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#86</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#87</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#88</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVID WESTOVER JR</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#89</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#90</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="part-time">
+                <div class="card-header">
+                    <span class="car-number">#91</span>
+                    <span class="status-select">Part Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRANDON JACKSON</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#92</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#93</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#94</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#95</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#96</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="past-champion">
+                <div class="card-header">
+                    <span class="car-number">#97</span>
+                    <span class="status-select">Past Champion Reserved</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">EDDIE HAGIGH</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#98</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+            <div class="card" data-status="full-time">
+                <div class="card-header">
+                    <span class="car-number">#99</span>
+                    <span class="status-select">Full Time</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSH BILLITER</div>
+                </div>
+            </div>
+            <div class="card" data-status="available">
+                <div class="card-header">
+                    <span class="car-number">#100</span>
+                    <span class="status-select">Available</span>
+                </div>
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply | Bandit Racing League</title>
+    <!-- Google Fonts for an aggressive, modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href='/standings.html'>Standings</a></li>
+                <li><a href='/schedule.html'>Schedule</a></li>
+                <li><a href='/results.html'>Results</a></li>
+                <li><a href='/drivers.html'>Drivers</a></li>
+                <li><a href="/fantasy.html">Fantasy League</a></li>
+                <li><a href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"></a></li>
+                <li><a href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"></a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="/apply.html" class="btn-secondary active">Apply to League</a>
+                <div class="qr-container">
+                    <img src="assets/discord-qr.png" alt="QR Code" style="height: 42px; border-radius: 4px; border: 2px solid var(--neon-green); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <div class="qr-popup">
+                        <img src="assets/discord-qr.png" style="width: 100%; border-radius: 4px;">
+                        <p style="margin-top: 10px; font-weight: bold; font-family: var(--font-heading); color: var(--neon-green); text-transform: uppercase;">Scan to Join!</p>
+                    </div>
+                </div>
+                <a href="https://discord.gg/zXjvS9en" target="_blank" class="btn-primary">Join Discord</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="hero" style="min-height: 30vh; padding-top: 60px;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content" style="position: relative; z-index: 2;">
+            <h1 class="hero-title" style="font-size: 4rem;">JOIN THE <span class="accent">LEAGUE</span></h1>
+            <h2 class="hero-subtitle italic-heavy" style="text-transform: uppercase; letter-spacing: 2px; color: var(--chase-yellow); font-size: 1.5rem;">FOLLOW THESE STEPS TO SECURE YOUR SPOT</h2>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container" style="margin-top: -40px; margin-bottom: 80px; position: relative; z-index: 5;">
+        <div class="card neon-border" style="max-width: 800px; margin: 0 auto; padding: 40px;">
+            
+            <p style="font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 40px;">
+                Because iRacing has removed direct web links to leagues, you must apply directly through the iRacing UI desktop app. Follow the simple 3-step guide below!
+            </p>
+
+            <div class="instruction-steps">
+                
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Open iRacing</h3>
+                        <p>Launch the iRacing UI desktop application and log in to your account.</p>
+                        <a href="https://members.iracing.com" target="_blank" class="btn-secondary" style="margin-top: 15px; display: inline-block;">Go to iRacing.com &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Navigate to Leagues</h3>
+                        <p>On the left-hand navigation menu in the UI, click on the <strong>Leagues</strong> tab, then click on the <strong>Find a League</strong> button.</p>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number" style="background-color: var(--neon-green); color: #000; box-shadow: 0 0 15px var(--neon-green-glow);">3</div>
+                    <div class="step-content">
+                        <h3>Search & Apply</h3>
+                        <p>In the search bar, type in our official League ID number:</p>
+                        <div class="league-id-box" style="background: rgba(0,255,0,0.1); border: 2px dashed var(--neon-green); padding: 15px; text-align: center; font-size: 2.5rem; font-family: var(--font-heading); font-weight: 900; letter-spacing: 5px; color: #fff; margin: 20px 0; border-radius: 8px;">
+                            5234
+                        </div>
+                        <p>Click on <strong>Bandit Racing League</strong> when it appears, and click the <strong style="color: var(--neon-green);">Apply to League</strong> button!</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #2a2c33; margin: 40px 0;">
+
+            <div style="text-align: center;">
+                <h3 style="margin-bottom: 15px; font-size: 1.8rem;">FINAL STEP: JOIN THE DISCORD</h3>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">Once you have applied in iRacing, join our Discord server and let an admin know you applied!</p>
+                <a href="https://discord.gg/zXjvS9en" target="_blank" class="btn-primary" style="font-size: 1.2rem; padding: 15px 40px;">JOIN DISCORD SERVER</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

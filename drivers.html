@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drivers Roster | Bandit Racing League</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href='/'>Home</a></li>
+                <li><a href='/standings'>Standings</a></li>
+                <li><a href='/schedule'>Schedule</a></li>
+                <li><a href='/results'>Results</a></li>
+                <li><a class='active' href='/drivers'>Drivers</a></li>
+                <li><a href="/fantasy.html">Fantasy League</a></li>
+                <li><a href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"></a></li>
+                <li><a href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"></a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="/apply.html" class="btn-secondary">Apply to League</a>
+                <a href="https://discord.gg/zXjvS9en" target="_blank" class="btn-primary">Join Discord</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="schedule-header container text-center">
+        <div class="header-content">
+            <h1 class="italic-heavy accent title-massive">DRIVER ROSTER</h1>
+            <h2 class="italic-heavy text-light">SEASON 16</h2>
+        </div>
+    </header>
+
+    <!-- Grid -->
+    <section class="container" style="margin-bottom: 80px;">
+        <div class="roster-grid" id="driver-grid">
+            <!-- Drivers are dynamically generated here -->
+        </div>
+    </section>
+
+    <script src="roster_data.js"></script>
+    <script>
+        const grid = document.getElementById('driver-grid');
+
+        if (typeof rosterData === 'undefined' || typeof numbersList === 'undefined') {
+            grid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;'>No roster data found. Please drop your exported <code>roster_data.js</code> file from the Car Number Tracker into the folder!</p>";
+        } else {
+            const statusMap = {
+                'available': 'Available',
+                'full-time': 'Full Time',
+                'part-time': 'Part Time',
+                'reserved': 'Reserved / Practice',
+                'past-champion': 'Past Champion Reserved'
+            };
+
+            numbersList.forEach(num => {
+                const data = rosterData[num] || { driver: '', status: 'available' };
+                const hasDriver = data.driver && data.driver.trim() !== '';
+                
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.setAttribute('data-status', data.status);
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                            ${hasDriver ? 
+                                `<img src="assets/drivers numbers/${data.driver.trim()}.png" class="custom-number-img" style="max-height: 85px; max-width: 160px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>#${num}</span>'">` 
+                                : `<span class="car-number">#${num}</span>`
+                            }
+                        </div>
+                        <span class="status-badge">${statusMap[data.status] || 'Available'}</span>
+                    </div>
+                    <div class="input-group">
+                        ${hasDriver ? '' : '<label>Driver Name</label>'}
+                        <div class="driver-display" style="opacity: ${hasDriver ? '1' : '0.3'}; display: flex; align-items: center;">
+                            ${hasDriver ? data.driver.trim() : 'Available'}
+                        </div>
+                        ${hasDriver ? 
+                            `<div style="margin-top: 8px;"><a href="https://simracerhub.com/season_standings.php?season_id=28135" target="_blank" style="display:inline-block; color: var(--neon-green); font-size: 0.75rem; text-decoration: none; border: 1px solid var(--neon-green); padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">View Stats &rarr;</a></div>` 
+                            : ''}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+    </script>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Scraping data and temporary cache
+simhub.html
+scrape_league.html
+scraped_drivers.txt
+test_picks.csv
+
+# Temporary test scripts
+test_url.py
+test_url2.py
+
+# Python cache files
+__pycache__/
+*.pyc

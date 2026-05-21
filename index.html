@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandit Racing League</title>
+    <!-- Google Fonts for an aggressive, modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href='/standings'>Standings</a></li>
+                <li><a href='/schedule'>Schedule</a></li>
+                <li><a href='/results'>Results</a></li>
+                <li><a href='/drivers'>Drivers</a></li>
+                <li><a href="/fantasy.html">Fantasy League</a></li>
+                <li><a href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"></a></li>
+                <li><a href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"></a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="/apply.html" class="btn-secondary">Apply to League</a>
+                <div class="qr-container">
+                    <img src="assets/discord-qr.png" alt="QR Code" style="height: 42px; border-radius: 4px; border: 2px solid var(--neon-green); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" onerror="this.onerror=null; this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='">
+                    <div class="qr-popup">
+                        <img src="assets/discord-qr.png" style="width: 100%; border-radius: 4px;" onerror="this.style.display='none'">
+                        <p style="margin-top: 10px; font-weight: bold; font-family: var(--font-heading); color: var(--neon-green); text-transform: uppercase;">Scan to Join!</p>
+                    </div>
+                </div>
+                <a href="https://discord.gg/zXjvS9en" target="_blank" class="btn-primary">Join Discord</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="assets/main-logo.png" alt="Bandit Racing League" style="max-width: 900px; width: 100%; margin-bottom: 10px; filter: drop-shadow(0 0 30px rgba(0, 255, 0, 0.15));" onerror="this.onerror=null; this.outerHTML='<h1 class=&quot;hero-title&quot;>NO RULES. <br><span class=&quot;accent&quot;>JUST SPEED.</span></h1>'">
+            <h2 class="hero-subtitle italic-heavy" style="text-transform: uppercase; letter-spacing: 2px; color: var(--chase-yellow); text-shadow: 0 0 15px rgba(255, 204, 0, 0.3);">WHERE CHAMPIONS ARE MADE</h2>
+            <img src="assets/Presenting-sponsor.png" alt="Presenting Sponsor" style="max-width: 800px; width: 100%; margin-top: 30px; margin-bottom: 120px; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));">
+
+        </div>
+    </header>
+
+    <!-- Command Center -->
+    <section class="command-center container">
+        
+        <!-- Top Split Section: Broadcast + Spotlight -->
+        <div class="top-split-layout">
+            
+            <!-- Live Broadcast Embed -->
+            <div id="broadcast" class="broadcast-container card neon-border" style="margin-bottom: 0; display: flex; flex-direction: column;">
+                <div class="card-header flex-header">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="live-dot"></span>
+                        <img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 45px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));">
+                    </div>
+                    <span class="broadcast-status">Online</span>
+                </div>
+                <div class="video-wrapper" style="flex-grow: 1;">
+                    
+                    <!-- STATE 1: PERMANENT LIVE BROADCAST -->
+                    <!-- Uncomment the iframe below ONLY on race day -->
+                    <!-- <iframe src="https://www.youtube.com/embed/live_stream?channel=UCN_xKkH2qU6_0eF9nC44uGg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+                    <!-- STATE 2: PREVIOUS RACE VOD -->
+                    <!-- Swap the VIDEO_ID below with last week's race ID to show the replay -->
+                    <iframe src="https://www.youtube.com/embed/6QFN7eOKLZs?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                    <!-- STATE 3: UPCOMING RACE GRAPHIC -->
+                    <!-- Uncomment the img below 2 days before the race (save image in assets folder) -->
+                    <!-- <img src="assets/promo-graphic.png" class="promo-graphic" alt="Next Race Promo"> -->
+                </div>
+            </div>
+
+            <!-- Driver Spotlight Section -->
+            <div class="card neon-border spotlight-vertical" style="display: flex; flex-direction: column;">
+                <div class="card-header flex-header">
+                    <h2><span class="live-dot" style="background: var(--chase-yellow); box-shadow: 0 0 10px var(--chase-yellow);"></span> DRIVER SPOTLIGHT</h2>
+                </div>
+                <div class="spotlight-card vertical-layout" style="flex-grow: 1;">
+                    <div class="spotlight-visual">
+                        <!-- Drop spotlight-nickerson.png into assets/ to replace the placeholder -->
+                        <img src="assets/spotlight-nickerson.png" alt="Nick Nickerson Car" class="spotlight-img" onerror="this.onerror=null; this.outerHTML='<div class=\'spotlight-placeholder\'>DRIVER CAR IMAGE</div>'">
+                        <img src="assets/drivers numbers/Nick Nickerson.png" alt="#2" class="spotlight-number" onerror="this.style.display='none'">
+                    </div>
+                    <div class="spotlight-content">
+                        <h3 class="spotlight-name">Nick Nickerson</h3>
+                        <p class="spotlight-bio">A dominant force in the Bandit Racing League, Nick Nickerson is the undeniable favorite for the Season 15 Championship. With a staggering 27% career win rate and an incredible 62% Top 5 finish rate over nearly 300 starts, Nickerson is a master of consistency.</p>
+                        
+                        <div class="spotlight-stats-grid">
+                            <div class="stat-box">
+                                <span class="stat-label">Wins</span>
+                                <span class="stat-value accent">78</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Top 5s</span>
+                                <span class="stat-value">179</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Laps Led</span>
+                                <span class="stat-value">8,808</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Win %</span>
+                                <span class="stat-value">27%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="grid-3">
+            <!-- Latest Winner -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Latest Winner</h2>
+                </div>
+                <div class="card-body winner-spotlight text-center">
+                    <div class="winner-img" style="cursor: pointer;" onclick="window.open('https://simracerhub.com/driver_stats.php?driver_id=63408&season_id=28135', '_blank')">
+                        <!-- Update the src below to match your new image file name each week! -->
+                        <img src="assets/j.knaakslinger.png" alt="Winning Car" style="width: 100%; border-radius: 4px; object-fit: cover;" onerror="this.onerror=null; this.outerHTML='<div class=\'placeholder-car\'>WINNING CAR IMAGE</div>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=63408&season_id=28135" target="_blank" style="text-decoration: none;">
+                        <h3 class="winner-name">Jackson Knaak</h3>
+                    </a>
+                    <p class="track-name">Slinger Speedway</p>
+                    <div style="margin: 15px 0;">
+                        <!-- Automatically loads the custom number if you drop it in assets/drivers numbers/ -->
+                        <img src="assets/drivers numbers/Jackson Knaak.png" alt="Custom Number" style="max-height: 50px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<p class=\'car-number accent\'>#00</p>'">
+                    </div>
+                    <div class="view-all-container" style="margin-top: 20px;">
+                        <a class='view-all' href='/results'>View Full Race Results &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Race -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Next Race</h2>
+                </div>
+                <div class="card-body event-info text-center">
+                    <div id="next-track-logo-container" style="height: 60px; margin-bottom: 10px; display: flex; justify-content: center; align-items: center;">
+                        <img id="next-track-logo" src="" alt="Track Logo" style="max-height: 100%; max-width: 100%; object-fit: contain; display: none; filter: drop-shadow(0 0 8px rgba(153, 255, 51, 0.8));" onerror="this.style.display='none'">
+                    </div>
+                    <h3 class="next-track" id="next-track-name">Loading...</h3>
+                    <p class="date" id="next-track-date">Loading date...</p>
+                    <div class="countdown">
+                        <div class="time-box"><span id="cd-days">00</span>Days</div>
+                        <div class="time-box"><span id="cd-hours">00</span>Hrs</div>
+                        <div class="time-box"><span id="cd-mins">00</span>Min</div>
+                        <div class="time-box"><span id="cd-secs">00</span>Sec</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top 5 Standings -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Top 5 Standings</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="standings-list">
+                        <li><span class="pos">1</span><span class="driver">N. Nickerson</span><span class="pts accent">690</span></li>
+                        <li><span class="pos">2</span><span class="driver">J. Platt</span><span class="pts">650</span></li>
+                        <li><span class="pos">3</span><span class="driver">K. Foster</span><span class="pts">624</span></li>
+                        <li><span class="pos">4</span><span class="driver">D. Leakey</span><span class="pts">581</span></li>
+                        <li><span class="pos">5</span><span class="driver">L. Murray</span><span class="pts">559</span></li>
+                    </ul>
+                    <div class="view-all-container">
+                        <a class='view-all' href='/standings'>View Full Standings &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News Section -->
+    <section class="container" style="margin-bottom: 60px;">
+        <div class="card neon-border">
+            <div class="card-header flex-header">
+                <h2><span class="live-dot" style="background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green);"></span> LATEST NEWS & ANALYSIS</h2>
+            </div>
+            <div class="card-body" style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green);">
+                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Series Analysis</div>
+                    <a href='/article_consistency' style='text-decoration: none;'>
+                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">The Art of Consistency: How to Contend Without a Trophy</h3>
+                    </a>
+                    <p style="color: #ccc; margin-bottom: 15px;">While Nickerson and Platt have proven they can find Victory Lane, a separate group of drivers has mastered the art of the "quietly brilliant" finish. A deep dive into the hidden battle of consistency in the Bandit Racing League.</p>
+                    <a class='btn-primary' href='/article_consistency' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <div style="text-align: center;">
+                <img src="assets/discord-qr.png" alt="Join Discord QR Code" style="max-width: 150px; border-radius: 12px; border: 2px solid var(--neon-green); box-shadow: 0 0 15px rgba(0,255,0,0.2);" onerror="this.onerror=null; this.outerHTML='<div style=\'padding: 20px; border: 2px dashed #00ff00; color: #fff; margin-bottom: 10px;\'>Save QR Code as assets/discord-qr.png</div>'">
+                <p style="margin-top: 10px; font-family: var(--font-heading); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: var(--neon-green);">Scan to Join our Discord!</p>
+            </div>
+            <p style="color: #666;">&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Full Season 16 Schedule Array
+        const seasonSchedule = [
+            { track: "Daytona Oval", logo: "Daytona_Clean.png", dateStr: "Wednesday, June 17th @ 9:00 PM EST", time: new Date("Jun 17, 2026 21:00:00 EST").getTime() },
+            { track: "Atlanta", logo: "AtlantaBlack.png", dateStr: "Wednesday, June 24th @ 9:00 PM EST", time: new Date("Jun 24, 2026 21:00:00 EST").getTime() },
+            { track: "Charlotte", logo: "Charlotte-Motor-Speedway-logo-2019.png", dateStr: "Wednesday, July 8th @ 9:00 PM EST", time: new Date("Jul 8, 2026 21:00:00 EST").getTime() },
+            { track: "Bristol", logo: "Bristol.png", dateStr: "Wednesday, July 15th @ 9:00 PM EST", time: new Date("Jul 15, 2026 21:00:00 EST").getTime() },
+            { track: "Nashville Superspeedway", logo: "Nashville.png", dateStr: "Wednesday, July 22nd @ 9:00 PM EST", time: new Date("Jul 22, 2026 21:00:00 EST").getTime() },
+            { track: "Pocono", logo: "POCONO.png", dateStr: "Wednesday, July 29th @ 9:00 PM EST", time: new Date("Jul 29, 2026 21:00:00 EST").getTime() },
+            { track: "Richmond", logo: "Richmond.png", dateStr: "Wednesday, August 5th @ 9:00 PM EST", time: new Date("Aug 5, 2026 21:00:00 EST").getTime() },
+            { track: "Michigan", logo: "MICHIGAN INT.png", dateStr: "Wednesday, August 12th @ 9:00 PM EST", time: new Date("Aug 12, 2026 21:00:00 EST").getTime() },
+            { track: "Gateway", logo: "World_Wide_Technology_Raceway_logo.svg.png", dateStr: "Wednesday, August 19th @ 9:00 PM EST", time: new Date("Aug 19, 2026 21:00:00 EST").getTime() },
+            { track: "Darlington", logo: "Darlington.png", dateStr: "Wednesday, September 2nd @ 9:00 PM EST", time: new Date("Sep 2, 2026 21:00:00 EST").getTime() },
+            { track: "Kansas", logo: "Kansas.png", dateStr: "Wednesday, September 9th @ 9:00 PM EST", time: new Date("Sep 9, 2026 21:00:00 EST").getTime() },
+            { track: "Texas", logo: "Texas Motorspeedway.png", dateStr: "Wednesday, September 16th @ 9:00 PM EST", time: new Date("Sep 16, 2026 21:00:00 EST").getTime() },
+            { track: "Las Vegas", logo: "Vegas.png", dateStr: "Wednesday, September 23rd @ 9:00 PM EST", time: new Date("Sep 23, 2026 21:00:00 EST").getTime() },
+            { track: "Watkins Glen", dateStr: "Wednesday, September 30th @ 9:00 PM EST", time: new Date("Sep 30, 2026 21:00:00 EST").getTime() },
+            { track: "Phoenix", logo: "phoenix.png", dateStr: "Wednesday, October 7th @ 9:00 PM EST", time: new Date("Oct 7, 2026 21:00:00 EST").getTime() },
+            { track: "Martinsville", logo: "Martinsville.jpg", dateStr: "Wednesday, October 14th @ 9:00 PM EST", time: new Date("Oct 14, 2026 21:00:00 EST").getTime() },
+            { track: "Talladega", logo: "Talladega.jpg", dateStr: "Wednesday, October 21st @ 9:00 PM EST", time: new Date("Oct 21, 2026 21:00:00 EST").getTime() },
+            { track: "Kansas", logo: "Kansas.png", dateStr: "Wednesday, October 28th @ 9:00 PM EST", time: new Date("Oct 28, 2026 21:00:00 EST").getTime() },
+            { track: "Road America", logo: "Road America.png", dateStr: "Wednesday, November 4th @ 9:00 PM EST", time: new Date("Nov 4, 2026 21:00:00 EST").getTime() },
+            { track: "Phoenix", logo: "phoenix.png", dateStr: "Wednesday, November 11th @ 9:00 PM EST", time: new Date("Nov 11, 2026 21:00:00 EST").getTime() },
+            { track: "Homestead Miami", logo: "Homestead Miami.jpg", dateStr: "Wednesday, November 18th @ 9:00 PM EST", time: new Date("Nov 18, 2026 21:00:00 EST").getTime() }
+        ];
+
+        function startCountdown() {
+            let nextRace = null;
+            const nowTime = new Date().getTime();
+            
+            // Find the first race in the schedule that hasn't happened yet
+            for (let i = 0; i < seasonSchedule.length; i++) {
+                if (seasonSchedule[i].time > nowTime) {
+                    nextRace = seasonSchedule[i];
+                    break;
+                }
+            }
+
+            if (nextRace) {
+                // Automatically populate the track and date text on the homepage
+                document.getElementById("next-track-name").innerText = nextRace.track;
+                document.getElementById("next-track-date").innerText = nextRace.dateStr;
+                
+                // Automatically load the track logo if it exists in assets/tracks/Track Logos/
+                const logoImg = document.getElementById("next-track-logo");
+                const logoFilename = nextRace.logo ? nextRace.logo : (nextRace.track + ".png");
+                logoImg.src = "assets/tracks/Track Logos/" + logoFilename;
+                logoImg.style.display = "block";
+                
+                const countDownDate = nextRace.time;
+                const x = setInterval(function() {
+                    const now = new Date().getTime();
+                    const distance = countDownDate - now;
+
+                    // If the countdown finishes, refresh the widget to grab the next race!
+                    if (distance < 0) {
+                        clearInterval(x);
+                        startCountdown(); 
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById("cd-days").innerHTML = days.toString().padStart(2, '0');
+                    document.getElementById("cd-hours").innerHTML = hours.toString().padStart(2, '0');
+                    document.getElementById("cd-mins").innerHTML = minutes.toString().padStart(2, '0');
+                    document.getElementById("cd-secs").innerHTML = seconds.toString().padStart(2, '0');
+                }, 1000);
+            } else {
+                // If all races in the array are in the past
+                document.getElementById("next-track-name").innerText = "Season Complete!";
+                document.getElementById("next-track-date").innerText = "Stay tuned for next season.";
+                document.getElementById("cd-days").innerHTML = "00";
+                document.getElementById("cd-hours").innerHTML = "00";
+                document.getElementById("cd-mins").innerHTML = "00";
+                document.getElementById("cd-secs").innerHTML = "00";
+            }
+        }
+
+        // Initialize the auto-updating logic
+        startCountdown();
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimTrax Broadcasting | Bandit Racing League</title>
+    <!-- Google Fonts for an aggressive, modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href='/standings.html'>Standings</a></li>
+                <li><a href='/schedule.html'>Schedule</a></li>
+                <li><a href='/results.html'>Results</a></li>
+                <li><a href='/drivers.html'>Drivers</a></li>
+                <li><a href="/fantasy.html">Fantasy League</a></li>
+                <li><a href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"></a></li>
+                <li><a href="/simtrax.html" class="active"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"></a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="/apply.html" class="btn-secondary">Apply to League</a>
+                <div class="qr-container">
+                    <img src="assets/discord-qr.png" alt="QR Code" style="height: 42px; border-radius: 4px; border: 2px solid var(--neon-green); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <div class="qr-popup">
+                        <img src="assets/discord-qr.png" style="width: 100%; border-radius: 4px;">
+                        <p style="margin-top: 10px; font-weight: bold; font-family: var(--font-heading); color: var(--neon-green); text-transform: uppercase;">Scan to Join!</p>
+                    </div>
+                </div>
+                <a href="https://discord.gg/zXjvS9en" target="_blank" class="btn-primary">Join Discord</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="hero" style="min-height: 50vh; padding-top: 60px; display: flex; align-items: center; justify-content: center; text-align: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content" style="position: relative; z-index: 2;">
+            <img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="max-width: 600px; width: 100%; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));" onerror="this.onerror=null; this.outerHTML='<h1 class=\'hero-title\' style=\'font-size: 5rem;\'>SIMTRAX <span class=\'accent\'>BROADCASTING</span></h1>'">
+            <h2 class="hero-subtitle italic-heavy" style="text-transform: uppercase; letter-spacing: 5px; color: var(--neon-green); font-size: 1.5rem; margin-top: 10px;">Official Broadcast Partners</h2>
+        </div>
+    </header>
+
+    <!-- Main Content: Broadcast Assets Gallery -->
+    <main class="container" style="margin-top: 40px; margin-bottom: 80px; position: relative; z-index: 5;">
+        
+        <!-- Top Row: Centered Presenting Sponsor -->
+        <div style="display: flex; justify-content: center; margin-bottom: 30px;">
+            <div class="card neon-border" style="width: 100%; max-width: 600px; padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">Presenting Sponsor</h3>
+                <img src="assets/Presenting-sponsor.png" alt="Presenting Sponsor" style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+            </div>
+        </div>
+
+        <!-- Bottom Row: 3 Monitors (Starting Lineup, Caution, Final Results) -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+            
+            <!-- Asset Card: Starting Lineup (Left) -->
+            <div class="card neon-border" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">Starting Lineup</h3>
+                <img src="assets/starting-lineup.png" alt="Starting Lineup" style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+            </div>
+            
+            <!-- Asset Card: Caution Sponsor (Center) -->
+            <div class="card neon-border" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">Caution Sponsor</h3>
+                <img src="assets/caution-sponsor.png" alt="Caution Sponsor" style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+            </div>
+
+            <!-- Asset Card: Final Results (Right) -->
+            <div class="card neon-border" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">Final Results</h3>
+                <img src="assets/final-results.png" alt="Final Results" style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+            </div>
+
+            <!-- Asset Card: LAT Oils Commercial (Center, Row 2) -->
+            <div class="card neon-border" style="grid-column: 2; padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">LAT Oils Commercial</h3>
+                <video controls style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+                    <source src="assets/lat-oils-commercial.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy League | Bandit Racing League</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Extra visual feedback for selected slot icons */
+        .summary-pick-slot {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.03);
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px dashed #333;
+            transition: all 0.3s ease;
+        }
+        .summary-pick-slot.filled {
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid var(--neon-green);
+        }
+        .slot-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #555;
+        }
+        .filled .slot-indicator {
+            background: var(--neon-green);
+            box-shadow: 0 0 8px var(--neon-green);
+        }
+        .submit-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5,5,5,0.95);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .submit-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .submit-overlay-content {
+            text-align: center;
+            max-width: 500px;
+            padding: 40px;
+            background: var(--bg-panel);
+            border: 2px solid var(--neon-green);
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 30px var(--neon-green-glow);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .submit-overlay.active .submit-overlay-content {
+            transform: scale(1);
+        }
+        .submit-overlay h3 {
+            font-size: 2.5rem;
+            color: var(--neon-green);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--neon-green-glow);
+        }
+        .submit-overlay p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+        }
+        .points-table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .points-table th, .points-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #222;
+        }
+        .points-table th {
+            text-align: left;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/standings.html">Standings</a></li>
+                <li><a href="/schedule.html">Schedule</a></li>
+                <li><a href="/results.html">Results</a></li>
+                <li><a href="/drivers.html">Drivers</a></li>
+                <li><a class="active" href="/fantasy.html">Fantasy League</a></li>
+                <li><a href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"></a></li>
+                <li><a href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"></a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="/apply.html" class="btn-secondary">Apply to League</a>
+                <div class="qr-container">
+                    <img src="assets/discord-qr.png" alt="QR Code" style="height: 42px; border-radius: 4px; border: 2px solid var(--neon-green); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <div class="qr-popup">
+                        <img src="assets/discord-qr.png" style="width: 100%; border-radius: 4px;">
+                        <p style="margin-top: 10px; font-weight: bold; font-family: var(--font-heading); color: var(--neon-green); text-transform: uppercase;">Scan to Join!</p>
+                    </div>
+                </div>
+                <a href="https://discord.gg/zXjvS9en" target="_blank" class="btn-primary">Join Discord</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" style="min-height: 40vh; padding-top: 60px; display: flex; align-items: center; justify-content: center; text-align: center; position: relative;">
+        <div class="hero-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(5,5,5,1) 100%);"></div>
+        <div class="hero-content" style="position: relative; z-index: 2;">
+            <h1 style="font-size: 4rem; font-weight: 900; font-style: italic;"><span class="accent">FANTASY</span> LEAGUE</h1>
+            <h2 class="italic-heavy" style="text-transform: uppercase; letter-spacing: 5px; color: var(--neon-green); font-size: 1.3rem; margin-top: 10px;">Viewer Participation Zone</h2>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container" style="margin-top: 20px; margin-bottom: 100px;">
+        
+        <!-- Tab Navigation -->
+        <div class="fantasy-tabs">
+            <button class="fantasy-tab-btn active" onclick="switchTab('picks-tab')">Submit Roster</button>
+            <button class="fantasy-tab-btn" onclick="switchTab('leaderboard-tab')">Standings</button>
+            <button class="fantasy-tab-btn" onclick="switchTab('rules-tab')">How To Play</button>
+        </div>
+
+        <!-- TAB 1: SUBMIT PICKS -->
+        <div id="picks-tab" class="fantasy-tab-content active">
+            <div class="fantasy-intro">
+                <p>Welcome to the official <strong>Bandit Racing League Fantasy Challenge</strong>! Draft your roster of 4 drivers for this week's race. Submissions close when the green flag drops on race night.</p>
+                <div style="margin-top: 15px; font-weight: 700; color: var(--neon-green); text-transform: uppercase; font-family: var(--font-heading);" id="lock-countdown">
+                    Selections open for the next race!
+                </div>
+            </div>
+
+            <!-- TIER A SECTION -->
+            <div class="tier-section" id="tier-a-container">
+                <div class="tier-header tier-a">
+                    <span>TIER A: THE FRONT RUNNERS</span>
+                    <span>SELECT 1 DRIVER</span>
+                </div>
+                <div class="roster-grid" id="tier-a-grid">
+                    <!-- Dynamic rendering -->
+                </div>
+            </div>
+
+            <!-- TIER B SECTION -->
+            <div class="tier-section" id="tier-b-container">
+                <div class="tier-header tier-b">
+                    <span>TIER B: THE CONTENDERS</span>
+                    <span>SELECT 2 DRIVERS</span>
+                </div>
+                <div class="roster-grid" id="tier-b-grid">
+                    <!-- Dynamic rendering -->
+                </div>
+            </div>
+
+            <!-- TIER C SECTION -->
+            <div class="tier-section" id="tier-c-container">
+                <div class="tier-header tier-c">
+                    <span>TIER C: THE DARK HORSES</span>
+                    <span>SELECT 1 DRIVER</span>
+                </div>
+                <div class="roster-grid" id="tier-c-grid">
+                    <!-- Dynamic rendering -->
+                </div>
+            </div>
+
+            <!-- TIEBREAKER & FORM -->
+            <div class="fantasy-panel" style="margin-top: 40px;">
+                <h3 style="color: #fff; margin-bottom: 20px; font-size: 1.5rem; text-align: center; border-bottom: 1px solid #222; padding-bottom: 15px;">Complete Your Entry</h3>
+                
+                <div class="fantasy-form-container">
+                    <form id="fantasy-picks-form" onsubmit="submitFantasyForm(event)">
+                        
+                        <!-- Tiebreaker -->
+                        <div class="fantasy-form-group">
+                            <label class="fantasy-form-label" for="tiebreaker">Tiebreaker: Caution Laps</label>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -5px; margin-bottom: 10px;">Predict the exact number of caution laps in this race. Closest guess wins scoring ties.</p>
+                            <input class="fantasy-form-input" type="number" id="tiebreaker" min="0" max="150" required placeholder="e.g. 12">
+                        </div>
+
+                        <!-- Name -->
+                        <div class="fantasy-form-group">
+                            <label class="fantasy-form-label" for="fan-name">Your Name / Alias</label>
+                            <input class="fantasy-form-input" type="text" id="fan-name" maxlength="50" required placeholder="Enter the name for the leaderboard">
+                        </div>
+
+                        <!-- Email -->
+                        <div class="fantasy-form-group">
+                            <label class="fantasy-form-label" for="fan-email">Email Address (Optional)</label>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -5px; margin-bottom: 10px;">Used only to verify your entry if needed.</p>
+                            <input class="fantasy-form-input" type="email" id="fan-email" placeholder="e.g. yourname@example.com">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <!-- SELECTION FOOTER (STICKY SUMMARY) -->
+            <div class="fantasy-selection-summary">
+                <div class="summary-picks">
+                    <div class="summary-pick-slot" id="slot-a">
+                        <span class="slot-indicator"></span>
+                        <span>Tier A: <strong class="summary-pick-val" id="val-a">None Selected</strong></span>
+                    </div>
+                    <div class="summary-pick-slot" id="slot-b1">
+                        <span class="slot-indicator"></span>
+                        <span>Tier B (1): <strong class="summary-pick-val" id="val-b1">None Selected</strong></span>
+                    </div>
+                    <div class="summary-pick-slot" id="slot-b2">
+                        <span class="slot-indicator"></span>
+                        <span>Tier B (2): <strong class="summary-pick-val" id="val-b2">None Selected</strong></span>
+                    </div>
+                    <div class="summary-pick-slot" id="slot-c">
+                        <span class="slot-indicator"></span>
+                        <span>Tier C: <strong class="summary-pick-val" id="val-c">None Selected</strong></span>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" form="fantasy-picks-form" class="btn-primary" id="submit-picks-btn" disabled style="padding: 15px 35px; font-size: 1.1rem; width: 100%;">Submit Roster</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: STANDINGS LEADERBOARD -->
+        <div id="leaderboard-tab" class="fantasy-tab-content">
+            <div class="fantasy-panel">
+                <div class="fantasy-leaderboard-header">
+                    <div class="fantasy-leaderboard-title">
+                        <h2>FANTASY LEAGUE LEADERBOARD</h2>
+                        <div class="fantasy-leaderboard-meta" id="leaderboard-update-time">Last updated: Never</div>
+                    </div>
+                    <div class="fantasy-leaderboard-meta text-right" id="latest-race-info" style="border-left: 2px solid var(--neon-green); padding-left: 15px; background: rgba(0,255,0,0.01);">
+                        <strong>Latest Scored Race</strong><br>
+                        <span id="latest-race-track">No races recorded</span><br>
+                        <span style="color: var(--neon-green); font-weight: bold;" id="latest-race-winner"></span>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="fantasy-table-wrapper">
+                    <table class="fantasy-table" id="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Rank</th>
+                                <th>Fan Player</th>
+                                <th style="width: 150px;">Total Points</th>
+                                <th style="width: 120px;">Race Wins</th>
+                                <th>Selected Roster (Latest Race)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                            <!-- Standings dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Race History Feed -->
+            <div class="fantasy-panel" style="margin-top: 40px;">
+                <h3 style="color: #fff; margin-bottom: 25px; font-size: 1.4rem; border-left: 3px solid var(--chase-yellow); padding-left: 10px;">Season Race History</h3>
+                <div id="race-history-container">
+                    <!-- History cards populate here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: HOW TO PLAY & RULES -->
+        <div id="rules-tab" class="fantasy-tab-content">
+            <div class="fantasy-panel">
+                <h2 style="color: var(--neon-green); margin-bottom: 20px; font-size: 2rem;">Drafting & Scoring Rules</h2>
+                
+                <h3 style="color: #fff; margin-top: 30px; margin-bottom: 10px; font-size: 1.3rem;">Roster Requirements</h3>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">Each race week, you must select exactly four drivers within the specified tiers:</p>
+                <ul style="color: var(--text-muted); margin-left: 25px; margin-bottom: 20px;">
+                    <li style="margin-bottom: 5px;"><strong>Tier A (Front Runners)</strong>: Choose 1 driver.</li>
+                    <li style="margin-bottom: 5px;"><strong>Tier B (Contenders)</strong>: Choose 2 drivers.</li>
+                    <li style="margin-bottom: 5px;"><strong>Tier C (Dark Horses)</strong>: Choose 1 driver.</li>
+                </ul>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">You must also submit a <strong>Tiebreaker</strong> guess: your prediction of the total number of caution laps run during the main event.</p>
+
+                <h3 style="color: #fff; margin-top: 30px; margin-bottom: 10px; font-size: 1.3rem;">Points Scale</h3>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">Your weekly fantasy score is the sum of the points scored by each of your 4 drafted drivers. Drivers earn points based on their official race stats from SimRacerHub:</p>
+                
+                <div style="max-width: 600px; margin-bottom: 30px;">
+                    <table class="points-table">
+                        <thead>
+                            <tr>
+                                <th>Finishing Position</th>
+                                <th>Points Earned</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1st Place</td><td>40 pts</td></tr>
+                            <tr><td>2nd Place</td><td>35 pts</td></tr>
+                            <tr><td>3rd Place</td><td>32 pts</td></tr>
+                            <tr><td>4th Place</td><td>30 pts</td></tr>
+                            <tr><td>5th Place</td><td>28 pts</td></tr>
+                            <tr><td>6th - 14th Place</td><td>Decrements by 2 pts per position (e.g. 6th = 26, 7th = 24...)</td></tr>
+                            <tr><td>15th Place & Below</td><td>8 pts (minimum finish points)</td></tr>
+                            <tr><td style="color: var(--status-available);"><strong>Pole Position (Starts 1st)</strong></td><td style="color: var(--status-available);">+5 bonus pts</td></tr>
+                            <tr><td style="color: var(--status-available);"><strong>Led Most Laps</strong></td><td style="color: var(--status-available);">+5 bonus pts</td></tr>
+                            <tr><td style="color: var(--status-available);"><strong>Clean Race (0 Incidents)</strong></td><td style="color: var(--status-available);">+3 bonus pts</td></tr>
+                            <tr><td style="color: var(--status-reserved);"><strong>DNF (Did Not Finish)</strong></td><td style="color: var(--status-reserved);">-10 penalty pts</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 style="color: #fff; margin-top: 30px; margin-bottom: 10px; font-size: 1.3rem;">Winning the Week & Standings</h3>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">After each race is completed, driver stats are scraped from SimRacerHub, points are tallied, and the standings are updated.</p>
+                <ul style="color: var(--text-muted); margin-left: 25px; margin-bottom: 20px;">
+                    <li style="margin-bottom: 5px;"><strong>Weekly Winner</strong>: The fan with the highest total score. If there is a tie, the fan whose caution lap guess was closest to the actual caution laps is crowned the winner.</li>
+                    <li style="margin-bottom: 5px;"><strong>Championship Leaderboard</strong>: A running sum of your points across all scored races. High scores earn you bragging rights and the title of Ultimate Bandit Analyst!</li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SUCCESS SUBMIT OVERLAY -->
+    <div class="submit-overlay" id="success-overlay">
+        <div class="submit-overlay-content">
+            <h3>ROSTER LOCKED</h3>
+            <p>Your fantasy picks have been successfully submitted for the next race! Your roster will be scored once official results are published.</p>
+            <div id="submitted-picks-summary" style="margin-bottom: 30px; text-align: left; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 4px; border: 1px solid #333;">
+                <!-- Filled in via script -->
+            </div>
+            <button class="btn-primary" onclick="closeSuccessOverlay()">Back to Standings</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Roster Data and Standings Data -->
+    <script src="roster_data.js"></script>
+    <script src="fantasy_data.js"></script>
+    
+    <!-- Page Logic -->
+    <script>
+        // Store current user picks
+        const currentPicks = {
+            A: null,
+            B: [],
+            C: null
+        };
+
+        // Switch Tabs
+        function switchTab(tabId) {
+            // Remove active classes
+            document.querySelectorAll('.fantasy-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.fantasy-tab-content').forEach(tab => tab.classList.remove('active'));
+
+            // Find clicked button
+            const clickedBtn = Array.from(document.querySelectorAll('.fantasy-tab-btn')).find(btn => 
+                btn.getAttribute('onclick').includes(tabId)
+            );
+            if (clickedBtn) clickedBtn.classList.add('active');
+
+            // Find tab panel
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Initialize Fantasy Form & Roster grids
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load picks from local storage if they submitted previously
+            const savedPicks = localStorage.getItem('bandit_fantasy_submitted_picks');
+            const savedName = localStorage.getItem('bandit_fantasy_submitted_name');
+            const savedEmail = localStorage.getItem('bandit_fantasy_submitted_email');
+            
+            if (savedName) document.getElementById('fan-name').value = savedName;
+            if (savedEmail) document.getElementById('fan-email').value = savedEmail;
+
+            // Render Driver Grids based on rosterData and fantasyData.tiers
+            renderRosterDraftGrids();
+
+            // Render Leaderboard & standings
+            renderLeaderboard();
+
+            // Render Race History
+            renderRaceHistory();
+
+            // Render countdown details
+            updateCountdownText();
+        });
+
+        // Map status
+        const statusMap = {
+            'available': 'Available',
+            'full-time': 'Full Time',
+            'part-time': 'Part Time',
+            'reserved': 'Reserved / Practice',
+            'past-champion': 'Past Champion'
+        };
+
+        // Helper to find driver details from rosterData by name
+        function findDriverByName(driverName) {
+            if (typeof rosterData === 'undefined') return null;
+            driverName = driverName.trim().toLowerCase();
+            
+            for (let num in rosterData) {
+                const driverObj = rosterData[num];
+                if (driverObj && driverObj.driver && driverObj.driver.trim().toLowerCase() === driverName) {
+                    return {
+                        number: num,
+                        driver: driverObj.driver,
+                        status: driverObj.status
+                    };
+                }
+            }
+            return null;
+        }
+
+        function renderRosterDraftGrids() {
+            const gridA = document.getElementById('tier-a-grid');
+            const gridB = document.getElementById('tier-b-grid');
+            const gridC = document.getElementById('tier-c-grid');
+
+            if (typeof fantasyData === 'undefined' || !fantasyData.tiers) {
+                gridA.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted);'>Error loading fantasy tiers. Please run the calculator script.</p>";
+                return;
+            }
+
+            const renderTier = (tierArray, gridContainer, tierKey) => {
+                gridContainer.innerHTML = '';
+                let renderedCount = 0;
+                
+                tierArray.forEach(driverName => {
+                    const driverDetail = findDriverByName(driverName);
+                    // Only render active drivers (those signed up in rosterData)
+                    if (driverDetail) {
+                        renderedCount++;
+                        const hasNumImg = driverDetail.driver && driverDetail.driver.trim() !== '';
+                        const card = document.createElement('div');
+                        card.className = 'fantasy-driver-card';
+                        card.setAttribute('data-driver-name', driverDetail.driver);
+                        card.setAttribute('data-tier', tierKey);
+                        card.onclick = () => selectDriverCard(card, driverDetail.driver, tierKey);
+
+                        card.innerHTML = `
+                            <div class="fantasy-card-check">✓</div>
+                            <div class="fantasy-driver-info">
+                                <div style="height: 60px; display:flex; align-items:center;">
+                                    ${hasNumImg ? 
+                                        `<img src="assets/drivers numbers/${driverDetail.driver.trim()}.png" style="max-height: 55px; max-width: 110px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'fantasy-driver-num\\'>#${driverDetail.number}</span>'">` 
+                                        : `<span class="fantasy-driver-num">#${driverDetail.number}</span>`
+                                    }
+                                </div>
+                                <div>
+                                    <div class="fantasy-driver-name">${driverDetail.driver}</div>
+                                    <span style="font-size: 0.75rem; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">${statusMap[driverDetail.status] || 'Active'}</span>
+                                </div>
+                            </div>
+                            <div class="fantasy-driver-stats">
+                                <span>SimHub Stats</span>
+                                <a href="https://simracerhub.com/season_standings.php?season_id=28135" target="_blank" onclick="event.stopPropagation();" style="color: var(--neon-green);">Profile &rarr;</a>
+                            </div>
+                        `;
+                        gridContainer.appendChild(card);
+                    }
+                });
+
+                if (renderedCount === 0) {
+                    gridContainer.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 20px;'>No active drivers registered in this tier.</p>";
+                }
+            };
+
+            renderTier(fantasyData.tiers.A, gridA, 'A');
+            renderTier(fantasyData.tiers.B, gridB, 'B');
+            renderTier(fantasyData.tiers.C, gridC, 'C');
+        }
+
+        function selectDriverCard(cardElement, driverName, tierKey) {
+            if (tierKey === 'A') {
+                // De-select current Tier A card
+                const currentSel = document.querySelector('#tier-a-grid .fantasy-driver-card.selected');
+                if (currentSel) currentSel.classList.remove('selected');
+                
+                if (currentPicks.A === driverName) {
+                    currentPicks.A = null;
+                } else {
+                    cardElement.classList.add('selected');
+                    currentPicks.A = driverName;
+                }
+            } 
+            else if (tierKey === 'C') {
+                // De-select current Tier C card
+                const currentSel = document.querySelector('#tier-c-grid .fantasy-driver-card.selected');
+                if (currentSel) currentSel.classList.remove('selected');
+
+                if (currentPicks.C === driverName) {
+                    currentPicks.C = null;
+                } else {
+                    cardElement.classList.add('selected');
+                    currentPicks.C = driverName;
+                }
+            } 
+            else if (tierKey === 'B') {
+                const idx = currentPicks.B.indexOf(driverName);
+                if (idx > -1) {
+                    // Clicked an already selected card -> deselect it
+                    cardElement.classList.remove('selected');
+                    currentPicks.B.splice(idx, 1);
+                } else {
+                    // Selecting a new card
+                    if (currentPicks.B.length >= 2) {
+                        alert("You can only select up to 2 drivers from Tier B!");
+                        return;
+                    }
+                    cardElement.classList.add('selected');
+                    currentPicks.B.push(driverName);
+                }
+            }
+
+            updateSelectionSummary();
+        }
+
+        function updateSelectionSummary() {
+            // Update Tier A
+            const valA = document.getElementById('val-a');
+            const slotA = document.getElementById('slot-a');
+            if (currentPicks.A) {
+                valA.textContent = currentPicks.A;
+                slotA.classList.add('filled');
+            } else {
+                valA.textContent = "None Selected";
+                slotA.classList.remove('filled');
+            }
+
+            // Update Tier B1
+            const valB1 = document.getElementById('val-b1');
+            const slotB1 = document.getElementById('slot-b1');
+            if (currentPicks.B[0]) {
+                valB1.textContent = currentPicks.B[0];
+                slotB1.classList.add('filled');
+            } else {
+                valB1.textContent = "None Selected";
+                slotB1.classList.remove('filled');
+            }
+
+            // Update Tier B2
+            const valB2 = document.getElementById('val-b2');
+            const slotB2 = document.getElementById('slot-b2');
+            if (currentPicks.B[1]) {
+                valB2.textContent = currentPicks.B[1];
+                slotB2.classList.add('filled');
+            } else {
+                valB2.textContent = "None Selected";
+                slotB2.classList.remove('filled');
+            }
+
+            // Update Tier C
+            const valC = document.getElementById('val-c');
+            const slotC = document.getElementById('slot-c');
+            if (currentPicks.C) {
+                valC.textContent = currentPicks.C;
+                slotC.classList.add('filled');
+            } else {
+                valC.textContent = "None Selected";
+                slotC.classList.remove('filled');
+            }
+
+            // Enable/Disable Submit Button
+            const submitBtn = document.getElementById('submit-picks-btn');
+            const formValid = currentPicks.A && currentPicks.B.length === 2 && currentPicks.C;
+            submitBtn.disabled = !formValid;
+        }
+
+        // Render Countdown Text
+        function updateCountdownText() {
+            const countdownEl = document.getElementById('lock-countdown');
+            if (typeof fantasyData !== 'undefined' && fantasyData.latest_race && fantasyData.latest_race.date) {
+                countdownEl.innerHTML = `LOCKED / SCORING NEXT EVENT — Next picks open after race scoring completes.`;
+            }
+        }
+
+        // Render Leaderboard
+        function renderLeaderboard() {
+            const tbody = document.getElementById('leaderboard-body');
+            const timeEl = document.getElementById('leaderboard-update-time');
+            const latestWinnerEl = document.getElementById('latest-race-winner');
+            const latestTrackEl = document.getElementById('latest-race-track');
+
+            if (typeof fantasyData === 'undefined' || !fantasyData.leaderboard) {
+                tbody.innerHTML = "<tr><td colspan='5' style='text-align:center;'>No standings recorded yet. Run the update script!</td></tr>";
+                return;
+            }
+
+            // Update header meta
+            timeEl.textContent = `Last updated: ${fantasyData.last_updated || 'Never'}`;
+            if (fantasyData.latest_race && fantasyData.latest_race.track) {
+                latestTrackEl.innerHTML = `${fantasyData.latest_race.track}<br><span style="font-size:0.8rem; color:var(--text-muted);">${fantasyData.latest_race.date || ''}</span>`;
+                latestWinnerEl.textContent = `Weekly Winner: ${fantasyData.latest_race.winner || 'None'}`;
+            }
+
+            // Render Rows
+            tbody.innerHTML = '';
+            fantasyData.leaderboard.forEach(player => {
+                const tr = document.createElement('tr');
+                let podiumClass = '';
+                if (player.rank === 1) podiumClass = 'podium-1';
+                else if (player.rank === 2) podiumClass = 'podium-2';
+                else if (player.rank === 3) podiumClass = 'podium-3';
+                
+                if (podiumClass) tr.className = podiumClass;
+
+                // Get latest picks badges
+                let picksHtml = '';
+                if (player.history && player.history.length > 0) {
+                    const latestEntry = player.history[player.history.length - 1];
+                    const picks = latestEntry.picks || [];
+                    
+                    picksHtml = `
+                        <div class="fantasy-row-picks">
+                            <span class="fantasy-row-pick-badge tier-a">${picks[0] || 'N/A'}</span>
+                            <span class="fantasy-row-pick-badge tier-b">${picks[1] || 'N/A'}</span>
+                            <span class="fantasy-row-pick-badge tier-b">${picks[2] || 'N/A'}</span>
+                            <span class="fantasy-row-pick-badge tier-c">${picks[3] || 'N/A'}</span>
+                        </div>
+                    `;
+                } else {
+                    picksHtml = '<span style="color:var(--text-muted); font-size:0.85rem;">No picks recorded</span>';
+                }
+
+                tr.innerHTML = `
+                    <td class="fantasy-rank">${player.rank}</td>
+                    <td class="fantasy-player-name">${player.name}</td>
+                    <td class="fantasy-score">${player.score} pts</td>
+                    <td class="fantasy-wins">${player.wins || 0}</td>
+                    <td>${picksHtml}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            if (fantasyData.leaderboard.length === 0) {
+                tbody.innerHTML = "<tr><td colspan='5' style='text-align:center;'>No standings recorded yet. Run the update script!</td></tr>";
+            }
+        }
+
+        // Render Race History Feed
+        function renderRaceHistory() {
+            const container = document.getElementById('race-history-container');
+            if (typeof fantasyData === 'undefined' || !fantasyData.races || fantasyData.races.length === 0) {
+                container.innerHTML = "<p style='text-align: center; color: var(--text-muted); padding: 20px;'>No race results history archived yet.</p>";
+                return;
+            }
+
+            container.innerHTML = '';
+            // Render races in reverse order (latest first)
+            const sortedRaces = [...fantasyData.races].reverse();
+
+            sortedRaces.forEach(race => {
+                const raceCard = document.createElement('div');
+                raceCard.className = 'fantasy-panel';
+                raceCard.style.marginBottom = '25px';
+                raceCard.style.border = '1px solid #1a1a1a';
+                
+                // Get weekly top score
+                let bestScore = -999;
+                let winners = [];
+                race.results.forEach(res => {
+                    if (res.total > bestScore) {
+                        bestScore = res.total;
+                        winners = [res.name];
+                    } else if (res.total === bestScore) {
+                        winners.push(res.name);
+                    }
+                });
+
+                // Top 3 weekly finishers table
+                const sortedWinners = [...race.results].sort((a,b) => b.total - a.total).slice(0, 3);
+                let podiumRows = '';
+                sortedWinners.forEach((w, idx) => {
+                    podiumRows += `
+                        <tr style="background:transparent;">
+                            <td style="padding: 8px 0; font-weight: bold; color: ${idx===0 ? 'var(--status-pastchampion)' : '#fff'}">
+                                ${idx+1}. ${w.name}
+                            </td>
+                            <td style="padding: 8px 0; text-align:right; font-family:var(--font-heading); font-weight:900; color:var(--neon-green);">
+                                ${w.total} pts
+                            </td>
+                            <td style="padding: 8px 10px; color: var(--text-muted); font-size:0.8rem;">
+                                Picks: ${w.picks.join(', ')}
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                raceCard.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; padding-bottom:15px; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
+                        <div>
+                            <h4 style="color:#fff; font-size:1.2rem; margin:0;">${race.track}</h4>
+                            <span style="font-size:0.85rem; color:var(--text-muted);">${race.date} &#183; ${race.caution_laps} caution laps</span>
+                        </div>
+                        <div style="background:rgba(255,204,0,0.05); border:1px solid var(--chase-yellow); padding:5px 12px; border-radius:4px; font-size:0.85rem; color:var(--chase-yellow);">
+                            🏆 Winner: <strong>${winners.join(', ')}</strong> (${bestScore} pts)
+                        </div>
+                    </div>
+                    <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+                        <thead>
+                            <tr style="border-bottom:1px solid #111;"><th style="padding: 4px 0; color:var(--text-muted); text-align:left;">Weekly Top 3</th><th style="padding: 4px 0; text-align:right; color:var(--text-muted);">Score</th><th style="padding: 4px 10px; color:var(--text-muted); text-align:left;">Selections</th></tr>
+                        </thead>
+                        <tbody>
+                            ${podiumRows}
+                        </tbody>
+                    </table>
+                `;
+                container.appendChild(raceCard);
+            });
+        }
+
+        // Form Submit Handler
+        function submitFantasyForm(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('fan-name').value.trim();
+            const email = document.getElementById('fan-email').value.trim();
+            const tiebreaker = document.getElementById('tiebreaker').value;
+
+            if (!currentPicks.A || currentPicks.B.length !== 2 || !currentPicks.C || !name) {
+                alert("Please select a complete roster of 4 drivers before submitting!");
+                return;
+            }
+
+            // Save to localStorage
+            localStorage.setItem('bandit_fantasy_submitted_picks', JSON.stringify(currentPicks));
+            localStorage.setItem('bandit_fantasy_submitted_name', name);
+            if (email) localStorage.setItem('bandit_fantasy_submitted_email', email);
+
+            // Populate success summary
+            const summaryDiv = document.getElementById('submitted-picks-summary');
+            summaryDiv.innerHTML = `
+                <p style="margin-bottom:8px;"><strong>Fan Name:</strong> ${name}</p>
+                <p style="margin-bottom:8px;"><strong>Tier A Pick:</strong> ${currentPicks.A}</p>
+                <p style="margin-bottom:8px;"><strong>Tier B Picks:</strong> ${currentPicks.B.join(', ')}</p>
+                <p style="margin-bottom:8px;"><strong>Tier C Pick:</strong> ${currentPicks.C}</p>
+                <p style="margin-bottom:0;"><strong>Tiebreaker (Caution Laps):</strong> ${tiebreaker}</p>
+            `;
+
+            // Display Success Overlay
+            document.getElementById('success-overlay').classList.add('active');
+
+            // Send to Google Form
+            const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScgUSQNAfVpdD0BHqH4afJdEMV9xNvorSkQ-ZTumX9RrxLYKw/formResponse';
+            const formData = new URLSearchParams();
+            formData.append('entry.600556052', name);
+            formData.append('entry.660537648', currentPicks.A);
+            formData.append('entry.1220374346', currentPicks.B[0]);
+            formData.append('entry.202307613', currentPicks.B[1]);
+            formData.append('entry.1542867592', currentPicks.C);
+            formData.append('entry.900395544', tiebreaker);
+
+            fetch(formUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData
+            }).then(() => {
+                console.log("Successfully posted picks to Google Form");
+            }).catch(err => {
+                console.error("Error submitting to Google Form", err);
+            });
+        }
+
+        function closeSuccessOverlay() {
+            document.getElementById('success-overlay').classList.remove('active');
+            // Switch back to Standing tab so they can review their name (which will show up on standings after next python sync!)
+            switchTab('leaderboard-tab');
+        }
+    </script>
+</body>
+</html>

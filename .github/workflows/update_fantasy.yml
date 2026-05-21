@@ -1,0 +1,32 @@
+name: Update Fantasy Standings
+
+on:
+  schedule:
+    # Runs every Thursday at 03:30 AM UTC (Wednesday 11:30 PM EST / 8:30 PM PST)
+    - cron: '30 3 * * 4'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  update-standings:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to commit and push changes back
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run Fantasy Update Script
+        run: |
+          python update_fantasy.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add fantasy_data.js
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update fantasy standings [skip ci]" && git push)
