@@ -278,7 +278,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2078308,
+      "balance": 2060415,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -346,7 +346,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -257
+          "amount": -253
         },
         {
           "date": "May 25, 2026",
@@ -394,7 +394,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -208
+          "amount": -212
         },
         {
           "date": "May 25, 2026",
@@ -446,12 +446,6 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Virtual Sponsorship Earned: RPM Graphics (Upward Performance Trend)",
-          "category": "income",
-          "amount": 17893
-        },
-        {
-          "date": "May 25, 2026",
           "description": "Charlotte Mock Race Results: P1, P2, P10, P18",
           "category": "info",
           "amount": 0
@@ -460,10 +454,9 @@ const teamsData = {
       "sponsors": [
         "Geezer Authentics",
         "Silverado Performance",
-        "Craftsman Tools",
-        "RPM Graphics"
+        "Craftsman Tools"
       ],
-      "passcodeHash": "dc589413c5e810828161270183203a1d74dbf96b174b2dcb64f1984c84d6f1a2"
+      "passcodeHash": "0af7d7158becc6d02dc41536107090e77195cf90c556cadb37866528cc94e8a9"
     },
     {
       "id": "lady-chaos-racing",
@@ -473,7 +466,7 @@ const teamsData = {
       "logo": "assets/lady-chaos-logo.png",
       "points": 80,
       "wins": 0,
-      "balance": 2164309,
+      "balance": 2164290,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -564,7 +557,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: DAVE LEAKEY from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -196
+          "amount": -207
         },
         {
           "date": "May 25, 2026",
@@ -588,7 +581,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BOB BERRY from Richmond, VA (260 mi)",
           "category": "expense",
-          "amount": -206
+          "amount": -213
         },
         {
           "date": "May 25, 2026",
@@ -612,7 +605,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON GREENWELL from Indianapolis, IN (480 mi)",
           "category": "expense",
-          "amount": -190
+          "amount": -191
         },
         {
           "date": "May 25, 2026",
@@ -638,7 +631,7 @@ const teamsData = {
         "Ford Performance",
         "Mobil 1"
       ],
-      "passcodeHash": "94eb55fe8549dd5d1abe35d920ca045f029e41e60d6158d20da820ab6e506849"
+      "passcodeHash": "7300b047e7a8a380860e42c06cdab59b5dd3070b1d57dc95c920f2e501b88d3c"
     },
     {
       "id": "simtrax-motorsports",
@@ -648,7 +641,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 96,
       "wins": 0,
-      "balance": 2166575,
+      "balance": 2166603,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -739,7 +732,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON ALLEGRINI from Nashville, TN (340 mi)",
           "category": "expense",
-          "amount": -213
+          "amount": -185
         },
         {
           "date": "May 25, 2026",
@@ -808,7 +801,7 @@ const teamsData = {
           "amount": 0
         }
       ],
-      "passcodeHash": "a78177cb465cb62a0aed846c743782035ecb5ceb783b67b8dbbd05e7b99e02ab",
+      "passcodeHash": "3324dab86f4dcdf48ba8ed6d736dcf050f09a23bf617c7d3579224548269ba1f",
       "sponsors": [
         "SimTrax Broadcasting",
         "Toyota Racing Development",
@@ -823,7 +816,7 @@ const teamsData = {
       "logo": "assets/937-racing-logo.png",
       "points": 62,
       "wins": 0,
-      "balance": 2124794,
+      "balance": 2124780,
       "drivers": {
         "primary": [
           "VICTOR WEAVER",
@@ -846,7 +839,7 @@ const teamsData = {
         {
           "id": "truck-2",
           "make": "Chevrolet",
-          "name": "937 Silverado #96",
+          "name": "937 Silverado #95",
           "condition": 64
         },
         {
@@ -891,7 +884,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (359 mi)",
           "category": "expense",
-          "amount": -200
+          "amount": -201
         },
         {
           "date": "May 25, 2026",
@@ -907,7 +900,7 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Standard Race Prep: 937 Silverado #96 (JOSH ADAMS)",
+          "description": "Standard Race Prep: 937 Silverado #95 (JOSH ADAMS)",
           "category": "expense",
           "amount": -2000
         },
@@ -915,7 +908,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (349 mi)",
           "category": "expense",
-          "amount": -209
+          "amount": -187
         },
         {
           "date": "May 25, 2026",
@@ -939,7 +932,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: DIONTE RADER from Miamisburg, OH (356 mi)",
           "category": "expense",
-          "amount": -198
+          "amount": -233
         },
         {
           "date": "May 25, 2026",
@@ -977,7 +970,7 @@ const teamsData = {
         "Silverado Performance",
         "Craftsman Tools"
       ],
-      "passcodeHash": "81d2be758760bb445521bfcb47bc5b8f66990fa41f16ee08dddbf16a9b4fab77"
+      "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305"
     }
   ]
 };
