@@ -736,7 +736,23 @@
             });
         }
 
-        function repairTruckInteractive(teamId, truckId, cost) {
+        async function sha256(message) {
+            if (window.crypto && crypto.subtle) {
+                const msgBuffer = new TextEncoder().encode(message);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+            // Fallback (e.g. non-secure file:// direct browser views)
+            let hash = 0;
+            for (let i = 0; i < message.length; i++) {
+                hash = ((hash << 5) - hash) + message.charCodeAt(i);
+                hash |= 0;
+            }
+            return 'fallback_' + hash.toString(16);
+        }
+
+        async function repairTruckInteractive(teamId, truckId, cost) {
             const team = teamsData.teams.find(t => t.id === teamId);
             if (!team) return;
             const truck = team.trucks.find(tr => tr.id === truckId);
@@ -747,7 +763,22 @@
                 return;
             }
             
-            const confirmRepair = confirm(`Are you sure you want to repair ${truck.name}? This will restore its condition to 100% and deduct $${new Intl.NumberFormat('en-US').format(cost)} from your balance.`);
+            // Challenge for passcode
+            const passcode = prompt(`Repairing ${truck.name} requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
+            if (passcode === null) return; // User cancelled
+            
+            if (!team.passcodeHash) {
+                alert("Error: Passcode protection is not initialized for this team.");
+                return;
+            }
+            
+            const hashed = await sha256(passcode.trim());
+            if (hashed !== team.passcodeHash) {
+                alert(`Authentication Failed!\n\nIncorrect passcode. Only the authorized team owner (${team.owner}) can perform chassis repairs.`);
+                return;
+            }
+            
+            const confirmRepair = confirm(`Passcode Verified!\n\nAre you sure you want to repair ${truck.name}? This will restore its condition to 100% and deduct $${new Intl.NumberFormat('en-US').format(cost)} from your balance.`);
             if (!confirmRepair) return;
             
             // Execute repair

@@ -278,7 +278,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2071808,
+      "balance": 2078308,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -346,7 +346,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -216
+          "amount": -257
         },
         {
           "date": "May 25, 2026",
@@ -394,7 +394,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -242
+          "amount": -208
         },
         {
           "date": "May 25, 2026",
@@ -446,9 +446,9 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Virtual Sponsorship Earned: Veloce Simulators (Upward Performance Trend)",
+          "description": "Virtual Sponsorship Earned: RPM Graphics (Upward Performance Trend)",
           "category": "income",
-          "amount": 11386
+          "amount": 17893
         },
         {
           "date": "May 25, 2026",
@@ -461,8 +461,9 @@ const teamsData = {
         "Geezer Authentics",
         "Silverado Performance",
         "Craftsman Tools",
-        "Veloce Simulators"
-      ]
+        "RPM Graphics"
+      ],
+      "passcodeHash": "dc589413c5e810828161270183203a1d74dbf96b174b2dcb64f1984c84d6f1a2"
     },
     {
       "id": "lady-chaos-racing",
@@ -472,7 +473,7 @@ const teamsData = {
       "logo": "assets/lady-chaos-logo.png",
       "points": 80,
       "wins": 0,
-      "balance": 2164224,
+      "balance": 2164309,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -563,7 +564,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: DAVE LEAKEY from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -249
+          "amount": -196
         },
         {
           "date": "May 25, 2026",
@@ -587,7 +588,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BOB BERRY from Richmond, VA (260 mi)",
           "category": "expense",
-          "amount": -190
+          "amount": -206
         },
         {
           "date": "May 25, 2026",
@@ -611,7 +612,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON GREENWELL from Indianapolis, IN (480 mi)",
           "category": "expense",
-          "amount": -238
+          "amount": -190
         },
         {
           "date": "May 25, 2026",
@@ -636,7 +637,8 @@ const teamsData = {
         "Chaos Cosmetics",
         "Ford Performance",
         "Mobil 1"
-      ]
+      ],
+      "passcodeHash": "94eb55fe8549dd5d1abe35d920ca045f029e41e60d6158d20da820ab6e506849"
     },
     {
       "id": "simtrax-motorsports",
@@ -646,7 +648,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 96,
       "wins": 0,
-      "balance": 2166603,
+      "balance": 2166575,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -737,7 +739,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON ALLEGRINI from Nashville, TN (340 mi)",
           "category": "expense",
-          "amount": -185
+          "amount": -213
         },
         {
           "date": "May 25, 2026",
@@ -806,6 +808,7 @@ const teamsData = {
           "amount": 0
         }
       ],
+      "passcodeHash": "a78177cb465cb62a0aed846c743782035ecb5ceb783b67b8dbbd05e7b99e02ab",
       "sponsors": [
         "SimTrax Broadcasting",
         "Toyota Racing Development",
@@ -820,7 +823,7 @@ const teamsData = {
       "logo": "assets/937-racing-logo.png",
       "points": 62,
       "wins": 0,
-      "balance": 2106912,
+      "balance": 2124794,
       "drivers": {
         "primary": [
           "VICTOR WEAVER",
@@ -888,7 +891,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (359 mi)",
           "category": "expense",
-          "amount": -208
+          "amount": -200
         },
         {
           "date": "May 25, 2026",
@@ -912,7 +915,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (349 mi)",
           "category": "expense",
-          "amount": -227
+          "amount": -209
         },
         {
           "date": "May 25, 2026",
@@ -936,7 +939,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: DIONTE RADER from Miamisburg, OH (356 mi)",
           "category": "expense",
-          "amount": -222
+          "amount": -198
         },
         {
           "date": "May 25, 2026",
@@ -964,12 +967,6 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Lost Sponsor Capital: Craftsman Tools (Downward Performance Trend)",
-          "category": "expense",
-          "amount": -17832
-        },
-        {
-          "date": "May 25, 2026",
           "description": "Charlotte Mock Race Results: P4, P8, P14, DNS",
           "category": "info",
           "amount": 0
@@ -977,8 +974,10 @@ const teamsData = {
       ],
       "sponsors": [
         "937 Racing",
-        "Silverado Performance"
-      ]
+        "Silverado Performance",
+        "Craftsman Tools"
+      ],
+      "passcodeHash": "81d2be758760bb445521bfcb47bc5b8f66990fa41f16ee08dddbf16a9b4fab77"
     }
   ]
 };
