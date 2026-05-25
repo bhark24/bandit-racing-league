@@ -258,7 +258,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2012853,
+      "balance": 2012965,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -320,7 +320,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -243
+          "amount": -203
         },
         {
           "date": "May 25, 2026",
@@ -336,9 +336,9 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Drive & Lodging: LOGAN MURRAY from Charlotte, NC (0 mi)",
+          "description": "Local Travel: LOGAN MURRAY from Charlotte, NC (0 mi)",
           "category": "expense",
-          "amount": -100
+          "amount": -20
         },
         {
           "date": "May 25, 2026",
@@ -356,7 +356,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -204
+          "amount": -212
         },
         {
           "date": "May 25, 2026",
@@ -410,7 +410,7 @@ const teamsData = {
       "logo": "assets/geezer-icon.png",
       "points": 86,
       "wins": 0,
-      "balance": 2144357,
+      "balance": 2144474,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -472,7 +472,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -643
+          "amount": -526
         },
         {
           "date": "May 25, 2026",
@@ -496,7 +496,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 100,
       "wins": 0,
-      "balance": 2134517,
+      "balance": 2134662,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -558,7 +558,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -483
+          "amount": -338
         },
         {
           "date": "May 25, 2026",
