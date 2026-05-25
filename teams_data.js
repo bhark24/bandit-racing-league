@@ -258,7 +258,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2099659,
+      "balance": 2068437,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -320,7 +320,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -194
+          "amount": -233
         },
         {
           "date": "May 25, 2026",
@@ -356,7 +356,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -204
+          "amount": -210
         },
         {
           "date": "May 25, 2026",
@@ -399,30 +399,23 @@ const teamsData = {
           "description": "Fast Repair: Geezer Silverado #1 (RICKY HART)",
           "category": "expense",
           "amount": -83250
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Virtual Sponsorship Earned: RPM Graphics (Upward Performance Trend)",
-          "category": "income",
-          "amount": 31177
         }
       ],
       "sponsors": [
         "Geezer Authentics",
         "Silverado Performance",
-        "Craftsman Tools",
-        "RPM Graphics"
+        "Craftsman Tools"
       ]
     },
     {
-      "id": "geezer-performance",
-      "name": "Geezer Performance App Racing",
+      "id": "lady-chaos-racing",
+      "name": "Lady Chaos Racing Team",
       "owner": "Nicole Kriesel",
-      "homeBase": "Charlotte, NC",
-      "logo": "assets/geezer-icon.png",
+      "homeBase": "Madison, WI",
+      "logo": "assets/lady-chaos-logo.png",
       "points": 86,
       "wins": 0,
-      "balance": 2189295,
+      "balance": 2182345,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -439,25 +432,25 @@ const teamsData = {
         {
           "id": "truck-1",
           "make": "Ford",
-          "name": "Geezer F-150 #6",
+          "name": "Chaos F-150 #6",
           "condition": 89
         },
         {
           "id": "truck-2",
           "make": "Ford",
-          "name": "Geezer F-150 #18",
+          "name": "Chaos F-150 #18",
           "condition": 81
         },
         {
           "id": "truck-3",
           "make": "Ford",
-          "name": "Geezer F-150 #75",
+          "name": "Chaos F-150 #75",
           "condition": 93
         },
         {
           "id": "truck-4",
           "make": "Ford",
-          "name": "Geezer F-150 #83",
+          "name": "Chaos F-150 #83",
           "condition": 85
         }
       ],
@@ -476,15 +469,15 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Hauler Logistics: Charlotte, NC to Concord, NC (12 mi)",
+          "description": "Hauler Logistics: Madison, WI to Concord, NC (707 mi)",
           "category": "expense",
-          "amount": -123
+          "amount": -7079
         },
         {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -582
+          "amount": -576
         },
         {
           "date": "May 25, 2026",
@@ -500,7 +493,7 @@ const teamsData = {
         }
       ],
       "sponsors": [
-        "Geezer Performance App",
+        "Chaos Cosmetics",
         "Ford Performance",
         "Mobil 1"
       ]
@@ -513,7 +506,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 100,
       "wins": 0,
-      "balance": 2174557,
+      "balance": 2174567,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -575,7 +568,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -371
+          "amount": -361
         },
         {
           "date": "May 25, 2026",

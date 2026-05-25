@@ -424,7 +424,8 @@ def main():
         home_base_coords = {
             "ashtabula, oh": (41.8651, -80.7898),
             "charlotte, nc": (35.2271, -80.8431),
-            "concord, nc": (35.4088, -80.5795)
+            "concord, nc": (35.4088, -80.5795),
+            "madison, wi": (43.0731, -89.4012)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates
@@ -557,8 +558,8 @@ def main():
         if "sponsors" not in team:
             if team["id"] == "geezer-authentics-racing":
                 team["sponsors"] = ["Geezer Authentics", "Silverado Performance", "Craftsman Tools"]
-            elif team["id"] == "geezer-performance":
-                team["sponsors"] = ["Geezer Performance App", "Ford Performance", "Mobil 1"]
+            elif team["id"] == "lady-chaos-racing":
+                team["sponsors"] = ["Chaos Cosmetics", "Ford Performance", "Mobil 1"]
             else:
                 team["sponsors"] = ["SimTrax Broadcasting", "Toyota Racing Development", "NASCAR Heat"]
 
