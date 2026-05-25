@@ -553,6 +553,50 @@ def main():
                 })
                 print(f"  Slot {idx+1}: {driver_name} DNS - No active backup available")
                 
+        # Ensure sponsors array exists in database
+        if "sponsors" not in team:
+            if team["id"] == "geezer-authentics-racing":
+                team["sponsors"] = ["Geezer Authentics", "Silverado Performance", "Craftsman Tools"]
+            elif team["id"] == "geezer-performance":
+                team["sponsors"] = ["Geezer Performance App", "Ford Performance", "Mobil 1"]
+            else:
+                team["sponsors"] = ["SimTrax Broadcasting", "Toyota Racing Development", "NASCAR Heat"]
+
+        # Sponsor Trend Evaluation:
+        # Upward direction: weekly points >= 90
+        # Downward direction: weekly points < 70
+        import random
+        available_new_sponsors = ["SimGear Pro", "Apex Fuel", "Checkered Flag Media", "QuickPit Lubricants", "DraftMasters", "Veloce Simulators", "FastTrack Designs", "RPM Graphics", "Octane Apparel", "Precision Shifters"]
+        
+        if team_points_this_week >= 90:
+            if random.random() < 0.50:
+                options = [s for s in available_new_sponsors if s not in team["sponsors"]]
+                if options:
+                    new_sponsor = random.choice(options)
+                    sponsor_payout = random.randint(10000, 35000)
+                    team["sponsors"].append(new_sponsor)
+                    team_earnings += sponsor_payout
+                    team["ledger"].append({
+                        "date": race_date,
+                        "description": f"Virtual Sponsorship Earned: {new_sponsor} (Upward Performance Trend)",
+                        "category": "income",
+                        "amount": sponsor_payout
+                    })
+                    print(f"  [Sponsor Gain] {team['name']} earned sponsorship from {new_sponsor}! (+${sponsor_payout})")
+        elif team_points_this_week < 70:
+            if random.random() < 0.40 and len(team["sponsors"]) > 1:
+                lost_sponsor = random.choice(team["sponsors"])
+                sponsor_loss = random.randint(5000, 20000)
+                team["sponsors"].remove(lost_sponsor)
+                team_expenses += sponsor_loss
+                team["ledger"].append({
+                    "date": race_date,
+                    "description": f"Lost Sponsor Capital: {lost_sponsor} (Downward Performance Trend)",
+                    "category": "expense",
+                    "amount": -sponsor_loss
+                })
+                print(f"  [Sponsor Loss] {team['name']} lost sponsorship from {lost_sponsor}! (-${sponsor_loss})")
+
         # Calculate updated balance
         team["balance"] += (team_earnings - team_expenses)
         team["points"] += team_points_this_week

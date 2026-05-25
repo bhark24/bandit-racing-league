@@ -248,7 +248,7 @@
         <div class="hero-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(5,5,5,1) 100%);"></div>
         <div class="hero-content" style="position: relative; z-index: 2;">
             <h1 style="font-size: 4rem; font-weight: 900; font-style: italic;"><span class="accent">FRANCHISE</span> TEAMS</h1>
-            <h2 class="italic-heavy" style="text-transform: uppercase; letter-spacing: 5px; color: var(--chase-yellow); font-size: 1.3rem; margin-top: 10px;">League Finances & Garages</h2>
+            <h2 class="italic-heavy" style="text-transform: uppercase; letter-spacing: 5px; color: var(--chase-yellow); font-size: 1.3rem; margin-top: 10px;">Expenses and Race Winnings</h2>
         </div>
     </header>
 
@@ -321,7 +321,11 @@
                     </div>
                     <div>
                         <h3 style="color:#fff; margin-bottom:15px; font-size:1.3rem;">Backup Drivers (2 Slots)</h3>
-                        <div style="display:flex; flex-direction:column; gap: 15px;" id="backup-drivers-container">
+                        <div style="display:flex; flex-direction:column; gap: 15px; margin-bottom: 25px;" id="backup-drivers-container">
+                            <!-- Rendered dynamically -->
+                        </div>
+                        <h3 style="color:#fff; margin-bottom:15px; font-size:1.3rem;">Active Franchise Sponsors</h3>
+                        <div style="display:flex; flex-wrap:wrap; gap: 10px;" id="sponsors-container">
                             <!-- Rendered dynamically -->
                         </div>
                     </div>
@@ -582,7 +586,7 @@
                     }
 
                     slotCard.innerHTML = `
-                        <img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'font-family:var(--font-heading); font-size:1.5rem; font-weight:bold; color:var(--neon-green);\'>#</span>'">
+                        <img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="handleDriverNumberError(this)">
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
                             <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
@@ -627,7 +631,7 @@
                     }
 
                     slotCard.innerHTML = `
-                        <img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'font-family:var(--font-heading); font-size:1.5rem; font-weight:bold; color:var(--neon-green);\'>#</span>'">
+                        <img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="handleDriverNumberError(this)">
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
                             <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
@@ -646,6 +650,32 @@
                     `;
                 }
                 backupCont.appendChild(slotCard);
+            }
+
+            // Render active franchise sponsors
+            const sponsorsCont = document.getElementById('sponsors-container');
+            if (sponsorsCont) {
+                sponsorsCont.innerHTML = '';
+                const sponsorsList = team.sponsors || [];
+                if (sponsorsList.length === 0) {
+                    sponsorsCont.innerHTML = '<span style="color:var(--text-muted); font-size:0.9rem;">No active sponsors.</span>';
+                } else {
+                    sponsorsList.forEach(sponsor => {
+                        const badge = document.createElement('span');
+                        badge.style.background = 'rgba(0,255,0,0.03)';
+                        badge.style.border = '1px solid var(--neon-green)';
+                        badge.style.borderRadius = '20px';
+                        badge.style.padding = '6px 14px';
+                        badge.style.color = '#fff';
+                        badge.style.fontSize = '0.85rem';
+                        badge.style.fontWeight = 'bold';
+                        badge.style.display = 'inline-flex';
+                        badge.style.alignItems = 'center';
+                        badge.style.boxShadow = '0 0 8px rgba(0,255,0,0.08)';
+                        badge.innerHTML = `🤝 ${sponsor}`;
+                        sponsorsCont.appendChild(badge);
+                    });
+                }
             }
         }
 
@@ -667,7 +697,7 @@
                 let driverLabel = `<span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Driver: Vacant</span>`;
                 
                 if (driverName) {
-                    visualHTML = `<img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:45px; max-width:90px; object-fit:contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'font-size:2rem;\'>🚚</span>'">`;
+                    visualHTML = `<img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:45px; max-width:90px; object-fit:contain;" onerror="handleTruckNumberError(this)">`;
                     driverLabel = `<span style="font-size:0.75rem; color:var(--neon-green); font-weight:bold; text-transform:uppercase;">Driver: ${driverName}</span>`;
                 }
 
@@ -793,6 +823,25 @@
 
             // Show target panel
             document.getElementById(tabId).classList.add('active');
+        }
+
+        function handleDriverNumberError(img) {
+            img.onerror = null;
+            const span = document.createElement('span');
+            span.style.fontFamily = 'var(--font-heading)';
+            span.style.fontSize = '1.5rem';
+            span.style.fontWeight = 'bold';
+            span.style.color = 'var(--neon-green)';
+            span.textContent = '#';
+            img.parentNode.replaceChild(span, img);
+        }
+
+        function handleTruckNumberError(img) {
+            img.onerror = null;
+            const span = document.createElement('span');
+            span.style.fontSize = '2rem';
+            span.textContent = '🚚';
+            img.parentNode.replaceChild(span, img);
         }
 
         // Toggle mobile navigation menu

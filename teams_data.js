@@ -258,7 +258,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2068388,
+      "balance": 2099659,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -320,7 +320,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -256
+          "amount": -194
         },
         {
           "date": "May 25, 2026",
@@ -356,7 +356,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -236
+          "amount": -204
         },
         {
           "date": "May 25, 2026",
@@ -399,7 +399,19 @@ const teamsData = {
           "description": "Fast Repair: Geezer Silverado #1 (RICKY HART)",
           "category": "expense",
           "amount": -83250
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Virtual Sponsorship Earned: RPM Graphics (Upward Performance Trend)",
+          "category": "income",
+          "amount": 31177
         }
+      ],
+      "sponsors": [
+        "Geezer Authentics",
+        "Silverado Performance",
+        "Craftsman Tools",
+        "RPM Graphics"
       ]
     },
     {
@@ -410,7 +422,7 @@ const teamsData = {
       "logo": "assets/geezer-icon.png",
       "points": 86,
       "wins": 0,
-      "balance": 2189350,
+      "balance": 2189295,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -472,7 +484,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -527
+          "amount": -582
         },
         {
           "date": "May 25, 2026",
@@ -486,6 +498,11 @@ const teamsData = {
           "category": "income",
           "amount": 120000
         }
+      ],
+      "sponsors": [
+        "Geezer Performance App",
+        "Ford Performance",
+        "Mobil 1"
       ]
     },
     {
@@ -496,7 +513,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 100,
       "wins": 0,
-      "balance": 2174567,
+      "balance": 2174557,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -558,7 +575,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -361
+          "amount": -371
         },
         {
           "date": "May 25, 2026",
@@ -572,6 +589,11 @@ const teamsData = {
           "category": "income",
           "amount": 105000
         }
+      ],
+      "sponsors": [
+        "SimTrax Broadcasting",
+        "Toyota Racing Development",
+        "NASCAR Heat"
       ]
     }
   ]
