@@ -1479,21 +1479,8 @@ footer {
 
 .fantasy-driver-card.selected {
     background-color: #111;
-}
-
-.tier-a .fantasy-driver-card.selected {
-    border-color: var(--status-pastchampion);
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-}
-
-.tier-b .fantasy-driver-card.selected {
     border-color: var(--neon-green);
     box-shadow: 0 0 15px var(--neon-green-glow);
-}
-
-.tier-c .fantasy-driver-card.selected {
-    border-color: var(--status-fulltime);
-    box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
 }
 
 .fantasy-card-check {
@@ -1518,16 +1505,8 @@ footer {
     border-color: transparent;
 }
 
-.tier-a .fantasy-driver-card.selected .fantasy-card-check {
-    background-color: var(--status-pastchampion);
-}
-
-.tier-b .fantasy-driver-card.selected .fantasy-card-check {
+.fantasy-driver-card.selected .fantasy-card-check {
     background-color: var(--neon-green);
-}
-
-.tier-c .fantasy-driver-card.selected .fantasy-card-check {
-    background-color: var(--status-fulltime);
 }
 
 .fantasy-driver-info {
@@ -1759,16 +1738,12 @@ footer {
 }
 
 .fantasy-row-pick-badge {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 255, 0, 0.02);
     padding: 3px 8px;
     border-radius: 4px;
-    border: 1px solid #222;
-    color: var(--text-muted);
+    border: 1px solid var(--neon-green);
+    color: #fff;
 }
-
-.fantasy-row-pick-badge.tier-a { border-color: var(--status-pastchampion); color: #ffd700dd; }
-.fantasy-row-pick-badge.tier-b { border-color: var(--neon-green); color: rgba(0, 255, 0, 0.8); }
-.fantasy-row-pick-badge.tier-c { border-color: var(--status-fulltime); color: rgba(0, 229, 255, 0.8); }
 
 @media (max-width: 992px) {
     .fantasy-selection-summary {
