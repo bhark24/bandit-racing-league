@@ -258,7 +258,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2068466,
+      "balance": 2094145,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -320,7 +320,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -208
+          "amount": -197
         },
         {
           "date": "May 25, 2026",
@@ -356,7 +356,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -206
+          "amount": -235
         },
         {
           "date": "May 25, 2026",
@@ -399,12 +399,19 @@ const teamsData = {
           "description": "Fast Repair: Geezer Silverado #1 (RICKY HART)",
           "category": "expense",
           "amount": -83250
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Virtual Sponsorship Earned: QuickPit Lubricants (Upward Performance Trend)",
+          "category": "income",
+          "amount": 25697
         }
       ],
       "sponsors": [
         "Geezer Authentics",
         "Silverado Performance",
-        "Craftsman Tools"
+        "Craftsman Tools",
+        "QuickPit Lubricants"
       ]
     },
     {
@@ -415,7 +422,7 @@ const teamsData = {
       "logo": "assets/lady-chaos-logo.png",
       "points": 86,
       "wins": 0,
-      "balance": 2182355,
+      "balance": 2182282,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -475,21 +482,75 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Travel Lodging (Flights + Drives for Crew)",
+          "description": "Local Travel: NICOLE KRIESEL from Charlotte, NC (0 mi)",
           "category": "expense",
-          "amount": -566
+          "amount": -20
         },
         {
           "date": "May 25, 2026",
-          "description": "Sponsor Starting Bonuses (4 Drivers)",
+          "description": "Sponsor Start Bonus: NICOLE KRIESEL",
           "category": "income",
-          "amount": 60000
+          "amount": 15000
         },
         {
           "date": "May 25, 2026",
-          "description": "Prize Money: P3, P4, P12, P14 Winnings",
+          "description": "Prize Money: NICOLE KRIESEL (P3)",
           "category": "income",
-          "amount": 120000
+          "amount": 45000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Flight & Lodging: VICTOR WEAVER from Daytona Beach, FL (420 mi)",
+          "category": "expense",
+          "amount": -193
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Sponsor Start Bonus: VICTOR WEAVER",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Prize Money: VICTOR WEAVER (P4)",
+          "category": "income",
+          "amount": 35000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Flight & Lodging: BOB BERRY from Richmond, VA (260 mi)",
+          "category": "expense",
+          "amount": -194
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Sponsor Start Bonus: BOB BERRY",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Prize Money: BOB BERRY (P12)",
+          "category": "income",
+          "amount": 20000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Flight & Lodging: JASON GREENWELL from Indianapolis, IN (480 mi)",
+          "category": "expense",
+          "amount": -232
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Sponsor Start Bonus: JASON GREENWELL",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Prize Money: JASON GREENWELL (P14)",
+          "category": "income",
+          "amount": 20000
         }
       ],
       "sponsors": [
@@ -506,7 +567,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 100,
       "wins": 0,
-      "balance": 2174562,
+      "balance": 2174614,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -566,21 +627,75 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Travel Lodging (Flights + Drives for Crew)",
+          "description": "Local Travel: JONATHON PLATT from Concord, NC (0 mi)",
           "category": "expense",
-          "amount": -366
+          "amount": -20
         },
         {
           "date": "May 25, 2026",
-          "description": "Sponsor Starting Bonuses (4 Drivers)",
+          "description": "Sponsor Start Bonus: JONATHON PLATT",
           "category": "income",
-          "amount": 60000
+          "amount": 15000
         },
         {
           "date": "May 25, 2026",
-          "description": "Prize Money: P5, P6, P7, P8 Winnings",
+          "description": "Prize Money: JONATHON PLATT (P5)",
           "category": "income",
-          "amount": 105000
+          "amount": 30000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Flight & Lodging: JASON ALLEGRINI from Nashville, TN (340 mi)",
+          "category": "expense",
+          "amount": -174
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Sponsor Start Bonus: JASON ALLEGRINI",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Prize Money: JASON ALLEGRINI (P6)",
+          "category": "income",
+          "amount": 25000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Drive & Lodging: MATT CROCKETT from Roanoke, VA (130 mi)",
+          "category": "expense",
+          "amount": -100
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Sponsor Start Bonus: MATT CROCKETT",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Prize Money: MATT CROCKETT (P7)",
+          "category": "income",
+          "amount": 25000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Local Travel: JOSH ADAMS from Charlotte, NC (0 mi)",
+          "category": "expense",
+          "amount": -20
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Sponsor Start Bonus: JOSH ADAMS",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Prize Money: JOSH ADAMS (P8)",
+          "category": "income",
+          "amount": 25000
         }
       ],
       "sponsors": [
