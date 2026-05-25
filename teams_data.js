@@ -258,7 +258,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2094145,
+      "balance": 2089987,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -320,7 +320,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -197
+          "amount": -212
         },
         {
           "date": "May 25, 2026",
@@ -356,7 +356,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -235
+          "amount": -207
         },
         {
           "date": "May 25, 2026",
@@ -402,16 +402,22 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Virtual Sponsorship Earned: QuickPit Lubricants (Upward Performance Trend)",
+          "description": "Virtual Sponsorship Earned: DraftMasters (Upward Performance Trend)",
           "category": "income",
-          "amount": 25697
+          "amount": 21526
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Charlotte Mock Race Results: P1, P2, P10, P18",
+          "category": "info",
+          "amount": 0
         }
       ],
       "sponsors": [
         "Geezer Authentics",
         "Silverado Performance",
         "Craftsman Tools",
-        "QuickPit Lubricants"
+        "DraftMasters"
       ]
     },
     {
@@ -422,7 +428,7 @@ const teamsData = {
       "logo": "assets/lady-chaos-logo.png",
       "points": 86,
       "wins": 0,
-      "balance": 2182282,
+      "balance": 2182267,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -502,7 +508,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: VICTOR WEAVER from Daytona Beach, FL (420 mi)",
           "category": "expense",
-          "amount": -193
+          "amount": -230
         },
         {
           "date": "May 25, 2026",
@@ -520,7 +526,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BOB BERRY from Richmond, VA (260 mi)",
           "category": "expense",
-          "amount": -194
+          "amount": -207
         },
         {
           "date": "May 25, 2026",
@@ -538,7 +544,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON GREENWELL from Indianapolis, IN (480 mi)",
           "category": "expense",
-          "amount": -232
+          "amount": -197
         },
         {
           "date": "May 25, 2026",
@@ -551,6 +557,12 @@ const teamsData = {
           "description": "Prize Money: JASON GREENWELL (P14)",
           "category": "income",
           "amount": 20000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Charlotte Mock Race Results: P3, P4, P12, P14",
+          "category": "info",
+          "amount": 0
         }
       ],
       "sponsors": [
@@ -567,7 +579,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 100,
       "wins": 0,
-      "balance": 2174614,
+      "balance": 2197790,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -647,7 +659,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON ALLEGRINI from Nashville, TN (340 mi)",
           "category": "expense",
-          "amount": -174
+          "amount": -202
         },
         {
           "date": "May 25, 2026",
@@ -696,12 +708,25 @@ const teamsData = {
           "description": "Prize Money: JOSH ADAMS (P8)",
           "category": "income",
           "amount": 25000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Virtual Sponsorship Earned: Octane Apparel (Upward Performance Trend)",
+          "category": "income",
+          "amount": 23204
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Charlotte Mock Race Results: P5, P6, P7, P8",
+          "category": "info",
+          "amount": 0
         }
       ],
       "sponsors": [
         "SimTrax Broadcasting",
         "Toyota Racing Development",
-        "NASCAR Heat"
+        "NASCAR Heat",
+        "Octane Apparel"
       ]
     }
   ]

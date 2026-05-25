@@ -789,10 +789,17 @@
             sortedLedger.forEach(item => {
                 const tr = document.createElement('tr');
                 const isIncome = item.category === 'income';
+                let amtDisplay = '';
+                let amtClass = '';
                 
-                const formattedAmount = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(Math.abs(item.amount));
-                const amtDisplay = (isIncome ? '+' : '-') + formattedAmount;
-                const amtClass = isIncome ? 'income' : 'expense';
+                if (item.amount === 0) {
+                    amtDisplay = '—';
+                    amtClass = 'info-neutral';
+                } else {
+                    const formattedAmount = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(Math.abs(item.amount));
+                    amtDisplay = (isIncome ? '+' : '-') + formattedAmount;
+                    amtClass = isIncome ? 'income' : 'expense';
+                }
 
                 tr.innerHTML = `
                     <td style="color:var(--text-muted);">${item.date}</td>
