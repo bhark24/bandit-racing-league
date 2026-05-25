@@ -271,10 +271,10 @@ def get_prize_money(position):
     elif position == 3: return 45000
     elif position == 4: return 35000
     elif position == 5: return 30000
-    elif position >= 6 and position <= 10: return 20000
-    elif position >= 11 and position <= 15: return 15000
-    elif position >= 16 and position <= 20: return 7500
-    else: return 4000
+    elif position >= 6 and position <= 10: return 25000
+    elif position >= 11 and position <= 15: return 20000
+    elif position >= 16 and position <= 20: return 15000
+    else: return 12000
 
 def main():
     parser = argparse.ArgumentParser(description="Update teams_data.js from SimRacerHub results and optional iRacing JSON.")
