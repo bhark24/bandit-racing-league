@@ -258,7 +258,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 1262800,
+      "balance": 2012853,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -302,7 +302,7 @@ const teamsData = {
           "date": "2026-05-24",
           "description": "Starting Franchise Balance",
           "category": "income",
-          "amount": 2000000
+          "amount": 2750000
         },
         {
           "date": "2026-05-24",
@@ -320,7 +320,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -250
+          "amount": -243
         },
         {
           "date": "May 25, 2026",
@@ -356,7 +356,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -250
+          "amount": -204
         },
         {
           "date": "May 25, 2026",
@@ -410,7 +410,7 @@ const teamsData = {
       "logo": "assets/geezer-icon.png",
       "points": 86,
       "wins": 0,
-      "balance": 1394300,
+      "balance": 2144357,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -454,7 +454,7 @@ const teamsData = {
           "date": "2026-05-24",
           "description": "Starting Franchise Balance",
           "category": "income",
-          "amount": 2000000
+          "amount": 2750000
         },
         {
           "date": "2026-05-24",
@@ -472,7 +472,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -700
+          "amount": -643
         },
         {
           "date": "May 25, 2026",
@@ -496,7 +496,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 100,
       "wins": 0,
-      "balance": 1384450,
+      "balance": 2134517,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -540,7 +540,7 @@ const teamsData = {
           "date": "2026-05-24",
           "description": "Starting Franchise Balance",
           "category": "income",
-          "amount": 2000000
+          "amount": 2750000
         },
         {
           "date": "2026-05-24",
@@ -558,7 +558,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -550
+          "amount": -483
         },
         {
           "date": "May 25, 2026",
