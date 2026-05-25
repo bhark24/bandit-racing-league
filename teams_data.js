@@ -258,7 +258,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2012965,
+      "balance": 2008466,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -312,15 +312,15 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Hauler Logistics: Concord, NC to Charlotte Motor Speedway (0 mi)",
+          "description": "Hauler Logistics: Ashtabula, OH to Concord, NC (450 mi)",
           "category": "expense",
-          "amount": 0
+          "amount": -4500
         },
         {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -203
+          "amount": -208
         },
         {
           "date": "May 25, 2026",
@@ -356,7 +356,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -212
+          "amount": -206
         },
         {
           "date": "May 25, 2026",
@@ -410,7 +410,7 @@ const teamsData = {
       "logo": "assets/geezer-icon.png",
       "points": 86,
       "wins": 0,
-      "balance": 2144474,
+      "balance": 2144290,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -464,15 +464,15 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Hauler Logistics: Concord, NC to Charlotte Motor Speedway (0 mi)",
+          "description": "Hauler Logistics: Charlotte, NC to Concord, NC (12 mi)",
           "category": "expense",
-          "amount": 0
+          "amount": -123
         },
         {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -526
+          "amount": -587
         },
         {
           "date": "May 25, 2026",
@@ -496,7 +496,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 100,
       "wins": 0,
-      "balance": 2134662,
+      "balance": 2134609,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -550,15 +550,15 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Hauler Logistics: Concord, NC to Charlotte Motor Speedway (0 mi)",
+          "description": "Hauler Logistics: Concord, NC to Concord, NC (7 mi)",
           "category": "expense",
-          "amount": 0
+          "amount": -72
         },
         {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -338
+          "amount": -319
         },
         {
           "date": "May 25, 2026",

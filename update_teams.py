@@ -147,6 +147,39 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return R * c
 
+def calculate_flight_cost(distance, date_str):
+    month = 5 # Default to May
+    try:
+        # Check standard date formats
+        for fmt in ("%b %d, %Y", "%B %d, %Y", "%Y-%m-%d"):
+            try:
+                dt = datetime.strptime(date_str, fmt)
+                month = dt.month
+                break
+            except ValueError:
+                pass
+    except Exception:
+        pass
+        
+    # Base: $150 + $0.15 per mile
+    base_cost = 150 + (distance * 0.15)
+    
+    # Seasonal multipliers
+    if month in (6, 7, 8, 11, 12):
+        seasonal_mult = 1.3 # Summer & winter holidays
+    elif month in (1, 2):
+        seasonal_mult = 0.8 # Winter off-season
+    else:
+        seasonal_mult = 1.0 # Spring / Fall
+        
+    cost = base_cost * seasonal_mult
+    
+    # Random market fluctuation (+/- 15%)
+    import random
+    fluctuation = random.uniform(0.85, 1.15)
+    
+    return int(cost * fluctuation)
+
 def parse_iracing_json(path):
     if not path or not os.path.exists(path):
         return {}
@@ -387,17 +420,26 @@ def main():
         team_earnings = 0
         
         # Deduct team-wide hauler logistics cost
-        # Flat $5/mi round trip from Concord, NC
-        hauler_cost = int(track_dist_concord * 2 * 5)
+        # Calculate from team's specific homeBase to track coordinates
+        home_base_coords = {
+            "ashtabula, oh": (41.8651, -80.7898),
+            "charlotte, nc": (35.2271, -80.8431),
+            "concord, nc": (35.4088, -80.5795)
+        }
+        home_base_norm = team["homeBase"].strip().lower()
+        coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates
+        
+        hauler_dist = haversine_distance(coords[0], coords[1], track_lat, track_lon)
+        hauler_cost = int(hauler_dist * 2 * 5) # $5/mi round trip
         team_expenses += hauler_cost
         team["ledger"].append({
             "date": race_date,
-            "description": f"Hauler Logistics: Concord, NC to {track_info['name']} ({track_dist_concord} mi)",
+            "description": f"Hauler Logistics: {team['homeBase']} to {track_info['city']} ({int(hauler_dist)} mi)",
             "category": "expense",
             "amount": -hauler_cost
         })
         
-        print(f"  Team Hauler Travel Cost: ${hauler_cost}")
+        print(f"  Team Hauler Travel Cost: ${hauler_cost} ({int(hauler_dist)} mi)")
         
         # Evaluate each active slot (mapping to trucks[0..3])
         for idx, (driver_name, is_backup, replaced_pri) in enumerate(active_lineup):
@@ -417,11 +459,14 @@ def main():
                 drv_loc = teams_db["driverLocations"].get(driver_name.upper())
                 if drv_loc:
                     drv_dist = haversine_distance(drv_loc["lat"], drv_loc["lon"], track_lat, track_lon)
-                    if drv_dist > 250:
-                        travel_fee = 250 # Flight cost
+                    if drv_dist <= 50:
+                        travel_fee = 20 # Local commute / fuel only, no lodging
+                        desc = f"Local Travel: {driver_name} from {drv_loc['city']} ({int(drv_dist)} mi)"
+                    elif drv_dist > 250:
+                        travel_fee = calculate_flight_cost(drv_dist, race_date)
                         desc = f"Flight & Lodging: {driver_name} from {drv_loc['city']} ({int(drv_dist)} mi)"
                     else:
-                        travel_fee = 100 # Driving cost
+                        travel_fee = 100 # Driving & Lodging
                         desc = f"Drive & Lodging: {driver_name} from {drv_loc['city']} ({int(drv_dist)} mi)"
                 else:
                     # Fallback to driving if no coordinate found
