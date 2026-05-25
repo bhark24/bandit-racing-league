@@ -671,6 +671,16 @@
                     driverLabel = `<span style="font-size:0.75rem; color:var(--neon-green); font-weight:bold; text-transform:uppercase;">Driver: ${driverName}</span>`;
                 }
 
+                let repairBtnHTML = '';
+                if (truck.condition < 100) {
+                    const cost = (100 - truck.condition) * 500;
+                    repairBtnHTML = `
+                        <button class="btn-primary" style="margin-top: 10px; padding: 6px 12px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="repairTruckInteractive('${team.id}', '${truck.id}', ${cost})">
+                            🔧 Repair Truck ($${new Intl.NumberFormat('en-US').format(cost)})
+                        </button>
+                    `;
+                }
+
                 card.innerHTML = `
                     <div style="display:flex; align-items:center; gap:20px; width: 100%; flex-wrap: wrap;">
                         <div style="width:90px; display:flex; justify-content:center; align-items:center;">
@@ -683,16 +693,60 @@
                                 ${driverLabel}
                             </div>
                         </div>
-                        <div style="text-align:right; min-width: 150px; margin-top: 10px;">
+                        <div style="text-align:right; min-width: 150px; margin-top: 10px; display: flex; flex-direction: column; align-items: flex-end;">
                             <span style="color:#fff; font-weight:bold; font-size:1rem;">Condition: ${truck.condition}%</span>
-                            <div class="condition-bar-container" style="margin-left:auto;">
+                            <div class="condition-bar-container" style="margin-left:auto; margin-bottom: 5px;">
                                 <div class="condition-bar-fill" style="width: ${truck.condition}%; background: ${barColor};"></div>
                             </div>
+                            ${repairBtnHTML}
                         </div>
                     </div>
                 `;
                 container.appendChild(card);
             });
+        }
+
+        function repairTruckInteractive(teamId, truckId, cost) {
+            const team = teamsData.teams.find(t => t.id === teamId);
+            if (!team) return;
+            const truck = team.trucks.find(tr => tr.id === truckId);
+            if (!truck) return;
+            
+            if (team.balance < cost) {
+                alert(`Insufficient franchise capital to repair this truck. Required: $${new Intl.NumberFormat('en-US').format(cost)}, Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
+                return;
+            }
+            
+            const confirmRepair = confirm(`Are you sure you want to repair ${truck.name}? This will restore its condition to 100% and deduct $${new Intl.NumberFormat('en-US').format(cost)} from your balance.`);
+            if (!confirmRepair) return;
+            
+            // Execute repair
+            team.balance -= cost;
+            const oldCondition = truck.condition;
+            truck.condition = 100;
+            
+            // Add ledger entry
+            const today = new Date();
+            const year = today.getFullYear();
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[today.getMonth()];
+            const day = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${month} ${day}, ${year}`;
+            
+            team.ledger.push({
+                date: dateStr,
+                description: `Repaired Fleet Truck: ${truck.name} (+${100 - oldCondition}%)`,
+                category: "expense",
+                amount: -cost
+            });
+            
+            // Re-render UI components
+            renderTeamsDirectory();
+            selectTeam(teamId);
+            renderFranchiseStandings();
+            
+            // Keep the Garage tab active
+            switchTeamTab('garage-tab');
         }
 
         function renderLedgerTab(team) {

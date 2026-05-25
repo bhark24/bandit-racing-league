@@ -258,7 +258,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2008466,
+      "balance": 2055929,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -320,7 +320,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -208
+          "amount": -211
         },
         {
           "date": "May 25, 2026",
@@ -332,7 +332,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Prize Money: BILL HARKINS (P2)",
           "category": "income",
-          "amount": 40000
+          "amount": 55000
         },
         {
           "date": "May 25, 2026",
@@ -350,13 +350,13 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Prize Money: LOGAN MURRAY (P10)",
           "category": "income",
-          "amount": 15000
+          "amount": 20000
         },
         {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -206
+          "amount": -240
         },
         {
           "date": "May 25, 2026",
@@ -368,7 +368,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Prize Money: NICK NICKERSON (P1)",
           "category": "income",
-          "amount": 50000
+          "amount": 75000
         },
         {
           "date": "May 25, 2026",
@@ -392,7 +392,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Prize Money: RICKY HART (P18)",
           "category": "income",
-          "amount": 5000
+          "amount": 7500
         },
         {
           "date": "May 25, 2026",
@@ -410,7 +410,7 @@ const teamsData = {
       "logo": "assets/geezer-icon.png",
       "points": 86,
       "wins": 0,
-      "balance": 2144290,
+      "balance": 2179328,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -472,7 +472,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -587
+          "amount": -549
         },
         {
           "date": "May 25, 2026",
@@ -484,7 +484,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Prize Money: P3, P4, P12, P14 Winnings",
           "category": "income",
-          "amount": 75000
+          "amount": 110000
         }
       ]
     },
@@ -496,7 +496,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 100,
       "wins": 0,
-      "balance": 2134609,
+      "balance": 2159605,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -558,7 +558,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -319
+          "amount": -323
         },
         {
           "date": "May 25, 2026",
@@ -570,7 +570,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Prize Money: P5, P6, P7, P8 Winnings",
           "category": "income",
-          "amount": 65000
+          "amount": 90000
         }
       ]
     }
