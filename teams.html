@@ -662,18 +662,32 @@
                 if (truck.condition < 40) barColor = '#ff1744';
                 else if (truck.condition < 75) barColor = 'var(--chase-yellow)';
 
+                const driverName = team.drivers.primary[index];
+                let visualHTML = `<span style="font-size:2rem;">🚚</span>`;
+                let driverLabel = `<span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Driver: Vacant</span>`;
+                
+                if (driverName) {
+                    visualHTML = `<img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:45px; max-width:90px; object-fit:contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'font-size:2rem;\'>🚚</span>'">`;
+                    driverLabel = `<span style="font-size:0.75rem; color:var(--neon-green); font-weight:bold; text-transform:uppercase;">Driver: ${driverName}</span>`;
+                }
+
                 card.innerHTML = `
-                    <div style="display:flex; align-items:center; gap:15px;">
-                        <span style="font-size:2rem;">🚚</span>
-                        <div>
-                            <strong style="color:#fff; font-size:1.1rem; display:block;">${truck.name}</strong>
-                            <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Make: ${truck.make} | Fleet ID: ${truck.id}</span>
+                    <div style="display:flex; align-items:center; gap:20px; width: 100%; flex-wrap: wrap;">
+                        <div style="width:90px; display:flex; justify-content:center; align-items:center;">
+                            ${visualHTML}
                         </div>
-                    </div>
-                    <div style="text-align:right;">
-                        <span style="color:#fff; font-weight:bold; font-size:1rem;">Condition: ${truck.condition}%</span>
-                        <div class="condition-bar-container">
-                            <div class="condition-bar-fill" style="width: ${truck.condition}%; background: ${barColor};"></div>
+                        <div style="flex-grow: 1; min-width: 200px;">
+                            <strong style="color:#fff; font-size:1.1rem; display:block;">${truck.name}</strong>
+                            <div style="display:flex; flex-direction:column; gap:2px;">
+                                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Make: ${truck.make} | Fleet ID: ${truck.id}</span>
+                                ${driverLabel}
+                            </div>
+                        </div>
+                        <div style="text-align:right; min-width: 150px; margin-top: 10px;">
+                            <span style="color:#fff; font-weight:bold; font-size:1rem;">Condition: ${truck.condition}%</span>
+                            <div class="condition-bar-container" style="margin-left:auto;">
+                                <div class="condition-bar-fill" style="width: ${truck.condition}%; background: ${barColor};"></div>
+                            </div>
                         </div>
                     </div>
                 `;
