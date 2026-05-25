@@ -258,7 +258,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2103222,
+      "balance": 2068466,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -320,7 +320,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -210
+          "amount": -208
         },
         {
           "date": "May 25, 2026",
@@ -356,7 +356,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -254
+          "amount": -206
         },
         {
           "date": "May 25, 2026",
@@ -399,19 +399,12 @@ const teamsData = {
           "description": "Fast Repair: Geezer Silverado #1 (RICKY HART)",
           "category": "expense",
           "amount": -83250
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Virtual Sponsorship Earned: FastTrack Designs (Upward Performance Trend)",
-          "category": "income",
-          "amount": 34806
         }
       ],
       "sponsors": [
         "Geezer Authentics",
         "Silverado Performance",
-        "Craftsman Tools",
-        "FastTrack Designs"
+        "Craftsman Tools"
       ]
     },
     {
@@ -422,7 +415,7 @@ const teamsData = {
       "logo": "assets/lady-chaos-logo.png",
       "points": 86,
       "wins": 0,
-      "balance": 2182352,
+      "balance": 2182355,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -484,7 +477,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -569
+          "amount": -566
         },
         {
           "date": "May 25, 2026",
@@ -513,7 +506,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 100,
       "wins": 0,
-      "balance": 2174579,
+      "balance": 2174562,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -575,7 +568,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Travel Lodging (Flights + Drives for Crew)",
           "category": "expense",
-          "amount": -349
+          "amount": -366
         },
         {
           "date": "May 25, 2026",
