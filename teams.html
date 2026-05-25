@@ -305,9 +305,9 @@
 
             <!-- Tab Buttons -->
             <div class="team-tabs">
-                <button class="team-tab-btn active" onclick="switchTeamTab('roster-tab')">Lineup & Roster</button>
-                <button class="team-tab-btn" onclick="switchTeamTab('garage-tab')">Garage & Fleet Condition</button>
-                <button class="team-tab-btn" onclick="switchTeamTab('finances-tab')">Financial Office Ledger</button>
+                <button class="team-tab-btn active" onclick="switchTeamTab('roster-tab')">DRIVERS AND THE GARAGE</button>
+                <button class="team-tab-btn" onclick="switchTeamTab('garage-tab')">RACE CHASSIS CONDITION</button>
+                <button class="team-tab-btn" onclick="switchTeamTab('finances-tab')">CURRENT TEAM FINANCIALS</button>
             </div>
 
             <!-- TAB 1: ROSTER -->
@@ -344,7 +344,7 @@
             <!-- TAB 3: FINANCES -->
             <div id="finances-tab" class="panel-tab-content">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                    <h3 style="color:#fff; font-size:1.3rem; margin:0;">Logistics & Financial Ledger</h3>
+                    <h3 style="color:#fff; font-size:1.3rem; margin:0;">CURRENT TEAM FINANCIALS</h3>
                     <div style="text-align:right;">
                         <span style="color:var(--text-muted); font-size:0.85rem; text-transform:uppercase; display:block;">Current Capital Balance</span>
                         <span id="detail-team-balance-large" style="font-family:var(--font-heading); font-size:2.5rem; font-weight:900; color:var(--neon-green); text-shadow:0 0 10px var(--neon-green-glow); line-height:1;">$0</span>
@@ -423,7 +423,7 @@
                     <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">Owner: ${team.owner}</p>
                     <div class="team-overview-balance">${formattedBalance}</div>
                     <div style="font-size:0.8rem; color:var(--text-muted); border-top:1px solid #1c1c1c; padding-top:10px; margin-top:auto; display:flex; justify-content:space-between;">
-                        <span>Fleet Condition:</span>
+                        <span>RACE CHASSIS CONDITION:</span>
                         <strong style="color:var(--neon-green);">${calculateFleetCondition(team)}% Avg</strong>
                     </div>
                 `;
