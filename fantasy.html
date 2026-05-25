@@ -471,8 +471,8 @@
                 
                 tierArray.forEach(driverName => {
                     const driverDetail = findDriverByName(driverName);
-                    // Only render active drivers (those signed up in rosterData)
-                    if (driverDetail) {
+                    // Only render active full-time and past-champion drivers (exclude part-time / reserved)
+                    if (driverDetail && driverDetail.status !== 'part-time' && driverDetail.status !== 'reserved') {
                         renderedCount++;
                         const hasNumImg = driverDetail.driver && driverDetail.driver.trim() !== '';
                         const card = document.createElement('div');

@@ -233,6 +233,13 @@ def score_picks(picks, driver_scores, caution_laps):
     # Since headers might change, we'll map by index based on our standard layout
     fan_results = []
     
+    # Calculate last place points (safety net for DNS/no-show drivers)
+    if driver_scores:
+        last_place_pts = min(d["total_points"] for d in driver_scores.values())
+    else:
+        last_place_pts = 0
+    print(f"DNS Safety Net: No-show drivers will receive last-place finisher points ({last_place_pts} pts)")
+    
     for row in picks:
         if not row or len(row) < 6:
             continue
@@ -251,11 +258,11 @@ def score_picks(picks, driver_scores, caution_laps):
             except ValueError:
                 pass
                 
-        # Calculate points for each pick
-        score_a = driver_scores.get(pick_a, {}).get("total_points", 0)
-        score_b1 = driver_scores.get(pick_b1, {}).get("total_points", 0)
-        score_b2 = driver_scores.get(pick_b2, {}).get("total_points", 0)
-        score_c = driver_scores.get(pick_c, {}).get("total_points", 0)
+        # Calculate points for each pick (use last-place points if picked driver is a no-show)
+        score_a = driver_scores.get(pick_a, {}).get("total_points", last_place_pts) if pick_a else 0
+        score_b1 = driver_scores.get(pick_b1, {}).get("total_points", last_place_pts) if pick_b1 else 0
+        score_b2 = driver_scores.get(pick_b2, {}).get("total_points", last_place_pts) if pick_b2 else 0
+        score_c = driver_scores.get(pick_c, {}).get("total_points", last_place_pts) if pick_c else 0
         
         # Alert if a driver wasn't found in results (did not start)
         if pick_a and pick_a not in driver_scores:
