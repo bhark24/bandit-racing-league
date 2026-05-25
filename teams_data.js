@@ -199,9 +199,9 @@ const teamsData = {
       "lon": -80.8431
     },
     "VICTOR WEAVER": {
-      "city": "Daytona Beach, FL",
-      "lat": 29.2108,
-      "lon": -81.0228
+      "city": "Dayton, OH",
+      "lat": 39.7589,
+      "lon": -84.1916
     },
     "BOB BERRY": {
       "city": "Richmond, VA",
@@ -234,19 +234,39 @@ const teamsData = {
       "lon": -79.9414
     },
     "JOSH ADAMS": {
-      "city": "Charlotte, NC",
-      "lat": 35.2271,
-      "lon": -80.8431
+      "city": "Springboro, OH",
+      "lat": 39.5523,
+      "lon": -84.2333
     },
     "MATT BAILEY": {
-      "city": "Concord, NC",
-      "lat": 35.4088,
-      "lon": -80.5795
+      "city": "Xenia, OH",
+      "lat": 39.6848,
+      "lon": -83.9297
     },
     "NATHAN SANTOS": {
       "city": "Spartanburg, SC",
       "lat": 34.9496,
       "lon": -81.932
+    },
+    "DIONTE RADER": {
+      "city": "Miamisburg, OH",
+      "lat": 39.6428,
+      "lon": -84.2866
+    },
+    "DAVE LEAKEY": {
+      "city": "Orlando, FL",
+      "lat": 28.5383,
+      "lon": -81.3792
+    },
+    "JACKSON KNAAK": {
+      "city": "Concord, NC",
+      "lat": 35.4088,
+      "lon": -80.5795
+    },
+    "KEVIN FOSTER": {
+      "city": "Concord, NC",
+      "lat": 35.4088,
+      "lon": -80.5795
     }
   },
   "teams": [
@@ -258,7 +278,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2071618,
+      "balance": 2071808,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -326,7 +346,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -240
+          "amount": -216
         },
         {
           "date": "May 25, 2026",
@@ -374,7 +394,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -255
+          "amount": -242
         },
         {
           "date": "May 25, 2026",
@@ -426,9 +446,9 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Virtual Sponsorship Earned: Apex Fuel (Upward Performance Trend)",
+          "description": "Virtual Sponsorship Earned: Veloce Simulators (Upward Performance Trend)",
           "category": "income",
-          "amount": 11233
+          "amount": 11386
         },
         {
           "date": "May 25, 2026",
@@ -441,7 +461,7 @@ const teamsData = {
         "Geezer Authentics",
         "Silverado Performance",
         "Craftsman Tools",
-        "Apex Fuel"
+        "Veloce Simulators"
       ]
     },
     {
@@ -450,19 +470,18 @@ const teamsData = {
       "owner": "Nicole Kriesel",
       "homeBase": "Madison, WI",
       "logo": "assets/lady-chaos-logo.png",
-      "points": 86,
+      "points": 80,
       "wins": 0,
-      "balance": 2174222,
+      "balance": 2164224,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
-          "VICTOR WEAVER",
           "BOB BERRY",
-          "JASON GREENWELL"
+          "JASON GREENWELL",
+          "DAVE LEAKEY"
         ],
         "backup": [
-          "DYLAN NICASTRO",
-          "ETHAN SIKORSKI"
+          "NATHAN SANTOS"
         ]
       },
       "trucks": [
@@ -476,7 +495,7 @@ const teamsData = {
           "id": "truck-2",
           "make": "Ford",
           "name": "Chaos F-150 #18",
-          "condition": 81
+          "condition": 73
         },
         {
           "id": "truck-3",
@@ -536,27 +555,27 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Standard Race Prep: Chaos F-150 #18 (VICTOR WEAVER)",
+          "description": "Standard Race Prep: Chaos F-150 #18 (DAVE LEAKEY)",
           "category": "expense",
           "amount": -2000
         },
         {
           "date": "May 25, 2026",
-          "description": "Flight & Lodging: VICTOR WEAVER from Daytona Beach, FL (420 mi)",
+          "description": "Flight & Lodging: DAVE LEAKEY from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -233
+          "amount": -249
         },
         {
           "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: VICTOR WEAVER",
+          "description": "Sponsor Start Bonus: DAVE LEAKEY",
           "category": "income",
           "amount": 15000
         },
         {
           "date": "May 25, 2026",
-          "description": "Prize Money: VICTOR WEAVER (P4)",
+          "description": "Prize Money: DAVE LEAKEY (P7)",
           "category": "income",
-          "amount": 35000
+          "amount": 25000
         },
         {
           "date": "May 25, 2026",
@@ -568,7 +587,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BOB BERRY from Richmond, VA (260 mi)",
           "category": "expense",
-          "amount": -198
+          "amount": -190
         },
         {
           "date": "May 25, 2026",
@@ -592,7 +611,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON GREENWELL from Indianapolis, IN (480 mi)",
           "category": "expense",
-          "amount": -248
+          "amount": -238
         },
         {
           "date": "May 25, 2026",
@@ -608,7 +627,7 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Charlotte Mock Race Results: P3, P4, P12, P14",
+          "description": "Charlotte Mock Race Results: P3, P7, P12, P14",
           "category": "info",
           "amount": 0
         }
@@ -625,19 +644,18 @@ const teamsData = {
       "owner": "Johnathon Platt",
       "homeBase": "Concord, NC",
       "logo": "assets/simtrax-logo.png",
-      "points": 100,
+      "points": 96,
       "wins": 0,
-      "balance": 2189672,
+      "balance": 2166603,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
           "JASON ALLEGRINI",
           "MATT CROCKETT",
-          "JOSH ADAMS"
+          "JACKSON KNAAK"
         ],
         "backup": [
-          "MATT BAILEY",
-          "NATHAN SANTOS"
+          "KEVIN FOSTER"
         ]
       },
       "trucks": [
@@ -663,7 +681,7 @@ const teamsData = {
           "id": "truck-4",
           "make": "Toyota",
           "name": "SimTrax Tundra #22",
-          "condition": 86
+          "condition": 82
         }
       ],
       "ledger": [
@@ -719,7 +737,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON ALLEGRINI from Nashville, TN (340 mi)",
           "category": "expense",
-          "amount": -187
+          "amount": -185
         },
         {
           "date": "May 25, 2026",
@@ -759,15 +777,142 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Standard Race Prep: SimTrax Tundra #22 (JOSH ADAMS)",
+          "description": "Standard Race Prep: SimTrax Tundra #22 (JACKSON KNAAK)",
           "category": "expense",
           "amount": -2000
         },
         {
           "date": "May 25, 2026",
-          "description": "Local Travel: JOSH ADAMS from Charlotte, NC (0 mi)",
+          "description": "Local Travel: JACKSON KNAAK from Concord, NC (0 mi)",
           "category": "expense",
           "amount": -20
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Sponsor Start Bonus: JACKSON KNAAK",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Prize Money: JACKSON KNAAK (P10)",
+          "category": "income",
+          "amount": 25000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Charlotte Mock Race Results: P5, P6, P7, P10",
+          "category": "info",
+          "amount": 0
+        }
+      ],
+      "sponsors": [
+        "SimTrax Broadcasting",
+        "Toyota Racing Development",
+        "NASCAR Heat"
+      ]
+    },
+    {
+      "id": "937-racing",
+      "name": "937 Racing",
+      "owner": "Victor Weaver",
+      "homeBase": "Dayton, OH",
+      "logo": "assets/937-racing-logo.png",
+      "points": 62,
+      "wins": 0,
+      "balance": 2106912,
+      "drivers": {
+        "primary": [
+          "VICTOR WEAVER",
+          "JOSH ADAMS",
+          "VACANT",
+          "VACANT"
+        ],
+        "backup": [
+          "DIONTE RADER",
+          "MATT BAILEY"
+        ]
+      },
+      "trucks": [
+        {
+          "id": "truck-1",
+          "make": "Chevrolet",
+          "name": "937 Silverado #18",
+          "condition": 73
+        },
+        {
+          "id": "truck-2",
+          "make": "Chevrolet",
+          "name": "937 Silverado #96",
+          "condition": 64
+        },
+        {
+          "id": "truck-3",
+          "make": "Chevrolet",
+          "name": "937 Silverado #17",
+          "condition": 55
+        },
+        {
+          "id": "truck-4",
+          "make": "Chevrolet",
+          "name": "937 Silverado #19",
+          "condition": 100
+        }
+      ],
+      "ledger": [
+        {
+          "date": "2026-05-24",
+          "description": "Starting Franchise Balance",
+          "category": "income",
+          "amount": 2750000
+        },
+        {
+          "date": "2026-05-24",
+          "description": "Purchased Fleet of 4x Chevy Silverado Trucks",
+          "category": "expense",
+          "amount": -740000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Hauler Logistics: Dayton, OH to Concord, NC (359 mi)",
+          "category": "expense",
+          "amount": -3599
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Standard Race Prep: 937 Silverado #18 (VICTOR WEAVER)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (359 mi)",
+          "category": "expense",
+          "amount": -208
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Sponsor Start Bonus: VICTOR WEAVER",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Prize Money: VICTOR WEAVER (P4)",
+          "category": "income",
+          "amount": 35000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Standard Race Prep: 937 Silverado #96 (JOSH ADAMS)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (349 mi)",
+          "category": "expense",
+          "amount": -227
         },
         {
           "date": "May 25, 2026",
@@ -783,22 +928,56 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Virtual Sponsorship Earned: SimGear Pro (Upward Performance Trend)",
-          "category": "income",
-          "amount": 23071
+          "description": "Standard Race Prep: 937 Silverado #17 (DIONTE RADER)",
+          "category": "expense",
+          "amount": -2000
         },
         {
           "date": "May 25, 2026",
-          "description": "Charlotte Mock Race Results: P5, P6, P7, P8",
+          "description": "Flight & Lodging: DIONTE RADER from Miamisburg, OH (356 mi)",
+          "category": "expense",
+          "amount": -222
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Sponsor Start Bonus: DIONTE RADER",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Prize Money: DIONTE RADER (P14)",
+          "category": "income",
+          "amount": 20000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Substituted DIONTE RADER into Slot 3 for VACANT",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "MATT BAILEY DNS: Slot 4 remains vacant",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Lost Sponsor Capital: Craftsman Tools (Downward Performance Trend)",
+          "category": "expense",
+          "amount": -17832
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Charlotte Mock Race Results: P4, P8, P14, DNS",
           "category": "info",
           "amount": 0
         }
       ],
       "sponsors": [
-        "SimTrax Broadcasting",
-        "Toyota Racing Development",
-        "NASCAR Heat",
-        "SimGear Pro"
+        "937 Racing",
+        "Silverado Performance"
       ]
     }
   ]
