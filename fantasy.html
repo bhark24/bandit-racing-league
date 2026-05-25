@@ -21,6 +21,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        .pool-tier-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .pool-tier-badge.tier-a-badge {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--status-pastchampion);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        .pool-tier-badge.tier-b-badge {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--neon-green);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+        }
+        .pool-tier-badge.tier-c-badge {
+            background: rgba(0, 229, 255, 0.15);
+            color: var(--status-fulltime);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+        }
+        @media (max-width: 768px) {
+            .lineup-board-grid {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+        }
+        
         /* Extra visual feedback for selected slot icons */
         .summary-pick-slot {
             display: flex;
@@ -173,35 +203,46 @@
                 </div>
             </div>
 
-            <!-- TIER A SECTION -->
-            <div class="tier-section" id="tier-a-container">
-                <div class="tier-header tier-a">
-                    <span>TIER A: THE FRONT RUNNERS</span>
-                    <span>SELECT 1 DRIVER</span>
-                </div>
-                <div class="roster-grid" id="tier-a-grid">
-                    <!-- Dynamic rendering -->
+            <!-- LINEUP BOARD -->
+            <div class="fantasy-panel" style="margin-bottom: 30px;">
+                <h3 style="color:#fff; font-size:1.5rem; font-family:var(--font-heading); text-transform:uppercase; text-align:center; border-bottom:1px solid #222; padding-bottom:15px; margin-bottom:20px; letter-spacing:1px;">My Lineup Draft Board</h3>
+                <div class="lineup-board-grid" style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                    <!-- Tier A Slot -->
+                    <div class="lineup-slot slot-a" style="border: 2px dashed #333; padding: 20px; border-radius: 8px; text-align: center; transition: all 0.3s;" id="board-slot-a">
+                        <span style="display:block; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--status-pastchampion); margin-bottom: 10px; letter-spacing: 1px;">Tier A (1 Pick)</span>
+                        <div id="board-val-a" style="font-family:var(--font-heading); font-size: 1.1rem; font-weight: bold; color: var(--text-muted); min-height: 35px; display: flex; align-items: center; justify-content: center;">Empty</div>
+                        <button type="button" class="btn-remove-pick" id="btn-remove-a" style="display:none; margin: 10px auto 0; background:transparent; border:none; color:#ff1744; font-size:0.8rem; font-weight:bold; cursor:pointer;" onclick="removePick('A')">Remove</button>
+                    </div>
+                    <!-- Tier B Slot 1 -->
+                    <div class="lineup-slot slot-b1" style="border: 2px dashed #333; padding: 20px; border-radius: 8px; text-align: center; transition: all 0.3s;" id="board-slot-b1">
+                        <span style="display:block; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--neon-green); margin-bottom: 10px; letter-spacing: 1px;">Tier B (Pick 1)</span>
+                        <div id="board-val-b1" style="font-family:var(--font-heading); font-size: 1.1rem; font-weight: bold; color: var(--text-muted); min-height: 35px; display: flex; align-items: center; justify-content: center;">Empty</div>
+                        <button type="button" class="btn-remove-pick" id="btn-remove-b1" style="display:none; margin: 10px auto 0; background:transparent; border:none; color:#ff1744; font-size:0.8rem; font-weight:bold; cursor:pointer;" onclick="removePick('B1')">Remove</button>
+                    </div>
+                    <!-- Tier B Slot 2 -->
+                    <div class="lineup-slot slot-b2" style="border: 2px dashed #333; padding: 20px; border-radius: 8px; text-align: center; transition: all 0.3s;" id="board-slot-b2">
+                        <span style="display:block; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--neon-green); margin-bottom: 10px; letter-spacing: 1px;">Tier B (Pick 2)</span>
+                        <div id="board-val-b2" style="font-family:var(--font-heading); font-size: 1.1rem; font-weight: bold; color: var(--text-muted); min-height: 35px; display: flex; align-items: center; justify-content: center;">Empty</div>
+                        <button type="button" class="btn-remove-pick" id="btn-remove-b2" style="display:none; margin: 10px auto 0; background:transparent; border:none; color:#ff1744; font-size:0.8rem; font-weight:bold; cursor:pointer;" onclick="removePick('B2')">Remove</button>
+                    </div>
+                    <!-- Tier C Slot -->
+                    <div class="lineup-slot slot-c" style="border: 2px dashed #333; padding: 20px; border-radius: 8px; text-align: center; transition: all 0.3s;" id="board-slot-c">
+                        <span style="display:block; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--status-fulltime); margin-bottom: 10px; letter-spacing: 1px;">Tier C (1 Pick)</span>
+                        <div id="board-val-c" style="font-family:var(--font-heading); font-size: 1.1rem; font-weight: bold; color: var(--text-muted); min-height: 35px; display: flex; align-items: center; justify-content: center;">Empty</div>
+                        <button type="button" class="btn-remove-pick" id="btn-remove-c" style="display:none; margin: 10px auto 0; background:transparent; border:none; color:#ff1744; font-size:0.8rem; font-weight:bold; cursor:pointer;" onclick="removePick('C')">Remove</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- TIER B SECTION -->
-            <div class="tier-section" id="tier-b-container">
-                <div class="tier-header tier-b">
-                    <span>TIER B: THE CONTENDERS</span>
-                    <span>SELECT 2 DRIVERS</span>
+            <!-- DRIVER DRAFT POOL -->
+            <div class="fantasy-panel" style="margin-bottom: 40px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; padding-bottom:15px; margin-bottom:20px; flex-wrap:wrap; gap:15px;">
+                    <h3 style="color:#fff; font-size:1.5rem; font-family:var(--font-heading); text-transform:uppercase; margin:0; letter-spacing:1px;">Driver Draft Pool</h3>
+                    <div style="position:relative; width: 100%; max-width: 350px;">
+                        <input type="text" id="driver-search-input" placeholder="Search name, tier, or car #..." style="width:100%; padding: 10px 15px; background:#050505; border:1px solid #333; border-radius: 4px; color:#fff; font-family: var(--font-body);" oninput="filterDriverPool()">
+                    </div>
                 </div>
-                <div class="roster-grid" id="tier-b-grid">
-                    <!-- Dynamic rendering -->
-                </div>
-            </div>
-
-            <!-- TIER C SECTION -->
-            <div class="tier-section" id="tier-c-container">
-                <div class="tier-header tier-c">
-                    <span>TIER C: THE DARK HORSES</span>
-                    <span>SELECT 1 DRIVER</span>
-                </div>
-                <div class="roster-grid" id="tier-c-grid">
+                <div class="roster-grid" id="unified-driver-pool-grid">
                     <!-- Dynamic rendering -->
                 </div>
             </div>
@@ -415,8 +456,23 @@
             if (savedName) document.getElementById('fan-name').value = savedName;
             if (savedEmail) document.getElementById('fan-email').value = savedEmail;
 
+            if (savedPicks) {
+                try {
+                    const parsed = JSON.parse(savedPicks);
+                    if (parsed) {
+                        currentPicks = parsed;
+                    }
+                } catch(e) {
+                    console.error("Error loading saved picks", e);
+                }
+            }
+
             // Render Driver Grids based on rosterData and fantasyData.tiers
             renderRosterDraftGrids();
+
+            // Update Selection summary and draft board
+            updateSelectionSummary();
+            updateDraftBoard();
 
             // Render Leaderboard & standings
             renderLeaderboard();
@@ -456,85 +512,146 @@
         }
 
         function renderRosterDraftGrids() {
-            const gridA = document.getElementById('tier-a-grid');
-            const gridB = document.getElementById('tier-b-grid');
-            const gridC = document.getElementById('tier-c-grid');
-
+            const gridContainer = document.getElementById('unified-driver-pool-grid');
             if (typeof fantasyData === 'undefined' || !fantasyData.tiers) {
-                gridA.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted);'>Error loading fantasy tiers. Please run the calculator script.</p>";
+                gridContainer.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted);'>Error loading fantasy tiers. Please run the calculator script.</p>";
                 return;
             }
 
-            const renderTier = (tierArray, gridContainer, tierKey) => {
-                gridContainer.innerHTML = '';
-                let renderedCount = 0;
-                
+            // Combine all tiers into a single array of objects
+            const allDrivers = [];
+            
+            const addDriversFromTier = (tierArray, tierName) => {
                 tierArray.forEach(driverName => {
                     const driverDetail = findDriverByName(driverName);
-                    // Only render active full-time and past-champion drivers (exclude part-time / reserved)
+                    // Filter out part-time and reserved drivers
                     if (driverDetail && driverDetail.status !== 'part-time' && driverDetail.status !== 'reserved') {
-                        renderedCount++;
-                        const hasNumImg = driverDetail.driver && driverDetail.driver.trim() !== '';
-                        const card = document.createElement('div');
-                        card.className = 'fantasy-driver-card';
-                        card.setAttribute('data-driver-name', driverDetail.driver);
-                        card.setAttribute('data-tier', tierKey);
-                        card.onclick = () => selectDriverCard(card, driverDetail.driver, tierKey);
-
-                        card.innerHTML = `
-                            <div class="fantasy-card-check">✓</div>
-                            <div class="fantasy-driver-info">
-                                <div style="height: 60px; display:flex; align-items:center;">
-                                    ${hasNumImg ? 
-                                        `<img src="assets/drivers numbers/${driverDetail.driver.trim()}.png" style="max-height: 55px; max-width: 110px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'fantasy-driver-num\\'>#${driverDetail.number}</span>'">` 
-                                        : `<span class="fantasy-driver-num">#${driverDetail.number}</span>`
-                                    }
-                                </div>
-                                <div>
-                                    <div class="fantasy-driver-name">${driverDetail.driver}</div>
-                                    <span style="font-size: 0.75rem; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">${statusMap[driverDetail.status] || 'Active'}</span>
-                                </div>
-                            </div>
-                            <div class="fantasy-driver-stats">
-                                <span>SimHub Stats</span>
-                                <a href="https://simracerhub.com/season_standings.php?season_id=28135" target="_blank" onclick="event.stopPropagation();" style="color: var(--neon-green);">Profile &rarr;</a>
-                            </div>
-                        `;
-                        gridContainer.appendChild(card);
+                        allDrivers.push({
+                            name: driverDetail.driver,
+                            number: driverDetail.number,
+                            status: driverDetail.status,
+                            tier: tierName
+                        });
                     }
                 });
-
-                if (renderedCount === 0) {
-                    gridContainer.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 20px;'>No active drivers registered in this tier.</p>";
-                }
             };
 
-            renderTier(fantasyData.tiers.A, gridA, 'A');
-            renderTier(fantasyData.tiers.B, gridB, 'B');
-            renderTier(fantasyData.tiers.C, gridC, 'C');
+            addDriversFromTier(fantasyData.tiers.A, 'A');
+            addDriversFromTier(fantasyData.tiers.B, 'B');
+            addDriversFromTier(fantasyData.tiers.C, 'C');
+
+            // Sort drivers alphabetically by name
+            allDrivers.sort((a, b) => a.name.localeCompare(b.name));
+
+            // Save the list globally for search filtering
+            window.allEligibleDrivers = allDrivers;
+
+            displayDriverPool(allDrivers);
+        }
+
+        function displayDriverPool(driversList) {
+            const gridContainer = document.getElementById('unified-driver-pool-grid');
+            gridContainer.innerHTML = '';
+
+            if (driversList.length === 0) {
+                gridContainer.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 20px;'>No matching drivers found in the pool.</p>";
+                return;
+            }
+
+            driversList.forEach(driver => {
+                const card = document.createElement('div');
+                card.className = 'fantasy-driver-card';
+                card.setAttribute('data-driver-name', driver.name);
+                card.setAttribute('data-tier', driver.tier);
+                
+                // Set class if already selected
+                const isSelected = (driver.tier === 'A' && currentPicks.A === driver.name) ||
+                                   (driver.tier === 'C' && currentPicks.C === driver.name) ||
+                                   (driver.tier === 'B' && currentPicks.B.includes(driver.name));
+                
+                if (isSelected) {
+                    card.classList.add('selected');
+                }
+
+                card.onclick = () => selectDriverCard(card, driver.name, driver.tier);
+
+                // Tier badge text & class
+                let tierText = '';
+                let tierClass = '';
+                if (driver.tier === 'A') {
+                    tierText = 'Tier A';
+                    tierClass = 'tier-a-badge';
+                } else if (driver.tier === 'B') {
+                    tierText = 'Tier B';
+                    tierClass = 'tier-b-badge';
+                } else {
+                    tierText = 'Tier C';
+                    tierClass = 'tier-c-badge';
+                }
+
+                card.innerHTML = `
+                    <div class="fantasy-card-check">✓</div>
+                    <div class="fantasy-driver-info">
+                        <div style="height: 60px; display:flex; align-items:center;">
+                            <img src="assets/drivers numbers/${driver.name.trim()}.png" style="max-height: 55px; max-width: 110px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'fantasy-driver-num\\'>#${driver.number}</span>'">
+                        </div>
+                        <div>
+                            <div class="fantasy-driver-name">${driver.name}</div>
+                            <div style="display:flex; gap: 5px; margin-top: 5px;">
+                                <span style="font-size: 0.7rem; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">${statusMap[driver.status] || 'Active'}</span>
+                                <span class="pool-tier-badge ${tierClass}" style="font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: 700; text-transform: uppercase;">${tierText}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fantasy-driver-stats">
+                        <span>SimHub Stats</span>
+                        <a href="https://simracerhub.com/season_standings.php?season_id=28135" target="_blank" onclick="event.stopPropagation();" style="color: var(--neon-green);">Profile &rarr;</a>
+                    </div>
+                `;
+                
+                gridContainer.appendChild(card);
+            });
+        }
+
+        function filterDriverPool() {
+            const query = document.getElementById('driver-search-input').value.trim().toLowerCase();
+            if (!window.allEligibleDrivers) return;
+
+            if (!query) {
+                displayDriverPool(window.allEligibleDrivers);
+                return;
+            }
+
+            const filtered = window.allEligibleDrivers.filter(driver => {
+                return driver.name.toLowerCase().includes(query) || 
+                       driver.number.toString().includes(query) || 
+                       driver.tier.toLowerCase().includes(query);
+            });
+
+            displayDriverPool(filtered);
         }
 
         function selectDriverCard(cardElement, driverName, tierKey) {
             if (tierKey === 'A') {
-                // De-select current Tier A card
-                const currentSel = document.querySelector('#tier-a-grid .fantasy-driver-card.selected');
-                if (currentSel) currentSel.classList.remove('selected');
-                
                 if (currentPicks.A === driverName) {
+                    cardElement.classList.remove('selected');
                     currentPicks.A = null;
                 } else {
+                    const currentSel = document.querySelector('.fantasy-driver-card[data-tier="A"].selected');
+                    if (currentSel) currentSel.classList.remove('selected');
+                    
                     cardElement.classList.add('selected');
                     currentPicks.A = driverName;
                 }
             } 
             else if (tierKey === 'C') {
-                // De-select current Tier C card
-                const currentSel = document.querySelector('#tier-c-grid .fantasy-driver-card.selected');
-                if (currentSel) currentSel.classList.remove('selected');
-
                 if (currentPicks.C === driverName) {
+                    cardElement.classList.remove('selected');
                     currentPicks.C = null;
                 } else {
+                    const currentSel = document.querySelector('.fantasy-driver-card[data-tier="C"].selected');
+                    if (currentSel) currentSel.classList.remove('selected');
+                    
                     cardElement.classList.add('selected');
                     currentPicks.C = driverName;
                 }
@@ -542,11 +659,9 @@
             else if (tierKey === 'B') {
                 const idx = currentPicks.B.indexOf(driverName);
                 if (idx > -1) {
-                    // Clicked an already selected card -> deselect it
                     cardElement.classList.remove('selected');
                     currentPicks.B.splice(idx, 1);
                 } else {
-                    // Selecting a new card
                     if (currentPicks.B.length >= 2) {
                         alert("You can only select up to 2 drivers from Tier B!");
                         return;
@@ -557,6 +672,98 @@
             }
 
             updateSelectionSummary();
+            updateDraftBoard();
+        }
+
+        function updateDraftBoard() {
+            // Update Tier A
+            const valA = document.getElementById('board-val-a');
+            const slotA = document.getElementById('board-slot-a');
+            const btnRemoveA = document.getElementById('btn-remove-a');
+            if (currentPicks.A) {
+                valA.innerHTML = `<img src="assets/drivers numbers/${currentPicks.A.trim()}.png" style="max-height: 35px; vertical-align: middle; margin-right: 10px;" onerror="this.style.display='none'"> <strong>${currentPicks.A}</strong>`;
+                slotA.style.border = '2px solid var(--status-pastchampion)';
+                slotA.style.background = 'rgba(255, 215, 0, 0.03)';
+                btnRemoveA.style.display = 'block';
+            } else {
+                valA.textContent = "Empty";
+                slotA.style.border = '2px dashed #333';
+                slotA.style.background = 'transparent';
+                btnRemoveA.style.display = 'none';
+            }
+
+            // Update Tier B1
+            const valB1 = document.getElementById('board-val-b1');
+            const slotB1 = document.getElementById('board-slot-b1');
+            const btnRemoveB1 = document.getElementById('btn-remove-b1');
+            if (currentPicks.B[0]) {
+                valB1.innerHTML = `<img src="assets/drivers numbers/${currentPicks.B[0].trim()}.png" style="max-height: 35px; vertical-align: middle; margin-right: 10px;" onerror="this.style.display='none'"> <strong>${currentPicks.B[0]}</strong>`;
+                slotB1.style.border = '2px solid var(--neon-green)';
+                slotB1.style.background = 'rgba(0, 255, 0, 0.03)';
+                btnRemoveB1.style.display = 'block';
+            } else {
+                valB1.textContent = "Empty";
+                slotB1.style.border = '2px dashed #333';
+                slotB1.style.background = 'transparent';
+                btnRemoveB1.style.display = 'none';
+            }
+
+            // Update Tier B2
+            const valB2 = document.getElementById('board-val-b2');
+            const slotB2 = document.getElementById('board-slot-b2');
+            const btnRemoveB2 = document.getElementById('btn-remove-b2');
+            if (currentPicks.B[1]) {
+                valB2.innerHTML = `<img src="assets/drivers numbers/${currentPicks.B[1].trim()}.png" style="max-height: 35px; vertical-align: middle; margin-right: 10px;" onerror="this.style.display='none'"> <strong>${currentPicks.B[1]}</strong>`;
+                slotB2.style.border = '2px solid var(--neon-green)';
+                slotB2.style.background = 'rgba(0, 255, 0, 0.03)';
+                btnRemoveB2.style.display = 'block';
+            } else {
+                valB2.textContent = "Empty";
+                slotB2.style.border = '2px dashed #333';
+                slotB2.style.background = 'transparent';
+                btnRemoveB2.style.display = 'none';
+            }
+
+            // Update Tier C
+            const valC = document.getElementById('board-val-c');
+            const slotC = document.getElementById('board-slot-c');
+            const btnRemoveC = document.getElementById('btn-remove-c');
+            if (currentPicks.C) {
+                valC.innerHTML = `<img src="assets/drivers numbers/${currentPicks.C.trim()}.png" style="max-height: 35px; vertical-align: middle; margin-right: 10px;" onerror="this.style.display='none'"> <strong>${currentPicks.C}</strong>`;
+                slotC.style.border = '2px solid var(--status-fulltime)';
+                slotC.style.background = 'rgba(0, 229, 255, 0.03)';
+                btnRemoveC.style.display = 'block';
+            } else {
+                valC.textContent = "Empty";
+                slotC.style.border = '2px dashed #333';
+                slotC.style.background = 'transparent';
+                btnRemoveC.style.display = 'none';
+            }
+        }
+
+        function removePick(slotKey) {
+            let driverName = null;
+            if (slotKey === 'A') {
+                driverName = currentPicks.A;
+                currentPicks.A = null;
+            } else if (slotKey === 'C') {
+                driverName = currentPicks.C;
+                currentPicks.C = null;
+            } else if (slotKey === 'B1') {
+                driverName = currentPicks.B[0];
+                currentPicks.B.splice(0, 1);
+            } else if (slotKey === 'B2') {
+                driverName = currentPicks.B[1];
+                currentPicks.B.splice(1, 1);
+            }
+            
+            if (driverName) {
+                const card = document.querySelector(`.fantasy-driver-card[data-driver-name="${driverName}"]`);
+                if (card) card.classList.remove('selected');
+            }
+            
+            updateSelectionSummary();
+            updateDraftBoard();
         }
 
         function updateSelectionSummary() {
