@@ -264,6 +264,29 @@
             </div>
         </div>
 
+        <!-- Franchise Championship Standings -->
+        <div class="fantasy-panel" style="margin-bottom: 40px; padding: 25px; border: 1px solid #222; border-radius: var(--border-radius); background: var(--bg-panel);">
+            <h2 style="color: #fff; margin-top: 0; margin-bottom: 20px; font-size: 1.8rem; font-family: var(--font-heading); display: flex; align-items: center; gap: 10px;">
+                🏆 FRANCHISE CHAMPIONSHIP STANDINGS
+            </h2>
+            <div class="fantasy-table-wrapper">
+                <table class="ledger-table" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">Rank</th>
+                            <th>Team</th>
+                            <th>Owner</th>
+                            <th style="text-align: center; width: 100px;">Wins</th>
+                            <th style="text-align: right; width: 120px;">Points</th>
+                        </tr>
+                    </thead>
+                    <tbody id="standings-table-body">
+                        <!-- Rendered dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <!-- Section: Grid of Teams -->
         <h2 style="color: #fff; margin-bottom: 25px; font-size: 1.8rem; font-family: var(--font-heading);">League Franchises</h2>
         <div class="teams-grid" id="teams-grid-container">
@@ -361,6 +384,7 @@
         let selectedTeamId = null;
 
         document.addEventListener('DOMContentLoaded', () => {
+            renderFranchiseStandings();
             renderTeamsDirectory();
             
             // Default select the first team
@@ -440,6 +464,91 @@
             document.getElementById('team-details-panel').style.display = 'block';
         }
 
+        function getLatestDriverStatus(team, driverName) {
+            if (!team.ledger || team.ledger.length === 0) {
+                const isPrimary = team.drivers.primary.includes(driverName);
+                return {
+                    status: isPrimary ? 'Active' : 'Backup',
+                    icon: isPrimary ? '🟢' : '🔵',
+                    color: isPrimary ? 'var(--neon-green)' : 'var(--status-parttime)'
+                };
+            }
+            
+            // Find unique dates from ledger entries containing points calculations/bonuses/subs
+            const raceDates = team.ledger
+                .filter(item => item.date !== '2026-05-24' && (item.description.includes('Bonus') || item.description.includes('DNS') || item.description.includes('Substituted') || item.description.includes('Prize Money')))
+                .map(item => item.date);
+            
+            if (raceDates.length === 0) {
+                const isPrimary = team.drivers.primary.includes(driverName);
+                return {
+                    status: isPrimary ? 'Active' : 'Backup',
+                    icon: isPrimary ? '🟢' : '🔵',
+                    color: isPrimary ? 'var(--neon-green)' : 'var(--status-parttime)'
+                };
+            }
+            
+            const latestDate = raceDates[raceDates.length - 1];
+            const dayEntries = team.ledger.filter(item => item.date === latestDate);
+            
+            const hasStartBonus = dayEntries.some(item => item.description.includes(`Sponsor Start Bonus: ${driverName}`));
+            const isSubbedOut = dayEntries.some(item => item.description.includes('Substituted') && item.description.includes(`for ${driverName}`));
+            const isSubbedIn = dayEntries.some(item => item.description.includes(`Substituted ${driverName}`));
+            const isDNS = dayEntries.some(item => item.description.includes(`${driverName} DNS`));
+            
+            if (hasStartBonus) {
+                if (isSubbedIn) {
+                    return { status: 'Subbed In', icon: '🔁', color: 'var(--neon-green)', highlight: true };
+                }
+                return { status: 'Active', icon: '🟢', color: 'var(--neon-green)', highlight: true };
+            }
+            if (isSubbedOut || isDNS) {
+                return { status: 'DNS (Absent)', icon: '🔴', color: '#ff1744' };
+            }
+            
+            const isBackup = team.drivers.backup.includes(driverName);
+            if (isBackup) {
+                return { status: 'Benched', icon: '🟡', color: 'var(--chase-yellow)' };
+            }
+            
+            return { status: 'Benched', icon: '⚪', color: 'var(--text-muted)' };
+        }
+
+        function renderFranchiseStandings() {
+            const body = document.getElementById('standings-table-body');
+            if (typeof teamsData === 'undefined' || !teamsData.teams) {
+                body.innerHTML = "<tr><td colspan='5' style='text-align:center;'>Error loading standings.</td></tr>";
+                return;
+            }
+
+            const sortedTeams = [...teamsData.teams].sort((a, b) => {
+                if (b.points !== a.points) {
+                    return b.points - a.points;
+                }
+                return b.wins - a.wins;
+            });
+
+            body.innerHTML = '';
+            sortedTeams.forEach((team, index) => {
+                const tr = document.createElement('tr');
+                const rankDisplay = index === 0 ? `<span style="color:var(--neon-green); font-weight:900;">1st</span>` : 
+                                   index === 1 ? `<span style="color:#eee; font-weight:700;">2nd</span>` : 
+                                   `<span style="color:var(--text-muted); font-weight:700;">3rd</span>`;
+                
+                tr.innerHTML = `
+                    <td style="font-family:var(--font-heading); font-weight:700; font-size:1.1rem; padding:12px 15px;">${rankDisplay}</td>
+                    <td style="display:flex; align-items:center; gap:15px; padding:12px 15px;">
+                        <img src="${team.logo}" alt="${team.name}" style="height:35px; max-width:80px; object-fit:contain;">
+                        <strong style="color:#fff; font-size:1.05rem;">${team.name}</strong>
+                    </td>
+                    <td style="color:var(--text-muted); padding:12px 15px;">${team.owner}</td>
+                    <td style="text-align:center; font-weight:bold; color:#fff; padding:12px 15px;">${team.wins}</td>
+                    <td style="text-align:right; font-family:var(--font-heading); font-size:1.2rem; font-weight:900; color:var(--neon-green); text-shadow:0 0 5px var(--neon-green-glow); padding:12px 15px;">${team.points}</td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+
         function renderRosterTab(team) {
             const primaryCont = document.getElementById('primary-drivers-container');
             const backupCont = document.getElementById('backup-drivers-container');
@@ -458,13 +567,28 @@
                 slotCard.style.display = 'flex';
                 slotCard.style.alignItems = 'center';
                 slotCard.style.gap = '15px';
+                slotCard.style.transition = 'all 0.3s ease';
 
                 if (driverName) {
+                    const drvInfo = getLatestDriverStatus(team, driverName);
+                    const homeCity = (typeof teamsData !== 'undefined' && teamsData.driverLocations[driverName.toUpperCase()]) ? 
+                                     teamsData.driverLocations[driverName.toUpperCase()].city : 'Location N/A';
+                    
+                    if (drvInfo.highlight) {
+                        slotCard.style.borderColor = 'var(--neon-green)';
+                        slotCard.style.boxShadow = '0 0 10px rgba(0,255,0,0.1)';
+                    } else if (drvInfo.status.includes('DNS')) {
+                        slotCard.style.borderColor = '#ff1744';
+                    }
+
                     slotCard.innerHTML = `
                         <img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'font-family:var(--font-heading); font-size:1.5rem; font-weight:bold; color:var(--neon-green);\'>#</span>'">
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
-                            <span style="font-size:0.75rem; color:var(--neon-green); font-weight:bold; text-transform:uppercase;">Primary Driver</span>
+                            <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
+                            <span style="font-size:0.75rem; color:${drvInfo.color}; font-weight:bold; text-transform:uppercase; display:flex; align-items:center; gap:4px;">
+                                <span>${drvInfo.icon}</span> ${drvInfo.status}
+                            </span>
                         </div>
                     `;
                 } else {
@@ -490,13 +614,26 @@
                 slotCard.style.display = 'flex';
                 slotCard.style.alignItems = 'center';
                 slotCard.style.gap = '15px';
+                slotCard.style.transition = 'all 0.3s ease';
 
                 if (driverName) {
+                    const drvInfo = getLatestDriverStatus(team, driverName);
+                    const homeCity = (typeof teamsData !== 'undefined' && teamsData.driverLocations[driverName.toUpperCase()]) ? 
+                                     teamsData.driverLocations[driverName.toUpperCase()].city : 'Location N/A';
+                    
+                    if (drvInfo.highlight) {
+                        slotCard.style.borderColor = 'var(--neon-green)';
+                        slotCard.style.boxShadow = '0 0 10px rgba(0,255,0,0.1)';
+                    }
+
                     slotCard.innerHTML = `
                         <img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'font-family:var(--font-heading); font-size:1.5rem; font-weight:bold; color:var(--neon-green);\'>#</span>'">
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
-                            <span style="font-size:0.75rem; color:var(--status-parttime); font-weight:bold; text-transform:uppercase;">Backup Driver</span>
+                            <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
+                            <span style="font-size:0.75rem; color:${drvInfo.color}; font-weight:bold; text-transform:uppercase; display:flex; align-items:center; gap:4px;">
+                                <span>${drvInfo.icon}</span> ${drvInfo.status}
+                            </span>
                         </div>
                     `;
                 } else {
