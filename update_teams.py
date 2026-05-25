@@ -192,16 +192,27 @@ def parse_iracing_json(path):
         print(f"Error loading iRacing JSON: {e}")
         return {}
 
-    fast_repairs = {}
+    driver_data = {}
     
     def search_results(obj):
         if isinstance(obj, dict):
-            if "display_name" in obj and "fast_repairs_used" in obj:
+            name = None
+            if "display_name" in obj:
                 name = normalize_name(obj["display_name"])
-                fast_repairs[name] = int(obj["fast_repairs_used"])
-            elif "name" in obj and "fast_repairs_used" in obj:
+            elif "name" in obj:
                 name = normalize_name(obj["name"])
-                fast_repairs[name] = int(obj["fast_repairs_used"])
+                
+            if name and "fast_repairs_used" in obj:
+                fast_repairs = int(obj["fast_repairs_used"])
+                reason_out = str(obj.get("reason_out", ""))
+                reason_out_id = int(obj.get("reason_out_id", 0)) if obj.get("reason_out_id") is not None else 0
+                
+                if name not in driver_data or fast_repairs > driver_data[name]["fast_repairs_used"]:
+                    driver_data[name] = {
+                        "fast_repairs_used": fast_repairs,
+                        "reason_out": reason_out,
+                        "reason_out_id": reason_out_id
+                    }
             for v in obj.values():
                 search_results(v)
         elif isinstance(obj, list):
@@ -209,8 +220,9 @@ def parse_iracing_json(path):
                 search_results(item)
                 
     search_results(data)
-    print(f"Found fast repair status for {len(fast_repairs)} drivers in JSON.")
-    return fast_repairs
+    print(f"Found iRacing status for {len(driver_data)} drivers in JSON.")
+    return driver_data
+
 
 def calculate_driver_points(drivers, config):
     scoring = config["scoring"]
@@ -251,7 +263,8 @@ def calculate_driver_points(drivers, config):
             "driver_name": raw_name,
             "finish": fp,
             "incidents": inc,
-            "total_points": total
+            "total_points": total,
+            "status": status
         }
         
     return driver_scores
@@ -523,22 +536,46 @@ def main():
                 total_wear = natural_wear + incident_damage + extra_dmg
                 
                 # Check for fast repair flag in iRacing JSON
-                used_fast_repair = fast_repairs.get(norm_driver, 0) > 0
+                driver_ir_data = fast_repairs.get(norm_driver, {})
+                used_fast_repair = driver_ir_data.get("fast_repairs_used", 0) > 0
+                
+                # Check for DNF due to excessive damage
+                driver_finish_status = score_data.get("status", "running").lower()
+                srh_damage_dnf = any(term in driver_finish_status for term in ["accident", "crash", "damage", "suspension", "contact"])
+                
+                iracing_reason_out = driver_ir_data.get("reason_out", "").lower()
+                iracing_damage_dnf = any(term in iracing_reason_out for term in ["accident", "crash", "damage", "suspension", "contact"])
+                
+                is_damage_dnf = srh_damage_dnf or iracing_damage_dnf
                 
                 if used_fast_repair:
-                    # Flat 45% of truck price ($185k)
-                    fast_repair_fee = 83250
-                    team_expenses += fast_repair_fee
-                    # Reset truck condition to 100% immediately
-                    truck["condition"] = 100
-                    
-                    team["ledger"].append({
-                        "date": race_date,
-                        "description": f"Fast Repair: {truck['name']} ({driver_name})",
-                        "category": "expense",
-                        "amount": -fast_repair_fee
-                    })
-                    print(f"  Slot {idx+1}: {driver_name} used Fast Repair on {truck['name']}! Cost: $83,250")
+                    if is_damage_dnf:
+                        # Totaled! Replaced by a new truck costing $185k
+                        replacement_cost = 185000
+                        team_expenses += replacement_cost
+                        truck["condition"] = 100
+                        
+                        team["ledger"].append({
+                            "date": race_date,
+                            "description": f"Replacement Fleet Truck: {truck['name']} ({driver_name}) (Totaled after DNF)",
+                            "category": "expense",
+                            "amount": -replacement_cost
+                        })
+                        print(f"  Slot {idx+1}: {driver_name} used Fast Repair but DNF'd due to damage! Truck {truck['name']} totaled. Replaced for $185,000.")
+                    else:
+                        # Flat 45% of truck price ($185k)
+                        fast_repair_fee = 83250
+                        team_expenses += fast_repair_fee
+                        # Reset truck condition to 100% immediately
+                        truck["condition"] = 100
+                        
+                        team["ledger"].append({
+                            "date": race_date,
+                            "description": f"Fast Repair: {truck['name']} ({driver_name})",
+                            "category": "expense",
+                            "amount": -fast_repair_fee
+                        })
+                        print(f"  Slot {idx+1}: {driver_name} used Fast Repair on {truck['name']}! Cost: $83,250")
                 else:
                     # Reduce truck condition
                     truck["condition"] = max(0, truck["condition"] - total_wear)
