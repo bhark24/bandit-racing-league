@@ -247,8 +247,8 @@ def main():
     parser = argparse.ArgumentParser(description="Update teams_data.js from SimRacerHub results and optional iRacing JSON.")
     parser.add_argument("--schedule_id", type=str, help="SimRacerHub schedule ID to fetch.")
     parser.add_argument("--iracing_json", type=str, help="Path to raw iRacing results JSON to check fast repairs.")
-    parser.add_argument("--damage", type=str, help="JSON string of manual additional damage, e.g. '{\"outlaw-racing\": {\"truck-2\": 15}}'")
-    parser.add_argument("--repair", type=str, help="JSON string of manual repairs to execute, e.g. '{\"outlaw-racing\": [\"truck-2\"]}'")
+    parser.add_argument("--damage", type=str, help="JSON string of manual additional damage, e.g. '{\"geezer-authentics-racing\": {\"truck-2\": 15}}'")
+    parser.add_argument("--repair", type=str, help="JSON string of manual repairs to execute, e.g. '{\"geezer-authentics-racing\": [\"truck-2\"]}'")
     parser.add_argument("--test", action="store_true", help="Run with local simhub.html test file.")
     args = parser.parse_args()
     

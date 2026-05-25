@@ -23,7 +23,11 @@ const teamsData = {
     "homestead": { "name": "Homestead-Miami Speedway", "city": "Homestead, FL", "distance": 680, "airport": "MIA", "lat": 25.4619, "lon": -80.4789 }
   },
   "driverLocations": {
-    "BILL HARKINS": { "city": "Concord, NC", "lat": 35.4088, "lon": -80.5795 },
+    "BILL HARKINS": {
+      "city": "Ashtabula, OH",
+      "lat": 41.8651,
+      "lon": -80.7898
+    },
     "LOGAN MURRAY": { "city": "Charlotte, NC", "lat": 35.2271, "lon": -80.8431 },
     "NICK NICKERSON": { "city": "Orlando, FL", "lat": 28.5383, "lon": -81.3792 },
     "RICKY HART": { "city": "Atlanta, GA", "lat": 33.7490, "lon": -84.3880 },
@@ -43,11 +47,11 @@ const teamsData = {
   },
   "teams": [
     {
-      "id": "outlaw-racing",
-      "name": "Outlaw Racing Technologies",
+      "id": "geezer-authentics-racing",
+      "name": "Geezer Authentic's Racing Team",
       "owner": "Bill Harkins",
-      "homeBase": "Concord, NC",
-      "logo": "assets/main-logo.png",
+      "homeBase": "Ashtabula, OH",
+      "logo": "assets/geezer-authentics-logo.png",
       "points": 0,
       "wins": 0,
       "balance": 1260000,
@@ -56,10 +60,10 @@ const teamsData = {
         "backup": ["SEAN BRITT", "JONATHON PLATT"]
       },
       "trucks": [
-        { "id": "truck-1", "make": "Chevrolet", "name": "Outlaw Silverado #12", "condition": 100 },
-        { "id": "truck-2", "make": "Chevrolet", "name": "Outlaw Silverado #4", "condition": 100 },
-        { "id": "truck-3", "make": "Chevrolet", "name": "Outlaw Silverado #2", "condition": 100 },
-        { "id": "truck-4", "make": "Chevrolet", "name": "Outlaw Silverado #1", "condition": 100 }
+        { "id": "truck-1", "make": "Chevrolet", "name": "Geezer Silverado #12", "condition": 100 },
+        { "id": "truck-2", "make": "Chevrolet", "name": "Geezer Silverado #4", "condition": 100 },
+        { "id": "truck-3", "make": "Chevrolet", "name": "Geezer Silverado #2", "condition": 100 },
+        { "id": "truck-4", "make": "Chevrolet", "name": "Geezer Silverado #1", "condition": 100 }
       ],
       "ledger": [
         { "date": "2026-05-24", "description": "Starting Franchise Balance", "category": "income", "amount": 2000000 },
