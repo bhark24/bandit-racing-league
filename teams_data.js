@@ -258,7 +258,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2068390,
+      "balance": 2071618,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -318,9 +318,15 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Standard Race Prep: Geezer Silverado #12 (BILL HARKINS)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -242
+          "amount": -240
         },
         {
           "date": "May 25, 2026",
@@ -333,6 +339,12 @@ const teamsData = {
           "description": "Prize Money: BILL HARKINS (P2)",
           "category": "income",
           "amount": 55000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Standard Race Prep: Geezer Silverado #4 (LOGAN MURRAY)",
+          "category": "expense",
+          "amount": -2000
         },
         {
           "date": "May 25, 2026",
@@ -354,9 +366,15 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Standard Race Prep: Geezer Silverado #2 (NICK NICKERSON)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -248
+          "amount": -255
         },
         {
           "date": "May 25, 2026",
@@ -375,6 +393,12 @@ const teamsData = {
           "description": "Fast Repair: Geezer Silverado #2 (NICK NICKERSON)",
           "category": "expense",
           "amount": -83250
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Standard Race Prep: Geezer Silverado #1 (RICKY HART)",
+          "category": "expense",
+          "amount": -2000
         },
         {
           "date": "May 25, 2026",
@@ -402,6 +426,12 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Virtual Sponsorship Earned: Apex Fuel (Upward Performance Trend)",
+          "category": "income",
+          "amount": 11233
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Charlotte Mock Race Results: P1, P2, P10, P18",
           "category": "info",
           "amount": 0
@@ -410,7 +440,8 @@ const teamsData = {
       "sponsors": [
         "Geezer Authentics",
         "Silverado Performance",
-        "Craftsman Tools"
+        "Craftsman Tools",
+        "Apex Fuel"
       ]
     },
     {
@@ -421,7 +452,7 @@ const teamsData = {
       "logo": "assets/lady-chaos-logo.png",
       "points": 86,
       "wins": 0,
-      "balance": 2182294,
+      "balance": 2174222,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -481,6 +512,12 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Standard Race Prep: Chaos F-150 #6 (NICOLE KRIESEL)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Local Travel: NICOLE KRIESEL from Charlotte, NC (0 mi)",
           "category": "expense",
           "amount": -20
@@ -499,9 +536,15 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Standard Race Prep: Chaos F-150 #18 (VICTOR WEAVER)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Flight & Lodging: VICTOR WEAVER from Daytona Beach, FL (420 mi)",
           "category": "expense",
-          "amount": -235
+          "amount": -233
         },
         {
           "date": "May 25, 2026",
@@ -517,9 +560,15 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Standard Race Prep: Chaos F-150 #75 (BOB BERRY)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Flight & Lodging: BOB BERRY from Richmond, VA (260 mi)",
           "category": "expense",
-          "amount": -178
+          "amount": -198
         },
         {
           "date": "May 25, 2026",
@@ -535,9 +584,15 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Standard Race Prep: Chaos F-150 #83 (JASON GREENWELL)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON GREENWELL from Indianapolis, IN (480 mi)",
           "category": "expense",
-          "amount": -194
+          "amount": -248
         },
         {
           "date": "May 25, 2026",
@@ -572,7 +627,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 100,
       "wins": 0,
-      "balance": 2185491,
+      "balance": 2189672,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -632,6 +687,12 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Standard Race Prep: SimTrax Tundra #13 (JONATHON PLATT)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Local Travel: JONATHON PLATT from Concord, NC (0 mi)",
           "category": "expense",
           "amount": -20
@@ -650,9 +711,15 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Standard Race Prep: SimTrax Tundra #14 (JASON ALLEGRINI)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON ALLEGRINI from Nashville, TN (340 mi)",
           "category": "expense",
-          "amount": -179
+          "amount": -187
         },
         {
           "date": "May 25, 2026",
@@ -665,6 +732,12 @@ const teamsData = {
           "description": "Prize Money: JASON ALLEGRINI (P6)",
           "category": "income",
           "amount": 25000
+        },
+        {
+          "date": "May 25, 2026",
+          "description": "Standard Race Prep: SimTrax Tundra #15 (MATT CROCKETT)",
+          "category": "expense",
+          "amount": -2000
         },
         {
           "date": "May 25, 2026",
@@ -686,6 +759,12 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Standard Race Prep: SimTrax Tundra #22 (JOSH ADAMS)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Local Travel: JOSH ADAMS from Charlotte, NC (0 mi)",
           "category": "expense",
           "amount": -20
@@ -704,9 +783,9 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Virtual Sponsorship Earned: FastTrack Designs (Upward Performance Trend)",
+          "description": "Virtual Sponsorship Earned: SimGear Pro (Upward Performance Trend)",
           "category": "income",
-          "amount": 10882
+          "amount": 23071
         },
         {
           "date": "May 25, 2026",
@@ -719,7 +798,7 @@ const teamsData = {
         "SimTrax Broadcasting",
         "Toyota Racing Development",
         "NASCAR Heat",
-        "FastTrack Designs"
+        "SimGear Pro"
       ]
     }
   ]

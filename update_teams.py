@@ -455,6 +455,20 @@ def main():
         
         print(f"  Team Hauler Travel Cost: ${hauler_cost} ({int(hauler_dist)} mi)")
         
+        # Quarterly Hauler Maintenance (every 4 races)
+        race_count = sum(1 for item in team["ledger"] if item.get("category") == "info" or "race results" in item.get("description", "").lower())
+        current_race_num = race_count + 1
+        if current_race_num % 4 == 0:
+            hauler_maint = 2000
+            team_expenses += hauler_maint
+            team["ledger"].append({
+                "date": race_date,
+                "description": f"Quarterly Hauler Maintenance (Race {current_race_num})",
+                "category": "expense",
+                "amount": -hauler_maint
+            })
+            print(f"  Quarterly Hauler Maintenance Charged: ${hauler_maint} (Race {current_race_num})")
+        
         # Evaluate each active slot (mapping to trucks[0..3])
         for idx, (driver_name, is_backup, replaced_pri) in enumerate(active_lineup):
             norm_driver = normalize_name(driver_name)
@@ -468,6 +482,16 @@ def main():
                 driver_finish = score_data["finish"]
                 
                 team_points_this_week += driver_pts
+                
+                # Standard maintenance race prep fee
+                prep_fee = 2000
+                team_expenses += prep_fee
+                team["ledger"].append({
+                    "date": race_date,
+                    "description": f"Standard Race Prep: {truck['name']} ({driver_name})",
+                    "category": "expense",
+                    "amount": -prep_fee
+                })
                 
                 # Travel lodging cost calculations (driver-specific)
                 drv_loc = teams_db["driverLocations"].get(driver_name.upper())
@@ -548,7 +572,25 @@ def main():
                 
                 is_damage_dnf = srh_damage_dnf or iracing_damage_dnf
                 
-                if used_fast_repair:
+                # Check for DNF due to blown motor (mechanical / engine failure)
+                srh_engine_dnf = any(term in driver_finish_status for term in ["engine", "mechanical", "blown motor"])
+                iracing_engine_dnf = any(term in iracing_reason_out for term in ["engine", "mechanical"])
+                is_engine_dnf = srh_engine_dnf or iracing_engine_dnf
+                
+                if is_engine_dnf:
+                    # Engine replacement: costs $45,000 and restores truck to 100%
+                    engine_cost = 45000
+                    team_expenses += engine_cost
+                    truck["condition"] = 100
+                    
+                    team["ledger"].append({
+                        "date": race_date,
+                        "description": f"Engine Replacement: {truck['name']} ({driver_name}) (Blown Motor)",
+                        "category": "expense",
+                        "amount": -engine_cost
+                    })
+                    print(f"  Slot {idx+1}: {driver_name} DNF'd due to a blown engine! Replaced motor on {truck['name']} for $45,000.")
+                elif used_fast_repair:
                     if is_damage_dnf:
                         # Totaled! Replaced by a new truck costing $185k
                         replacement_cost = 185000
