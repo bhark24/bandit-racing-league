@@ -301,19 +301,21 @@
     <main class="container" style="margin-top: 20px; margin-bottom: 100px;">
 
         <!-- UNDER CONSTRUCTION WARNING BANNER -->
-        <div class="construction-banner">
-            <div class="construction-icon">⚠️</div>
-            <div class="construction-text">
-                <h3>Under Construction & Development</h3>
-                <p>The Franchise Teams and League Economy dashboard is currently in active development. Below is a mock preview of the team ledger, fleet garages, and roster budgets. Payout and repair mechanics will be activated shortly.</p>
+        <div class="construction-banner" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 20px; flex: 1; min-width: 280px;">
+                <div class="construction-icon">⚠️</div>
+                <div class="construction-text">
+                    <h3>Under Construction & Development</h3>
+                    <p>The Franchise Teams and League Economy dashboard is currently in active development. Below is a mock preview of the team ledger, fleet garages, and roster budgets. Payout and repair mechanics will be activated shortly.</p>
+                </div>
             </div>
+            <button class="reset-db-btn" onclick="resetState()" style="flex-shrink: 0;">Reset Session State</button>
         </div>
 
         <!-- Franchise Championship Standings -->
         <div class="fantasy-panel" style="margin-bottom: 40px; padding: 25px; border: 1px solid #222; border-radius: var(--border-radius); background: var(--bg-panel);">
             <h2 style="color: #fff; margin-top: 0; margin-bottom: 20px; font-size: 1.8rem; font-family: var(--font-heading); display: flex; align-items: center; justify-content: space-between;">
                 <span>🏆 FRANCHISE CHAMPIONSHIP STANDINGS</span>
-                <button class="reset-db-btn" onclick="resetState()">Reset Database</button>
             </h2>
             <div class="fantasy-table-wrapper">
                 <table class="ledger-table" style="width: 100%;">

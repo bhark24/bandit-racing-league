@@ -169,9 +169,9 @@ const teamsData = {
       "lon": -80.7898
     },
     "LOGAN MURRAY": {
-      "city": "Charlotte, NC",
-      "lat": 35.2271,
-      "lon": -80.8431
+      "city": "West Plains, MO",
+      "lat": 36.7281,
+      "lon": -91.8515
     },
     "NICK NICKERSON": {
       "city": "Orlando, FL",
