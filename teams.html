@@ -957,7 +957,13 @@
             if (saved) {
                 try {
                     localTeamsData = JSON.parse(saved);
-                    teamsData.teams = localTeamsData.teams;
+                    // Merge local modifications with the server's team list, so any newly added teams (like Wrist's Up Racing) are automatically loaded!
+                    const serverTeams = teamsData.teams;
+                    const mergedTeams = serverTeams.map(serverTeam => {
+                        const savedTeam = localTeamsData.teams.find(t => t.id === serverTeam.id);
+                        return savedTeam ? savedTeam : serverTeam;
+                    });
+                    teamsData.teams = mergedTeams;
                 } catch (e) {
                     console.error("Failed to parse saved state:", e);
                     localTeamsData = null;
