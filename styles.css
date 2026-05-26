@@ -1228,11 +1228,13 @@ footer {
 
 .car-number {
     font-family: 'Teko', sans-serif;
-    font-size: 4rem;
-    font-weight: 700;
+    font-size: 4.8rem;
+    font-weight: 900;
     line-height: 0.8;
-    color: var(--text-light);
+    color: #fff;
     font-style: italic;
+    text-shadow: 2.5px 2.5px 0px #000, -2.5px -2.5px 0px #000, 2.5px -2.5px 0px #000, -2.5px 2.5px 0px #000, 0px 4px 10px rgba(0,0,0,0.6);
+    letter-spacing: -2px;
 }
 
 .status-badge {
