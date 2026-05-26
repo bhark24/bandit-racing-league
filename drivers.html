@@ -68,8 +68,13 @@
 
     <script src="teams_data.js"></script>
     <script src="roster_data.js"></script>
-    <script>
         const grid = document.getElementById('driver-grid');
+
+        function getDriverImgPath(name) {
+            if (!name) return '';
+            const formattedName = name.trim().toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            return `assets/drivers numbers/${formattedName}.png`;
+        }
 
         function findTeamsForDriver(driverName) {
             if (typeof teamsData === 'undefined' || !teamsData.teams) return [];
@@ -169,7 +174,7 @@
                     <div class="card-header">
                         <div style="height: 90px; display:flex; align-items:center;">
                             ${hasDriver ? 
-                                `<img src="assets/drivers numbers/${data.driver.trim()}.png" class="custom-number-img" style="max-height: 85px; max-width: 160px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>${num}</span>'">` 
+                                `<img src="${getDriverImgPath(data.driver)}" class="custom-number-img" style="max-height: 85px; max-width: 160px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>${num}</span>'">` 
                                 : `<span class="car-number">${num}</span>`
                             }
                         </div>

@@ -419,8 +419,13 @@
     
     <!-- Page Logic -->
     <script>
-        // Store current user picks (array of 4 slots)
         let currentPicks = [null, null, null, null];
+
+        function getDriverImgPath(name) {
+            if (!name) return '';
+            const formattedName = name.trim().toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            return `assets/drivers numbers/${formattedName}.png`;
+        }
 
         // Switch Tabs
         function switchTab(tabId) {
@@ -569,7 +574,7 @@
                     <div class="fantasy-card-check">✓</div>
                     <div class="fantasy-driver-info">
                         <div style="height: 60px; display:flex; align-items:center;">
-                            <img src="assets/drivers numbers/${driver.name.trim()}.png" style="max-height: 55px; max-width: 110px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'fantasy-driver-num\\'>#${driver.number}</span>'">
+                            <img src="${getDriverImgPath(driver.name)}" style="max-height: 55px; max-width: 110px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'fantasy-driver-num\\'>#${driver.number}</span>'">
                         </div>
                         <div>
                             <div class="fantasy-driver-name">${driver.name}</div>
@@ -629,7 +634,7 @@
                 const driver = currentPicks[i];
                 
                 if (driver) {
-                    valEl.innerHTML = `<img src="assets/drivers numbers/${driver.trim()}.png" style="max-height: 35px; vertical-align: middle; margin-right: 10px;" onerror="this.style.display='none'"> <strong>${driver}</strong>`;
+                    valEl.innerHTML = `<img src="${getDriverImgPath(driver)}" style="max-height: 35px; vertical-align: middle; margin-right: 10px;" onerror="this.style.display='none'"> <strong>${driver}</strong>`;
                     slotEl.style.border = '2px solid var(--neon-green)';
                     slotEl.style.background = 'rgba(0, 255, 0, 0.03)';
                     btnRemove.style.display = 'block';

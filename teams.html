@@ -438,6 +438,12 @@
     <script>
         let selectedTeamId = null;
 
+        function getDriverImgPath(name) {
+            if (!name || name === 'VACANT') return '';
+            const formattedName = name.trim().toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            return `assets/drivers numbers/${formattedName}.png`;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             loadState();
             renderFranchiseStandings();
@@ -639,7 +645,7 @@
                     }
 
                     slotCard.innerHTML = `
-                        <img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="handleDriverNumberError(this)">
+                        <img src="${getDriverImgPath(driverName)}" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="handleDriverNumberError(this)">
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
                             <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
@@ -687,7 +693,7 @@
                     }
 
                     slotCard.innerHTML = `
-                        <img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="handleDriverNumberError(this)">
+                        <img src="${getDriverImgPath(driverName)}" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="handleDriverNumberError(this)">
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
                             <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
@@ -756,7 +762,7 @@
                 let driverLabel = `<span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Driver: Vacant</span>`;
                 
                 if (driverName) {
-                    visualHTML = `<img src="assets/drivers numbers/${driverName.trim()}.png" style="max-height:45px; max-width:90px; object-fit:contain;" onerror="handleTruckNumberError(this)">`;
+                    visualHTML = `<img src="${getDriverImgPath(driverName)}" style="max-height:45px; max-width:90px; object-fit:contain;" onerror="handleTruckNumberError(this)">`;
                     driverLabel = `<span style="font-size:0.75rem; color:var(--neon-green); font-weight:bold; text-transform:uppercase;">Driver: ${driverName}</span>`;
                 }
 
