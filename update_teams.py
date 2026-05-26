@@ -439,7 +439,8 @@ def main():
             "charlotte, nc": (35.2271, -80.8431),
             "concord, nc": (35.4088, -80.5795),
             "madison, wi": (43.0731, -89.4012),
-            "cleveland, oh": (41.4993, -81.6944)
+            "cleveland, oh": (41.4993, -81.6944),
+            "dayton, oh": (39.7589, -84.1916)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates

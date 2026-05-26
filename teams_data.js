@@ -276,9 +276,9 @@ const teamsData = {
       "owner": "Bill Harkins",
       "homeBase": "Cleveland, OH",
       "logo": "assets/roundy-motorsports-logo.png",
-      "points": 0,
-      "wins": 0,
-      "balance": 2010000,
+      "points": 98,
+      "wins": 1,
+      "balance": 2202889,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -296,19 +296,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Ford",
           "name": "Roundy F-150 #12",
-          "condition": 100
+          "condition": 94
         },
         {
           "id": "truck-2",
           "make": "Ford",
           "name": "Roundy F-150 #4",
-          "condition": 100
+          "condition": 97
         },
         {
           "id": "truck-3",
           "make": "Ford",
           "name": "Roundy F-150 #15",
-          "condition": 100
+          "condition": 88
         },
         {
           "id": "truck-4",
@@ -329,12 +329,109 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Ford F-150 Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Hauler Logistics: Cleveland, OH to Daytona Beach, FL (849 mi)",
+          "category": "expense",
+          "amount": -8498
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Standard Race Prep: Roundy F-150 #4 (LOGAN MURRAY)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Flight & Lodging: LOGAN MURRAY from West Plains, MO (813 mi)",
+          "category": "expense",
+          "amount": -267
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Sponsor Start Bonus: LOGAN MURRAY",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Prize Money: LOGAN MURRAY (P1)",
+          "category": "income",
+          "amount": 75000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Standard Race Prep: Roundy F-150 #15 (MATT CROCKETT)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Flight & Lodging: MATT CROCKETT from Roanoke, VA (836 mi)",
+          "category": "expense",
+          "amount": -301
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Sponsor Start Bonus: MATT CROCKETT",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Prize Money: MATT CROCKETT (P5)",
+          "category": "income",
+          "amount": 30000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Standard Race Prep: Roundy F-150 #12 (BILL HARKINS)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (874 mi)",
+          "category": "expense",
+          "amount": -272
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Sponsor Start Bonus: BILL HARKINS",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Prize Money: BILL HARKINS (P8)",
+          "category": "income",
+          "amount": 25000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "VACANT DNS - No active backup available",
+          "category": "expense",
+          "amount": 0
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Virtual Sponsorship Earned: Veloce Simulators (Upward Performance Trend)",
+          "category": "income",
+          "amount": 33227
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Daytona Race Results: P1, P5, P8, DNS",
+          "category": "info",
+          "amount": 0
         }
       ],
       "sponsors": [
         "Roundy Motorsports",
         "Ford Performance",
-        "Craftsman Tools"
+        "Craftsman Tools",
+        "Veloce Simulators"
       ],
       "passcodeHash": "e7faa8b075ab5b412691a8b097ebfee4bb5fd87c448bfffc35ed519a449702ce"
     },
@@ -344,9 +441,9 @@ const teamsData = {
       "owner": "Victor Weaver",
       "homeBase": "Dayton, OH",
       "logo": "assets/937-racing-logo.png",
-      "points": 0,
+      "points": 91,
       "wins": 0,
-      "balance": 2010000,
+      "balance": 2193870,
       "drivers": {
         "primary": [
           "VICTOR WEAVER",
@@ -364,25 +461,25 @@ const teamsData = {
           "id": "truck-1",
           "make": "Toyota",
           "name": "937 Tundra #18",
-          "condition": 100
+          "condition": 89
         },
         {
           "id": "truck-2",
           "make": "Toyota",
           "name": "937 Tundra #95",
-          "condition": 100
+          "condition": 92
         },
         {
           "id": "truck-3",
           "make": "Toyota",
           "name": "937 Tundra #17",
-          "condition": 100
+          "condition": 81
         },
         {
           "id": "truck-4",
           "make": "Toyota",
           "name": "937 Tundra #19",
-          "condition": 100
+          "condition": 86
         }
       ],
       "ledger": [
@@ -397,12 +494,139 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Toyota Tundra Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Hauler Logistics: Dayton, OH to Daytona Beach, FL (750 mi)",
+          "category": "expense",
+          "amount": -7506
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Standard Race Prep: 937 Tundra #18 (VICTOR WEAVER)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (750 mi)",
+          "category": "expense",
+          "amount": -291
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Sponsor Start Bonus: VICTOR WEAVER",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Prize Money: VICTOR WEAVER (P2)",
+          "category": "income",
+          "amount": 55000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Standard Race Prep: 937 Tundra #95 (JOSH ADAMS)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (737 mi)",
+          "category": "expense",
+          "amount": -223
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Sponsor Start Bonus: JOSH ADAMS",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Prize Money: JOSH ADAMS (P6)",
+          "category": "income",
+          "amount": 25000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Standard Race Prep: 937 Tundra #17 (DIONTE RADER)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Flight & Lodging: DIONTE RADER from Miamisburg, OH (744 mi)",
+          "category": "expense",
+          "amount": -253
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Sponsor Start Bonus: DIONTE RADER",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Prize Money: DIONTE RADER (P11)",
+          "category": "income",
+          "amount": 20000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Substituted DIONTE RADER into Slot 3 for VACANT (DNS)",
+          "category": "income",
+          "amount": 0
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Standard Race Prep: 937 Tundra #19 (MATT BAILEY)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Flight & Lodging: MATT BAILEY from Xenia, OH (742 mi)",
+          "category": "expense",
+          "amount": -291
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Sponsor Start Bonus: MATT BAILEY",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Prize Money: MATT BAILEY (P12)",
+          "category": "income",
+          "amount": 20000
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Substituted MATT BAILEY into Slot 4 for VACANT (DNS)",
+          "category": "income",
+          "amount": 0
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Virtual Sponsorship Earned: Octane Apparel (Upward Performance Trend)",
+          "category": "income",
+          "amount": 20434
+        },
+        {
+          "date": "2026-05-25",
+          "description": "Daytona Race Results: P2, P6, P11, P12",
+          "category": "info",
+          "amount": 0
         }
       ],
       "sponsors": [
         "937 Racing",
         "Toyota Racing Development",
-        "Craftsman Tools"
+        "Craftsman Tools",
+        "Octane Apparel"
       ],
       "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305"
     }
