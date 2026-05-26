@@ -18,7 +18,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         .construction-banner {
@@ -347,7 +347,7 @@
                 <div style="display:flex; align-items:center; gap:25px; flex-wrap:wrap;">
                     <img id="detail-team-logo" src="" alt="Team Logo" style="max-height: 80px; max-width: 160px; object-fit: contain;">
                     <div>
-                        <h2 id="detail-team-name" style="font-size: 2.2rem; color: #fff; margin:0;">Team Name</h2>
+                        <h2 id="detail-team-name" style="font-size: 2.2rem; color: #fff; margin:0; font-style: italic;">Team Name</h2>
                         <p style="color:var(--text-muted); margin: 5px 0 0 0; font-size: 1rem;">Owner: <strong id="detail-team-owner" style="color:#fff;">Owner Name</strong> | Team Base Location: <span id="detail-team-base">City, State</span></p>
                     </div>
                 </div>
@@ -477,7 +477,7 @@
                         <img src="${team.logo}" alt="${team.name}" class="team-overview-logo">
                         <span style="font-size:0.75rem; background:rgba(255,255,255,0.05); padding:4px 8px; border-radius:4px; color:var(--text-muted); font-weight:700; text-transform:uppercase;">${team.homeBase}</span>
                     </div>
-                    <h3 style="color:#fff; font-family:var(--font-heading); font-size:1.3rem; margin:10px 0 5px 0;">${team.name}</h3>
+                    <h3 style="color:#fff; font-family:var(--font-heading); font-size:1.3rem; margin:10px 0 5px 0; font-style: italic;">${team.name}</h3>
                     <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">Owner: ${team.owner}</p>
                     <div class="team-overview-balance">${formattedBalance}</div>
                     <div style="font-size:0.8rem; color:var(--text-muted); border-top:1px solid #1c1c1c; padding-top:10px; margin-top:auto; display:flex; justify-content:space-between;">
@@ -602,7 +602,7 @@
                     <td style="font-family:var(--font-heading); font-weight:700; font-size:1.1rem; padding:12px 15px;">${rankDisplay}</td>
                     <td style="display:flex; align-items:center; gap:15px; padding:12px 15px;">
                         <img src="${team.logo}" alt="${team.name}" style="height:35px; max-width:80px; object-fit:contain;">
-                        <strong style="color:#fff; font-size:1.05rem;">${team.name}</strong>
+                        <strong style="color:#fff; font-size:1.05rem; font-style: italic;">${team.name}</strong>
                     </td>
                     <td style="color:var(--text-muted); padding:12px 15px;">${team.owner}</td>
                     <td style="text-align:center; font-weight:bold; color:#fff; padding:12px 15px;">${team.wins}</td>
@@ -737,7 +737,9 @@
                         badge.style.display = 'inline-flex';
                         badge.style.alignItems = 'center';
                         badge.style.boxShadow = '0 0 8px rgba(0,255,0,0.08)';
-                        badge.innerHTML = `🤝 ${sponsor}`;
+                        const isTeamName = typeof teamsData !== 'undefined' && teamsData.teams && teamsData.teams.some(t => t.name === sponsor);
+                        const displaySponsor = isTeamName ? `<i>${sponsor}</i>` : sponsor;
+                        badge.innerHTML = `🤝 ${displaySponsor}`;
                         sponsorsCont.appendChild(badge);
                     });
                 }
