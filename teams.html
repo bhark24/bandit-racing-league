@@ -203,6 +203,51 @@
                 text-align: center;
             }
         }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scaleUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        .btn-release {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+            margin-top: 5px;
+            display: inline-block;
+            transition: color 0.2s;
+        }
+        .btn-release:hover {
+            color: #ff1744;
+        }
+        .reset-db-btn {
+            background: rgba(255, 23, 68, 0.05);
+            border: 1px solid rgba(255, 23, 68, 0.3);
+            color: #ff1744;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: var(--font-heading);
+            transition: all 0.2s;
+        }
+        .reset-db-btn:hover {
+            background: rgba(255, 23, 68, 0.15);
+            border-color: #ff1744;
+            box-shadow: 0 0 10px rgba(255, 23, 68, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -266,8 +311,9 @@
 
         <!-- Franchise Championship Standings -->
         <div class="fantasy-panel" style="margin-bottom: 40px; padding: 25px; border: 1px solid #222; border-radius: var(--border-radius); background: var(--bg-panel);">
-            <h2 style="color: #fff; margin-top: 0; margin-bottom: 20px; font-size: 1.8rem; font-family: var(--font-heading); display: flex; align-items: center; gap: 10px;">
-                🏆 FRANCHISE CHAMPIONSHIP STANDINGS
+            <h2 style="color: #fff; margin-top: 0; margin-bottom: 20px; font-size: 1.8rem; font-family: var(--font-heading); display: flex; align-items: center; justify-content: space-between;">
+                <span>🏆 FRANCHISE CHAMPIONSHIP STANDINGS</span>
+                <button class="reset-db-btn" onclick="resetState()">Reset Database</button>
             </h2>
             <div class="fantasy-table-wrapper">
                 <table class="ledger-table" style="width: 100%;">
@@ -295,11 +341,18 @@
 
         <!-- Section: Interactive Detailed View of Selected Team -->
         <div class="fantasy-panel" id="team-details-panel" style="display:none; animation: fadeIn 0.4s ease;">
-            <div style="display:flex; align-items:center; gap:25px; margin-bottom:30px; border-bottom:1px solid #222; padding-bottom:20px; flex-wrap:wrap;">
-                <img id="detail-team-logo" src="" alt="Team Logo" style="max-height: 80px; max-width: 160px; object-fit: contain;">
-                <div>
-                    <h2 id="detail-team-name" style="font-size: 2.2rem; color: #fff; margin:0;">Team Name</h2>
-                    <p style="color:var(--text-muted); margin: 5px 0 0 0; font-size: 1rem;">Owner: <strong id="detail-team-owner" style="color:#fff;">Owner Name</strong> | Team Base Location: <span id="detail-team-base">City, State</span></p>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:30px; border-bottom:1px solid #222; padding-bottom:20px; flex-wrap:wrap; gap:20px;">
+                <div style="display:flex; align-items:center; gap:25px; flex-wrap:wrap;">
+                    <img id="detail-team-logo" src="" alt="Team Logo" style="max-height: 80px; max-width: 160px; object-fit: contain;">
+                    <div>
+                        <h2 id="detail-team-name" style="font-size: 2.2rem; color: #fff; margin:0;">Team Name</h2>
+                        <p style="color:var(--text-muted); margin: 5px 0 0 0; font-size: 1rem;">Owner: <strong id="detail-team-owner" style="color:#fff;">Owner Name</strong> | Team Base Location: <span id="detail-team-base">City, State</span></p>
+                    </div>
+                </div>
+                <div id="sim-button-container" style="display:none; align-items:center;">
+                    <button class="btn-primary" style="padding: 12px 24px; font-size: 0.95rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius); box-shadow: 0 0 15px var(--neon-green-glow); display: flex; align-items: center; gap: 8px;" onclick="simulateRaceWeekendInteractive()">
+                        🏁 Simulate Race Weekend
+                    </button>
                 </div>
             </div>
 
@@ -384,10 +437,12 @@
 
     <!-- Load the JavaScript Mock Database first -->
     <script src="teams_data.js"></script>
+    <script src="roster_data.js"></script>
     <script>
         let selectedTeamId = null;
 
         document.addEventListener('DOMContentLoaded', () => {
+            loadState();
             renderFranchiseStandings();
             renderTeamsDirectory();
             
@@ -466,6 +521,16 @@
 
             // Make details visible
             document.getElementById('team-details-panel').style.display = 'block';
+
+            // Show or hide simulation button container
+            const simContainer = document.getElementById('sim-button-container');
+            if (simContainer) {
+                if (teamId === '937-racing') {
+                    simContainer.style.display = 'flex';
+                } else {
+                    simContainer.style.display = 'none';
+                }
+            }
         }
 
         function getLatestDriverStatus(team, driverName) {
@@ -573,7 +638,7 @@
                 slotCard.style.gap = '15px';
                 slotCard.style.transition = 'all 0.3s ease';
 
-                if (driverName) {
+                if (driverName && driverName !== 'VACANT') {
                     const drvInfo = getLatestDriverStatus(team, driverName);
                     const homeCity = (typeof teamsData !== 'undefined' && teamsData.driverLocations[driverName.toUpperCase()]) ? 
                                      teamsData.driverLocations[driverName.toUpperCase()].city : 'Location N/A';
@@ -590,9 +655,10 @@
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
                             <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
-                            <span style="font-size:0.75rem; color:${drvInfo.color}; font-weight:bold; text-transform:uppercase; display:flex; align-items:center; gap:4px;">
+                            <span style="font-size:0.75rem; color:${drvInfo.color}; font-weight:bold; text-transform:uppercase; display:flex; align-items:center; gap:4px; margin-bottom:4px;">
                                 <span>${drvInfo.icon}</span> ${drvInfo.status}
                             </span>
+                            <button class="btn-release" onclick="releaseDriver('${team.id}', 'primary', ${i})">Release Driver</button>
                         </div>
                     `;
                 } else {
@@ -600,7 +666,9 @@
                         <span style="font-size:1.8rem; color:#333;">👤</span>
                         <div>
                             <strong style="color:#444; display:block; font-size:0.95rem;">Vacant Slot</strong>
-                            <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">No Driver Signed</span>
+                            <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="openSignDriverModal('${team.id}', 'primary', ${i})">
+                                + Sign Driver
+                            </button>
                         </div>
                     `;
                 }
@@ -635,9 +703,10 @@
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
                             <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
-                            <span style="font-size:0.75rem; color:${drvInfo.color}; font-weight:bold; text-transform:uppercase; display:flex; align-items:center; gap:4px;">
+                            <span style="font-size:0.75rem; color:${drvInfo.color}; font-weight:bold; text-transform:uppercase; display:flex; align-items:center; gap:4px; margin-bottom:4px;">
                                 <span>${drvInfo.icon}</span> ${drvInfo.status}
                             </span>
+                            <button class="btn-release" onclick="releaseDriver('${team.id}', 'backup', ${i})">Release Driver</button>
                         </div>
                     `;
                 } else {
@@ -645,7 +714,9 @@
                         <span style="font-size:1.8rem; color:#333;">👤</span>
                         <div>
                             <strong style="color:#444; display:block; font-size:0.95rem;">Vacant Slot</strong>
-                            <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">No Driver Signed</span>
+                            <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="openSignDriverModal('${team.id}', 'backup', ${i})">
+                                + Sign Driver
+                            </button>
                         </div>
                     `;
                 }
@@ -882,6 +953,501 @@
             img.parentNode.replaceChild(span, img);
         }
 
+        // LocalStorage and database persistence state
+        let localTeamsData = null;
+
+        function loadState() {
+            const saved = localStorage.getItem('bandit_teams_data');
+            if (saved) {
+                try {
+                    localTeamsData = JSON.parse(saved);
+                    teamsData.teams = localTeamsData.teams;
+                } catch (e) {
+                    console.error("Failed to parse saved state:", e);
+                    localTeamsData = null;
+                }
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem('bandit_teams_data', JSON.stringify({ teams: teamsData.teams }));
+        }
+
+        function resetState() {
+            if (confirm("Are you sure you want to reset the franchise database? This will revert all repair purchases, roster changes, and weekly simulations back to the initial Charlotte mock week status.")) {
+                localStorage.removeItem('bandit_teams_data');
+                window.location.reload();
+            }
+        }
+
+        // Option 1: Roster Signings & Agency
+        function getAvailableFreeAgents() {
+            const signedNames = new Set();
+            teamsData.teams.forEach(team => {
+                (team.drivers.primary || []).forEach(name => { if (name && name !== 'VACANT') signedNames.add(normalizeName(name)); });
+                (team.drivers.backup || []).forEach(name => { if (name) signedNames.add(normalizeName(name)); });
+            });
+
+            function normalizeName(name) {
+                return name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
+            }
+
+            const freeAgents = [];
+            for (let num in rosterData) {
+                const driverName = rosterData[num].driver;
+                if (driverName && driverName.trim() !== '') {
+                    const norm = normalizeName(driverName);
+                    if (!signedNames.has(norm)) {
+                        freeAgents.push(driverName.trim());
+                    }
+                }
+            }
+            return [...new Set(freeAgents)].sort();
+        }
+
+        let activeSignTeamId = null;
+        let activeSignSlotType = null;
+        let activeSignSlotIndex = null;
+
+        function openSignDriverModal(teamId, slotType, slotIndex) {
+            activeSignTeamId = teamId;
+            activeSignSlotType = slotType;
+            activeSignSlotIndex = slotIndex;
+
+            const selectEl = document.getElementById('free-agent-select');
+            selectEl.innerHTML = '';
+
+            const agents = getAvailableFreeAgents();
+            if (agents.length === 0) {
+                selectEl.innerHTML = '<option value="">No Free Agents Available</option>';
+                document.getElementById('confirm-sign-btn').disabled = true;
+            } else {
+                agents.forEach(agent => {
+                    const option = document.createElement('option');
+                    option.value = agent;
+                    option.textContent = agent;
+                    selectEl.appendChild(option);
+                });
+                document.getElementById('confirm-sign-btn').disabled = false;
+            }
+
+            document.getElementById('confirm-sign-btn').onclick = executeSignDriver;
+            document.getElementById('sign-driver-modal').style.display = 'flex';
+        }
+
+        function closeSignDriverModal() {
+            document.getElementById('sign-driver-modal').style.display = 'none';
+        }
+
+        async function executeSignDriver() {
+            const selectEl = document.getElementById('free-agent-select');
+            const driverName = selectEl.value;
+            if (!driverName) return;
+
+            const team = teamsData.teams.find(t => t.id === activeSignTeamId);
+            if (!team) return;
+
+            const cost = 50000;
+            if (team.balance < cost) {
+                alert(`Insufficient franchise balance. Required: $50,000, Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
+                return;
+            }
+
+            const passcode = prompt(`Signing a driver requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
+            if (passcode === null) return;
+
+            const hashed = await sha256(passcode.trim());
+            if (hashed !== team.passcodeHash) {
+                alert("Authentication Failed! Incorrect passcode.");
+                return;
+            }
+
+            const confirmSign = confirm(`Are you sure you want to sign ${driverName} for a $50,000 signing bonus?`);
+            if (!confirmSign) return;
+
+            if (activeSignSlotType === 'primary') {
+                team.drivers.primary[activeSignSlotIndex] = driverName;
+            } else {
+                team.drivers.backup[activeSignSlotIndex] = driverName;
+            }
+            team.balance -= cost;
+
+            const today = new Date();
+            const year = today.getFullYear();
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[today.getMonth()];
+            const day = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${month} ${day}, ${year}`;
+
+            team.ledger.push({
+                date: dateStr,
+                description: `Signed Driver: ${driverName} (Signing Bonus)`,
+                category: "expense",
+                amount: -cost
+            });
+
+            saveState();
+            closeSignDriverModal();
+            renderTeamsDirectory();
+            selectTeam(activeSignTeamId);
+            renderFranchiseStandings();
+        }
+
+        async function releaseDriver(teamId, slotType, slotIndex) {
+            const team = teamsData.teams.find(t => t.id === teamId);
+            if (!team) return;
+
+            let driverName = '';
+            if (slotType === 'primary') {
+                driverName = team.drivers.primary[slotIndex];
+            } else {
+                driverName = team.drivers.backup[slotIndex];
+            }
+            if (!driverName || driverName === 'VACANT') return;
+
+            const passcode = prompt(`Releasing ${driverName} requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
+            if (passcode === null) return;
+
+            const hashed = await sha256(passcode.trim());
+            if (hashed !== team.passcodeHash) {
+                alert("Authentication Failed! Incorrect passcode.");
+                return;
+            }
+
+            const confirmRelease = confirm(`Are you sure you want to release ${driverName}? They will be returned to the Free Agent pool.`);
+            if (!confirmRelease) return;
+
+            if (slotType === 'primary') {
+                team.drivers.primary[slotIndex] = 'VACANT';
+            } else {
+                team.drivers.backup[slotIndex] = '';
+            }
+
+            const today = new Date();
+            const year = today.getFullYear();
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[today.getMonth()];
+            const day = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${month} ${day}, ${year}`;
+
+            team.ledger.push({
+                date: dateStr,
+                description: `Released Driver: ${driverName}`,
+                category: "info",
+                amount: 0
+            });
+
+            saveState();
+            renderTeamsDirectory();
+            selectTeam(teamId);
+            renderFranchiseStandings();
+        }
+
+        // Option 5: Race Weekend Simulation Engine
+        function haversineDistance(lat1, lon1, lat2, lon2) {
+            const R = 3958.8;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function simulateRaceWeekendInteractive() {
+            const team = teamsData.teams.find(t => t.id === '937-racing');
+            if (!team) return;
+
+            const activeDrivers = team.drivers.primary.filter(d => d && d !== 'VACANT');
+            if (activeDrivers.length === 0) {
+                alert("Error: You must sign at least one primary driver to simulate a race!");
+                return;
+            }
+
+            const tracks = teamsData.tracks;
+            const trackKeys = Object.keys(tracks).filter(k => tracks[k].distance > 0);
+            const randKey = trackKeys[Math.floor(Math.random() * trackKeys.length)];
+            const track = tracks[randKey];
+
+            // 1. Calculate hauler logistics cost
+            const baseLat = 39.7589;
+            const baseLon = -84.1916;
+            const haulerDistance = Math.round(haversineDistance(baseLat, baseLon, track.lat, track.lon));
+            const haulerCost = Math.round(haulerDistance * 2 * 5.00);
+
+            // 2. Calculate driver travel costs
+            const driverTravelCosts = [];
+            let totalTravelCost = 0;
+            activeDrivers.forEach(driverName => {
+                const loc = teamsData.driverLocations[driverName.toUpperCase()];
+                let driverDist = 0;
+                if (loc) {
+                    driverDist = haversineDistance(loc.lat, loc.lon, track.lat, track.lon);
+                }
+                const cost = driverDist > 250 ? 250 : 100;
+                totalTravelCost += cost;
+                driverTravelCosts.push({ name: driverName, cost: cost });
+            });
+
+            // 3. Prep fee
+            const prepFee = activeDrivers.length * 2000;
+
+            // 4. Standings, winnings & points
+            const finishes = [];
+            let totalWinnings = 0;
+            let totalPoints = 0;
+            activeDrivers.forEach(driverName => {
+                const finishPos = Math.floor(Math.random() * 24) + 1;
+                let winnings = 12000;
+                let points = 10;
+                if (finishPos === 1) { winnings = 75000; points = 40; }
+                else if (finishPos === 2) { winnings = 55000; points = 35; }
+                else if (finishPos === 3) { winnings = 45000; points = 32; }
+                else if (finishPos === 4) { winnings = 35000; points = 30; }
+                else if (finishPos === 5) { winnings = 30000; points = 28; }
+                else if (finishPos <= 10) { winnings = 25000; points = 25; }
+                else if (finishPos <= 15) { winnings = 20000; points = 20; }
+                else if (finishPos <= 20) { winnings = 15000; points = 15; }
+
+                totalWinnings += winnings;
+                totalPoints += points;
+                finishes.push({ name: driverName, pos: finishPos, winnings: winnings, points: points });
+            });
+
+            // 5. Wear, incidents & repairs
+            const incidentDeductions = [];
+            let repairFees = 0;
+            let totaledFees = 0;
+            let engineFees = 0;
+
+            finishes.forEach(f => {
+                const slotIndex = team.drivers.primary.indexOf(f.name);
+                if (slotIndex === -1) return;
+                const truck = team.trucks[slotIndex];
+                if (!truck) return;
+
+                const incidents = Math.floor(Math.random() * 13);
+                const wear = incidents * 4;
+                let oldCond = truck.condition;
+                let newCond = Math.max(0, oldCond - wear);
+                truck.condition = newCond;
+
+                const blownEngine = Math.random() < 0.05;
+                const totaled = Math.random() < 0.03;
+                const usedFastRepair = newCond < 70 && Math.random() < 0.70;
+
+                let incidentText = `${incidents} Incidents (-${wear}%)`;
+                let actionText = "";
+
+                if (totaled && usedFastRepair) {
+                    totaledFees += 185000;
+                    truck.condition = 100;
+                    actionText = "💥 Totaled Truck (DNF after Fast Repair) - Replaced Fleet Truck (-$185,000)";
+                    incidentText += " | DNF (Crash)";
+                } else if (blownEngine) {
+                    engineFees += 45000;
+                    truck.condition = 100;
+                    actionText = "⚙️ Blown Engine (DNF) - Replaced Engine (-$45,000)";
+                    incidentText += " | DNF (Engine)";
+                } else if (usedFastRepair) {
+                    repairFees += 83250;
+                    truck.condition = 100;
+                    actionText = "⚡ Used Fast Repair - Restored condition (-$83,250)";
+                }
+
+                incidentDeductions.push({
+                    driver: f.name,
+                    truck: truck.name,
+                    incidents: incidents,
+                    wear: wear,
+                    oldCond: oldCond,
+                    newCond: truck.condition,
+                    actionText: actionText,
+                    incidentText: incidentText
+                });
+            });
+
+            runSimulationAnimation(track, haulerCost, totalTravelCost, prepFee, totalWinnings, totalPoints, finishes, incidentDeductions, repairFees, totaledFees, engineFees);
+        }
+
+        function runSimulationAnimation(track, haulerCost, totalTravelCost, prepFee, totalWinnings, totalPoints, finishes, incidentDeductions, repairFees, totaledFees, engineFees) {
+            const modal = document.getElementById('sim-modal');
+            const progress = document.getElementById('sim-progress-bar');
+            const title = document.getElementById('sim-status-title');
+            const desc = document.getElementById('sim-status-desc');
+            const stageAnim = document.getElementById('sim-stage-animation');
+            const stageResults = document.getElementById('sim-stage-results');
+            const graphic = document.getElementById('sim-graphic');
+
+            stageAnim.style.display = 'block';
+            stageResults.style.display = 'none';
+            progress.style.width = '0%';
+            modal.style.display = 'flex';
+
+            title.textContent = "Hauler Departing";
+            desc.textContent = `937 Racing hauler is departing Dayton, OH for ${track.name} (${track.city})...`;
+            graphic.textContent = "🚚";
+            
+            setTimeout(() => {
+                progress.style.width = '33%';
+                
+                setTimeout(() => {
+                    title.textContent = "Practice & Qualifying";
+                    desc.textContent = `Drivers are logging laps and setting speeds in practice...`;
+                    graphic.textContent = "⏱️";
+                    progress.style.width = '66%';
+
+                    setTimeout(() => {
+                        title.textContent = "Race In Progress";
+                        desc.textContent = `Green flag is in the air! Action is underway at ${track.name}...`;
+                        graphic.textContent = "🟢🏁";
+                        progress.style.width = '100%';
+
+                        setTimeout(() => {
+                            stageAnim.style.display = 'none';
+                            stageResults.style.display = 'block';
+                            
+                            document.getElementById('sim-results-track').textContent = `${track.name} (${track.city})`;
+                            
+                            const resultsList = document.getElementById('sim-driver-results-list');
+                            resultsList.innerHTML = '';
+                            finishes.forEach(f => {
+                                const matchedWear = incidentDeductions.find(d => d.driver === f.name);
+                                let wearDetails = '';
+                                if (matchedWear) {
+                                    wearDetails = `<span style="font-size:0.8rem; display:block; color:var(--text-muted); margin-top:2px;">
+                                        Incidents: ${matchedWear.incidentText} ${matchedWear.actionText ? `<strong style="color:#ff1744; display:block; margin-top:2px;">${matchedWear.actionText}</strong>` : `(Condition: ${matchedWear.oldCond}% &rarr; ${matchedWear.newCond}%)`}
+                                    </span>`;
+                                }
+                                
+                                const item = document.createElement('div');
+                                item.style.borderBottom = '1px solid #1a1a1a';
+                                item.style.paddingBottom = '8px';
+                                item.innerHTML = `
+                                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                                        <strong style="color:#fff;">${f.name}</strong>
+                                        <span style="background:var(--neon-green); color:#000; font-family:var(--font-heading); font-weight:bold; font-size:0.8rem; padding:2px 8px; border-radius:4px;">P${f.pos}</span>
+                                    </div>
+                                    <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-top:4px;">
+                                        <span style="color:var(--text-muted);">Points: +${f.points}</span>
+                                        <span style="color:var(--neon-green); font-weight:bold;">+$${new Intl.NumberFormat('en-US').format(f.winnings)}</span>
+                                    </div>
+                                    ${wearDetails}
+                                `;
+                                resultsList.appendChild(item);
+                            });
+
+                            const finSummary = document.getElementById('sim-financial-summary');
+                            const totalCosts = haulerCost + totalTravelCost + prepFee + repairFees + totaledFees + engineFees;
+                            const netBalance = totalWinnings - totalCosts;
+                            const netColor = netBalance >= 0 ? 'var(--neon-green)' : '#ff1744';
+                            
+                            finSummary.innerHTML = `
+                                <div style="color:var(--text-muted);">Total Winnings:</div>
+                                <div style="text-align:right; color:var(--neon-green); font-weight:bold;">+$${new Intl.NumberFormat('en-US').format(totalWinnings)}</div>
+                                
+                                <div style="color:var(--text-muted);">Hauler Logistics:</div>
+                                <div style="text-align:right; color:#ff1744;">-$${new Intl.NumberFormat('en-US').format(haulerCost)}</div>
+                                
+                                <div style="color:var(--text-muted);">Driver Travel:</div>
+                                <div style="text-align:right; color:#ff1744;">-$${new Intl.NumberFormat('en-US').format(totalTravelCost)}</div>
+                                
+                                <div style="color:var(--text-muted);">Standard Prep:</div>
+                                <div style="text-align:right; color:#ff1744;">-$${new Intl.NumberFormat('en-US').format(prepFee)}</div>
+                                
+                                <div style="color:var(--text-muted);">Fleet Repairs/Engine/Replacement:</div>
+                                <div style="text-align:right; color:#ff1744;">-$${new Intl.NumberFormat('en-US').format(repairFees + totaledFees + engineFees)}</div>
+                                
+                                <div style="border-top:1px solid #222; padding-top:8px; font-weight:bold; color:#fff;">Net Income:</div>
+                                <div style="border-top:1px solid #222; padding-top:8px; text-align:right; font-weight:bold; color:${netColor};">
+                                    ${netBalance >= 0 ? '+' : ''}$${new Intl.NumberFormat('en-US').format(netBalance)}
+                                </div>
+                            `;
+
+                            applySimulationResults(track, haulerCost, totalTravelCost, prepFee, totalWinnings, totalPoints, finishes, incidentDeductions, repairFees, totaledFees, engineFees);
+                        }, 1500);
+                    }, 1500);
+                }, 1500);
+            }, 1000);
+        }
+
+        function applySimulationResults(track, haulerCost, totalTravelCost, prepFee, totalWinnings, totalPoints, finishes, incidentDeductions, repairFees, totaledFees, engineFees) {
+            const team = teamsData.teams.find(t => t.id === '937-racing');
+            if (!team) return;
+
+            const totalCosts = haulerCost + totalTravelCost + prepFee + repairFees + totaledFees + engineFees;
+            const netIncome = totalWinnings - totalCosts;
+
+            team.points += totalPoints;
+            const wonRace = finishes.some(f => f.pos === 1);
+            if (wonRace) team.wins += 1;
+            team.balance += netIncome;
+
+            const today = new Date();
+            const year = today.getFullYear();
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[today.getMonth()];
+            const day = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${month} ${day}, ${year}`;
+
+            team.ledger.push({
+                date: dateStr,
+                description: `Hauler Logistics: Dayton, OH to ${track.city} (Round Trip)`,
+                category: "expense",
+                amount: -haulerCost
+            });
+
+            team.ledger.push({
+                date: dateStr,
+                description: `Driver Travel Costs: flights & driving for ${finishes.length} drivers`,
+                category: "expense",
+                amount: -totalTravelCost
+            });
+
+            team.ledger.push({
+                date: dateStr,
+                description: `Standard Race Prep: ${finishes.length} trucks`,
+                category: "expense",
+                amount: -prepFee
+            });
+
+            finishes.forEach(f => {
+                team.ledger.push({
+                    date: dateStr,
+                    description: `Sponsor Payout: ${f.name} P${f.pos} at ${track.name}`,
+                    category: "income",
+                    amount: f.winnings
+                });
+            });
+
+            incidentDeductions.forEach(d => {
+                if (d.actionText) {
+                    let cost = 0;
+                    let desc = "";
+                    if (d.actionText.includes("Totaled")) { cost = -185000; desc = `Replacement Fleet Truck: ${d.truck} (${d.driver}) (Totaled after DNF)`; }
+                    else if (d.actionText.includes("Engine")) { cost = -45000; desc = `Engine Replacement: ${d.truck} (${d.driver}) (Blown Motor)`; }
+                    else if (d.actionText.includes("Fast")) { cost = -83250; desc = `Fast Repair: ${d.truck} (${d.driver})`; }
+                    
+                    team.ledger.push({
+                        date: dateStr,
+                        description: desc,
+                        category: "expense",
+                        amount: cost
+                    });
+                }
+            });
+
+            saveState();
+        }
+
+        function closeSimResultsModal() {
+            document.getElementById('sim-modal').style.display = 'none';
+            renderTeamsDirectory();
+            selectTeam('937-racing');
+            renderFranchiseStandings();
+        }
+
         // Toggle mobile navigation menu
         document.addEventListener('DOMContentLoaded', function() {
             const toggleBtn = document.querySelector('.nav-toggle');
@@ -894,5 +1460,65 @@
             }
         });
     </script>
+
+    <!-- Driver Sign Modal -->
+    <div id="sign-driver-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding: 20px;">
+        <div style="background:var(--bg-panel); border:2px solid var(--neon-green); border-radius:var(--border-radius); padding:30px; width:100%; max-width:500px; box-shadow:0 0 30px rgba(0,255,0,0.2); animation: scaleUp 0.3s ease; position:relative;">
+            <h3 style="color:#fff; margin-top:0; font-family:var(--font-heading); font-size:1.6rem; margin-bottom:15px; text-transform:uppercase; letter-spacing:1px;">Sign Free Agent</h3>
+            <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:20px;">Select an available driver from the free agency pool to sign. Signing requires owner passcode verification and deducts a flat <strong style="color:var(--neon-green);">$50,000</strong> signing bonus from team capital.</p>
+            
+            <div class="input-group" style="margin-bottom:20px;">
+                <label style="color:var(--text-muted); font-size:0.85rem; text-transform:uppercase; font-weight:bold; display:block; margin-bottom:8px;">Select Driver</label>
+                <select id="free-agent-select" style="width:100%; padding:12px; background:#090909; border:1px solid #333; color:#fff; border-radius:var(--border-radius); font-size:1rem; outline:none;">
+                    <!-- Options populated dynamically -->
+                </select>
+            </div>
+            
+            <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:25px;">
+                <button class="btn-secondary" style="padding:10px 20px; cursor:pointer;" onclick="closeSignDriverModal()">Cancel</button>
+                <button class="btn-primary" style="padding:10px 20px; cursor:pointer;" id="confirm-sign-btn">Sign Driver</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simulation Modal -->
+    <div id="sim-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; align-items:center; justify-content:center; padding: 20px;">
+        <div id="sim-modal-content" style="background:var(--bg-panel); border:2px solid var(--neon-green); border-radius:var(--border-radius); padding:40px; width:100%; max-width:600px; box-shadow:0 0 35px var(--neon-green-glow); animation: scaleUp 0.3s ease; position:relative; overflow:hidden;">
+            <!-- Animation Stage -->
+            <div id="sim-stage-animation" style="text-align:center;">
+                <div id="sim-graphic" style="font-size:4rem; margin-bottom:20px; animation: bounce 1s infinite alternate;">🚚</div>
+                <h3 id="sim-status-title" style="font-family:var(--font-heading); color:#fff; font-size:1.8rem; margin:0 0 10px 0; text-transform:uppercase; letter-spacing:1px;">Hauler Departing</h3>
+                <p id="sim-status-desc" style="color:var(--text-muted); font-size:1rem; margin:0 0 25px 0;">937 Racing hauler is departing Dayton, OH...</p>
+                
+                <div style="width:100%; background:#222; height:12px; border-radius:6px; overflow:hidden; margin-bottom:10px;">
+                    <div id="sim-progress-bar" style="width:0%; height:100%; background:var(--neon-green); box-shadow:0 0 10px var(--neon-green-glow); transition: width 0.3s ease;"></div>
+                </div>
+            </div>
+
+            <!-- Results Stage (Hidden initially) -->
+            <div id="sim-stage-results" style="display:none;">
+                <h3 style="font-family:var(--font-heading); color:var(--neon-green); font-size:2rem; margin-top:0; margin-bottom:5px; text-transform:uppercase; text-shadow:0 0 10px var(--neon-green-glow);">🏁 RACE RESULTS</h3>
+                <p id="sim-results-track" style="color:var(--chase-yellow); font-weight:bold; font-size:1.1rem; margin-bottom:20px; text-transform:uppercase;">Daytona International Speedway</p>
+                
+                <div style="background:#090909; border:1px solid #222; border-radius:var(--border-radius); padding:20px; margin-bottom:25px;">
+                    <h4 style="color:#fff; margin-top:0; border-bottom:1px solid #222; padding-bottom:8px; font-size:1rem; text-transform:uppercase;">Finishing Positions & Wear</h4>
+                    <div id="sim-driver-results-list" style="display:flex; flex-direction:column; gap:12px; margin-bottom:15px;">
+                        <!-- Results items here -->
+                    </div>
+                </div>
+
+                <div style="background:#090909; border:1px solid #222; border-radius:var(--border-radius); padding:20px; margin-bottom:25px;">
+                    <h4 style="color:#fff; margin-top:0; border-bottom:1px solid #222; padding-bottom:8px; font-size:1rem; text-transform:uppercase;">Financial Impact Summary</h4>
+                    <div id="sim-financial-summary" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; font-size:0.95rem;">
+                        <!-- Financial breakdown here -->
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:center; margin-top:20px;">
+                    <button class="btn-primary" style="padding:12px 30px; font-size:1.05rem; cursor:pointer;" onclick="closeSimResultsModal()">Apply & Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
