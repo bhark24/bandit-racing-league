@@ -466,7 +466,7 @@ const teamsData = {
         {
           "id": "truck-2",
           "make": "Toyota",
-          "name": "937 Tundra #95",
+          "name": "937 Tundra #22",
           "condition": 92
         },
         {
@@ -527,7 +527,7 @@ const teamsData = {
         },
         {
           "date": "2026-05-25",
-          "description": "Standard Race Prep: 937 Tundra #95 (JOSH ADAMS)",
+          "description": "Standard Race Prep: 937 Tundra #22 (JOSH ADAMS)",
           "category": "expense",
           "amount": -2000
         },
