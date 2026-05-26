@@ -119,13 +119,48 @@
                 card.className = 'card';
                 card.setAttribute('data-status', data.status);
                 
-                let headerLogoHtml = '';
+                let teamInfoHtml = '';
                 if (hasDriver) {
                     const matches = findTeamsForDriver(data.driver);
-                    const match937 = matches.find(m => m.team.id === '937-racing');
-                    if (match937) {
-                        headerLogoHtml = `
-                            <img src="${match937.team.logo}" style="height: 50px; max-width: 90px; object-fit: contain; margin-left: 15px; filter: drop-shadow(0 0 8px rgba(0,255,0,0.15));" alt="937 Racing Logo">
+                    if (matches.length > 0) {
+                        const team = matches[0].team;
+                        let name = team.name.toUpperCase();
+                        let base = team.homeBase.toUpperCase();
+                        
+                        const stateMap = {
+                            'OH': 'OHIO',
+                            'WI': 'WISCONSIN',
+                            'NC': 'NORTH CAROLINA',
+                            'FL': 'FLORIDA',
+                            'GA': 'GEORGIA',
+                            'VA': 'VIRGINIA',
+                            'IN': 'INDIANA',
+                            'TN': 'TENNESSEE',
+                            'PA': 'PENNSYLVANIA',
+                            'MI': 'MICHIGAN',
+                            'IL': 'ILLINOIS',
+                            'SC': 'SOUTH CAROLINA',
+                            'KS': 'KANSAS',
+                            'TX': 'TEXAS',
+                            'NV': 'NEVADA',
+                            'NY': 'NEW YORK',
+                            'AZ': 'ARIZONA',
+                            'AL': 'ALABAMA'
+                        };
+                        
+                        base = base.replace(/,/g, '');
+                        for (let [abbr, full] of Object.entries(stateMap)) {
+                            let regex = new RegExp('\\b' + abbr + '$');
+                            if (regex.test(base)) {
+                                base = base.replace(regex, full);
+                                break;
+                            }
+                        }
+                        
+                        teamInfoHtml = `
+                            <div class="driver-team" style="font-style: italic; font-weight: bold; font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                                TEAM: ${name}, ${base}
+                            </div>
                         `;
                     }
                 }
@@ -137,7 +172,6 @@
                                 `<img src="assets/drivers numbers/${data.driver.trim()}.png" class="custom-number-img" style="max-height: 85px; max-width: 160px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>${num}</span>'">` 
                                 : `<span class="car-number">${num}</span>`
                             }
-                            ${headerLogoHtml}
                         </div>
                         <span class="status-badge">${statusMap[data.status] || 'Available'}</span>
                     </div>
@@ -146,6 +180,7 @@
                         <div class="driver-display" style="opacity: ${hasDriver ? '1' : '0.3'}; display: flex; align-items: center;">
                             ${hasDriver ? data.driver.trim() : 'Available'}
                         </div>
+                        ${teamInfoHtml}
                         ${hasDriver ? 
                             `<div style="margin-top: 12px;"><a href="https://simracerhub.com/season_standings.php?season_id=28135" target="_blank" style="display:inline-block; color: var(--neon-green); font-size: 0.75rem; text-decoration: none; border: 1px solid var(--neon-green); padding: 4px 10px; border-radius: 4px; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; transition: all 0.3s ease;">View Stats &rarr;</a></div>` 
                             : ''}
