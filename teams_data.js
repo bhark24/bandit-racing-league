@@ -278,7 +278,7 @@ const teamsData = {
       "logo": "assets/roundy-motorsports-logo.png",
       "points": 98,
       "wins": 1,
-      "balance": 2202889,
+      "balance": 2202689,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -346,7 +346,7 @@ const teamsData = {
           "date": "2026-05-25",
           "description": "Flight & Lodging: LOGAN MURRAY from West Plains, MO (813 mi)",
           "category": "expense",
-          "amount": -267
+          "amount": -412
         },
         {
           "date": "2026-05-25",
@@ -370,7 +370,7 @@ const teamsData = {
           "date": "2026-05-25",
           "description": "Flight & Lodging: MATT CROCKETT from Roanoke, VA (836 mi)",
           "category": "expense",
-          "amount": -301
+          "amount": -415
         },
         {
           "date": "2026-05-25",
@@ -394,7 +394,7 @@ const teamsData = {
           "date": "2026-05-25",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (874 mi)",
           "category": "expense",
-          "amount": -272
+          "amount": -213
         },
         {
           "date": "2026-05-25",
@@ -443,7 +443,7 @@ const teamsData = {
       "logo": "assets/937-racing-logo.png",
       "points": 91,
       "wins": 0,
-      "balance": 2193870,
+      "balance": 2193552,
       "drivers": {
         "primary": [
           "VICTOR WEAVER",
@@ -511,7 +511,7 @@ const teamsData = {
           "date": "2026-05-25",
           "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (750 mi)",
           "category": "expense",
-          "amount": -291
+          "amount": -377
         },
         {
           "date": "2026-05-25",
@@ -535,7 +535,7 @@ const teamsData = {
           "date": "2026-05-25",
           "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (737 mi)",
           "category": "expense",
-          "amount": -223
+          "amount": -292
         },
         {
           "date": "2026-05-25",
@@ -559,7 +559,7 @@ const teamsData = {
           "date": "2026-05-25",
           "description": "Flight & Lodging: DIONTE RADER from Miamisburg, OH (744 mi)",
           "category": "expense",
-          "amount": -253
+          "amount": -328
         },
         {
           "date": "2026-05-25",
@@ -589,7 +589,7 @@ const teamsData = {
           "date": "2026-05-25",
           "description": "Flight & Lodging: MATT BAILEY from Xenia, OH (742 mi)",
           "category": "expense",
-          "amount": -291
+          "amount": -379
         },
         {
           "date": "2026-05-25",

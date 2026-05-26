@@ -147,7 +147,7 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return R * c
 
-def calculate_flight_cost(distance, date_str):
+def calculate_flight_cost(distance, date_str, origin_city=""):
     month = 5 # Default to May
     try:
         # Check standard date formats
@@ -161,8 +161,24 @@ def calculate_flight_cost(distance, date_str):
     except Exception:
         pass
         
-    # Base: $150 + $0.15 per mile
-    base_cost = 150 + (distance * 0.15)
+    # Real-world base economy flight costs from regional/major airports to Orlando/Daytona
+    airport_base_prices = {
+        "ashtabula, oh": 220,  # CLE major: ~$200 roundtrip
+        "cleveland, oh": 220,  # CLE major: ~$200
+        "west plains, mo": 420,  # SGF regional: ~$400 (no direct flights)
+        "roanoke, va": 380,  # ROA regional: ~$350 (no direct flights)
+        "dayton, oh": 340,  # DAY moderate: ~$330
+        "springboro, oh": 340, # DAY
+        "miamisburg, oh": 340, # DAY
+        "xenia, oh": 340,  # DAY
+    }
+    
+    city_key = origin_city.strip().lower() if origin_city else ""
+    if city_key in airport_base_prices:
+        base_cost = airport_base_prices[city_key]
+    else:
+        # Fallback to a distance-based formula that yields realistic costs
+        base_cost = 250 + (distance * 0.20)
     
     # Seasonal multipliers
     if month in (6, 7, 8, 11, 12):
@@ -503,7 +519,7 @@ def main():
                         travel_fee = 20 # Local commute / fuel only, no lodging
                         desc = f"Local Travel: {driver_name} from {drv_loc['city']} ({int(drv_dist)} mi)"
                     elif drv_dist > 250:
-                        travel_fee = calculate_flight_cost(drv_dist, race_date)
+                        travel_fee = calculate_flight_cost(drv_dist, race_date, drv_loc.get("city", ""))
                         desc = f"Flight & Lodging: {driver_name} from {drv_loc['city']} ({int(drv_dist)} mi)"
                     else:
                         travel_fee = 100 # Driving & Lodging
