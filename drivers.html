@@ -66,9 +66,39 @@
         </div>
     </section>
 
+    <script src="teams_data.js"></script>
     <script src="roster_data.js"></script>
     <script>
         const grid = document.getElementById('driver-grid');
+
+        function findTeamsForDriver(driverName) {
+            if (typeof teamsData === 'undefined' || !teamsData.teams) return [];
+            
+            function normalize(name) {
+                if (!name) return "";
+                let n = name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
+                if (n === "DIANTERODER" || n === "DIANTERADER") return "DIONTERADER";
+                if (n === "DAVIDLEAKEY") return "DAVELEAKEY";
+                return n;
+            }
+
+            const nameNorm = normalize(driverName);
+            if (!nameNorm) return [];
+
+            const matchedTeams = [];
+            for (let team of teamsData.teams) {
+                const primary = (team.drivers.primary || []).map(normalize);
+                const backup = (team.drivers.backup || []).map(normalize);
+                if (primary.includes(nameNorm) || backup.includes(nameNorm)) {
+                    const isBackup = backup.includes(nameNorm);
+                    matchedTeams.push({
+                        team: team,
+                        role: isBackup ? "Backup" : "Primary"
+                    });
+                }
+            }
+            return matchedTeams;
+        }
 
         if (typeof rosterData === 'undefined' || typeof numbersList === 'undefined') {
             grid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;'>No roster data found. Please drop your exported <code>roster_data.js</code> file from the Car Number Tracker into the folder!</p>";
@@ -89,6 +119,25 @@
                 card.className = 'card';
                 card.setAttribute('data-status', data.status);
                 
+                let teamHtml = '';
+                if (hasDriver) {
+                    const matches = findTeamsForDriver(data.driver);
+                    if (matches.length > 0) {
+                        teamHtml = '<div class="driver-teams-container" style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">';
+                        matches.forEach(m => {
+                            const team = m.team;
+                            const roleText = m.role === "Backup" ? " (Backup)" : "";
+                            teamHtml += `
+                                <div class="driver-team-badge" style="display:flex; align-items:center; gap:8px; background: rgba(0, 255, 0, 0.03); border: 1px solid rgba(0, 255, 0, 0.15); border-radius: 4px; padding: 5px 10px; max-width: fit-content; box-shadow: 0 0 10px rgba(0,255,0,0.05);">
+                                    <img src="${team.logo}" style="height: 18px; max-width: 45px; object-fit: contain;" alt="${team.name} Logo">
+                                    <span style="font-size: 0.7rem; font-weight: bold; color: #fff; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.5px;">${team.name}${roleText}</span>
+                                </div>
+                            `;
+                        });
+                        teamHtml += '</div>';
+                    }
+                }
+                
                 card.innerHTML = `
                     <div class="card-header">
                         <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
@@ -104,8 +153,9 @@
                         <div class="driver-display" style="opacity: ${hasDriver ? '1' : '0.3'}; display: flex; align-items: center;">
                             ${hasDriver ? data.driver.trim() : 'Available'}
                         </div>
+                        ${teamHtml}
                         ${hasDriver ? 
-                            `<div style="margin-top: 8px;"><a href="https://simracerhub.com/season_standings.php?season_id=28135" target="_blank" style="display:inline-block; color: var(--neon-green); font-size: 0.75rem; text-decoration: none; border: 1px solid var(--neon-green); padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">View Stats &rarr;</a></div>` 
+                            `<div style="margin-top: 12px;"><a href="https://simracerhub.com/season_standings.php?season_id=28135" target="_blank" style="display:inline-block; color: var(--neon-green); font-size: 0.75rem; text-decoration: none; border: 1px solid var(--neon-green); padding: 4px 10px; border-radius: 4px; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; transition: all 0.3s ease;">View Stats &rarr;</a></div>` 
                             : ''}
                     </div>
                 `;
