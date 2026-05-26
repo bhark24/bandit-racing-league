@@ -278,7 +278,7 @@ const teamsData = {
       "logo": "assets/geezer-authentics-logo.png",
       "points": 106,
       "wins": 1,
-      "balance": 2060415,
+      "balance": 2060412,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -346,7 +346,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
           "category": "expense",
-          "amount": -253
+          "amount": -216
         },
         {
           "date": "May 25, 2026",
@@ -394,7 +394,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -212
+          "amount": -252
         },
         {
           "date": "May 25, 2026",
@@ -466,7 +466,7 @@ const teamsData = {
       "logo": "assets/lady-chaos-logo.png",
       "points": 80,
       "wins": 0,
-      "balance": 2164290,
+      "balance": 2164275,
       "drivers": {
         "primary": [
           "NICOLE KRIESEL",
@@ -557,7 +557,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: DAVE LEAKEY from Orlando, FL (530 mi)",
           "category": "expense",
-          "amount": -207
+          "amount": -257
         },
         {
           "date": "May 25, 2026",
@@ -581,7 +581,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: BOB BERRY from Richmond, VA (260 mi)",
           "category": "expense",
-          "amount": -213
+          "amount": -181
         },
         {
           "date": "May 25, 2026",
@@ -605,7 +605,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON GREENWELL from Indianapolis, IN (480 mi)",
           "category": "expense",
-          "amount": -191
+          "amount": -188
         },
         {
           "date": "May 25, 2026",
@@ -641,7 +641,7 @@ const teamsData = {
       "logo": "assets/simtrax-logo.png",
       "points": 96,
       "wins": 0,
-      "balance": 2166603,
+      "balance": 2180771,
       "drivers": {
         "primary": [
           "JONATHON PLATT",
@@ -732,7 +732,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JASON ALLEGRINI from Nashville, TN (340 mi)",
           "category": "expense",
-          "amount": -185
+          "amount": -230
         },
         {
           "date": "May 25, 2026",
@@ -796,6 +796,12 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Virtual Sponsorship Earned: RPM Graphics (Upward Performance Trend)",
+          "category": "income",
+          "amount": 14213
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Charlotte Mock Race Results: P5, P6, P7, P10",
           "category": "info",
           "amount": 0
@@ -805,7 +811,8 @@ const teamsData = {
       "sponsors": [
         "SimTrax Broadcasting",
         "Toyota Racing Development",
-        "NASCAR Heat"
+        "NASCAR Heat",
+        "RPM Graphics"
       ]
     },
     {
@@ -816,7 +823,7 @@ const teamsData = {
       "logo": "assets/937-racing-logo.png",
       "points": 62,
       "wins": 0,
-      "balance": 2124780,
+      "balance": 2111610,
       "drivers": {
         "primary": [
           "VICTOR WEAVER",
@@ -832,26 +839,26 @@ const teamsData = {
       "trucks": [
         {
           "id": "truck-1",
-          "make": "Chevrolet",
-          "name": "937 Silverado #18",
+          "make": "Toyota",
+          "name": "937 Tundra #18",
           "condition": 73
         },
         {
           "id": "truck-2",
-          "make": "Chevrolet",
-          "name": "937 Silverado #95",
+          "make": "Toyota",
+          "name": "937 Tundra #95",
           "condition": 64
         },
         {
           "id": "truck-3",
-          "make": "Chevrolet",
-          "name": "937 Silverado #17",
+          "make": "Toyota",
+          "name": "937 Tundra #17",
           "condition": 55
         },
         {
           "id": "truck-4",
-          "make": "Chevrolet",
-          "name": "937 Silverado #19",
+          "make": "Toyota",
+          "name": "937 Tundra #19",
           "condition": 100
         }
       ],
@@ -864,7 +871,7 @@ const teamsData = {
         },
         {
           "date": "2026-05-24",
-          "description": "Purchased Fleet of 4x Chevy Silverado Trucks",
+          "description": "Purchased Fleet of 4x Toyota Tundra Trucks",
           "category": "expense",
           "amount": -740000
         },
@@ -876,7 +883,7 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Standard Race Prep: 937 Silverado #18 (VICTOR WEAVER)",
+          "description": "Standard Race Prep: 937 Tundra #18 (VICTOR WEAVER)",
           "category": "expense",
           "amount": -2000
         },
@@ -884,7 +891,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (359 mi)",
           "category": "expense",
-          "amount": -201
+          "amount": -176
         },
         {
           "date": "May 25, 2026",
@@ -900,7 +907,7 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Standard Race Prep: 937 Silverado #95 (JOSH ADAMS)",
+          "description": "Standard Race Prep: 937 Tundra #95 (JOSH ADAMS)",
           "category": "expense",
           "amount": -2000
         },
@@ -908,7 +915,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (349 mi)",
           "category": "expense",
-          "amount": -187
+          "amount": -218
         },
         {
           "date": "May 25, 2026",
@@ -924,7 +931,7 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
-          "description": "Standard Race Prep: 937 Silverado #17 (DIONTE RADER)",
+          "description": "Standard Race Prep: 937 Tundra #17 (DIONTE RADER)",
           "category": "expense",
           "amount": -2000
         },
@@ -932,7 +939,7 @@ const teamsData = {
           "date": "May 25, 2026",
           "description": "Flight & Lodging: DIONTE RADER from Miamisburg, OH (356 mi)",
           "category": "expense",
-          "amount": -233
+          "amount": -227
         },
         {
           "date": "May 25, 2026",
@@ -960,6 +967,12 @@ const teamsData = {
         },
         {
           "date": "May 25, 2026",
+          "description": "Lost Sponsor Capital: Toyota Racing Development (Downward Performance Trend)",
+          "category": "expense",
+          "amount": -13170
+        },
+        {
+          "date": "May 25, 2026",
           "description": "Charlotte Mock Race Results: P4, P8, P14, DNS",
           "category": "info",
           "amount": 0
@@ -967,7 +980,6 @@ const teamsData = {
       ],
       "sponsors": [
         "937 Racing",
-        "Silverado Performance",
         "Craftsman Tools"
       ],
       "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305"

@@ -639,6 +639,8 @@ def main():
                 team["sponsors"] = ["Geezer Authentics", "Silverado Performance", "Craftsman Tools"]
             elif team["id"] == "lady-chaos-racing":
                 team["sponsors"] = ["Chaos Cosmetics", "Ford Performance", "Mobil 1"]
+            elif team["id"] == "937-racing":
+                team["sponsors"] = ["937 Racing", "Toyota Racing Development", "Craftsman Tools"]
             else:
                 team["sponsors"] = ["SimTrax Broadcasting", "Toyota Racing Development", "NASCAR Heat"]
 
