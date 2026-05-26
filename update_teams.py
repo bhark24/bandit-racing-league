@@ -655,6 +655,8 @@ def main():
         if "sponsors" not in team:
             if team["id"] == "roundy-motorsports":
                 team["sponsors"] = ["Roundy Motorsports", "Ford Performance", "Craftsman Tools"]
+            elif team["id"] == "wrists-up-racing":
+                team["sponsors"] = ["Wrist's Up Racing", "Chevrolet Accessories", "Craftsman Tools"]
             else:
                 team["sponsors"] = ["937 Racing", "Toyota Racing Development", "Craftsman Tools"]
 

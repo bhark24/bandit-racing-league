@@ -214,9 +214,9 @@ const teamsData = {
       "lon": -86.1581
     },
     "DYLAN NICASTRO": {
-      "city": "Concord, NC",
-      "lat": 35.4088,
-      "lon": -80.5795
+      "city": "Cleveland, OH",
+      "lat": 41.4993,
+      "lon": -81.6944
     },
     "ETHAN SIKORSKI": {
       "city": "Charlotte, NC",
@@ -267,6 +267,11 @@ const teamsData = {
       "city": "Concord, NC",
       "lat": 35.4088,
       "lon": -80.5795
+    },
+    "DAVID WESTOVER JR": {
+      "city": "Ashtabula, OH",
+      "lat": 41.8651,
+      "lon": -80.7898
     }
   },
   "teams": [
@@ -629,6 +634,74 @@ const teamsData = {
         "Octane Apparel"
       ],
       "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305"
+    },
+    {
+      "id": "wrists-up-racing",
+      "name": "Wrist's Up Racing",
+      "owner": "Dylan Nicastro",
+      "homeBase": "Cleveland, OH",
+      "logo": "assets/wrists-up-racing-logo.png",
+      "points": 0,
+      "wins": 0,
+      "balance": 2010000,
+      "drivers": {
+        "primary": [
+          "VACANT",
+          "VACANT",
+          "VACANT",
+          "VACANT"
+        ],
+        "backup": [
+          "DYLAN NICASTRO",
+          "DAVID WESTOVER JR"
+        ]
+      },
+      "trucks": [
+        {
+          "id": "truck-1",
+          "make": "Chevrolet",
+          "name": "Wrist's Up Silverado #23",
+          "condition": 100
+        },
+        {
+          "id": "truck-2",
+          "make": "Chevrolet",
+          "name": "Wrist's Up Silverado #88",
+          "condition": 100
+        },
+        {
+          "id": "truck-3",
+          "make": "Chevrolet",
+          "name": "Wrist's Up Silverado #24",
+          "condition": 100
+        },
+        {
+          "id": "truck-4",
+          "make": "Chevrolet",
+          "name": "Wrist's Up Silverado #25",
+          "condition": 100
+        }
+      ],
+      "ledger": [
+        {
+          "date": "2026-05-24",
+          "description": "Starting Franchise Balance",
+          "category": "income",
+          "amount": 2750000
+        },
+        {
+          "date": "2026-05-24",
+          "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
+          "category": "expense",
+          "amount": -740000
+        }
+      ],
+      "sponsors": [
+        "Wrist's Up Racing",
+        "Chevrolet Accessories",
+        "Craftsman Tools"
+      ],
+      "passcodeHash": "858a794b9a1df6e2fa1e6258cafa1f3df7f31ff877c887107e245163fa52fbdc"
     }
   ]
 };
