@@ -293,8 +293,8 @@ def main():
     parser = argparse.ArgumentParser(description="Update teams_data.js from SimRacerHub results and optional iRacing JSON.")
     parser.add_argument("--schedule_id", type=str, help="SimRacerHub schedule ID to fetch.")
     parser.add_argument("--iracing_json", type=str, help="Path to raw iRacing results JSON to check fast repairs.")
-    parser.add_argument("--damage", type=str, help="JSON string of manual additional damage, e.g. '{\"geezer-authentics-racing\": {\"truck-2\": 15}}'")
-    parser.add_argument("--repair", type=str, help="JSON string of manual repairs to execute, e.g. '{\"geezer-authentics-racing\": [\"truck-2\"]}'")
+    parser.add_argument("--damage", type=str, help="JSON string of manual additional damage, e.g. '{\"roundy-motorsports\": {\"truck-2\": 15}}'")
+    parser.add_argument("--repair", type=str, help="JSON string of manual repairs to execute, e.g. '{\"roundy-motorsports\": [\"truck-2\"]}'")
     parser.add_argument("--test", action="store_true", help="Run with local simhub.html test file.")
     args = parser.parse_args()
     
@@ -438,7 +438,8 @@ def main():
             "ashtabula, oh": (41.8651, -80.7898),
             "charlotte, nc": (35.2271, -80.8431),
             "concord, nc": (35.4088, -80.5795),
-            "madison, wi": (43.0731, -89.4012)
+            "madison, wi": (43.0731, -89.4012),
+            "cleveland, oh": (41.4993, -81.6944)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates
@@ -635,8 +636,8 @@ def main():
                 
         # Ensure sponsors array exists in database
         if "sponsors" not in team:
-            if team["id"] == "geezer-authentics-racing":
-                team["sponsors"] = ["Geezer Authentics", "Silverado Performance", "Craftsman Tools"]
+            if team["id"] == "roundy-motorsports":
+                team["sponsors"] = ["Roundy Motorsports", "Ford Performance", "Craftsman Tools"]
             elif team["id"] == "lady-chaos-racing":
                 team["sponsors"] = ["Chaos Cosmetics", "Ford Performance", "Mobil 1"]
             elif team["id"] == "937-racing":

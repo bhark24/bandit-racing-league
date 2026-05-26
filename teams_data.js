@@ -271,237 +271,50 @@ const teamsData = {
   },
   "teams": [
     {
-      "id": "geezer-authentics-racing",
-      "name": "Geezer Authentic's Racing Team",
+      "id": "roundy-motorsports",
+      "name": "Roundy Motorsports",
       "owner": "Bill Harkins",
-      "homeBase": "Ashtabula, OH",
-      "logo": "assets/geezer-authentics-logo.png",
-      "points": 106,
-      "wins": 1,
-      "balance": 2060412,
+      "homeBase": "Cleveland, OH",
+      "logo": "assets/roundy-motorsports-logo.png",
+      "points": 0,
+      "wins": 0,
+      "balance": 2010000,
       "drivers": {
         "primary": [
           "BILL HARKINS",
           "LOGAN MURRAY",
-          "NICK NICKERSON",
-          "RICKY HART"
+          "MATT CROCKETT",
+          "VACANT"
         ],
         "backup": [
-          "SEAN BRITT",
-          "JONATHON PLATT"
-        ]
-      },
-      "trucks": [
-        {
-          "id": "truck-1",
-          "make": "Chevrolet",
-          "name": "Geezer Silverado #12",
-          "condition": 85
-        },
-        {
-          "id": "truck-2",
-          "make": "Chevrolet",
-          "name": "Geezer Silverado #4",
-          "condition": 80
-        },
-        {
-          "id": "truck-3",
-          "make": "Chevrolet",
-          "name": "Geezer Silverado #2",
-          "condition": 100
-        },
-        {
-          "id": "truck-4",
-          "make": "Chevrolet",
-          "name": "Geezer Silverado #1",
-          "condition": 100
-        }
-      ],
-      "ledger": [
-        {
-          "date": "2026-05-24",
-          "description": "Starting Franchise Balance",
-          "category": "income",
-          "amount": 2750000
-        },
-        {
-          "date": "2026-05-24",
-          "description": "Purchased Fleet of 4x Chevy Silverado Trucks",
-          "category": "expense",
-          "amount": -740000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Hauler Logistics: Ashtabula, OH to Concord, NC (450 mi)",
-          "category": "expense",
-          "amount": -4500
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: Geezer Silverado #12 (BILL HARKINS)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (520 mi)",
-          "category": "expense",
-          "amount": -216
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: BILL HARKINS",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: BILL HARKINS (P2)",
-          "category": "income",
-          "amount": 55000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: Geezer Silverado #4 (LOGAN MURRAY)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Local Travel: LOGAN MURRAY from Charlotte, NC (0 mi)",
-          "category": "expense",
-          "amount": -20
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: LOGAN MURRAY",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: LOGAN MURRAY (P10)",
-          "category": "income",
-          "amount": 25000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: Geezer Silverado #2 (NICK NICKERSON)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Flight & Lodging: NICK NICKERSON from Orlando, FL (530 mi)",
-          "category": "expense",
-          "amount": -252
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: NICK NICKERSON",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: NICK NICKERSON (P1)",
-          "category": "income",
-          "amount": 75000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Fast Repair: Geezer Silverado #2 (NICK NICKERSON)",
-          "category": "expense",
-          "amount": -83250
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: Geezer Silverado #1 (RICKY HART)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Drive & Lodging: RICKY HART from Atlanta, GA (250 mi)",
-          "category": "expense",
-          "amount": -100
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: RICKY HART",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: RICKY HART (P18)",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Fast Repair: Geezer Silverado #1 (RICKY HART)",
-          "category": "expense",
-          "amount": -83250
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Charlotte Mock Race Results: P1, P2, P10, P18",
-          "category": "info",
-          "amount": 0
-        }
-      ],
-      "sponsors": [
-        "Geezer Authentics",
-        "Silverado Performance",
-        "Craftsman Tools"
-      ],
-      "passcodeHash": "0af7d7158becc6d02dc41536107090e77195cf90c556cadb37866528cc94e8a9"
-    },
-    {
-      "id": "lady-chaos-racing",
-      "name": "Lady Chaos Racing Team",
-      "owner": "Nicole Kriesel",
-      "homeBase": "Madison, WI",
-      "logo": "assets/lady-chaos-logo.png",
-      "points": 80,
-      "wins": 0,
-      "balance": 2164275,
-      "drivers": {
-        "primary": [
-          "NICOLE KRIESEL",
-          "BOB BERRY",
-          "JASON GREENWELL",
-          "DAVE LEAKEY"
-        ],
-        "backup": [
-          "NATHAN SANTOS"
+          "VACANT",
+          "VACANT"
         ]
       },
       "trucks": [
         {
           "id": "truck-1",
           "make": "Ford",
-          "name": "Chaos F-150 #6",
-          "condition": 89
+          "name": "Roundy F-150 #12",
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Ford",
-          "name": "Chaos F-150 #18",
-          "condition": 73
+          "name": "Roundy F-150 #4",
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Ford",
-          "name": "Chaos F-150 #75",
-          "condition": 93
+          "name": "Roundy F-150 #15",
+          "condition": 100
         },
         {
           "id": "truck-4",
           "make": "Ford",
-          "name": "Chaos F-150 #83",
-          "condition": 85
+          "name": "Roundy F-150 #1",
+          "condition": 100
         }
       ],
       "ledger": [
@@ -516,304 +329,14 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Ford F-150 Trucks",
           "category": "expense",
           "amount": -740000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Hauler Logistics: Madison, WI to Concord, NC (707 mi)",
-          "category": "expense",
-          "amount": -7079
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: Chaos F-150 #6 (NICOLE KRIESEL)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Local Travel: NICOLE KRIESEL from Charlotte, NC (0 mi)",
-          "category": "expense",
-          "amount": -20
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: NICOLE KRIESEL",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: NICOLE KRIESEL (P3)",
-          "category": "income",
-          "amount": 45000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: Chaos F-150 #18 (DAVE LEAKEY)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Flight & Lodging: DAVE LEAKEY from Orlando, FL (530 mi)",
-          "category": "expense",
-          "amount": -257
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: DAVE LEAKEY",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: DAVE LEAKEY (P7)",
-          "category": "income",
-          "amount": 25000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: Chaos F-150 #75 (BOB BERRY)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Flight & Lodging: BOB BERRY from Richmond, VA (260 mi)",
-          "category": "expense",
-          "amount": -181
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: BOB BERRY",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: BOB BERRY (P12)",
-          "category": "income",
-          "amount": 20000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: Chaos F-150 #83 (JASON GREENWELL)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Flight & Lodging: JASON GREENWELL from Indianapolis, IN (480 mi)",
-          "category": "expense",
-          "amount": -188
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: JASON GREENWELL",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: JASON GREENWELL (P14)",
-          "category": "income",
-          "amount": 20000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Charlotte Mock Race Results: P3, P7, P12, P14",
-          "category": "info",
-          "amount": 0
         }
       ],
       "sponsors": [
-        "Chaos Cosmetics",
+        "Roundy Motorsports",
         "Ford Performance",
-        "Mobil 1"
+        "Craftsman Tools"
       ],
-      "passcodeHash": "7300b047e7a8a380860e42c06cdab59b5dd3070b1d57dc95c920f2e501b88d3c"
-    },
-    {
-      "id": "simtrax-motorsports",
-      "name": "SimTrax Broadcasting Group",
-      "owner": "Johnathon Platt",
-      "homeBase": "Concord, NC",
-      "logo": "assets/simtrax-logo.png",
-      "points": 96,
-      "wins": 0,
-      "balance": 2180771,
-      "drivers": {
-        "primary": [
-          "JONATHON PLATT",
-          "JASON ALLEGRINI",
-          "MATT CROCKETT",
-          "JACKSON KNAAK"
-        ],
-        "backup": [
-          "KEVIN FOSTER"
-        ]
-      },
-      "trucks": [
-        {
-          "id": "truck-1",
-          "make": "Toyota",
-          "name": "SimTrax Tundra #13",
-          "condition": 88
-        },
-        {
-          "id": "truck-2",
-          "make": "Toyota",
-          "name": "SimTrax Tundra #14",
-          "condition": 85
-        },
-        {
-          "id": "truck-3",
-          "make": "Toyota",
-          "name": "SimTrax Tundra #15",
-          "condition": 90
-        },
-        {
-          "id": "truck-4",
-          "make": "Toyota",
-          "name": "SimTrax Tundra #22",
-          "condition": 82
-        }
-      ],
-      "ledger": [
-        {
-          "date": "2026-05-24",
-          "description": "Starting Franchise Balance",
-          "category": "income",
-          "amount": 2750000
-        },
-        {
-          "date": "2026-05-24",
-          "description": "Purchased Fleet of 4x Toyota Tundra Trucks",
-          "category": "expense",
-          "amount": -740000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Hauler Logistics: Concord, NC to Concord, NC (7 mi)",
-          "category": "expense",
-          "amount": -72
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: SimTrax Tundra #13 (JONATHON PLATT)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Local Travel: JONATHON PLATT from Concord, NC (0 mi)",
-          "category": "expense",
-          "amount": -20
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: JONATHON PLATT",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: JONATHON PLATT (P5)",
-          "category": "income",
-          "amount": 30000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: SimTrax Tundra #14 (JASON ALLEGRINI)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Flight & Lodging: JASON ALLEGRINI from Nashville, TN (340 mi)",
-          "category": "expense",
-          "amount": -230
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: JASON ALLEGRINI",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: JASON ALLEGRINI (P6)",
-          "category": "income",
-          "amount": 25000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: SimTrax Tundra #15 (MATT CROCKETT)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Drive & Lodging: MATT CROCKETT from Roanoke, VA (130 mi)",
-          "category": "expense",
-          "amount": -100
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: MATT CROCKETT",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: MATT CROCKETT (P7)",
-          "category": "income",
-          "amount": 25000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: SimTrax Tundra #22 (JACKSON KNAAK)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Local Travel: JACKSON KNAAK from Concord, NC (0 mi)",
-          "category": "expense",
-          "amount": -20
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: JACKSON KNAAK",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: JACKSON KNAAK (P10)",
-          "category": "income",
-          "amount": 25000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Virtual Sponsorship Earned: RPM Graphics (Upward Performance Trend)",
-          "category": "income",
-          "amount": 14213
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Charlotte Mock Race Results: P5, P6, P7, P10",
-          "category": "info",
-          "amount": 0
-        }
-      ],
-      "passcodeHash": "3324dab86f4dcdf48ba8ed6d736dcf050f09a23bf617c7d3579224548269ba1f",
-      "sponsors": [
-        "SimTrax Broadcasting",
-        "Toyota Racing Development",
-        "NASCAR Heat",
-        "RPM Graphics"
-      ]
+      "passcodeHash": "0af7d7158becc6d02dc41536107090e77195cf90c556cadb37866528cc94e8a9"
     },
     {
       "id": "937-racing",
@@ -821,9 +344,9 @@ const teamsData = {
       "owner": "Victor Weaver",
       "homeBase": "Dayton, OH",
       "logo": "assets/937-racing-logo.png",
-      "points": 62,
+      "points": 0,
       "wins": 0,
-      "balance": 2111610,
+      "balance": 2010000,
       "drivers": {
         "primary": [
           "VICTOR WEAVER",
@@ -841,19 +364,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Toyota",
           "name": "937 Tundra #18",
-          "condition": 73
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Toyota",
           "name": "937 Tundra #95",
-          "condition": 64
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Toyota",
           "name": "937 Tundra #17",
-          "condition": 55
+          "condition": 100
         },
         {
           "id": "truck-4",
@@ -874,112 +397,11 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Toyota Tundra Trucks",
           "category": "expense",
           "amount": -740000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Hauler Logistics: Dayton, OH to Concord, NC (359 mi)",
-          "category": "expense",
-          "amount": -3599
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: 937 Tundra #18 (VICTOR WEAVER)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (359 mi)",
-          "category": "expense",
-          "amount": -176
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: VICTOR WEAVER",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: VICTOR WEAVER (P4)",
-          "category": "income",
-          "amount": 35000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: 937 Tundra #95 (JOSH ADAMS)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (349 mi)",
-          "category": "expense",
-          "amount": -218
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: JOSH ADAMS",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: JOSH ADAMS (P8)",
-          "category": "income",
-          "amount": 25000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Standard Race Prep: 937 Tundra #17 (DIONTE RADER)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Flight & Lodging: DIONTE RADER from Miamisburg, OH (356 mi)",
-          "category": "expense",
-          "amount": -227
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Sponsor Start Bonus: DIONTE RADER",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Prize Money: DIONTE RADER (P14)",
-          "category": "income",
-          "amount": 20000
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Substituted DIONTE RADER into Slot 3 for VACANT",
-          "category": "info",
-          "amount": 0
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "MATT BAILEY DNS: Slot 4 remains vacant",
-          "category": "info",
-          "amount": 0
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Lost Sponsor Capital: Toyota Racing Development (Downward Performance Trend)",
-          "category": "expense",
-          "amount": -13170
-        },
-        {
-          "date": "May 25, 2026",
-          "description": "Charlotte Mock Race Results: P4, P8, P14, DNS",
-          "category": "info",
-          "amount": 0
         }
       ],
       "sponsors": [
         "937 Racing",
+        "Toyota Racing Development",
         "Craftsman Tools"
       ],
       "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305"
