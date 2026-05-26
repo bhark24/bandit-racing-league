@@ -311,8 +311,9 @@
 
         <!-- Franchise Championship Standings -->
         <div class="fantasy-panel" style="margin-bottom: 40px; padding: 25px; border: 1px solid #222; border-radius: var(--border-radius); background: var(--bg-panel);">
-            <h2 style="color: #fff; margin-top: 0; margin-bottom: 20px; font-size: 1.8rem; font-family: var(--font-heading);">
-                🏆 FRANCHISE CHAMPIONSHIP STANDINGS
+            <h2 style="color: #fff; margin-top: 0; margin-bottom: 20px; font-size: 1.8rem; font-family: var(--font-heading); display: flex; align-items: center; justify-content: space-between;">
+                <span>🏆 FRANCHISE CHAMPIONSHIP STANDINGS</span>
+                <button class="reset-db-btn" onclick="resetState()">Reset Database</button>
             </h2>
             <div class="fantasy-table-wrapper">
                 <table class="ledger-table" style="width: 100%;">
@@ -436,6 +437,7 @@
         let selectedTeamId = null;
 
         document.addEventListener('DOMContentLoaded', () => {
+            loadState();
             renderFranchiseStandings();
             renderTeamsDirectory();
             
@@ -639,9 +641,10 @@
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
                             <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
-                            <span style="font-size:0.75rem; color:${drvInfo.color}; font-weight:bold; text-transform:uppercase; display:flex; align-items:center; gap:4px;">
+                            <span style="font-size:0.75rem; color:${drvInfo.color}; font-weight:bold; text-transform:uppercase; display:flex; align-items:center; gap:4px; margin-bottom:4px;">
                                 <span>${drvInfo.icon}</span> ${drvInfo.status}
                             </span>
+                            <button class="btn-release" onclick="releaseDriver('${team.id}', 'primary', ${i})">Release Driver</button>
                         </div>
                     `;
                 } else {
@@ -649,6 +652,9 @@
                         <span style="font-size:1.8rem; color:#333;">👤</span>
                         <div>
                             <strong style="color:#444; display:block; font-size:0.95rem;">Vacant Slot</strong>
+                            <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="openSignDriverModal('${team.id}', 'primary', ${i})">
+                                + Sign Driver
+                            </button>
                         </div>
                     `;
                 }
@@ -683,9 +689,10 @@
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
                             <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
-                            <span style="font-size:0.75rem; color:${drvInfo.color}; font-weight:bold; text-transform:uppercase; display:flex; align-items:center; gap:4px;">
+                            <span style="font-size:0.75rem; color:${drvInfo.color}; font-weight:bold; text-transform:uppercase; display:flex; align-items:center; gap:4px; margin-bottom:4px;">
                                 <span>${drvInfo.icon}</span> ${drvInfo.status}
                             </span>
+                            <button class="btn-release" onclick="releaseDriver('${team.id}', 'backup', ${i})">Release Driver</button>
                         </div>
                     `;
                 } else {
@@ -693,6 +700,9 @@
                         <span style="font-size:1.8rem; color:#333;">👤</span>
                         <div>
                             <strong style="color:#444; display:block; font-size:0.95rem;">Vacant Slot</strong>
+                            <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="openSignDriverModal('${team.id}', 'backup', ${i})">
+                                + Sign Driver
+                            </button>
                         </div>
                     `;
                 }
@@ -748,6 +758,16 @@
                     driverLabel = `<span style="font-size:0.75rem; color:var(--neon-green); font-weight:bold; text-transform:uppercase;">Driver: ${driverName}</span>`;
                 }
 
+                let repairBtnHTML = '';
+                if (truck.condition < 100) {
+                    const cost = (100 - truck.condition) * 500;
+                    repairBtnHTML = `
+                        <button class="btn-primary" style="margin-top: 10px; padding: 6px 12px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="repairTruckInteractive('${team.id}', '${truck.id}', ${cost})">
+                            🔧 Repair Truck ($${new Intl.NumberFormat('en-US').format(cost)})
+                        </button>
+                    `;
+                }
+
                 card.innerHTML = `
                     <div style="display:flex; align-items:center; gap:20px; width: 100%; flex-wrap: wrap;">
                         <div style="width:90px; display:flex; justify-content:center; align-items:center;">
@@ -765,6 +785,7 @@
                             <div class="condition-bar-container" style="margin-left:auto; margin-bottom: 5px;">
                                 <div class="condition-bar-fill" style="width: ${truck.condition}%; background: ${barColor};"></div>
                             </div>
+                            ${repairBtnHTML}
                         </div>
                     </div>
                 `;
@@ -772,7 +793,79 @@
             });
         }
 
+        async function sha256(message) {
+            if (window.crypto && crypto.subtle) {
+                const msgBuffer = new TextEncoder().encode(message);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+            // Fallback (e.g. non-secure file:// direct browser views)
+            let hash = 0;
+            for (let i = 0; i < message.length; i++) {
+                hash = ((hash << 5) - hash) + message.charCodeAt(i);
+                hash |= 0;
+            }
+            return 'fallback_' + hash.toString(16);
+        }
 
+        async function repairTruckInteractive(teamId, truckId, cost) {
+            const team = teamsData.teams.find(t => t.id === teamId);
+            if (!team) return;
+            const truck = team.trucks.find(tr => tr.id === truckId);
+            if (!truck) return;
+            
+            if (team.balance < cost) {
+                alert(`Insufficient franchise capital to repair this truck. Required: $${new Intl.NumberFormat('en-US').format(cost)}, Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
+                return;
+            }
+            
+            // Challenge for passcode
+            const passcode = prompt(`Repairing ${truck.name} requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
+            if (passcode === null) return; // User cancelled
+            
+            if (!team.passcodeHash) {
+                alert("Error: Passcode protection is not initialized for this team.");
+                return;
+            }
+            
+            const hashed = await sha256(passcode.trim());
+            if (hashed !== team.passcodeHash) {
+                alert(`Authentication Failed!\n\nIncorrect passcode. Only the authorized team owner (${team.owner}) can perform chassis repairs.`);
+                return;
+            }
+            
+            const confirmRepair = confirm(`Passcode Verified!\n\nAre you sure you want to repair ${truck.name}? This will restore its condition to 100% and deduct $${new Intl.NumberFormat('en-US').format(cost)} from your balance.`);
+            if (!confirmRepair) return;
+            
+            // Execute repair
+            team.balance -= cost;
+            const oldCondition = truck.condition;
+            truck.condition = 100;
+            
+            // Add ledger entry
+            const today = new Date();
+            const year = today.getFullYear();
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[today.getMonth()];
+            const day = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${month} ${day}, ${year}`;
+            
+            team.ledger.push({
+                date: dateStr,
+                description: `Repaired Fleet Truck: ${truck.name} (+${100 - oldCondition}%)`,
+                category: "expense",
+                amount: -cost
+            });
+            
+            // Re-render UI components
+            renderTeamsDirectory();
+            selectTeam(teamId);
+            renderFranchiseStandings();
+            
+            // Keep the Garage tab active
+            switchTeamTab('garage-tab');
+        }
 
         function renderLedgerTab(team) {
             const body = document.getElementById('ledger-body');
@@ -846,6 +939,196 @@
             img.parentNode.replaceChild(span, img);
         }
 
+        // LocalStorage and database persistence state
+        let localTeamsData = null;
+
+        function loadState() {
+            const saved = localStorage.getItem('bandit_teams_data');
+            if (saved) {
+                try {
+                    localTeamsData = JSON.parse(saved);
+                    teamsData.teams = localTeamsData.teams;
+                } catch (e) {
+                    console.error("Failed to parse saved state:", e);
+                    localTeamsData = null;
+                }
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem('bandit_teams_data', JSON.stringify({ teams: teamsData.teams }));
+        }
+
+        function resetState() {
+            if (confirm("Are you sure you want to reset the franchise database? This will revert all repair purchases, roster changes, and weekly simulations back to the initial Charlotte mock week status.")) {
+                localStorage.removeItem('bandit_teams_data');
+                window.location.reload();
+            }
+        }
+
+        // Option 1: Roster Signings & Agency
+        function getAvailableFreeAgents() {
+            const signedNames = new Set();
+            teamsData.teams.forEach(team => {
+                (team.drivers.primary || []).forEach(name => { if (name && name !== 'VACANT') signedNames.add(normalizeName(name)); });
+                (team.drivers.backup || []).forEach(name => { if (name) signedNames.add(normalizeName(name)); });
+            });
+
+            function normalizeName(name) {
+                return name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
+            }
+
+            const freeAgents = [];
+            for (let num in rosterData) {
+                const driverName = rosterData[num].driver;
+                if (driverName && driverName.trim() !== '') {
+                    const norm = normalizeName(driverName);
+                    if (!signedNames.has(norm)) {
+                        freeAgents.push(driverName.trim());
+                    }
+                }
+            }
+            return [...new Set(freeAgents)].sort();
+        }
+
+        let activeSignTeamId = null;
+        let activeSignSlotType = null;
+        let activeSignSlotIndex = null;
+
+        function openSignDriverModal(teamId, slotType, slotIndex) {
+            activeSignTeamId = teamId;
+            activeSignSlotType = slotType;
+            activeSignSlotIndex = slotIndex;
+
+            const selectEl = document.getElementById('free-agent-select');
+            selectEl.innerHTML = '';
+
+            const agents = getAvailableFreeAgents();
+            if (agents.length === 0) {
+                selectEl.innerHTML = '<option value="">No Free Agents Available</option>';
+                document.getElementById('confirm-sign-btn').disabled = true;
+            } else {
+                agents.forEach(agent => {
+                    const option = document.createElement('option');
+                    option.value = agent;
+                    option.textContent = agent;
+                    selectEl.appendChild(option);
+                });
+                document.getElementById('confirm-sign-btn').disabled = false;
+            }
+
+            document.getElementById('confirm-sign-btn').onclick = executeSignDriver;
+            document.getElementById('sign-driver-modal').style.display = 'flex';
+        }
+
+        function closeSignDriverModal() {
+            document.getElementById('sign-driver-modal').style.display = 'none';
+        }
+
+        async function executeSignDriver() {
+            const selectEl = document.getElementById('free-agent-select');
+            const driverName = selectEl.value;
+            if (!driverName) return;
+
+            const team = teamsData.teams.find(t => t.id === activeSignTeamId);
+            if (!team) return;
+
+            const cost = 50000;
+            if (team.balance < cost) {
+                alert(`Insufficient franchise balance. Required: $50,000, Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
+                return;
+            }
+
+            const passcode = prompt(`Signing a driver requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
+            if (passcode === null) return;
+
+            const hashed = await sha256(passcode.trim());
+            if (hashed !== team.passcodeHash) {
+                alert("Authentication Failed! Incorrect passcode.");
+                return;
+            }
+
+            const confirmSign = confirm(`Are you sure you want to sign ${driverName} for a $50,000 signing bonus?`);
+            if (!confirmSign) return;
+
+            if (activeSignSlotType === 'primary') {
+                team.drivers.primary[activeSignSlotIndex] = driverName;
+            } else {
+                team.drivers.backup[activeSignSlotIndex] = driverName;
+            }
+            team.balance -= cost;
+
+            const today = new Date();
+            const year = today.getFullYear();
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[today.getMonth()];
+            const day = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${month} ${day}, ${year}`;
+
+            team.ledger.push({
+                date: dateStr,
+                description: `Signed Driver: ${driverName} (Signing Bonus)`,
+                category: "expense",
+                amount: -cost
+            });
+
+            saveState();
+            closeSignDriverModal();
+            renderTeamsDirectory();
+            selectTeam(activeSignTeamId);
+            renderFranchiseStandings();
+        }
+
+        async function releaseDriver(teamId, slotType, slotIndex) {
+            const team = teamsData.teams.find(t => t.id === teamId);
+            if (!team) return;
+
+            let driverName = '';
+            if (slotType === 'primary') {
+                driverName = team.drivers.primary[slotIndex];
+            } else {
+                driverName = team.drivers.backup[slotIndex];
+            }
+            if (!driverName || driverName === 'VACANT') return;
+
+            const passcode = prompt(`Releasing ${driverName} requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
+            if (passcode === null) return;
+
+            const hashed = await sha256(passcode.trim());
+            if (hashed !== team.passcodeHash) {
+                alert("Authentication Failed! Incorrect passcode.");
+                return;
+            }
+
+            const confirmRelease = confirm(`Are you sure you want to release ${driverName}? They will be returned to the Free Agent pool.`);
+            if (!confirmRelease) return;
+
+            if (slotType === 'primary') {
+                team.drivers.primary[slotIndex] = 'VACANT';
+            } else {
+                team.drivers.backup[slotIndex] = '';
+            }
+
+            const today = new Date();
+            const year = today.getFullYear();
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[today.getMonth()];
+            const day = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${month} ${day}, ${year}`;
+
+            team.ledger.push({
+                date: dateStr,
+                description: `Released Driver: ${driverName}`,
+                category: "info",
+                amount: 0
+            });
+
+            saveState();
+            renderTeamsDirectory();
+            selectTeam(teamId);
+            renderFranchiseStandings();
+        }
+
 
 
         // Toggle mobile navigation menu
@@ -860,6 +1143,27 @@
             }
         });
     </script>
+
+    <!-- Driver Sign Modal -->
+    <div id="sign-driver-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding: 20px;">
+        <div style="background:var(--bg-panel); border:2px solid var(--neon-green); border-radius:var(--border-radius); padding:30px; width:100%; max-width:500px; box-shadow:0 0 30px rgba(0,255,0,0.2); animation: scaleUp 0.3s ease; position:relative;">
+            <h3 style="color:#fff; margin-top:0; font-family:var(--font-heading); font-size:1.6rem; margin-bottom:15px; text-transform:uppercase; letter-spacing:1px;">Sign Free Agent</h3>
+            <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:20px;">Select an available driver from the free agency pool to sign. Signing requires owner passcode verification and deducts a flat <strong style="color:var(--neon-green);">$50,000</strong> signing bonus from team capital.</p>
+            
+            <div class="input-group" style="margin-bottom:20px;">
+                <label style="color:var(--text-muted); font-size:0.85rem; text-transform:uppercase; font-weight:bold; display:block; margin-bottom:8px;">Select Driver</label>
+                <select id="free-agent-select" style="width:100%; padding:12px; background:#090909; border:1px solid #333; color:#fff; border-radius:var(--border-radius); font-size:1rem; outline:none;">
+                    <!-- Options populated dynamically -->
+                </select>
+            </div>
+            
+            <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:25px;">
+                <button class="btn-secondary" style="padding:10px 20px; cursor:pointer;" onclick="closeSignDriverModal()">Cancel</button>
+                <button class="btn-primary" style="padding:10px 20px; cursor:pointer;" id="confirm-sign-btn">Sign Driver</button>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 </html>
