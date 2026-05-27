@@ -60,10 +60,10 @@ Weekly Earnings:
   - P16 - P20: $15,000
   - P21+: $12,000
 - Virtual Sponsorships:
-  - Evaluated weekly based on performance.
-  - Upward Performance (Team scores >= 90 points): 50% chance of gaining a sponsor,
+  - Evaluated weekly based on the average finishing position of all participating drivers:
+  - Upward Performance (Average finish of 12.0 or better): 50% chance of gaining a sponsor,
     yielding a random start payout of $10,000 - $35,000.
-  - Downward Performance (Team scores < 70 points): 40% chance of losing a sponsor,
+  - Downward Performance (Average finish of 20.0 or worse): 40% chance of losing a sponsor,
     costing a random capital loss of $5,000 - $20,000.
 
 Weekly Expenses:
