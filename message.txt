@@ -25,8 +25,7 @@ breakdown of how the team economy and rules operate.
 ------------------------------------------------------------------------
 2. TRUCK FLEET & DAMAGE MECHANICS
 ------------------------------------------------------------------------
-Every franchise maintains a fleet of 4 Craftsman Trucks corresponding to the
-4 driver slots. Trucks degrade based on wear and race incidents:
+Teams are required to purchase and maintain one Craftsman Truck for each of their active full-time (primary) drivers. For example, if a franchise only has 2 primary drivers, they only need to purchase and maintain 2 trucks (rather than a full fleet of 4). Trucks degrade based on wear and race incidents:
 
 - Natural Wear: Deducts 2-5% condition per race.
 - Incident Damage: Deducts 4% condition per incident in the race.
