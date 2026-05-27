@@ -10,7 +10,7 @@ breakdown of how the team economy and rules operate.
 1. FRANCHISE TEAMS & ROSTERS
 ------------------------------------------------------------------------
 - Teams consist of 4 primary driver slots and 2 backup driver slots.
-- Every team must maintain a full lineup.
+- Teams are not required to maintain a full lineup, and some may have vacant slots (never reaching 6 total drivers).
 - Active Lineup Substitution (DNS Auto-Sub):
   - Prior to weekly scoring, the system checks the active drivers.
   - If a primary driver is absent (DNS), the system automatically scans the team's
