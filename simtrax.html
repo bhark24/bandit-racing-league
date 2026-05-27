@@ -21,6 +21,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .simtrax-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 30px;
+        }
+        .simtrax-grid .card-starting { grid-column: 1 / span 2; }
+        .simtrax-grid .card-caution { grid-column: 3 / span 2; }
+        .simtrax-grid .card-restart { grid-column: 5 / span 2; }
+        .simtrax-grid .card-final { grid-column: 2 / span 2; }
+        .simtrax-grid .card-video { grid-column: 4 / span 2; }
+
+        @media (max-width: 992px) {
+            .simtrax-grid {
+                grid-template-columns: 1fr;
+            }
+            .simtrax-grid .card {
+                grid-column: auto !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -80,29 +101,35 @@
             </div>
         </div>
 
-        <!-- Bottom Row: 3 Monitors (Starting Lineup, Caution, Final Results) -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+        <!-- Bottom Row: 5 Assets (Starting Lineup, Caution Sponsor, Restart Zone, Final Results, LAT Oils) -->
+        <div class="simtrax-grid">
             
             <!-- Asset Card: Starting Lineup (Left) -->
-            <div class="card neon-border" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+            <div class="card neon-border card-starting" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
                 <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">Starting Lineup</h3>
                 <img src="assets/starting-lineup.png" alt="Starting Lineup" style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
             </div>
             
             <!-- Asset Card: Caution Sponsor (Center) -->
-            <div class="card neon-border" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+            <div class="card neon-border card-caution" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
                 <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">Caution Sponsor</h3>
                 <img src="assets/caution-sponsor.png" alt="Caution Sponsor" style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
             </div>
 
-            <!-- Asset Card: Final Results (Right) -->
-            <div class="card neon-border" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+            <!-- Asset Card: Restart Zone (Right) -->
+            <div class="card neon-border card-restart" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">Restart Zone</h3>
+                <img src="assets/perfect_shine_restart_zone.png" alt="Restart Zone" style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+            </div>
+
+            <!-- Asset Card: Final Results (Row 2, Center-Left) -->
+            <div class="card neon-border card-final" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
                 <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">Final Results</h3>
                 <img src="assets/final-results.png" alt="Final Results" style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
             </div>
 
-            <!-- Asset Card: LAT Oils Commercial (Center, Row 2) -->
-            <div class="card neon-border" style="grid-column: 2; padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+            <!-- Asset Card: LAT Oils Commercial (Row 2, Center-Right) -->
+            <div class="card neon-border card-video" style="padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
                 <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">LAT Oils Commercial</h3>
                 <video controls style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
                     <source src="assets/lat-oils-commercial.mov" type="video/mp4">

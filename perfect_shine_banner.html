@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,900;1,900&family=Permanent+Marker&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 1024px;
+      height: 546px;
+      background-color: #000000;
+      font-family: 'Outfit', sans-serif;
+      overflow: hidden;
+    }
+    
+    .banner-container {
+      width: 1024px;
+      height: 546px;
+      background-image: url('assets/banner_template_green.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    /* Redrawn top neon line to cover any mask edges and keep the top border uniform */
+    .top-neon-line {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1024px;
+      height: 4px;
+      background: #00ff00;
+      box-shadow: 0 0 8px #00ff00, 0 0 15px #00ff00;
+      z-index: 3;
+    }
+
+    /* Redrawn left neon line to cover any mask edges and keep the left border uniform */
+    .left-neon-line {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 546px;
+      background: #00ff00;
+      box-shadow: 0 0 8px #00ff00, 0 0 15px #00ff00;
+      z-index: 3;
+    }
+
+    /* Mask to cover the original left logo (JoKa) completely including the top nozzle */
+    .left-mask {
+      position: absolute;
+      left: 40px;
+      top: 10px;
+      width: 370px;
+      height: 490px;
+      background: #010803;
+      filter: blur(25px);
+      z-index: 1;
+    }
+
+    /* Mask to cover the original right text and the checkered flag completely (solid color, no gradient) */
+    .right-mask {
+      position: absolute;
+      left: 410px;
+      top: -30px; /* Extends off-screen at the top to cover flag remnants */
+      width: 644px; /* Extends off-screen at the right to cover flag remnants */
+      height: 530px; /* Covers down to y=500px, leaving the bottom cyan line visible */
+      background: #020a04; /* Solid opaque cover, completely blocking out the checkered flag */
+      filter: blur(20px);
+      z-index: 1;
+    }
+
+    /* Additional dark overlay to clean up the center transition */
+    .center-mask {
+      position: absolute;
+      left: 360px;
+      top: 50px;
+      width: 100px;
+      height: 440px;
+      background: #020a04;
+      filter: blur(25px);
+      z-index: 1;
+    }
+
+    /* Left Content (Car Logo) */
+    .left-content {
+      position: absolute;
+      left: 20px;
+      top: 0;
+      width: 420px;
+      height: 546px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .car-logo {
+      width: 380px;
+      height: auto;
+      filter: drop-shadow(0 0 25px rgba(0, 229, 255, 0.65)) drop-shadow(0 0 10px rgba(0, 229, 255, 0.35));
+    }
+
+    /* Right Content */
+    .right-content {
+      position: absolute;
+      left: 460px;
+      top: 0;
+      width: 530px;
+      height: 546px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      box-sizing: border-box;
+      padding-right: 30px;
+    }
+
+    /* Text Style: RESTART ZONE (Stacked vertically to match FINAL RESULTS layout and prevent overflow) */
+    .text-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-style: italic;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      transform: skewX(-8deg); /* Slanted style to match the original */
+    }
+
+    .word-restart {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 78px;
+      color: #a8ffa8; /* Lighter shade of neon green core */
+      /* Simplified glow layers to keep text sharp and highly legible */
+      text-shadow: 
+        0 0 4px #00ff00,
+        0 0 10px rgba(0, 255, 0, 0.6),
+        0 0 20px rgba(0, 255, 0, 0.3);
+      letter-spacing: -2px;
+      line-height: 0.9;
+    }
+
+    .word-zone {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 92px;
+      color: #00ff00; /* Neon green color */
+      /* Simplified glow layers to keep text sharp and highly legible */
+      text-shadow: 
+        0 0 4px #00ff00,
+        0 0 10px rgba(0, 255, 0, 0.6),
+        0 0 20px rgba(0, 255, 0, 0.3);
+      letter-spacing: 2px;
+      /* Rotate slightly to make it look brushed/graffiti style */
+      transform: rotate(-3deg);
+      line-height: 0.9;
+      margin-top: -5px; /* Pulls it slightly closer to RESTART */
+    }
+
+    /* Divider Line */
+    .divider-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+      position: relative;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00ff00, transparent);
+      box-shadow: 0 0 6px rgba(0, 255, 0, 0.8);
+    }
+
+    .presented-by {
+      position: absolute;
+      background-color: transparent;
+      padding: 0 15px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      text-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Bottom Logo */
+    .text-logo-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 5px;
+    }
+
+    .text-logo {
+      width: 330px;
+      height: auto;
+      filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.5));
+    }
+  </style>
+</head>
+<body>
+  <div class="banner-container">
+    <!-- Redrawn top and left neon lines in green -->
+    <div class="top-neon-line"></div>
+    <div class="left-neon-line"></div>
+
+    <!-- Masks to cover old graphics and flags -->
+    <div class="left-mask"></div>
+    <div class="right-mask"></div>
+    <div class="center-mask"></div>
+
+    <!-- New content overlaid -->
+    <div class="left-content">
+      <img src="assets/perfect_shine_car_clean.png" class="car-logo" alt="Perfect Shine Car">
+    </div>
+
+    <div class="right-content">
+      <div class="text-title">
+        <div class="word-restart">RESTART</div>
+        <div class="word-zone">ZONE</div>
+      </div>
+
+      <div class="divider-container">
+        <div class="divider-line"></div>
+        <span class="presented-by">PRESENTED BY</span>
+      </div>
+
+      <div class="text-logo-container">
+        <img src="assets/perfect_shine_text_clean.png" class="text-logo" alt="Perfect Shine Auto Spa">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
