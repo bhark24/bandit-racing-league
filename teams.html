@@ -353,6 +353,15 @@
                 </div>
             </div>
 
+            <!-- Emergency Loan Alert Banner -->
+            <div id="team-loan-alert-banner" style="display:none; background:rgba(255,23,68,0.1); border:2px solid #ff1744; border-radius:var(--border-radius); padding:15px; margin-bottom:20px; align-items:center; gap:15px;">
+                <div style="font-size:1.8rem; color:#ff1744; line-height:1;">⚠️</div>
+                <div style="flex-grow:1;">
+                    <h4 style="margin:0 0 5px 0; color:#fff; font-family:var(--font-heading); text-transform:uppercase; font-size:1rem; letter-spacing:0.5px;">Financial Action Lock Active</h4>
+                    <p style="margin:0; color:var(--text-muted); font-size:0.85rem;">This team has an active Emergency Loan balance of <strong id="alert-banner-loan-amount" style="color:#ff1744;">$0</strong>. Manual chassis repairs and signing free agents are locked. 50% of all future weekly earnings will be automatically deducted to repay this loan (plus 2% weekly interest).</p>
+                </div>
+            </div>
+
             <!-- Tab Buttons -->
             <div class="team-tabs">
                 <button class="team-tab-btn active" onclick="switchTeamTab('roster-tab')">DRIVERS AND THE GARAGE</button>
@@ -393,11 +402,17 @@
 
             <!-- TAB 3: FINANCES -->
             <div id="finances-tab" class="panel-tab-content">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:20px;">
                     <h3 style="color:#fff; font-size:1.3rem; margin:0;">CURRENT TEAM FINANCIALS</h3>
-                    <div style="text-align:right;">
-                        <span style="color:var(--text-muted); font-size:0.85rem; text-transform:uppercase; display:block;">Current Capital Balance</span>
-                        <span id="detail-team-balance-large" style="font-family:var(--font-heading); font-size:2.5rem; font-weight:900; color:var(--neon-green); text-shadow:0 0 10px var(--neon-green-glow); line-height:1;">$0</span>
+                    <div style="display:flex; gap:30px; align-items:center;">
+                        <div style="text-align:right;">
+                            <span style="color:var(--text-muted); font-size:0.85rem; text-transform:uppercase; display:block;">Current Capital Balance</span>
+                            <span id="detail-team-balance-large" style="font-family:var(--font-heading); font-size:2.5rem; font-weight:900; color:var(--neon-green); text-shadow:0 0 10px var(--neon-green-glow); line-height:1;">$0</span>
+                        </div>
+                        <div id="detail-team-loan-container" style="text-align:right; display:none;">
+                            <span style="color:#ff1744; font-size:0.85rem; text-transform:uppercase; display:block;">Active Emergency Loan</span>
+                            <span id="detail-team-loan-large" style="font-family:var(--font-heading); font-size:2.5rem; font-weight:900; color:#ff1744; text-shadow:0 0 10px rgba(255,23,68,0.5); line-height:1;">$0</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -516,6 +531,24 @@
 
             const formattedBalance = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(team.balance);
             document.getElementById('detail-team-balance-large').textContent = formattedBalance;
+
+            // Emergency Loan UI Updates
+            const loan = team.loan || 0;
+            const loanContainer = document.getElementById('detail-team-loan-container');
+            const loanLarge = document.getElementById('detail-team-loan-large');
+            const loanBanner = document.getElementById('team-loan-alert-banner');
+            const loanBannerAmt = document.getElementById('alert-banner-loan-amount');
+
+            if (loan > 0) {
+                const formattedLoan = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(loan);
+                if (loanLarge) loanLarge.textContent = formattedLoan;
+                if (loanContainer) loanContainer.style.display = 'block';
+                if (loanBannerAmt) loanBannerAmt.textContent = formattedLoan;
+                if (loanBanner) loanBanner.style.display = 'flex';
+            } else {
+                if (loanContainer) loanContainer.style.display = 'none';
+                if (loanBanner) loanBanner.style.display = 'none';
+            }
 
             // Render Tab contents
             renderRosterTab(team);
@@ -656,13 +689,21 @@
                         </div>
                     `;
                 } else {
+                    const isLocked = (team.loan || 0) > 0;
+                    const signBtnHTML = isLocked ? `
+                        <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: Active Emergency Loan">
+                            🔒 Sign Locked (Active Loan)
+                        </button>
+                    ` : `
+                        <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="openSignDriverModal('${team.id}', 'primary', ${i})">
+                            + Sign Driver
+                        </button>
+                    `;
                     slotCard.innerHTML = `
                         <span style="font-size:1.8rem; color:#333;">👤</span>
                         <div>
                             <strong style="color:#444; display:block; font-size:0.95rem;">Vacant Slot</strong>
-                            <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="openSignDriverModal('${team.id}', 'primary', ${i})">
-                                + Sign Driver
-                            </button>
+                            ${signBtnHTML}
                         </div>
                     `;
                 }
@@ -704,13 +745,21 @@
                         </div>
                     `;
                 } else {
+                    const isLocked = (team.loan || 0) > 0;
+                    const signBtnHTML = isLocked ? `
+                        <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: Active Emergency Loan">
+                            🔒 Sign Locked (Active Loan)
+                        </button>
+                    ` : `
+                        <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="openSignDriverModal('${team.id}', 'backup', ${i})">
+                            + Sign Driver
+                        </button>
+                    `;
                     slotCard.innerHTML = `
                         <span style="font-size:1.8rem; color:#333;">👤</span>
                         <div>
                             <strong style="color:#444; display:block; font-size:0.95rem;">Vacant Slot</strong>
-                            <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="openSignDriverModal('${team.id}', 'backup', ${i})">
-                                + Sign Driver
-                            </button>
+                            ${signBtnHTML}
                         </div>
                     `;
                 }
@@ -771,11 +820,20 @@
                 let repairBtnHTML = '';
                 if (truck.condition < 100) {
                     const cost = (100 - truck.condition) * 500;
-                    repairBtnHTML = `
-                        <button class="btn-primary" style="margin-top: 10px; padding: 6px 12px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="repairTruckInteractive('${team.id}', '${truck.id}', ${cost})">
-                            🔧 Repair Truck ($${new Intl.NumberFormat('en-US').format(cost)})
-                        </button>
-                    `;
+                    const isLocked = (team.loan || 0) > 0;
+                    if (isLocked) {
+                        repairBtnHTML = `
+                            <button class="btn-primary" style="margin-top: 10px; padding: 6px 12px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: Active Emergency Loan">
+                                🔒 Repair Locked (Active Loan)
+                            </button>
+                        `;
+                    } else {
+                        repairBtnHTML = `
+                            <button class="btn-primary" style="margin-top: 10px; padding: 6px 12px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="repairTruckInteractive('${team.id}', '${truck.id}', ${cost})">
+                                🔧 Repair Truck ($${new Intl.NumberFormat('en-US').format(cost)})
+                            </button>
+                        `;
+                    }
                 }
 
                 card.innerHTML = `
@@ -824,6 +882,11 @@
             if (!team) return;
             const truck = team.trucks.find(tr => tr.id === truckId);
             if (!truck) return;
+            
+            if (team.loan > 0) {
+                alert(`Action Locked: This team has an active emergency loan ($${new Intl.NumberFormat('en-US').format(team.loan)}). Manual chassis repairs are locked until the loan is fully repaid.`);
+                return;
+            }
             
             if (team.balance < cost) {
                 alert(`Insufficient franchise capital to repair this truck. Required: $${new Intl.NumberFormat('en-US').format(cost)}, Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
@@ -1012,6 +1075,13 @@
         let activeSignSlotIndex = null;
 
         function openSignDriverModal(teamId, slotType, slotIndex) {
+            const team = teamsData.teams.find(t => t.id === teamId);
+            if (!team) return;
+            if (team.loan > 0) {
+                alert(`Action Locked: This team has an active emergency loan ($${new Intl.NumberFormat('en-US').format(team.loan)}). Signing drivers is locked until the loan is fully repaid.`);
+                return;
+            }
+
             activeSignTeamId = teamId;
             activeSignSlotType = slotType;
             activeSignSlotIndex = slotIndex;
@@ -1048,6 +1118,12 @@
 
             const team = teamsData.teams.find(t => t.id === activeSignTeamId);
             if (!team) return;
+
+            if (team.loan > 0) {
+                alert(`Action Locked: This team has an active emergency loan ($${new Intl.NumberFormat('en-US').format(team.loan)}). Signing drivers is locked until the loan is fully repaid.`);
+                closeSignDriverModal();
+                return;
+            }
 
             const cost = 50000;
             if (team.balance < cost) {

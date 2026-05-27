@@ -284,6 +284,7 @@ const teamsData = {
       "points": 98,
       "wins": 1,
       "balance": 2202689,
+      "loan": 0,
       "drivers": {
         "primary": [
           "BILL HARKINS",
@@ -449,6 +450,7 @@ const teamsData = {
       "points": 91,
       "wins": 0,
       "balance": 2193552,
+      "loan": 0,
       "drivers": {
         "primary": [
           "VICTOR WEAVER",
@@ -644,6 +646,7 @@ const teamsData = {
       "points": 0,
       "wins": 0,
       "balance": 2010000,
+      "loan": 0,
       "drivers": {
         "primary": [
           "VACANT",

@@ -326,6 +326,9 @@ def main():
                 if not team:
                     print(f"Error: Repair team '{team_id}' not found.")
                     continue
+                if team.get("loan", 0) > 0:
+                    print(f"Error: Team '{team_id}' has an active emergency loan (${team['loan']}) and cannot perform repairs (Action Locked).")
+                    continue
                 for t_id in truck_ids:
                     truck = next((tr for tr in team["trucks"] if tr["id"] == t_id), None)
                     if not truck:
@@ -696,11 +699,47 @@ def main():
                 print(f"  [Sponsor Loss] {team['name']} lost sponsorship from {lost_sponsor}! (-${sponsor_loss})")
 
         # Calculate updated balance
-        team["balance"] += (team_earnings - team_expenses)
+        loan = team.get("loan", 0)
+        repayment = 0
+        if loan > 0 and team_earnings > 0:
+            repayment = min(loan, int(0.5 * team_earnings))
+            loan -= repayment
+            team["ledger"].append({
+                "date": race_date,
+                "description": f"Emergency Loan Repayment (50% of earnings): -${repayment}",
+                "category": "expense",
+                "amount": -repayment
+            })
+
+        if loan > 0:
+            interest = int(loan * 0.02)
+            loan += interest
+            team["ledger"].append({
+                "date": race_date,
+                "description": f"Weekly Loan Interest Accrued (2%): +${interest} (New Loan: ${loan})",
+                "category": "info",
+                "amount": 0
+            })
+
+        team["balance"] += (team_earnings - team_expenses - repayment)
+
+        if team["balance"] < 0:
+            loan_issued = abs(team["balance"])
+            loan += loan_issued
+            team["balance"] = 0
+            team["ledger"].append({
+                "date": race_date,
+                "description": f"Emergency Loan Issued: +${loan_issued} (To cover negative balance)",
+                "category": "income",
+                "amount": loan_issued
+            })
+
+        team["loan"] = loan
         team["points"] += team_points_this_week
         
         weekly_team_points[team_id] = team_points_this_week
-        print(f"  Weekly Summary: Points = {team_points_this_week}, Earnings = +${team_earnings}, Expenses = -${team_expenses}, New Balance = ${team['balance']}")
+        loan_str = f", Loan = ${team['loan']}" if team.get("loan", 0) > 0 else ""
+        print(f"  Weekly Summary: Points = {team_points_this_week}, Earnings = +${team_earnings}, Expenses = -${team_expenses}, New Balance = ${team['balance']}{loan_str}")
         
     # Determine weekly winner and credit points/wins
     if weekly_team_points:
