@@ -1,0 +1,106 @@
+========================================================================
+             BANDIT RACING LEAGUE - FRANCHISE TEAM ECONOMY EXPLANATION
+========================================================================
+
+The Bandit Racing League (BRL) economy dashboard simulates team-wide rosters,
+finances, fleet truck maintenance, and active sponsorships. Below is a comprehensive
+breakdown of how the team economy and rules operate.
+
+------------------------------------------------------------------------
+1. FRANCHISE TEAMS & ROSTERS
+------------------------------------------------------------------------
+- Teams consist of 4 primary driver slots and 2 backup driver slots.
+- Every team must maintain a full lineup.
+- Active Lineup Substitution (DNS Auto-Sub):
+  - Prior to weekly scoring, the system checks the active drivers.
+  - If a primary driver is absent (DNS), the system automatically scans the team's
+    backup drivers and substitutes a backup driver who participated.
+  - If no backup driver participated, the slot remains vacant and scores a DNS.
+
+- Driver Signings & Releases:
+  - Signing a new free agent driver requires owner passcode authorization and
+    deducts a flat $50,000 signing bonus from team capital.
+  - Releasing an active driver returns them to the free agency pool (cost: $0).
+
+------------------------------------------------------------------------
+2. TRUCK FLEET & DAMAGE MECHANICS
+------------------------------------------------------------------------
+Every franchise maintains a fleet of 4 Craftsman Trucks corresponding to the
+4 driver slots. Trucks degrade based on wear and race incidents:
+
+- Natural Wear: Deducts 2-5% condition per race.
+- Incident Damage: Deducts 4% condition per incident in the race.
+- Mechanical / Engine Failures:
+  - If a driver DNF's due to a blown motor, the engine must be replaced at
+    the end of the race for a flat fee of $45,000 (restores condition to 100%).
+- Fast Repairs / Crash damage:
+  - If a driver DNF's due to crash damage and used a Fast Repair, the truck is
+    totaled. It must be replaced with a new truck for $185,000.
+  - If a driver uses a Fast Repair but does NOT DNF, the team is charged a flat
+    Fast Repair fee of $83,250 (restores condition to 100% immediately).
+- Manual Chassis Repairs:
+  - Owners can manually repair a truck at any time using the dashboard.
+  - Repairs cost $500 per 1% condition restored (restores condition to 100%).
+  - Repairs require verification of the owner's passcode.
+
+------------------------------------------------------------------------
+3. FINANCES & ECONOMY
+------------------------------------------------------------------------
+Franchise balances are updated at the end of each simulation week:
+
+Weekly Earnings:
+- Sponsor Start Bonus: +$15,000 per starting driver.
+- Position Prize Money:
+  - P1: $75,000
+  - P2: $55,000
+  - P3: $45,000
+  - P4: $35,000
+  - P5: $30,000
+  - P6 - P10: $25,000
+  - P11 - P15: $20,000
+  - P16 - P20: $15,000
+  - P21+: $12,000
+- Virtual Sponsorships:
+  - Evaluated weekly based on performance.
+  - Upward Performance (Team scores >= 90 points): 50% chance of gaining a sponsor,
+    yielding a random start payout of $10,000 - $35,000.
+  - Downward Performance (Team scores < 70 points): 40% chance of losing a sponsor,
+    costing a random capital loss of $5,000 - $20,000.
+
+Weekly Expenses:
+- Driver Travel & Lodging: Calculated based on driver's home city coordinates
+  to the track coordinates:
+  - Local commute (<= 50 mi): $20
+  - Driving distance (51 - 250 mi): $100
+  - Flight distance (> 250 mi): Seasonally adjusted flight cost ($250 base + $0.20/mi).
+- Hauler Logistics: Cost to transport the truck fleet from the team's home base
+  to the track coordinates, calculated at $5.00/mi round-trip.
+- Quarterly Hauler Maintenance: Charged $2,000 every 4 simulation races.
+
+------------------------------------------------------------------------
+4. EMERGENCY LOAN & ACTION LOCK SYSTEM
+------------------------------------------------------------------------
+To manage financial distress when expenses exceed a team's cash reserves:
+
+- Emergency Loan Issuance:
+  - If a team's weekly balance drops below zero, a loan is automatically issued
+    to cover the debt, bringing the team's cash balance back to exactly $0.
+  - The loan balance increases by the absolute value of the debt.
+  
+- Automated Repayment:
+  - While a team has an active loan balance (loan > 0), 50% of all future weekly
+    earnings (sponsor start bonuses, prize money, sponsor payouts) is automatically
+    deducted and applied to repay the loan before updating the cash balance.
+
+- Loan Interest:
+  - Any remaining active loan balance accumulates 2% weekly interest at the end
+    of each simulation week.
+
+- Financial Action Lock:
+  - While a team has an active loan balance (loan > 0), they are locked out of
+    manual franchise actions. Specifically, they cannot:
+    1. Repair fleet trucks.
+    2. Sign new free agent drivers.
+  - These actions are disabled in the UI (buttons shown as locked/disabled) and
+    blocked in the command-line/backend scripts.
+========================================================================
