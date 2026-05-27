@@ -102,4 +102,24 @@ To manage financial distress when expenses exceed a team's cash reserves:
     2. Sign new free agent drivers.
   - These actions are disabled in the UI (buttons shown as locked/disabled) and
     blocked in the command-line/backend scripts.
+
+------------------------------------------------------------------------
+5. CHAMPIONSHIP POINTS SYSTEM (SEASON 16)
+------------------------------------------------------------------------
+For Season 16, the Bandit Racing League uses the official NASCAR Craftsman
+Truck Series championship points system to calculate driver and team standings:
+
+- Race Finish Points:
+  - 1st Place: 40 points
+  - 2nd Place: 35 points
+  - 3rd Place: 34 points
+  - 4th Place: 33 points
+  - 5th Place: 32 points
+  - Points decrease by 1 point per position from P3 to P36 (P36 through P40 receive 1 point).
+- Stage Points:
+  - Drivers finishing in the top 10 of Stage 1 and Stage 2 earn additional points
+    (1st: 10 pts, 2nd: 9 pts, 3rd: 8 pts, ..., 10th: 1 pt).
+- Bonuses/Penalties:
+  - Custom league bonuses (such as pole position, laps led, clean race bonuses, or DNF
+    penalties) are applied as configured in the season settings.
 ========================================================================
