@@ -75,6 +75,10 @@ const rosterData = {
     "driver": "MICHAEL RAMOS",
     "status": "full-time"
   },
+  "28": {
+    "driver": "",
+    "status": "part-time"
+  },
   "43": {
     "driver": "JONATHON PLATT",
     "status": "past-champion"
@@ -83,17 +87,9 @@ const rosterData = {
     "driver": "MICHAEL RAKES",
     "status": "full-time"
   },
-  "50": {
-    "driver": "DAVIS CARROLL",
-    "status": "full-time"
-  },
   "51": {
     "driver": "CURTIS YANCEY",
     "status": "part-time"
-  },
-  "54": {
-    "driver": "",
-    "status": "available"
   },
   "62": {
     "driver": "TY CORINO",
