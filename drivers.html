@@ -106,9 +106,10 @@
             return matchedTeams;
         }
 
-        if (typeof rosterData === 'undefined' || typeof numbersList === 'undefined') {
-            grid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;'>No roster data found. Please drop your exported <code>roster_data.js</code> file from the Car Number Tracker into the folder!</p>";
-        } else {
+        let lastRosterJson = '';
+
+        function renderDriverGrid() {
+            grid.innerHTML = '';
             const statusMap = {
                 'available': 'Available',
                 'full-time': 'Full Time',
@@ -194,6 +195,39 @@
                 `;
                 grid.appendChild(card);
             });
+        }
+
+        function loadRosterDynamically() {
+            const oldScript = document.getElementById('dynamic-roster-script');
+            if (oldScript) {
+                oldScript.remove();
+            }
+
+            const script = document.createElement('script');
+            script.id = 'dynamic-roster-script';
+            script.src = 'roster_data.js?t=' + Date.now();
+            
+            script.onload = function() {
+                if (typeof rosterData !== 'undefined' && typeof numbersList !== 'undefined') {
+                    const currentHash = JSON.stringify(rosterData);
+                    if (currentHash === lastRosterJson) {
+                        return;
+                    }
+                    lastRosterJson = currentHash;
+                    renderDriverGrid();
+                }
+            };
+            document.body.appendChild(script);
+        }
+
+        // Run dynamically
+        if (typeof rosterData === 'undefined' || typeof numbersList === 'undefined') {
+            grid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;'>No roster data found. Please drop your exported <code>roster_data.js</code> file from the Car Number Tracker into the folder!</p>";
+            setTimeout(loadRosterDynamically, 3000);
+        } else {
+            lastRosterJson = JSON.stringify(rosterData);
+            renderDriverGrid();
+            setInterval(loadRosterDynamically, 3000);
         }
 
         // Toggle mobile navigation menu
