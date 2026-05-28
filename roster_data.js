@@ -88,7 +88,7 @@ const rosterData = {
     "status": "full-time"
   },
   "50": {
-    "driver": "DAVIS CARR",
+    "driver": "DAVIS CARROLL",
     "status": "full-time"
   },
   "51": {
