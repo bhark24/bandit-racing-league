@@ -71,12 +71,6 @@ def clean_name(name):
     # E.g. "Jesse VAUGHAN" -> "Jesse Vaughan", "MARK ALAN BIVENS" -> "Mark Alan Bivens"
     return name.strip().title()
 
-def car_sort_key(num_str):
-    try:
-        return int(num_str)
-    except ValueError:
-        return 999
-
 # Parse roster_data.js
 if not os.path.exists(ROSTER_DATA_PATH):
     print(f"Error: Roster data file not found at {ROSTER_DATA_PATH}")
@@ -91,58 +85,65 @@ if not match:
     print("Error: Could not parse rosterData object from roster_data.js")
     exit(1)
 
+# Extract numbersList from roster_data.js
+match_list = re.search(r'const\s+numbersList\s*=\s*(\[.*?\])\s*;', js_content, re.DOTALL)
+if not match_list:
+    print("Error: Could not parse numbersList from roster_data.js")
+    exit(1)
+
 try:
     roster_data = json.loads(match.group(1))
+    numbers_list = json.loads(match_list.group(1))
 except Exception as e:
     print(f"Error decoding JSON from roster_data.js: {e}")
     exit(1)
 
 cards_html = ""
-sorted_numbers = sorted(roster_data.keys(), key=car_sort_key)
 
-for number in sorted_numbers:
-    info = roster_data[number]
-    driver_name = info["driver"].strip()
-    status = info["status"].strip()
-    
-    # Skip unoccupied/available spots
-    if not driver_name or driver_name.lower() == "available":
-        continue
+for number in numbers_list:
+    # Check if this number is in roster_data AND the driver name is occupied
+    is_occupied = False
+    if number in roster_data:
+        info = roster_data[number]
+        driver_name = info.get("driver", "").strip()
+        status = info.get("status", "").strip()
+        if driver_name and driver_name.lower() != "available":
+            is_occupied = True
+            
+    if is_occupied:
+        display_name = clean_name(driver_name)
+        status_display = status.replace("-", " ").title()
         
-    display_name = clean_name(driver_name)
-    status_display = status.replace("-", " ").title()
-    
-    # Check if there is a SimRacerHub ID
-    lookup_name = display_name.lower()
-    # Handle manual alias lookup overrides
-    if "jesse vaughan" in lookup_name:
-        did = None
-    elif "davis carroll" in lookup_name:
-        did = None
-    elif "jason allegrini" in lookup_name:
-        did = None
-    elif "michael rakes" in lookup_name:
-        did = None
-    elif "tyson kopf" in lookup_name:
-        did = None
-    else:
-        did = SRH_IDS.get(lookup_name)
-        
-    # Generate stats button
-    if did:
-        stats_btn_html = f'<a href="https://simracerhub.com/driver_stats.php?driver_id={did}&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>'
-    else:
-        stats_btn_html = '<a href="#" class="btn-stats disabled-stats" style="opacity: 0.55; cursor: not-allowed; pointer-events: none; border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05);">No Stats Yet</a>'
-        
-    # Render custom number image if available on disk, otherwise render text fallback
-    if lookup_name in NUMBER_IMAGES:
-        img_filename = NUMBER_IMAGES[lookup_name]
-        # Folder is named "drivers numbers" under assets. URL-encode the space as %20
-        number_render_html = f'<img src="assets/drivers%20numbers/{img_filename}" alt="Custom Number" style="max-height: 120px; max-width: 200px; object-fit: contain;">'
-    else:
-        number_render_html = f'<span style="color:var(--neon-green); font-size:3.5rem; font-weight:900; font-style:italic; font-family:var(--font-heading); text-shadow: 0 0 10px rgba(0,255,0,0.3);">#{number}</span>'
+        # Check if there is a SimRacerHub ID
+        lookup_name = display_name.lower()
+        # Handle manual alias lookup overrides
+        if "jesse vaughan" in lookup_name:
+            did = None
+        elif "davis carroll" in lookup_name:
+            did = None
+        elif "jason allegrini" in lookup_name:
+            did = None
+        elif "michael rakes" in lookup_name:
+            did = None
+        elif "tyson kopf" in lookup_name:
+            did = None
+        else:
+            did = SRH_IDS.get(lookup_name)
+            
+        # Generate stats button
+        if did:
+            stats_btn_html = f'<a href="https://simracerhub.com/driver_stats.php?driver_id={did}&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>'
+        else:
+            stats_btn_html = '<a href="#" class="btn-stats disabled-stats" style="opacity: 0.55; cursor: not-allowed; pointer-events: none; border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05);">No Stats Yet</a>'
+            
+        # Render custom number image if available on disk, otherwise render text fallback
+        if lookup_name in NUMBER_IMAGES:
+            img_filename = NUMBER_IMAGES[lookup_name]
+            number_render_html = f'<img src="assets/drivers%20numbers/{img_filename}" alt="Custom Number" style="max-height: 120px; max-width: 200px; object-fit: contain;">'
+        else:
+            number_render_html = f'<span style="color:var(--neon-green); font-size:3.5rem; font-weight:900; font-style:italic; font-family:var(--font-heading); text-shadow: 0 0 10px rgba(0,255,0,0.3);">#{number}</span>'
 
-    cards_html += f"""
+        cards_html += f"""
             <div class="driver-card" data-status="{status}">
                 <div class="driver-img-box">
                     <span class="placeholder-photo">[ CAR IMAGE ]</span>
@@ -156,6 +157,23 @@ for number in sorted_numbers:
                         {number_render_html}
                     </div>
                     {stats_btn_html}
+                </div>
+            </div>"""
+    else:
+        # Render Vacant / Available Slot Card
+        cards_html += f"""
+            <div class="driver-card available-card" style="border: 1px dashed rgba(57, 255, 20, 0.25); background: linear-gradient(180deg, #0d0d0f 0%, #040405 100%); opacity: 0.8; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--neon-green)'; this.style.opacity='1'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(57, 255, 20, 0.25)'; this.style.opacity='0.8'; this.style.transform='translateY(0)';" data-status="available">
+                <div class="driver-img-box" style="background-color: #030303; border-bottom: 2px dashed rgba(57, 255, 20, 0.15); display: flex; align-items: center; justify-content: center; height: 180px;">
+                    <span style="color: rgba(255, 255, 255, 0.12); font-size: 1rem; font-weight: bold; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 2px;">Vacant Slot</span>
+                </div>
+                <div class="driver-info" style="padding: 20px; text-align: center; display: flex; flex-direction: column; flex-grow: 1;">
+                    <div class="watermark-number" style="color: rgba(255, 255, 255, 0.015);">{number}</div>
+                    <div style="font-size: 0.8rem; font-weight: bold; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Available</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px; font-size: 1.6rem; color: rgba(255,255,255,0.35); z-index: 2; position: relative;">#{number} Available</h3>
+                    <div class="driver-number-img" style="min-height: 120px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center; z-index: 2; position: relative;">
+                        <span style="color: rgba(255, 255, 255, 0.08); font-size: 3.5rem; font-weight: 900; font-style: italic; font-family: var(--font-heading);">#{number}</span>
+                    </div>
+                    <a href="/apply.html" class="btn-stats" style="border-color: rgba(57, 255, 20, 0.25); color: var(--neon-green); background: rgba(57, 255, 20, 0.02); text-decoration: none; padding: 10px; border-radius: 4px; font-weight: bold; text-transform: uppercase; font-family: var(--font-heading); transition: all 0.2s ease;" onmouseover="this.style.background='rgba(57, 255, 20, 0.12)'; this.style.borderColor='var(--neon-green)';" onmouseout="this.style.background='rgba(57, 255, 20, 0.02)'; this.style.borderColor='rgba(57, 255, 20, 0.25)';" onclick="window.location.href='/apply.html'; return false;">Claim Number &rarr;</a>
                 </div>
             </div>"""
 
@@ -262,4 +280,4 @@ html_template = f"""<!DOCTYPE html>
 with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
     f.write(html_template)
 
-print(f"Successfully generated drivers.html with {len(sorted_numbers)} active spots.")
+print(f"Successfully generated drivers.html with {len(numbers_list)} total slots.")
