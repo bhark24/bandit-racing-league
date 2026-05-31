@@ -253,10 +253,20 @@ const teamsData = {
       "lat": 39.6428,
       "lon": -84.2866
     },
-    "DAVE LEAKEY": {
-      "city": "Orlando, FL",
-      "lat": 28.5383,
-      "lon": -81.3792
+    "DAVID LEAKEY": {
+      "city": "Crestview, FL",
+      "lat": 30.7621,
+      "lon": -86.5694
+    },
+    "CONOR GIBSON": {
+      "city": "Toronto, ON",
+      "lat": 43.6532,
+      "lon": -79.3832
+    },
+    "CURTIS YANCEY": {
+      "city": "Clearwater, FL",
+      "lat": 27.9659,
+      "lon": -82.8001
     },
     "JACKSON KNAAK": {
       "city": "Concord, NC",
@@ -281,9 +291,9 @@ const teamsData = {
       "owner": "Bill Harkins",
       "homeBase": "Cleveland, OH",
       "logo": "assets/roundy-motorsports-logo.png",
-      "points": 98,
-      "wins": 1,
-      "balance": 2202689,
+      "points": 16,
+      "wins": 0,
+      "balance": 2037270,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -302,19 +312,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Ford",
           "name": "Roundy F-150 #12",
-          "condition": 94
+          "condition": 49
         },
         {
           "id": "truck-2",
           "make": "Ford",
           "name": "Roundy F-150 #4",
-          "condition": 97
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Ford",
           "name": "Roundy F-150 #15",
-          "condition": 88
+          "condition": 49
         },
         {
           "id": "truck-4",
@@ -337,107 +347,81 @@ const teamsData = {
           "amount": -740000
         },
         {
-          "date": "2026-05-25",
+          "date": "May 7, 2025",
           "description": "Hauler Logistics: Cleveland, OH to Daytona Beach, FL (849 mi)",
           "category": "expense",
           "amount": -8498
         },
         {
-          "date": "2026-05-25",
-          "description": "Standard Race Prep: Roundy F-150 #4 (LOGAN MURRAY)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Flight & Lodging: LOGAN MURRAY from West Plains, MO (813 mi)",
-          "category": "expense",
-          "amount": -412
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Sponsor Start Bonus: LOGAN MURRAY",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Prize Money: LOGAN MURRAY (P1)",
-          "category": "income",
-          "amount": 75000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Standard Race Prep: Roundy F-150 #15 (MATT CROCKETT)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Flight & Lodging: MATT CROCKETT from Roanoke, VA (836 mi)",
-          "category": "expense",
-          "amount": -415
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Sponsor Start Bonus: MATT CROCKETT",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Prize Money: MATT CROCKETT (P5)",
-          "category": "income",
-          "amount": 30000
-        },
-        {
-          "date": "2026-05-25",
+          "date": "May 7, 2025",
           "description": "Standard Race Prep: Roundy F-150 #12 (BILL HARKINS)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "2026-05-25",
+          "date": "May 7, 2025",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (874 mi)",
           "category": "expense",
-          "amount": -213
+          "amount": -210
         },
         {
-          "date": "2026-05-25",
+          "date": "May 7, 2025",
           "description": "Sponsor Start Bonus: BILL HARKINS",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "2026-05-25",
-          "description": "Prize Money: BILL HARKINS (P8)",
+          "date": "May 7, 2025",
+          "description": "Prize Money: BILL HARKINS (P29)",
           "category": "income",
-          "amount": 25000
+          "amount": 12000
         },
         {
-          "date": "2026-05-25",
+          "date": "May 7, 2025",
+          "description": "LOGAN MURRAY DNS - No active backup available",
+          "category": "expense",
+          "amount": 0
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Standard Race Prep: Roundy F-150 #15 (MATT CROCKETT)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Flight & Lodging: MATT CROCKETT from Roanoke, VA (560 mi)",
+          "category": "expense",
+          "amount": -429
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Sponsor Start Bonus: MATT CROCKETT",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Prize Money: MATT CROCKETT (P23)",
+          "category": "income",
+          "amount": 12000
+        },
+        {
+          "date": "May 7, 2025",
           "description": "VACANT DNS - No active backup available",
           "category": "expense",
           "amount": 0
         },
         {
-          "date": "2026-05-25",
-          "description": "Virtual Sponsorship Earned: Veloce Simulators (Upward Performance Trend)",
-          "category": "income",
-          "amount": 33227
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Daytona Race Results: P1, P5, P8, DNS",
-          "category": "info",
-          "amount": 0
+          "date": "May 7, 2025",
+          "description": "Lost Sponsor Capital: Ford Performance (Downward Performance: 26.0 Avg Finish)",
+          "category": "expense",
+          "amount": -13593
         }
       ],
       "sponsors": [
         "Roundy Motorsports",
-        "Ford Performance",
-        "Craftsman Tools",
-        "Veloce Simulators"
+        "Craftsman Tools"
       ],
       "passcodeHash": "e7faa8b075ab5b412691a8b097ebfee4bb5fd87c448bfffc35ed519a449702ce"
     },
@@ -447,9 +431,9 @@ const teamsData = {
       "owner": "Victor Weaver",
       "homeBase": "Dayton, OH",
       "logo": "assets/937-racing-logo.png",
-      "points": 91,
+      "points": -2,
       "wins": 0,
-      "balance": 2193552,
+      "balance": 2008581,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -468,25 +452,25 @@ const teamsData = {
           "id": "truck-1",
           "make": "Toyota",
           "name": "937 Tundra #18",
-          "condition": 89
+          "condition": 81
         },
         {
           "id": "truck-2",
           "make": "Toyota",
           "name": "937 Tundra #22",
-          "condition": 92
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Toyota",
           "name": "937 Tundra #17",
-          "condition": 81
+          "condition": 100
         },
         {
           "id": "truck-4",
           "make": "Toyota",
           "name": "937 Tundra #19",
-          "condition": 86
+          "condition": 100
         }
       ],
       "ledger": [
@@ -503,137 +487,63 @@ const teamsData = {
           "amount": -740000
         },
         {
-          "date": "2026-05-25",
+          "date": "May 7, 2025",
           "description": "Hauler Logistics: Dayton, OH to Daytona Beach, FL (750 mi)",
           "category": "expense",
           "amount": -7506
         },
         {
-          "date": "2026-05-25",
+          "date": "May 7, 2025",
           "description": "Standard Race Prep: 937 Tundra #18 (VICTOR WEAVER)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "2026-05-25",
+          "date": "May 7, 2025",
           "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (750 mi)",
           "category": "expense",
-          "amount": -377
+          "amount": -323
         },
         {
-          "date": "2026-05-25",
+          "date": "May 7, 2025",
           "description": "Sponsor Start Bonus: VICTOR WEAVER",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "2026-05-25",
-          "description": "Prize Money: VICTOR WEAVER (P2)",
+          "date": "May 7, 2025",
+          "description": "Prize Money: VICTOR WEAVER (P33)",
           "category": "income",
-          "amount": 55000
+          "amount": 12000
         },
         {
-          "date": "2026-05-25",
-          "description": "Standard Race Prep: 937 Tundra #22 (JOSH ADAMS)",
+          "date": "May 7, 2025",
+          "description": "JOSH ADAMS DNS - No active backup available",
           "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (737 mi)",
-          "category": "expense",
-          "amount": -292
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Sponsor Start Bonus: JOSH ADAMS",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Prize Money: JOSH ADAMS (P6)",
-          "category": "income",
-          "amount": 25000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Standard Race Prep: 937 Tundra #17 (DIONTE RADER)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Flight & Lodging: DIONTE RADER from Miamisburg, OH (744 mi)",
-          "category": "expense",
-          "amount": -328
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Sponsor Start Bonus: DIONTE RADER",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Prize Money: DIONTE RADER (P11)",
-          "category": "income",
-          "amount": 20000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Substituted DIONTE RADER into Slot 3 for VACANT (DNS)",
-          "category": "income",
           "amount": 0
         },
         {
-          "date": "2026-05-25",
-          "description": "Standard Race Prep: 937 Tundra #19 (MATT BAILEY)",
+          "date": "May 7, 2025",
+          "description": "VACANT DNS - No active backup available",
           "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Flight & Lodging: MATT BAILEY from Xenia, OH (742 mi)",
-          "category": "expense",
-          "amount": -379
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Sponsor Start Bonus: MATT BAILEY",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Prize Money: MATT BAILEY (P12)",
-          "category": "income",
-          "amount": 20000
-        },
-        {
-          "date": "2026-05-25",
-          "description": "Substituted MATT BAILEY into Slot 4 for VACANT (DNS)",
-          "category": "income",
           "amount": 0
         },
         {
-          "date": "2026-05-25",
-          "description": "Virtual Sponsorship Earned: Octane Apparel (Upward Performance Trend)",
-          "category": "income",
-          "amount": 20434
+          "date": "May 7, 2025",
+          "description": "VACANT DNS - No active backup available",
+          "category": "expense",
+          "amount": 0
         },
         {
-          "date": "2026-05-25",
-          "description": "Daytona Race Results: P2, P6, P11, P12",
-          "category": "info",
-          "amount": 0
+          "date": "May 7, 2025",
+          "description": "Lost Sponsor Capital: 937 Racing (Downward Performance: 33.0 Avg Finish)",
+          "category": "expense",
+          "amount": -18590
         }
       ],
       "sponsors": [
-        "937 Racing",
         "Toyota Racing Development",
-        "Craftsman Tools",
-        "Octane Apparel"
+        "Craftsman Tools"
       ],
       "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305"
     },
@@ -643,9 +553,9 @@ const teamsData = {
       "owner": "Dylan Nicastro",
       "homeBase": "Cleveland, OH",
       "logo": "assets/wrists-up-racing-logo.png",
-      "points": 0,
+      "points": 16,
       "wins": 0,
-      "balance": 2010000,
+      "balance": 2047838,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -664,13 +574,13 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Wrist's Up Silverado #23",
-          "condition": 100
+          "condition": 63
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Wrist's Up Silverado #88",
-          "condition": 100
+          "condition": 63
         },
         {
           "id": "truck-3",
@@ -697,11 +607,94 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Hauler Logistics: Cleveland, OH to Daytona Beach, FL (849 mi)",
+          "category": "expense",
+          "amount": -8498
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Standard Race Prep: Wrist's Up Silverado #23 (DYLAN NICASTRO)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Flight & Lodging: DYLAN NICASTRO from Cleveland, OH (849 mi)",
+          "category": "expense",
+          "amount": -241
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Sponsor Start Bonus: DYLAN NICASTRO",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Prize Money: DYLAN NICASTRO (P28)",
+          "category": "income",
+          "amount": 12000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Substituted DYLAN NICASTRO for VACANT (DNS)",
+          "category": "income",
+          "amount": 0
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Standard Race Prep: Wrist's Up Silverado #88 (DAVID WESTOVER JR)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Flight & Lodging: DAVID WESTOVER JR from Ashtabula, OH (874 mi)",
+          "category": "expense",
+          "amount": -236
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Sponsor Start Bonus: DAVID WESTOVER JR",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Prize Money: DAVID WESTOVER JR (P18)",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Substituted DAVID WESTOVER JR for VACANT (DNS)",
+          "category": "income",
+          "amount": 0
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "VACANT DNS - No active backup available",
+          "category": "expense",
+          "amount": 0
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "VACANT DNS - No active backup available",
+          "category": "expense",
+          "amount": 0
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Lost Sponsor Capital: Chevrolet Accessories (Downward Performance: 23.0 Avg Finish)",
+          "category": "expense",
+          "amount": -6187
         }
       ],
       "sponsors": [
         "Wrist's Up Racing",
-        "Chevrolet Accessories",
         "Craftsman Tools"
       ],
       "passcodeHash": "858a794b9a1df6e2fa1e6258cafa1f3df7f31ff877c887107e245163fa52fbdc"
@@ -712,9 +705,9 @@ const teamsData = {
       "owner": "David Leakey",
       "homeBase": "Crestview, FL",
       "logo": "assets/zerofoxtrot-logo.jpg",
-      "points": 0,
-      "wins": 0,
-      "balance": 2010000,
+      "points": 64,
+      "wins": 1,
+      "balance": 2124676,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -733,19 +726,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #84",
-          "condition": 100
+          "condition": 64
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #31",
-          "condition": 100
+          "condition": 82
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #51",
-          "condition": 100
+          "condition": 49
         },
         {
           "id": "truck-4",
@@ -766,6 +759,90 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Hauler Logistics: Crestview, FL to Daytona Beach, FL (348 mi)",
+          "category": "expense",
+          "amount": -3487
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Standard Race Prep: ZeroFoxtrot Silverado #84 (DAVID LEAKEY)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Flight & Lodging: DAVID LEAKEY from Crestview, FL (348 mi)",
+          "category": "expense",
+          "amount": -353
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Sponsor Start Bonus: DAVID LEAKEY",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Prize Money: DAVID LEAKEY (P12)",
+          "category": "income",
+          "amount": 20000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Standard Race Prep: ZeroFoxtrot Silverado #31 (CONOR GIBSON)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Flight & Lodging: CONOR GIBSON from Toronto, ON (1001 mi)",
+          "category": "expense",
+          "amount": -384
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Sponsor Start Bonus: CONOR GIBSON",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Prize Money: CONOR GIBSON (P9)",
+          "category": "income",
+          "amount": 25000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Standard Race Prep: ZeroFoxtrot Silverado #51 (CURTIS YANCEY)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Drive & Lodging: CURTIS YANCEY from Clearwater, FL (137 mi)",
+          "category": "expense",
+          "amount": -100
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Sponsor Start Bonus: CURTIS YANCEY",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Prize Money: CURTIS YANCEY (P4)",
+          "category": "income",
+          "amount": 35000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "VACANT DNS - No active backup available",
+          "category": "expense",
+          "amount": 0
         }
       ],
       "sponsors": [
