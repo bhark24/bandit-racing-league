@@ -370,7 +370,18 @@
                 <a id="download-link" href="https://www.dropbox.com/scl/fi/g65w1439v1sps4l44sivp/Geezer_Dashboard_Setup.exe?rlkey=v6l6d91p60ed01t3t2q78d0f1&dl=1" target="_blank" class="btn-download" onclick="trackDownload()">
                     Download Installer (.EXE)
                 </a>
-                <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-top: 10px; font-style: italic;">Installer Package is digitally signed and optimized for Windows 10 & 11.</p>
+                <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-top: 10px; font-style: italic; margin-bottom: 20px;">Installer Package is digitally signed and optimized for Windows 10 & 11.</p>
+                
+                <!-- Spotter Live Access Section -->
+                <div style="background-color: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.2); border-radius: 6px; padding: 15px; margin-top: 15px; font-family: monospace; font-size: 0.9rem;">
+                    <div style="color: var(--neon-green); font-weight: bold; margin-bottom: 5px; text-transform: uppercase; font-family: var(--font-heading); font-size: 1.1rem;">Spotter Live Access Link</div>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0 0 12px 0; line-height: 1.4; font-family: sans-serif;">Give this link to your spotter. They can view your live telemetry stream on their phone, tablet, or secondary screen when you are in a BRL league event session.</p>
+                    <div style="display: flex; gap: 8px;">
+                        <input id="spotter-url-box" type="text" readonly style="flex: 1; background: rgba(0,0,0,0.4); border: 1px solid #2a2c33; color: #fff; padding: 10px; border-radius: 4px; font-size: 0.8rem; font-family: monospace;" value="">
+                        <button onclick="copySpotterUrl()" class="btn-verify" style="width: auto; padding: 10px 18px; font-size: 0.8rem; border-radius: 4px;">Copy</button>
+                    </div>
+                    <div id="copy-toast" style="color: var(--neon-green); font-size: 0.75rem; margin-top: 8px; font-family: sans-serif; display: none;">Link copied to clipboard!</div>
+                </div>
             </div>
         </div>
     </section>
@@ -517,12 +528,35 @@
                 if (authorizedIds.includes(inputVal)) {
                     statusDiv.innerHTML = "Access Granted. Welcome Driver!";
                     statusDiv.style.color = "var(--neon-green)";
+                    
+                    // Generate dynamic Spotter URL
+                    const spotterUrlBox = document.getElementById("spotter-url-box");
+                    if (spotterUrlBox) {
+                        const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+                        spotterUrlBox.value = `${baseUrl}/spotter.html?driver=${inputVal}`;
+                    }
+                    
                     downloadPanel.classList.add("active");
                 } else {
                     statusDiv.innerHTML = "Access Denied. Account Number Not Registered.";
                     statusDiv.style.color = "#ff1744";
                 }
             }, 1000);
+        }
+
+        function copySpotterUrl() {
+            const copyText = document.getElementById("spotter-url-box");
+            if (copyText) {
+                copyText.select();
+                copyText.setSelectionRange(0, 99999);
+                navigator.clipboard.writeText(copyText.value);
+                
+                const toast = document.getElementById("copy-toast");
+                if (toast) {
+                    toast.style.display = "block";
+                    setTimeout(() => { toast.style.display = "none"; }, 3000);
+                }
+            }
         }
 
         function trackDownload() {

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Spotter Dashboard | Bandit Racing League</title>
+    <!-- SEO & Page Previews -->
+    <meta name="description" content="Live real-time spotter telemetry dashboard for the Bandit Racing League. Track relative gaps, fuel calculations, and tire wear.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Custom layout for Spotter Dashboard */
+        body {
+            background-color: #0a0a0c;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spotter-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 110px auto 40px auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+            flex: 1;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            background: rgba(21, 22, 26, 0.8);
+            border: 1px solid #1f2128;
+            border-radius: 12px;
+            padding: 15px 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .driver-info-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .driver-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--neon-green) 0%, #15161a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #000;
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.35);
+        }
+
+        .driver-meta h2 {
+            margin: 0;
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
+        .driver-meta p {
+            margin: 2px 0 0 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-online {
+            background: rgba(57, 255, 20, 0.1);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.15);
+        }
+
+        .status-offline {
+            background: rgba(255, 23, 68, 0.1);
+            color: #ff1744;
+            border: 1px solid #ff1744;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: currentColor;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* Portal Login Panel */
+        .portal-card {
+            max-width: 500px;
+            margin: 150px auto;
+            background: linear-gradient(135deg, #15161a 0%, #0d0d0f 100%);
+            border: 1px solid #2a2c33;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            position: relative;
+        }
+
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--neon-green);
+            border-radius: 12px 12px 0 0;
+        }
+
+        /* Dashboard Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 25px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+        }
+
+        .dashboard-grid.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dash-card {
+            background: rgba(21, 22, 26, 0.8);
+            border: 1px solid #1f2128;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #fff;
+            border-left: 4px solid var(--neon-green);
+            padding-left: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* Standings / Relative Display */
+        .relative-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .relative-table th {
+            text-align: left;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            padding: 10px;
+            border-bottom: 1px solid #2a2c33;
+        }
+
+        .relative-table td {
+            padding: 14px 10px;
+            font-family: monospace;
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .relative-row.highlight {
+            background: rgba(57, 255, 20, 0.08);
+            border-left: 3px solid var(--neon-green);
+        }
+
+        .relative-row.highlight td {
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+
+        .gap-ahead {
+            color: #ff1744;
+        }
+
+        .gap-behind {
+            color: var(--neon-green);
+        }
+
+        /* Fuel Widget */
+        .fuel-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metric-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #2a2c33;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            font-family: var(--font-heading);
+            color: var(--chase-yellow);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+
+        /* Tire Heatmap Grid */
+        .tire-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        .tire-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #2a2c33;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .tire-label {
+            font-family: var(--font-heading);
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .tire-wear {
+            font-size: 1.6rem;
+            font-weight: 900;
+            font-family: var(--font-heading);
+            color: var(--neon-green);
+        }
+
+        .tire-temp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-top: 12px;
+        }
+
+        .temp-cell {
+            font-size: 0.75rem;
+            padding: 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        /* Flag Overlay System */
+        #flag-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: inset 0 0 0px 0px transparent;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .flag-state-green { box-shadow: inset 0 0 40px 10px rgba(0, 255, 0, 0.35) !important; }
+        .flag-state-yellow { box-shadow: inset 0 0 40px 10px rgba(255, 235, 59, 0.35) !important; animation: flag-flash-yellow 1s infinite !important; }
+        .flag-state-blue { box-shadow: inset 0 0 40px 10px rgba(33, 150, 243, 0.35) !important; }
+        .flag-state-white { box-shadow: inset 0 0 40px 10px rgba(255, 255, 255, 0.3) !important; }
+        .flag-state-black { box-shadow: inset 0 0 40px 10px rgba(0, 0, 0, 0.75) !important; }
+
+        @keyframes flag-flash-yellow {
+            0%, 100% { box-shadow: inset 0 0 40px 10px rgba(255, 235, 59, 0.35); }
+            50% { box-shadow: inset 0 0 60px 20px rgba(255, 235, 59, 0.6); }
+        }
+
+        /* Demo controls */
+        .demo-bar {
+            display: none;
+            background: rgba(255, 152, 0, 0.15);
+            border: 1px solid #ff9800;
+            color: #ff9800;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-mobile-header">
+                <a href="/index.html" class="nav-brand-mobile">BANDIT RACING LEAGUE</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/apply.html" class="btn-secondary">Apply to League</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/standings.html">Standings</a></li>
+                <li><a href="/schedule.html">Schedule</a></li>
+                <li><a href="/results.html">Results</a></li>
+                <li><a href="/drivers.html">Drivers</a></li>
+                <li><a href="/teams.html">Teams</a></li>
+                <li><a data-tooltip="Fantasy League" href="/fantasy.html"><img src="assets/fantasy-icon.png" alt="Fantasy League" style="height: 42px; width: 42px; border-radius: 50%; border: 1.5px solid var(--neon-green); vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.4)); object-fit: cover;"><span class="nav-icon-label">Fantasy League</span></a></li>
+                <li><a data-tooltip="Geezer App" href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"><span class="nav-icon-label">Geezer App</span></a></li>
+                <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><span class="nav-icon-label">SimTrax Broadcasting</span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="flag-overlay"></div>
+
+    <div class="spotter-container">
+        
+        <!-- Portal card when driver is not loaded -->
+        <div id="portal-setup" class="portal-card">
+            <h3 class="italic-heavy" style="font-size: 1.8rem; color: #fff; text-transform: uppercase; margin-bottom: 5px;">Spotter Connection</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">Enter the iRacing Customer ID of the driver you are spotting for to receive live telemetry.</p>
+            
+            <input type="text" id="driver-input" class="verify-input" style="width:100%; box-sizing:border-box; margin-bottom:20px;" placeholder="e.g. 375692">
+            <button class="btn-verify" onclick="connectDriverPortal()" style="margin-bottom:10px;">Connect Dashboard</button>
+            <button class="btn-secondary" onclick="activateDemoMode()" style="width: 100%; border:1px solid #ff9800; color:#ff9800;">Launch Visual Demo</button>
+        </div>
+
+        <!-- Dashboard layout when driver is loaded -->
+        <div id="dashboard-layout" style="display: none;">
+            
+            <div id="demo-indicator" class="demo-bar">
+                <span>⚠️ VIEWING MOCK TELEMETRY DEMO</span>
+                <button class="btn-secondary" onclick="stopDemoMode()" style="font-size:0.75rem; padding: 4px 10px; border-color:#ff9800; color:#ff9800;">Exit Demo</button>
+            </div>
+
+            <!-- Top Header Meta -->
+            <div class="dashboard-header">
+                <div class="driver-info-box">
+                    <div class="driver-avatar" id="header-avatar">DR</div>
+                    <div class="driver-meta">
+                        <h2 id="header-driver-name">Loading Driver...</h2>
+                        <p>iRacing Customer ID: <span id="header-driver-id">00000</span> | Track: <span id="header-track-name" style="color:var(--chase-yellow);">Determining...</span></p>
+                    </div>
+                </div>
+                <div class="status-badge status-offline" id="connection-badge">
+                    <div class="status-dot"></div>
+                    <span id="connection-status-text">OFFLINE</span>
+                </div>
+            </div>
+
+            <!-- Core Dashboard Grid -->
+            <div class="dashboard-grid active">
+                
+                <!-- Left Column: Standings / Relative -->
+                <div class="dash-card">
+                    <h3 class="card-title">Live Session Relative</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="relative-table">
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Car #</th>
+                                    <th>Driver Name</th>
+                                    <th>Lap Diff</th>
+                                    <th style="text-align: right;">Interval (S)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="relative-body">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: var(--text-muted);">Waiting for active session telemetry...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right Column: Fuel & Tires -->
+                <div style="display: flex; flex-direction: column; gap: 25px;">
+                    
+                    <!-- Fuel Widget -->
+                    <div class="dash-card">
+                        <h3 class="card-title">Pit & Fuel Telemetry</h3>
+                        <div class="fuel-metrics">
+                            <div class="metric-box">
+                                <div class="metric-value" id="fuel-level">0.0g</div>
+                                <div class="metric-label">Remaining</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="fuel-usage">0.00</div>
+                                <div class="metric-label">Avg/Lap</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-value" id="fuel-laps">0.0</div>
+                                <div class="metric-label">Laps Left</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tires Widget -->
+                    <div class="dash-card">
+                        <h3 class="card-title">Tire Wear & Temperatures</h3>
+                        <div class="tire-container">
+                            <!-- Left Front -->
+                            <div class="tire-card">
+                                <div class="tire-label">Left Front</div>
+                                <div class="tire-wear" id="tire-lf-wear">--%</div>
+                                <div class="tire-temp-grid">
+                                    <div class="temp-cell" id="tire-lf-t1" style="background: rgba(0,0,255,0.1)">--</div>
+                                    <div class="temp-cell" id="tire-lf-t2" style="background: rgba(0,0,255,0.1)">--</div>
+                                    <div class="temp-cell" id="tire-lf-t3" style="background: rgba(0,0,255,0.1)">--</div>
+                                </div>
+                            </div>
+                            <!-- Right Front -->
+                            <div class="tire-card">
+                                <div class="tire-label">Right Front</div>
+                                <div class="tire-wear" id="tire-rf-wear">--%</div>
+                                <div class="tire-temp-grid">
+                                    <div class="temp-cell" id="tire-rf-t1" style="background: rgba(0,0,255,0.1)">--</div>
+                                    <div class="temp-cell" id="tire-rf-t2" style="background: rgba(0,0,255,0.1)">--</div>
+                                    <div class="temp-cell" id="tire-rf-t3" style="background: rgba(0,0,255,0.1)">--</div>
+                                </div>
+                            </div>
+                            <!-- Left Rear -->
+                            <div class="tire-card">
+                                <div class="tire-label">Left Rear</div>
+                                <div class="tire-wear" id="tire-lr-wear">--%</div>
+                                <div class="tire-temp-grid">
+                                    <div class="temp-cell" id="tire-lr-t1" style="background: rgba(0,0,255,0.1)">--</div>
+                                    <div class="temp-cell" id="tire-lr-t2" style="background: rgba(0,0,255,0.1)">--</div>
+                                    <div class="temp-cell" id="tire-lr-t3" style="background: rgba(0,0,255,0.1)">--</div>
+                                </div>
+                            </div>
+                            <!-- Right Rear -->
+                            <div class="tire-card">
+                                <div class="tire-label">Right Rear</div>
+                                <div class="tire-wear" id="tire-rr-wear">--%</div>
+                                <div class="tire-temp-grid">
+                                    <div class="temp-cell" id="tire-rr-t1" style="background: rgba(0,0,255,0.1)">--</div>
+                                    <div class="temp-cell" id="tire-rr-t2" style="background: rgba(0,0,255,0.1)">--</div>
+                                    <div class="temp-cell" id="tire-rr-t3" style="background: rgba(0,0,255,0.1)">--</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Spotter Portal WebSockets and Demo Logic -->
+    <script>
+        let ws = null;
+        let isDemoMode = false;
+        let demoInterval = null;
+        let lastPacketTime = 0;
+        let offlineCheckTimer = null;
+
+        // Auto-connect if query parameter exists
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const driverId = urlParams.get('driver');
+            if (driverId) {
+                document.getElementById('driver-input').value = driverId;
+                connectDriverPortal(driverId);
+            }
+        });
+
+        function connectDriverPortal(driverId = null) {
+            if (!driverId) {
+                driverId = document.getElementById('driver-input').value.trim();
+            }
+
+            if (!driverId) {
+                alert("Please enter a valid iRacing Customer ID.");
+                return;
+            }
+
+            // Hide portal login, show dashboard shell
+            document.getElementById('portal-setup').style.display = 'none';
+            document.getElementById('dashboard-layout').style.display = 'block';
+            document.getElementById('header-driver-id').innerText = driverId;
+            document.getElementById('header-avatar').innerText = driverId.substring(0, 2);
+
+            // Establish websocket connection to Cloud Relay Server
+            // Configured to connect to the custom WebSocket relay address
+            const relayHost = 'wss://relay.geezerapp.com/ws/' + driverId;
+            
+            updateConnectionStatus(false, "CONNECTING");
+
+            try {
+                if (ws) {
+                    ws.close();
+                }
+
+                ws = new WebSocket(relayHost);
+
+                ws.onopen = () => {
+                    console.log("Connected to spotter cloud relay:", relayHost);
+                    updateConnectionStatus(false, "CONNECTED (WAITING)");
+                };
+
+                ws.onmessage = (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        handleTelemetryPacket(data);
+                    } catch (e) {
+                        console.error("Error parsing websocket JSON:", e);
+                    }
+                };
+
+                ws.onclose = () => {
+                    console.log("Disconnected from spotter cloud relay.");
+                    updateConnectionStatus(false, "OFFLINE");
+                };
+
+                ws.onerror = (err) => {
+                    console.error("Websocket error:", err);
+                    updateConnectionStatus(false, "CONNECTION ERROR");
+                };
+
+            } catch (e) {
+                console.error("Failed to establish WS connection:", e);
+            }
+
+            // Offline Timeout checker: if no data for 5 seconds, switch indicator to offline
+            if (offlineCheckTimer) clearInterval(offlineCheckTimer);
+            offlineCheckTimer = setInterval(() => {
+                const now = Date.now();
+                if (now - lastPacketTime > 5000 && !isDemoMode) {
+                    updateConnectionStatus(false, "OFFLINE");
+                }
+            }, 2000);
+        }
+
+        function handleTelemetryPacket(data) {
+            lastPacketTime = Date.now();
+            updateConnectionStatus(true, "ACTIVE");
+
+            // Update Meta & Track
+            document.getElementById('header-driver-name').innerText = data.relative?.find(d => d.highlight)?.name || "Bill Harkins";
+            document.getElementById('header-track-name').innerText = data.trackName || "Unknown Track";
+
+            // Update Flag States
+            updateFlagState(data.flagState);
+
+            // Update Fuel Metrics
+            document.getElementById('fuel-level').innerText = (data.fuel || 0.0).toFixed(1) + 'g';
+            document.getElementById('fuel-usage').innerText = (data.avgFuel || 0.000).toFixed(3);
+            document.getElementById('fuel-laps').innerText = (data.lapsFuelRemaining || 0.0).toFixed(1);
+
+            // Update Tires
+            updateTireUI('lf', data.tires?.LF);
+            updateTireUI('rf', data.tires?.RF);
+            updateTireUI('lr', data.tires?.LR);
+            updateTireUI('rr', data.tires?.RR);
+
+            // Update Relative Standings
+            const tbody = document.getElementById('relative-body');
+            tbody.innerHTML = '';
+
+            if (data.relative && data.relative.length > 0) {
+                data.relative.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'relative-row' + (row.highlight ? ' highlight' : '');
+                    
+                    const gapClass = row.gap < 0 ? 'gap-behind' : (row.gap > 0 ? 'gap-ahead' : '');
+                    const gapText = row.highlight ? 'PLAYER' : (row.gap > 0 ? '+' + row.gap.toFixed(2) : row.gap.toFixed(2));
+                    const lapDiffText = row.lapDiff !== 0 ? (row.lapDiff > 0 ? `+${row.lapDiff} L` : `${row.lapDiff} L`) : '-';
+
+                    tr.innerHTML = `
+                        <td>${row.pos}</td>
+                        <td>${row.car}</td>
+                        <td>${row.name}</td>
+                        <td>${lapDiffText}</td>
+                        <td style="text-align: right;" class="${gapClass}">${gapText}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No cars in relative range</td></tr>`;
+            }
+        }
+
+        function updateTireUI(cornerId, tireData) {
+            const wearEl = document.getElementById(`tire-${cornerId}-wear`);
+            if (wearEl && tireData) {
+                wearEl.innerText = (tireData.wear || 100) + '%';
+                
+                // Colorize wear
+                if (tireData.wear > 90) wearEl.style.color = 'var(--neon-green)';
+                else if (tireData.wear > 75) wearEl.style.color = 'var(--chase-yellow)';
+                else wearEl.style.color = '#ff1744';
+
+                // Temps
+                if (tireData.temps && tireData.temps.length >= 3) {
+                    for (let i = 0; i < 3; i++) {
+                        const tempEl = document.getElementById(`tire-${cornerId}-t${i+1}`);
+                        if (tempEl) {
+                            tempEl.innerText = tireData.temps[i] + '°';
+                            
+                            // Visual heat color scaling (assuming Fahrenheit)
+                            const t = tireData.temps[i];
+                            if (t > 240) tempEl.style.background = 'rgba(255, 23, 68, 0.4)';
+                            else if (t > 200) tempEl.style.background = 'rgba(255, 152, 0, 0.3)';
+                            else if (t > 150) tempEl.style.background = 'rgba(76, 175, 80, 0.2)';
+                            else tempEl.style.background = 'rgba(33, 150, 243, 0.15)';
+                        }
+                    }
+                }
+            }
+        }
+
+        function updateFlagState(flag) {
+            const overlay = document.getElementById('flag-overlay');
+            overlay.className = ''; // Reset
+            
+            if (flag === 'green') overlay.classList.add('flag-state-green');
+            else if (flag === 'yellow') overlay.classList.add('flag-state-yellow');
+            else if (flag === 'blue') overlay.classList.add('flag-state-blue');
+            else if (flag === 'white') overlay.classList.add('flag-state-white');
+            else if (flag === 'black') overlay.classList.add('flag-state-black');
+        }
+
+        function updateConnectionStatus(isOnline, textOverride = null) {
+            const badge = document.getElementById('connection-badge');
+            const label = document.getElementById('connection-status-text');
+
+            if (isOnline) {
+                badge.className = "status-badge status-online";
+                label.innerText = textOverride || "ONLINE";
+            } else {
+                badge.className = "status-badge status-offline";
+                label.innerText = textOverride || "OFFLINE";
+            }
+        }
+
+        /* PREMIUM VISUAL DEMO MODE */
+        function activateDemoMode() {
+            document.getElementById('portal-setup').style.display = 'none';
+            document.getElementById('dashboard-layout').style.display = 'block';
+            document.getElementById('demo-indicator').style.display = 'flex';
+            document.getElementById('header-driver-id').innerText = "375692";
+            document.getElementById('header-avatar').innerText = "37";
+            document.getElementById('header-driver-name').innerText = "Bill Harkins (DEMO)";
+            document.getElementById('header-track-name').innerText = "Daytona International Speedway";
+            
+            isDemoMode = true;
+            updateConnectionStatus(true, "ACTIVE (DEMO)");
+
+            // Simulated live telemetry loop
+            let fuel = 18.5;
+            let lap = 12;
+            let relativePositions = [
+                { pos: 3, car: 8, name: "Sean Britt", gap: 1.45, highlight: false, lapDiff: 0 },
+                { pos: 4, car: 21, name: "Nicole Kriesel", gap: 0.82, highlight: false, lapDiff: 0 },
+                { pos: 5, car: 99, name: "Bill Harkins", gap: 0.00, highlight: true, lapDiff: 0 },
+                { pos: 6, car: 44, name: "Jesse Vaughan", gap: -0.35, highlight: false, lapDiff: 0 },
+                { pos: 7, car: 12, name: "Eddie Hagigh", gap: -1.12, highlight: false, lapDiff: 0 }
+            ];
+
+            let flags = ['green', 'yellow', 'green', 'blue', 'green'];
+            let flagIndex = 0;
+
+            demoInterval = setInterval(() => {
+                // Decay fuel slightly
+                fuel -= 0.05;
+                if (fuel <= 1.0) fuel = 18.5;
+
+                // Modulate intervals for realistic screen movement
+                relativePositions[0].gap += (Math.random() - 0.5) * 0.05;
+                relativePositions[1].gap += (Math.random() - 0.5) * 0.03;
+                relativePositions[3].gap += (Math.random() - 0.5) * 0.03;
+                relativePositions[4].gap += (Math.random() - 0.5) * 0.04;
+
+                // Randomly trigger flags every 10 seconds
+                if (Math.random() > 0.90) {
+                    flagIndex = (flagIndex + 1) % flags.length;
+                }
+
+                const mockData = {
+                    trackName: "Daytona International Speedway",
+                    flagState: flags[flagIndex],
+                    fuel: fuel,
+                    avgFuel: 0.428,
+                    lapsFuelRemaining: fuel / 0.428,
+                    tires: {
+                        LF: { wear: Math.round(98 - (lap * 0.15)), temps: [180, 185, 190] },
+                        RF: { wear: Math.round(92 - (lap * 0.25)), temps: [210, 220, 230] },
+                        LR: { wear: Math.round(97 - (lap * 0.12)), temps: [178, 181, 184] },
+                        RR: { wear: Math.round(90 - (lap * 0.28)), temps: [215, 228, 235] }
+                    },
+                    relative: relativePositions
+                };
+
+                handleTelemetryPacket(mockData);
+                // Keep status online since handleTelemetryPacket resets to ONLINE
+                updateConnectionStatus(true, "ACTIVE (DEMO)");
+            }, 500);
+        }
+
+        function stopDemoMode() {
+            isDemoMode = false;
+            if (demoInterval) clearInterval(demoInterval);
+            document.getElementById('demo-indicator').style.display = 'none';
+            document.getElementById('dashboard-layout').style.display = 'none';
+            document.getElementById('portal-setup').style.display = 'block';
+            updateConnectionStatus(false, "OFFLINE");
+            updateFlagState('green');
+        }
+    </script>
+</body>
+</html>
