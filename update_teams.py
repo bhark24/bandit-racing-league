@@ -696,16 +696,14 @@ def main():
             elif avg_finish >= 20.0:
                 if random.random() < 0.40 and len(team["sponsors"]) > 1:
                     lost_sponsor = random.choice(team["sponsors"])
-                    sponsor_loss = random.randint(5000, 20000)
                     team["sponsors"].remove(lost_sponsor)
-                    team_expenses += sponsor_loss
                     team["ledger"].append({
                         "date": race_date,
-                        "description": f"Lost Sponsor Capital: {lost_sponsor} (Downward Performance: {avg_finish:.1f} Avg Finish)",
-                        "category": "expense",
-                        "amount": -sponsor_loss
+                        "description": f"<span style=\"color:#ff4d4d;\">Lost Sponsor: {lost_sponsor} (Downward Performance: {avg_finish:.1f} Avg Finish)</span>",
+                        "category": "info",
+                        "amount": 0
                     })
-                    print(f"  [Sponsor Loss] {team['name']} lost sponsorship from {lost_sponsor}! (-${sponsor_loss})")
+                    print(f"  [Sponsor Loss] {team['name']} lost sponsorship from {lost_sponsor}!")
         else:
             print("  No participating drivers - sponsor trend skipped.")
 

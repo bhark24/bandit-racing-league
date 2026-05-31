@@ -293,7 +293,7 @@ const teamsData = {
       "logo": "assets/roundy-motorsports-logo.png",
       "points": 16,
       "wins": 0,
-      "balance": 2037270,
+      "balance": 2050863,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -414,9 +414,9 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "Lost Sponsor Capital: Ford Performance (Downward Performance: 26.0 Avg Finish)",
-          "category": "expense",
-          "amount": -13593
+          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Ford Performance (Downward Performance: 26.0 Avg Finish)</span>",
+          "category": "info",
+          "amount": 0
         }
       ],
       "sponsors": [
@@ -433,7 +433,7 @@ const teamsData = {
       "logo": "assets/937-racing-logo.png",
       "points": -2,
       "wins": 0,
-      "balance": 2008581,
+      "balance": 2027171,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -536,9 +536,9 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "Lost Sponsor Capital: 937 Racing (Downward Performance: 33.0 Avg Finish)",
-          "category": "expense",
-          "amount": -18590
+          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: 937 Racing (Downward Performance: 33.0 Avg Finish)</span>",
+          "category": "info",
+          "amount": 0
         }
       ],
       "sponsors": [
@@ -555,7 +555,7 @@ const teamsData = {
       "logo": "assets/wrists-up-racing-logo.png",
       "points": 16,
       "wins": 0,
-      "balance": 2047838,
+      "balance": 2054025,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -688,9 +688,9 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "Lost Sponsor Capital: Chevrolet Accessories (Downward Performance: 23.0 Avg Finish)",
-          "category": "expense",
-          "amount": -6187
+          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Chevrolet Accessories (Downward Performance: 23.0 Avg Finish)</span>",
+          "category": "info",
+          "amount": 0
         }
       ],
       "sponsors": [
