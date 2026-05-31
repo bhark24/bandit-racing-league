@@ -43,6 +43,30 @@ SRH_IDS = {
     "dionte rader": 136821
 }
 
+# Exact filename mapping for drivers with custom numbers in "assets/drivers numbers"
+NUMBER_IMAGES = {
+    "benjamin lacy": "Benjamin Lacy.png",
+    "bill harkins": "Bill Harkins.png",
+    "brandon geers": "Brandon Geers.png",
+    "curtis yancey": "Curtis Yancey.png",
+    "david leakey": "David Leakey.png",
+    "david westover jr": "David Westover.pmg.png",
+    "diante roder": "Dionte_number.png",
+    "dionte rader": "Dionte_number.png",
+    "eddie hagigh": "Eddie Hagigh.png",
+    "ethan sikorski": "Ethan Sikorski.png",
+    "josh adams": "Josh Adams.png",
+    "logan murray": "Logan Murray.png",
+    "mark alan bivens": "Mark Alan Bivens.png",
+    "matt crockett": "Matt Crockett.png",
+    "michael rakes": "Michael Rakes.png",
+    "nathan santos": "Nathan Santos.png",
+    "sean britt": "Sean Britt.png",
+    "ty corino": "Ty Corino.png",
+    "victor weaver": "Victor Weaver.png",
+    "dylan nicastro": "Dillon.png"
+}
+
 def clean_name(name):
     # E.g. "Jesse VAUGHAN" -> "Jesse Vaughan", "MARK ALAN BIVENS" -> "Mark Alan Bivens"
     return name.strip().title()
@@ -110,6 +134,14 @@ for number in sorted_numbers:
     else:
         stats_btn_html = '<a href="#" class="btn-stats disabled-stats" style="opacity: 0.55; cursor: not-allowed; pointer-events: none; border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05);">No Stats Yet</a>'
         
+    # Render custom number image if available on disk, otherwise render text fallback
+    if lookup_name in NUMBER_IMAGES:
+        img_filename = NUMBER_IMAGES[lookup_name]
+        # Folder is named "drivers numbers" under assets. URL-encode the space as %20
+        number_render_html = f'<img src="assets/drivers%20numbers/{img_filename}" alt="Custom Number" style="max-height: 120px; max-width: 200px; object-fit: contain;">'
+    else:
+        number_render_html = f'<span style="color:var(--neon-green); font-size:3.5rem; font-weight:900; font-style:italic; font-family:var(--font-heading); text-shadow: 0 0 10px rgba(0,255,0,0.3);">#{number}</span>'
+
     cards_html += f"""
             <div class="driver-card" data-status="{status}">
                 <div class="driver-img-box">
@@ -121,8 +153,7 @@ for number in sorted_numbers:
                     <div style="font-size: 0.8rem; font-weight: bold; color: var(--neon-green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">{status_display}</div>
                     <h3 class="italic-heavy" style="margin-bottom:10px; font-size: 1.6rem; z-index: 2; position: relative;">{display_name}</h3>
                     <div class="driver-number-img" style="min-height: 120px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center; z-index: 2; position: relative;">
-                        <!-- Custom Number Graphic or Fallback Text -->
-                        <img src="assets/numbers/{display_name}.png" alt="Custom Number" style="max-height: 120px; max-width: 200px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\\'color:var(--neon-green); font-size:3.5rem; font-weight:900; font-style:italic; font-family:var(--font-heading); text-shadow: 0 0 10px rgba(0,255,0,0.3);\\'>#{number}</span>'">
+                        {number_render_html}
                     </div>
                     {stats_btn_html}
                 </div>
