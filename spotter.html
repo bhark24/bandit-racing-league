@@ -518,7 +518,13 @@
 
                     <!-- Tires Widget -->
                     <div class="dash-card">
-                        <h3 class="card-title">Tire Wear</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                            <h3 class="card-title" style="margin-bottom: 0;">Tire Wear</h3>
+                            <div style="text-align: right; margin-top: -5px;">
+                                <div id="last-stint-laps" style="font-size: 1.3rem; font-weight: 900; color: var(--chase-yellow); font-family: 'Outfit', sans-serif; font-style: italic; line-height: 1.1;">--</div>
+                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-style: italic; font-weight: 700; letter-spacing: 0.5px;">Laps on Last Set</div>
+                            </div>
+                        </div>
                         <div class="tire-container">
                             <!-- Left Front -->
                             <div class="tire-card">
@@ -769,6 +775,12 @@
             updateTireUI('lr', data.tires?.LR);
             updateTireUI('rr', data.tires?.RR);
 
+            // Update Laps on Last Set of Tires
+            const lastStintEl = document.getElementById('last-stint-laps');
+            if (lastStintEl) {
+                lastStintEl.innerText = data.prevStint !== undefined && data.prevStint > 0 ? data.prevStint : '--';
+            }
+
             // Update SVG Track Map positions
             if (data.allDrivers) {
                 updateTrackMap(data.allDrivers);
@@ -988,6 +1000,7 @@
                     avgFuel: 0.428,
                     lapsFuelRemaining: fuel / 0.428,
                     lapsRemaining: "28 / 50 Laps",
+                    prevStint: 26, // Simulated 26 laps completed on last tire set
                     tires: {
                         LF: { wear: Math.round(98 - (lap * 0.15)), temps: [180, 185, 190] },
                         RF: { wear: Math.round(92 - (lap * 0.25)), temps: [210, 220, 230] },
