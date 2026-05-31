@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Spotter Dashboard | Bandit Racing League</title>
     <!-- SEO & Page Previews -->
-    <meta name="description" content="Live real-time spotter telemetry dashboard for the Bandit Racing League. Track relative gaps, fuel calculations, and tire wear.">
+    <meta name="description" content="Live real-time spotter telemetry dashboard for the Bandit Racing League. Track relative standings, fuel calculations, active track maps, and tire wear.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
         }
 
         .spotter-container {
-            max-width: 1400px;
+            max-width: 1500px;
             width: 100%;
             margin: 110px auto 40px auto;
             padding: 0 20px;
@@ -148,10 +148,10 @@
             border-radius: 12px 12px 0 0;
         }
 
-        /* Dashboard Grid Layout */
+        /* 3-Column Dashboard Grid Layout */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 25px;
             opacity: 0;
             transform: translateY(10px);
@@ -170,6 +170,8 @@
             padding: 25px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
         }
 
         .card-title {
@@ -260,8 +262,8 @@
         .tire-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-top: 15px;
+            gap: 20px;
+            margin-top: 10px;
         }
 
         .tire-card {
@@ -405,7 +407,7 @@
                     <div class="driver-avatar" id="header-avatar">DR</div>
                     <div class="driver-meta">
                         <h2 id="header-driver-name">Loading Driver...</h2>
-                        <p>iRacing Customer ID: <span id="header-driver-id">00000</span> | Track: <span id="header-track-name" style="color:var(--chase-yellow);">Determining...</span></p>
+                        <p>iRacing Customer ID: <span id="header-driver-id">00000</span> | Session Laps Remaining: <span id="header-laps-remain" style="color:var(--neon-green); font-weight:bold;">--</span></p>
                     </div>
                 </div>
                 <div class="status-badge status-offline" id="connection-badge">
@@ -414,13 +416,13 @@
                 </div>
             </div>
 
-            <!-- Core Dashboard Grid -->
+            <!-- Core 3-Column Dashboard Grid -->
             <div class="dashboard-grid active">
                 
-                <!-- Left Column: Standings / Relative -->
+                <!-- Column 1: Standings / Relative -->
                 <div class="dash-card">
-                    <h3 class="card-title">Live Session Relative</h3>
-                    <div style="overflow-x: auto;">
+                    <h3 class="card-title">Driver Standings</h3>
+                    <div style="overflow-y: auto; flex: 1; min-height: 380px;">
                         <table class="relative-table">
                             <thead>
                                 <tr>
@@ -433,19 +435,50 @@
                             </thead>
                             <tbody id="relative-body">
                                 <tr>
-                                    <td colspan="5" style="text-align: center; color: var(--text-muted);">Waiting for active session telemetry...</td>
+                                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px 0;">Waiting for active session telemetry...</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Right Column: Fuel & Tires -->
+                <!-- Column 2: Active Track Map -->
+                <div class="dash-card" style="align-items: center;">
+                    <h3 class="card-title" style="width: 100%;">Active Track Map</h3>
+                    
+                    <!-- Track Logo Display -->
+                    <div style="height: 65px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                        <img id="track-logo-img" src="" alt="Track Logo" style="max-height: 100%; max-width: 280px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.25)); display: none;">
+                    </div>
+                    
+                    <h4 id="header-track-name" style="font-family:var(--font-heading); text-transform:uppercase; color:var(--chase-yellow); font-size:1.1rem; margin:0 0 15px 0; text-align:center;">Determining Track...</h4>
+                    
+                    <!-- SVG Live Track Path -->
+                    <div style="position: relative; width: 100%; aspect-ratio: 2/1; background: rgba(0,0,0,0.45); border: 1px solid #2a2c33; border-radius: 8px; padding: 10px; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        <svg viewBox="0 0 400 200" width="100%" height="100%" id="track-svg" style="display: block;">
+                            <!-- Gray background track line -->
+                            <path d="M 100 20 L 300 20 A 80 80 0 0 1 300 180 L 100 180 A 80 80 0 0 1 100 20 Z" fill="none" stroke="#22252e" stroke-width="24" stroke-linecap="round"></path>
+                            <!-- Inner indicator line -->
+                            <path d="M 100 20 L 300 20 A 80 80 0 0 1 300 180 L 100 180 A 80 80 0 0 1 100 20 Z" fill="none" stroke="#101115" stroke-width="2" stroke-linecap="round"></path>
+                            
+                            <!-- Moving driver dots group -->
+                            <g id="track-dots-group"></g>
+                        </svg>
+                    </div>
+                    
+                    <!-- Track Map Legend -->
+                    <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-top: 20px;">
+                        <span style="display:flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:50%; background:var(--neon-green); box-shadow:0 0 5px var(--neon-green)"></span> Player</span>
+                        <span style="display:flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:50%; background:#ff1744;"></span> Opponents</span>
+                    </div>
+                </div>
+
+                <!-- Column 3: Fuel Data & Tire Wear -->
                 <div style="display: flex; flex-direction: column; gap: 25px;">
                     
                     <!-- Fuel Widget -->
                     <div class="dash-card">
-                        <h3 class="card-title">Pit & Fuel Telemetry</h3>
+                        <h3 class="card-title">Fuel Data</h3>
                         <div class="fuel-metrics">
                             <div class="metric-box">
                                 <div class="metric-value" id="fuel-level">0.0g</div>
@@ -464,11 +497,11 @@
 
                     <!-- Tires Widget -->
                     <div class="dash-card">
-                        <h3 class="card-title">Tire Wear & Temperatures</h3>
+                        <h3 class="card-title">Tire Wear</h3>
                         <div class="tire-container">
                             <!-- Left Front -->
                             <div class="tire-card">
-                                <div class="tire-label">Left Front</div>
+                                <div class="tire-label">LF</div>
                                 <div class="tire-wear" id="tire-lf-wear">--%</div>
                                 <div class="tire-temp-grid">
                                     <div class="temp-cell" id="tire-lf-t1" style="background: rgba(0,0,255,0.1)">--</div>
@@ -478,7 +511,7 @@
                             </div>
                             <!-- Right Front -->
                             <div class="tire-card">
-                                <div class="tire-label">Right Front</div>
+                                <div class="tire-label">RF</div>
                                 <div class="tire-wear" id="tire-rf-wear">--%</div>
                                 <div class="tire-temp-grid">
                                     <div class="temp-cell" id="tire-rf-t1" style="background: rgba(0,0,255,0.1)">--</div>
@@ -488,7 +521,7 @@
                             </div>
                             <!-- Left Rear -->
                             <div class="tire-card">
-                                <div class="tire-label">Left Rear</div>
+                                <div class="tire-label">LR</div>
                                 <div class="tire-wear" id="tire-lr-wear">--%</div>
                                 <div class="tire-temp-grid">
                                     <div class="temp-cell" id="tire-lr-t1" style="background: rgba(0,0,255,0.1)">--</div>
@@ -498,7 +531,7 @@
                             </div>
                             <!-- Right Rear -->
                             <div class="tire-card">
-                                <div class="tire-label">Right Rear</div>
+                                <div class="tire-label">RR</div>
                                 <div class="tire-wear" id="tire-rr-wear">--%</div>
                                 <div class="tire-temp-grid">
                                     <div class="temp-cell" id="tire-rr-t1" style="background: rgba(0,0,255,0.1)">--</div>
@@ -523,7 +556,7 @@
         </div>
     </footer>
 
-    <!-- Spotter Portal WebSockets and Demo Logic -->
+    <!-- Spotter Portal WebSockets, SVG Oval Coordinates, and Demo Logic -->
     <script>
         let ws = null;
         let isDemoMode = false;
@@ -558,7 +591,6 @@
             document.getElementById('header-avatar').innerText = driverId.substring(0, 2);
 
             // Establish websocket connection to Cloud Relay Server
-            // Configured to connect to the custom WebSocket relay address
             const relayHost = 'wss://relay.geezerapp.com/ws/' + driverId;
             
             updateConnectionStatus(false, "CONNECTING");
@@ -608,13 +640,95 @@
             }, 2000);
         }
 
+        /* SVG Oval Coordinate Mapper */
+        function getOvalCoordinates(pct) {
+            // Mapping onto a stadium shape SVG inside a 400x200 viewport.
+            // straight line length: 200. curve length: Math.PI * 80 = 251.32.
+            // Total length = 902.65
+            const straightLen = 200;
+            const curveLen = Math.PI * 80;
+            const totalLen = (straightLen * 2) + (curveLen * 2);
+            
+            let d = (pct % 1.0) * totalLen;
+            if (d < 0) d += totalLen;
+            
+            let x = 100, y = 20;
+            
+            if (d < straightLen) {
+                // Top straightaway (left to right)
+                x = 100 + d;
+                y = 20;
+            } else if (d < straightLen + curveLen) {
+                // Right turn 1-2 (semi-circle)
+                const ratio = (d - straightLen) / curveLen;
+                const angle = -Math.PI / 2 + ratio * Math.PI;
+                x = 300 + Math.cos(angle) * 80;
+                y = 100 + Math.sin(angle) * 80;
+            } else if (d < (straightLen * 2) + curveLen) {
+                // Bottom straightaway (right to left)
+                const offset = d - (straightLen + curveLen);
+                x = 300 - offset;
+                y = 180;
+            } else {
+                // Left turn 3-4 (semi-circle)
+                const ratio = (d - ((straightLen * 2) + curveLen)) / curveLen;
+                const angle = Math.PI / 2 + ratio * Math.PI;
+                x = 100 + Math.cos(angle) * 80;
+                y = 100 + Math.sin(angle) * 80;
+            }
+            
+            return { x, y };
+        }
+
+        function updateTrackMap(allDrivers) {
+            const group = document.getElementById('track-dots-group');
+            if (!group) return;
+            group.innerHTML = '';
+            
+            if (!allDrivers || allDrivers.length === 0) return;
+            
+            allDrivers.forEach(d => {
+                const pos = getOvalCoordinates(d.pct);
+                
+                // Vehicle dot element
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", pos.x);
+                circle.setAttribute("cy", pos.y);
+                circle.setAttribute("r", d.highlight ? "8" : "5");
+                circle.setAttribute("fill", d.highlight ? "var(--neon-green)" : "#ff1744");
+                if (d.highlight) {
+                    circle.setAttribute("stroke", "#fff");
+                    circle.setAttribute("stroke-width", "2");
+                    circle.setAttribute("style", "filter: drop-shadow(0 0 5px var(--neon-green));");
+                }
+                
+                // Label (Car Number)
+                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                text.setAttribute("x", pos.x);
+                text.setAttribute("y", d.highlight ? pos.y - 12 : pos.y - 8);
+                text.setAttribute("fill", d.highlight ? "var(--neon-green)" : "#fff");
+                text.setAttribute("font-size", d.highlight ? "10px" : "8px");
+                text.setAttribute("font-weight", "bold");
+                text.setAttribute("text-anchor", "middle");
+                text.textContent = d.carNum || d.car;
+                
+                group.appendChild(circle);
+                group.appendChild(text);
+            });
+        }
+
         function handleTelemetryPacket(data) {
             lastPacketTime = Date.now();
             updateConnectionStatus(true, "ACTIVE");
 
             // Update Meta & Track
-            document.getElementById('header-driver-name').innerText = data.relative?.find(d => d.highlight)?.name || "Bill Harkins";
+            const playerInfo = data.relative?.find(d => d.highlight);
+            document.getElementById('header-driver-name').innerText = playerInfo ? playerInfo.name : "Bill Harkins";
             document.getElementById('header-track-name').innerText = data.trackName || "Unknown Track";
+            document.getElementById('header-laps-remain').innerText = data.lapsRemaining || "--";
+
+            // Update Track Logo Layout dynamically
+            updateTrackLogo(data.trackName);
 
             // Update Flag States
             updateFlagState(data.flagState);
@@ -630,7 +744,20 @@
             updateTireUI('lr', data.tires?.LR);
             updateTireUI('rr', data.tires?.RR);
 
-            // Update Relative Standings
+            // Update SVG Track Map positions
+            if (data.allDrivers) {
+                updateTrackMap(data.allDrivers);
+            } else if (data.relative) {
+                // Fallback using relative driver subset percentages
+                const relativeSubset = data.relative.map(d => ({
+                    carNum: d.car,
+                    pct: d.gap / 60.0, // rough percentage offset fallback
+                    highlight: d.highlight
+                }));
+                updateTrackMap(relativeSubset);
+            }
+
+            // Update Standings / Relative
             const tbody = document.getElementById('relative-body');
             tbody.innerHTML = '';
 
@@ -653,7 +780,66 @@
                     tbody.appendChild(tr);
                 });
             } else {
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No cars in relative range</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px 0;">No active standings data</td></tr>`;
+            }
+        }
+
+        function updateTrackLogo(trackName) {
+            const logoImg = document.getElementById('track-logo-img');
+            if (!logoImg) return;
+            
+            if (!trackName) {
+                logoImg.style.display = 'none';
+                return;
+            }
+            
+            const nameLower = trackName.toLowerCase();
+            let logoFile = null;
+            
+            // Matches track name strings from iRacing to repository track logo asset files
+            if (nameLower.includes("daytona")) {
+                logoFile = "Daytona_Clean.png";
+            } else if (nameLower.includes("talladega") || nameLower.includes("dega")) {
+                logoFile = "Dega.png";
+            } else if (nameLower.includes("atlanta")) {
+                logoFile = "AtlantaBlack.png";
+            } else if (nameLower.includes("bristol")) {
+                logoFile = "Bristol.png";
+            } else if (nameLower.includes("charlotte")) {
+                logoFile = "Charlotte_Motor_Speedway_logo.svg.png";
+            } else if (nameLower.includes("darlington")) {
+                logoFile = "Darlington.png";
+            } else if (nameLower.includes("kansas")) {
+                logoFile = "Kansas.png";
+            } else if (nameLower.includes("richmond")) {
+                logoFile = "Richmond.png";
+            } else if (nameLower.includes("iowa")) {
+                logoFile = "Iowa Speedway.png";
+            } else if (nameLower.includes("nashville")) {
+                logoFile = "Nashville.png";
+            } else if (nameLower.includes("mid-ohio") || nameLower.includes("midohio")) {
+                logoFile = "MidOhio.png";
+            } else if (nameLower.includes("indianapolis") || nameLower.includes("indy")) {
+                logoFile = "INDY White.webp";
+            } else if (nameLower.includes("las vegas") || nameLower.includes("vegas")) {
+                logoFile = "Vegas.png";
+            } else if (nameLower.includes("homestead")) {
+                logoFile = "Homestead_Miami_Speedway_Logo.png";
+            } else if (nameLower.includes("michigan")) {
+                logoFile = "MICHIGAN INT.png";
+            } else if (nameLower.includes("pocono")) {
+                logoFile = "POCONO.png";
+            } else if (nameLower.includes("road america")) {
+                logoFile = "Road America.png";
+            } else if (nameLower.includes("road atlanta")) {
+                logoFile = "Road_Atlanta_Track_Logo.png";
+            }
+            
+            if (logoFile) {
+                logoImg.src = `assets/tracks/Track Logos/${logoFile}`;
+                logoImg.style.display = 'block';
+            } else {
+                logoImg.style.display = 'none';
             }
         }
 
@@ -719,6 +905,7 @@
             document.getElementById('header-avatar').innerText = "37";
             document.getElementById('header-driver-name').innerText = "Bill Harkins (DEMO)";
             document.getElementById('header-track-name').innerText = "Daytona International Speedway";
+            document.getElementById('header-laps-remain').innerText = "28 / 50 Laps";
             
             isDemoMode = true;
             updateConnectionStatus(true, "ACTIVE (DEMO)");
@@ -734,22 +921,38 @@
                 { pos: 7, car: 12, name: "Eddie Hagigh", gap: -1.12, highlight: false, lapDiff: 0 }
             ];
 
+            // Setup mock positions of all drivers circulating the track map
+            let trackDrivers = [
+                { car: 8, carNum: "8", pct: 0.05, highlight: false },
+                { car: 21, carNum: "21", pct: 0.03, highlight: false },
+                { car: 99, carNum: "99", pct: 0.00, highlight: true },
+                { car: 44, carNum: "44", pct: 0.98, highlight: false },
+                { car: 12, carNum: "12", pct: 0.95, highlight: false },
+                { car: 1, carNum: "1", pct: 0.40, highlight: false },
+                { car: 14, carNum: "14", pct: 0.55, highlight: false }
+            ];
+
             let flags = ['green', 'yellow', 'green', 'blue', 'green'];
             let flagIndex = 0;
 
             demoInterval = setInterval(() => {
                 // Decay fuel slightly
-                fuel -= 0.05;
+                fuel -= 0.03;
                 if (fuel <= 1.0) fuel = 18.5;
 
-                // Modulate intervals for realistic screen movement
+                // Move drivers along the track loop
+                trackDrivers.forEach(d => {
+                    d.pct = (d.pct + 0.004) % 1.0;
+                });
+
+                // Modulate standings gap numbers slightly
                 relativePositions[0].gap += (Math.random() - 0.5) * 0.05;
                 relativePositions[1].gap += (Math.random() - 0.5) * 0.03;
                 relativePositions[3].gap += (Math.random() - 0.5) * 0.03;
                 relativePositions[4].gap += (Math.random() - 0.5) * 0.04;
 
-                // Randomly trigger flags every 10 seconds
-                if (Math.random() > 0.90) {
+                // Randomly trigger flags
+                if (Math.random() > 0.92) {
                     flagIndex = (flagIndex + 1) % flags.length;
                 }
 
@@ -759,19 +962,21 @@
                     fuel: fuel,
                     avgFuel: 0.428,
                     lapsFuelRemaining: fuel / 0.428,
+                    lapsRemaining: "28 / 50 Laps",
                     tires: {
                         LF: { wear: Math.round(98 - (lap * 0.15)), temps: [180, 185, 190] },
                         RF: { wear: Math.round(92 - (lap * 0.25)), temps: [210, 220, 230] },
                         LR: { wear: Math.round(97 - (lap * 0.12)), temps: [178, 181, 184] },
                         RR: { wear: Math.round(90 - (lap * 0.28)), temps: [215, 228, 235] }
                     },
-                    relative: relativePositions
+                    relative: relativePositions,
+                    allDrivers: trackDrivers
                 };
 
                 handleTelemetryPacket(mockData);
-                // Keep status online since handleTelemetryPacket resets to ONLINE
+                // Keep connection status showing ACTIVE (DEMO)
                 updateConnectionStatus(true, "ACTIVE (DEMO)");
-            }, 500);
+            }, 100);
         }
 
         function stopDemoMode() {
