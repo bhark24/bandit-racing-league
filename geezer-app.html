@@ -361,13 +361,13 @@
             <!-- Lockable Download Reveal Panel -->
             <div id="download-panel" class="download-reveal">
                 <div style="background-color: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.2); border-radius: 6px; padding: 15px; margin-bottom: 20px; font-family: monospace; font-size: 0.9rem;">
-                    <div style="color: var(--neon-green); font-weight: bold; margin-bottom: 5px; text-transform: uppercase; font-family: var(--font-heading); font-size: 1.1rem;">Release Version 1.2</div>
+                    <div id="release-version" style="color: var(--neon-green); font-weight: bold; margin-bottom: 5px; text-transform: uppercase; font-family: var(--font-heading); font-size: 1.1rem;">Release Version 1.2</div>
                     <div style="color: #fff; line-height: 1.4;">
-                        <strong>Update Details:</strong> Fixes the AI cars missing from the Relative window, resolves Best Lap issues, and adds the brand new VR Overlay Manager with Pop-out Modules!
+                        <strong>Update Details:</strong> <span id="update-details">Fixes the AI cars missing from the Relative window, resolves Best Lap issues, and adds the brand new VR Overlay Manager with Pop-out Modules!</span>
                     </div>
                 </div>
                 
-                <a href="https://www.dropbox.com/scl/fi/g65w1439v1sps4l44sivp/Geezer_Dashboard_Setup.exe?rlkey=v6l6d91p60ed01t3t2q78d0f1&dl=1" target="_blank" class="btn-download" onclick="trackDownload()">
+                <a id="download-link" href="https://www.dropbox.com/scl/fi/g65w1439v1sps4l44sivp/Geezer_Dashboard_Setup.exe?rlkey=v6l6d91p60ed01t3t2q78d0f1&dl=1" target="_blank" class="btn-download" onclick="trackDownload()">
                     Download Installer (.EXE)
                 </a>
                 <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-top: 10px; font-style: italic;">Installer Package is digitally signed and optimized for Windows 10 & 11.</p>
@@ -421,20 +421,67 @@
 
     <!-- Verification Logic -->
     <script>
-        // Authorized iRacing IDs from database registry log
-        const AUTHORIZED_IDS = [
-            "315521",
-            "153878",
-            "194401",
-            "355269",
-            "48469",
-            "302586",
-            "18905",
-            "375692",
-            "317726",
-            "365210",
-            "91227"
-        ];
+        let authorizedIds = [];
+        let updateVersion = "1.2";
+        let updateLink = "https://www.dropbox.com/scl/fi/g65w1439v1sps4l44sivp/Geezer_Dashboard_Setup.exe?rlkey=v6l6d91p60ed01t3t2q78d0f1&dl=1";
+        let updateMessage = "Fixes the AI cars missing from the Relative window, resolves Best Lap issues, and adds the brand new VR Overlay Manager with Pop-out Modules!";
+
+        // Fetch authorized IDs and metadata on load
+        async function loadAuthData() {
+            try {
+                // Append timestamp to bust cache in browser
+                const response = await fetch('Geezer_Auth_IDs.txt?t=' + new Date().getTime());
+                if (!response.ok) {
+                    console.warn("Could not fetch Geezer_Auth_IDs.txt, using fallback values.");
+                    return;
+                }
+                const text = await response.text();
+                const lines = text.split('\n');
+                authorizedIds = [];
+                
+                lines.forEach(line => {
+                    line = line.trim();
+                    if (!line || line.startsWith('#')) return;
+                    
+                    if (line.startsWith('!')) {
+                        const parts = line.substring(1).split('=');
+                        if (parts.length >= 2) {
+                            const key = parts[0].trim();
+                            const val = parts.slice(1).join('=').trim();
+                            if (key === 'UPDATE_VERSION') {
+                                updateVersion = val;
+                            } else if (key === 'UPDATE_LINK') {
+                                updateLink = val;
+                            } else if (key === 'UPDATE_MESSAGE') {
+                                updateMessage = val;
+                            }
+                        }
+                    } else {
+                        authorizedIds.push(line);
+                    }
+                });
+
+                // Update UI details
+                const releaseVersionEl = document.getElementById("release-version");
+                const updateDetailsEl = document.getElementById("update-details");
+                const downloadLinkEl = document.getElementById("download-link");
+
+                if (releaseVersionEl) releaseVersionEl.innerText = `Release Version ${updateVersion}`;
+                if (updateDetailsEl) updateDetailsEl.innerText = updateMessage;
+                if (downloadLinkEl) downloadLinkEl.href = updateLink;
+
+                console.log("Loaded auth data successfully:", {
+                    version: updateVersion,
+                    link: updateLink,
+                    idsCount: authorizedIds.length
+                });
+            } catch (e) {
+                console.error("Error parsing Geezer_Auth_IDs.txt:", e);
+            }
+        }
+
+        // Call loadAuthData on startup
+        window.addEventListener('DOMContentLoaded', loadAuthData);
 
         function verifyDriverId() {
             const inputVal = document.getElementById("iracing-id").value.trim();
@@ -467,7 +514,7 @@
                 verifyBtn.style.opacity = "1";
                 verifyBtn.style.cursor = "pointer";
 
-                if (AUTHORIZED_IDS.includes(inputVal)) {
+                if (authorizedIds.includes(inputVal)) {
                     statusDiv.innerHTML = "Access Granted. Welcome Driver!";
                     statusDiv.style.color = "var(--neon-green)";
                     downloadPanel.classList.add("active");
