@@ -31,37 +31,9 @@
         }
         
         .portal-container {
-            max-width: 1200px;
+            max-width: 550px;
             margin: 0 auto 80px auto;
             padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        .showcase-card {
-            background: rgba(21, 22, 26, 0.8);
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .app-mockup {
-            width: 100%;
-            border-radius: 8px;
-            border: 2px solid rgba(0, 255, 0, 0.15);
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .showcase-card:hover .app-mockup {
-            border-color: var(--neon-green);
-            box-shadow: 0 0 35px rgba(0, 255, 0, 0.25);
         }
 
         .control-card {
@@ -329,20 +301,15 @@
 
     <!-- Page Header -->
     <header class="geezer-header container text-center">
-        <div class="header-content">
+        <div class="header-content" style="display: flex; flex-direction: column; align-items: center;">
+            <h2 class="italic-heavy text-light" style="text-transform: uppercase; font-size: 1.4rem; letter-spacing: 2px; color: var(--chase-yellow); margin-bottom: 20px;">The official app for the BANDIT RACING LEAGUE.</h2>
             <!-- App Logo (will degrade to text if not found) -->
-            <img src="assets/geezer-logo.png" alt="Geezer Authentic's App" style="max-width: 500px; width: 100%; margin-bottom: 20px; filter: drop-shadow(0 0 25px rgba(0, 255, 0, 0.25));" onerror="this.onerror=null; this.outerHTML='<h1 class=\'italic-heavy accent title-massive\'>GEEZER AUTHENTICS</h1>'">
-            <h2 class="italic-heavy text-light" style="text-transform: uppercase; font-size: 1.4rem; letter-spacing: 2px; color: var(--chase-yellow); margin-top: 5px;">The official app for the BANDIT RACING LEAGUE.</h2>
+            <img src="assets/geezer-logo.png" alt="Geezer Authentic's App" style="max-width: 500px; width: 100%; margin-bottom: 5px; filter: drop-shadow(0 0 25px rgba(0, 255, 0, 0.25));" onerror="this.onerror=null; this.outerHTML='<h1 class=\'italic-heavy accent title-massive\'>GEEZER AUTHENTICS</h1>'">
         </div>
     </header>
 
     <!-- Roster Check & Mockup Section -->
     <section class="portal-container">
-        <!-- Mockup Display -->
-        <div class="showcase-card">
-            <img src="GEEZER PERFORMANCE APP.png" alt="Geezer Performance App Interface" class="app-mockup" onerror="this.outerHTML='<div style=\'height:400px; display:flex; align-items:center; justify-content:center; background:#111; border-radius:8px;\'>[ GEEZER PERFORMANCE APP PREVIEW ]</div>'">
-        </div>
-
         <!-- Download & Verification Portal -->
         <div class="control-card">
             <h3 class="italic-heavy" style="font-size: 1.8rem; color: #fff; text-transform: uppercase; text-align: center; margin-bottom: 5px;">Driver Access</h3>
