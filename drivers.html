@@ -3,50 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Driver Roster | Bandit Racing League</title>
-    <!-- SEO & Page Previews -->
-    <meta name="description" content="Meet the drivers of the Bandit Racing League. Browse the official active roster, car numbers, and driver statuses!">
-    <meta name="keywords" content="Bandit Racing League, Roster, iRacing Drivers, NASCAR Car Numbers">
-    
-    <!-- Open Graph / Discord Previews -->
-    <meta property="og:title" content="Bandit Racing League - Driver Roster">
-    <meta property="og:description" content="Meet the drivers of the Bandit Racing League. Browse the official active roster, car numbers, and driver statuses!">
-    <meta property="og:image" content="https://banditracingleague.net/assets/main-logo.png">
-    <meta property="og:url" content="https://banditracingleague.net/drivers.html">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#00ff00">
-
+    <title>Drivers Roster | Bandit Racing League</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Teko:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <!-- Mobile Header (Visible only on mobile) -->
-            <div class="nav-mobile-header">
-                <a href="/index.html" class="nav-brand-mobile">BANDIT RACING LEAGUE</a>
-                <button class="nav-toggle" aria-label="Toggle navigation">
-                    <span class="hamburger"></span>
-                </button>
+            <div class="nav-logo">
+                <img src="assets/logo-wide.png" alt="Bandit Racing League" class="logo-img" onerror="this.onerror=null; this.outerHTML='<span class=\'logo-text\'>BANDIT <span class=\'accent\'>RACING</span></span>'">
             </div>
-            
             <ul class="nav-links">
-                <li><a href="/apply.html" class="btn-secondary">Apply to League</a></li>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="/standings.html">Standings</a></li>
-                <li><a href="/schedule.html">Schedule</a></li>
-                <li><a href="/results.html">Results</a></li>
-                <li><a class="active" href="/drivers.html">Drivers</a></li>
-                <li><a href="/teams.html">Teams</a></li>
-                <li><a data-tooltip="Fantasy League" href="/fantasy.html"><img src="assets/fantasy-icon.png" alt="Fantasy League" style="height: 42px; width: 42px; border-radius: 50%; border: 1.5px solid var(--neon-green); vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.4)); object-fit: cover;"><span class="nav-icon-label">Fantasy League</span></a></li>
-                <li><a data-tooltip="Geezer App" href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"><span class="nav-icon-label">Geezer App</span></a></li>
-                <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><span class="nav-icon-label">SimTrax Broadcasting</span></a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="standings.html">Standings</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="results.html">Results</a></li>
+                <li><a href="drivers.html" class="active">Drivers</a></li>
+                <li><a href="#">Rulebook</a></li>
             </ul>
-            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
-                <a href="https://discord.gg/HSvP4UG2st" target="_blank" class="btn-primary">Join Discord</a>
+            <div class="nav-actions">
+                <a href="#" class="btn-primary">Join Discord</a>
             </div>
         </div>
     </nav>
@@ -61,187 +40,264 @@
 
     <!-- Grid -->
     <section class="container" style="margin-bottom: 80px;">
-        <div class="roster-grid" id="driver-grid">
-            <!-- Drivers are dynamically generated here -->
+        <div class="grid-4">
+
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/63408.png" alt="Jackson Knaak"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Jackson Knaak</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Jackson Knaak.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=63408&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/21107.png" alt="Brandon Jackson"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Brandon Jackson</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Brandon Jackson.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=21107&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/45358.png" alt="Curtis Yancey"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Curtis Yancey</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Curtis Yancey.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=45358&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/39648.png" alt="Kevin Foster"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Kevin Foster</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Kevin Foster.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=39648&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/118435.png" alt="Logan A Murray"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Logan A Murray</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Logan A Murray.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=118435&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/17336.png" alt="Nick Nickerson"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Nick Nickerson</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Nick Nickerson.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=17336&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/121220.png" alt="Nathan Santos"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Nathan Santos</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Nathan Santos.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=121220&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/60455.png" alt="David Leakey"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">David Leakey</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/David Leakey.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=60455&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/35159.png" alt="Conor Gibson"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Conor Gibson</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Conor Gibson.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=35159&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/41381.png" alt="Nolan Gross"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Nolan Gross</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Nolan Gross.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=41381&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/1652.png" alt="Bob Berry"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Bob Berry</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Bob Berry.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=1652&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/39625.png" alt="Bill Harkins"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Bill Harkins</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Bill Harkins.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=39625&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/39205.png" alt="Johnathon Platt"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Johnathon Platt</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Johnathon Platt.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=39205&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/60464.png" alt="Victor Weaver"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Victor Weaver</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Victor Weaver.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=60464&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/47625.png" alt="Matt Crockett"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Matt Crockett</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Matt Crockett.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=47625&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/64312.png" alt="Nicole Kriesel"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Nicole Kriesel</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Nicole Kriesel.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=64312&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
+            <div class="driver-card">
+                <div class="driver-img-box">
+                    <span class="placeholder-photo">[ CAR IMAGE ]</span>
+                    <!-- <img src="assets/drivers/105478.png" alt="Adam Clark"> -->
+                </div>
+                <div class="driver-info">
+                    <div class="watermark-number">00</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px;">Adam Clark</h3>
+                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+                        <!-- Drop your custom number graphic in assets/numbers/! -->
+                        <img src="assets/numbers/Adam Clark.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\'>#00</span>'">
+                    </div>
+                    <a href="https://simracerhub.com/driver_stats.php?driver_id=105478&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                </div>
+            </div>
         </div>
-    </section>
-
-    <script src="teams_data.js"></script>
-    <script src="roster_data.js"></script>
-    <script>
-        const grid = document.getElementById('driver-grid');
-
-        function getDriverImgPath(name) {
-            if (!name) return '';
-            const formattedName = name.trim().toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-            return `assets/drivers numbers/${formattedName}.png`;
-        }
-
-        function findTeamsForDriver(driverName) {
-            if (typeof teamsData === 'undefined' || !teamsData.teams) return [];
-            
-            function normalize(name) {
-                if (!name) return "";
-                let n = name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
-                if (n === "DIANTERODER" || n === "DIANTERADER") return "DIONTERADER";
-                if (n === "DAVIDLEAKEY") return "DAVELEAKEY";
-                return n;
-            }
-
-            const nameNorm = normalize(driverName);
-            if (!nameNorm) return [];
-
-            const matchedTeams = [];
-            for (let team of teamsData.teams) {
-                const primary = (team.drivers.primary || []).map(normalize);
-                const backup = (team.drivers.backup || []).map(normalize);
-                if (primary.includes(nameNorm) || backup.includes(nameNorm)) {
-                    const isBackup = backup.includes(nameNorm);
-                    matchedTeams.push({
-                        team: team,
-                        role: isBackup ? "Backup" : "Primary"
-                    });
-                }
-            }
-            return matchedTeams;
-        }
-
-        let lastRosterJson = '';
-
-        function renderDriverGrid() {
-            grid.innerHTML = '';
-            const statusMap = {
-                'available': 'Available',
-                'full-time': 'Full Time',
-                'part-time': 'Part Time',
-                'reserved': 'Reserved / Practice',
-                'past-champion': 'Past Champion Reserved'
-            };
-
-            numbersList.forEach(num => {
-                const data = rosterData[num] || { driver: '', status: 'available' };
-                const hasDriver = data.driver && data.driver.trim() !== '';
-                
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.setAttribute('data-status', data.status);
-                
-                let teamInfoHtml = '';
-                if (hasDriver) {
-                    const matches = findTeamsForDriver(data.driver);
-                    if (matches.length > 0) {
-                        const team = matches[0].team;
-                        let name = team.name.toUpperCase();
-                        let base = team.homeBase.toUpperCase();
-                        
-                        const stateMap = {
-                            'OH': 'OHIO',
-                            'WI': 'WISCONSIN',
-                            'NC': 'NORTH CAROLINA',
-                            'FL': 'FLORIDA',
-                            'GA': 'GEORGIA',
-                            'VA': 'VIRGINIA',
-                            'IN': 'INDIANA',
-                            'TN': 'TENNESSEE',
-                            'PA': 'PENNSYLVANIA',
-                            'MI': 'MICHIGAN',
-                            'IL': 'ILLINOIS',
-                            'SC': 'SOUTH CAROLINA',
-                            'KS': 'KANSAS',
-                            'TX': 'TEXAS',
-                            'NV': 'NEVADA',
-                            'NY': 'NEW YORK',
-                            'AZ': 'ARIZONA',
-                            'AL': 'ALABAMA'
-                        };
-                        
-                        base = base.replace(/,/g, '');
-                        for (let [abbr, full] of Object.entries(stateMap)) {
-                            let regex = new RegExp('\\b' + abbr + '$');
-                            if (regex.test(base)) {
-                                base = base.replace(regex, full);
-                                break;
-                            }
-                        }
-                        
-                        teamInfoHtml = `
-                            <div class="driver-team" style="font-style: italic; font-weight: bold; font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
-                                TEAM: ${name}, ${base}
-                            </div>
-                        `;
-                    }
-                }
-                
-                card.innerHTML = `
-                    <div class="card-header">
-                        <div style="height: 90px; display:flex; align-items:center;">
-                            ${hasDriver ? 
-                                `<img src="${getDriverImgPath(data.driver)}" class="custom-number-img" style="max-height: 85px; max-width: 160px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>${num}</span>'">` 
-                                : `<span class="car-number">${num}</span>`
-                            }
-                        </div>
-                        <span class="status-badge">${statusMap[data.status] || 'Available'}</span>
-                    </div>
-                    <div class="input-group">
-                        ${hasDriver ? '' : '<label>Driver Name</label>'}
-                        <div class="driver-display" style="opacity: ${hasDriver ? '1' : '0.3'}; display: flex; align-items: center;">
-                            ${hasDriver ? data.driver.trim() : 'Available'}
-                        </div>
-                        ${teamInfoHtml}
-                        ${hasDriver ? 
-                            `<div style="margin-top: 12px;"><a href="https://simracerhub.com/season_standings.php?season_id=28135" target="_blank" style="display:inline-block; color: var(--neon-green); font-size: 0.75rem; text-decoration: none; border: 1px solid var(--neon-green); padding: 4px 10px; border-radius: 4px; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; transition: all 0.3s ease;">View Stats &rarr;</a></div>` 
-                            : ''}
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function loadRosterDynamically() {
-            const oldScript = document.getElementById('dynamic-roster-script');
-            if (oldScript) {
-                oldScript.remove();
-            }
-
-            const script = document.createElement('script');
-            script.id = 'dynamic-roster-script';
-            script.src = 'roster_data.js?t=' + Date.now();
-            
-            script.onload = function() {
-                if (typeof rosterData !== 'undefined' && typeof numbersList !== 'undefined') {
-                    const currentHash = JSON.stringify(rosterData);
-                    if (currentHash === lastRosterJson) {
-                        return;
-                    }
-                    lastRosterJson = currentHash;
-                    renderDriverGrid();
-                }
-            };
-            document.body.appendChild(script);
-        }
-
-        // Run dynamically
-        if (typeof rosterData === 'undefined' || typeof numbersList === 'undefined') {
-            grid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;'>No roster data found. Please drop your exported <code>roster_data.js</code> file from the Car Number Tracker into the folder!</p>";
-            setTimeout(loadRosterDynamically, 3000);
-        } else {
-            lastRosterJson = JSON.stringify(rosterData);
-            renderDriverGrid();
-            setInterval(loadRosterDynamically, 3000);
-        }
-
-        // Toggle mobile navigation menu
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleBtn = document.querySelector('.nav-toggle');
-            const navContainer = document.querySelector('.nav-container');
-            
-            if (toggleBtn && navContainer) {
-                toggleBtn.addEventListener('click', function() {
-                    navContainer.classList.toggle('nav-open');
-                });
-            }
-        });
-    </script>
     </section>
 
     <footer>

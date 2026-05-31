@@ -79,6 +79,10 @@ const rosterData = {
     "driver": "Jesse VAUGHAN",
     "status": "part-time"
   },
+  "31": {
+    "driver": "CONOR GIBSON",
+    "status": "full-time"
+  },
   "43": {
     "driver": "JONATHON PLATT",
     "status": "past-champion"

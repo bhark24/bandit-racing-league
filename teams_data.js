@@ -705,6 +705,75 @@ const teamsData = {
         "Craftsman Tools"
       ],
       "passcodeHash": "858a794b9a1df6e2fa1e6258cafa1f3df7f31ff877c887107e245163fa52fbdc"
+    },
+    {
+      "id": "zerofoxtrot",
+      "name": "ZeroFoxtrot",
+      "owner": "David Leakey",
+      "homeBase": "Crestview, FL",
+      "logo": "assets/zerofoxtrot-logo.jpg",
+      "points": 0,
+      "wins": 0,
+      "balance": 2010000,
+      "loan": 0,
+      "drivers": {
+        "primary": [
+          "DAVID LEAKEY",
+          "CONOR GIBSON",
+          "CURTIS YANCEY",
+          "VACANT"
+        ],
+        "backup": [
+          "VACANT",
+          "VACANT"
+        ]
+      },
+      "trucks": [
+        {
+          "id": "truck-1",
+          "make": "Chevrolet",
+          "name": "ZeroFoxtrot Silverado #84",
+          "condition": 100
+        },
+        {
+          "id": "truck-2",
+          "make": "Chevrolet",
+          "name": "ZeroFoxtrot Silverado #31",
+          "condition": 100
+        },
+        {
+          "id": "truck-3",
+          "make": "Chevrolet",
+          "name": "ZeroFoxtrot Silverado #51",
+          "condition": 100
+        },
+        {
+          "id": "truck-4",
+          "make": "Chevrolet",
+          "name": "ZeroFoxtrot Silverado #00",
+          "condition": 100
+        }
+      ],
+      "ledger": [
+        {
+          "date": "2026-05-24",
+          "description": "Starting Franchise Balance",
+          "category": "income",
+          "amount": 2750000
+        },
+        {
+          "date": "2026-05-24",
+          "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
+          "category": "expense",
+          "amount": -740000
+        }
+      ],
+      "sponsors": [
+        "ZeroFoxtrot",
+        "Chevrolet Accessories",
+        "Craftsman Tools"
+      ],
+      "passcodeHash": "13b92326aee45b686501b518930032a92c937945b258b461840f4b2572ed9d68"
     }
   ]
 };

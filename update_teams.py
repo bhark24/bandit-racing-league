@@ -132,7 +132,8 @@ def normalize_name(name):
         "dave": "david",
         "mike": "michael",
         "diante": "dionte",
-        "roder": "rader"
+        "roder": "rader",
+        "connor": "conor"
     }
     
     words = name.split()
@@ -460,7 +461,8 @@ def main():
             "concord, nc": (35.4088, -80.5795),
             "madison, wi": (43.0731, -89.4012),
             "cleveland, oh": (41.4993, -81.6944),
-            "dayton, oh": (39.7589, -84.1916)
+            "dayton, oh": (39.7589, -84.1916),
+            "crestview, fl": (30.7621, -86.5694)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates

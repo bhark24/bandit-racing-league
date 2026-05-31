@@ -7,6 +7,7 @@ drivers = [
     ("Nick Nickerson", 17336),
     ("Nathan Santos2", 121220),
     ("David Leakey", 60455),
+    ("Conor Gibson", 35159),
     ("Nolan Gross", 41381),
     ("Bob Berry", 1652),
     ("Bill Harkins", 39625),
