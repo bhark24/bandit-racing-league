@@ -494,11 +494,16 @@
                     </div>
 
                     <!-- Live Flag Status Indicator -->
-                    <div style="margin-top: 15px; display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.3); border: 1px solid #2a2c33; padding: 8px 20px; border-radius: 6px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">
-                        <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700; letter-spacing: 0.5px;">Active Flag:</span>
-                        <div id="flag-status-box" style="display: flex; align-items: center; gap: 8px;">
-                            <span id="flag-color-block" style="width: 14px; height: 14px; border-radius: 3px; background-color: var(--neon-green); display: inline-block; border: 1px solid rgba(255,255,255,0.25);"></span>
-                            <span id="flag-status-text" style="font-size: 0.9rem; font-weight: 900; color: var(--neon-green); text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; letter-spacing: 0.5px;">GREEN</span>
+                    <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px; background: rgba(0,0,0,0.3); border: 1px solid #2a2c33; padding: 10px 20px; border-radius: 6px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); align-items: center; min-width: 220px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700; letter-spacing: 0.5px;">Active Flag:</span>
+                            <div id="flag-status-box" style="display: flex; align-items: center; gap: 8px;">
+                                <span id="flag-color-block" style="width: 14px; height: 14px; border-radius: 3px; background-color: var(--neon-green); display: inline-block; border: 1px solid rgba(255,255,255,0.25);"></span>
+                                <span id="flag-status-text" style="font-size: 0.9rem; font-weight: 900; color: var(--neon-green); text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; letter-spacing: 0.5px;">GREEN</span>
+                            </div>
+                        </div>
+                        <div id="penalty-reason-container" style="display: none; font-size: 0.8rem; font-weight: bold; color: #ff1744; text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 6px; width: 100%; text-align: center; letter-spacing: 0.5px; margin-top: 2px;">
+                            Infraction: <span id="penalty-reason-text" style="color: #fff;">None</span>
                         </div>
                     </div>
                 </div>
@@ -773,6 +778,18 @@
             // Update Flag States
             updateFlagState(data.flagState);
 
+            // Update Penalty Reasons
+            const penaltyContainer = document.getElementById('penalty-reason-container');
+            const penaltyText = document.getElementById('penalty-reason-text');
+            if (penaltyContainer && penaltyText) {
+                if (data.penaltyReason) {
+                    penaltyText.innerText = data.penaltyReason;
+                    penaltyContainer.style.display = 'block';
+                } else {
+                    penaltyContainer.style.display = 'none';
+                }
+            }
+
             // Update Fuel Metrics
             document.getElementById('fuel-level').innerText = (data.fuel || 0.0).toFixed(1) + 'g';
             document.getElementById('fuel-usage').innerText = (data.avgFuel || 0.000).toFixed(3);
@@ -1038,6 +1055,15 @@
                     flagIndex = (flagIndex + 1) % flags.length;
                 }
 
+                // Determine simulated penalty reason based on flags
+                let mockPenalty = "";
+                if (flags[flagIndex] === 'black') {
+                    mockPenalty = "Speeding on Pit Road";
+                } else if (flags[flagIndex] === 'yellow') {
+                    // Occasionally simulate a pace car infraction under yellow
+                    mockPenalty = Math.random() > 0.5 ? "Passing under Yellow" : "";
+                }
+
                 const mockData = {
                     trackName: "Daytona International Speedway",
                     flagState: flags[flagIndex],
@@ -1046,6 +1072,7 @@
                     lapsFuelRemaining: fuel / 0.428,
                     lapsRemaining: "28 / 50 Laps",
                     prevStint: 26, // Simulated 26 laps completed on last tire set
+                    penaltyReason: mockPenalty,
                     tires: {
                         LF: { wear: Math.round(98 - (lap * 0.15)), temps: [180, 185, 190] },
                         RF: { wear: Math.round(92 - (lap * 0.25)), temps: [210, 220, 230] },
