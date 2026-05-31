@@ -18,7 +18,7 @@
         body {
             background-color: #0a0a0c;
             color: #fff;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Outfit', sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -67,14 +67,17 @@
             color: #000;
             border: 2px solid var(--neon-green);
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.35);
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
         }
 
         .driver-meta h2 {
             margin: 0;
-            font-family: var(--font-heading);
+            font-family: 'Outfit', sans-serif;
             font-size: 1.4rem;
             text-transform: uppercase;
             font-style: italic;
+            font-weight: 900;
         }
 
         .driver-meta p {
@@ -82,13 +85,16 @@
             color: var(--text-muted);
             font-size: 0.85rem;
             letter-spacing: 1px;
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
         }
 
         .status-badge {
             padding: 6px 14px;
             border-radius: 20px;
             font-weight: 900;
-            font-family: var(--font-heading);
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
             text-transform: uppercase;
             font-size: 0.85rem;
             letter-spacing: 1px;
@@ -175,10 +181,11 @@
         }
 
         .card-title {
-            font-family: var(--font-heading);
+            font-family: 'Outfit', sans-serif;
             font-size: 1.2rem;
             text-transform: uppercase;
             font-style: italic;
+            font-weight: 900;
             margin-top: 0;
             margin-bottom: 20px;
             color: #fff;
@@ -187,7 +194,7 @@
             letter-spacing: 1px;
         }
 
-        /* Standings / Relative Display */
+        /* Standings / Relative Display with sportier look */
         .relative-table {
             width: 100%;
             border-collapse: collapse;
@@ -196,15 +203,20 @@
         .relative-table th {
             text-align: left;
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
+            font-weight: 700;
             padding: 10px;
             border-bottom: 1px solid #2a2c33;
         }
 
         .relative-table td {
             padding: 14px 10px;
-            font-family: monospace;
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
+            font-weight: 700;
             font-size: 1.05rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -216,7 +228,7 @@
 
         .relative-row.highlight td {
             color: var(--neon-green);
-            font-weight: bold;
+            font-weight: 900;
         }
 
         .gap-ahead {
@@ -246,7 +258,8 @@
         .metric-value {
             font-size: 1.8rem;
             font-weight: 900;
-            font-family: var(--font-heading);
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
             color: var(--chase-yellow);
         }
 
@@ -256,6 +269,9 @@
             text-transform: uppercase;
             margin-top: 5px;
             letter-spacing: 1px;
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
+            font-weight: 700;
         }
 
         /* Tire Heatmap Grid */
@@ -276,8 +292,9 @@
         }
 
         .tire-label {
-            font-family: var(--font-heading);
-            font-weight: bold;
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
+            font-weight: 900;
             font-size: 0.85rem;
             color: #fff;
             margin-bottom: 10px;
@@ -287,7 +304,8 @@
         .tire-wear {
             font-size: 1.6rem;
             font-weight: 900;
-            font-family: var(--font-heading);
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
             color: var(--neon-green);
         }
 
@@ -302,8 +320,9 @@
             font-size: 0.75rem;
             padding: 5px;
             border-radius: 4px;
-            font-weight: bold;
-            font-family: monospace;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
         }
 
         /* Flag Overlay System */
@@ -342,6 +361,8 @@
             align-items: center;
             justify-content: space-between;
             font-weight: bold;
+            font-family: 'Outfit', sans-serif;
+            font-style: italic;
         }
 
         @media (max-width: 992px) {
@@ -388,7 +409,7 @@
             <h3 class="italic-heavy" style="font-size: 1.8rem; color: #fff; text-transform: uppercase; margin-bottom: 5px;">Spotter Connection</h3>
             <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">Enter the iRacing Customer ID of the driver you are spotting for to receive live telemetry.</p>
             
-            <input type="text" id="driver-input" class="verify-input" style="width:100%; box-sizing:border-box; margin-bottom:20px;" placeholder="e.g. 375692">
+            <input type="text" id="driver-input" class="verify-input" style="width:100%; box-sizing:border-box; margin-bottom:20px; font-family:'Outfit', sans-serif; font-style:italic;" placeholder="e.g. 375692">
             <button class="btn-verify" onclick="connectDriverPortal()" style="margin-bottom:10px;">Connect Dashboard</button>
             <button class="btn-secondary" onclick="activateDemoMode()" style="width: 100%; border:1px solid #ff9800; color:#ff9800;">Launch Visual Demo</button>
         </div>
@@ -451,7 +472,7 @@
                         <img id="track-logo-img" src="" alt="Track Logo" style="max-height: 100%; max-width: 280px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.25)); display: none;">
                     </div>
                     
-                    <h4 id="header-track-name" style="font-family:var(--font-heading); text-transform:uppercase; color:var(--chase-yellow); font-size:1.1rem; margin:0 0 15px 0; text-align:center;">Determining Track...</h4>
+                    <h4 id="header-track-name" style="font-family:'Outfit', sans-serif; font-style:italic; font-weight:900; text-transform:uppercase; color:var(--chase-yellow); font-size:1.1rem; margin:0 0 15px 0; text-align:center;">Determining Track...</h4>
                     
                     <!-- SVG Live Track Path -->
                     <div style="position: relative; width: 100%; aspect-ratio: 2/1; background: rgba(0,0,0,0.45); border: 1px solid #2a2c33; border-radius: 8px; padding: 10px; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center;">
@@ -467,7 +488,7 @@
                     </div>
                     
                     <!-- Track Map Legend -->
-                    <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-top: 20px;">
+                    <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-top: 20px; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700;">
                         <span style="display:flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:50%; background:var(--neon-green); box-shadow:0 0 5px var(--neon-green)"></span> Player</span>
                         <span style="display:flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:50%; background:#ff1744;"></span> Opponents</span>
                     </div>
@@ -640,7 +661,7 @@
             }, 2000);
         }
 
-        /* SVG Oval Coordinate Mapper */
+        /* SVG Oval Coordinate Mapper (Counter-Clockwise) */
         function getOvalCoordinates(pct) {
             // Mapping onto a stadium shape SVG inside a 400x200 viewport.
             // straight line length: 200. curve length: Math.PI * 80 = 251.32.
@@ -649,13 +670,15 @@
             const curveLen = Math.PI * 80;
             const totalLen = (straightLen * 2) + (curveLen * 2);
             
-            let d = (pct % 1.0) * totalLen;
-            if (d < 0) d += totalLen;
+            // Reverse direction to make it counter-clockwise (oval-style track mapping)
+            let reversedPct = 1.0 - (pct % 1.0);
+            if (reversedPct < 0) reversedPct += 1.0;
             
+            let d = reversedPct * totalLen;
             let x = 100, y = 20;
             
             if (d < straightLen) {
-                // Top straightaway (left to right)
+                // Top straightaway (left to right in clockwise, right to left in counter-clockwise)
                 x = 100 + d;
                 y = 20;
             } else if (d < straightLen + curveLen) {
@@ -665,7 +688,7 @@
                 x = 300 + Math.cos(angle) * 80;
                 y = 100 + Math.sin(angle) * 80;
             } else if (d < (straightLen * 2) + curveLen) {
-                // Bottom straightaway (right to left)
+                // Bottom straightaway (right to left in clockwise, left to right in counter-clockwise)
                 const offset = d - (straightLen + curveLen);
                 x = 300 - offset;
                 y = 180;
@@ -709,6 +732,8 @@
                 text.setAttribute("fill", d.highlight ? "var(--neon-green)" : "#fff");
                 text.setAttribute("font-size", d.highlight ? "10px" : "8px");
                 text.setAttribute("font-weight", "bold");
+                text.setAttribute("font-style", "italic");
+                text.setAttribute("font-family", "Outfit, sans-serif");
                 text.setAttribute("text-anchor", "middle");
                 text.textContent = d.carNum || d.car;
                 
