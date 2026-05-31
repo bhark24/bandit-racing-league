@@ -75,24 +75,12 @@ const rosterData = {
     "driver": "MICHAEL RAMOS",
     "status": "full-time"
   },
-  "28": {
-    "driver": "Jesse VAUGHAN",
-    "status": "part-time"
-  },
-  "31": {
-    "driver": "CONOR GIBSON",
-    "status": "full-time"
-  },
   "43": {
     "driver": "JONATHON PLATT",
     "status": "past-champion"
   },
   "47": {
     "driver": "MICHAEL RAKES",
-    "status": "full-time"
-  },
-  "50": {
-    "driver": "DAVIS CARROLL",
     "status": "full-time"
   },
   "51": {
