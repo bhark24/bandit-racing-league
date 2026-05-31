@@ -6,11 +6,11 @@
     <title>Geezer Authentic's App | Bandit Racing League</title>
     <!-- SEO & Page Previews -->
     <meta name="description" content="Geezer Authentic's App - Custom pit road warning systems and driver authentication portal for the Bandit Racing League.">
-    <meta name="keywords" content="Geezer Authentic, iRacing tools, Bandit Racing League, pit road warnings">
+    <meta name="keywords" content="Geezer Authentic, iRacing tools, Bandit Racing League, pit road warnings, driver portal">
     
     <!-- Open Graph / Discord Previews -->
-    <meta property="og:title" content="Bandit Racing League - Geezer Authentic's App">
-    <meta property="og:description" content="Geezer Authentic's App - Custom pit road warning systems and driver authentication portal. Under construction.">
+    <meta property="og:title" content="Geezer Authentic's App | Bandit Racing League">
+    <meta property="og:description" content="The official app for the Bandit Racing League. Setup pit road speed warnings and driver portal authentication.">
     <meta property="og:image" content="https://banditracingleague.net/assets/main-logo.png">
     <meta property="og:url" content="https://banditracingleague.net/geezer-app.html">
     <meta property="og:type" content="website">
@@ -21,6 +21,273 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Custom layout for landing page */
+        .geezer-header {
+            margin-top: 140px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .portal-container {
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .showcase-card {
+            background: rgba(21, 22, 26, 0.8);
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-mockup {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid rgba(0, 255, 0, 0.15);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .showcase-card:hover .app-mockup {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 35px rgba(0, 255, 0, 0.25);
+        }
+
+        .control-card {
+            background: linear-gradient(135deg, #15161a 0%, #0d0d0f 100%);
+            border: 1px solid #2a2c33;
+            border-radius: 12px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .control-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--neon-green);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .verify-input {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid #2a2c33;
+            border-radius: 6px;
+            padding: 15px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-family: monospace;
+            text-align: center;
+            letter-spacing: 2px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .verify-input:focus {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.15);
+        }
+
+        /* Success and Info sections */
+        .download-reveal {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+            margin-top: 15px;
+            padding-top: 25px;
+            border-top: 1px solid #2a2c33;
+        }
+
+        .download-reveal.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-verify {
+            width: 100%;
+            padding: 15px;
+            background: var(--neon-green);
+            color: #000;
+            font-weight: 900;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+        }
+
+        .btn-verify:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.4);
+            background: #2ce60f;
+        }
+
+        .btn-download {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            background: transparent;
+            color: var(--neon-green);
+            font-weight: 900;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--neon-green);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-download:hover {
+            background: rgba(57, 255, 20, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+        }
+
+        .status-msg {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            text-align: center;
+            min-height: 24px;
+        }
+
+        /* Spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--neon-green);
+            animation: spin 1s ease-in-out infinite;
+            margin: 15px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Features Section */
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(21, 22, 26, 0.6);
+            border: 1px solid #1f2128;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--neon-green);
+            transform: translateY(-4px);
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-heading);
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Timeline Guide */
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid #2a2c33;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -41px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #0a0a0c;
+            border: 2px solid var(--neon-green);
+        }
+
+        .timeline-item h4 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
+        .timeline-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 992px) {
+            .portal-container {
+                grid-template-columns: 1fr;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -61,36 +328,159 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="hero" style="min-height: 50vh; padding-top: 60px; display: flex; align-items: center; justify-content: center; text-align: center;">
-        <div class="hero-overlay"></div>
-        <div class="hero-content" style="position: relative; z-index: 2;">
+    <header class="geezer-header container text-center">
+        <div class="header-content">
             <!-- App Logo (will degrade to text if not found) -->
-            <img src="assets/geezer-logo.png" alt="Geezer Authentic's App" style="max-width: 500px; margin-bottom: 20px; filter: drop-shadow(0 0 20px rgba(0, 255, 0, 0.2));" onerror="this.onerror=null; this.outerHTML='<h1 class=\'hero-title\' style=\'font-size: 5rem;\'>GEEZER <span class=\'accent\'>AUTHENTIC\\'S</span> APP</h1>'">
-            
-            <div style="background-color: rgba(255, 204, 0, 0.1); border: 2px dashed var(--chase-yellow); padding: 20px 40px; border-radius: 8px; display: inline-block; margin-top: 30px;">
-                <h2 class="hero-subtitle italic-heavy" style="text-transform: uppercase; letter-spacing: 5px; color: var(--chase-yellow); font-size: 2rem; margin: 0; text-shadow: 0 0 15px rgba(255, 204, 0, 0.3);">🚧 UNDER CONSTRUCTION 🚧</h2>
-                <p style="color: #fff; margin-top: 10px; font-family: var(--font-body); font-size: 1.1rem;">The custom Pit Road Warning System and Driver Authentication portal is currently being built.</p>
-            </div>
+            <img src="assets/geezer-logo.png" alt="Geezer Authentic's App" style="max-width: 500px; width: 100%; margin-bottom: 20px; filter: drop-shadow(0 0 25px rgba(0, 255, 0, 0.25));" onerror="this.onerror=null; this.outerHTML='<h1 class=\'italic-heavy accent title-massive\'>GEEZER AUTHENTICS</h1>'">
+            <h2 class="italic-heavy text-light" style="text-transform: uppercase; font-size: 1.4rem; letter-spacing: 2px; color: var(--chase-yellow); margin-top: 5px;">The official app for the BANDIT RACING LEAGUE.</h2>
         </div>
     </header>
+
+    <!-- Roster Check & Mockup Section -->
+    <section class="portal-container">
+        <!-- Mockup Display -->
+        <div class="showcase-card">
+            <img src="GEEZER PERFORMANCE APP.png" alt="Geezer Performance App Interface" class="app-mockup" onerror="this.outerHTML='<div style=\'height:400px; display:flex; align-items:center; justify-content:center; background:#111; border-radius:8px;\'>[ GEEZER PERFORMANCE APP PREVIEW ]</div>'">
+        </div>
+
+        <!-- Download & Verification Portal -->
+        <div class="control-card">
+            <h3 class="italic-heavy" style="font-size: 1.8rem; color: #fff; text-transform: uppercase; text-align: center; margin-bottom: 5px;">Driver Access</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; text-align: center; margin-bottom: 10px;">This app is exclusively restricted to registered Bandit Racing League drivers. Enter your iRacing Customer ID below to unlock access.</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label for="iracing-id" style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; font-weight: bold;">iRacing Customer ID (Account Number)</label>
+                <input type="text" id="iracing-id" class="verify-input" placeholder="e.g. 375692" autocomplete="off">
+            </div>
+
+            <button id="verify-btn" class="btn-verify" onclick="verifyDriverId()">Verify & Unlock Download</button>
+            
+            <div class="spinner" id="verify-spinner"></div>
+            <div id="verification-status" class="status-msg"></div>
+
+            <!-- Lockable Download Reveal Panel -->
+            <div id="download-panel" class="download-reveal">
+                <div style="background-color: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.2); border-radius: 6px; padding: 15px; margin-bottom: 20px; font-family: monospace; font-size: 0.9rem;">
+                    <div style="color: var(--neon-green); font-weight: bold; margin-bottom: 5px; text-transform: uppercase; font-family: var(--font-heading); font-size: 1.1rem;">Release Version 1.2</div>
+                    <div style="color: #fff; line-height: 1.4;">
+                        <strong>Update Details:</strong> Fixes the AI cars missing from the Relative window, resolves Best Lap issues, and adds the brand new VR Overlay Manager with Pop-out Modules!
+                    </div>
+                </div>
+                
+                <a href="https://www.dropbox.com/scl/fi/g65w1439v1sps4l44sivp/Geezer_Dashboard_Setup.exe?rlkey=v6l6d91p60ed01t3t2q78d0f1&dl=1" target="_blank" class="btn-download" onclick="trackDownload()">
+                    Download Installer (.EXE)
+                </a>
+                <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-top: 10px; font-style: italic;">Installer Package is digitally signed and optimized for Windows 10 & 11.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Features Overview -->
+    <section class="container" style="margin-bottom: 80px;">
+        <h2 class="italic-heavy text-center" style="font-size: 2.2rem; color: #fff; text-transform: uppercase; margin-bottom: 40px; text-shadow: 0 0 10px rgba(0,0,0,0.5);">Key Capabilities</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Pit Road Warning System</h3>
+                <p>Monitors live pit lane speed limit parameters, providing dynamic visual gauges and audio voice warnings to completely eliminate speeding penalties.</p>
+            </div>
+            <div class="feature-card">
+                <h3>iRacing Live SDK Link</h3>
+                <p>Under-the-hood real-time telemetry link that runs silently in the background with near-zero system resource usage, keeping your frame rates optimized.</p>
+            </div>
+            <div class="feature-card">
+                <h3>VR Overlay Manager</h3>
+                <p>Enables fully customized VR telemetry cards and pop-out modules, so you can place relative timetables and status boxes anywhere in your 3D cockpit.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Guide Timeline -->
+    <section class="timeline-container">
+        <h2 class="italic-heavy text-center" style="font-size: 2.2rem; color: #fff; text-transform: uppercase; margin-bottom: 50px;">App Setup Instructions</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>1. Verify & Download</h4>
+                <p>Unlock the portal above using your official iRacing Customer ID and download the desktop installer (`Geezer_Dashboard_Setup.exe`). Run the setup wizard to install the software.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>2. Launch & Link with iRacing</h4>
+                <p>Open the Geezer Dashboard and make sure iRacing is running. The app will automatically establish a low-latency connection via the official iRacing SDK.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>3. Telemetry ID Verification</h4>
+                <p>Upon starting, the app verifies your active iRacing account number against the BRL registry. Telemetry records, incident thresholds, and driver profile settings will sync instantly.</p>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="container footer-content">
             <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Verification Logic -->
     <script>
-        // Toggle mobile navigation menu
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleBtn = document.querySelector('.nav-toggle');
-            const navContainer = document.querySelector('.nav-container');
-            
-            if (toggleBtn && navContainer) {
-                toggleBtn.addEventListener('click', function() {
-                    navContainer.classList.toggle('nav-open');
-                });
+        // Authorized iRacing IDs from database registry log
+        const AUTHORIZED_IDS = [
+            "315521",
+            "153878",
+            "194401",
+            "355269",
+            "48469",
+            "302586",
+            "18905",
+            "375692",
+            "317726",
+            "365210",
+            "91227"
+        ];
+
+        function verifyDriverId() {
+            const inputVal = document.getElementById("iracing-id").value.trim();
+            const statusDiv = document.getElementById("verification-status");
+            const spinner = document.getElementById("verify-spinner");
+            const downloadPanel = document.getElementById("download-panel");
+            const verifyBtn = document.getElementById("verify-btn");
+
+            // Hide previous results
+            statusDiv.innerHTML = "";
+            statusDiv.style.color = "";
+            downloadPanel.classList.remove("active");
+
+            if (!inputVal) {
+                statusDiv.innerHTML = "Please enter your iRacing ID";
+                statusDiv.style.color = "var(--chase-yellow)";
+                return;
             }
-        });
+
+            // Show loading animation
+            spinner.style.display = "block";
+            verifyBtn.disabled = true;
+            verifyBtn.style.opacity = "0.5";
+            verifyBtn.style.cursor = "not-allowed";
+
+            // Simulate server lookup delay (1 second) for realistic interface response
+            setTimeout(() => {
+                spinner.style.display = "none";
+                verifyBtn.disabled = false;
+                verifyBtn.style.opacity = "1";
+                verifyBtn.style.cursor = "pointer";
+
+                if (AUTHORIZED_IDS.includes(inputVal)) {
+                    statusDiv.innerHTML = "Access Granted. Welcome Driver!";
+                    statusDiv.style.color = "var(--neon-green)";
+                    downloadPanel.classList.add("active");
+                } else {
+                    statusDiv.innerHTML = "Access Denied. Account Number Not Registered.";
+                    statusDiv.style.color = "#ff1744";
+                }
+            }, 1000);
+        }
+
+        function trackDownload() {
+            console.log("Installer download triggered.");
+        }
     </script>
 </body>
 </html>
