@@ -703,7 +703,7 @@ const teamsData = {
       "id": "zerofoxtrot",
       "name": "ZeroFoxtrot",
       "owner": "David Leakey",
-      "homeBase": "Crestview, FL",
+      "homeBase": "Weeki Wachee, FL",
       "logo": "assets/zerofoxtrot-logo.jpg",
       "points": 64,
       "wins": 1,

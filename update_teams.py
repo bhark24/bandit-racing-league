@@ -462,7 +462,8 @@ def main():
             "madison, wi": (43.0731, -89.4012),
             "cleveland, oh": (41.4993, -81.6944),
             "dayton, oh": (39.7589, -84.1916),
-            "crestview, fl": (30.7621, -86.5694)
+            "crestview, fl": (30.7621, -86.5694),
+            "weeki wachee, fl": (28.5169, -82.5750)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates
