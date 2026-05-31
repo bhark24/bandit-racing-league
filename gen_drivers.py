@@ -1,40 +1,130 @@
-drivers = [
-    ("Jackson Knaak", 63408),
-    ("Brandon Jackson", 21107),
-    ("Curtis Yancey", 45358),
-    ("Kevin Foster", 39648),
-    ("Logan A Murray", 118435),
-    ("Nick Nickerson", 17336),
-    ("Nathan Santos2", 121220),
-    ("David Leakey", 60455),
-    ("Conor Gibson", 35159),
-    ("Nolan Gross", 41381),
-    ("Bob Berry", 1652),
-    ("Bill Harkins", 39625),
-    ("Johnathon Platt", 39205),
-    ("Victor Weaver", 60464),
-    ("Matt Crockett", 47625),
-    ("Nicole Kriesel", 64312),
-    ("Adam Clark", 105478)
-]
+import os
+import re
+import json
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ROSTER_DATA_PATH = os.path.join(BASE_DIR, "roster_data.js")
+OUTPUT_PATH = os.path.join(BASE_DIR, "drivers.html")
+
+# Hardcoded resolved SimRacerHub driver IDs (compiled from historical & current season data)
+SRH_IDS = {
+    "jackson knaak": 63408,
+    "nolan gross": 41381,
+    "bret guzik": 39652,
+    "ricky hart": 20741,
+    "nick nickerson": 17336,
+    "logan murray": 118435,
+    "sean britt": 63784,
+    "nicole kriesel": 64312,
+    "benjamin lacy": 50037,
+    "kevin foster": 39648,
+    "bill harkins": 39625,
+    "jonathon platt": 39205,
+    "victor weaver": 60464,
+    "matt bailey": 137917,
+    "nathan santos": 121220,
+    "josh adams": 30420,
+    "dylan nicastro": 119582,
+    "ethan sikorski": 100493,
+    "michael ramos": 59641,
+    "conor gibson": 35159,
+    "curtis yancey": 45358,
+    "ty corino": 130105,
+    "brandon geers": 67132,
+    "bob berry": 1652,
+    "mark alan bivens": 56258,
+    "jason greenwell": 60453,
+    "david leakey": 60455,
+    "david westover jr": 119581,
+    "brandon jackson": 21107,
+    "eddie hagigh": 60452,
+    "josh billiter": 45729,
+    "diante roder": 136821,
+    "dionte rader": 136821
+}
+
+def clean_name(name):
+    # E.g. "Jesse VAUGHAN" -> "Jesse Vaughan", "MARK ALAN BIVENS" -> "Mark Alan Bivens"
+    return name.strip().title()
+
+def car_sort_key(num_str):
+    try:
+        return int(num_str)
+    except ValueError:
+        return 999
+
+# Parse roster_data.js
+if not os.path.exists(ROSTER_DATA_PATH):
+    print(f"Error: Roster data file not found at {ROSTER_DATA_PATH}")
+    exit(1)
+
+with open(ROSTER_DATA_PATH, "r", encoding="utf-8") as f:
+    js_content = f.read()
+
+# Extract JSON object assigned to rosterData
+match = re.search(r'const\s+rosterData\s*=\s*({.*?});', js_content, re.DOTALL)
+if not match:
+    print("Error: Could not parse rosterData object from roster_data.js")
+    exit(1)
+
+try:
+    roster_data = json.loads(match.group(1))
+except Exception as e:
+    print(f"Error decoding JSON from roster_data.js: {e}")
+    exit(1)
 
 cards_html = ""
-for name, did in drivers:
-    display_name = name.replace("2", "") if name == "Nathan Santos2" else name
+sorted_numbers = sorted(roster_data.keys(), key=car_sort_key)
+
+for number in sorted_numbers:
+    info = roster_data[number]
+    driver_name = info["driver"].strip()
+    status = info["status"].strip()
+    
+    # Skip unoccupied/available spots
+    if not driver_name or driver_name.lower() == "available":
+        continue
+        
+    display_name = clean_name(driver_name)
+    status_display = status.replace("-", " ").title()
+    
+    # Check if there is a SimRacerHub ID
+    lookup_name = display_name.lower()
+    # Handle manual alias lookup overrides
+    if "jesse vaughan" in lookup_name:
+        did = None
+    elif "davis carroll" in lookup_name:
+        did = None
+    elif "jason allegrini" in lookup_name:
+        did = None
+    elif "michael rakes" in lookup_name:
+        did = None
+    elif "tyson kopf" in lookup_name:
+        did = None
+    else:
+        did = SRH_IDS.get(lookup_name)
+        
+    # Generate stats button
+    if did:
+        stats_btn_html = f'<a href="https://simracerhub.com/driver_stats.php?driver_id={did}&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>'
+    else:
+        stats_btn_html = '<a href="#" class="btn-stats disabled-stats" style="opacity: 0.55; cursor: not-allowed; pointer-events: none; border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05);">No Stats Yet</a>'
+        
     cards_html += f"""
-            <div class="driver-card">
+            <div class="driver-card" data-status="{status}">
                 <div class="driver-img-box">
                     <span class="placeholder-photo">[ CAR IMAGE ]</span>
-                    <!-- <img src="assets/drivers/{did}.png" alt="{display_name}"> -->
+                    <!-- <img src="assets/drivers/{did if did else 'placeholder'}.png" alt="{display_name}"> -->
                 </div>
                 <div class="driver-info">
-                    <div class="watermark-number">00</div>
-                    <h3 class="italic-heavy" style="margin-bottom:10px;">{display_name}</h3>
-                    <div class="driver-number-img" style="min-height: 60px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center;">
-                        <!-- Drop your custom number graphic in assets/numbers/! -->
-                        <img src="assets/numbers/{display_name}.png" alt="Custom Number" style="max-height: 60px; max-width: 100px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\\'color:var(--neon-green); font-size:2rem; font-weight:900; font-style:italic;\\'>#00</span>'">
+                    <div class="watermark-number">{number}</div>
+                    <div style="font-size: 0.8rem; font-weight: bold; color: var(--neon-green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">{status_display}</div>
+                    <h3 class="italic-heavy" style="margin-bottom:10px; font-size: 1.6rem; z-index: 2; position: relative;">{display_name}</h3>
+                    <div class="driver-number-img" style="min-height: 120px; margin-bottom: 15px; display: flex; justify-content: center; align-items: center; z-index: 2; position: relative;">
+                        <!-- Custom Number Graphic or Fallback Text -->
+                        <img src="assets/numbers/{display_name}.png" alt="Custom Number" style="max-height: 120px; max-width: 200px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span style=\\'color:var(--neon-green); font-size:3.5rem; font-weight:900; font-style:italic; font-family:var(--font-heading); text-shadow: 0 0 10px rgba(0,255,0,0.3);\\'>#{number}</span>'">
                     </div>
-                    <a href="https://simracerhub.com/driver_stats.php?driver_id={did}&season_id=28135" target="_blank" class="btn-stats">View Stats &rarr;</a>
+                    {stats_btn_html}
                 </div>
             </div>"""
 
@@ -43,35 +133,64 @@ html_template = f"""<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drivers Roster | Bandit Racing League</title>
+    <title>Driver Roster | Bandit Racing League</title>
+    <!-- SEO & Page Previews -->
+    <meta name="description" content="Official driver roster of the Bandit Racing League. View driver stats, car numbers, status tags, and profiles of our short track sim racers.">
+    <meta name="keywords" content="Bandit Racing League, Roster, iRacing League, Short Track Racing, Sim Racing, Drivers">
+    
+    <!-- Open Graph / Discord Previews -->
+    <meta property="og:title" content="Driver Roster | Bandit Racing League">
+    <meta property="og:description" content="Official driver roster of the Bandit Racing League. View driver stats, car numbers, status tags, and profiles.">
+    <meta property="og:image" content="https://banditracingleague.net/assets/main-logo.png">
+    <meta property="og:url" content="https://banditracingleague.net/drivers.html">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#00ff00">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <img src="assets/logo-wide.png" alt="Bandit Racing League" class="logo-img" onerror="this.onerror=null; this.outerHTML='<span class=\\'logo-text\\'>BANDIT <span class=\\'accent\\'>RACING</span></span>'">
+            <!-- Mobile Header (Visible only on mobile) -->
+            <div class="nav-mobile-header">
+                <a href="/index.html" class="nav-brand-mobile">BANDIT RACING LEAGUE</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
             </div>
+            
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="standings.html">Standings</a></li>
-                <li><a href="schedule.html">Schedule</a></li>
-                <li><a href="results.html">Results</a></li>
-                <li><a href="drivers.html" class="active">Drivers</a></li>
-                <li><a href="#">Rulebook</a></li>
+                <li><a href="/apply.html" class="btn-secondary">Apply to League</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/standings.html">Standings</a></li>
+                <li><a href="/schedule.html">Schedule</a></li>
+                <li><a href="/results.html">Results</a></li>
+                <li><a href="/drivers.html" class="active">Drivers</a></li>
+                <li><a href="/teams.html">Teams</a></li>
+                <li><a data-tooltip="Fantasy League" href="/fantasy.html"><img src="assets/fantasy-icon.png" alt="Fantasy League" style="height: 42px; width: 42px; border-radius: 50%; border: 1.5px solid var(--neon-green); vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.4)); object-fit: cover;"><span class="nav-icon-label">Fantasy League</span></a></li>
+                <li><a data-tooltip="Geezer App" href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"><span class="nav-icon-label">Geezer App</span></a></li>
+                <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><span class="nav-icon-label">SimTrax Broadcasting</span></a></li>
             </ul>
-            <div class="nav-actions">
-                <a href="#" class="btn-primary">Join Discord</a>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="https://discord.gg/HSvP4UG2st" target="_blank" class="btn-primary">Join Discord</a>
+                <div class="qr-container">
+                    <img src="assets/discord-qr.png" alt="QR Code" style="height: 42px; border-radius: 4px; border: 2px solid var(--neon-green); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" onerror="this.onerror=null; this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='">
+                    <div class="qr-popup">
+                        <img src="assets/discord-qr.png" style="width: 100%; border-radius: 4px;" onerror="this.style.display='none'">
+                        <p style="margin-top: 10px; font-weight: bold; font-family: var(--font-heading); color: var(--neon-green); text-transform: uppercase;">Scan to Join!</p>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Header -->
-    <header class="schedule-header container text-center">
+    <header class="schedule-header container text-center" style="margin-top: 140px; margin-bottom: 40px;">
         <div class="header-content">
             <h1 class="italic-heavy accent title-massive">DRIVER ROSTER</h1>
             <h2 class="italic-heavy text-light">SEASON 16</h2>
@@ -79,20 +198,37 @@ html_template = f"""<!DOCTYPE html>
     </header>
 
     <!-- Grid -->
-    <section class="container" style="margin-bottom: 80px;">
+    <section class="container" style="margin-bottom: 120px; padding: 0 20px;">
         <div class="grid-4">
 {cards_html}
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container footer-content">
             <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Mobile Navigation Toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {{
+            const toggleBtn = document.querySelector('.nav-toggle');
+            const navContainer = document.querySelector('.nav-container');
+            
+            if (toggleBtn && navContainer) {{
+                toggleBtn.addEventListener('click', function() {{
+                    navContainer.classList.toggle('nav-open');
+                }});
+            }}
+        }});
+    </script>
 </body>
 </html>
 """
 
-with open(r"C:\Users\Bill\.gemini\antigravity\scratch\bandit_racing_league\drivers.html", "w", encoding="utf-8") as f:
+with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
     f.write(html_template)
+
+print(f"Successfully generated drivers.html with {len(sorted_numbers)} active spots.")
