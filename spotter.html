@@ -492,6 +492,15 @@
                         <span style="display:flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:50%; background:var(--neon-green); box-shadow:0 0 5px var(--neon-green)"></span> Player</span>
                         <span style="display:flex; align-items:center; gap:5px;"><span style="width:10px; height:10px; border-radius:50%; background:#ff1744;"></span> Opponents</span>
                     </div>
+
+                    <!-- Live Flag Status Indicator -->
+                    <div style="margin-top: 15px; display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.3); border: 1px solid #2a2c33; padding: 8px 20px; border-radius: 6px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">
+                        <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700; letter-spacing: 0.5px;">Active Flag:</span>
+                        <div id="flag-status-box" style="display: flex; align-items: center; gap: 8px;">
+                            <span id="flag-color-block" style="width: 14px; height: 14px; border-radius: 3px; background-color: var(--neon-green); display: inline-block; border: 1px solid rgba(255,255,255,0.25);"></span>
+                            <span id="flag-status-text" style="font-size: 0.9rem; font-weight: 900; color: var(--neon-green); text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; letter-spacing: 0.5px;">GREEN</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Column 3: Fuel Data & Tire Wear -->
@@ -911,13 +920,49 @@
 
         function updateFlagState(flag) {
             const overlay = document.getElementById('flag-overlay');
+            const colorBlock = document.getElementById('flag-color-block');
+            const statusText = document.getElementById('flag-status-text');
+            
             overlay.className = ''; // Reset
             
-            if (flag === 'green') overlay.classList.add('flag-state-green');
-            else if (flag === 'yellow') overlay.classList.add('flag-state-yellow');
-            else if (flag === 'blue') overlay.classList.add('flag-state-blue');
-            else if (flag === 'white') overlay.classList.add('flag-state-white');
-            else if (flag === 'black') overlay.classList.add('flag-state-black');
+            let color = 'var(--neon-green)';
+            let text = 'GREEN';
+            
+            if (flag === 'green') {
+                overlay.classList.add('flag-state-green');
+                color = 'var(--neon-green)';
+                text = 'GREEN';
+            } else if (flag === 'yellow') {
+                overlay.classList.add('flag-state-yellow');
+                color = 'var(--chase-yellow)';
+                text = 'CAUTION';
+            } else if (flag === 'blue') {
+                overlay.classList.add('flag-state-blue');
+                color = '#2196f3';
+                text = 'BLUE FLAG';
+            } else if (flag === 'white') {
+                overlay.classList.add('flag-state-white');
+                color = '#ffffff';
+                text = 'WHITE FLAG';
+            } else if (flag === 'black') {
+                overlay.classList.add('flag-state-black');
+                color = '#0c0d12';
+                text = 'BLACK FLAG';
+            }
+            
+            if (colorBlock) {
+                colorBlock.style.backgroundColor = color;
+                if (flag === 'black') {
+                    colorBlock.style.borderColor = '#ff1744';
+                } else {
+                    colorBlock.style.borderColor = 'rgba(255,255,255,0.25)';
+                }
+            }
+            
+            if (statusText) {
+                statusText.innerText = text;
+                statusText.style.color = (flag === 'black') ? '#ff1744' : color;
+            }
         }
 
         function updateConnectionStatus(isOnline, textOverride = null) {
