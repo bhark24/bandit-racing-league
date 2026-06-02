@@ -83,6 +83,10 @@ const rosterData = {
     "driver": "MICHAEL RAKES",
     "status": "full-time"
   },
+  "50": {
+    "driver": "DAVIS CARROLL",
+    "status": "full-time"
+  },
   "51": {
     "driver": "CURTIS YANCEY",
     "status": "part-time"
