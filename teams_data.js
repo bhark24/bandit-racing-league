@@ -873,7 +873,7 @@ const teamsData = {
       "name": "Carter Phillips Racing",
       "owner": "Carter Phillips",
       "homeBase": "Columbia, SC",
-      "logo": "assets/carter-phillips-racing-logo.png",
+      "logo": "assets/carter-phillips-racing-logo.jpg",
       "points": 0,
       "wins": 0,
       "balance": 2010000,
@@ -882,7 +882,7 @@ const teamsData = {
         "primary": [
           "EDDIE HAGIGH",
           "JASON GREENWELL",
-          "VACANT",
+          "CARTER PHILLIPS",
           "VACANT"
         ],
         "backup": [
@@ -906,7 +906,7 @@ const teamsData = {
         {
           "id": "truck-3",
           "make": "Chevrolet",
-          "name": "Carter Phillips Silverado #3",
+          "name": "Carter Phillips Silverado #30",
           "condition": 100
         },
         {
