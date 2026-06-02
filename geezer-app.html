@@ -308,6 +308,14 @@
         </div>
     </header>
 
+    <!-- App Storyline & Description -->
+    <section class="container" style="max-width: 800px; margin: 0 auto 50px auto; padding: 0 20px; text-align: center;">
+        <h1 class="italic-heavy text-light" style="font-size: 2rem; text-transform: uppercase; margin-bottom: 20px; font-style: italic;">Designed by Sim Racers, Built for Absolute Focus.</h1>
+        <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px;">
+            Whether you are hitting the apex or managing a high-stakes pit strategy, information is speed. The <strong style="color: #fff;">Geezer Telemetry Dashboard</strong> is a premium, lightweight companion app built specifically for iRacing drivers who demand real-time, zero-latency data without screen clutter. Engineered to run seamlessly on a secondary monitor or dedicated telemetry screen, the dashboard bridges the gap between your car’s telemetry stream and your race strategy, giving you the edge you need to stay ahead of the pack.
+        </p>
+    </section>
+
     <!-- Roster Check & Mockup Section -->
     <section class="portal-container">
         <!-- Download & Verification Portal -->
@@ -364,18 +372,22 @@
     <!-- App Features Overview -->
     <section class="container" style="margin-bottom: 80px;">
         <h2 class="italic-heavy text-center" style="font-size: 2.2rem; color: #fff; text-transform: uppercase; margin-bottom: 40px; text-shadow: 0 0 10px rgba(0,0,0,0.5);">Key Capabilities</h2>
-        <div class="features-grid">
+        <div class="features-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 1000px; margin: 0 auto;">
             <div class="feature-card">
-                <h3>Pit Road Warning System</h3>
-                <p>Monitors live pit lane speed limit parameters, providing dynamic visual gauges and audio voice warnings to completely eliminate speeding penalties.</p>
+                <h3>🎙️ Smart Crew Chief</h3>
+                <p>Audio voice alerts for fuel warnings, lap deltas, and pit windows to keep your eyes on the track. Includes a quick On/Off toggle.</p>
             </div>
             <div class="feature-card">
-                <h3>iRacing Live SDK Link</h3>
-                <p>Under-the-hood real-time telemetry link that runs silently in the background with near-zero system resource usage, keeping your frame rates optimized.</p>
+                <h3>🎨 Premium Redesigned HUD</h3>
+                <p>High-contrast telemetry panels with uppercase, italicized typography optimized for maximum readability at high speed.</p>
             </div>
             <div class="feature-card">
-                <h3>VR Overlay Manager</h3>
-                <p>Enables fully customized VR telemetry cards and pop-out modules, so you can place relative timetables and status boxes anywhere in your 3D cockpit.</p>
+                <h3>🚀 One-Click Auto-Launch</h3>
+                <p>Installer automatically launches the dashboard and pins a clean, transparent G-logo shortcut directly to your Desktop.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ Under-the-Hood SDK Link</h3>
+                <p>Low-latency telemetry bridge querying iRacing's memory space silently in the background with zero system resource impact.</p>
             </div>
         </div>
     </section>
@@ -386,15 +398,15 @@
         <div class="timeline">
             <div class="timeline-item">
                 <h4>1. Verify & Download</h4>
-                <p>Unlock the portal above using your official iRacing Customer ID and download the desktop installer (`Geezer_Dashboard_Setup.exe`). Run the setup wizard to install the software.</p>
+                <p>Unlock the portal above using your iRacing Customer ID and download the installer (`Geezer_Dashboard_Setup.exe`).</p>
             </div>
             <div class="timeline-item">
-                <h4>2. Launch & Link with iRacing</h4>
-                <p>Open the Geezer Dashboard and make sure iRacing is running. The app will automatically establish a low-latency connection via the official iRacing SDK.</p>
+                <h4>2. Install & Auto-Start</h4>
+                <p>Run the setup. The app extracts the files, configures the desktop shortcut icon, and launches the dashboard automatically.</p>
             </div>
             <div class="timeline-item">
-                <h4>3. Telemetry ID Verification</h4>
-                <p>Upon starting, the app verifies your active iRacing account number against the BRL registry. Telemetry records, incident thresholds, and driver profile settings will sync instantly.</p>
+                <h4>3. Sync & Race</h4>
+                <p>Start your iRacing session. The dashboard automatically syncs and starts displaying live telemetry and audio warnings.</p>
             </div>
         </div>
     </section>
