@@ -356,7 +356,8 @@
                 
                 <h3 style="color: #fff; margin-top: 30px; margin-bottom: 10px; font-size: 1.3rem;">Roster Requirements</h3>
                 <p style="color: var(--text-muted); margin-bottom: 15px;">Each race week, you must select exactly four drivers of your choice from the roster.</p>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">You must also submit a <strong>Tiebreaker</strong> guess: your prediction of the total number of caution laps run during the main event.</p>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">You must also submit a <strong>Tiebreaker</strong> guess: your prediction of the total number of caution laps run during the main event.</p>
+                <p style="color: var(--text-muted); margin-bottom: 20px;"><strong>DNS / No-Show Safety Net:</strong> If you select a driver who does not participate in the race (or fails to qualify), you will receive a safety net score equal to <strong>1 point less than the lowest-scoring active driver</strong> in that race (typically 7 points, unless penalties apply). <em>Exception:</em> If the starting grid/field is completely full (36+ drivers), any driver who fails to qualify or does not start will receive <strong>0 points</strong>.</p>
 
                 <h3 style="color: #fff; margin-top: 30px; margin-bottom: 10px; font-size: 1.3rem;">Points Scale</h3>
                 <p style="color: var(--text-muted); margin-bottom: 15px;">Your weekly fantasy score is the sum of the points scored by each of your 4 drafted drivers. Drivers earn points based on their official race stats from SimRacerHub:</p>
@@ -372,11 +373,8 @@
                         <tbody>
                             <tr><td>1st Place</td><td>40 pts</td></tr>
                             <tr><td>2nd Place</td><td>35 pts</td></tr>
-                            <tr><td>3rd Place</td><td>32 pts</td></tr>
-                            <tr><td>4th Place</td><td>30 pts</td></tr>
-                            <tr><td>5th Place</td><td>28 pts</td></tr>
-                            <tr><td>6th - 14th Place</td><td>Decrements by 2 pts per position (e.g. 6th = 26, 7th = 24...)</td></tr>
-                            <tr><td>15th Place & Below</td><td>8 pts (minimum finish points)</td></tr>
+                            <tr><td>3rd - 36th Place</td><td>Decrements by 1 pt per position (e.g. 3rd = 34, 4th = 33...)</td></tr>
+                            <tr><td>36th Place & Below</td><td>1 pt (minimum finish points)</td></tr>
                             <tr><td style="color: var(--status-available);"><strong>Pole Position (Starts 1st)</strong></td><td style="color: var(--status-available);">+5 bonus pts</td></tr>
                             <tr><td style="color: var(--status-available);"><strong>Led Most Laps</strong></td><td style="color: var(--status-available);">+5 bonus pts</td></tr>
                             <tr><td style="color: var(--status-available);"><strong>Clean Race (0 Incidents)</strong></td><td style="color: var(--status-available);">+3 bonus pts</td></tr>
@@ -529,8 +527,10 @@
             const allDrivers = [];
             for (let num in rosterData) {
                 const driverDetail = rosterData[num];
-                // Filter out part-time and reserved drivers
-                if (driverDetail.status !== 'part-time' && driverDetail.status !== 'reserved') {
+                // Include all active drivers (filter out empty/vacant slots)
+                if (driverDetail.driver && 
+                    driverDetail.driver.toLowerCase() !== 'available' && 
+                    driverDetail.driver.toLowerCase() !== 'vacant') {
                     allDrivers.push({
                         name: driverDetail.driver,
                         number: num,

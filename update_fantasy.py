@@ -227,18 +227,26 @@ def load_picks(config):
     print(f"Loaded {len(picks)} fan picks.")
     return picks
 
-def score_picks(picks, driver_scores, caution_laps):
+def score_picks(picks, driver_scores, caution_laps, config):
     # Match headers to figure out columns
     # We expect columns like: Name, Tier A, Tier B1, Tier B2, Tier C, Tiebreaker (Caution)
     # Since headers might change, we'll map by index based on our standard layout
     fan_results = []
     
     # Calculate last place points (safety net for DNS/no-show drivers)
+    max_field_size = config.get("max_field_size", 36)
+    is_field_full = len(driver_scores) >= max_field_size
+    
     if driver_scores:
-        last_place_pts = min(d["total_points"] for d in driver_scores.values())
+        if is_field_full:
+            last_place_pts = 0
+            print(f"DNS Safety Net: The field is FULL ({len(driver_scores)}/{max_field_size} drivers). No-show/DNQ drivers receive 0 points.")
+        else:
+            last_place_pts = min(d["total_points"] for d in driver_scores.values()) - 1
+            print(f"DNS Safety Net: The field is NOT full ({len(driver_scores)}/{max_field_size} drivers). No-show drivers receive 1 point less than the last-place finisher ({last_place_pts} pts)")
     else:
         last_place_pts = 0
-    print(f"DNS Safety Net: No-show drivers will receive last-place finisher points ({last_place_pts} pts)")
+        print(f"DNS Safety Net: No driver scores found. Defaulting to 0 pts.")
     
     for row in picks:
         if not row or len(row) < 6:
@@ -451,7 +459,7 @@ def main():
     picks = load_picks(config)
     
     # Calculate scores for picks
-    fan_results = score_picks(picks, driver_scores, caution_laps)
+    fan_results = score_picks(picks, driver_scores, caution_laps, config)
     
     # Update standings JS file
     update_data_js(fan_results, track_name, race_date, caution_laps, config)
