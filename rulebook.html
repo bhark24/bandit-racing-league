@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandit Racing League | Season 16 Official Rule Book</title>
+    <!-- SEO & Page Previews -->
+    <meta name="description" content="Official rule book for Bandit Racing League Season 16. iRacing oval license requirements, point systems, communication, restarts, and race procedures.">
+    <meta name="keywords" content="Bandit Racing League, iRacing Rules, Sim Racing Rules, NASCAR Rules, iRacing License, BRL Rules">
+    
+    <!-- Open Graph / Discord Previews -->
+    <meta property="og:title" content="Bandit Racing League | Season 16 Official Rule Book">
+    <meta property="og:description" content="View the official race procedures, points system, and code of conduct for Bandit Racing League Season 16.">
+    <meta property="og:image" content="https://banditracingleague.net/assets/main-logo.png">
+    <meta property="og:url" content="https://banditracingleague.net/rulebook.html">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#00ff00">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Custom Rulebook Styles */
+        .rulebook-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            margin-top: 40px;
+            margin-bottom: 80px;
+            align-items: start;
+        }
+
+        /* Sidebar & Search */
+        .rulebook-sidebar {
+            position: sticky;
+            top: 100px;
+            background: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 0, 0.15);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            max-height: calc(100vh - 140px);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.05);
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            background: #000;
+            border: 1px solid #333;
+            border-radius: var(--border-radius);
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+        }
+
+        .toc-list-container {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding-right: 5px;
+        }
+
+        .toc-list-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .toc-list-container::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 2px;
+        }
+
+        .toc-list-container::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-green);
+        }
+
+        .rulebook-toc {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .rulebook-toc a {
+            display: block;
+            padding: 6px 10px;
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border-left: 2px solid transparent;
+            transition: all var(--transition-fast);
+        }
+
+        .rulebook-toc a:hover,
+        .rulebook-toc a.active {
+            color: var(--neon-green);
+            border-left-color: var(--neon-green);
+            padding-left: 14px;
+            background: rgba(0, 255, 0, 0.03);
+        }
+
+        /* Mobile Drawer Toggle */
+        .mobile-toc-toggle {
+            display: none;
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-panel);
+            border: 1px solid var(--neon-green);
+            color: #fff;
+            font-family: var(--font-heading);
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            margin-bottom: 20px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Content Sections */
+        .rulebook-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .rulebook-section {
+            background: var(--bg-panel);
+            border-radius: var(--border-radius);
+            border: 1px solid #222;
+            padding: 30px;
+            scroll-margin-top: 110px;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .rulebook-section:hover {
+            border-color: rgba(0, 255, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 255, 0, 0.02);
+        }
+
+        .rulebook-section.highlighted-section {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.05);
+        }
+
+        .rulebook-section h2 {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 10px;
+        }
+
+        .section-number {
+            color: var(--neon-green);
+            font-weight: 900;
+            text-shadow: 0 0 10px var(--neon-green-glow);
+        }
+
+        .rule-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .rule-list li {
+            position: relative;
+            padding-left: 25px;
+            font-family: var(--font-body);
+            color: #ccc;
+        }
+
+        .rule-list li strong {
+            color: #fff;
+        }
+
+        .rule-letter {
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+            font-weight: 700;
+            font-family: var(--font-heading);
+        }
+
+        /* Points Table Styles */
+        .points-table-wrapper {
+            margin-top: 20px;
+            overflow-x: auto;
+            border-radius: var(--border-radius);
+            border: 1px solid #333;
+        }
+
+        .points-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        .points-table th {
+            background-color: #000;
+            color: var(--neon-green);
+            padding: 12px 15px;
+            font-weight: 900;
+            border-bottom: 2px solid var(--neon-green);
+            text-transform: uppercase;
+        }
+
+        .points-table td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #222;
+            background-color: rgba(255, 255, 255, 0.01);
+        }
+
+        .points-table tr:hover td {
+            background-color: rgba(0, 255, 0, 0.03);
+            color: #fff;
+        }
+
+        .points-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .points-info-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #333;
+            border-radius: var(--border-radius);
+            padding: 20px;
+        }
+
+        .points-info-card h4 {
+            color: var(--chase-yellow);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            text-shadow: 0 0 5px rgba(255, 204, 0, 0.2);
+        }
+
+        /* Rule Alert Blocks */
+        .rule-alert {
+            background: rgba(255, 23, 68, 0.05);
+            border-left: 4px solid var(--status-reserved);
+            padding: 15px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin-top: 15px;
+        }
+
+        .rule-alert h4 {
+            color: var(--status-reserved);
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rule-alert p {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .rule-info {
+            background: rgba(0, 229, 255, 0.05);
+            border-left: 4px solid var(--status-fulltime);
+            padding: 15px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin-top: 15px;
+        }
+
+        .rule-info h4 {
+            color: var(--status-fulltime);
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .rule-info p {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Search Highlight */
+        .highlight {
+            background-color: rgba(0, 255, 0, 0.3);
+            color: #fff;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .rulebook-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .rulebook-sidebar {
+                display: none; /* Controlled by JS toggle */
+                position: fixed;
+                top: 80px;
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+                z-index: 1000;
+                max-height: none;
+                background: #0b0b0b;
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+            }
+
+            .rulebook-sidebar.open {
+                display: flex;
+            }
+
+            .mobile-toc-toggle {
+                display: flex;
+            }
+
+            .points-grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Mobile Header (Visible only on mobile) -->
+            <div class="nav-mobile-header">
+                <a href="/index.html" class="nav-brand-mobile">BANDIT RACING LEAGUE</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="/apply.html" class="btn-secondary">Apply to League</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/standings.html">Standings</a></li>
+                <li><a href="/schedule.html">Schedule</a></li>
+                <li><a href="/results.html">Results</a></li>
+                <li><a href="/drivers.html">Drivers</a></li>
+                <li><a href="/teams.html">Teams</a></li>
+                <li><a href="/merch.html">Merch</a></li>
+                <li><a href="/rulebook.html" class="active">Rulebook</a></li>
+                <li><a data-tooltip="Fantasy League" href="/fantasy.html"><img src="assets/fantasy-icon.png" alt="Fantasy League" style="height: 42px; width: 42px; border-radius: 50%; border: 1.5px solid var(--neon-green); vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.4)); object-fit: cover;"><span class="nav-icon-label">Fantasy League</span></a></li>
+                <li><a data-tooltip="Geezer App" href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"><span class="nav-icon-label">Geezer App</span></a></li>
+                <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><span class="nav-icon-label">SimTrax Broadcasting</span></a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="https://discord.gg/HSvP4UG2st" target="_blank" class="btn-primary">Join Discord</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="schedule-header text-center" style="margin-top: 60px; margin-bottom: 20px;">
+        <h1 class="italic-heavy accent title-massive" style="font-size: 3.5rem; line-height: 1.1;">Season 16</h1>
+        <h2 class="italic-heavy text-light sub-heavy" style="font-size: 2.2rem; letter-spacing: 2px;">Official Rule Book</h2>
+        <p style="color: var(--text-muted); font-family: var(--font-heading); margin-top: 10px; font-weight: bold; text-transform: uppercase;">Revised June 2026</p>
+    </header>
+
+    <!-- Main Content Layout -->
+    <div class="container">
+        
+        <!-- Development Warning Banner -->
+        <div class="rule-alert" style="background: rgba(255, 152, 0, 0.08); border-left: 4px solid #ff9800; border-radius: var(--border-radius); padding: 15px; margin-bottom: 25px;">
+            <h4 style="color: #ff9800; margin: 0 0 5px 0; font-family: var(--font-heading); display: flex; align-items: center; gap: 8px; font-weight: bold; text-transform: uppercase; font-size: 1rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                Under Development / Draft Rules
+            </h4>
+            <p style="color: #ccc; margin: 0; font-size: 0.95rem; font-family: var(--font-body);">These rules are currently under review for Season 16 and are subject to change.</p>
+        </div>
+        
+        <!-- Mobile Toggle Button -->
+        <button class="mobile-toc-toggle" onclick="toggleMobileToc()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <span>Table of Contents / Filter</span>
+        </button>
+
+        <div class="rulebook-layout">
+            
+            <!-- Sticky Sidebar -->
+            <aside class="rulebook-sidebar" id="sidebar">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="rule-search" placeholder="Search rules..." oninput="filterRules()">
+                </div>
+                <div class="toc-list-container">
+                    <ul class="rulebook-toc">
+                        <li><a href="#sec1" class="active">1. Code of Conduct</a></li>
+                        <li><a href="#sec2">2. Points & Playoffs</a></li>
+                        <li><a href="#sec3">3. Provisionals</a></li>
+                        <li><a href="#sec4">4. Communication</a></li>
+                        <li><a href="#sec5">5. Race Procedures</a></li>
+                        <li><a href="#sec6">6. Incident System</a></li>
+                        <li><a href="#sec7">7. Repairs & Tires</a></li>
+                        <li><a href="#sec8">8. Qualifying</a></li>
+                        <li><a href="#sec9">9. Race Starts</a></li>
+                        <li><a href="#sec10">10. Wrecking & Retaliation</a></li>
+                        <li><a href="#sec11">11. Caution Flags</a></li>
+                        <li><a href="#sec12">12. Pit Road Rules</a></li>
+                        <li><a href="#sec13">13. Superspeedways</a></li>
+                        <li><a href="#sec14">14. Team Guidelines</a></li>
+                        <li><a href="#sec15">15. Restarts</a></li>
+                        <li><a href="#sec16">16. G/W/C Restarts</a></li>
+                        <li><a href="#sec17">17. Checkered Flags</a></li>
+                        <li><a href="#sec18">18. Protest System</a></li>
+                        <li><a href="#sec19">19. League Admins</a></li>
+                        <li><a href="#sec20">20. Connection Issues</a></li>
+                        <li><a href="#sec21">21. Social Media</a></li>
+                        <li><a href="#sec22">22. Contacts</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Rules Sections -->
+            <main class="rulebook-content">
+
+                <!-- Section 1 -->
+                <section class="rulebook-section" id="sec1">
+                    <h2><span class="section-number">SECTION 1:</span> iRacing Code of Conduct</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> All iRacing official rules and general Code of Conduct apply fully to all Bandit Racing League (BRL) events.</li>
+                        <li><span class="rule-letter">B)</span> The minimum iRacing requirement to participate in any BRL sanctioned event is a <strong>C1.0 Oval License</strong>.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 2 -->
+                <section class="rulebook-section highlighted-section" id="sec2">
+                    <h2><span class="section-number">SECTION 2:</span> Points System & Playoffs</h2>
+                    <p style="color: #ccc; margin-bottom: 20px; font-family: var(--font-body);">
+                        For Season 16, the Bandit Racing League utilizes the official <strong>NASCAR Craftsman Truck Series</strong> championship points system to calculate driver and team standings.
+                    </p>
+                    
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>Championship Race Points Scale</strong>: Driver race points are distributed at the end of each event based on finishing position. A race win awards <strong>55 points</strong>, and P36 through P40 receive a flat 1 point.</li>
+                    </ul>
+
+                    <!-- Points Table -->
+                    <div class="points-table-wrapper">
+                        <table class="points-table">
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Points</th>
+                                    <th>Pos</th>
+                                    <th>Points</th>
+                                    <th>Pos</th>
+                                    <th>Points</th>
+                                    <th>Pos</th>
+                                    <th>Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1st</strong></td><td class="accent" style="font-weight: 900;">55</td>
+                                    <td><strong>11th</strong></td><td>26</td>
+                                    <td><strong>21st</strong></td><td>16</td>
+                                    <td><strong>31st</strong></td><td>6</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2nd</strong></td><td>35</td>
+                                    <td><strong>12th</strong></td><td>25</td>
+                                    <td><strong>22nd</strong></td><td>15</td>
+                                    <td><strong>32nd</strong></td><td>5</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3rd</strong></td><td>34</td>
+                                    <td><strong>13th</strong></td><td>24</td>
+                                    <td><strong>23rd</strong></td><td>14</td>
+                                    <td><strong>33rd</strong></td><td>4</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4th</strong></td><td>33</td>
+                                    <td><strong>14th</strong></td><td>23</td>
+                                    <td><strong>24th</strong></td><td>13</td>
+                                    <td><strong>34th</strong></td><td>3</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5th</strong></td><td>32</td>
+                                    <td><strong>15th</strong></td><td>22</td>
+                                    <td><strong>25th</strong></td><td>12</td>
+                                    <td><strong>35th</strong></td><td>2</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6th</strong></td><td>31</td>
+                                    <td><strong>16th</strong></td><td>21</td>
+                                    <td><strong>26th</strong></td><td>11</td>
+                                    <td><strong>36th-40th</strong></td><td>1</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>7th</strong></td><td>30</td>
+                                    <td><strong>17th</strong></td><td>20</td>
+                                    <td><strong>27th</strong></td><td>10</td>
+                                    <td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>8th</strong></td><td>29</td>
+                                    <td><strong>18th</strong></td><td>19</td>
+                                    <td><strong>28th</strong></td><td>9</td>
+                                    <td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>9th</strong></td><td>28</td>
+                                    <td><strong>19th</strong></td><td>18</td>
+                                    <td><strong>29th</strong></td><td>8</td>
+                                    <td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>10th</strong></td><td>27</td>
+                                    <td><strong>20th</strong></td><td>17</td>
+                                    <td><strong>30th</strong></td><td>7</td>
+                                    <td></td><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="points-grid-2">
+                        <div class="points-info-card">
+                            <h4>Stage Scoring Info</h4>
+                            <ul class="rule-list" style="gap: 8px;">
+                                <li style="font-size: 0.9rem;"><span class="rule-letter">•</span> Races are split into <strong>three stages</strong> (Stage 1, Stage 2, and the Final Stage).</li>
+                                <li style="font-size: 0.9rem;"><span class="rule-letter">•</span> **Stage 1 Break** occurs at the lap closest to <strong>30%</strong> of the scheduled race distance. Race Control throws the caution flag.</li>
+                                <li style="font-size: 0.9rem;"><span class="rule-letter">•</span> **Stage 2 Break** occurs at the lap closest to <strong>60%</strong> of the scheduled race distance. Race Control throws the caution flag.</li>
+                                <li style="font-size: 0.9rem;"><span class="rule-letter">•</span> The top 10 finishers of both Stage 1 and Stage 2 earn bonus championship points:</li>
+                                <li style="font-size: 0.9rem; padding-left: 20px; font-weight: bold; color: var(--neon-green);">P1: 10 pts, P2: 9 pts, P3: 8 pts ... P10: 1 pt.</li>
+                            </ul>
+                        </div>
+                        <div class="points-info-card">
+                            <h4>Playoff Format (The Chase)</h4>
+                            <ul class="rule-list" style="gap: 8px;">
+                                <li style="font-size: 0.9rem;"><span class="rule-letter">•</span> <strong>Qualification</strong>: The **top 10 drivers** in the standings at the end of the regular season qualify for the Chase. *(Win-and-you're-in is inactive; qualification is points-based)*.</li>
+                                <li style="font-size: 0.9rem;"><span class="rule-letter">•</span> <strong>Season Structure</strong>: The schedule consists of a **16-race Regular Season** followed by a **5-race postseason (The Chase)**.</li>
+                                <li style="font-size: 0.9rem;"><span class="rule-letter">•</span> <strong>No Elimination Rounds</strong>: The 10 qualifying drivers compete over all **final five (5) races** of the season to determine the championship.</li>
+                                <li style="font-size: 0.9rem;"><span class="rule-letter">•</span> <strong>Points Seeding Reset</strong>: Seeding points are reset at the beginning of the Chase as follows:
+                                    <br>&nbsp;&nbsp;1st Seed: **2,100 pts** | 2nd Seed: **2,075 pts** | 3rd Seed: **2,065 pts**
+                                    <br>&nbsp;&nbsp;4th-10th Seeds: Decrease by **5 pts** per position (4th: 2060, 5th: 2055, ..., 10th: 2030).
+                                </li>
+                                <li style="font-size: 0.9rem;"><span class="rule-letter">•</span> <strong>Champion</strong>: The driver with the highest cumulative points at the end of the 5-race Chase is crowned champion.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <ul class="rule-list" style="margin-top: 20px;">
+                        <li><span class="rule-letter">B)</span> <strong>Bonus Points</strong> are awarded in the regular season as follows:
+                            <br>• <strong>+1 point</strong>: Fastest Qualifier (Pole position).
+                            <br>• <strong>+1 point</strong>: Leading at least one lap.
+                        </li>
+                        <li><span class="rule-letter">C)</span> There is <strong>no minimum race participation requirement</strong>. Points are calculated on actual results.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 3 -->
+                <section class="rulebook-section" id="sec3">
+                    <h2><span class="section-number">SECTION 3:</span> Provisionals</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> Drivers are allowed a maximum of <strong>2 provisionals</strong> per season.</li>
+                        <li><span class="rule-letter">B)</span> Drivers must notify the League Owner, Race Control, or admins <strong>prior to the scheduled start time</strong> of the race they intend to skip.</li>
+                        <li><span class="rule-letter">C)</span> Provisional points will be awarded as equivalent to **1 point less (-1) than the last place finisher** of that event. *(Example: If the last place finisher receives 12 points, the driver using the provisional will receive 11 points)*</li>
+                    </ul>
+                </section>
+
+                <!-- Section 4 -->
+                <section class="rulebook-section" id="sec4">
+                    <h2><span class="section-number">SECTION 4:</span> Communication Guidelines</h2>
+                    <div class="rule-alert" style="background: rgba(255, 23, 68, 0.03); border-color: var(--status-reserved); margin-bottom: 20px;">
+                        <h4>In-Sim Text Chat Rule</h4>
+                        <p>In-sim text/voice chat on iRacing is strictly reserved for race-related communication. Casual conversations or flaming are prohibited.</p>
+                    </div>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>Working Microphone Required</strong>: A functioning microphone is mandatory for all drivers. There are no exceptions to this rule.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Discord App Mandatory</strong>: All drivers must be active and present in the official BRL Discord voice channels during all league events.</li>
+                        <li><span class="rule-letter">C)</span> <strong>Discord Name Sync</strong>: Your Discord nickname must display exactly as your real name appears in iRacing, followed by your assigned car number. *(Example: Bill Harkins #11)*</li>
+                        <li><span class="rule-letter">D)</span> <strong>Comm Exceptions</strong>: In-sim iRacing chat is the absolute minimum level of communication allowed. You must have prior approval from a league admin to use in-sim chat instead of Discord, and must prove Discord does not work. Race admins must be able to reach you.</li>
+                        <li><span class="rule-letter">E)</span> <strong>Swearing & Flaming</strong>: Profanity or verbal abuse directed at other drivers is forbidden. Drivers will receive <strong>one (1) warning</strong> prior to a chat mute/ban. Continued disregard for professionalism can lead to league dismissal.</li>
+                        <li><span class="rule-letter">F)</span> <strong>Broadcast Etiquette</strong>: Professionalism rules extend to all live streams, whether broadcasted by BRL, SimTrax, or individual driver streams (YouTube, Twitch, Facebook, etc.).</li>
+                    </ul>
+                </section>
+
+                <!-- Section 5 -->
+                <section class="rulebook-section" id="sec5">
+                    <h2><span class="section-number">SECTION 5:</span> Race Procedures</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>Fixed Set-ups</strong>: All events will use locked setups. All oval events are capped at **70% fuel load**.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Realistic Weather</strong>: Weather conditions will be configured dynamically via realistic setting configurations in iRacing.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 6 -->
+                <section class="rulebook-section" id="sec6">
+                    <h2><span class="section-number">SECTION 6:</span> Incident System</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>No Auto Incident Limit</strong>: There is no automated incident point limit enforced by the game server.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Reckless Driver Penalty</strong>: BRL Race Control reserves the right to review post-race logs and penalize or remove drivers deemed reckless based on their incident count or pattern of collisions throughout the season. Penalties may include removal from the league.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 7 -->
+                <section class="rulebook-section" id="sec7">
+                    <h2><span class="section-number">SECTION 7:</span> Repairs & Tire Limits</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>Fast Repairs</strong>: <strong>One (1) Fast Repair</strong> is permitted per race. BRL reserves the right to adjust or remove Fast Repairs at any point in the season based on competition data.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Tire Set Limits</strong>:
+                            <br>• <strong>Oval events</strong>: <strong>3 total sets</strong> (the set started on + 2 pit sets) allowed.
+                            <br>• <strong>Road Course events</strong>: <strong>2 total sets</strong> (the set started on + 1 pit set) allowed.
+                            <br>*(BRL reserves the right to adjust limits based on track/weather conditions)*
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Section 8 -->
+                <section class="rulebook-section" id="sec8">
+                    <h2><span class="section-number">SECTION 8:</span> Qualifying</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>Strict Qualifying</strong>: Qualifying settings are set to strict for all oval track events.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Mandatory Participation</strong>: Driver qualification runs are mandatory for all BRL events.</li>
+                        <li><span class="rule-letter">C)</span> <strong>No post-qualifying EOLs</strong>: Drivers are not permitted to take End of Line (EOL) starting positions voluntarily after setting a qualifying lap.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 9 -->
+                <section class="rulebook-section" id="sec9">
+                    <h2><span class="section-number">SECTION 9:</span> Initial Green Flag Starts</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> The race officially begins when the <strong>iRacing Green Flag</strong> waves. No driver may accelerate before this flag.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Starting Lane Choice</strong>: Initial starting lanes are locked by iRacing. There is no lane choice on the initial green flag.</li>
+                        <li><span class="rule-letter">C)</span> <strong>Jumping the Start</strong>: iRacing issues automatic drive-thru penalties for start violations (primarily affecting front-row starters). Race Control may clear these at their sole discretion if they determine the start was clean.</li>
+                        <li><span class="rule-letter">D)</span> Any penalty issued that is not cleared by Race Control must be served within <strong>3 laps</strong> of green flag racing.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 10 -->
+                <section class="rulebook-section" id="sec10">
+                    <h2><span class="section-number">SECTION 10:</span> Malicious Wrecking & Retaliation</h2>
+                    <div class="rule-alert">
+                        <h4>Zero Tolerance Policy</h4>
+                        <p>Aggressive moves with intent to wreck, retaliate, or maliciously contact another vehicle will result in immediate disqualification and removal from BRL.</p>
+                    </div>
+                    <ul class="rule-list" style="margin-top: 15px;">
+                        <li><span class="rule-letter">A)</span> <strong>Disqualification</strong>: Drivers displaying intent to wreck or making intentional aggressive moves towards another driver will be removed from the session and disqualified. Intent is evaluated by Race Control/Admins.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Points Removal</strong>: All standings and points gained during that event will be completely stripped.</li>
+                        <li><span class="rule-letter">C)</span> <strong>Probation & EOL Penalties</strong>: Offending drivers are placed on a minimum <strong>3-race probation</strong>, requiring them to start at the tail end of the field for the next 3 events.</li>
+                        <li><span class="rule-letter">D)</span> <strong>Qualifying Mute during EOL</strong>: While serving a 3-week EOL penalty, drivers <strong>are not permitted to set a qualifying lap</strong> and must start at the tail of the field.</li>
+                        <li><span class="rule-letter">E)</span> <strong>Retaliation</strong>: Retaliation is treated identically to intentional wrecking and carries the same severe penalties. Race Control's decisions are final.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 11 -->
+                <section class="rulebook-section" id="sec11">
+                    <h2><span class="section-number">SECTION 11:</span> Caution Flags</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>Cautions Incidents</strong>: Any driver causing a wreck or collision while under caution (speeding to catch field, tire warming collisions) will receive an immediate EOL penalty. Severe or repeat infractions can lead to event removal.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Pace Distance</strong>: Drivers must maintain a safe distance and match the official pace car speed at all times.</li>
+                        <li><span class="rule-letter">C)</span> <strong>Damaged Vehicles</strong>: Any car unable to maintain pace speed or damaged beyond repair must tow to pit road immediately.</li>
+                        <li><span class="rule-letter">D)</span> <strong>Debating Flags</strong>: Race Control decisions regarding cautions and flags are final and cannot be debated over voice chat during the event.</li>
+                        <li><span class="rule-letter">E)</span> <strong>Lucky Dog</strong>: BRL uses the automatic iRacing Lucky Dog (free pass) rule.</li>
+                        <li><span class="rule-letter">F)</span> <strong>Wave Arounds</strong>: Granted by Race Control depending on race conditions and situation.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 12 -->
+                <section class="rulebook-section" id="sec12">
+                    <h2><span class="section-number">SECTION 12:</span> Pit Road Procedures</h2>
+                    <div class="rule-alert" style="background: rgba(255, 23, 68, 0.02); border-color: var(--status-reserved);">
+                        <h4>Speeding Penalties Are Final</h4>
+                        <p>Pit road speeding penalties are enforced by the iRacing system and will NOT be cleared by Race Control.</p>
+                    </div>
+                    <ul class="rule-list" style="margin-top: 15px;">
+                        <li><span class="rule-letter">A)</span> Drivers must maintain safe vehicle control upon pit entry, stay to the right side of the lane, and observe the speed limit.</li>
+                        <li><span class="rule-letter">B)</span> Passing on pit road is permitted only on the left side of the vehicle being passed. The passing driver assumes all collision risks.</li>
+                        <li><span class="rule-letter">C)</span> <strong>Serving a Speeding Penalty under Green</strong>: Green-flag speeding penalties must be served within <strong>4 laps</strong> under consecutive green flag conditions.</li>
+                        <li><span class="rule-letter">D)</span> <strong>Caution During Penalty</strong>: If a caution is thrown while you hold an unserved green-flag penalty, the penalty must still be served. You must pit and serve it before crossing the start-finish line for the 4th green-flag lap after the restart. Failure to do so results in iRacing disqualifying the driver (Race Control cannot override an iRacing disqualification, as iRacing does not permit overrides).</li>
+                        <li><span class="rule-letter">E)</span> <strong>Lagging Back Block</strong>: A driver is strictly prohibited from lagging back on a restart to immediately dive down pit road and serve a penalty. Drivers must take the green flag on the track and then pit on the following lap.</li>
+                        <li><span class="rule-letter">F)</span> Unsafe pit road exits will not be cleared.</li>
+                        <li><span class="rule-letter">G)</span> <strong>Collision Avoidance</strong>: Race Control will review and clear black flags if a driver entered pit road solely to avoid an active accident on the track.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 13 -->
+                <section class="rulebook-section" id="sec13">
+                    <h2><span class="section-number">SECTION 13:</span> Superspeedway & 1.5 Mile Procedures</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>Early Race Wrecks</strong>: Within the <strong>first 15 laps</strong> of a race on Superspeedways and 1.5-mile tracks, any driver causing a wreck will receive an immediate drive-thru penalty.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Repeat Incidents</strong>: A second wreck caused by the same driver results in another drive-thru penalty and automatic probation.</li>
+                        <li><span class="rule-letter">C)</span> <strong>Arguing Penalty</strong>: Arguing about a drive-thru penalty over in-game chat will result in an immediate chat mute and <strong>1 additional drive-thru penalty</strong> (total of 2). Race Control's decision is 100% final.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 14 -->
+                <section class="rulebook-section" id="sec14">
+                    <h2><span class="section-number">SECTION 14:</span> Franchise Team Rules</h2>
+                    <div class="rule-alert" style="background: rgba(255, 23, 68, 0.03); border-color: var(--status-reserved); margin-bottom: 20px;">
+                        <h4>Team Blocking Violation</h4>
+                        <p>Intentional blocking by a team driver to defend another franchise team member carries severe point penalties for the entire squad.</p>
+                    </div>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>Blocking Penalty</strong>: If a driver blocks intentionally to aid a teammate, <strong>the entire team receives a -15 point penalty per driver</strong> and the entire team must start from the pit road for the next event. The penalty is evaluated and applied post-race.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Side-Drafting Exception</strong>: Side-drafting is not classified as blocking as long as a genuine effort to gain a position is being made.</li>
+                        <li><span class="rule-letter">C)</span> <strong>Unbiased Review</strong>: Only league admins unaffiliated with the blocking or blocked team may request and review the blocking incident.</li>
+                        <li><span class="rule-letter">D)</span> <strong>Franchise Owners</strong>: Teams must designate an official Team Owner who assumes full responsibility for all team members' actions.</li>
+                        <li><span class="rule-letter">E)</span> <strong>Team Radio Channels</strong>: Discord team radio channels are limited to a **maximum of 6 team members** plus **1 open spot** reserved for Race Control access. BRL reserves the right to alter or remove channels if code of conduct violations occur.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 15 -->
+                <section class="rulebook-section" id="sec15">
+                    <h2><span class="section-number">SECTION 15:</span> Green Flag Restarts</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>Lane Choice</strong>: The race leader is awarded lane choice on all restarts after the initial green flag.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Calling Lane Choice</strong>: The leader must call out their starting lane choice over in-sim voice chat with <strong>two laps to go</strong> under caution. The leader is responsible for informing all drivers and Race Control.</li>
+                        <li><span class="rule-letter">C)</span> <strong>Restart Zone Enforced</strong>: The restart zone must be observed. If iRacing issues a jumping penalty, the driver must serve it. Race Control does not control or clear this penalty.</li>
+                        <li><span class="rule-letter">D)</span> <strong>Pace Car Pit Entrance</strong>: The pace car must be completely off the racing surface, in the pit lane, and called clear by iRacing before the leader is permitted to accelerate.</li>
+                        <li><span class="rule-letter">E)</span> <strong>Accelerating Early</strong>: Accelerating before the pace car enters pit road will trigger an automatic iRacing drive-thru penalty.</li>
+                        <li><span class="rule-letter">F)</span> <strong>No Passing Before Line</strong>: Drivers are not allowed to pass on the restart before crossing the start-finish line. Passing to the left is strictly prohibited.</li>
+                        <li><span class="rule-letter">G)</span> <strong>Tire Warming</strong>: Warming of tires is permitted under caution, but excessive warming that causes safety concerns is not allowed. Drivers must maintain their lane until the green flag is thrown.</li>
+                        <li><span class="rule-letter">H)</span> <strong>Leader Restarts Infraction (Blending)</strong>: If the leader fails to maintain their starting line on a restart and blends into the opposite line, they will face post-race penalties:
+                            <br>• <strong>First Violation (L-1)</strong>: The race win will be stripped. The 2nd place finisher (provided they have no restart infractions) will be declared the winner.
+                            <br>• <strong>Points Adjustment (L-2)</strong>: The disqualified winner will be credited with points equal to the last-place position on the lead lap.
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Section 16 -->
+                <section class="rulebook-section" id="sec16">
+                    <h2><span class="section-number">SECTION 16:</span> Green/White/Checkered (GWC)</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> All standard restart rules, lane choices, and passing restrictions apply during Green/White/Checkered finishes.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 17 -->
+                <section class="rulebook-section" id="sec17">
+                    <h2><span class="section-number">SECTION 17:</span> Checkered Flags</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>No Post-Race Wrecking</strong>: Drivers are strictly forbidden from intentionally crashing into other vehicles after crossing the checkered flag.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Media Interviews</strong>: The top 3 finishers are required to remain in the server after the race for screenshots, photos, and live broadcast interviews.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 18 -->
+                <section class="rulebook-section" id="sec18">
+                    <h2><span class="section-number">SECTION 18:</span> Protests</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>No Formal Protest System</strong>: Formal post-race protest tickets have been removed. Drivers with a racing issue should contact Race Control directly for a private meeting. Race Control will determine if additional league owners or admins need to be consultated.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 19 -->
+                <section class="rulebook-section" id="sec19">
+                    <h2><span class="section-number">SECTION 19:</span> League Admins</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> Admins are competitors first and foremost. They volunteer to maintain a clean, fair, and organized racing experience.</li>
+                        <li><span class="rule-letter">B)</span> Admins must be treated with the same respect as any other league member.</li>
+                        <li><span class="rule-letter">C)</span> Admins are subject to all rules and procedures outlined in this rule book.</li>
+                        <li><span class="rule-letter">D)</span> Admins are only permitted to clear their own black flags if no other active admin is present in the session.</li>
+                        <li><span class="rule-letter">E)</span> Admins are authorized to clear black flags for other league members when warranted.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 20 -->
+                <section class="rulebook-section" id="sec20">
+                    <h2><span class="section-number">SECTION 20:</span> Connection Issues (Blinking)</h2>
+                    <div class="rule-alert" style="background: rgba(255, 23, 68, 0.02); border-color: var(--status-reserved);">
+                        <h4>blinking Warning system</h4>
+                        <p>Drivers experiencing high ping or severe packet loss (blinking) that endangers others must move off the racing line.</p>
+                    </div>
+                    <ul class="rule-list" style="margin-top: 15px;">
+                        <li><span class="rule-letter">A)</span> <strong>First Offense</strong>: A verbal warning is issued over communications.</li>
+                        <li><span class="rule-letter">B)</span> <strong>Second Offense</strong>: The driver must blend to the tail of the field and run off the racing line. The connection must stabilize within <strong>5 laps</strong>, or the driver must pit until stable.</li>
+                        <li><span class="rule-letter">C)</span> <strong>Disconnected Laps</strong>: No laps will be restored to any driver who disconnects from the iRacing server. Disconnections are treated as mechanical failures; you may rejoin the race but will receive no wave arounds.</li>
+                        <li><span class="rule-letter">D)</span> <strong>Tactical Disconnects</strong>: Intentional disconnections to avoid crash damage or gain an unfair advantage will result in immediate disqualification and potential league ban.</li>
+                    </ul>
+                </section>
+
+                <!-- Section 21 -->
+                <section class="rulebook-section" id="sec21">
+                    <h2><span class="section-number">SECTION 21:</span> Social Media & Links</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> Official BRL Web portal and media pages:
+                            <br>• <strong>Discord</strong>: <a href="https://discord.gg/2DYG64D" target="_blank" class="accent">discord.gg/2DYG64D</a>
+                            <br>• <strong>Facebook</strong>: <a href="https://www.facebook.com/BanditRacingLeague" target="_blank" class="accent">facebook.com/BanditRacingLeague</a>
+                            <br>• <strong>Website</strong>: <a href="http://banditracingleague.net" target="_blank" class="accent">banditracingleague.net</a>
+                            <br>• <strong>Instagram</strong>: <a href="https://www.instagram.com/brl.iracing" target="_blank" class="accent">@brl.iracing</a>
+                            <br>• <strong>Broadcast Partner</strong>: SimTrax Broadcasting
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Section 22 -->
+                <section class="rulebook-section" id="sec22">
+                    <h2><span class="section-number">SECTION 22:</span> League Contacts</h2>
+                    <ul class="rule-list">
+                        <li><span class="rule-letter">A)</span> <strong>League Officials & Structure</strong>:
+                            <br>• <strong>League Owner</strong>: Kevin Foster
+                            <br>• <strong>President of Operations</strong>: Bill Harkins
+                            <br>• <strong>Race Control Director</strong>: TBD
+                            <br>• <strong>Race Admins</strong>: Kevin Foster, Nick Nickerson, Brandon Jackson, Benjamin Lacy, Ricky Hart Jr., Bob Berry, Curtis Yancey
+                        </li>
+                    </ul>
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+            <p style="color: #666;">&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Search, Filter, Scrollspy, and Mobile Toggle JS -->
+    <script>
+        function filterRules() {
+            const query = document.getElementById('rule-search').value.toLowerCase();
+            const sections = document.querySelectorAll('.rulebook-section');
+            const tocLinks = document.querySelectorAll('.rulebook-toc a');
+            
+            sections.forEach(section => {
+                const text = section.innerText.toLowerCase();
+                const matches = text.includes(query);
+                
+                if (matches) {
+                    section.style.display = 'block';
+                    // Optional: Highlight search matches in text
+                    highlightText(section, query);
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+            
+            // Sync Table of Contents links
+            tocLinks.forEach(link => {
+                const targetId = link.getAttribute('href').substring(1);
+                const section = document.getElementById(targetId);
+                if (section) {
+                    if (section.style.display === 'none') {
+                        link.style.display = 'none';
+                    } else {
+                        link.style.display = 'block';
+                    }
+                }
+            });
+        }
+
+        // Highlight matching query words
+        function highlightText(element, query) {
+            removeHighlights(element);
+            if (!query) return;
+
+            const walk = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let node;
+            while (node = walk.nextNode()) {
+                textNodes.push(node);
+            }
+
+            textNodes.forEach(node => {
+                const parent = node.parentNode;
+                if (parent.tagName === 'SCRIPT' || parent.tagName === 'STYLE' || parent.classList.contains('points-table')) return;
+                
+                const text = node.nodeValue;
+                const index = text.toLowerCase().indexOf(query);
+                
+                if (index >= 0) {
+                    const span = document.createElement('span');
+                    span.className = 'highlight-wrapper';
+                    
+                    const before = text.substring(0, index);
+                    const match = text.substring(index, index + query.length);
+                    const after = text.substring(index + query.length);
+                    
+                    const beforeNode = document.createTextNode(before);
+                    const matchNode = document.createElement('span');
+                    matchNode.className = 'highlight';
+                    matchNode.innerText = match;
+                    const afterNode = document.createTextNode(after);
+                    
+                    parent.insertBefore(beforeNode, node);
+                    parent.insertBefore(matchNode, node);
+                    parent.insertBefore(afterNode, node);
+                    parent.removeChild(node);
+                }
+            });
+        }
+
+        function removeHighlights(element) {
+            const highlights = element.querySelectorAll('.highlight');
+            highlights.forEach(highlight => {
+                const parent = highlight.parentNode;
+                parent.replaceChild(document.createTextNode(highlight.innerText), highlight);
+                parent.normalize();
+            });
+        }
+
+        // Scrollspy Functionality
+        window.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    const link = document.querySelector(`.rulebook-toc a[href="#${id}"]`);
+                    
+                    if (link && entry.isIntersecting) {
+                        document.querySelectorAll('.rulebook-toc a').forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.rulebook-section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Mobile Sidebar Drawer Toggle
+        function toggleMobileToc() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Close mobile drawer on TOC link click
+        document.querySelectorAll('.rulebook-toc a').forEach(link => {
+            link.addEventListener('click', () => {
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        });
+
+        // Toggle mobile navigation menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.querySelector('.nav-toggle');
+            const navContainer = document.querySelector('.nav-container');
+            
+            if (toggleBtn && navContainer) {
+                toggleBtn.addEventListener('click', function() {
+                    navContainer.classList.toggle('nav-open');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
