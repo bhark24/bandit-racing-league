@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Redesign Preview</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0d0e12;
+            color: #ffffff;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #1f2128;
+            width: 100%;
+            background: #111217;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #00ff00;
+        }
+        p {
+            margin: 0;
+            color: #8f929d;
+            font-size: 0.95rem;
+        }
+        .container {
+            max-width: 1200px;
+            width: 95%;
+            margin: 30px auto;
+            background: #15161a;
+            border: 1px solid #2a2c33;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid #2a2c33;
+        }
+        .notes {
+            max-width: 800px;
+            width: 90%;
+            margin: 0 auto 50px auto;
+            line-height: 1.6;
+        }
+        h3 {
+            color: #00ff00;
+            border-bottom: 1px dashed rgba(255,255,255,0.15);
+            padding-bottom: 8px;
+        }
+        ul {
+            padding-left: 20px;
+            color: #cfd1d8;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Geezer App Dashboard Redesign Preview</h1>
+        <p>A visual mockup demonstrating a balanced layout while retaining all built features.</p>
+    </header>
+    
+    <div class="container">
+        <img src="dashboard_preview.png" alt="Sim Dashboard Mockup Design">
+    </div>
+
+    <div class="notes">
+        <h3>Redesign Highlights</h3>
+        <ul>
+            <li><strong>Balance</strong>: The relative stands table is expanded vertically to occupy the center, getting rid of the empty blank center void.</li>
+            <li><strong>Decluttering</strong>: Setup buttons are hidden from the driving UI, and pit checkboxes are cleanly aligned.</li>
+            <li><strong>Contrast</strong>: Dimmer labels and high-contrast monospaced data values make it easy to read telemetry instantly.</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Merch Store | Bandit Racing League</title>
+    <!-- SEO & Page Previews -->
+    <meta name="description" content="Official Merchandise Store of the Bandit Racing League. Get your official hoodies, snapbacks, personalized driver jerseys, and decals!">
+    <meta name="keywords" content="Bandit Racing League, Merch Store, Racing Apparel, iRacing Gear, Bandit Hoodie, Custom Driver Jersey">
+    
+    <!-- Open Graph / Discord Previews -->
+    <meta property="og:title" content="Bandit Racing League - Official Merch Store">
+    <meta property="og:description" content="Get your official Bandit Racing League hoodies, snapbacks, and personalized jerseys!">
+    <meta property="og:image" content="https://banditracingleague.net/assets/main-logo.png">
+    <meta property="og:url" content="https://banditracingleague.net/merch.html">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#00ff00">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Merch Specific Styles -->
+    <style>
+        /* Construction Banner Ribbon */
+        .construction-banner {
+            background: repeating-linear-gradient(
+                -45deg,
+                #000,
+                #000 20px,
+                var(--neon-green) 20px,
+                var(--neon-green) 40px
+            );
+            color: #000;
+            text-align: center;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 1.2rem;
+            padding: 12px 20px;
+            box-shadow: 0 4px 20px rgba(0, 255, 0, 0.25);
+            border-bottom: 2px solid #000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 90;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .construction-banner span {
+            background-color: #000;
+            color: var(--neon-green);
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            border: 1px solid var(--neon-green);
+        }
+
+        /* Merch Catalog Grid */
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .product-card {
+            background-color: var(--bg-panel);
+            border: 1px solid #222;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.15);
+        }
+
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%; /* 1:1 Square Ratio */
+            background-color: #0d0d0d;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--chase-yellow);
+            color: #000;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .product-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            gap: 15px;
+        }
+
+        .product-price {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--neon-green);
+        }
+
+        .product-options {
+            background-color: #080808;
+            color: var(--text-light);
+            border: 1px solid #333;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            outline: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .product-options:focus {
+            border-color: var(--neon-green);
+        }
+
+        /* Cart Floating Button */
+        .cart-trigger {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: var(--neon-green);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+            z-index: 99;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .cart-trigger:hover {
+            transform: scale(1.08);
+            background-color: #1aff1a;
+        }
+
+        .cart-count-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #ff1744;
+            color: #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #000;
+        }
+
+        /* Shopping Cart Slide-out Drawer */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 420px;
+            height: 100vh;
+            background-color: var(--bg-panel);
+            border-left: 2px solid var(--neon-green);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            display: none;
+        }
+
+        .cart-overlay.open {
+            display: block;
+        }
+
+        .cart-header {
+            padding: 25px;
+            border-bottom: 1px solid #222;
+            background-color: rgba(255, 255, 255, 0.02);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-size: 1.4rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .cart-close-btn:hover {
+            color: var(--neon-green);
+        }
+
+        .cart-items-container {
+            padding: 20px;
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 50px;
+            font-size: 1.1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            background-color: #0b0b0b;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border: 1px solid #1a1a1a;
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            object-fit: cover;
+            border: 1px solid #222;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .cart-item-option {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-price {
+            color: var(--neon-green);
+            font-weight: bold;
+            font-family: var(--font-heading);
+        }
+
+        .cart-item-qty-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .qty-btn {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background-color: var(--neon-green);
+            color: #000;
+            border-color: var(--neon-green);
+        }
+
+        .qty-val {
+            font-family: var(--font-heading);
+            font-weight: bold;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #ff1744;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 5px;
+        }
+
+        .cart-footer {
+            padding: 25px;
+            border-top: 1px solid #222;
+            background-color: rgba(255, 255, 255, 0.02);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cart-summary-line {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+        }
+
+        .cart-summary-total {
+            font-size: 1.4rem;
+            font-weight: 900;
+            border-top: 1px solid #222;
+            padding-top: 15px;
+            color: var(--neon-green);
+        }
+
+        .promo-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .promo-input {
+            flex-grow: 1;
+            background-color: #080808;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            outline: none;
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        .promo-input:focus {
+            border-color: var(--neon-green);
+        }
+
+        /* Mock Construction Modal */
+        .construction-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 480px;
+            background-color: var(--bg-panel);
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.35);
+            border-radius: 8px;
+            padding: 40px 30px;
+            z-index: 2000;
+            text-align: center;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .construction-modal.open {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--chase-yellow);
+            animation: pulse-icon 2s infinite;
+        }
+
+        @keyframes pulse-icon {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 480px) {
+            .cart-drawer {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Under Construction Banner Ribbon -->
+    <div class="construction-banner">
+        ⚠️ under construction <span>Sneak Peek Only</span> under construction ⚠️
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Mobile Header (Visible only on mobile) -->
+            <div class="nav-mobile-header">
+                <a href="/index.html" class="nav-brand-mobile">BANDIT RACING LEAGUE</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="/apply.html" class="btn-secondary">Apply to League</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/standings.html">Standings</a></li>
+                <li><a href="/schedule.html">Schedule</a></li>
+                <li><a href="/results.html">Results</a></li>
+                <li><a href="/drivers.html">Drivers</a></li>
+                <li><a href="/teams.html">Teams</a></li>
+                <li><a href="/merch.html" class="active">Merch</a></li>
+                <li><a data-tooltip="Fantasy League" href="/fantasy.html"><img src="assets/fantasy-icon.png" alt="Fantasy League" style="height: 42px; width: 42px; border-radius: 50%; border: 1.5px solid var(--neon-green); vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.4)); object-fit: cover;"><span class="nav-icon-label">Fantasy League</span></a></li>
+                <li><a data-tooltip="Geezer App" href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"><span class="nav-icon-label">Geezer App</span></a></li>
+                <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><span class="nav-icon-label">SimTrax Broadcasting</span></a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="https://discord.gg/HSvP4UG2st" target="_blank" class="btn-primary">Join Discord</a>
+                <div class="qr-container">
+                    <img src="assets/discord-qr.png" alt="QR Code" style="height: 42px; border-radius: 4px; border: 2px solid var(--neon-green); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <div class="qr-popup">
+                        <img src="assets/discord-qr.png" style="width: 100%; border-radius: 4px;">
+                        <p style="margin-top: 10px; font-weight: bold; font-family: var(--font-heading); color: var(--neon-green); text-transform: uppercase;">Scan to Join!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="hero" style="min-height: 35vh; padding-top: 60px;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content" style="position: relative; z-index: 2;">
+            <h1 class="hero-title" style="font-size: 4rem;">OFFICIAL <span class="accent">MERCH STORE</span></h1>
+            <h2 class="hero-subtitle italic-heavy" style="text-transform: uppercase; letter-spacing: 2px; color: var(--chase-yellow); font-size: 1.4rem;">SNEAK PEEK &bull; SUPPORT THE LEAGUE</h2>
+        </div>
+    </header>
+
+    <!-- Storefront Main Section -->
+    <main class="container" style="margin-top: -40px; margin-bottom: 80px; position: relative; z-index: 5;">
+        
+        <!-- Welcome Info -->
+        <div class="card neon-border" style="padding: 30px; margin-bottom: 50px;">
+            <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: space-between;">
+                <div style="max-width: 700px;">
+                    <h3 style="color: var(--neon-green); margin-bottom: 10px;">Welcome to the Sneak Peek!</h3>
+                    <p style="color: var(--text-muted); line-height: 1.5;">
+                        We are currently preparing the official merchandise store for the Bandit Racing League! Below is a preview of the upcoming BRL gear. Try out the shopping cart system and see how it works! Use code <strong style="color: var(--neon-green);">BANDIT10</strong> for a mock 10% discount.
+                    </p>
+                </div>
+                <div style="background-color: rgba(255, 204, 0, 0.1); border: 1.5px solid var(--chase-yellow); padding: 15px; border-radius: 6px; font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; text-align: center; color: var(--chase-yellow); letter-spacing: 0.5px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.1);">
+                    ⚠️ Cart is in Sandbox Mode
+                </div>
+            </div>
+        </div>
+
+        <!-- Merch Catalog -->
+        <div class="merch-grid">
+            
+            <!-- Hoodie -->
+            <div class="product-card" data-id="brl-hoodie">
+                <span class="product-badge">Top Seller</span>
+                <div class="product-image-container">
+                    <img src="assets/merch_hoodie.png" alt="BRL Official Hoodie" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">BRL Official Hoodie</h3>
+                    <p class="product-description">Premium heavy-blend black pullover hoodie. Features the metallic Bandit Racing League cowboy logo printed on the chest, and sleek neon-green tire track stripes down both sleeves.</p>
+                    <select class="product-options" id="opt-hoodie">
+                        <option value="S">Size: Small</option>
+                        <option value="M" selected>Size: Medium</option>
+                        <option value="L">Size: Large</option>
+                        <option value="XL">Size: X-Large</option>
+                        <option value="XXL">Size: XX-Large</option>
+                    </select>
+                    <div class="product-bottom">
+                        <span class="product-price">$49.99</span>
+                        <button class="btn-primary add-to-cart-btn" data-id="brl-hoodie" data-name="BRL Official Hoodie" data-price="49.99" data-img="assets/merch_hoodie.png" data-select="opt-hoodie">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jersey -->
+            <div class="product-card" data-id="brl-jersey">
+                <span class="product-badge">Custom</span>
+                <div class="product-image-container">
+                    <img src="assets/merch_jersey.png" alt="Personalized Driver Jersey" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Driver Racing Jersey</h3>
+                    <p class="product-description">Custom sublimated high-performance racing jersey. Features a carbon-fiber textured print in neon green, silver, and black. Customizable with your driver name and number on the back!</p>
+                    <select class="product-options" id="opt-jersey">
+                        <option value="S">Size: Small</option>
+                        <option value="M" selected>Size: Medium</option>
+                        <option value="L">Size: Large</option>
+                        <option value="XL">Size: X-Large</option>
+                        <option value="XXL">Size: XX-Large</option>
+                    </select>
+                    <div class="product-bottom">
+                        <span class="product-price">$59.99</span>
+                        <button class="btn-primary add-to-cart-btn" data-id="brl-jersey" data-name="Driver Racing Jersey" data-price="59.99" data-img="assets/merch_jersey.png" data-select="opt-jersey">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Snapback Hat -->
+            <div class="product-card" data-id="brl-hat">
+                <div class="product-image-container">
+                    <img src="assets/merch_hat.png" alt="Bandit Snapback Hat" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Bandit Snapback Hat</h3>
+                    <p class="product-description">Classic structured snapback cap with a flat bill. Features the official Bandit Racing League emblem embroidered in high-relief 3D stitching, complete with neon-green eyelets.</p>
+                    <select class="product-options" id="opt-hat">
+                        <option value="OneSize" selected>Size: Adjustable Snapback</option>
+                    </select>
+                    <div class="product-bottom">
+                        <span class="product-price">$24.99</span>
+                        <button class="btn-primary add-to-cart-btn" data-id="brl-hat" data-name="Bandit Snapback Hat" data-price="24.99" data-img="assets/merch_hat.png" data-select="opt-hat">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decal Pack -->
+            <div class="product-card" data-id="brl-decals">
+                <div class="product-image-container">
+                    <img src="assets/merch_decals.png" alt="BRL Decal Pack" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">BRL Premium Decal Pack</h3>
+                    <p class="product-description">Get a set of high-gloss, die-cut vinyl stickers. Perfect for your toolbox, laptop, rig, or vehicle. Pack includes round, shield-shaped, and text-only BRL cowboy decals.</p>
+                    <select class="product-options" id="opt-decals">
+                        <option value="Standard" selected>Pack: 8-Decals Pack</option>
+                    </select>
+                    <div class="product-bottom">
+                        <span class="product-price">$9.99</span>
+                        <button class="btn-primary add-to-cart-btn" data-id="brl-decals" data-name="BRL Premium Decal Pack" data-price="9.99" data-img="assets/merch_decals.png" data-select="opt-decals">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Floating Cart Button -->
+    <button class="cart-trigger" id="cartTrigger" aria-label="Open Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <span class="cart-count-badge" id="cartCountBadge">0</span>
+    </button>
+
+    <!-- Cart Overlay & Sidebar Drawer -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Your Shopping Cart
+            </h2>
+            <button class="cart-close-btn" id="cartCloseBtn">&times;</button>
+        </div>
+
+        <div class="cart-items-container" id="cartItemsContainer">
+            <!-- Dynamic Cart Items go here -->
+            <div class="empty-cart-msg">Your cart is currently empty.</div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-summary-line">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+            
+            <div class="promo-input-group">
+                <input type="text" placeholder="PROMO CODE" class="promo-input" id="promoInput">
+                <button class="btn-secondary" id="applyPromoBtn" style="padding: 10px 15px;">Apply</button>
+            </div>
+            
+            <div id="promoMsg" style="font-size: 0.85rem; color: var(--neon-green); margin-top: -8px; display: none;">Discount code applied!</div>
+
+            <div class="cart-summary-line cart-summary-total">
+                <span>Total</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+
+            <button class="btn-primary btn-large" id="checkoutBtn" style="width: 100%; padding: 15px 0;">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Under Construction Modal popup -->
+    <div class="cart-overlay" id="modalOverlay" style="z-index: 1999;"></div>
+    <div class="construction-modal" id="constructionModal">
+        <div class="modal-icon">⚠️</div>
+        <h2 style="margin-bottom: 15px; color: var(--chase-yellow);">Under Construction</h2>
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 25px;">
+            The Bandit Racing League merchandise store is currently in development. Online ordering is disabled during this sneak peek. 
+        </p>
+        <p style="color: var(--text-light); font-weight: bold; margin-bottom: 30px;">
+            We will announce the official grand opening on our Discord server and weekly broadcasts soon!
+        </p>
+        <button class="btn-primary" id="modalCloseBtn" style="padding: 12px 35px;">Back to Preview</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Main Logic Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Nav Toggle
+            const toggleBtn = document.querySelector('.nav-toggle');
+            const navContainer = document.querySelector('.nav-container');
+            if (toggleBtn && navContainer) {
+                toggleBtn.addEventListener('click', function() {
+                    navContainer.classList.toggle('nav-open');
+                });
+            }
+
+            // Shopping Cart Variables
+            let cart = [];
+            let discount = 0.0;
+
+            // DOM Elements
+            const cartTrigger = document.getElementById('cartTrigger');
+            const cartDrawer = document.getElementById('cartDrawer');
+            const cartOverlay = document.getElementById('cartOverlay');
+            const cartCloseBtn = document.getElementById('cartCloseBtn');
+            const cartCountBadge = document.getElementById('cartCountBadge');
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartTotal = document.getElementById('cartTotal');
+            const promoInput = document.getElementById('promoInput');
+            const applyPromoBtn = document.getElementById('applyPromoBtn');
+            const promoMsg = document.getElementById('promoMsg');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            // Modal Elements
+            const constructionModal = document.getElementById('constructionModal');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+            // Slide out Drawer Triggers
+            function openCart() {
+                cartDrawer.classList.add('open');
+                cartOverlay.classList.add('open');
+            }
+
+            function closeCart() {
+                cartDrawer.classList.remove('open');
+                cartOverlay.classList.remove('open');
+            }
+
+            cartTrigger.addEventListener('click', openCart);
+            cartCloseBtn.addEventListener('click', closeCart);
+            cartOverlay.addEventListener('click', closeCart);
+
+            // Add To Cart logic
+            const addButtons = document.querySelectorAll('.add-to-cart-btn');
+            addButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const name = this.getAttribute('data-name');
+                    const price = parseFloat(this.getAttribute('data-price'));
+                    const img = this.getAttribute('data-img');
+                    const selectId = this.getAttribute('data-select');
+                    const optionVal = document.getElementById(selectId).value;
+
+                    addItemToCart(id, name, price, img, optionVal);
+                    openCart();
+                });
+            });
+
+            function addItemToCart(id, name, price, img, option) {
+                // Check if item with same option already exists
+                const existingItem = cart.find(item => item.id === id && item.option === option);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ id, name, price, img, option, quantity: 1 });
+                }
+                updateCartUI();
+            }
+
+            // Update Cart quantities
+            function updateQty(id, option, newQty) {
+                const item = cart.find(item => item.id === id && item.option === option);
+                if (item) {
+                    item.quantity = parseInt(newQty);
+                    if (item.quantity <= 0) {
+                        removeItem(id, option);
+                    } else {
+                        updateCartUI();
+                    }
+                }
+            }
+
+            // Remove Item
+            function removeItem(id, option) {
+                cart = cart.filter(item => !(item.id === id && item.option === option));
+                updateCartUI();
+            }
+
+            // Recalculate and Draw UI
+            function updateCartUI() {
+                cartItemsContainer.innerHTML = '';
+                
+                let count = 0;
+                let subtotal = 0.0;
+
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<div class="empty-cart-msg">Your cart is currently empty.</div>';
+                } else {
+                    cart.forEach(item => {
+                        count += item.quantity;
+                        const lineTotal = item.price * item.quantity;
+                        subtotal += lineTotal;
+
+                        const itemEl = document.createElement('div');
+                        itemEl.className = 'cart-item';
+                        itemEl.innerHTML = `
+                            <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                            <div class="cart-item-details">
+                                <div class="cart-item-title">${item.name}</div>
+                                <div class="cart-item-option">${item.option}</div>
+                                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                                <div class="cart-item-qty-control">
+                                    <button class="qty-btn dec-qty" data-id="${item.id}" data-opt="${item.option}">-</button>
+                                    <span class="qty-val">${item.quantity}</span>
+                                    <button class="qty-btn inc-qty" data-id="${item.id}" data-opt="${item.option}">+</button>
+                                </div>
+                            </div>
+                            <button class="cart-item-remove" data-id="${item.id}" data-opt="${item.option}">&times;</button>
+                        `;
+                        cartItemsContainer.appendChild(itemEl);
+                    });
+                }
+
+                // Bind listener elements
+                document.querySelectorAll('.dec-qty').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const opt = this.getAttribute('data-opt');
+                        const item = cart.find(x => x.id === id && x.option === opt);
+                        updateQty(id, opt, item.quantity - 1);
+                    });
+                });
+
+                document.querySelectorAll('.inc-qty').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const opt = this.getAttribute('data-opt');
+                        const item = cart.find(x => x.id === id && x.option === opt);
+                        updateQty(id, opt, item.quantity + 1);
+                    });
+                });
+
+                document.querySelectorAll('.cart-item-remove').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const opt = this.getAttribute('data-opt');
+                        removeItem(id, opt);
+                    });
+                });
+
+                // Update count and totals
+                cartCountBadge.textContent = count;
+                cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+                
+                const discountAmount = subtotal * discount;
+                const total = subtotal - discountAmount;
+                cartTotal.textContent = `$${total.toFixed(2)}`;
+            }
+
+            // Discount Code Logic
+            applyPromoBtn.addEventListener('click', function() {
+                const code = promoInput.value.trim().toUpperCase();
+                if (code === 'BANDIT10') {
+                    discount = 0.10;
+                    promoMsg.style.display = 'block';
+                    updateCartUI();
+                } else {
+                    discount = 0.0;
+                    promoMsg.style.display = 'none';
+                    alert('Invalid discount code. Try: BANDIT10');
+                    updateCartUI();
+                }
+            });
+
+            // Sandbox Checkout Modal launch
+            checkoutBtn.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty! Add products first.');
+                    return;
+                }
+                closeCart();
+                constructionModal.classList.add('open');
+                modalOverlay.classList.add('open');
+            });
+
+            function closeModal() {
+                constructionModal.classList.remove('open');
+                modalOverlay.classList.remove('open');
+            }
+
+            modalCloseBtn.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', closeModal);
+        });
+    </script>
+</body>
+</html>
