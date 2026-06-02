@@ -574,7 +574,7 @@
             
             // Find unique dates from ledger entries containing points calculations/bonuses/subs
             const raceDates = team.ledger
-                .filter(item => item.date !== '2026-05-24' && (item.description.includes('Bonus') || item.description.includes('DNS') || item.description.includes('Substituted') || item.description.includes('Prize Money')))
+                .filter(item => item.date !== '2026-05-24' && (item.description.includes('Sponsor Start Bonus') || item.description.includes('DNS') || item.description.includes('Substituted') || item.description.includes('Prize Money')))
                 .map(item => item.date);
             
             if (raceDates.length === 0) {
