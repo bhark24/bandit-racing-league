@@ -707,14 +707,14 @@ const teamsData = {
       "logo": "assets/zerofoxtrot-logo.jpg",
       "points": 64,
       "wins": 1,
-      "balance": 2124676,
+      "balance": 2074676,
       "loan": 0,
       "drivers": {
         "primary": [
           "DAVID LEAKEY",
           "CONOR GIBSON",
           "CURTIS YANCEY",
-          "VACANT"
+          "MICHAEL RAMOS"
         ],
         "backup": [
           "VACANT",
@@ -843,6 +843,12 @@ const teamsData = {
           "description": "VACANT DNS - No active backup available",
           "category": "expense",
           "amount": 0
+        },
+        {
+          "date": "Jun 01, 2026",
+          "description": "Signed Driver: MICHAEL RAMOS (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
