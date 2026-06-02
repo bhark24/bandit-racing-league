@@ -431,9 +431,12 @@
                         <p>iRacing Customer ID: <span id="header-driver-id">00000</span> | Session Laps Remaining: <span id="header-laps-remain" style="color:var(--neon-green); font-weight:bold;">--</span></p>
                     </div>
                 </div>
-                <div class="status-badge status-offline" id="connection-badge">
-                    <div class="status-dot"></div>
-                    <span id="connection-status-text">OFFLINE</span>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button id="btn-spotter-fullscreen" class="btn-verify" style="width: auto; padding: 10px 18px; font-size: 0.85rem; margin: 0; background: rgba(57, 255, 20, 0.05); border: 2px solid var(--neon-green); color: var(--neon-green);">📺 Fullscreen</button>
+                    <div class="status-badge status-offline" id="connection-badge">
+                        <div class="status-dot"></div>
+                        <span id="connection-status-text">OFFLINE</span>
+                    </div>
                 </div>
             </div>
 
@@ -1098,6 +1101,41 @@
             updateConnectionStatus(false, "OFFLINE");
             updateFlagState('green');
         }
+
+        // Fullscreen Toggle Logic for Spotters (Tablets/Phones)
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnFullscreen = document.getElementById('btn-spotter-fullscreen');
+            if (btnFullscreen) {
+                btnFullscreen.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen()
+                            .then(() => {
+                                btnFullscreen.innerHTML = "📺 Windowed";
+                            })
+                            .catch(err => {
+                                console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                            });
+                    } else {
+                        document.exitFullscreen()
+                            .then(() => {
+                                btnFullscreen.innerHTML = "📺 Fullscreen";
+                            })
+                            .catch(err => {
+                                btnFullscreen.innerHTML = "📺 Fullscreen";
+                            });
+                    }
+                });
+
+                document.addEventListener('fullscreenchange', () => {
+                    if (document.fullscreenElement) {
+                        btnFullscreen.innerHTML = "📺 Windowed";
+                    } else {
+                        btnFullscreen.innerHTML = "📺 Fullscreen";
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
