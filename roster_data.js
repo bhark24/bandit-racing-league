@@ -129,7 +129,7 @@ const rosterData = {
   },
   "97": {
     "driver": "EDDIE HAGIGH",
-    "status": "past-champion"
+    "status": "full-time"
   },
   "99": {
     "driver": "JOSH BILLITER",

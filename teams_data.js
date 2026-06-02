@@ -209,9 +209,9 @@ const teamsData = {
       "lon": -77.436
     },
     "JASON GREENWELL": {
-      "city": "Indianapolis, IN",
-      "lat": 39.7684,
-      "lon": -86.1581
+      "city": "Plymouth, MI",
+      "lat": 42.3714,
+      "lon": -83.4702
     },
     "DYLAN NICASTRO": {
       "city": "Cleveland, OH",
@@ -282,6 +282,16 @@ const teamsData = {
       "city": "Ashtabula, OH",
       "lat": 41.8651,
       "lon": -80.7898
+    },
+    "CARTER PHILLIPS": {
+      "city": "Columbia, SC",
+      "lat": 34.0007,
+      "lon": -81.0348
+    },
+    "EDDIE HAGIGH": {
+      "city": "Severna Park, MD",
+      "lat": 39.0696,
+      "lon": -76.5452
     }
   },
   "teams": [
@@ -857,6 +867,74 @@ const teamsData = {
         "Craftsman Tools"
       ],
       "passcodeHash": "13b92326aee45b686501b518930032a92c937945b258b461840f4b2572ed9d68"
+    },
+    {
+      "id": "carter-phillips-racing",
+      "name": "Carter Phillips Racing",
+      "owner": "Carter Phillips",
+      "homeBase": "Columbia, SC",
+      "logo": "assets/carter-phillips-racing-logo.png",
+      "points": 0,
+      "wins": 0,
+      "balance": 2010000,
+      "loan": 0,
+      "drivers": {
+        "primary": [
+          "EDDIE HAGIGH",
+          "JASON GREENWELL",
+          "VACANT",
+          "VACANT"
+        ],
+        "backup": [
+          "VACANT",
+          "VACANT"
+        ]
+      },
+      "trucks": [
+        {
+          "id": "truck-1",
+          "make": "Chevrolet",
+          "name": "Carter Phillips Silverado #97",
+          "condition": 100
+        },
+        {
+          "id": "truck-2",
+          "make": "Chevrolet",
+          "name": "Carter Phillips Silverado #83",
+          "condition": 100
+        },
+        {
+          "id": "truck-3",
+          "make": "Chevrolet",
+          "name": "Carter Phillips Silverado #3",
+          "condition": 100
+        },
+        {
+          "id": "truck-4",
+          "make": "Chevrolet",
+          "name": "Carter Phillips Silverado #4",
+          "condition": 100
+        }
+      ],
+      "ledger": [
+        {
+          "date": "2026-05-24",
+          "description": "Starting Franchise Balance",
+          "category": "income",
+          "amount": 2750000
+        },
+        {
+          "date": "2026-05-24",
+          "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
+          "category": "expense",
+          "amount": -740000
+        }
+      ],
+      "sponsors": [
+        "Carter Phillips Racing",
+        "Craftsman Tools"
+      ],
+      "passcodeHash": "c059737b8d4f40f0980c500e23e7100b21a8d6e3c09533f81e695123d6a978f8"
     }
   ]
 };
