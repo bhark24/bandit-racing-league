@@ -379,6 +379,53 @@
                 text-align: center;
             }
         }
+
+        /* Fullscreen Dashboard styling */
+        :fullscreen .navbar,
+        .is-fullscreen .navbar,
+        :fullscreen footer,
+        .is-fullscreen footer {
+            display: none !important;
+        }
+
+        :fullscreen .spotter-container,
+        .is-fullscreen .spotter-container {
+            max-width: 100% !important;
+            width: 100% !important;
+            height: 100vh !important;
+            margin: 0 !important;
+            padding: 15px !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        :fullscreen #dashboard-layout,
+        .is-fullscreen #dashboard-layout {
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 !important;
+            height: 100% !important;
+        }
+
+        :fullscreen .dashboard-grid,
+        .is-fullscreen .dashboard-grid {
+            flex: 1 !important;
+            display: grid !important;
+            grid-template-columns: 1fr 1fr 1fr !important;
+            gap: 20px !important;
+        }
+
+        :fullscreen .dash-card,
+        .is-fullscreen .dash-card {
+            height: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        :fullscreen .dash-card > div,
+        .is-fullscreen .dash-card > div {
+            flex: 1 !important;
+        }
     </style>
 </head>
 <body>
@@ -1106,39 +1153,50 @@
             updateFlagState('green');
         }
 
-        // Fullscreen Toggle Logic for Spotters (Tablets/Phones)
+        // Fullscreen Toggle Logic for Spotters
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen()
+                    .catch(err => {
+                        console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                    });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen()
+                        .catch(err => {
+                            console.error(`Error attempting to exit fullscreen: ${err.message}`);
+                        });
+                }
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const btnFullscreen = document.getElementById('btn-spotter-fullscreen');
             if (btnFullscreen) {
                 btnFullscreen.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if (!document.fullscreenElement) {
-                        document.documentElement.requestFullscreen()
-                            .then(() => {
-                                btnFullscreen.innerHTML = "📺 Windowed";
-                            })
-                            .catch(err => {
-                                console.error(`Error attempting to enable fullscreen: ${err.message}`);
-                            });
-                    } else {
-                        document.exitFullscreen()
-                            .then(() => {
-                                btnFullscreen.innerHTML = "📺 Fullscreen";
-                            })
-                            .catch(err => {
-                                btnFullscreen.innerHTML = "📺 Fullscreen";
-                            });
-                    }
+                    toggleFullscreen();
                 });
 
+                // Listen to fullscreen changes to update UI classes and button text
                 document.addEventListener('fullscreenchange', () => {
                     if (document.fullscreenElement) {
+                        document.body.classList.add('is-fullscreen');
                         btnFullscreen.innerHTML = "📺 Windowed";
                     } else {
+                        document.body.classList.remove('is-fullscreen');
                         btnFullscreen.innerHTML = "📺 Fullscreen";
                     }
                 });
             }
+
+            // Intercept F11 key to use the HTML5 Fullscreen API instead of browser default fullscreen
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'F11') {
+                    e.preventDefault();
+                    toggleFullscreen();
+                }
+            });
         });
     </script>
 </body>
