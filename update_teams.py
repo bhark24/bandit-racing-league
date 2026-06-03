@@ -731,39 +731,37 @@ def main():
             if prev_finishes:
                 all_finishes.extend(prev_finishes)
                 avg_finish = sum(all_finishes) / len(all_finishes)
-                weeks_count = 2
                 print(f"  Team Average Finish (2-Week Avg): {avg_finish:.2f} ({len(participating_finishes)} finishes this week, {len(prev_finishes)} finishes last week)")
-            else:
-                avg_finish = sum(participating_finishes) / len(participating_finishes)
-                weeks_count = 1
-                print(f"  Team Average Finish (1-Week Avg): {avg_finish:.2f} ({len(participating_finishes)} finishes this week)")
-            
-            if avg_finish <= 12.0:
-                if random.random() < 0.50:
-                    options = [s for s in available_new_sponsors if s not in team["sponsors"]]
-                    if options:
-                        new_sponsor = random.choice(options)
-                        sponsor_payout = random.randint(10000, 35000)
-                        team["sponsors"].append(new_sponsor)
-                        team_earnings += sponsor_payout
+                
+                if avg_finish <= 12.0:
+                    if random.random() < 0.50:
+                        options = [s for s in available_new_sponsors if s not in team["sponsors"]]
+                        if options:
+                            new_sponsor = random.choice(options)
+                            sponsor_payout = random.randint(10000, 35000)
+                            team["sponsors"].append(new_sponsor)
+                            team_earnings += sponsor_payout
+                            team["ledger"].append({
+                                "date": race_date,
+                                "description": f"Virtual Sponsorship Earned: {new_sponsor} (Upward Performance: {avg_finish:.1f} Avg Finish over 2 weeks)",
+                                "category": "income",
+                                "amount": sponsor_payout
+                            })
+                            print(f"  [Sponsor Gain] {team['name']} earned sponsorship from {new_sponsor}! (+${sponsor_payout})")
+                elif avg_finish >= 20.0:
+                    if random.random() < 0.40 and len(team["sponsors"]) > 1:
+                        lost_sponsor = random.choice(team["sponsors"])
+                        team["sponsors"].remove(lost_sponsor)
                         team["ledger"].append({
                             "date": race_date,
-                            "description": f"Virtual Sponsorship Earned: {new_sponsor} (Upward Performance: {avg_finish:.1f} Avg Finish over {weeks_count} weeks)",
-                            "category": "income",
-                            "amount": sponsor_payout
+                            "description": f"<span style=\"color:#ff4d4d;\">Lost Sponsor: {lost_sponsor} (Downward Performance: {avg_finish:.1f} Avg Finish over 2 weeks)</span>",
+                            "category": "info",
+                            "amount": 0
                         })
-                        print(f"  [Sponsor Gain] {team['name']} earned sponsorship from {new_sponsor}! (+${sponsor_payout})")
-            elif avg_finish >= 20.0:
-                if random.random() < 0.40 and len(team["sponsors"]) > 1:
-                    lost_sponsor = random.choice(team["sponsors"])
-                    team["sponsors"].remove(lost_sponsor)
-                    team["ledger"].append({
-                        "date": race_date,
-                        "description": f"<span style=\"color:#ff4d4d;\">Lost Sponsor: {lost_sponsor} (Downward Performance: {avg_finish:.1f} Avg Finish over {weeks_count} weeks)</span>",
-                        "category": "info",
-                        "amount": 0
-                    })
-                    print(f"  [Sponsor Loss] {team['name']} lost sponsorship from {lost_sponsor}!")
+                        print(f"  [Sponsor Loss] {team['name']} lost sponsorship from {lost_sponsor}!")
+            else:
+                avg_finish = sum(participating_finishes) / len(participating_finishes)
+                print(f"  Team Average Finish: {avg_finish:.2f} ({len(participating_finishes)} finishes this week). Sponsor evaluation skipped (requires 2-week average).")
         else:
             print("  No participating drivers - sponsor trend skipped.")
 
