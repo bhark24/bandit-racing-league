@@ -189,6 +189,20 @@
             color: #ff1744;
             font-weight: bold;
         }
+        .roster-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        @media (max-width: 992px) {
+            .roster-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            #primary-drivers-container, #trucks-container {
+                grid-template-columns: 1fr !important;
+            }
+        }
         @media (max-width: 768px) {
             .construction-banner {
                 flex-direction: column;
@@ -373,7 +387,7 @@
 
             <!-- TAB 1: ROSTER -->
             <div id="roster-tab" class="panel-tab-content active">
-                <div style="display:grid; grid-template-columns: 2fr 1fr; gap:30px;">
+                <div class="roster-layout">
                     <div>
                         <h3 style="color:#fff; margin-bottom:15px; font-size:1.3rem;">Primary Drivers (4 Slots)</h3>
                         <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 15px;" id="primary-drivers-container">
