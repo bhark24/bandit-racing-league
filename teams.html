@@ -606,10 +606,10 @@
             
             const isBackup = team.drivers.backup.includes(driverName);
             if (isBackup) {
-                return { status: 'Benched', icon: '🟡', color: 'var(--chase-yellow)' };
+                return { status: 'Backup', icon: '🔵', color: 'var(--status-parttime)' };
             }
             
-            return { status: 'Benched', icon: '⚪', color: 'var(--text-muted)' };
+            return { status: 'Active', icon: '🟢', color: 'var(--neon-green)' };
         }
 
         function renderFranchiseStandings() {

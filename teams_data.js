@@ -301,9 +301,9 @@ const teamsData = {
       "owner": "Bill Harkins",
       "homeBase": "Cleveland, OH",
       "logo": "assets/roundy-motorsports-logo.png",
-      "points": 16,
+      "points": 22,
       "wins": 0,
-      "balance": 2050863,
+      "balance": 2050951,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -322,7 +322,7 @@ const teamsData = {
           "id": "truck-1",
           "make": "Ford",
           "name": "Roundy F-150 #12",
-          "condition": 49
+          "condition": 50
         },
         {
           "id": "truck-2",
@@ -334,7 +334,7 @@ const teamsData = {
           "id": "truck-3",
           "make": "Ford",
           "name": "Roundy F-150 #15",
-          "condition": 49
+          "condition": 47
         },
         {
           "id": "truck-4",
@@ -372,7 +372,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (874 mi)",
           "category": "expense",
-          "amount": -210
+          "amount": -214
         },
         {
           "date": "May 7, 2025",
@@ -402,7 +402,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: MATT CROCKETT from Roanoke, VA (560 mi)",
           "category": "expense",
-          "amount": -429
+          "amount": -337
         },
         {
           "date": "May 7, 2025",
@@ -421,16 +421,11 @@ const teamsData = {
           "description": "VACANT DNS - No active backup available",
           "category": "expense",
           "amount": 0
-        },
-        {
-          "date": "May 7, 2025",
-          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Ford Performance (Downward Performance: 26.0 Avg Finish)</span>",
-          "category": "info",
-          "amount": 0
         }
       ],
       "sponsors": [
         "Roundy Motorsports",
+        "Ford Performance",
         "Craftsman Tools"
       ],
       "passcodeHash": "e7faa8b075ab5b412691a8b097ebfee4bb5fd87c448bfffc35ed519a449702ce"
@@ -441,9 +436,9 @@ const teamsData = {
       "owner": "Victor Weaver",
       "homeBase": "Dayton, OH",
       "logo": "assets/937-racing-logo.png",
-      "points": -2,
+      "points": -6,
       "wins": 0,
-      "balance": 2027171,
+      "balance": 2027142,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -512,7 +507,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (750 mi)",
           "category": "expense",
-          "amount": -323
+          "amount": -352
         },
         {
           "date": "May 7, 2025",
@@ -543,15 +538,10 @@ const teamsData = {
           "description": "VACANT DNS - No active backup available",
           "category": "expense",
           "amount": 0
-        },
-        {
-          "date": "May 7, 2025",
-          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: 937 Racing (Downward Performance: 33.0 Avg Finish)</span>",
-          "category": "info",
-          "amount": 0
         }
       ],
       "sponsors": [
+        "937 Racing",
         "Toyota Racing Development",
         "Craftsman Tools"
       ],
@@ -563,9 +553,9 @@ const teamsData = {
       "owner": "Dylan Nicastro",
       "homeBase": "Cleveland, OH",
       "logo": "assets/wrists-up-racing-logo.png",
-      "points": 16,
+      "points": 28,
       "wins": 0,
-      "balance": 2054025,
+      "balance": 2054005,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -590,7 +580,7 @@ const teamsData = {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Wrist's Up Silverado #88",
-          "condition": 63
+          "condition": 64
         },
         {
           "id": "truck-3",
@@ -634,7 +624,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: DYLAN NICASTRO from Cleveland, OH (849 mi)",
           "category": "expense",
-          "amount": -241
+          "amount": -252
         },
         {
           "date": "May 7, 2025",
@@ -664,7 +654,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: DAVID WESTOVER JR from Ashtabula, OH (874 mi)",
           "category": "expense",
-          "amount": -236
+          "amount": -245
         },
         {
           "date": "May 7, 2025",
@@ -695,16 +685,11 @@ const teamsData = {
           "description": "VACANT DNS - No active backup available",
           "category": "expense",
           "amount": 0
-        },
-        {
-          "date": "May 7, 2025",
-          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Chevrolet Accessories (Downward Performance: 23.0 Avg Finish)</span>",
-          "category": "info",
-          "amount": 0
         }
       ],
       "sponsors": [
         "Wrist's Up Racing",
+        "Chevrolet Accessories",
         "Craftsman Tools"
       ],
       "passcodeHash": "858a794b9a1df6e2fa1e6258cafa1f3df7f31ff877c887107e245163fa52fbdc"
@@ -715,9 +700,9 @@ const teamsData = {
       "owner": "David Leakey",
       "homeBase": "Weeki Wachee, FL",
       "logo": "assets/zerofoxtrot-logo.jpg",
-      "points": 64,
+      "points": 110,
       "wins": 1,
-      "balance": 2074676,
+      "balance": 2109948,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -736,13 +721,13 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #84",
-          "condition": 64
+          "condition": 63
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #31",
-          "condition": 82
+          "condition": 80
         },
         {
           "id": "truck-3",
@@ -754,7 +739,7 @@ const teamsData = {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #00",
-          "condition": 100
+          "condition": 64
         }
       ],
       "ledger": [
@@ -771,10 +756,16 @@ const teamsData = {
           "amount": -740000
         },
         {
-          "date": "May 7, 2025",
-          "description": "Hauler Logistics: Crestview, FL to Daytona Beach, FL (348 mi)",
+          "date": "2026-06-01",
+          "description": "Signed Driver: MICHAEL RAMOS (Signing Bonus)",
           "category": "expense",
-          "amount": -3487
+          "amount": -50000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Hauler Logistics: Weeki Wachee, FL to Daytona Beach, FL (105 mi)",
+          "category": "expense",
+          "amount": -1054
         },
         {
           "date": "May 7, 2025",
@@ -786,7 +777,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: DAVID LEAKEY from Crestview, FL (348 mi)",
           "category": "expense",
-          "amount": -353
+          "amount": -287
         },
         {
           "date": "May 7, 2025",
@@ -810,7 +801,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: CONOR GIBSON from Toronto, ON (1001 mi)",
           "category": "expense",
-          "amount": -384
+          "amount": -511
         },
         {
           "date": "May 7, 2025",
@@ -850,15 +841,27 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "VACANT DNS - No active backup available",
+          "description": "Standard Race Prep: ZeroFoxtrot Silverado #00 (MICHAEL RAMOS)",
           "category": "expense",
-          "amount": 0
+          "amount": -2000
         },
         {
-          "date": "Jun 01, 2026",
-          "description": "Signed Driver: MICHAEL RAMOS (Signing Bonus)",
+          "date": "May 7, 2025",
+          "description": "Drive & Lodging: MICHAEL RAMOS (Location N/A)",
           "category": "expense",
-          "amount": -50000
+          "amount": -100
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Sponsor Start Bonus: MICHAEL RAMOS",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Prize Money: MICHAEL RAMOS (P13)",
+          "category": "income",
+          "amount": 20000
         }
       ],
       "sponsors": [
@@ -876,7 +879,7 @@ const teamsData = {
       "logo": "assets/carter-phillips-racing-logo.jpg",
       "points": 0,
       "wins": 0,
-      "balance": 2010000,
+      "balance": 2006691,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -928,6 +931,36 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "Hauler Logistics: Columbia, SC to Daytona Beach, FL (330 mi)",
+          "category": "expense",
+          "amount": -3309
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "EDDIE HAGIGH DNS - No active backup available",
+          "category": "expense",
+          "amount": 0
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "JASON GREENWELL DNS - No active backup available",
+          "category": "expense",
+          "amount": 0
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "CARTER PHILLIPS DNS - No active backup available",
+          "category": "expense",
+          "amount": 0
+        },
+        {
+          "date": "May 7, 2025",
+          "description": "VACANT DNS - No active backup available",
+          "category": "expense",
+          "amount": 0
         }
       ],
       "sponsors": [

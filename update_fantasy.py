@@ -153,6 +153,8 @@ def calculate_driver_scores(drivers, config):
         norm_name = normalize_name(raw_name)
         
         fp = int(d.get("fp", 99))
+        if fp >= 999:
+            continue
         qp = int(d.get("qp", 99))
         inc = int(d.get("inc", 0) or 0)
         status = str(d.get("st", "Running")).lower()
