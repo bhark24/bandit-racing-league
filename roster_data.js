@@ -1,11 +1,11 @@
 const rosterData = {
   "1": {
     "driver": "RICKY HART",
-    "status": "past-champion"
+    "status": "full-time"
   },
   "2": {
     "driver": "NICK NICKERSON",
-    "status": "past-champion"
+    "status": "full-time"
   },
   "4": {
     "driver": "LOGAN MURRAY",
@@ -13,7 +13,7 @@ const rosterData = {
   },
   "5": {
     "driver": "SEAN BRITT",
-    "status": "part-time"
+    "status": "full-time"
   },
   "6": {
     "driver": "NICOLE KRIESEL",
@@ -21,11 +21,11 @@ const rosterData = {
   },
   "7": {
     "driver": "BENJAMIN LACY",
-    "status": "past-champion"
+    "status": "full-time"
   },
   "8": {
     "driver": "KEVIN FOSTER",
-    "status": "past-champion"
+    "status": "full-time"
   },
   "12": {
     "driver": "BILL HARKINS",
@@ -33,7 +33,7 @@ const rosterData = {
   },
   "13": {
     "driver": "JONATHON PLATT",
-    "status": "part-time"
+    "status": "full-time"
   },
   "14": {
     "driver": "JASON ALLEGRINI",
@@ -45,7 +45,7 @@ const rosterData = {
   },
   "17": {
     "driver": "DIANTE RODER",
-    "status": "part-time"
+    "status": "full-time"
   },
   "18": {
     "driver": "VICTOR WEAVER",
@@ -53,11 +53,11 @@ const rosterData = {
   },
   "19": {
     "driver": "MATT BAILEY",
-    "status": "part-time"
+    "status": "full-time"
   },
   "21": {
     "driver": "NATHAN SANTOS",
-    "status": "part-time"
+    "status": "full-time"
   },
   "22": {
     "driver": "JOSH ADAMS",
@@ -65,11 +65,11 @@ const rosterData = {
   },
   "23": {
     "driver": "DYLAN NICASTRO",
-    "status": "part-time"
+    "status": "full-time"
   },
   "24": {
     "driver": "ETHAN SIKORSKI",
-    "status": "part-time"
+    "status": "full-time"
   },
   "27": {
     "driver": "MICHAEL RAMOS",
@@ -81,7 +81,7 @@ const rosterData = {
   },
   "43": {
     "driver": "JONATHON PLATT",
-    "status": "past-champion"
+    "status": "full-time"
   },
   "47": {
     "driver": "MICHAEL RAKES",
@@ -93,7 +93,7 @@ const rosterData = {
   },
   "51": {
     "driver": "CURTIS YANCEY",
-    "status": "part-time"
+    "status": "full-time"
   },
   "62": {
     "driver": "TY CORINO",
@@ -101,7 +101,7 @@ const rosterData = {
   },
   "73": {
     "driver": "BRANDON GEERS",
-    "status": "part-time"
+    "status": "full-time"
   },
   "75": {
     "driver": "BOB BERRY",
@@ -109,7 +109,7 @@ const rosterData = {
   },
   "76": {
     "driver": "MARK ALAN BIVENS",
-    "status": "past-champion"
+    "status": "full-time"
   },
   "77": {
     "driver": "TYSON KOPF",
@@ -125,11 +125,11 @@ const rosterData = {
   },
   "88": {
     "driver": "DAVID WESTOVER JR",
-    "status": "part-time"
+    "status": "full-time"
   },
   "91": {
     "driver": "BRANDON JACKSON",
-    "status": "part-time"
+    "status": "full-time"
   },
   "97": {
     "driver": "EDDIE HAGIGH",
@@ -145,11 +145,11 @@ const rosterData = {
   },
   "02": {
     "driver": "NOLAN GROSS",
-    "status": "part-time"
+    "status": "full-time"
   },
   "04": {
     "driver": "BRET GUZIK",
-    "status": "past-champion"
+    "status": "full-time"
   }
 };
 const numbersList = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"];

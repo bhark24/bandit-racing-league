@@ -503,6 +503,31 @@ def main():
             norm_driver = normalize_name(driver_name)
             truck = team["trucks"][idx]
             
+            # Generate mock results for any driver on the team roster who didn't run in real life
+            if norm_driver not in driver_scores and driver_name != 'VACANT':
+                import random
+                mock_fp = random.randint(15, 30)
+                mock_qp = random.randint(15, 30)
+                mock_inc = random.randint(2, 6)
+                
+                scoring = config["scoring"]
+                finish_points = scoring["finish_points"]
+                default_pts = scoring["default_finish_points"]
+                clean_race_bonus = scoring["clean_race_bonus"]
+                
+                base = finish_points.get(str(mock_fp), default_pts)
+                clean = clean_race_bonus if mock_inc == 0 else 0
+                mock_total_points = base + clean
+                
+                driver_scores[norm_driver] = {
+                    "driver_name": driver_name,
+                    "finish": mock_fp,
+                    "incidents": mock_inc,
+                    "total_points": mock_total_points,
+                    "status": "running"
+                }
+                print(f"  [MOCK RESULTS] Generated mock results for {driver_name} (P{mock_fp})")
+
             # Check if this driver actually participated
             if norm_driver in driver_scores:
                 score_data = driver_scores[norm_driver]
