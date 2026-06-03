@@ -103,6 +103,10 @@ const rosterData = {
     "driver": "CURTIS YANCEY",
     "status": "part-time"
   },
+  "54": {
+    "driver": "",
+    "status": "part-time"
+  },
   "62": {
     "driver": "TY CORINO",
     "status": "full-time"
