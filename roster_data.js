@@ -75,6 +75,10 @@ const rosterData = {
     "driver": "MICHAEL RAMOS",
     "status": "full-time"
   },
+  "30": {
+    "driver": "",
+    "status": "full-time"
+  },
   "31": {
     "driver": "Connor Gibson",
     "status": "full-time"
