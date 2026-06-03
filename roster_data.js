@@ -52,7 +52,7 @@ const rosterData = {
     "status": "full-time"
   },
   "19": {
-    "driver": "MATT BAILEY",
+    "driver": "",
     "status": "available"
   },
   "21": {
