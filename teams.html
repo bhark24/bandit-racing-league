@@ -350,7 +350,7 @@
                     <img id="detail-team-logo" src="" alt="Team Logo" style="max-height: 80px; max-width: 160px; object-fit: contain;">
                     <div>
                         <h2 id="detail-team-name" style="font-size: 2.2rem; color: #fff; margin:0; font-style: italic;">Team Name</h2>
-                        <p style="color:var(--text-muted); margin: 5px 0 0 0; font-size: 1rem;">Owner: <strong id="detail-team-owner" style="color:#fff;">Owner Name</strong> | Team Base Location: <span id="detail-team-base">City, State</span></p>
+                        <p style="color:var(--text-muted); margin: 5px 0 0 0; font-size: 1rem;">Owner: <strong id="detail-team-owner" style="color:#fff;">Owner Name</strong> | Team Base Location: <span id="detail-team-base">City, State</span> | Highest Earner: <span id="detail-team-earner" style="color:var(--neon-green); font-weight:bold;">None</span></p>
                     </div>
                 </div>
             </div>
@@ -386,7 +386,11 @@
                             <!-- Rendered dynamically -->
                         </div>
                         <h3 style="color:#fff; margin-bottom:15px; font-size:1.3rem;">Active Franchise Sponsors</h3>
-                        <div style="display:flex; flex-wrap:wrap; gap: 10px;" id="sponsors-container">
+                        <div style="display:flex; flex-wrap:wrap; gap: 10px; margin-bottom: 25px;" id="sponsors-container">
+                            <!-- Rendered dynamically -->
+                        </div>
+                        <h3 style="color:#fff; margin-bottom:15px; font-size:1.3rem;">Driver Earnings Standings</h3>
+                        <div style="display:flex; flex-direction:column; gap: 10px;" id="driver-earnings-container">
                             <!-- Rendered dynamically -->
                         </div>
                     </div>
@@ -792,6 +796,78 @@
                         const displaySponsor = isTeamName ? `<i>${sponsor}</i>` : sponsor;
                         badge.innerHTML = `🤝 ${displaySponsor}`;
                         sponsorsCont.appendChild(badge);
+                    });
+                }
+            }
+
+            // Calculate and render driver earnings standings
+            const earningsCont = document.getElementById('driver-earnings-container');
+            const earnerLabel = document.getElementById('detail-team-earner');
+            
+            if (earningsCont) {
+                earningsCont.innerHTML = '';
+                
+                // Get earnings map
+                const earnings = {};
+                const allDrivers = [...team.drivers.primary, ...team.drivers.backup].filter(name => name && name !== 'VACANT');
+                allDrivers.forEach(name => {
+                    earnings[name] = 0;
+                });
+                
+                if (team.ledger) {
+                    team.ledger.forEach(entry => {
+                        const desc = entry.description || "";
+                        allDrivers.forEach(driver => {
+                            if (desc.includes(`Sponsor Start Bonus: ${driver}`) || desc.includes(`Prize Money: ${driver} (P`)) {
+                                earnings[driver] += Number(entry.amount || 0);
+                            }
+                            if (desc.includes(`Signed Driver: ${driver} (Signing Bonus)`)) {
+                                earnings[driver] += Math.abs(Number(entry.amount || 0));
+                            }
+                        });
+                    });
+                }
+                
+                // Sort drivers by earnings descending
+                const sortedDrivers = Object.entries(earnings).sort((a, b) => b[1] - a[1]);
+                
+                // Update Highest Earner in Header
+                if (sortedDrivers.length > 0 && sortedDrivers[0][1] > 0) {
+                    const topDriver = sortedDrivers[0][0];
+                    const topAmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(sortedDrivers[0][1]);
+                    if (earnerLabel) {
+                        earnerLabel.innerHTML = `👑 ${topDriver} (${topAmt})`;
+                    }
+                } else {
+                    if (earnerLabel) {
+                        earnerLabel.textContent = "None";
+                    }
+                }
+                
+                // Render List of Drivers in order of earnings
+                if (sortedDrivers.length === 0) {
+                    earningsCont.innerHTML = '<span style="color:var(--text-muted); font-size:0.9rem;">No rostered drivers.</span>';
+                } else {
+                    sortedDrivers.forEach(([driver, amt], idx) => {
+                        const formattedAmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(amt);
+                        const row = document.createElement('div');
+                        row.style.display = 'flex';
+                        row.style.justifyContent = 'space-between';
+                        row.style.alignItems = 'center';
+                        row.style.padding = '8px 12px';
+                        row.style.background = '#090909';
+                        row.style.border = '1px solid #1a1a1a';
+                        row.style.borderRadius = 'var(--border-radius)';
+                        row.style.fontSize = '0.9rem';
+                        
+                        const rankEmoji = idx === 0 ? '👑 ' : '';
+                        const fontColor = idx === 0 ? 'var(--neon-green)' : '#fff';
+                        
+                        row.innerHTML = `
+                            <span style="font-weight:bold; color:${fontColor};">${rankEmoji}${driver}</span>
+                            <span style="font-family:var(--font-heading); font-weight:700; color:var(--text-muted);">${formattedAmt}</span>
+                        `;
+                        earningsCont.appendChild(row);
                     });
                 }
             }
