@@ -76,7 +76,7 @@ const rosterData = {
     "status": "full-time"
   },
   "31": {
-    "driver": "C",
+    "driver": "Connor Gibson",
     "status": "full-time"
   },
   "43": {
