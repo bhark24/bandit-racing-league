@@ -172,6 +172,7 @@ def calculate_flight_cost(distance, date_str, origin_city=""):
         "springboro, oh": 340, # DAY
         "miamisburg, oh": 340, # DAY
         "xenia, oh": 340,  # DAY
+        "salt lake city, ut": 350,
     }
     
     city_key = origin_city.strip().lower() if origin_city else ""
