@@ -83,6 +83,10 @@ const rosterData = {
     "driver": "Connor Gibson",
     "status": "full-time"
   },
+  "32": {
+    "driver": "",
+    "status": "full-time"
+  },
   "38": {
     "driver": "Peter Murphy",
     "status": "part-time"
