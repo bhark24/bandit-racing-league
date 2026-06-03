@@ -53,7 +53,7 @@ const rosterData = {
   },
   "19": {
     "driver": "MATT BAILEY",
-    "status": "part-time"
+    "status": "available"
   },
   "21": {
     "driver": "NATHAN SANTOS",
