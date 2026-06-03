@@ -303,14 +303,14 @@ const teamsData = {
       "logo": "assets/roundy-motorsports-logo.png",
       "points": 29,
       "wins": 0,
-      "balance": 2075493,
+      "balance": 2025493,
       "loan": 0,
       "drivers": {
         "primary": [
           "BILL HARKINS",
           "LOGAN MURRAY",
           "MATT CROCKETT",
-          "VACANT"
+          "TERRY KONDAS"
         ],
         "backup": [
           "VACANT",
@@ -439,6 +439,12 @@ const teamsData = {
           "description": "VACANT DNS - No active backup available",
           "category": "expense",
           "amount": 0
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: TERRY KONDAS (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
