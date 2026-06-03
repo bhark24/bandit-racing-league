@@ -289,6 +289,27 @@ def calculate_driver_points(drivers, config):
         
     return driver_scores
 
+def get_previous_race_finishes(team, current_race_date):
+    import re
+    # Find all unique dates in the ledger that have race info (containing "Prize Money")
+    race_dates = sorted(list(set(
+        item["date"] for item in team["ledger"] 
+        if item["date"] != current_race_date and "Prize Money" in item.get("description", "")
+    )))
+    
+    if not race_dates:
+        return []
+        
+    prev_date = race_dates[-1]
+    
+    finishes = []
+    for item in team["ledger"]:
+        if item["date"] == prev_date and "Prize Money" in item.get("description", ""):
+            match = re.search(r'Prize Money:.*?\(P(\d+)\)', item["description"])
+            if match:
+                finishes.append(int(match.group(1)))
+    return finishes
+
 def find_track_key(track_name, tracks_data):
     normalized_srh = track_name.lower().replace(" ", "").replace("-", "")
     for key, info in tracks_data.items():
@@ -704,8 +725,18 @@ def main():
         available_new_sponsors = ["SimGear Pro", "Apex Fuel", "Checkered Flag Media", "QuickPit Lubricants", "DraftMasters", "Veloce Simulators", "FastTrack Designs", "RPM Graphics", "Octane Apparel", "Precision Shifters"]
         
         if participating_finishes:
-            avg_finish = sum(participating_finishes) / len(participating_finishes)
-            print(f"  Team Average Finish: {avg_finish:.2f} ({len(participating_finishes)} participating drivers)")
+            # Calculate 2-week average finish position
+            all_finishes = list(participating_finishes)
+            prev_finishes = get_previous_race_finishes(team, race_date)
+            if prev_finishes:
+                all_finishes.extend(prev_finishes)
+                avg_finish = sum(all_finishes) / len(all_finishes)
+                weeks_count = 2
+                print(f"  Team Average Finish (2-Week Avg): {avg_finish:.2f} ({len(participating_finishes)} finishes this week, {len(prev_finishes)} finishes last week)")
+            else:
+                avg_finish = sum(participating_finishes) / len(participating_finishes)
+                weeks_count = 1
+                print(f"  Team Average Finish (1-Week Avg): {avg_finish:.2f} ({len(participating_finishes)} finishes this week)")
             
             if avg_finish <= 12.0:
                 if random.random() < 0.50:
@@ -717,7 +748,7 @@ def main():
                         team_earnings += sponsor_payout
                         team["ledger"].append({
                             "date": race_date,
-                            "description": f"Virtual Sponsorship Earned: {new_sponsor} (Upward Performance: {avg_finish:.1f} Avg Finish)",
+                            "description": f"Virtual Sponsorship Earned: {new_sponsor} (Upward Performance: {avg_finish:.1f} Avg Finish over {weeks_count} weeks)",
                             "category": "income",
                             "amount": sponsor_payout
                         })
@@ -728,7 +759,7 @@ def main():
                     team["sponsors"].remove(lost_sponsor)
                     team["ledger"].append({
                         "date": race_date,
-                        "description": f"<span style=\"color:#ff4d4d;\">Lost Sponsor: {lost_sponsor} (Downward Performance: {avg_finish:.1f} Avg Finish)</span>",
+                        "description": f"<span style=\"color:#ff4d4d;\">Lost Sponsor: {lost_sponsor} (Downward Performance: {avg_finish:.1f} Avg Finish over {weeks_count} weeks)</span>",
                         "category": "info",
                         "amount": 0
                     })
