@@ -75,20 +75,12 @@ const rosterData = {
     "driver": "MICHAEL RAMOS",
     "status": "full-time"
   },
-  "30": {
-    "driver": "CARTER PHILLIPS",
-    "status": "full-time"
-  },
   "43": {
     "driver": "JONATHON PLATT",
     "status": "past-champion"
   },
   "47": {
     "driver": "MICHAEL RAKES",
-    "status": "full-time"
-  },
-  "50": {
-    "driver": "DAVIS CARROLL",
     "status": "full-time"
   },
   "51": {
@@ -133,7 +125,7 @@ const rosterData = {
   },
   "97": {
     "driver": "EDDIE HAGIGH",
-    "status": "full-time"
+    "status": "past-champion"
   },
   "99": {
     "driver": "JOSH BILLITER",
