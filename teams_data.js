@@ -174,14 +174,14 @@ const teamsData = {
       "lon": -91.8515
     },
     "NICK NICKERSON": {
-      "city": "Orlando, FL",
-      "lat": 28.5383,
-      "lon": -81.3792
+      "city": "Phoenix, AZ",
+      "lat": 33.4484,
+      "lon": -112.0740
     },
     "RICKY HART": {
-      "city": "Atlanta, GA",
-      "lat": 33.749,
-      "lon": -84.388
+      "city": "West Chester, PA",
+      "lat": 39.9607,
+      "lon": -75.6055
     },
     "SEAN BRITT": {
       "city": "Greensboro, NC",
@@ -274,9 +274,9 @@ const teamsData = {
       "lon": -80.5795
     },
     "KEVIN FOSTER": {
-      "city": "Concord, NC",
-      "lat": 35.4088,
-      "lon": -80.5795
+      "city": "Katy, TX",
+      "lat": 29.7858,
+      "lon": -95.8244
     },
     "DAVID WESTOVER JR": {
       "city": "Ashtabula, OH",
@@ -292,6 +292,11 @@ const teamsData = {
       "city": "Severna Park, MD",
       "lat": 39.0696,
       "lon": -76.5452
+    },
+    "BENJAMIN LACY": {
+      "city": "Loma Linda, CA",
+      "lat": 34.0483,
+      "lon": -117.2612
     }
   },
   "teams": [
@@ -1088,6 +1093,75 @@ const teamsData = {
         "Craftsman Tools"
       ],
       "passcodeHash": "c059737b8d4f40f0980c500e23e7100b21a8d6e3c09533f81e695123d6a978f8"
+    },
+    {
+      "id": "gfr-racing",
+      "name": "GFR Racing",
+      "owner": "Kevin Foster",
+      "homeBase": "Katy, TX",
+      "logo": "assets/gfr.png",
+      "points": 0,
+      "wins": 0,
+      "balance": 2750000,
+      "loan": 0,
+      "drivers": {
+        "primary": [
+          "KEVIN FOSTER",
+          "NICK NICKERSON",
+          "RICKY HART",
+          "BENJAMIN LACY"
+        ],
+        "backup": [
+          "VACANT",
+          "VACANT"
+        ]
+      },
+      "trucks": [
+        {
+          "id": "truck-1",
+          "make": "Chevrolet",
+          "name": "GFR Silverado #8",
+          "condition": 100
+        },
+        {
+          "id": "truck-2",
+          "make": "Chevrolet",
+          "name": "GFR Silverado #2",
+          "condition": 100
+        },
+        {
+          "id": "truck-3",
+          "make": "Chevrolet",
+          "name": "GFR Silverado #1",
+          "condition": 100
+        },
+        {
+          "id": "truck-4",
+          "make": "Chevrolet",
+          "name": "GFR Silverado #7",
+          "condition": 100
+        }
+      ],
+      "ledger": [
+        {
+          "date": "2026-05-24",
+          "description": "Starting Franchise Balance",
+          "category": "income",
+          "amount": 2750000
+        },
+        {
+          "date": "2026-05-24",
+          "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
+          "category": "expense",
+          "amount": -740000
+        }
+      ],
+      "sponsors": [
+        "GFR Racing",
+        "Chevrolet Accessories",
+        "Craftsman Tools"
+      ],
+      "passcodeHash": "d52640dd8dcaf61ea13dc1484e97ea8078e2a06bdf0f81d747e84fe7ccd6d785"
     }
   ]
 };
