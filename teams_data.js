@@ -259,9 +259,9 @@ const teamsData = {
       "lon": -86.5694
     },
     "CONOR GIBSON": {
-      "city": "Toronto, ON",
-      "lat": 43.6532,
-      "lon": -79.3832
+      "city": "Halifax, NS",
+      "lat": 44.6488,
+      "lon": -63.5752
     },
     "CURTIS YANCEY": {
       "city": "Clearwater, FL",
