@@ -52,8 +52,8 @@ const rosterData = {
     "status": "full-time"
   },
   "19": {
-    "driver": "",
-    "status": "available"
+    "driver": "MATT BAILEY",
+    "status": "part-time"
   },
   "21": {
     "driver": "NATHAN SANTOS",
@@ -75,20 +75,8 @@ const rosterData = {
     "driver": "MICHAEL RAMOS",
     "status": "full-time"
   },
-  "30": {
-    "driver": "CARTER PHILLIPS",
-    "status": "full-time"
-  },
-  "31": {
-    "driver": "Connor Gibson",
-    "status": "full-time"
-  },
-  "32": {
-    "driver": "TERRY KONDAS",
-    "status": "full-time"
-  },
-  "38": {
-    "driver": "Peter Murphy",
+  "28": {
+    "driver": "Jesse VAUGHAN",
     "status": "part-time"
   },
   "43": {
@@ -99,12 +87,12 @@ const rosterData = {
     "driver": "MICHAEL RAKES",
     "status": "full-time"
   },
+  "50": {
+    "driver": "DAVIS CARROLL",
+    "status": "full-time"
+  },
   "51": {
     "driver": "CURTIS YANCEY",
-    "status": "part-time"
-  },
-  "54": {
-    "driver": "MATT BAILEY",
     "status": "part-time"
   },
   "62": {
@@ -125,7 +113,7 @@ const rosterData = {
   },
   "77": {
     "driver": "TYSON KOPF",
-    "status": "part-time"
+    "status": "full-time"
   },
   "83": {
     "driver": "JASON GREENWELL",
