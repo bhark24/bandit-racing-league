@@ -743,7 +743,7 @@
                 slotCard.style.gap = '15px';
                 slotCard.style.transition = 'all 0.3s ease';
 
-                if (driverName) {
+                if (driverName && driverName !== 'VACANT') {
                     const drvInfo = getLatestDriverStatus(team, driverName);
                     const homeCity = (typeof teamsData !== 'undefined' && teamsData.driverLocations[driverName.toUpperCase()]) ? 
                                      teamsData.driverLocations[driverName.toUpperCase()].city : 'Location N/A';
@@ -1142,7 +1142,7 @@
             const signedNames = new Set();
             teamsData.teams.forEach(team => {
                 (team.drivers.primary || []).forEach(name => { if (name && name !== 'VACANT') signedNames.add(normalizeName(name)); });
-                (team.drivers.backup || []).forEach(name => { if (name) signedNames.add(normalizeName(name)); });
+                (team.drivers.backup || []).forEach(name => { if (name && name !== 'VACANT') signedNames.add(normalizeName(name)); });
             });
 
             function normalizeName(name) {
