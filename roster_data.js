@@ -1,7 +1,7 @@
 const rosterData = {
   "0": {
     "driver": "ADAM TAHAN",
-    "status": "available"
+    "status": "part-time"
   },
   "1": {
     "driver": "RICKY HART",
