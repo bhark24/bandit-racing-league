@@ -1,4 +1,8 @@
 const rosterData = {
+  "0": {
+    "driver": "",
+    "status": "part-time"
+  },
   "1": {
     "driver": "RICKY HART",
     "status": "past-champion"
