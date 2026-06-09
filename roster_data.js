@@ -149,7 +149,7 @@ const rosterData = {
   },
   "82": {
     "driver": "PAUL WILSON",
-    "status": "part-time"
+    "status": "available"
   },
   "83": {
     "driver": "JASON GREENWELL",
