@@ -452,26 +452,35 @@ def main():
         backup_index = 0
         
         # Determine Active Lineup using Option 1 (DNS Auto-Sub)
-        for primary in primaries:
-            norm_pri = normalize_name(primary)
-            if norm_pri in driver_scores:
-                active_lineup.append((primary, False, None))
-            else:
-                # Primary is DNS. Try to sub in a backup
-                subbed = False
-                while backup_index < len(backups):
-                    backup_driver = backups[backup_index]
-                    norm_back = normalize_name(backup_driver)
-                    backup_index += 1
+        if track_key == "daytona":
+            # Daytona special case: all non-vacant roster drivers participate
+            for primary in primaries:
+                if primary and primary != "VACANT":
+                    active_lineup.append((primary, False, None))
+            for backup in backups:
+                if backup and backup != "VACANT":
+                    active_lineup.append((backup, True, None))
+        else:
+            for primary in primaries:
+                norm_pri = normalize_name(primary)
+                if norm_pri in driver_scores:
+                    active_lineup.append((primary, False, None))
+                else:
+                    # Primary is DNS. Try to sub in a backup
+                    subbed = False
+                    while backup_index < len(backups):
+                        backup_driver = backups[backup_index]
+                        norm_back = normalize_name(backup_driver)
+                        backup_index += 1
+                        
+                        if norm_back in driver_scores:
+                            active_lineup.append((backup_driver, True, primary))
+                            subbed = True
+                            break
                     
-                    if norm_back in driver_scores:
-                        active_lineup.append((backup_driver, True, primary))
-                        subbed = True
-                        break
-                
-                if not subbed:
-                    # No backup available
-                    active_lineup.append((primary, False, None)) # remains primary, will score DNS
+                    if not subbed:
+                        # No backup available
+                        active_lineup.append((primary, False, None)) # remains primary, will score DNS
         
         # Process team scoring and economy for the 4 active slots
         team_points_this_week = 0
@@ -525,7 +534,7 @@ def main():
         # Evaluate each active slot (mapping to trucks[0..3])
         for idx, (driver_name, is_backup, replaced_pri) in enumerate(active_lineup):
             norm_driver = normalize_name(driver_name)
-            truck = team["trucks"][idx]
+            truck = team["trucks"][idx % len(team["trucks"])]
             
             # Generate mock results for any driver on the team roster who didn't run in real life
             if norm_driver not in driver_scores and driver_name != 'VACANT':
