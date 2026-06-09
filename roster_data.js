@@ -148,7 +148,7 @@ const rosterData = {
     "status": "full-time"
   },
   "82": {
-    "driver": "PAUL WILSON",
+    "driver": "",
     "status": "available"
   },
   "83": {
