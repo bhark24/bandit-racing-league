@@ -83,18 +83,6 @@ const rosterData = {
     "driver": "Jesse VAUGHAN",
     "status": "part-time"
   },
-  "30": {
-    "driver": "CARTER PHILLIPS",
-    "status": "full-time"
-  },
-  "31": {
-    "driver": "Connor Gibson",
-    "status": "full-time"
-  },
-  "32": {
-    "driver": "TERRY KONDAS",
-    "status": "full-time"
-  },
   "43": {
     "driver": "JONATHON PLATT",
     "status": "past-champion"
