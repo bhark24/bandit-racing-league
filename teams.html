@@ -1302,6 +1302,12 @@
                             if (serverLedgerLen !== savedLedgerLen) {
                                 return serverTeam;
                             }
+                            // Copy server metadata to savedTeam to preserve server updates
+                            savedTeam.name = serverTeam.name;
+                            savedTeam.owner = serverTeam.owner;
+                            savedTeam.homeBase = serverTeam.homeBase;
+                            savedTeam.logo = serverTeam.logo;
+                            savedTeam.passcodeHash = serverTeam.passcodeHash;
                             return savedTeam;
                         }
                         return serverTeam;
