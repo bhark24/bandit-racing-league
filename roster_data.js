@@ -95,6 +95,10 @@ const rosterData = {
     "driver": "CONNOR GIBSON",
     "status": "full-time"
   },
+  "32": {
+    "driver": "",
+    "status": "full-time"
+  },
   "43": {
     "driver": "JONATHON PLATT",
     "status": "past-champion"
