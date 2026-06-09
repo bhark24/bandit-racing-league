@@ -937,6 +937,19 @@
             const container = document.getElementById('trucks-container');
             container.innerHTML = '';
 
+            // Filter active drivers
+            const activeDrivers = [];
+            if (team.drivers.primary) {
+                team.drivers.primary.forEach(d => {
+                    if (d && d !== 'VACANT') activeDrivers.push(d);
+                });
+            }
+            if (team.drivers.backup) {
+                team.drivers.backup.forEach(d => {
+                    if (d && d !== 'VACANT') activeDrivers.push(d);
+                });
+            }
+
             team.trucks.forEach((truck, index) => {
                 const card = document.createElement('div');
                 card.className = 'truck-card';
@@ -946,12 +959,7 @@
                 if (truck.condition < 40) barColor = '#ff1744';
                 else if (truck.condition < 75) barColor = 'var(--chase-yellow)';
 
-                let driverName = '';
-                if (index < team.drivers.primary.length) {
-                    driverName = team.drivers.primary[index];
-                } else {
-                    driverName = team.drivers.backup[index - team.drivers.primary.length];
-                }
+                const driverName = activeDrivers[index];
                 
                 let visualHTML = `<span style="font-size:2rem;">🚚</span>`;
                 let driverLabel = `<span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Driver: Vacant</span>`;
