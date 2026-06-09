@@ -96,7 +96,7 @@ const rosterData = {
     "status": "full-time"
   },
   "32": {
-    "driver": "",
+    "driver": "TERRY KO",
     "status": "full-time"
   },
   "43": {
