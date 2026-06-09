@@ -123,6 +123,10 @@ const rosterData = {
     "driver": "TY CORINO",
     "status": "full-time"
   },
+  "72": {
+    "driver": "",
+    "status": "full-time"
+  },
   "73": {
     "driver": "BRANDON GEERS",
     "status": "part-time"
