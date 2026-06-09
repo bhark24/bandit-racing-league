@@ -160,7 +160,7 @@ const rosterData = {
     "status": "part-time"
   },
   "93": {
-    "driver": "SCOTT ",
+    "driver": "SCOTT SANDERSON",
     "status": "part-time"
   },
   "96": {
