@@ -160,7 +160,7 @@ const rosterData = {
     "status": "part-time"
   },
   "96": {
-    "driver": "",
+    "driver": "lucas wilsonm",
     "status": "full-time"
   },
   "97": {
