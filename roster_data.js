@@ -32,7 +32,7 @@ const rosterData = {
     "status": "past-champion"
   },
   "11": {
-    "driver": "JON OSBOURNE",
+    "driver": "JON OSBORNE",
     "status": "part-time"
   },
   "12": {
