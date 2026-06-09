@@ -91,6 +91,10 @@ const rosterData = {
     "driver": "CARTER PHILLIPS",
     "status": "full-time"
   },
+  "31": {
+    "driver": "",
+    "status": "full-time"
+  },
   "43": {
     "driver": "JONATHON PLATT",
     "status": "past-champion"
