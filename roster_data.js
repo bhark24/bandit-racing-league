@@ -147,6 +147,10 @@ const rosterData = {
     "driver": "TYSON KOPF",
     "status": "full-time"
   },
+  "82": {
+    "driver": "",
+    "status": "part-time"
+  },
   "83": {
     "driver": "JASON GREENWELL",
     "status": "full-time"
