@@ -1193,6 +1193,99 @@
         // LocalStorage and database persistence state
         let localTeamsData = null;
 
+        function normalizeRoster(team) {
+            if (!team || !team.drivers) return;
+            if (!team.drivers.primary) team.drivers.primary = ['VACANT', 'VACANT', 'VACANT', 'VACANT'];
+            if (!team.drivers.backup) team.drivers.backup = ['VACANT', 'VACANT'];
+
+            const normName = (name) => {
+                if (!name) return "";
+                let n = name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
+                const spellingMap = {
+                    "TERRYKONDAS": "TERRYKONDUS",
+                    "CONORGIBSON": "CONNORGIBSON",
+                    "DIONTERADER": "DIANTERODER",
+                    "JONATHONPLATT": "JOHNATHONPLATT",
+                    "JOHNATHONPLATT": "JONATHONPLATT"
+                };
+                return spellingMap[n] || n;
+            };
+
+            const getStatus = (name) => {
+                if (!name || name === 'VACANT') return null;
+                const norm = normName(name);
+                for (let num in rosterData) {
+                    if (rosterData[num].driver && normName(rosterData[num].driver) === norm) {
+                        return rosterData[num].status;
+                    }
+                }
+                return 'part-time'; // default
+            };
+
+            const isFullTime = (name) => {
+                const status = getStatus(name);
+                return status === 'full-time' || status === 'past-champion';
+            };
+
+            const isPartTime = (name) => {
+                const status = getStatus(name);
+                return status === 'part-time';
+            };
+
+            const isEmpty = (name) => {
+                return !name || name === 'VACANT' || name.trim() === '';
+            };
+
+            let changed = true;
+            let iterations = 0;
+            while (changed && iterations < 20) {
+                changed = false;
+                iterations++;
+
+                // 1. Promote a full-time driver from backup to a vacant primary slot
+                let ftBackupIdx = team.drivers.backup.findIndex(d => !isEmpty(d) && isFullTime(d));
+                let vacantPrimaryIdx = team.drivers.primary.findIndex(d => isEmpty(d));
+
+                if (ftBackupIdx !== -1 && vacantPrimaryIdx !== -1) {
+                    const driver = team.drivers.backup[ftBackupIdx];
+                    team.drivers.primary[vacantPrimaryIdx] = driver;
+                    team.drivers.backup[ftBackupIdx] = 'VACANT';
+                    changed = true;
+                    continue;
+                }
+
+                // 2. Swap a full-time driver from backup with a part-time driver in primary
+                let ptPrimaryIdx = team.drivers.primary.findIndex(d => !isEmpty(d) && isPartTime(d));
+                if (ftBackupIdx !== -1 && ptPrimaryIdx !== -1) {
+                    const ftDriver = team.drivers.backup[ftBackupIdx];
+                    const ptDriver = team.drivers.primary[ptPrimaryIdx];
+                    team.drivers.primary[ptPrimaryIdx] = ftDriver;
+                    team.drivers.backup[ftBackupIdx] = ptDriver;
+                    changed = true;
+                    continue;
+                }
+
+                // 3. Demote a part-time driver in primary to a vacant backup slot
+                let vacantBackupIdx = team.drivers.backup.findIndex(d => isEmpty(d));
+                if (ptPrimaryIdx !== -1 && vacantBackupIdx !== -1) {
+                    const driver = team.drivers.primary[ptPrimaryIdx];
+                    team.drivers.backup[vacantBackupIdx] = driver;
+                    team.drivers.primary[ptPrimaryIdx] = 'VACANT';
+                    changed = true;
+                    continue;
+                }
+            }
+
+            // Compaction: Shift active drivers to front of slots
+            const compactPrimary = team.drivers.primary.filter(d => !isEmpty(d));
+            while (compactPrimary.length < 4) compactPrimary.push('VACANT');
+            team.drivers.primary = compactPrimary;
+
+            const compactBackup = team.drivers.backup.filter(d => !isEmpty(d));
+            while (compactBackup.length < 2) compactBackup.push('VACANT');
+            team.drivers.backup = compactBackup;
+        }
+
         function loadState() {
             const saved = localStorage.getItem('bandit_teams_data');
             if (saved) {
@@ -1218,6 +1311,12 @@
                     console.error("Failed to parse saved state:", e);
                     localTeamsData = null;
                 }
+            }
+            // Always normalize all rosters
+            if (teamsData && teamsData.teams) {
+                teamsData.teams.forEach(team => {
+                    normalizeRoster(team);
+                });
             }
         }
 
@@ -1330,12 +1429,25 @@
             const confirmSign = confirm(`Are you sure you want to sign ${driverName} for a $50,000 signing bonus?`);
             if (!confirmSign) return;
 
+            const beforePrimary = JSON.stringify(team.drivers.primary);
+            const beforeBackup = JSON.stringify(team.drivers.backup);
+
             if (activeSignSlotType === 'primary') {
                 team.drivers.primary[activeSignSlotIndex] = driverName;
             } else {
                 team.drivers.backup[activeSignSlotIndex] = driverName;
             }
             team.balance -= cost;
+
+            // Normalize the roster to enforce full-time/part-time slot rules
+            normalizeRoster(team);
+
+            // Check if any swap or promotion occurred and alert the user
+            const afterPrimary = JSON.stringify(team.drivers.primary);
+            const afterBackup = JSON.stringify(team.drivers.backup);
+            if (beforePrimary !== afterPrimary || beforeBackup !== afterBackup) {
+                alert(`Roster optimized! Drivers auto-sorted to satisfy slot constraints: full-time drivers in primary slots, part-time drivers in backup slots.`);
+            }
 
             const today = new Date();
             const year = today.getFullYear();
@@ -1382,10 +1494,22 @@
             const confirmRelease = confirm(`Are you sure you want to release ${driverName}? They will be returned to the Free Agent pool.`);
             if (!confirmRelease) return;
 
+            const beforePrimary = JSON.stringify(team.drivers.primary);
+            const beforeBackup = JSON.stringify(team.drivers.backup);
+
             if (slotType === 'primary') {
                 team.drivers.primary[slotIndex] = 'VACANT';
             } else {
-                team.drivers.backup[slotIndex] = '';
+                team.drivers.backup[slotIndex] = 'VACANT';
+            }
+
+            // Normalize roster after release
+            normalizeRoster(team);
+
+            const afterPrimary = JSON.stringify(team.drivers.primary);
+            const afterBackup = JSON.stringify(team.drivers.backup);
+            if (beforePrimary !== afterPrimary || beforeBackup !== afterBackup) {
+                alert(`Roster optimized! A backup full-time driver has been promoted to fill the vacant primary slot.`);
             }
 
             const today = new Date();
