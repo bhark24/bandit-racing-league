@@ -539,8 +539,16 @@ def main():
             # Generate mock results for any driver on the team roster who didn't run in real life
             if norm_driver not in driver_scores and driver_name != 'VACANT':
                 import random
-                mock_fp = random.randint(15, 30)
-                mock_qp = random.randint(15, 30)
+                
+                # Get all currently taken finishing positions
+                taken_positions = {info["finish"] for info in driver_scores.values() if "finish" in info}
+                
+                # Find a unique mock finish position
+                mock_fp = random.randint(15, 43)
+                while mock_fp in taken_positions:
+                    mock_fp += 1
+                    
+                mock_qp = random.randint(15, 43)
                 mock_inc = random.randint(2, 6)
                 
                 scoring = config["scoring"]
