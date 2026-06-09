@@ -159,6 +159,10 @@ const rosterData = {
     "driver": "DAVID LEAKEY",
     "status": "full-time"
   },
+  "86": {
+    "driver": "",
+    "status": "part-time"
+  },
   "88": {
     "driver": "DAVID WESTOVER JR",
     "status": "part-time"
