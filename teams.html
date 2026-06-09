@@ -473,8 +473,46 @@
     <script>
         let selectedTeamId = null;
 
+        // Custom number image overrides
+        const NUMBER_IMAGES = {
+            "BENJAMINLACY": "Benjamin Lacy.png",
+            "BILLHARKINS": "Bill Harkins.png",
+            "BRANDONGEERS": "Brandon Geers.png",
+            "CURTISYANCEY": "Curtis Yancey.png",
+            "DAVIDLEAKEY": "David Leakey.png",
+            "DAVIDWESTOVERJR": "David Westover.pmg.png",
+            "DAVIDWESTOVER": "David Westover.pmg.png",
+            "DIANTERODER": "Dionte_number.png",
+            "DIONTERADER": "Dionte_number.png",
+            "EDDIEHAGIGH": "Eddie Hagigh.png",
+            "ETHANSIKORSKI": "Ethan Sikorski.png",
+            "JOSHADAMS": "Josh Adams.png",
+            "JOSHBILLITER": "Josh Billiter.png",
+            "JOSHBILITER": "Josh Billiter.png",
+            "LOGANMURRAY": "Logan Murray.png",
+            "MARKALANBIVENS": "Mark Alan Bivens.png",
+            "MATTCROCKETT": "Matt Crockett.png",
+            "MICHAELRAKES": "Michael Rakes.png",
+            "NATHANSANTOS": "Nathan Santos.png",
+            "SEANBRITT": "Sean Britt.png",
+            "TYCORINO": "Ty Corino.png",
+            "VICTORWEAVER": "Victor Weaver.png",
+            "DYLANNICASTRO": "Dillon.png",
+            "NICOLEKRIESEL": "Nicole Kriesel.png",
+            "NICOLEKREISEL": "Nicole Kriesel.png"
+        };
+
+        function normalizeName(name) {
+            if (!name) return "";
+            return name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
+        }
+
         function getDriverImgPath(name) {
             if (!name || name === 'VACANT') return '';
+            const norm = normalizeName(name);
+            if (NUMBER_IMAGES[norm]) {
+                return `assets/drivers numbers/${NUMBER_IMAGES[norm]}`;
+            }
             const formattedName = name.trim().toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
             return `assets/drivers numbers/${formattedName}.png`;
         }
@@ -698,7 +736,7 @@
                     }
 
                     slotCard.innerHTML = `
-                        <img src="${getDriverImgPath(driverName)}" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="handleDriverNumberError(this)">
+                        <img src="${getDriverImgPath(driverName)}" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="handleDriverNumberError(this, '${driverName.replace(/'/g, "\\'")}')">
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
                             <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
@@ -754,7 +792,7 @@
                     }
 
                     slotCard.innerHTML = `
-                        <img src="${getDriverImgPath(driverName)}" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="handleDriverNumberError(this)">
+                        <img src="${getDriverImgPath(driverName)}" style="max-height:40px; max-width:80px; object-fit:contain;" onerror="handleDriverNumberError(this, '${driverName.replace(/'/g, "\\'")}')">
                         <div>
                             <strong style="color:#fff; display:block; font-size:0.95rem;">${driverName}</strong>
                             <span style="font-size:0.7rem; color:var(--text-muted); display:block; margin:2px 0 4px 0;">📍 ${homeCity}</span>
@@ -900,12 +938,18 @@
                 if (truck.condition < 40) barColor = '#ff1744';
                 else if (truck.condition < 75) barColor = 'var(--chase-yellow)';
 
-                const driverName = team.drivers.primary[index];
+                let driverName = '';
+                if (index < team.drivers.primary.length) {
+                    driverName = team.drivers.primary[index];
+                } else {
+                    driverName = team.drivers.backup[index - team.drivers.primary.length];
+                }
+                
                 let visualHTML = `<span style="font-size:2rem;">🚚</span>`;
                 let driverLabel = `<span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Driver: Vacant</span>`;
                 
-                if (driverName) {
-                    visualHTML = `<img src="${getDriverImgPath(driverName)}" style="max-height:45px; max-width:90px; object-fit:contain;" onerror="handleTruckNumberError(this)">`;
+                if (driverName && driverName !== 'VACANT') {
+                    visualHTML = `<img src="${getDriverImgPath(driverName)}" style="max-height:45px; max-width:90px; object-fit:contain;" onerror="handleTruckNumberError(this, '${driverName.replace(/'/g, "\\'")}')">`;
                     driverLabel = `<span style="font-size:0.75rem; color:var(--neon-green); font-weight:bold; text-transform:uppercase;">Driver: ${driverName}</span>`;
                 }
 
@@ -1085,22 +1129,55 @@
             document.getElementById(tabId).classList.add('active');
         }
 
-        function handleDriverNumberError(img) {
+        function getDriverNumber(driverName) {
+            if (!driverName || driverName === 'VACANT') return '';
+            const normName = driverName.trim().toUpperCase();
+            for (let num in rosterData) {
+                if (rosterData[num].driver && rosterData[num].driver.trim().toUpperCase() === normName) {
+                    return num;
+                }
+            }
+            // Fallback: search case-insensitively / normalized in case of slight spelling differences
+            const normSearch = normName.replace(/[\s\.\-_]/g, "");
+            for (let num in rosterData) {
+                if (rosterData[num].driver) {
+                    const normRoster = rosterData[num].driver.trim().toUpperCase().replace(/[\s\.\-_]/g, "");
+                    if (normRoster === normSearch) {
+                        return num;
+                    }
+                }
+            }
+            return '';
+        }
+
+        function handleDriverNumberError(img, driverName) {
             img.onerror = null;
             const span = document.createElement('span');
-            span.style.fontFamily = 'var(--font-heading)';
-            span.style.fontSize = '1.5rem';
+            span.style.fontFamily = 'Teko, Outfit, sans-serif';
+            span.style.fontSize = '1.8rem';
             span.style.fontWeight = 'bold';
+            span.style.fontStyle = 'italic';
             span.style.color = 'var(--neon-green)';
-            span.textContent = '#';
+            span.style.textShadow = '1px 1px 2px rgba(0,0,0,0.5)';
+            
+            const num = getDriverNumber(driverName);
+            span.textContent = num ? `#${num}` : '#';
             img.parentNode.replaceChild(span, img);
         }
 
-        function handleTruckNumberError(img) {
+        function handleTruckNumberError(img, driverName) {
             img.onerror = null;
             const span = document.createElement('span');
-            span.style.fontSize = '2rem';
-            span.textContent = '🚚';
+            span.style.fontFamily = 'Teko, Outfit, sans-serif';
+            span.style.fontSize = '2.5rem';
+            span.style.fontWeight = '900';
+            span.style.fontStyle = 'italic';
+            span.style.color = '#fff';
+            span.style.textShadow = '2px 2px 4px rgba(0,0,0,0.5)';
+            span.style.marginRight = '10px';
+            
+            const num = getDriverNumber(driverName);
+            span.textContent = num ? `#${num}` : '';
             img.parentNode.replaceChild(span, img);
         }
 
