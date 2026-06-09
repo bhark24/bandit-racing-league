@@ -504,7 +504,15 @@
 
         function normalizeName(name) {
             if (!name) return "";
-            return name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
+            let n = name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
+            const spellingMap = {
+                "TERRYKONDAS": "TERRYKONDUS",
+                "CONORGIBSON": "CONNORGIBSON",
+                "DIONTERADER": "DIANTERODER",
+                "JONATHONPLATT": "JOHNATHONPLATT",
+                "JOHNATHONPLATT": "JONATHONPLATT"
+            };
+            return spellingMap[n] || n;
         }
 
         function getDriverImgPath(name) {
@@ -1131,17 +1139,10 @@
 
         function getDriverNumber(driverName) {
             if (!driverName || driverName === 'VACANT') return '';
-            const normName = driverName.trim().toUpperCase();
-            for (let num in rosterData) {
-                if (rosterData[num].driver && rosterData[num].driver.trim().toUpperCase() === normName) {
-                    return num;
-                }
-            }
-            // Fallback: search case-insensitively / normalized in case of slight spelling differences
-            const normSearch = normName.replace(/[\s\.\-_]/g, "");
+            const normSearch = normalizeName(driverName);
             for (let num in rosterData) {
                 if (rosterData[num].driver) {
-                    const normRoster = rosterData[num].driver.trim().toUpperCase().replace(/[\s\.\-_]/g, "");
+                    const normRoster = normalizeName(rosterData[num].driver);
                     if (normRoster === normSearch) {
                         return num;
                     }
