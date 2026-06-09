@@ -160,8 +160,8 @@ const rosterData = {
     "status": "part-time"
   },
   "96": {
-    "driver": "lucas wilson",
-    "status": "full-time"
+    "driver": "LUCAS WILSON",
+    "status": "part-time"
   },
   "97": {
     "driver": "EDDIE HAGIGH",
@@ -169,7 +169,7 @@ const rosterData = {
   },
   "99": {
     "driver": "JOSH BILLITER",
-    "status": "full-time"
+    "status": "part-time"
   },
   "00": {
     "driver": "Jackson Knaak",

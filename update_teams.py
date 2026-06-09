@@ -441,6 +441,8 @@ def main():
     # Process each team
     for team in teams_db["teams"]:
         team_id = team["id"]
+        if team_id == "striped-maple-racing":
+            continue
         print(f"\nProcessing Team: {team['name']}")
         
         primaries = team["drivers"]["primary"]
