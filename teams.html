@@ -244,6 +244,21 @@
         .btn-release:hover {
             color: #ff1744;
         }
+        .btn-fine {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+            margin-top: 5px;
+            display: inline-block;
+            transition: color 0.2s;
+        }
+        .btn-fine:hover {
+            color: var(--chase-yellow);
+        }
         .reset-db-btn {
             background: rgba(255, 23, 68, 0.05);
             border: 1px solid rgba(255, 23, 68, 0.3);
@@ -752,6 +767,8 @@
                                 <span>${drvInfo.icon}</span> ${drvInfo.status}
                             </span>
                             <button class="btn-release" onclick="releaseDriver('${team.id}', 'primary', ${i})">Release Driver</button>
+                            <span style="color:var(--text-muted); margin:0 4px; font-size:0.75rem;">|</span>
+                            <button class="btn-fine" onclick="fineDriver('${team.id}', '${driverName.replace(/'/g, "\\'")}')">Fine Driver</button>
                         </div>
                     `;
                 } else {
@@ -808,6 +825,8 @@
                                 <span>${drvInfo.icon}</span> ${drvInfo.status}
                             </span>
                             <button class="btn-release" onclick="releaseDriver('${team.id}', 'backup', ${i})">Release Driver</button>
+                            <span style="color:var(--text-muted); margin:0 4px; font-size:0.75rem;">|</span>
+                            <button class="btn-fine" onclick="fineDriver('${team.id}', '${driverName.replace(/'/g, "\\'")}')">Fine Driver</button>
                         </div>
                     `;
                 } else {
@@ -851,10 +870,14 @@
                         badge.style.fontWeight = 'bold';
                         badge.style.display = 'inline-flex';
                         badge.style.alignItems = 'center';
+                        badge.style.gap = '8px';
                         badge.style.boxShadow = '0 0 8px rgba(0,255,0,0.08)';
                         const isTeamName = typeof teamsData !== 'undefined' && teamsData.teams && teamsData.teams.some(t => t.name === sponsor);
                         const displaySponsor = isTeamName ? `<i>${sponsor}</i>` : sponsor;
-                        badge.innerHTML = `🤝 ${displaySponsor}`;
+                        badge.innerHTML = `
+                            <span>🤝 ${displaySponsor}</span>
+                            <button class="decline-sponsor-btn" style="background:none; border:none; color:#ff1744; cursor:pointer; font-weight:bold; font-size:1.1rem; padding:0 2px; line-height:1; display:inline-flex; align-items:center;" onclick="declineSponsor('${team.id}', '${sponsor.replace(/'/g, "\\'")}')" title="Decline Sponsor">✕</button>
+                        `;
                         sponsorsCont.appendChild(badge);
                     });
                 }
@@ -1530,6 +1553,92 @@
                 description: `Released Driver: ${driverName}`,
                 category: "info",
                 amount: 0
+            });
+
+            saveState();
+            renderTeamsDirectory();
+            selectTeam(teamId);
+            renderFranchiseStandings();
+        }
+
+        async function declineSponsor(teamId, sponsorName) {
+            const team = teamsData.teams.find(t => t.id === teamId);
+            if (!team) return;
+
+            const passcode = prompt(`Declining sponsor "${sponsorName}" requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
+            if (passcode === null) return;
+
+            const hashed = await sha256(passcode.trim());
+            if (hashed !== team.passcodeHash) {
+                alert("Authentication Failed! Incorrect passcode.");
+                return;
+            }
+
+            const confirmDecline = confirm(`Are you sure you want to decline the sponsor "${sponsorName}"? This will terminate the contract.`);
+            if (!confirmDecline) return;
+
+            // Remove sponsor from team.sponsors list
+            team.sponsors = team.sponsors.filter(s => s !== sponsorName);
+
+            const today = new Date();
+            const year = today.getFullYear();
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[today.getMonth()];
+            const day = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${month} ${day}, ${year}`;
+
+            team.ledger.push({
+                date: dateStr,
+                description: `Declined Sponsor: ${sponsorName}`,
+                category: "info",
+                amount: 0
+            });
+
+            saveState();
+            renderTeamsDirectory();
+            selectTeam(teamId);
+            renderFranchiseStandings();
+        }
+
+        async function fineDriver(teamId, driverName) {
+            const team = teamsData.teams.find(t => t.id === teamId);
+            if (!team) return;
+
+            const passcode = prompt(`Fining ${driverName} requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
+            if (passcode === null) return;
+
+            const hashed = await sha256(passcode.trim());
+            if (hashed !== team.passcodeHash) {
+                alert("Authentication Failed! Incorrect passcode.");
+                return;
+            }
+
+            const amountStr = prompt(`Enter fine amount for ${driverName} (numbers only, e.g. 5000):`);
+            if (amountStr === null) return;
+            const amount = parseInt(amountStr.trim().replace(/[\$,]/g, ""), 10);
+            if (isNaN(amount) || amount <= 0) {
+                alert("Invalid amount! Please enter a positive number.");
+                return;
+            }
+
+            const confirmFine = confirm(`Are you sure you want to fine ${driverName} $${new Intl.NumberFormat('en-US').format(amount)}?`);
+            if (!confirmFine) return;
+
+            // Fines credit the franchise capital balance (paid to the franchise)
+            team.balance += amount;
+
+            const today = new Date();
+            const year = today.getFullYear();
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[today.getMonth()];
+            const day = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${month} ${day}, ${year}`;
+
+            team.ledger.push({
+                date: dateStr,
+                description: `Driver Fine: ${driverName}`,
+                category: "income",
+                amount: amount
             });
 
             saveState();
