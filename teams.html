@@ -1112,11 +1112,20 @@
             if (saved) {
                 try {
                     localTeamsData = JSON.parse(saved);
-                    // Merge local modifications with the server's team list, so any newly added teams (like Wrist's Up Racing) are automatically loaded!
                     const serverTeams = teamsData.teams;
                     const mergedTeams = serverTeams.map(serverTeam => {
                         const savedTeam = localTeamsData.teams.find(t => t.id === serverTeam.id);
-                        return savedTeam ? savedTeam : serverTeam;
+                        if (savedTeam) {
+                            // If the server's ledger length differs, a new weekly simulation or database reset occurred.
+                            // Discard the stale cached team data and use the fresh server data.
+                            const serverLedgerLen = (serverTeam.ledger || []).length;
+                            const savedLedgerLen = (savedTeam.ledger || []).length;
+                            if (serverLedgerLen !== savedLedgerLen) {
+                                return serverTeam;
+                            }
+                            return savedTeam;
+                        }
+                        return serverTeam;
                     });
                     teamsData.teams = mergedTeams;
                 } catch (e) {
