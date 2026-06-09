@@ -159,6 +159,10 @@ const rosterData = {
     "driver": "BRANDON JACKSON",
     "status": "part-time"
   },
+  "96": {
+    "driver": "",
+    "status": "full-time"
+  },
   "97": {
     "driver": "EDDIE HAGIGH",
     "status": "past-champion"
