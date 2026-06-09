@@ -159,6 +159,10 @@ const rosterData = {
     "driver": "BRANDON JACKSON",
     "status": "part-time"
   },
+  "93": {
+    "driver": "",
+    "status": "part-time"
+  },
   "96": {
     "driver": "LUCAS WILSON",
     "status": "part-time"
