@@ -88,7 +88,7 @@ const rosterData = {
     "status": "part-time"
   },
   "30": {
-    "driver": "CA",
+    "driver": "CARTER PHILLIPS",
     "status": "full-time"
   },
   "43": {
