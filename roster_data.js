@@ -125,7 +125,7 @@ const rosterData = {
   },
   "72": {
     "driver": "",
-    "status": "full-time"
+    "status": "part-time"
   },
   "73": {
     "driver": "BRANDON GEERS",
