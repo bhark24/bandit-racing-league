@@ -31,6 +31,10 @@ const rosterData = {
     "driver": "KEVIN FOSTER",
     "status": "past-champion"
   },
+  "11": {
+    "driver": "",
+    "status": "part-time"
+  },
   "12": {
     "driver": "BILL HARKINS",
     "status": "full-time"
