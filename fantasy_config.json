@@ -54,7 +54,7 @@
     "pole_bonus": 5,
     "most_laps_led_bonus": 5,
     "clean_race_bonus": 3,
-    "dnf_penalty": -10
+    "dnf_penalty": 0
   },
   "tiers": {
     "A": [
