@@ -47,6 +47,10 @@ const rosterData = {
     "driver": "MATT CROCKETT",
     "status": "full-time"
   },
+  "16": {
+    "driver": "",
+    "status": "part-time"
+  },
   "17": {
     "driver": "DIANTE RODER",
     "status": "part-time"
