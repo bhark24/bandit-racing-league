@@ -99,6 +99,10 @@ const rosterData = {
     "driver": "TERRY KONDUS",
     "status": "full-time"
   },
+  "38": {
+    "driver": "",
+    "status": "part-time"
+  },
   "43": {
     "driver": "JONATHON PLATT",
     "status": "past-champion"
