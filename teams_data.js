@@ -299,9 +299,9 @@ const teamsData = {
       "lon": -117.2612
     },
     "LUCAS WILSON": {
-      "city": "TBD",
-      "lat": 35.4088,
-      "lon": -80.5795
+      "city": "Toronto, Ontario",
+      "lat": 43.6532,
+      "lon": -79.3832
     },
     "DAVIS CARROLL": {
       "city": "TBD",
@@ -333,7 +333,7 @@ const teamsData = {
       "logo": "assets/roundy-motorsports-logo.png",
       "points": 37,
       "wins": 0,
-      "balance": 2050433,
+      "balance": 2050316,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -352,19 +352,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Ford",
           "name": "Roundy F-150 #12",
-          "condition": 49
+          "condition": 50
         },
         {
           "id": "truck-2",
           "make": "Ford",
           "name": "Roundy F-150 #4",
-          "condition": 82
+          "condition": 88
         },
         {
           "id": "truck-3",
           "make": "Ford",
           "name": "Roundy F-150 #15",
-          "condition": 48
+          "condition": 49
         },
         {
           "id": "truck-4",
@@ -408,7 +408,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (874 mi)",
           "category": "expense",
-          "amount": -197
+          "amount": -250
         },
         {
           "date": "May 7, 2025",
@@ -432,7 +432,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: LOGAN MURRAY from West Plains, MO (813 mi)",
           "category": "expense",
-          "amount": -422
+          "amount": -469
         },
         {
           "date": "May 7, 2025",
@@ -456,7 +456,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: MATT CROCKETT from Salt Lake City, UT (1907 mi)",
           "category": "expense",
-          "amount": -350
+          "amount": -367
         },
         {
           "date": "May 7, 2025",
@@ -510,7 +510,7 @@ const teamsData = {
       "logo": "assets/937-racing-logo.png",
       "points": 9,
       "wins": 0,
-      "balance": 1890822,
+      "balance": 1890600,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -535,25 +535,25 @@ const teamsData = {
           "id": "truck-2",
           "make": "Toyota",
           "name": "937 Tundra #22",
-          "condition": 73
+          "condition": 78
         },
         {
           "id": "truck-3",
           "make": "Toyota",
           "name": "937 Tundra #47",
-          "condition": 90
+          "condition": 72
         },
         {
           "id": "truck-4",
           "make": "Toyota",
           "name": "937 Tundra #17",
-          "condition": 90
+          "condition": 77
         },
         {
           "id": "truck-5",
           "make": "Toyota",
           "name": "937 Tundra #19",
-          "condition": 75
+          "condition": 86
         }
       ],
       "ledger": [
@@ -597,7 +597,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (750 mi)",
           "category": "expense",
-          "amount": -301
+          "amount": -390
         },
         {
           "date": "May 7, 2025",
@@ -621,7 +621,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (737 mi)",
           "category": "expense",
-          "amount": -354
+          "amount": -385
         },
         {
           "date": "May 7, 2025",
@@ -631,7 +631,7 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "Prize Money: JOSH ADAMS (P35)",
+          "description": "Prize Money: JOSH ADAMS (P38)",
           "category": "income",
           "amount": 12000
         },
@@ -645,7 +645,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: MICHAEL RAKES from Roanoke, VA (560 mi)",
           "category": "expense",
-          "amount": -363
+          "amount": -419
         },
         {
           "date": "May 7, 2025",
@@ -655,7 +655,7 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "Prize Money: MICHAEL RAKES (P36)",
+          "description": "Prize Money: MICHAEL RAKES (P35)",
           "category": "income",
           "amount": 12000
         },
@@ -669,7 +669,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: DIONTE RADER from Miamisburg, OH (744 mi)",
           "category": "expense",
-          "amount": -324
+          "amount": -366
         },
         {
           "date": "May 7, 2025",
@@ -679,7 +679,7 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "Prize Money: DIONTE RADER (P37)",
+          "description": "Prize Money: DIONTE RADER (P36)",
           "category": "income",
           "amount": 12000
         },
@@ -693,7 +693,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: MATT BAILEY from Xenia, OH (742 mi)",
           "category": "expense",
-          "amount": -330
+          "amount": -334
         },
         {
           "date": "May 7, 2025",
@@ -703,7 +703,7 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "Prize Money: MATT BAILEY (P38)",
+          "description": "Prize Money: MATT BAILEY (P37)",
           "category": "income",
           "amount": 12000
         }
@@ -723,7 +723,7 @@ const teamsData = {
       "logo": "assets/wrists-up-racing-logo.png",
       "points": 28,
       "wins": 0,
-      "balance": 2054082,
+      "balance": 2054108,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -742,13 +742,13 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Wrist's Up Silverado #23",
-          "condition": 64
+          "condition": 65
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Wrist's Up Silverado #88",
-          "condition": 63
+          "condition": 64
         },
         {
           "id": "truck-3",
@@ -792,7 +792,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: DYLAN NICASTRO from Cleveland, OH (849 mi)",
           "category": "expense",
-          "amount": -189
+          "amount": -190
         },
         {
           "date": "May 7, 2025",
@@ -816,7 +816,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: DAVID WESTOVER JR from Ashtabula, OH (874 mi)",
           "category": "expense",
-          "amount": -231
+          "amount": -204
         },
         {
           "date": "May 7, 2025",
@@ -846,7 +846,7 @@ const teamsData = {
       "logo": "assets/zerofoxtrot-logo.jpg",
       "points": 110,
       "wins": 1,
-      "balance": 2109907,
+      "balance": 2109801,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -877,13 +877,13 @@ const teamsData = {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #51",
-          "condition": 66
+          "condition": 63
         },
         {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #00",
-          "condition": 47
+          "condition": 50
         }
       ],
       "ledger": [
@@ -921,7 +921,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: DAVID LEAKEY from Crestview, FL (348 mi)",
           "category": "expense",
-          "amount": -343
+          "amount": -363
         },
         {
           "date": "May 7, 2025",
@@ -945,7 +945,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: CONOR GIBSON from Halifax, NS (1431 mi)",
           "category": "expense",
-          "amount": -496
+          "amount": -582
         },
         {
           "date": "May 7, 2025",
@@ -1023,7 +1023,7 @@ const teamsData = {
       "logo": "assets/carter-phillips-racing-logo.jpg",
       "points": 3,
       "wins": 0,
-      "balance": 2080540,
+      "balance": 2080567,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -1042,19 +1042,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #97",
-          "condition": 77
+          "condition": 71
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #83",
-          "condition": 74
+          "condition": 83
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #30",
-          "condition": 90
+          "condition": 72
         },
         {
           "id": "truck-4",
@@ -1092,7 +1092,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: EDDIE HAGIGH from Severna Park, MD (727 mi)",
           "category": "expense",
-          "amount": -390
+          "amount": -352
         },
         {
           "date": "May 7, 2025",
@@ -1116,7 +1116,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: JASON GREENWELL from Plymouth, MI (919 mi)",
           "category": "expense",
-          "amount": -461
+          "amount": -429
         },
         {
           "date": "May 7, 2025",
@@ -1140,7 +1140,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: CARTER PHILLIPS from Columbia, SC (330 mi)",
           "category": "expense",
-          "amount": -300
+          "amount": -343
         },
         {
           "date": "May 7, 2025",
@@ -1169,7 +1169,7 @@ const teamsData = {
       "logo": "assets/gfr.png",
       "points": 52,
       "wins": 0,
-      "balance": 1899513,
+      "balance": 1899523,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -1194,13 +1194,13 @@ const teamsData = {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "GFR Silverado #2",
-          "condition": 81
+          "condition": 80
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "GFR Silverado #1",
-          "condition": 88
+          "condition": 75
         },
         {
           "id": "truck-4",
@@ -1212,7 +1212,7 @@ const teamsData = {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "GFR Silverado #13",
-          "condition": 72
+          "condition": 85
         }
       ],
       "ledger": [
@@ -1256,7 +1256,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: KEVIN FOSTER from Katy, TX (890 mi)",
           "category": "expense",
-          "amount": -489
+          "amount": -459
         },
         {
           "date": "May 7, 2025",
@@ -1280,7 +1280,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: NICK NICKERSON from Phoenix, AZ (1848 mi)",
           "category": "expense",
-          "amount": -631
+          "amount": -705
         },
         {
           "date": "May 7, 2025",
@@ -1304,7 +1304,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: RICKY HART from West Chester, PA (803 mi)",
           "category": "expense",
-          "amount": -461
+          "amount": -444
         },
         {
           "date": "May 7, 2025",
@@ -1328,7 +1328,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: BENJAMIN LACY from Loma Linda, CA (2146 mi)",
           "category": "expense",
-          "amount": -646
+          "amount": -672
         },
         {
           "date": "May 7, 2025",
@@ -1352,7 +1352,7 @@ const teamsData = {
           "date": "May 7, 2025",
           "description": "Flight & Lodging: JONATHON PLATT from Concord, NC (429 mi)",
           "category": "expense",
-          "amount": -356
+          "amount": -293
         },
         {
           "date": "May 7, 2025",
@@ -1378,7 +1378,7 @@ const teamsData = {
       "id": "striped-maple-racing",
       "name": "Striped Maple Racing",
       "owner": "Lucas Wilson",
-      "homeBase": "TBD",
+      "homeBase": "Toronto, Ontario",
       "logo": "assets/Striped-maple-racing.png",
       "points": 0,
       "wins": 0,

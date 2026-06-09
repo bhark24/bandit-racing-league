@@ -500,7 +500,8 @@ def main():
             "crestview, fl": (30.7621, -86.5694),
             "weeki wachee, fl": (28.5169, -82.5750),
             "columbia, sc": (34.0007, -81.0348),
-            "katy, tx": (29.7858, -95.8244)
+            "katy, tx": (29.7858, -95.8244),
+            "toronto, ontario": (43.6532, -79.3832)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates
