@@ -277,6 +277,99 @@
             border-color: #ff1744;
             box-shadow: 0 0 10px rgba(255, 23, 68, 0.2);
         }
+        @media (max-width: 992px) {
+            #telegram-layout {
+                grid-template-columns: 1fr !important;
+            }
+            #telegram-left {
+                border-right: none !important;
+                padding-right: 0 !important;
+                margin-bottom: 25px;
+            }
+        }
+        .highlight-badge {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .highlight-badge.wreck {
+            border-color: #ff1744;
+            background: rgba(255, 23, 68, 0.02);
+        }
+        .highlight-badge.charger {
+            border-color: var(--chase-yellow);
+            background: rgba(255, 204, 0, 0.02);
+        }
+        .driver-interview-card {
+            background: #090909;
+            border: 1px solid #1a1a1a;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .driver-interview-card:hover {
+            border-color: var(--neon-green);
+            background: rgba(0,255,0,0.02);
+            transform: translateY(-2px);
+        }
+        .driver-interview-card.selected {
+            border-color: var(--neon-green);
+            background: linear-gradient(135deg, #090909 0%, #111 100%);
+            box-shadow: 0 0 10px var(--neon-green-glow);
+        }
+        .speech-bubble {
+            position: relative;
+            background: #0d0d0d;
+            border: 1px solid var(--neon-green);
+            border-radius: 8px;
+            padding: 15px;
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-top: 15px;
+            box-shadow: 0 0 10px rgba(0,255,0,0.05);
+            animation: fadeIn 0.3s ease;
+        }
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            border-width: 0 10px 10px;
+            border-style: solid;
+            border-color: var(--neon-green) transparent;
+            display: block;
+            width: 0;
+        }
+        .interview-q-btn {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px 15px;
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            text-align: left;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .interview-q-btn:hover {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+            background: rgba(0,255,0,0.01);
+            text-shadow: 0 0 5px var(--neon-green-glow);
+        }
     </style>
 </head>
 <body>
@@ -343,6 +436,65 @@
             <button class="reset-db-btn" onclick="resetState()" style="flex-shrink: 0;">Reset Session State</button>
         </div>
 
+        <!-- The Outlaw Telegraph (Weekly Newspaper Column) -->
+        <div class="fantasy-panel" id="outlaw-telegraph-panel" style="margin-bottom: 40px; padding: 30px; border: 2px solid var(--neon-green); border-radius: var(--border-radius); background: linear-gradient(135deg, #0d0d0d 0%, #151515 100%); box-shadow: 0 0 20px rgba(0, 255, 0, 0.05); position: relative; overflow: hidden; display: none;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green-glow);"></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span style="font-size: 2rem;">📟</span>
+                    <div>
+                        <h2 style="color: var(--neon-green); font-family: 'Outfit', var(--font-heading); font-size: 2.2rem; font-weight: 900; letter-spacing: 2px; margin: 0; text-transform: uppercase; text-shadow: 0 0 10px var(--neon-green-glow); font-style: italic;">THE OUTLAW TELEGRAPH</h2>
+                        <span style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Weekly Dispatch & Gazette</span>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <span style="display: block; font-family: var(--font-heading); font-weight: bold; color: var(--chase-yellow); font-size: 1.1rem; text-transform: uppercase;" id="telegram-track">Daytona Oval</span>
+                    <span style="display: block; font-size: 0.85rem; color: var(--text-muted);" id="telegram-date">Wednesday, June 17th, 2026</span>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;" id="telegram-layout">
+                <!-- Left Column: News Dispatch -->
+                <div style="border-right: 1px dashed rgba(255,255,255,0.07); padding-right: 30px;" id="telegram-left">
+                    <h3 style="color: #fff; font-family: 'Outfit', var(--font-heading); font-size: 1.6rem; font-style: italic; margin-top: 0; margin-bottom: 15px; letter-spacing: 0.5px; line-height: 1.2;" id="telegram-headline">Knaak Conquers Slinger Speedway!</h3>
+                    <div style="color: #ccc; line-height: 1.6; font-size: 0.95rem; margin-bottom: 20px; text-align: justify;" id="telegram-body">
+                        <!-- Dynamically generated news article -->
+                    </div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;" id="telegram-highlights">
+                        <!-- Charger and Wreck badges -->
+                    </div>
+                </div>
+                
+                <!-- Right Column: Loot & Ledger Summary -->
+                <div style="display: flex; flex-direction: column; justify-content: space-between;" id="telegram-right">
+                    <div>
+                        <h4 style="color: var(--neon-green); font-family: var(--font-heading); margin-top: 0; margin-bottom: 15px; font-size: 1.05rem; letter-spacing: 1px; text-transform: uppercase; font-style: italic;">💰 The Loot & Ledger</h4>
+                        <div style="background: rgba(0,0,0,0.3); border: 1px solid #222; border-radius: 6px; padding: 15px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+                                <span>Total Prize Payouts:</span>
+                                <span style="color: var(--neon-green); font-weight: bold;" id="telegram-total-payouts">$0</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+                                <span>Total Repairs & Engines:</span>
+                                <span style="color: #ff1744; font-weight: bold;" id="telegram-total-repairs">-$0</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-top: 1px solid #333; padding-top: 8px; margin-top: 8px; font-size: 0.95rem; font-weight: bold; color: #fff;">
+                                <span>Net League Flow:</span>
+                                <span id="telegram-net-flow" style="color: var(--neon-green);">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <h4 style="color: #ff1744; font-family: var(--font-heading); margin-top: 0; margin-bottom: 15px; font-size: 1.05rem; letter-spacing: 1px; text-transform: uppercase; font-style: italic;">🪦 The Boot Hill Ledger</h4>
+                        <div style="background: rgba(0,0,0,0.3); border: 1px solid #222; border-radius: 6px; padding: 12px; font-size: 0.85rem; max-height: 150px; overflow-y: auto; color: var(--text-muted);" id="telegram-boothill-list">
+                            <!-- List of DNF and engine failures -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Franchise Championship Standings -->
         <div class="fantasy-panel" style="margin-bottom: 40px; padding: 25px; border: 1px solid #222; border-radius: var(--border-radius); background: var(--bg-panel);">
             <h2 style="color: #fff; margin-top: 0; margin-bottom: 20px; font-size: 1.8rem; font-family: var(--font-heading); display: flex; align-items: center; justify-content: space-between;">
@@ -398,6 +550,7 @@
                 <button class="team-tab-btn active" onclick="switchTeamTab('roster-tab')">DRIVERS AND THE GARAGE</button>
                 <button class="team-tab-btn" onclick="switchTeamTab('garage-tab')">RACE CHASSIS CONDITION</button>
                 <button class="team-tab-btn" onclick="switchTeamTab('finances-tab')">CURRENT TEAM FINANCIALS</button>
+                <button class="team-tab-btn" onclick="switchTeamTab('press-tab')">🤠 HIDEOUT INTERROGATIONS</button>
             </div>
 
             <!-- TAB 1: ROSTER -->
@@ -465,6 +618,47 @@
                             <!-- Rendered dynamically -->
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <!-- TAB 4: PRESS CONFERENCE -->
+            <div id="press-tab" class="panel-tab-content">
+                <h3 style="color:#fff; margin-bottom:20px; font-size:1.3rem;">🤠 The Hideout Interrogations</h3>
+                <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:25px;">Drag your drivers into the pressroom and see what they have to say about their performance, crashes, or team financials. Select a driver below to begin the interrogation.</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
+                    <!-- Left: Driver List -->
+                    <div style="display: flex; flex-direction: column; gap: 15px;" id="interview-drivers-list">
+                        <!-- Populated dynamically -->
+                    </div>
+                    
+                    <!-- Right: Q&A Board -->
+                    <div style="background: #090909; border: 1px solid #1a1a1a; border-radius: var(--border-radius); padding: 25px; min-height: 300px; display: flex; flex-direction: column; justify-content: center;" id="interview-qa-board">
+                        <div style="text-align: center; color: var(--text-muted);" id="interview-placeholder">
+                            <span style="font-size: 3rem; display: block; margin-bottom: 10px;">🤠</span>
+                            <p style="margin: 0; font-size: 0.95rem;">Select an active roster driver to start the interrogation.</p>
+                        </div>
+                        <div id="interview-interactive-area" style="display: none;">
+                            <div style="display: flex; align-items: center; gap: 15px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px;">
+                                <img id="interview-driver-img" src="" style="max-height: 45px; max-width: 90px; object-fit: contain;">
+                                <div>
+                                    <h4 id="interview-driver-name" style="margin: 0; color: #fff; font-size: 1.15rem; font-style: italic;">Driver Name</h4>
+                                    <span id="interview-driver-badge" style="font-size: 0.75rem; color: var(--neon-green); font-weight: bold; text-transform: uppercase;">Active</span>
+                                </div>
+                            </div>
+                            
+                            <h5 style="color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-top: 0; margin-bottom: 12px;">Choose Question:</h5>
+                            <div style="display: flex; flex-direction: column; gap: 10px;" id="interview-questions-container">
+                                <!-- Populated dynamically -->
+                            </div>
+                            
+                            <div id="interview-bubble-container" style="display: none;">
+                                <div class="speech-bubble" id="interview-speech-bubble">
+                                    <!-- Driver response text -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -544,6 +738,7 @@
             loadState();
             renderFranchiseStandings();
             renderTeamsDirectory();
+            renderOutlawTelegraph();
             
             // Default select the first team
             if (typeof teamsData !== 'undefined' && teamsData.teams && teamsData.teams.length > 0) {
@@ -591,6 +786,166 @@
             return Math.round(sum / team.trucks.length);
         }
 
+        function renderOutlawTelegraph() {
+            const panel = document.getElementById('outlaw-telegraph-panel');
+            if (typeof teamsData === 'undefined' || !teamsData.latestRace) {
+                panel.style.display = 'none';
+                return;
+            }
+
+            const latest = teamsData.latestRace;
+            panel.style.display = 'block';
+
+            document.getElementById('telegram-track').textContent = latest.track;
+            document.getElementById('telegram-date').textContent = latest.date;
+
+            const results = latest.results || [];
+            if (results.length === 0) return;
+
+            // 1. Winner
+            const winner = results[0];
+
+            // 2. Wreck of the Week (highest incidents)
+            let maxInc = -1;
+            let worstDriver = null;
+            results.forEach(d => {
+                if (d.incidents > maxInc) {
+                    maxInc = d.incidents;
+                    worstDriver = d;
+                }
+            });
+
+            // 3. Hard Charger (most positions gained: qualify - finish)
+            let maxGain = -999;
+            let hardCharger = null;
+            results.forEach(d => {
+                const gain = d.qualify - d.finish;
+                if (gain > maxGain) {
+                    maxGain = gain;
+                    hardCharger = d;
+                }
+            });
+
+            // 4. Calculate total payouts and repairs from ledgers on latest.date
+            let totalPayouts = 0;
+            let totalRepairs = 0;
+            const targetDate = latest.date;
+
+            teamsData.teams.forEach(team => {
+                if (team.ledger) {
+                    team.ledger.forEach(entry => {
+                        if (entry.date === targetDate) {
+                            if (entry.category === 'income') {
+                                totalPayouts += Number(entry.amount || 0);
+                            } else if (entry.category === 'expense') {
+                                totalRepairs += Math.abs(Number(entry.amount || 0));
+                            }
+                        }
+                    });
+                }
+            });
+
+            // 5. Populate Boot Hill List (DNFs, Engine blowouts, totaled trucks)
+            const bootHillCont = document.getElementById('telegram-boothill-list');
+            bootHillCont.innerHTML = '';
+            
+            const bootHillItems = [];
+            teamsData.teams.forEach(team => {
+                if (team.ledger) {
+                    team.ledger.forEach(entry => {
+                        if (entry.date === targetDate) {
+                            const desc = entry.description || "";
+                            if (desc.includes("Totaled") || desc.includes("Blown Motor") || desc.includes("Engine Replacement") || desc.includes("Replacement Fleet Truck") || desc.includes("DNF") || desc.includes("Fast Repair")) {
+                                bootHillItems.push({
+                                    logo: team.logo,
+                                    name: team.name,
+                                    desc: desc
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+
+            if (bootHillItems.length === 0) {
+                bootHillCont.innerHTML = '<div style="color:var(--text-muted); font-style:italic; font-size:0.85rem; padding: 5px 0;">Peace in the graveyard. No trucks totaled or motors blown this week.</div>';
+            } else {
+                bootHillItems.forEach(item => {
+                    const row = document.createElement('div');
+                    row.style.display = 'flex';
+                    row.style.alignItems = 'center';
+                    row.style.gap = '10px';
+                    row.style.marginBottom = '8px';
+                    row.style.borderBottom = '1px solid #1a1a1a';
+                    row.style.paddingBottom = '6px';
+                    row.innerHTML = `
+                        <img src="${item.logo}" alt="${item.name}" style="height:20px; max-width:40px; object-fit:contain;">
+                        <span style="font-size:0.8rem; color:#fff; line-height:1.2;">${item.desc}</span>
+                    `;
+                    bootHillCont.appendChild(row);
+                });
+            }
+
+            // 6. Format Financials
+            document.getElementById('telegram-total-payouts').textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(totalPayouts);
+            document.getElementById('telegram-total-repairs').textContent = '-' + new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(totalRepairs);
+            
+            const netFlow = totalPayouts - totalRepairs;
+            const netEl = document.getElementById('telegram-net-flow');
+            netEl.textContent = (netFlow >= 0 ? '+' : '-') + new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(Math.abs(netFlow));
+            netEl.style.color = netFlow >= 0 ? 'var(--neon-green)' : '#ff1744';
+
+            // 7. Dynamic Article Writing
+            const headlines = [
+                `🚨 OUTLAW WIRE: ${winner.name.toUpperCase()} STEALS VICTORY AT ${latest.track.toUpperCase()}!`,
+                `🚨 DUST & DESTRUCTION: ${winner.name.toUpperCase()} DOMINATES ${latest.track.toUpperCase()}!`,
+                `🚨 THE HEIST IS IN: ${winner.name.toUpperCase()} TAKES THE COLD CASH AT ${latest.track.toUpperCase()}!`
+            ];
+            document.getElementById('telegram-headline').textContent = headlines[Math.floor(Math.random() * headlines.length)];
+
+            let bodyHTML = `<p>The telegraph lines are buzzing tonight. The outlaws of the Bandit Racing League rode into **${latest.track}** and left a trail of smoking rubber, shattered body panels, and cash behind. </p>`;
+            
+            bodyHTML += `<p>**${winner.name}** executed a perfect hold-up, outrunning the law and the field to secure P1 and the largest loot payout of the night. </p>`;
+
+            if (worstDriver && maxInc > 0) {
+                const teamOfWorst = teamsData.teams.find(t => t.drivers.primary.includes(worstDriver.name) || t.drivers.backup.includes(worstDriver.name));
+                const teamName = teamOfWorst ? teamOfWorst.name : "their franchise";
+                bodyHTML += `<p>It wasn't a clean escape for everyone, though. **${worstDriver.name}** of **${teamName}** earned the infamous 'Wreck of the Week' citation. Racking up a brutal **${maxInc} incidents**, they left their crew sweeping up fiberglass all night. </p>`;
+            }
+
+            if (hardCharger && maxGain >= 3) {
+                bodyHTML += `<p>Meanwhile, **${hardCharger.name}** put on a masterclass in trail-blazing. Starting from a distant P${hardCharger.qualify} on the grid, they dodged the pileups and carved through the dust to finish P${hardCharger.finish}, gaining a massive **${maxGain} positions** as the race's official Hard Charger. </p>`;
+            }
+
+            if (bootHillItems.length > 0) {
+                bodyHTML += `<p>Check the right ledger—the Boot Hill graveyard is filling up fast. Mechanics are looking at a long week of rebuilding chassis and sourcing replacement engines for the battered fleet. </p>`;
+            } else {
+                bodyHTML += `<p>In a rare stroke of luck, every truck survived the evening without getting totaled, keeping the league's parts suppliers hungry for another week. </p>`;
+            }
+
+            // Replace markdown bold with HTML bold
+            bodyHTML = bodyHTML.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            document.getElementById('telegram-body').innerHTML = bodyHTML;
+
+            // 8. Render highlights badges
+            const highlightsCont = document.getElementById('telegram-highlights');
+            highlightsCont.innerHTML = '';
+
+            if (hardCharger && maxGain >= 3) {
+                const chargerBadge = document.createElement('div');
+                chargerBadge.className = 'highlight-badge charger';
+                chargerBadge.innerHTML = `<span>🐎</span> <div><strong style="color:var(--chase-yellow); display:block; font-size:0.75rem;">HARD CHARGER</strong><span style="font-size:0.7rem; color:#aaa;">${hardCharger.name} (+${maxGain})</span></div>`;
+                highlightsCont.appendChild(chargerBadge);
+            }
+
+            if (worstDriver && maxInc > 0) {
+                const wreckBadge = document.createElement('div');
+                wreckBadge.className = 'highlight-badge wreck';
+                wreckBadge.innerHTML = `<span>💥</span> <div><strong style="color:#ff1744; display:block; font-size:0.75rem;">WRECK OF THE WEEK</strong><span style="font-size:0.7rem; color:#aaa;">${worstDriver.name} (${maxInc} Inc)</span></div>`;
+                highlightsCont.appendChild(wreckBadge);
+            }
+        }
+
         function selectTeam(teamId) {
             selectedTeamId = teamId;
 
@@ -635,6 +990,7 @@
             renderRosterTab(team);
             renderGarageTab(team);
             renderLedgerTab(team);
+            renderInterviewsTab(team);
 
             // Make details visible
             document.getElementById('team-details-panel').style.display = 'block';
@@ -1151,6 +1507,222 @@
             if (sortedLedger.length === 0) {
                 body.innerHTML = "<tr><td colspan='4' style='text-align:center;'>No financial transactions logged yet.</td></tr>";
             }
+        }
+
+        function renderInterviewsTab(team) {
+            // Reset QA Board
+            document.getElementById('interview-placeholder').style.display = 'flex';
+            document.getElementById('interview-interactive-area').style.display = 'none';
+            document.getElementById('interview-bubble-container').style.display = 'none';
+
+            const listCont = document.getElementById('interview-drivers-list');
+            listCont.innerHTML = '';
+
+            // Get all rostered drivers
+            const activeDrivers = [];
+            if (team.drivers.primary) {
+                team.drivers.primary.forEach(d => {
+                    if (d && d !== 'VACANT') activeDrivers.push({ name: d, type: 'Primary' });
+                });
+            }
+            if (team.drivers.backup) {
+                team.drivers.backup.forEach(d => {
+                    if (d && d !== 'VACANT') activeDrivers.push({ name: d, type: 'Backup' });
+                });
+            }
+
+            if (activeDrivers.length === 0) {
+                listCont.innerHTML = '<span style="color:var(--text-muted); font-size:0.95rem;">No drivers currently signed to this franchise.</span>';
+                return;
+            }
+
+            activeDrivers.forEach(drv => {
+                const card = document.createElement('div');
+                card.className = 'driver-interview-card';
+                card.id = `interview-card-${normalizeName(drv.name)}`;
+                card.onclick = () => selectDriverForInterview(drv.name, drv.type, team.id);
+
+                card.innerHTML = `
+                    <img src="${getDriverImgPath(drv.name)}" style="max-height:30px; max-width:60px; object-fit:contain;" onerror="handleDriverNumberError(this, '${drv.name.replace(/'/g, "\\'")}')">
+                    <div>
+                        <strong style="color:#fff; display:block; font-size:0.9rem;">${drv.name}</strong>
+                        <span style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase;">${drv.type} Slot</span>
+                    </div>
+                `;
+                listCont.appendChild(card);
+            });
+        }
+
+        function selectDriverForInterview(driverName, slotType, teamId) {
+            // Remove selections
+            document.querySelectorAll('.driver-interview-card').forEach(c => c.classList.remove('selected'));
+            
+            // Add selection
+            const card = document.getElementById(`interview-card-${normalizeName(driverName)}`);
+            if (card) card.classList.add('selected');
+
+            // Show Interactive area
+            document.getElementById('interview-placeholder').style.display = 'none';
+            document.getElementById('interview-interactive-area').style.display = 'block';
+            document.getElementById('interview-bubble-container').style.display = 'none';
+
+            // Populate header
+            document.getElementById('interview-driver-name').textContent = driverName;
+            document.getElementById('interview-driver-img').src = getDriverImgPath(driverName);
+            
+            const badge = document.getElementById('interview-driver-badge');
+            badge.textContent = slotType + ' Driver';
+            badge.style.color = slotType === 'Primary' ? 'var(--neon-green)' : 'var(--status-parttime)';
+
+            // Clean up name for lookup
+            const normName = normalizeName(driverName);
+            
+            // Look up driver in latestRace results
+            let raceData = null;
+            if (typeof teamsData !== 'undefined' && teamsData.latestRace && teamsData.latestRace.results) {
+                raceData = teamsData.latestRace.results.find(r => normalizeName(r.name) === normName);
+            }
+
+            const qContainer = document.getElementById('interview-questions-container');
+            qContainer.innerHTML = '';
+
+            let questions = [];
+
+            if (raceData) {
+                const finish = raceData.finish;
+                const status = (raceData.status || "").toLowerCase();
+                const inc = raceData.incidents || 0;
+                const qualify = raceData.qualify || 99;
+                const gain = qualify - finish;
+
+                // Determine context-based dialogues
+                if (finish === 1) {
+                    // Scenario A: Winner
+                    questions = [
+                        {
+                            q: "Incredible victory tonight! Talk us through the winning pass.",
+                            a: "The truck was a rocket ship. We had a great run off Turn 4 on the restart, slid under the leader, and never looked back. The crew prepared an absolute gem."
+                        },
+                        {
+                            q: "How much does this victory boost team morale?",
+                            a: "It's massive. We've been working so hard in the shop. To bring home the win and the prize money is huge for the whole franchise. We're celebrating tonight!"
+                        },
+                        {
+                            q: "Can we expect this level of dominance next week?",
+                            a: "That's the goal. The competition is tough, but we've got a great package right now. We'll savor this win and then put our heads down to prepare for the next track."
+                        }
+                    ];
+                } else if (status.includes("engine") || status.includes("mechanical") || status.includes("motor")) {
+                    // Scenario B: Blown Engine
+                    questions = [
+                        {
+                            q: "You had a mechanical failure out there. What went wrong?",
+                            a: "We just lost power in the corners. The water temps spiked, and then the motor went completely sour. It's a blown engine. Nothing we could do in the cockpit."
+                        },
+                        {
+                            q: "How frustrating is it to lose a motor when you're running well?",
+                            a: "Extremely frustrating. We had a great truck and were moving forward. To get sidelined by a mechanical DNF is a tough pill to swallow for the budget."
+                        },
+                        {
+                            q: "Is the team worried about the $45,000 engine replacement cost?",
+                            a: "It hurts, for sure. The franchise capital takes a big hit when you have to buy a new power unit. But the owner knows we have to replace it to get back on track next week."
+                        }
+                    ];
+                } else if (status.includes("accident") || status.includes("crash") || status.includes("damage") || status.includes("suspension") || status.includes("contact")) {
+                    // Scenario C: Crash DNF
+                    questions = [
+                        {
+                            q: "You got knocked out of the race in a wreck. What happened?",
+                            a: "I got caught up in someone else's mess. Cars checked up in front of me, I got hit from behind, and got sent into the wall. Suspensions broke, truck was totaled. It was a disaster."
+                        },
+                        {
+                            q: "The truck was totaled, costing the team $185,000. How do you feel about that?",
+                            a: "It's awful. Nobody wants to write a check for $185,000 to replace a truck. I feel terrible for the crew and the owner, but that's the risk when the racing gets this tight."
+                        },
+                        {
+                            q: "How will you adjust your driving to avoid crashes next week?",
+                            a: "We just need to qualify better. When you start in the middle of the pack, you're in the 'danger zone'. If we qualify up front, we can stay clean."
+                        }
+                    ];
+                } else if (inc >= 8) {
+                    // Scenario D: High Incidents
+                    questions = [
+                        {
+                            q: "You had a busy night out there with a lot of incidents. Why was it so chaotic?",
+                            a: `It was just bumper-car racing. People were sliding all over, missing braking points, and running over each other. I was fighting the truck all night just to keep it straight. I racked up ${inc} incidents.`
+                        },
+                        {
+                            q: "Your owner is authorized to fine you for damage. Are you worried about a fine?",
+                            a: "I hope they see it was just hard short-track racing. Fines don't help team chemistry, but if the owner decides to issue one, I'll have to deal with it."
+                        },
+                        {
+                            q: "How is the truck chassis feeling after all that contact?",
+                            a: "It's pretty beat up. The steering was crooked after Lap 40. We'll need some garage time and franchise capital to get it back to 100% condition."
+                        }
+                    ];
+                } else if (inc === 0) {
+                    // Scenario E: Clean Race
+                    questions = [
+                        {
+                            q: "You brought the truck back with zero incidents. How did you manage that?",
+                            a: "I just kept my distance and let the chaotic runs play out ahead of me. It takes patience, but bringing back a clean truck saves the team thousands of dollars in repair bills."
+                        },
+                        {
+                            q: "Was it tempting to get aggressive when the pack bunched up?",
+                            a: "Sure, but the owner made it clear: repair costs are too high to be driving like a fool. A clean truck means we have more budget for next week's travel."
+                        },
+                        {
+                            q: "Are you satisfied with where you finished?",
+                            a: `Yes, we got solid points at P${finish} and didn't spend a dime on chassis repairs. That's a perfect business decision for our franchise.`
+                        }
+                    ];
+                } else {
+                    // Scenario F: General / Mid-pack
+                    questions = [
+                        {
+                            q: "How was the truck handling during the race?",
+                            a: "It was decent, a bit tight in the center of the corners. We adjusted the tire pressures during the stops, but we were just missing that extra 10% speed to run up front."
+                        },
+                        {
+                            q: "Describe your battles in the pack.",
+                            a: `It was an absolute dogfight in the mid-pack. Gaining P${finish} was hard-fought. We had some good side-by-side racing, but it was tough to make clean passes.`
+                        },
+                        {
+                            q: "What is the main adjustment the team needs to make for next week?",
+                            a: "We need to look at our travel prep and hauler logistics. If we get the truck dialed in earlier in the week, we can qualify better and start in a safer position."
+                        }
+                    ];
+                }
+            } else {
+                // Scenario G: DNS / backup
+                questions = [
+                    {
+                        q: "You didn't participate in the shootout this week. What was your role?",
+                        a: "I was supporting the guys from the pit box. We had our active roster set, but I was keeping a close eye on the track conditions and helping with spots. I'm ready to strap in whenever the owner calls."
+                    },
+                    {
+                        q: "Are you hoping to get signed to an active slot soon?",
+                        a: "Absolutely. I'm staying in shape, running laps, and keeping my helmet ready. The backup slots are good, but every driver wants to be in the primary seat scoring points for the franchise."
+                    },
+                    {
+                        q: "How is team morale in the hideout right now?",
+                        a: "Morale is solid. We're a tight group. Even when repair costs are high, we stick together and focus on the next track. The team has a bright future."
+                    }
+                ];
+            }
+
+            questions.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = 'interview-q-btn';
+                btn.textContent = `❓ ${item.q}`;
+                btn.onclick = () => {
+                    const bubbleCont = document.getElementById('interview-bubble-container');
+                    const bubble = document.getElementById('interview-speech-bubble');
+                    bubble.textContent = `"${item.a}"`;
+                    bubbleCont.style.display = 'block';
+                };
+                qContainer.appendChild(btn);
+            });
         }
 
         function switchTeamTab(tabId) {

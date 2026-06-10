@@ -282,9 +282,11 @@ def calculate_driver_points(drivers, config):
         driver_scores[norm_name] = {
             "driver_name": raw_name,
             "finish": fp,
+            "qualify": qp,
             "incidents": inc,
             "total_points": total,
-            "status": status
+            "status": d.get("st", "Running"),
+            "led": int(d.get("led", 0) or 0)
         }
         
     return driver_scores
@@ -564,9 +566,11 @@ def main():
                 driver_scores[norm_driver] = {
                     "driver_name": driver_name,
                     "finish": mock_fp,
+                    "qualify": mock_qp,
                     "incidents": mock_inc,
                     "total_points": mock_total_points,
-                    "status": "running"
+                    "status": "running",
+                    "led": 0
                 }
                 print(f"  [MOCK RESULTS] Generated mock results for {driver_name} (P{mock_fp})")
 
@@ -839,6 +843,34 @@ def main():
             if team["id"] in weekly_winners:
                 team["wins"] += 1
                 print(f"Weekly Winner: {team['name']} with {highest_score} points! Credit +1 Win.")
+                
+    # Record the latest race telemetry
+    results_list = []
+    for norm_name, score_data in driver_scores.items():
+        raw_name = score_data["driver_name"]
+        if ',' in raw_name:
+            parts = raw_name.split(',')
+            clean_name = f"{parts[1].strip()} {parts[0].strip()}"
+        else:
+            clean_name = raw_name
+            
+        results_list.append({
+            "name": clean_name.upper(),
+            "finish": score_data["finish"],
+            "qualify": score_data["qualify"],
+            "incidents": score_data["incidents"],
+            "status": score_data["status"],
+            "led": score_data["led"]
+        })
+    
+    # Sort results by finish position ascending
+    results_list.sort(key=lambda x: x["finish"])
+    
+    teams_db["latestRace"] = {
+        "track": track_name,
+        "date": race_date,
+        "results": results_list
+    }
                 
     # Save the updated database
     save_teams_database(teams_db, original_content)
