@@ -1890,11 +1890,16 @@
                     const mergedTeams = serverTeams.map(serverTeam => {
                         const savedTeam = localTeamsData.teams.find(t => t.id === serverTeam.id);
                         if (savedTeam) {
-                            // If the server's ledger length differs, a new weekly simulation or database reset occurred.
+                            // If the server's ledger length differs from the saved server-generated ledger length,
+                            // a new weekly simulation or database reset occurred.
                             // Discard the stale cached team data and use the fresh server data.
                             const serverLedgerLen = (serverTeam.ledger || []).length;
-                            const savedLedgerLen = (savedTeam.ledger || []).length;
-                            if (serverLedgerLen !== savedLedgerLen) {
+                            const localKeys = ["Signed Driver:", "Released Driver:", "Repaired Fleet Truck:", "Declined Sponsor:", "Driver Fine:"];
+                            const savedServerLedgerLen = (savedTeam.ledger || []).filter(entry => {
+                                const desc = entry.description || "";
+                                return !localKeys.some(key => desc.startsWith(key));
+                            }).length;
+                            if (serverLedgerLen !== savedServerLedgerLen) {
                                 return serverTeam;
                             }
                             // Copy server metadata to savedTeam to preserve server updates
