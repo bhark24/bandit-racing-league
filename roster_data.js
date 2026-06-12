@@ -104,7 +104,7 @@ const rosterData = {
     "status": "full-time"
   },
   "35": {
-    "driver": "wES fULLER.PNG",
+    "driver": "wES fULLER.PN",
     "status": "part-time"
   },
   "38": {
