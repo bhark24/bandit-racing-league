@@ -191,6 +191,10 @@ const rosterData = {
     "driver": "JOSH BILLITER",
     "status": "part-time"
   },
+  "100": {
+    "driver": "",
+    "status": "reserved"
+  },
   "00": {
     "driver": "Jackson Knaak",
     "status": "full-time"
