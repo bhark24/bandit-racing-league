@@ -192,7 +192,7 @@ const rosterData = {
     "status": "part-time"
   },
   "100": {
-    "driver": "UNAVAILAB",
+    "driver": "UNAVAILAB;",
     "status": "reserved"
   },
   "00": {
