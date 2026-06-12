@@ -91,6 +91,10 @@ const rosterData = {
     "driver": "Jesse VAUGHAN",
     "status": "part-time"
   },
+  "29": {
+    "driver": "",
+    "status": "part-time"
+  },
   "30": {
     "driver": "CARTER PHILLIPS",
     "status": "full-time"
