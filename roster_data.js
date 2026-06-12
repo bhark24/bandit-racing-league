@@ -92,7 +92,7 @@ const rosterData = {
     "status": "part-time"
   },
   "29": {
-    "driver": "GAR",
+    "driver": "GARR",
     "status": "part-time"
   },
   "30": {
