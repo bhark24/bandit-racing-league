@@ -200,7 +200,7 @@ const rosterData = {
     "status": "past-champion"
   },
   "08": {
-    "driver": "JACKSI",
+    "driver": "JACKSON ",
     "status": "full-time"
   }
 };
