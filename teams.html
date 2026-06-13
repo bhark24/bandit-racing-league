@@ -1459,8 +1459,11 @@
                 date: dateStr,
                 description: `Repaired Fleet Truck: ${truck.name} (+${100 - oldCondition}%)`,
                 category: "expense",
-                amount: -cost
+                amount: -cost,
+                local: true
             });
+            
+            saveState();
             
             // Re-render UI components
             renderTeamsDirectory();
@@ -1885,23 +1888,21 @@
             const saved = localStorage.getItem('bandit_teams_data');
             if (saved) {
                 try {
-                    localTeamsData = JSON.parse(saved);
+                    const localData = JSON.parse(saved);
                     const serverTeams = teamsData.teams;
+                    
+                    // If the latest race date doesn't match or is missing, a new simulation
+                    // or database reset occurred. Revert cache to server data.
+                    const serverRaceDate = teamsData.latestRace ? teamsData.latestRace.date : null;
+                    if (!localData.latestRaceDate || localData.latestRaceDate !== serverRaceDate) {
+                        console.log("Database version mismatch or new simulation. Reverting cache.");
+                        localStorage.removeItem('bandit_teams_data');
+                        return;
+                    }
+                    
                     const mergedTeams = serverTeams.map(serverTeam => {
-                        const savedTeam = localTeamsData.teams.find(t => t.id === serverTeam.id);
+                        const savedTeam = localData.teams.find(t => t.id === serverTeam.id);
                         if (savedTeam) {
-                            // If the server's ledger length differs from the saved server-generated ledger length,
-                            // a new weekly simulation or database reset occurred.
-                            // Discard the stale cached team data and use the fresh server data.
-                            const serverLedgerLen = (serverTeam.ledger || []).length;
-                            const localKeys = ["Signed Driver:", "Released Driver:", "Repaired Fleet Truck:", "Declined Sponsor:", "Driver Fine:"];
-                            const savedServerLedgerLen = (savedTeam.ledger || []).filter(entry => {
-                                const desc = entry.description || "";
-                                return !localKeys.some(key => desc.startsWith(key));
-                            }).length;
-                            if (serverLedgerLen !== savedServerLedgerLen) {
-                                return serverTeam;
-                            }
                             // Copy server metadata to savedTeam to preserve server updates
                             savedTeam.name = serverTeam.name;
                             savedTeam.owner = serverTeam.owner;
@@ -1915,7 +1916,6 @@
                     teamsData.teams = mergedTeams;
                 } catch (e) {
                     console.error("Failed to parse saved state:", e);
-                    localTeamsData = null;
                 }
             }
             // Always normalize all rosters
@@ -1927,7 +1927,10 @@
         }
 
         function saveState() {
-            localStorage.setItem('bandit_teams_data', JSON.stringify({ teams: teamsData.teams }));
+            localStorage.setItem('bandit_teams_data', JSON.stringify({ 
+                teams: teamsData.teams,
+                latestRaceDate: teamsData.latestRace ? teamsData.latestRace.date : null
+            }));
         }
 
         function resetState() {
@@ -2066,7 +2069,8 @@
                 date: dateStr,
                 description: `Signed Driver: ${driverName} (Signing Bonus)`,
                 category: "expense",
-                amount: -cost
+                amount: -cost,
+                local: true
             });
 
             saveState();
@@ -2129,7 +2133,8 @@
                 date: dateStr,
                 description: `Released Driver: ${driverName}`,
                 category: "info",
-                amount: 0
+                amount: 0,
+                local: true
             });
 
             saveState();
@@ -2168,7 +2173,8 @@
                 date: dateStr,
                 description: `Declined Sponsor: ${sponsorName}`,
                 category: "info",
-                amount: 0
+                amount: 0,
+                local: true
             });
 
             saveState();
@@ -2215,7 +2221,8 @@
                 date: dateStr,
                 description: `Driver Fine: ${driverName}`,
                 category: "income",
-                amount: amount
+                amount: amount,
+                local: true
             });
 
             saveState();

@@ -496,6 +496,16 @@ const teamsData = {
       "city": "Roanoke, VA",
       "lat": 37.271,
       "lon": -79.9414
+    },
+    "WES FULLER": {
+      "city": "Kansas City, KS",
+      "lat": 39.1156,
+      "lon": -94.8311
+    },
+    "RICKY GONZALES": {
+      "city": "Kansas City, KS",
+      "lat": 39.1156,
+      "lon": -94.8311
     }
   },
   "teams": [
@@ -2629,6 +2639,75 @@ const teamsData = {
         "Craftsman Tools"
       ],
       "passcodeHash": "11350e39f388ba27644fd1786929177fa12eb31ab4fc28429ebb53f520333b54"
+    },
+    {
+      "id": "title-town-racing",
+      "name": "Title Town Racing",
+      "owner": "Wes Fuller & Ricky Gonzales",
+      "homeBase": "Kansas City, KS",
+      "logo": "assets/Title_Town_racing.png",
+      "points": 0,
+      "wins": 0,
+      "balance": 2010000,
+      "loan": 0,
+      "drivers": {
+        "primary": [
+          "WES FULLER",
+          "RICKY GONZALES",
+          "VACANT",
+          "VACANT"
+        ],
+        "backup": [
+          "VACANT",
+          "VACANT"
+        ]
+      },
+      "trucks": [
+        {
+          "id": "truck-1",
+          "make": "RAM",
+          "name": "Title Town Ram #35",
+          "condition": 100
+        },
+        {
+          "id": "truck-2",
+          "make": "RAM",
+          "name": "Title Town Ram #82",
+          "condition": 100
+        },
+        {
+          "id": "truck-3",
+          "make": "RAM",
+          "name": "Title Town Ram #TBD",
+          "condition": 100
+        },
+        {
+          "id": "truck-4",
+          "make": "RAM",
+          "name": "Title Town Ram #TBD",
+          "condition": 100
+        }
+      ],
+      "ledger": [
+        {
+          "date": "2026-05-24",
+          "description": "Starting Franchise Balance",
+          "category": "income",
+          "amount": 2750000
+        },
+        {
+          "date": "2026-05-24",
+          "description": "Purchased Fleet of 4x RAM Trucks",
+          "category": "expense",
+          "amount": -740000
+        }
+      ],
+      "sponsors": [
+        "Title Town Racing",
+        "RAM Trucks",
+        "Craftsman Tools"
+      ],
+      "passcodeHash": "7c80456012d9a93fbfd574ba3b0204b364d3e52c7370b8921f7fa69fd70bddfa"
     }
   ]
 };

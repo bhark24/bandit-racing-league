@@ -443,7 +443,7 @@ def main():
     # Process each team
     for team in teams_db["teams"]:
         team_id = team["id"]
-        if team_id == "striped-maple-racing":
+        if team_id in ["striped-maple-racing", "title-town-racing"]:
             continue
         print(f"\nProcessing Team: {team['name']}")
         
