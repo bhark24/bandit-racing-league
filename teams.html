@@ -581,7 +581,10 @@
 
             <!-- TAB 2: GARAGE -->
             <div id="garage-tab" class="panel-tab-content">
-                <h3 style="color:#fff; margin-bottom:20px; font-size:1.3rem;">Weekly Truck Fleet Management</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:20px; border-bottom:1px solid #1a1a1a; padding-bottom:15px;">
+                    <h3 style="color:#fff; margin:0; font-size:1.3rem;">Weekly Truck Fleet Management</h3>
+                    <div id="repair-all-container"></div>
+                </div>
                 <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:25px;">Each team must purchase and maintain a Craftsman Truck for each of their active full-time drivers. Deductions from crashes or engine wear will lower condition ratings, requiring franchise capital for repairs.</p>
                 <div id="trucks-container" style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
                     <!-- Rendered dynamically -->
@@ -1316,6 +1319,39 @@
             const container = document.getElementById('trucks-container');
             container.innerHTML = '';
 
+            // Calculate total repair cost for all trucks
+            let totalRepairCost = 0;
+            let damagedTrucksCount = 0;
+            
+            team.trucks.forEach(truck => {
+                if (truck.condition < 100) {
+                    totalRepairCost += (100 - truck.condition) * 500;
+                    damagedTrucksCount++;
+                }
+            });
+            
+            const repairAllCont = document.getElementById('repair-all-container');
+            if (repairAllCont) {
+                if (damagedTrucksCount > 0) {
+                    const isLocked = (team.loan || 0) > 0;
+                    if (isLocked) {
+                        repairAllCont.innerHTML = `
+                            <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: Active Emergency Loan">
+                                🔒 Repair All Locked (Active Loan)
+                            </button>
+                        `;
+                    } else {
+                        repairAllCont.innerHTML = `
+                            <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="repairAllTrucksInteractive('${team.id}', ${totalRepairCost})">
+                                🔧 Repair All Trucks ($${new Intl.NumberFormat('en-US').format(totalRepairCost)})
+                            </button>
+                        `;
+                    }
+                } else {
+                    repairAllCont.innerHTML = '';
+                }
+            }
+
             // Filter active drivers
             const activeDrivers = [];
             if (team.drivers.primary) {
@@ -1458,6 +1494,76 @@
             team.ledger.push({
                 date: dateStr,
                 description: `Repaired Fleet Truck: ${truck.name} (+${100 - oldCondition}%)`,
+                category: "expense",
+                amount: -cost,
+                local: true
+            });
+            
+            saveState();
+            
+            // Re-render UI components
+            renderTeamsDirectory();
+            selectTeam(teamId);
+            renderFranchiseStandings();
+            
+            // Keep the Garage tab active
+            switchTeamTab('garage-tab');
+        }
+
+        async function repairAllTrucksInteractive(teamId, cost) {
+            const team = teamsData.teams.find(t => t.id === teamId);
+            if (!team) return;
+            
+            if (team.loan > 0) {
+                alert(`Action Locked: This team has an active emergency loan ($${new Intl.NumberFormat('en-US').format(team.loan)}). Manual chassis repairs are locked until the loan is fully repaid.`);
+                return;
+            }
+            
+            if (team.balance < cost) {
+                alert(`Insufficient franchise capital to repair all trucks. Required: $${new Intl.NumberFormat('en-US').format(cost)}, Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
+                return;
+            }
+            
+            // Challenge for passcode
+            const passcode = prompt(`Repairing all fleet trucks requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
+            if (passcode === null) return; // User cancelled
+            
+            if (!team.passcodeHash) {
+                alert("Error: Passcode protection is not initialized for this team.");
+                return;
+            }
+            
+            const hashed = await sha256(passcode.trim());
+            if (hashed !== team.passcodeHash) {
+                alert(`Authentication Failed!\n\nIncorrect passcode. Only the authorized team owner (${team.owner}) can perform chassis repairs.`);
+                return;
+            }
+            
+            const confirmRepair = confirm(`Passcode Verified!\n\nAre you sure you want to repair all trucks in the fleet? This will restore all truck conditions to 100% and deduct $${new Intl.NumberFormat('en-US').format(cost)} from your balance.`);
+            if (!confirmRepair) return;
+            
+            // Execute repairs for all damaged trucks
+            let repairedTruckNames = [];
+            team.trucks.forEach(truck => {
+                if (truck.condition < 100) {
+                    repairedTruckNames.push(`${truck.name} (+${100 - truck.condition}%)`);
+                    truck.condition = 100;
+                }
+            });
+            
+            team.balance -= cost;
+            
+            // Add ledger entry
+            const today = new Date();
+            const year = today.getFullYear();
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = months[today.getMonth()];
+            const day = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${month} ${day}, ${year}`;
+            
+            team.ledger.push({
+                date: dateStr,
+                description: `Repaired Fleet: ${repairedTruckNames.join(", ")}`,
                 category: "expense",
                 amount: -cost,
                 local: true
