@@ -1337,14 +1337,19 @@
                     if (isLocked) {
                         repairAllCont.innerHTML = `
                             <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: Active Emergency Loan">
-                                🔒 Repair All Locked (Active Loan)
+                                🔒 Repair Selected Locked (Active Loan)
                             </button>
                         `;
                     } else {
                         repairAllCont.innerHTML = `
-                            <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="repairAllTrucksInteractive('${team.id}', ${totalRepairCost})">
-                                🔧 Repair All Trucks ($${new Intl.NumberFormat('en-US').format(totalRepairCost)})
-                            </button>
+                            <div style="display:flex; align-items:center; gap:15px; flex-wrap:wrap;">
+                                <label style="color:var(--text-muted); font-size:0.85rem; display:flex; align-items:center; gap:6px; cursor:pointer; user-select:none; margin:0;">
+                                    <input type="checkbox" id="select-all-repairs" style="cursor:pointer;" onchange="toggleSelectAllRepairs('${team.id}')"> Select All
+                                </label>
+                                <button id="repair-selected-btn" class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="repairSelectedTrucksInteractive('${team.id}')">
+                                    🔧 Repair Selected ($0)
+                                </button>
+                            </div>
                         `;
                     }
                 } else {
@@ -1396,9 +1401,14 @@
                         `;
                     } else {
                         repairBtnHTML = `
-                            <button class="btn-primary" style="margin-top: 10px; padding: 6px 12px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="repairTruckInteractive('${team.id}', '${truck.id}', ${cost})">
-                                🔧 Repair Truck ($${new Intl.NumberFormat('en-US').format(cost)})
-                            </button>
+                            <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px; margin-top:10px;">
+                                <label style="color:var(--text-muted); font-size:0.8rem; display:flex; align-items:center; gap:6px; cursor:pointer; user-select:none; margin:0;">
+                                    <input type="checkbox" class="truck-repair-checkbox" data-truck-id="${truck.id}" data-cost="${cost}" checked style="cursor:pointer;" onchange="updateRepairSelectedButton('${team.id}')"> Select for Repair
+                                </label>
+                                <button class="btn-primary" style="padding: 6px 12px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="repairTruckInteractive('${team.id}', '${truck.id}', ${cost})">
+                                    🔧 Repair Truck ($${new Intl.NumberFormat('en-US').format(cost)})
+                                </button>
+                            </div>
                         `;
                     }
                 }
@@ -1426,6 +1436,9 @@
                 `;
                 container.appendChild(card);
             });
+
+            // Update the initial state of the multi-repair button/checkboxes
+            updateRepairSelectedButton(team.id);
         }
 
         async function sha256(message) {
@@ -1510,7 +1523,53 @@
             switchTeamTab('garage-tab');
         }
 
-        async function repairAllTrucksInteractive(teamId, cost) {
+        function toggleSelectAllRepairs(teamId) {
+            const selectAllCheck = document.getElementById('select-all-repairs');
+            const checks = document.querySelectorAll('.truck-repair-checkbox');
+            checks.forEach(chk => {
+                chk.checked = selectAllCheck.checked;
+            });
+            updateRepairSelectedButton(teamId);
+        }
+
+        function updateRepairSelectedButton(teamId) {
+            const team = teamsData.teams.find(t => t.id === teamId);
+            if (!team) return;
+            
+            const checks = document.querySelectorAll('.truck-repair-checkbox');
+            let totalSelectedCost = 0;
+            let selectedCount = 0;
+            let totalCount = checks.length;
+            
+            checks.forEach(chk => {
+                if (chk.checked) {
+                    totalSelectedCost += parseFloat(chk.getAttribute('data-cost') || 0);
+                    selectedCount++;
+                }
+            });
+            
+            const btn = document.getElementById('repair-selected-btn');
+            if (btn) {
+                btn.textContent = `🔧 Repair Selected ($${new Intl.NumberFormat('en-US').format(totalSelectedCost)})`;
+                if (selectedCount > 0) {
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                } else {
+                    btn.disabled = true;
+                    btn.style.opacity = '0.5';
+                    btn.style.cursor = 'not-allowed';
+                }
+            }
+            
+            // Sync "Select All" checkbox state
+            const selectAllCheck = document.getElementById('select-all-repairs');
+            if (selectAllCheck) {
+                selectAllCheck.checked = (selectedCount === totalCount && totalCount > 0);
+            }
+        }
+
+        async function repairSelectedTrucksInteractive(teamId) {
             const team = teamsData.teams.find(t => t.id === teamId);
             if (!team) return;
             
@@ -1519,13 +1578,29 @@
                 return;
             }
             
-            if (team.balance < cost) {
-                alert(`Insufficient franchise capital to repair all trucks. Required: $${new Intl.NumberFormat('en-US').format(cost)}, Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
+            const checks = document.querySelectorAll('.truck-repair-checkbox');
+            let selectedTruckIds = [];
+            let totalCost = 0;
+            
+            checks.forEach(chk => {
+                if (chk.checked) {
+                    selectedTruckIds.push(chk.getAttribute('data-truck-id'));
+                    totalCost += parseFloat(chk.getAttribute('data-cost') || 0);
+                }
+            });
+            
+            if (selectedTruckIds.length === 0) {
+                alert("Please select at least one truck to repair.");
+                return;
+            }
+            
+            if (team.balance < totalCost) {
+                alert(`Insufficient franchise capital to repair the selected trucks. Required: $${new Intl.NumberFormat('en-US').format(totalCost)}, Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
                 return;
             }
             
             // Challenge for passcode
-            const passcode = prompt(`Repairing all fleet trucks requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
+            const passcode = prompt(`Repairing selected fleet trucks requires owner authorization.\n\nEnter Owner Password for ${team.owner}:`);
             if (passcode === null) return; // User cancelled
             
             if (!team.passcodeHash) {
@@ -1539,19 +1614,20 @@
                 return;
             }
             
-            const confirmRepair = confirm(`Passcode Verified!\n\nAre you sure you want to repair all trucks in the fleet? This will restore all truck conditions to 100% and deduct $${new Intl.NumberFormat('en-US').format(cost)} from your balance.`);
+            const confirmRepair = confirm(`Passcode Verified!\n\nAre you sure you want to repair the ${selectedTruckIds.length} selected truck(s)? This will restore their conditions to 100% and deduct $${new Intl.NumberFormat('en-US').format(totalCost)} from your balance.`);
             if (!confirmRepair) return;
             
-            // Execute repairs for all damaged trucks
+            // Execute repairs for all selected trucks
             let repairedTruckNames = [];
-            team.trucks.forEach(truck => {
-                if (truck.condition < 100) {
+            selectedTruckIds.forEach(id => {
+                const truck = team.trucks.find(t => t.id === id);
+                if (truck) {
                     repairedTruckNames.push(`${truck.name} (+${100 - truck.condition}%)`);
                     truck.condition = 100;
                 }
             });
             
-            team.balance -= cost;
+            team.balance -= totalCost;
             
             // Add ledger entry
             const today = new Date();
@@ -1565,7 +1641,7 @@
                 date: dateStr,
                 description: `Repaired Fleet: ${repairedTruckNames.join(", ")}`,
                 category: "expense",
-                amount: -cost,
+                amount: -totalCost,
                 local: true
             });
             
