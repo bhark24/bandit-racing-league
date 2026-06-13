@@ -378,9 +378,9 @@ const teamsData = {
       "lon": -84.1916
     },
     "BOB BERRY": {
-      "city": "Richmond, VA",
-      "lat": 37.5407,
-      "lon": -77.436
+      "city": "Fort Worth, TX",
+      "lat": 32.7555,
+      "lon": -97.3308
     },
     "JASON GREENWELL": {
       "city": "Plymouth, MI",
