@@ -832,7 +832,7 @@ const teamsData = {
         {
           "id": "truck-2",
           "make": "Chevrolet",
-          "name": "Striped Maple Silverado #TBD",
+          "name": "Striped Maple Silverado #63",
           "condition": 100
         },
         {
