@@ -139,6 +139,10 @@ const rosterData = {
     "driver": "TY CORINO",
     "status": "full-time"
   },
+  "63": {
+    "driver": "",
+    "status": "part-time"
+  },
   "72": {
     "driver": "MASON PHLEGAR",
     "status": "part-time"
