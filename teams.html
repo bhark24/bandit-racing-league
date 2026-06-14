@@ -737,6 +737,36 @@
             return `assets/drivers numbers/${formattedName}.png`;
         }
 
+        function getDriverNumber(driverName) {
+            if (!driverName || driverName === 'VACANT') return null;
+            const nameUpper = driverName.toUpperCase();
+            for (const [num, info] of Object.entries(rosterData)) {
+                if (info.driver && info.driver.toUpperCase() === nameUpper) {
+                    return num;
+                }
+            }
+            return null;
+        }
+
+        function getDriverForTruck(truckName, team) {
+            const match = truckName.match(/#(\d+)/);
+            if (match) {
+                const num = match[1];
+                const driverInfo = rosterData[num];
+                if (driverInfo) {
+                    const name = driverInfo.driver;
+                    const allTeamDrivers = [
+                        ...(team.drivers.primary || []),
+                        ...(team.drivers.backup || [])
+                    ];
+                    if (allTeamDrivers.includes(name)) {
+                        return name;
+                    }
+                }
+            }
+            return null;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             loadState();
             renderFranchiseStandings();
@@ -1379,7 +1409,7 @@
                 if (truck.condition < 40) barColor = '#ff1744';
                 else if (truck.condition < 75) barColor = 'var(--chase-yellow)';
 
-                const driverName = activeDrivers[index];
+                const driverName = getDriverForTruck(truck.name, team);
                 
                 let visualHTML = `<span style="font-size:2rem;">🚚</span>`;
                 let driverLabel = `<span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Driver: Vacant</span>`;
@@ -2202,9 +2232,35 @@
                 return;
             }
 
-            const cost = 50000;
-            if (team.balance < cost) {
-                alert(`Insufficient franchise balance. Required: $50,000, Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
+            const driverNumber = getDriverNumber(driverName);
+            if (!driverNumber) {
+                alert("Error: Driver number could not be found in the roster database.");
+                return;
+            }
+
+            // Check if a truck for this driver's number already exists in the fleet
+            let hasMatchingTruck = team.trucks.some(t => t.name.includes(`#${driverNumber}`));
+            let spareTruck = null;
+            let truckCost = 0;
+            let buyNewTruck = false;
+
+            if (!hasMatchingTruck) {
+                // Check for a spare (#TBD) truck
+                spareTruck = team.trucks.find(t => t.name.includes("#TBD"));
+                if (!spareTruck) {
+                    truckCost = 185000;
+                    buyNewTruck = true;
+                }
+            }
+
+            const signingBonus = 50000;
+            const totalCost = signingBonus + truckCost;
+            if (team.balance < totalCost) {
+                if (buyNewTruck) {
+                    alert(`Insufficient franchise balance. Required: $${new Intl.NumberFormat('en-US').format(totalCost)} ($50,000 Signing Bonus + $185,000 New Truck), Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
+                } else {
+                    alert(`Insufficient franchise balance. Required: $50,000, Available: $${new Intl.NumberFormat('en-US').format(team.balance)}`);
+                }
                 return;
             }
 
@@ -2217,9 +2273,17 @@
                 return;
             }
 
-            const confirmSign = confirm(`Are you sure you want to sign ${driverName} for a $50,000 signing bonus?`);
+            let confirmMsg = `Are you sure you want to sign ${driverName} for a $50,000 signing bonus?`;
+            if (buyNewTruck) {
+                confirmMsg = `Are you sure you want to sign ${driverName}? No spare trucks are available. This will purchase a new fleet truck for $185,000. Total cost: $235,000.`;
+            } else if (spareTruck) {
+                confirmMsg = `Are you sure you want to sign ${driverName} for a $50,000 signing bonus? A spare truck (${spareTruck.name}) will be assigned and renamed to #${driverNumber} for free.`;
+            }
+
+            const confirmSign = confirm(confirmMsg);
             if (!confirmSign) return;
 
+            // Roster changes
             const beforePrimary = JSON.stringify(team.drivers.primary);
             const beforeBackup = JSON.stringify(team.drivers.backup);
 
@@ -2228,12 +2292,31 @@
             } else {
                 team.drivers.backup[activeSignSlotIndex] = driverName;
             }
-            team.balance -= cost;
 
-            // Normalize the roster to enforce full-time/part-time slot rules
+            // Deduct total balance
+            team.balance -= totalCost;
+
+            // Handle truck assignment/creation
+            let newTruckName = "";
+            if (spareTruck) {
+                const oldName = spareTruck.name;
+                spareTruck.name = (team.trucks[0] ? team.trucks[0].name : `${team.name} Truck #00`).replace(/#\d+/, '#' + driverNumber);
+                newTruckName = spareTruck.name;
+            } else if (buyNewTruck) {
+                const baseName = team.trucks[0] ? team.trucks[0].name : `${team.name} Truck #00`;
+                newTruckName = baseName.replace(/#\d+/, '#' + driverNumber);
+                const newTruckId = `truck-${team.trucks.length + 1}`;
+                team.trucks.push({
+                    id: newTruckId,
+                    make: team.trucks[0] ? team.trucks[0].make : "RAM",
+                    name: newTruckName,
+                    condition: 100
+                });
+            }
+
+            // Normalize roster
             normalizeRoster(team);
 
-            // Check if any swap or promotion occurred and alert the user
             const afterPrimary = JSON.stringify(team.drivers.primary);
             const afterBackup = JSON.stringify(team.drivers.backup);
             if (beforePrimary !== afterPrimary || beforeBackup !== afterBackup) {
@@ -2247,13 +2330,24 @@
             const day = String(today.getDate()).padStart(2, '0');
             const dateStr = `${month} ${day}, ${year}`;
 
+            // Ledger logging
             team.ledger.push({
                 date: dateStr,
                 description: `Signed Driver: ${driverName} (Signing Bonus)`,
                 category: "expense",
-                amount: -cost,
+                amount: -signingBonus,
                 local: true
             });
+
+            if (buyNewTruck) {
+                team.ledger.push({
+                    date: dateStr,
+                    description: `Purchased Fleet Truck: ${newTruckName}`,
+                    category: "expense",
+                    amount: -truckCost,
+                    local: true
+                });
+            }
 
             saveState();
             closeSignDriverModal();
@@ -2293,6 +2387,15 @@
                 team.drivers.primary[slotIndex] = 'VACANT';
             } else {
                 team.drivers.backup[slotIndex] = 'VACANT';
+            }
+
+            // Rename driver's truck back to #TBD
+            const driverNumber = getDriverNumber(driverName);
+            if (driverNumber) {
+                const driverTruck = team.trucks.find(t => t.name.includes(`#${driverNumber}`));
+                if (driverTruck) {
+                    driverTruck.name = driverTruck.name.replace(/#\d+/, '#TBD');
+                }
             }
 
             // Normalize roster after release

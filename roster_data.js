@@ -108,7 +108,7 @@ const rosterData = {
     "status": "full-time"
   },
   "35": {
-    "driver": "wES fULLER",
+    "driver": "WES FULLER",
     "status": "part-time"
   },
   "38": {
@@ -156,8 +156,8 @@ const rosterData = {
     "status": "full-time"
   },
   "82": {
-    "driver": "",
-    "status": "available"
+    "driver": "RICKY GONZALES",
+    "status": "part-time"
   },
   "83": {
     "driver": "JASON GREENWELL",

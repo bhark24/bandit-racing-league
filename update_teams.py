@@ -12,6 +12,32 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(BASE_DIR, "fantasy_config.json")
 TEAMS_DATA_PATH = os.path.join(BASE_DIR, "teams_data.js")
 
+def load_roster_mapping():
+    roster_path = os.path.join(BASE_DIR, "roster_data.js")
+    if not os.path.exists(roster_path):
+        print(f"Warning: roster_data.js not found at {roster_path}")
+        return {}
+    with open(roster_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    
+    # Extract JSON object from JS variable
+    match = re.search(r'const\s+rosterData\s*=\s*({.*?});', content, re.DOTALL)
+    if not match:
+        print("Warning: Could not extract rosterData from roster_data.js")
+        return {}
+    
+    try:
+        data = json.loads(match.group(1))
+        mapping = {}
+        for num, info in data.items():
+            driver_name = info.get("driver")
+            if driver_name:
+                mapping.setdefault(driver_name.upper(), []).append(num)
+        return mapping
+    except Exception as e:
+        print(f"Warning: Error parsing rosterData JSON: {e}")
+        return {}
+
 def load_config():
     if not os.path.exists(CONFIG_PATH):
         print(f"Error: Config file not found at {CONFIG_PATH}")
@@ -343,6 +369,7 @@ def main():
     
     config = load_config()
     teams_db, original_content = load_teams_database()
+    roster_mapping = load_roster_mapping()
     
     # Process Manual Repairs first if passed
     if args.repair:
@@ -537,7 +564,19 @@ def main():
         # Evaluate each active slot (mapping to trucks[0..3])
         for idx, (driver_name, is_backup, replaced_pri) in enumerate(active_lineup):
             norm_driver = normalize_name(driver_name)
-            truck = team["trucks"][idx % len(team["trucks"])]
+            # Find the truck associated with this driver's number
+            driver_nums = roster_mapping.get(driver_name.upper(), [])
+            truck = None
+            for num in driver_nums:
+                for t in team["trucks"]:
+                    if f"#{num}" in t["name"]:
+                        truck = t
+                        break
+                if truck:
+                    break
+            
+            if not truck:
+                truck = team["trucks"][idx % len(team["trucks"])]
             
             # Generate mock results for any driver on the team roster who didn't run in real life
             if norm_driver not in driver_scores and driver_name != 'VACANT':
