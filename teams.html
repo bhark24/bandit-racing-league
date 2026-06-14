@@ -400,6 +400,7 @@
                 <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><span class="nav-icon-label">SimTrax Broadcasting</span></a></li>
             </ul>
             <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="franchise_breakdown.pdf" target="_blank" class="btn-secondary" style="border-color: var(--chase-yellow); color: var(--chase-yellow); padding: 8px 16px; font-size: 0.9rem; text-decoration: none; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; border-radius: var(--border-radius); transition: all 0.3s ease; box-shadow: 0 0 10px rgba(255, 204, 0, 0.1);" onmouseover="this.style.backgroundColor='rgba(255, 204, 0, 0.1)'; this.style.boxShadow='0 0 15px rgba(255, 204, 0, 0.3)';" onmouseout="this.style.backgroundColor='transparent'; this.style.boxShadow='0 0 10px rgba(255, 204, 0, 0.1)';">Franchise Guide</a>
                 <a href="https://discord.gg/HSvP4UG2st" target="_blank" class="btn-primary">Join Discord</a>
                 <div class="qr-container">
                     <img src="assets/discord-qr.png" alt="QR Code" style="height: 42px; border-radius: 4px; border: 2px solid var(--neon-green); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
@@ -430,10 +431,15 @@
                 <div class="construction-icon">⚠️</div>
                 <div class="construction-text">
                     <h3>Under Construction & Development</h3>
-                    <p>The Franchise Teams and League Economy dashboard is currently in active development. Below is a mock preview of the team ledger, fleet garages, and roster budgets. Payout and repair mechanics will be activated shortly.</p>
+                    <p>The Franchise Teams and League Economy dashboard is currently in active development. Below is a mock preview of the team ledger, fleet garages, and roster budgets. Payout and repair mechanics will be activated shortly. Review the official rules and guidelines in the franchise guide.</p>
                 </div>
             </div>
-            <button class="reset-db-btn" onclick="resetState()" style="flex-shrink: 0;">Reset Session State</button>
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap; flex-shrink: 0;">
+                <a href="franchise_breakdown.pdf" target="_blank" class="btn-primary" style="background-color: var(--chase-yellow); border-color: var(--chase-yellow); color: #000; padding: 8px 18px; font-size: 0.85rem; text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: bold; text-transform: uppercase; box-shadow: 0 0 15px rgba(255, 204, 0, 0.2); transition: all 0.3s ease; border-radius: var(--border-radius);" onmouseover="this.style.boxShadow='0 0 25px rgba(255, 204, 0, 0.5)'; this.style.backgroundColor='transparent'; this.style.color='var(--chase-yellow)';" onmouseout="this.style.boxShadow='0 0 15px rgba(255, 204, 0, 0.2)'; this.style.backgroundColor='var(--chase-yellow)'; this.style.color='#000';">
+                    <span>📄</span> Franchise Guide (PDF)
+                </a>
+                <button class="reset-db-btn" onclick="resetState()" style="flex-shrink: 0;">Reset Session State</button>
+            </div>
         </div>
 
         <!-- The Outlaw Telegraph (Weekly Newspaper Column) -->
