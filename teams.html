@@ -645,7 +645,7 @@
             <!-- TAB 4: PRESS CONFERENCE -->
             <div id="press-tab" class="panel-tab-content">
                 <h3 style="color:#fff; margin-bottom:20px; font-size:1.3rem;">🤠 The Hideout Interrogations</h3>
-                <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:25px;">Drag your drivers into the pressroom and see what they have to say about their performance, crashes, or team financials. Select a driver below to begin the interrogation.</p>
+                <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:25px;">Click on your favorite driver to begin the interrogation and see what they have to say about their performance, crashes, or team financials.</p>
                 
                 <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
                     <!-- Left: Driver List -->
@@ -1816,6 +1816,21 @@
                 raceData = teamsData.latestRace.results.find(r => normalizeName(r.name) === normName);
             }
 
+            const team = teamsData.teams.find(t => t.id === teamId);
+            const teamName = team ? team.name : "the team";
+            const trackName = (teamsData.latestRace && teamsData.latestRace.track) ? teamsData.latestRace.track : "the track";
+
+            // Helper to generate deterministic variation index based on driver and team
+            const getIndex = (qIdx) => {
+                let str = driverName + teamName + qIdx;
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    hash = (hash << 5) - hash + str.charCodeAt(i);
+                    hash |= 0;
+                }
+                return Math.abs(hash) % 3; // 3 variations
+            };
+
             const qContainer = document.getElementById('interview-questions-container');
             qContainer.innerHTML = '';
 
@@ -1831,116 +1846,291 @@
                 // Determine context-based dialogues
                 if (finish === 1) {
                     // Scenario A: Winner
+                    const optionsQ1 = [
+                        "Incredible victory tonight! Talk us through the winning pass.",
+                        "What an outstanding race! How did you make that winning move?",
+                        "Winner's circle! Describe that final pass for the lead."
+                    ];
+                    const optionsA1 = [
+                        `The truck was a rocket ship. We had a great run off Turn 4 on the restart, slid under the leader, and never looked back. The crew prepared an absolute gem.`,
+                        `Honestly, our truck was handling beautifully. I set up the pass two laps prior, got a huge draft down the backstretch, and cleared them into Turn 3. It's a massive win for ${teamName}!`,
+                        `It was all about patience. We saw an opening when they got loose on the bottom, I kept my foot in it, and we just powered by on the high side at ${trackName}!`
+                    ];
+
+                    const optionsQ2 = [
+                        "How much does this victory boost team morale?",
+                        "What does this P1 finish mean for the whole franchise?",
+                        "How is the team feeling in the garage after this win?"
+                    ];
+                    const optionsA2 = [
+                        `It's massive. We've been working so hard in the shop. To bring home the win and the prize money is huge for the whole franchise. We're celebrating tonight!`,
+                        `Huge boost. Everyone in the ${teamName} garage has been grinding. P1 is exactly what we needed to prove we can compete at the highest level.`,
+                        `You have no idea. The energy in our shop is going to be electric this week. Getting the trophy and that winner's check makes all the late nights worth it.`
+                    ];
+
+                    const optionsQ3 = [
+                        "Can we expect this level of dominance next week?",
+                        "Are you confident you can keep this momentum going?",
+                        "What is the game plan for the next race?"
+                    ];
+                    const optionsA3 = [
+                        `That's the goal. The competition is tough, but we've got a great package right now. We'll savor this win and then put our heads down to prepare for the next track.`,
+                        `We're certainly going to try. Every track is different, but our notebooks are looking solid. We'll keep pushing to stay on top.`,
+                        `Winning is hard, but we've established a great baseline. We're going to celebrate tonight, but tomorrow we're back to work to make sure we keep this momentum.`
+                    ];
+
+                    const i1 = getIndex(1), i2 = getIndex(2), i3 = getIndex(3);
                     questions = [
-                        {
-                            q: "Incredible victory tonight! Talk us through the winning pass.",
-                            a: "The truck was a rocket ship. We had a great run off Turn 4 on the restart, slid under the leader, and never looked back. The crew prepared an absolute gem."
-                        },
-                        {
-                            q: "How much does this victory boost team morale?",
-                            a: "It's massive. We've been working so hard in the shop. To bring home the win and the prize money is huge for the whole franchise. We're celebrating tonight!"
-                        },
-                        {
-                            q: "Can we expect this level of dominance next week?",
-                            a: "That's the goal. The competition is tough, but we've got a great package right now. We'll savor this win and then put our heads down to prepare for the next track."
-                        }
+                        { q: optionsQ1[i1], a: optionsA1[i1] },
+                        { q: optionsQ2[i2], a: optionsA2[i2] },
+                        { q: optionsQ3[i3], a: optionsA3[i3] }
                     ];
                 } else if (status.includes("engine") || status.includes("mechanical") || status.includes("motor")) {
                     // Scenario B: Blown Engine
+                    const optionsQ1 = [
+                        "You had a mechanical failure out there. What went wrong?",
+                        "Tough break with the truck today. What happened under the hood?",
+                        "Walk us through the issue that put you out of the race."
+                    ];
+                    const optionsA1 = [
+                        `We just lost power in the corners. The water temps spiked, and then the motor went completely sour. It's a blown engine. Nothing we could do in the cockpit.`,
+                        `We had a sudden loss of oil pressure going down the straightaway at ${trackName}. Then I heard a loud pop and saw smoke. The engine just let go. Devastating end to our night.`,
+                        `Something internal failed in the valve train. We were cruising, and suddenly it sounded like a box of rocks under the hood. The motor is completely done.`
+                    ];
+
+                    const optionsQ2 = [
+                        "How frustrating is it to lose a motor when you're running well?",
+                        "How bad does this DNF hurt the team's momentum?",
+                        "You had a fast truck before the failure. How disappointing is this?"
+                    ];
+                    const optionsA2 = [
+                        `Extremely frustrating. We had a great truck and were moving forward. To get sidelined by a mechanical DNF is a tough pill to swallow for the budget.`,
+                        `It's the worst feeling. You put in all the prep, have a fast truck, and then a $45k engine blown DNF just ends your day through no fault of your own.`,
+                        `Very painful. We were in a position to secure a top-10 finish for ${teamName}. To leave with 0 points and a blown power unit is a major setback.`
+                    ];
+
+                    const optionsQ3 = [
+                        "Is the team worried about the $45,000 engine replacement cost?",
+                        "How does the owner feel about writing a check for a new motor?",
+                        "How will this engine cost affect the team's capital?"
+                    ];
+                    const optionsA3 = [
+                        `It hurts, for sure. The franchise capital takes a big hit when you have to buy a new power unit. But the owner knows we have to replace it to get back on track next week.`,
+                        `It's a huge financial blow. $45,000 isn't pocket change in this league. We'll have to tighten our belts and run a clean race next week to make up for it.`,
+                        `The owner isn't happy, that's for sure. It drains our capital and limits our options for signings or travel. But we have no choice but to rebuild and move on.`
+                    ];
+
+                    const i1 = getIndex(1), i2 = getIndex(2), i3 = getIndex(3);
                     questions = [
-                        {
-                            q: "You had a mechanical failure out there. What went wrong?",
-                            a: "We just lost power in the corners. The water temps spiked, and then the motor went completely sour. It's a blown engine. Nothing we could do in the cockpit."
-                        },
-                        {
-                            q: "How frustrating is it to lose a motor when you're running well?",
-                            a: "Extremely frustrating. We had a great truck and were moving forward. To get sidelined by a mechanical DNF is a tough pill to swallow for the budget."
-                        },
-                        {
-                            q: "Is the team worried about the $45,000 engine replacement cost?",
-                            a: "It hurts, for sure. The franchise capital takes a big hit when you have to buy a new power unit. But the owner knows we have to replace it to get back on track next week."
-                        }
+                        { q: optionsQ1[i1], a: optionsA1[i1] },
+                        { q: optionsQ2[i2], a: optionsA2[i2] },
+                        { q: optionsQ3[i3], a: optionsA3[i3] }
                     ];
                 } else if (status.includes("accident") || status.includes("crash") || status.includes("damage") || status.includes("suspension") || status.includes("contact")) {
                     // Scenario C: Crash DNF
+                    const optionsQ1 = [
+                        "You got knocked out of the race in a wreck. What happened?",
+                        "That was a nasty crash out there. Walk us through the incident.",
+                        "Your night ended in the wall. What caused the wreck?"
+                    ];
+                    const optionsA1 = [
+                        `I got caught up in someone else's mess. Cars checked up in front of me, I got hit from behind, and got sent into the wall. Suspensions broke, truck was totaled. It was a disaster.`,
+                        `A couple of guys got together in Turn 2 at ${trackName} and started spinning. I had nowhere to go, got collected, and hit the barrier hard. Totaled the nose of the truck.`,
+                        `Just tight racing. Someone tried to squeeze into a gap that wasn't there, clipped my rear quarter panel, and sent me spinning into traffic. Over in an instant.`
+                    ];
+
+                    const optionsQ2 = [
+                        "The truck was totaled, costing the team $185,000. How do you feel about that?",
+                        "A replacement truck is $185,000. How does the owner handle that expense?",
+                        "That's a huge hit to the team balance. How do you recover from a totaled truck?"
+                    ];
+                    const optionsA2 = [
+                        `It's awful. Nobody wants to write a check for $185,000 to replace a truck. I feel terrible for the crew and the owner, but that's the risk when the racing gets this tight.`,
+                        `I feel sick about the bill. $185,000 is a massive hit to ${teamName}'s balance. I know the owner is stressing, but we've got to buy a new chassis to stay in the game.`,
+                        `It's a devastating hit to our finances. But that's short track racing sometimes. The wrecking was heavy tonight and we paid the ultimate price.`
+                    ];
+
+                    const optionsQ3 = [
+                        "How will you adjust your driving to avoid crashes next week?",
+                        "What can you do differently to protect the equipment next time?",
+                        "How do you stay out of trouble at the next track?"
+                    ];
+                    const optionsA3 = [
+                        `We just need to qualify better. When you start in the middle of the pack, you're in the 'danger zone'. If we qualify up front, we can stay clean.`,
+                        `We need to work on track position early. If we can get ahead of the mid-pack chaos, we won't get collected in these multi-truck incidents.`,
+                        `Maybe be a bit more defensive. It's easy to get aggressive, but sometimes you have to back out and live to fight another lap.`
+                    ];
+
+                    const i1 = getIndex(1), i2 = getIndex(2), i3 = getIndex(3);
                     questions = [
-                        {
-                            q: "You got knocked out of the race in a wreck. What happened?",
-                            a: "I got caught up in someone else's mess. Cars checked up in front of me, I got hit from behind, and got sent into the wall. Suspensions broke, truck was totaled. It was a disaster."
-                        },
-                        {
-                            q: "The truck was totaled, costing the team $185,000. How do you feel about that?",
-                            a: "It's awful. Nobody wants to write a check for $185,000 to replace a truck. I feel terrible for the crew and the owner, but that's the risk when the racing gets this tight."
-                        },
-                        {
-                            q: "How will you adjust your driving to avoid crashes next week?",
-                            a: "We just need to qualify better. When you start in the middle of the pack, you're in the 'danger zone'. If we qualify up front, we can stay clean."
-                        }
+                        { q: optionsQ1[i1], a: optionsA1[i1] },
+                        { q: optionsQ2[i2], a: optionsA2[i2] },
+                        { q: optionsQ3[i3], a: optionsA3[i3] }
                     ];
                 } else if (inc >= 8) {
                     // Scenario D: High Incidents
+                    const optionsQ1 = [
+                        `You had a busy night out there with a lot of incidents. Why was it so chaotic?`,
+                        `You accumulated ${inc} incident points tonight. Why was it so rough on track?`,
+                        `A lot of contact out there. Walk us through some of those incidents.`
+                    ];
+                    const optionsA1 = [
+                        `It was just bumper-car racing. People were sliding all over, missing braking points, and running over each other. I was fighting the truck all night just to keep it straight. I racked up ${inc} incidents.`,
+                        `Track conditions at ${trackName} were slick and driving was wild. We got into it with three different trucks just trying to hold our lane. ${inc} incidents is way too high, but it was survival mode out there.`,
+                        `We had no rear grip and everyone was pushing. I got run into the wall twice and had to make some aggressive blocks. Just a messy, aggressive race all around.`
+                    ];
+
+                    const optionsQ2 = [
+                        "Your owner is authorized to fine you for damage. Are you worried about a fine?",
+                        "With all that damage, are you expecting a fine from the team owner?",
+                        "Does the franchise owner issue fines for high-incident races?"
+                    ];
+                    const optionsA2 = [
+                        `I hope they see it was just hard short-track racing. Fines don't help team chemistry, but if the owner decides to issue one, I'll have to deal with it.`,
+                        `I'm hoping the ${teamName} owner looks at the replay. It was a war zone out there. But if I get a fine, I'll take responsibility and pay my dues.`,
+                        `Fines are always a worry. But I was doing my best to save the truck. If we get hit with one, it is what it is—part of the franchise rules.`
+                    ];
+
+                    const optionsQ3 = [
+                        "How is the truck chassis feeling after all that contact?",
+                        "How much work does this truck need in the shop this week?",
+                        "Is the chassis severely bent from all those collisions?"
+                    ];
+                    const optionsA3 = [
+                        `It's pretty beat up. The steering was crooked after Lap 40. We'll need some garage time and franchise capital to get it back to 100% condition.`,
+                        `Chassis is bent, sheet metal is destroyed. The crew has a long week ahead of them in the shop. Hopefully the repair bill isn't too brutal.`,
+                        `It's got 'character' now, let's put it that way. The suspension took a beating. We'll definitely need a solid check from ${teamName}'s capital to fix this one.`
+                    ];
+
+                    const i1 = getIndex(1), i2 = getIndex(2), i3 = getIndex(3);
                     questions = [
-                        {
-                            q: "You had a busy night out there with a lot of incidents. Why was it so chaotic?",
-                            a: `It was just bumper-car racing. People were sliding all over, missing braking points, and running over each other. I was fighting the truck all night just to keep it straight. I racked up ${inc} incidents.`
-                        },
-                        {
-                            q: "Your owner is authorized to fine you for damage. Are you worried about a fine?",
-                            a: "I hope they see it was just hard short-track racing. Fines don't help team chemistry, but if the owner decides to issue one, I'll have to deal with it."
-                        },
-                        {
-                            q: "How is the truck chassis feeling after all that contact?",
-                            a: "It's pretty beat up. The steering was crooked after Lap 40. We'll need some garage time and franchise capital to get it back to 100% condition."
-                        }
+                        { q: optionsQ1[i1], a: optionsA1[i1] },
+                        { q: optionsQ2[i2], a: optionsA2[i2] },
+                        { q: optionsQ3[i3], a: optionsA3[i3] }
                     ];
                 } else if (inc === 0) {
                     // Scenario E: Clean Race
+                    const optionsQ1 = [
+                        "You brought the truck back with zero incidents. How did you manage that?",
+                        "A completely clean race today! How did you avoid all the incidents?",
+                        "No incidents at all! What was your strategy for staying clean?"
+                    ];
+                    const optionsA1 = [
+                        `I just kept my distance and let the chaotic runs play out ahead of me. It takes patience, but bringing back a clean truck saves the team thousands of dollars in repair bills.`,
+                        `Patience was key tonight at ${trackName}. I saw guys racing three-wide and decided to lift. Staying clean is the best way I can help ${teamName} right now.`,
+                        `I focused on smooth lines and stayed out of the mirror. We didn't have a single scratch on the body panels. I'm proud of how we managed the race.`
+                    ];
+
+                    const optionsQ2 = [
+                        "Was it tempting to get aggressive when the pack bunched up?",
+                        "Did you have to hold back to preserve the truck?",
+                        "How hard was it to resist diving into open gaps?"
+                    ];
+                    const optionsA2 = [
+                        `Sure, but the owner made it clear: repair costs are too high to be driving like a fool. A clean truck means we have more budget for next week's travel.`,
+                        `Always. But our team budget is tight, and a crash is the last thing we need. The best business decision was to finish clean.`,
+                        `Of course, but I kept my cool. Long-term franchise health is more important than a risky dive-bomb. The owner appreciates having a 100% truck in the garage.`
+                    ];
+
+                    const optionsQ3 = [
+                        "Are you satisfied with where you finished?",
+                        "Is a clean finish better than a risky higher position?",
+                        "How do you feel about your points and payout today?"
+                    ];
+                    const optionsA3 = [
+                        `Yes, we got solid points at P${finish} and didn't spend a dime on chassis repairs. That's a perfect business decision for our franchise.`,
+                        `Finishing P${finish} with a clean truck is a win in my book. We collected our prize money and saved the crew from overtime labor.`,
+                        `We could have pushed harder, but P${finish} is respectable. We gained points, earned sponsor cash, and have zero repair costs. A solid weekend.`
+                    ];
+
+                    const i1 = getIndex(1), i2 = getIndex(2), i3 = getIndex(3);
                     questions = [
-                        {
-                            q: "You brought the truck back with zero incidents. How did you manage that?",
-                            a: "I just kept my distance and let the chaotic runs play out ahead of me. It takes patience, but bringing back a clean truck saves the team thousands of dollars in repair bills."
-                        },
-                        {
-                            q: "Was it tempting to get aggressive when the pack bunched up?",
-                            a: "Sure, but the owner made it clear: repair costs are too high to be driving like a fool. A clean truck means we have more budget for next week's travel."
-                        },
-                        {
-                            q: "Are you satisfied with where you finished?",
-                            a: `Yes, we got solid points at P${finish} and didn't spend a dime on chassis repairs. That's a perfect business decision for our franchise.`
-                        }
+                        { q: optionsQ1[i1], a: optionsA1[i1] },
+                        { q: optionsQ2[i2], a: optionsA2[i2] },
+                        { q: optionsQ3[i3], a: optionsA3[i3] }
                     ];
                 } else {
                     // Scenario F: General / Mid-pack
+                    const optionsQ1 = [
+                        "How was the truck handling during the race?",
+                        "How did the chassis perform out there today?",
+                        "Did you struggle with the truck handling at all?"
+                    ];
+                    const optionsA1 = [
+                        `It was decent, a bit tight in the center of the corners. We adjusted the tire pressures during the stops, but we were just missing that extra 10% speed to run up front.`,
+                        `We started off loose, but the ${teamName} pit crew made some great track bar adjustments. By the end, we were matching the leaders' lap times.`,
+                        `Handling was a challenge at ${trackName}. We struggled with rear grip on exit, which made it hard to make passes. We'll work on it in the shop.`
+                    ];
+
+                    const optionsQ2 = [
+                        "Describe your battles in the pack.",
+                        "It was pretty crowded in the middle of the field. How were the battles?",
+                        "You were fighting hard in the mid-pack. How did it go?"
+                    ];
+                    const optionsA2 = [
+                        `It was an absolute dogfight in the mid-pack. Gaining P${finish} was hard-fought. We had some good side-by-side racing, but it was tough to make clean passes.`,
+                        `Just intense. We were swapping positions every lap. Finishing P${finish} represents a lot of hard work behind the wheel tonight.`,
+                        `Very competitive. Nobody was giving an inch in the middle of the field. I had to defend hard just to bring home P${finish}.`
+                    ];
+
+                    const optionsQ3 = [
+                        "What is the main adjustment the team needs to make for next week?",
+                        "What is the plan to improve performance for the next race?",
+                        "What area does the franchise need to focus on next?"
+                    ];
+                    const optionsA3 = [
+                        `We need to look at our travel prep and hauler logistics. If we get the truck dialed in earlier in the week, we can qualify better and start in a safer position.`,
+                        `Qualifying speed is our weakness. If we can start in the top 10, our race pace is good enough to stay there. We'll focus on single-lap runs.`,
+                        `We need to study the tire wear data from ${trackName}. We lost too much speed late in the runs, so we need a better long-run setup.`
+                    ];
+
+                    const i1 = getIndex(1), i2 = getIndex(2), i3 = getIndex(3);
                     questions = [
-                        {
-                            q: "How was the truck handling during the race?",
-                            a: "It was decent, a bit tight in the center of the corners. We adjusted the tire pressures during the stops, but we were just missing that extra 10% speed to run up front."
-                        },
-                        {
-                            q: "Describe your battles in the pack.",
-                            a: `It was an absolute dogfight in the mid-pack. Gaining P${finish} was hard-fought. We had some good side-by-side racing, but it was tough to make clean passes.`
-                        },
-                        {
-                            q: "What is the main adjustment the team needs to make for next week?",
-                            a: "We need to look at our travel prep and hauler logistics. If we get the truck dialed in earlier in the week, we can qualify better and start in a safer position."
-                        }
+                        { q: optionsQ1[i1], a: optionsA1[i1] },
+                        { q: optionsQ2[i2], a: optionsA2[i2] },
+                        { q: optionsQ3[i3], a: optionsA3[i3] }
                     ];
                 }
             } else {
                 // Scenario G: DNS / backup
+                const optionsQ1 = [
+                    "You didn't participate in the shootout this week. What was your role?",
+                    "Since you weren't behind the wheel today, how did you help the team?",
+                    "You were on the sidelines this week. What was your main task?"
+                ];
+                const optionsA1 = [
+                    `I was supporting the guys from the pit box. We had our active roster set, but I was keeping a close eye on the track conditions and helping with spots. I'm ready to strap in whenever the owner calls.`,
+                    `I was helping analyze the telemetry from the garage. We wanted to support ${teamName}'s active drivers. I'm staying focused and ready for my next shot.`,
+                    `Mainly spotter duty and strategy. It's a team sport, and even from the sidelines, I want to make sure our trucks finish up front. I'll be ready when my number is called.`
+                ];
+
+                const optionsQ2 = [
+                    "Are you hoping to get signed to an active slot soon?",
+                    "What are you doing to make sure you get a primary seat?",
+                    "How are you preparing for when you get the call to race?"
+                ];
+                const optionsA2 = [
+                    `Absolutely. I'm staying in shape, running laps, and keeping my helmet ready. The backup slots are good, but every driver wants to be in the primary seat scoring points for the franchise.`,
+                    `That's the ultimate goal. I'm putting in work on the simulator. I want to earn a primary seat for ${teamName} and prove what I can do on track.`,
+                    `Definitely. Roster spots are highly competitive, but I'm showing speed in practice. I just need to stay prepared for when an opportunity opens up.`
+                ];
+
+                const optionsQ3 = [
+                    "How is team morale in the hideout right now?",
+                    "How is the chemistry among the drivers and crew?",
+                    "Is the team spirit strong despite some rough races?"
+                ];
+                const optionsA3 = [
+                    `Morale is solid. We're a tight group. Even when repair costs are high, we stick together and focus on the next track. The team has a bright future.`,
+                    `We have great chemistry at ${teamName}. Everyone is aligned, and we're looking forward to the next race week. The vibes are excellent.`,
+                    `Morale is very high. A few rough incidents won't break us. We're focused on building the franchise and bringing home some trophies.`
+                ];
+
+                const i1 = getIndex(1), i2 = getIndex(2), i3 = getIndex(3);
                 questions = [
-                    {
-                        q: "You didn't participate in the shootout this week. What was your role?",
-                        a: "I was supporting the guys from the pit box. We had our active roster set, but I was keeping a close eye on the track conditions and helping with spots. I'm ready to strap in whenever the owner calls."
-                    },
-                    {
-                        q: "Are you hoping to get signed to an active slot soon?",
-                        a: "Absolutely. I'm staying in shape, running laps, and keeping my helmet ready. The backup slots are good, but every driver wants to be in the primary seat scoring points for the franchise."
-                    },
-                    {
-                        q: "How is team morale in the hideout right now?",
-                        a: "Morale is solid. We're a tight group. Even when repair costs are high, we stick together and focus on the next track. The team has a bright future."
-                    }
+                    { q: optionsQ1[i1], a: optionsA1[i1] },
+                    { q: optionsQ2[i2], a: optionsA2[i2] },
+                    { q: optionsQ3[i3], a: optionsA3[i3] }
                 ];
             }
 
