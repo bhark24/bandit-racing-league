@@ -513,7 +513,7 @@ def main():
         team_expenses += hauler_cost
         team["ledger"].append({
             "date": race_date,
-            "description": f"Hauler Logistics: {team['homeBase']} to {track_info['city']} ({int(hauler_dist)} mi)",
+            "description": f"Hauler Logistics: {team['homeBase']} to {track_info['city']} ({int(hauler_dist)} mi round trip)",
             "category": "expense",
             "amount": -hauler_cost
         })
