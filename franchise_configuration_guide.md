@@ -11,12 +11,12 @@ Each franchise is built around its active drivers and backup roster. The system 
 *   **Roster Composition:**
     *   **Primary Driver Slots (4 Slots):** Assigned to active, **Full-Time** drivers.
     *   **Backup Driver Slots (2 Slots):** Assigned to reserve or **Part-Time** drivers.
-*   **Auto-Sorting & Substitution:**
+*   **Roster Auto-Sorting:**
     *   Full-time drivers occupy primary slots, and part-time drivers occupy backup slots. The roster auto-sorts dynamically to satisfy this constraint.
-    *   If a primary driver is absent (**DNS - Did Not Start**) and a backup driver is registered, the backup driver is automatically substituted. In the race simulation, the backup driver drives their own dedicated truck (matched by their driver number), scoring points and earning revenue for the franchise. This ensures that wear and damage are applied directly to that driver's actual truck rather than the absent primary driver's truck.
-    *   **Handling When All 6 Drivers Participate:**
-        *   **Standard Races (Capped at 4 Active Slots):** Standard race weeks are capped at a maximum of 4 active simulation slots. If all 4 primary drivers participate, the backup drivers remain on the bench (DNS status in the simulation) even if they ran in real life. Inactive backups do not earn points or revenue, generate no prep/travel expenses, and their dedicated trucks suffer no wear. Backup drivers only substitute in if a primary driver is absent.
-        *   **Special Events (e.g., Daytona):** The active slot cap is removed. All registered roster drivers (up to 6 total: 4 primaries + 2 backups) participate in the simulation, scoring points, earning revenue, generating expenses, and running their own dedicated trucks.
+*   **Roster Participation & Calculations:**
+    *   **Full-Time Drivers:** All active full-time drivers in the primary slots participate in the race simulation. If they are absent (DNS) in the real race, they score 0 points/revenue, and their truck takes 0% wear.
+    *   **Part-Time (Backup) Drivers:** Backup drivers are fully simulated if they participate (show up) in the real-world race. When they run, they are calculated exactly like full-time primary drivers: they earn points, generate prep/travel expenses, earn sponsor start bonuses/prize money, and accumulate wear/damage directly on their own dedicated fleet truck. If they do not show up to race, they remain inactive on the bench and generate no costs or wear.
+    *   **No Active Slot Cap:** There is no longer a 4-slot cap for standard races. If a team has primary drivers and backup drivers show up to race, all participating drivers are fully simulated and calculated.
 *   **Dedicated Driver Trucks:**
     *   Every driver on the roster, whether **Full-Time** or **Part-Time**, must have their own dedicated truck in the team fleet, matched to their driver number (e.g., `#35` or `#82`).
 *   **Driver Signings & Truck Assignment:**

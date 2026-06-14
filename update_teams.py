@@ -481,7 +481,7 @@ def main():
         active_lineup = [] # list of (driver_name, is_backup, replaced_primary_name)
         backup_index = 0
         
-        # Determine Active Lineup using Option 1 (DNS Auto-Sub)
+        # Determine Active Lineup (DNS Auto-Sub replaced by no-cap participation)
         if track_key == "daytona":
             # Daytona special case: all non-vacant roster drivers participate
             for primary in primaries:
@@ -491,28 +491,17 @@ def main():
                 if backup and backup != "VACANT":
                     active_lineup.append((backup, True, None))
         else:
+            # Regular race: all primary slots participate (with mock results if DNS),
+            # and any backup driver who actually participated in the real-world race also runs.
             for primary in primaries:
-                norm_pri = normalize_name(primary)
-                if norm_pri in driver_scores:
-                    active_lineup.append((primary, False, None))
-                else:
-                    # Primary is DNS. Try to sub in a backup
-                    subbed = False
-                    while backup_index < len(backups):
-                        backup_driver = backups[backup_index]
-                        norm_back = normalize_name(backup_driver)
-                        backup_index += 1
-                        
-                        if norm_back in driver_scores:
-                            active_lineup.append((backup_driver, True, primary))
-                            subbed = True
-                            break
-                    
-                    if not subbed:
-                        # No backup available
-                        active_lineup.append((primary, False, None)) # remains primary, will score DNS
+                active_lineup.append((primary, False, None))
+            for backup in backups:
+                if backup and backup != "VACANT":
+                    norm_back = normalize_name(backup)
+                    if norm_back in driver_scores:
+                        active_lineup.append((backup, True, None))
         
-        # Process team scoring and economy for the 4 active slots
+        # Process team scoring and economy for the active slots
         team_points_this_week = 0
         team_expenses = 0
         team_earnings = 0
