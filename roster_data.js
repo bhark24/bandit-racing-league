@@ -3,10 +3,6 @@ const rosterData = {
     "driver": "ADAM TAHAN",
     "status": "part-time"
   },
-  "00": {
-    "driver": "Jackson Knaak",
-    "status": "full-time"
-  },
   "1": {
     "driver": "RICKY HART",
     "status": "past-champion"
@@ -15,17 +11,9 @@ const rosterData = {
     "driver": "NICK NICKERSON",
     "status": "past-champion"
   },
-  "02": {
-    "driver": "NOLAN GROSS",
-    "status": "part-time"
-  },
   "4": {
     "driver": "LOGAN MURRAY",
     "status": "full-time"
-  },
-  "04": {
-    "driver": "BRET GUZIK",
-    "status": "past-champion"
   },
   "5": {
     "driver": "SEAN BRITT",
@@ -42,10 +30,6 @@ const rosterData = {
   "8": {
     "driver": "KEVIN FOSTER",
     "status": "past-champion"
-  },
-  "08": {
-    "driver": "JACKSON DUKE",
-    "status": "full-time"
   },
   "10": {
     "driver": "CORDELL MCFARLIN",
@@ -128,7 +112,7 @@ const rosterData = {
     "status": "full-time"
   },
   "35": {
-    "driver": "WES FULLER",
+    "driver": "wES fULLER",
     "status": "part-time"
   },
   "38": {
@@ -156,7 +140,7 @@ const rosterData = {
     "status": "full-time"
   },
   "63": {
-    "driver": "DYLAN MCDONALD",
+    "driver": "Dylan MC DONALD",
     "status": "part-time"
   },
   "72": {
@@ -180,8 +164,8 @@ const rosterData = {
     "status": "full-time"
   },
   "82": {
-    "driver": "RICKY GONZALES",
-    "status": "full-time"
+    "driver": "",
+    "status": "available"
   },
   "83": {
     "driver": "JASON GREENWELL",
@@ -222,6 +206,22 @@ const rosterData = {
   "100": {
     "driver": "UNAVAILABLE",
     "status": "reserved"
+  },
+  "00": {
+    "driver": "Jackson Knaak",
+    "status": "full-time"
+  },
+  "02": {
+    "driver": "NOLAN GROSS",
+    "status": "part-time"
+  },
+  "04": {
+    "driver": "BRET GUZIK",
+    "status": "past-champion"
+  },
+  "08": {
+    "driver": "JACKSON DUKE",
+    "status": "full-time"
   }
 };
 const numbersList = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"];
