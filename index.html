@@ -424,6 +424,9 @@
 
             // Generate biography dynamically
             function getDynamicBio(name, number, teamName, seed) {
+                if (normalizeName(name) === "KEVINFOSTER") {
+                    return "A past champion and the owner of GFR Racing, Kevin Foster is a model of supreme consistency in the Bandit Racing League. Driving the #8 GFR Silverado, Foster is a perennial title threat known for his clean racing and high Top 5 finish rate.";
+                }
                 if (normalizeName(name) === "NICKNICKERSON") {
                     return "A dominant force in the Bandit Racing League, Nick Nickerson is the undeniable favorite for the Season 16 Championship. With a staggering 27% career win rate and an incredible 62% Top 5 finish rate over nearly 300 starts, Nickerson is a master of consistency.";
                 }
@@ -482,8 +485,8 @@
                     driverName = getWeeklyDriver(participants, seed);
                     latestStats = latestRace.results.find(r => normalizeName(r.name) === normalizeName(driverName));
                 } else {
-                    // Pre-season or pre-Daytona mode - hardcode to Nick Nickerson
-                    driverName = "Nick Nickerson";
+                    // Pre-season or pre-Daytona mode - hardcode to Kevin Foster
+                    driverName = "Kevin Foster";
                     isPreview = true;
                 }
 
@@ -523,21 +526,21 @@
                     document.getElementById('spotlight-stat-l4').innerText = "Laps Led";
                     document.getElementById('spotlight-stat-v4').innerText = latestStats.led || '0';
                 } else {
-                    // Pre-season preview mode stats (career details for Nick Nickerson, or general details)
+                    // Pre-season preview mode stats (career details for Kevin Foster)
                     document.getElementById('spotlight-header-title').innerHTML = `<span class="live-dot" style="background: var(--chase-yellow); box-shadow: 0 0 10px var(--chase-yellow);"></span> DRIVER SPOTLIGHT`;
                     
                     document.getElementById('spotlight-stat-l1').innerText = "Wins";
-                    document.getElementById('spotlight-stat-v1').innerText = "78";
+                    document.getElementById('spotlight-stat-v1').innerText = "52";
                     document.getElementById('spotlight-stat-v1').classList.add('accent');
 
                     document.getElementById('spotlight-stat-l2').innerText = "Top 5s";
-                    document.getElementById('spotlight-stat-v2').innerText = "179";
+                    document.getElementById('spotlight-stat-v2').innerText = "148";
 
                     document.getElementById('spotlight-stat-l3').innerText = "Laps Led";
-                    document.getElementById('spotlight-stat-v3').innerText = "8,808";
+                    document.getElementById('spotlight-stat-v3').innerText = "5,942";
 
                     document.getElementById('spotlight-stat-l4').innerText = "Win %";
-                    document.getElementById('spotlight-stat-v4').innerText = "27%";
+                    document.getElementById('spotlight-stat-v4').innerText = "19%";
                 }
 
                 // 3. Resolve images and fallbacks
