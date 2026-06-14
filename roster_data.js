@@ -31,6 +31,10 @@ const rosterData = {
     "driver": "KEVIN FOSTER",
     "status": "past-champion"
   },
+  "10": {
+    "driver": "CORDELL MCFARLIN",
+    "status": "full-time"
+  },
   "11": {
     "driver": "JON OSBORNE",
     "status": "part-time"
