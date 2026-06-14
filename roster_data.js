@@ -140,7 +140,7 @@ const rosterData = {
     "status": "full-time"
   },
   "63": {
-    "driver": "Dylan MCDONAL",
+    "driver": "Dylan MCDONALD",
     "status": "part-time"
   },
   "72": {
