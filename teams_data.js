@@ -1566,7 +1566,7 @@ const teamsData = {
       "sponsors": [
         "Carter Phillips Racing"
       ],
-      "passcodeHash": "c059737b8d4f40f0980c500e23e7100b21a8d6e3c09533f81e695123d6a978f8"
+      "passcodeHash": "ec2d220d50cb8f49dd8aa4981ca2322b010b778ab71573d91983bca49e8cc91c"
     },
     {
       "id": "gfr-racing",
