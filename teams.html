@@ -1820,9 +1820,9 @@
             const teamName = team ? team.name : "the team";
             const trackName = (teamsData.latestRace && teamsData.latestRace.track) ? teamsData.latestRace.track : "the track";
 
-            // Helper to generate deterministic variation index based on driver and team
+            // Helper to generate deterministic variation index based on driver, team, and track
             const getIndex = (qIdx) => {
-                let str = driverName + teamName + qIdx;
+                let str = driverName + teamName + trackName + qIdx;
                 let hash = 0;
                 for (let i = 0; i < str.length; i++) {
                     hash = (hash << 5) - hash + str.charCodeAt(i);
@@ -2079,7 +2079,7 @@
                         "What area does the franchise need to focus on next?"
                     ];
                     const optionsA3 = [
-                        `We need to look at our travel prep and hauler logistics. If we get the truck dialed in earlier in the week, we can qualify better and start in a safer position.`,
+                        `We need to focus on our qualifying setups. If we get the truck handling better in practice, we can start higher up and run in a much safer position.`,
                         `Qualifying speed is our weakness. If we can start in the top 10, our race pace is good enough to stay there. We'll focus on single-lap runs.`,
                         `We need to study the tire wear data from ${trackName}. We lost too much speed late in the runs, so we need a better long-run setup.`
                     ];
