@@ -585,7 +585,25 @@
                     <h3 style="color:#fff; margin:0; font-size:1.3rem;">Weekly Truck Fleet Management</h3>
                     <div id="repair-all-container"></div>
                 </div>
-                <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:25px;">Each team must purchase and maintain a Craftsman Truck for each of their active full-time drivers. Deductions from crashes or engine wear will lower condition ratings, requiring franchise capital for repairs.</p>
+                <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid #1a1a1a; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
+                    <p style="color: #fff; font-size: 0.95rem; margin: 0 0 12px 0; font-weight: 500; line-height: 1.4;">
+                        Each team must purchase and maintain a dedicated Craftsman Truck for each of their rostered drivers (both full-time and part-time). Deductions from race wear, crashes, or engine failures will lower condition ratings, requiring franchise capital for repairs.
+                    </p>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; font-size: 0.85rem; color: var(--text-muted); margin-top: 12px; border-top: 1px solid #1a1a1a; padding-top: 12px; line-height: 1.5;">
+                        <div>
+                            <strong style="color: #fff; display: block; margin-bottom: 6px; font-size: 0.9rem;">🔧 Repair Costs & Options</strong>
+                            • <b style="color: #10B981;">Manual Repairs:</b> Restores chassis at <b>$500</b> per 1% condition.<br>
+                            • <b style="color: #3B82F6;">Bulk Repairs:</b> Check multiple trucks to repair all of them in a single transaction, requiring password entry only **once**.<br>
+                            • <b style="color: #EF4444;">Loan Lock:</b> Manual repairs are disabled if the team has an active emergency loan.
+                        </div>
+                        <div>
+                            <strong style="color: #fff; display: block; margin-bottom: 6px; font-size: 0.9rem;">💥 Race Incidents (Auto-Applied)</strong>
+                            • <b style="color: #F59E0B;">Engine Blown DNF:</b> Flat <b>$45,000</b> replacement (resets to 100%).<br>
+                            • <b style="color: #F59E0B;">Fast Repair (Finished):</b> Flat <b>$83,250</b> fee (resets to 100%).<br>
+                            • <b style="color: #EF4444;">Fast Repair (DNF/Totaled):</b> Replaced with new truck for <b>$185,000</b> (resets to 100%).
+                        </div>
+                    </div>
+                </div>
                 <div id="trucks-container" style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
                     <!-- Rendered dynamically -->
                 </div>
