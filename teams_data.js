@@ -165,7 +165,7 @@ const teamsData = {
         "led": 0
       },
       {
-        "name": "TERRY KONDAS",
+        "name": "TERRY KONDUS",
         "finish": 37,
         "qualify": 26,
         "incidents": 4,
@@ -524,7 +524,7 @@ const teamsData = {
           "BILL HARKINS",
           "LOGAN MURRAY",
           "MATT CROCKETT",
-          "TERRY KONDAS"
+          "TERRY KONDUS"
         ],
         "backup": [
           "VACANT",
@@ -535,7 +535,7 @@ const teamsData = {
         {
           "id": "truck-1",
           "make": "Ford",
-          "name": "Roundy F-150 #12",
+          "name": "Roundy F-150 #322",
           "condition": 12
         },
         {
@@ -547,13 +547,13 @@ const teamsData = {
         {
           "id": "truck-3",
           "make": "Ford",
-          "name": "Roundy F-150 #15",
+          "name": "Roundy F-150 #325",
           "condition": 9
         },
         {
           "id": "truck-4",
           "make": "Ford",
-          "name": "Roundy F-150 #1",
+          "name": "Roundy F-150 #32",
           "condition": 13
         }
       ],
@@ -572,7 +572,7 @@ const teamsData = {
         },
         {
           "date": "Jun 02, 2026",
-          "description": "Signed Driver: TERRY KONDAS (Signing Bonus)",
+          "description": "Signed Driver: TERRY KONDUS (Signing Bonus)",
           "category": "expense",
           "amount": -50000
         },
@@ -584,7 +584,7 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "Standard Race Prep: Roundy F-150 #12 (BILL HARKINS)",
+          "description": "Standard Race Prep: Roundy F-150 #322 (BILL HARKINS)",
           "category": "expense",
           "amount": -2000
         },
@@ -632,7 +632,7 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "Standard Race Prep: Roundy F-150 #15 (MATT CROCKETT)",
+          "description": "Standard Race Prep: Roundy F-150 #325 (MATT CROCKETT)",
           "category": "expense",
           "amount": -2000
         },
@@ -656,25 +656,25 @@ const teamsData = {
         },
         {
           "date": "May 7, 2025",
-          "description": "Standard Race Prep: Roundy F-150 #1 (TERRY KONDAS)",
+          "description": "Standard Race Prep: Roundy F-150 #32 (TERRY KONDUS)",
           "category": "expense",
           "amount": -2000
         },
         {
           "date": "May 7, 2025",
-          "description": "Drive & Lodging: TERRY KONDAS (Location N/A)",
+          "description": "Drive & Lodging: TERRY KONDUS (Location N/A)",
           "category": "expense",
           "amount": -100
         },
         {
           "date": "May 7, 2025",
-          "description": "Sponsor Start Bonus: TERRY KONDAS",
+          "description": "Sponsor Start Bonus: TERRY KONDUS",
           "category": "income",
           "amount": 15000
         },
         {
           "date": "May 7, 2025",
-          "description": "Prize Money: TERRY KONDAS (P25)",
+          "description": "Prize Money: TERRY KONDUS (P25)",
           "category": "income",
           "amount": 12000
         },
@@ -686,7 +686,7 @@ const teamsData = {
         },
         {
           "date": "May 13, 2026",
-          "description": "Standard Race Prep: Roundy F-150 #12 (BILL HARKINS)",
+          "description": "Standard Race Prep: Roundy F-150 #322 (BILL HARKINS)",
           "category": "expense",
           "amount": -2000
         },
@@ -734,7 +734,7 @@ const teamsData = {
         },
         {
           "date": "May 13, 2026",
-          "description": "Standard Race Prep: Roundy F-150 #15 (MATT CROCKETT)",
+          "description": "Standard Race Prep: Roundy F-150 #325 (MATT CROCKETT)",
           "category": "expense",
           "amount": -2000
         },
@@ -758,25 +758,25 @@ const teamsData = {
         },
         {
           "date": "May 13, 2026",
-          "description": "Standard Race Prep: Roundy F-150 #1 (TERRY KONDAS)",
+          "description": "Standard Race Prep: Roundy F-150 #32 (TERRY KONDUS)",
           "category": "expense",
           "amount": -2000
         },
         {
           "date": "May 13, 2026",
-          "description": "Drive & Lodging: TERRY KONDAS (Location N/A)",
+          "description": "Drive & Lodging: TERRY KONDUS (Location N/A)",
           "category": "expense",
           "amount": -100
         },
         {
           "date": "May 13, 2026",
-          "description": "Sponsor Start Bonus: TERRY KONDAS",
+          "description": "Sponsor Start Bonus: TERRY KONDUS",
           "category": "income",
           "amount": 15000
         },
         {
           "date": "May 13, 2026",
-          "description": "Prize Money: TERRY KONDAS (P42)",
+          "description": "Prize Money: TERRY KONDUS (P42)",
           "category": "income",
           "amount": 12000
         },
@@ -788,7 +788,7 @@ const teamsData = {
         },
         {
           "date": "May 13, 2026",
-          "description": "Standard Race Prep: Roundy F-150 #12 (BILL HARKINS)",
+          "description": "Standard Race Prep: Roundy F-150 #322 (BILL HARKINS)",
           "category": "expense",
           "amount": -2000
         },
@@ -836,7 +836,7 @@ const teamsData = {
         },
         {
           "date": "May 13, 2026",
-          "description": "Standard Race Prep: Roundy F-150 #15 (MATT CROCKETT)",
+          "description": "Standard Race Prep: Roundy F-150 #325 (MATT CROCKETT)",
           "category": "expense",
           "amount": -2000
         },
@@ -860,25 +860,25 @@ const teamsData = {
         },
         {
           "date": "May 13, 2026",
-          "description": "Standard Race Prep: Roundy F-150 #1 (TERRY KONDAS)",
+          "description": "Standard Race Prep: Roundy F-150 #32 (TERRY KONDUS)",
           "category": "expense",
           "amount": -2000
         },
         {
           "date": "May 13, 2026",
-          "description": "Drive & Lodging: TERRY KONDAS (Location N/A)",
+          "description": "Drive & Lodging: TERRY KONDUS (Location N/A)",
           "category": "expense",
           "amount": -100
         },
         {
           "date": "May 13, 2026",
-          "description": "Sponsor Start Bonus: TERRY KONDAS",
+          "description": "Sponsor Start Bonus: TERRY KONDUS",
           "category": "income",
           "amount": 15000
         },
         {
           "date": "May 13, 2026",
-          "description": "Prize Money: TERRY KONDAS (P37)",
+          "description": "Prize Money: TERRY KONDUS (P37)",
           "category": "income",
           "amount": 12000
         }

@@ -159,7 +159,8 @@ def normalize_name(name):
         "mike": "michael",
         "diante": "dionte",
         "roder": "rader",
-        "connor": "conor"
+        "connor": "conor",
+        "kondas": "kondus"
     }
     
     words = name.split()
