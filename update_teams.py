@@ -557,7 +557,8 @@ def main():
             truck = None
             for num in driver_nums:
                 for t in team["trucks"]:
-                    if f"#{num}" in t["name"]:
+                    m = re.search(r'#(\d+)', t["name"])
+                    if m and m.group(1) == num:
                         truck = t
                         break
                 if truck:
