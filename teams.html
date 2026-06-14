@@ -861,6 +861,29 @@
             document.getElementById('telegram-track').textContent = latest.track;
             document.getElementById('telegram-date').textContent = latest.date;
 
+            if (latest.isPreview) {
+                document.getElementById('telegram-headline').textContent = "🚨 SEASON OPENER: GEEZER AUTHENTIC'S APP 80 @ DAYTONA!";
+                
+                let bodyHTML = `<p>The outlaws of the Bandit Racing League are ready to depart for Daytona on **June 17, 2026**! The trucks are loaded, the tools are packed, and the garages are cleared. No points have been scored and no cash has been won or lost yet, but the tension is high as the fleet of trucks prepares to roll out.</p>`;
+                bodyHTML += `<p>This season opening event is proudly presented by **Clear Low Communications**, supported by **Perfect Shine Auto Spa**, and running the **Geezer Authentic's Performance App**, with all the action broadcasted live on **YouTube**!</p>`;
+                bodyHTML = bodyHTML.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                document.getElementById('telegram-body').innerHTML = bodyHTML;
+
+                document.getElementById('telegram-total-payouts').textContent = "$0";
+                document.getElementById('telegram-total-repairs').textContent = "-$0";
+                
+                const netEl = document.getElementById('telegram-net-flow');
+                netEl.textContent = "$0";
+                netEl.style.color = 'var(--neon-green)';
+
+                const bootHillCont = document.getElementById('telegram-boothill-list');
+                bootHillCont.innerHTML = '<div style="color:var(--text-muted); font-style:italic; font-size:0.85rem; padding: 5px 0;">All quiet in the graveyard. The season has not yet begun.</div>';
+
+                const highlightsCont = document.getElementById('telegram-highlights');
+                highlightsCont.innerHTML = '';
+                return;
+            }
+
             const results = latest.results || [];
             if (results.length === 0) return;
 
