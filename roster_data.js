@@ -183,6 +183,10 @@ const rosterData = {
     "driver": "DAVID LEAKEY",
     "status": "full-time"
   },
+  "85": {
+    "driver": "",
+    "status": "reserved"
+  },
   "86": {
     "driver": "PAUL WILSON",
     "status": "part-time"
