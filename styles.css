@@ -146,7 +146,7 @@ a {
 }
 
 .nav-icon-label {
-    display: none; /* Hidden on desktop, shown via tooltip instead */
+    display: block; /* Shown on desktop for clear visibility */
     font-size: 0.65rem;
     font-family: var(--font-heading);
     font-weight: 700;
