@@ -99,7 +99,7 @@ Tell us what you think in the comments! What is your favorite new feature? 👇
     print("    website_launch_promo.png")
     
     # Open Facebook
-    fb_url = "https://www.facebook.com/BanditRacingLeague/posts"
+    fb_url = "https://www.facebook.com/BanditRacingLeague/"
     print(f"\n[+] Opening Facebook: {fb_url}")
     webbrowser.open(fb_url)
     print("=" * 60)
