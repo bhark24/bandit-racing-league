@@ -412,6 +412,14 @@
                 return `assets/drivers numbers/${formattedName}.png`;
             }
 
+            function getTruckImgPath(name) {
+                if (!name) return '';
+                const norm = name.toLowerCase().trim()
+                    .replace(/[\s\+\-\.]+/g, '_')
+                    .replace(/_+/g, '_');
+                return `assets/truck images/truck_image_${norm}.png`;
+            }
+
             // Find driver's car number from rosterData
             function getDriverCarNumber(name) {
                 if (typeof rosterData === 'undefined') return '--';
@@ -585,11 +593,23 @@
                     imgLoaded = true;
                 };
                 tempImg.onerror = function() {
-                    // Spotlight image failed - trigger fallback card
-                    fallbackNum.innerText = carNum;
-                    fallbackName.innerText = cleanName;
-                    fallbackBlock.style.display = 'flex';
-                    spotlightImg.style.display = 'none';
+                    // Spotlight image failed - check if truck image exists
+                    const truckImgSrc = getTruckImgPath(driverName);
+                    const tempTruck = new Image();
+                    tempTruck.src = truckImgSrc;
+                    tempTruck.onload = function() {
+                        spotlightImg.src = truckImgSrc;
+                        spotlightImg.style.display = 'block';
+                        fallbackBlock.style.display = 'none';
+                        imgLoaded = true;
+                    };
+                    tempTruck.onerror = function() {
+                        // Both failed - trigger fallback card
+                        fallbackNum.innerText = carNum;
+                        fallbackName.innerText = cleanName;
+                        fallbackBlock.style.display = 'flex';
+                        spotlightImg.style.display = 'none';
+                    };
                 };
 
                 // Try loading number image
