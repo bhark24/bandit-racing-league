@@ -358,7 +358,7 @@ Who is your pick to win? Let us know in the comments below! 👇"""
         print("Please copy the text manually from the window above.")
         
     # 8. Open Facebook Page URL
-    fb_url = "https://www.facebook.com/BanditRacingLeague/"
+    fb_url = "https://www.facebook.com/profile.php?id=61585435839542"
     print(f"[+] Opening Facebook: {fb_url}")
     webbrowser.open(fb_url)
     print("=" * 60)
