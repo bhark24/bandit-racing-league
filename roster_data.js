@@ -119,6 +119,10 @@ const rosterData = {
     "driver": "PETER MURPHY",
     "status": "part-time"
   },
+  "41": {
+    "driver": "",
+    "status": "part-time"
+  },
   "43": {
     "driver": "JONATHON PLATT",
     "status": "past-champion"
