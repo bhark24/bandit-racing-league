@@ -244,7 +244,7 @@ const rosterData = {
     "status": "full-time"
   },
   "03": {
-    "driver": "JUSTIN ZI",
+    "driver": "JUSTIN ZIE",
     "status": "part-time"
   }
 };
