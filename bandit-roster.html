@@ -1786,7 +1786,12 @@ footer {
         .card[data-status="past-champion"] .status-select { color: var(--status-pastchampion); }
 
         /* Truck image hover transition inside exported cards */
-        .custom-number-img { transition: opacity 0.3s ease; }
+        .custom-number-img {
+            max-height: 85px; 
+            max-width: 160px; 
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
         .card-image-container {
             position: relative;
             height: 90px;
