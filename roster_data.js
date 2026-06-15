@@ -147,6 +147,10 @@ const rosterData = {
     "driver": "Dylan MC DONALD",
     "status": "part-time"
   },
+  "64": {
+    "driver": "",
+    "status": "part-time"
+  },
   "72": {
     "driver": "MASON PHLEGAR",
     "status": "part-time"
