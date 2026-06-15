@@ -60,7 +60,7 @@ const rosterData = {
     "status": "part-time"
   },
   "17": {
-    "driver": "D0NTE RADER",
+    "driver": "DI0NTE RADER",
     "status": "part-time"
   },
   "18": {
