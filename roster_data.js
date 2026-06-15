@@ -120,7 +120,7 @@ const rosterData = {
     "status": "part-time"
   },
   "41": {
-    "driver": "DALTON ",
+    "driver": "DALTON KILROE",
     "status": "part-time"
   },
   "43": {
