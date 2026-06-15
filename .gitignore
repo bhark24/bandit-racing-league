@@ -11,3 +11,6 @@ test_url2.py
 # Python cache files
 __pycache__/
 *.pyc
+
+# Local weekly data JS file
+weekly_data.js

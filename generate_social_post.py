@@ -164,6 +164,111 @@ def get_next_race():
         print(f"Error checking schedule: {e}")
     return "Daytona Oval", "Wednesday, June 17th @ 9:00 PM EST"
 
+TRACK_LOGOS = {
+    "daytona oval": "Daytona_Clean.png",
+    "daytona": "Daytona_Clean.png",
+    "atlanta": "AtlantaBlack.png",
+    "charlotte": "Charlotte-Motor-Speedway-logo-2019.png",
+    "bristol": "Bristol.png",
+    "nashville superspeedway": "Nashville.png",
+    "nashville": "Nashville.png",
+    "pocono": "POCONO.png",
+    "richmond": "Richmond.png",
+    "michigan": "MICHIGAN INT.png",
+    "gateway": "World_Wide_Technology_Raceway_logo.svg.png",
+    "darlington": "Darlington.png",
+    "kansas": "Kansas.png",
+    "texas": "Texas Motorspeedway.png",
+    "las vegas": "Vegas.png",
+    "phoenix": "phoenix.png",
+    "martinsville": "Martinsville.jpg",
+    "talladega": "Talladega.jpg",
+    "road america": "Road America.png",
+    "homestead miami": "Homestead Miami.jpg"
+}
+
+def get_driver_number(winner_name, roster_data_path):
+    if not os.path.exists(roster_data_path):
+        return ""
+    try:
+        with open(roster_data_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        match = re.search(r'const\s+rosterData\s*=\s*({.*?});', content, re.DOTALL)
+        if match:
+            roster_data = json.loads(match.group(1))
+            for num, details in roster_data.items():
+                if details.get("driver", "").strip().upper() == winner_name.strip().upper():
+                    return num
+    except Exception as e:
+        print(f"Error loading roster: {e}")
+    return ""
+
+def generate_social_graphic(winner_name, track_name, race_date, teams_data, fantasy_data):
+    # 1. Gather all weekly data
+    winner_number = get_driver_number(winner_name, os.path.join(BASE_DIR, "roster_data.js"))
+    track_logo = TRACK_LOGOS.get(track_name.strip().lower(), "")
+    
+    team_list = []
+    if teams_data and "teams" in teams_data:
+        sorted_teams = sorted(teams_data["teams"], key=lambda x: x.get("points", 0), reverse=True)
+        for t in sorted_teams:
+            team_list.append({
+                "name": t.get("name", "Team"),
+                "points": t.get("points", 0),
+                "wins": t.get("wins", 0)
+            })
+            
+    fantasy_list = []
+    if fantasy_data and "leaderboard" in fantasy_data:
+        sorted_fans = fantasy_data["leaderboard"]
+        for fan in sorted_fans:
+            fantasy_list.append({
+                "name": fan.get("name", "Fan"),
+                "score": fan.get("score", 0),
+                "wins": fan.get("wins", 0)
+            })
+            
+    weekly_data = {
+        "winnerName": winner_name,
+        "winnerNumber": winner_number,
+        "trackName": track_name,
+        "trackLogo": track_logo,
+        "raceDate": race_date,
+        "teamStandings": team_list,
+        "fantasyLeaderboard": fantasy_list
+    }
+    
+    # 2. Write data to weekly_data.js
+    weekly_js_path = os.path.join(BASE_DIR, "weekly_data.js")
+    with open(weekly_js_path, "w", encoding="utf-8") as f:
+        f.write(f"const weeklyData = {json.dumps(weekly_data, indent=2)};\n")
+    print(f"[+] Standings and results data written to {weekly_js_path}")
+    
+    # 3. Generate image using Playwright
+    try:
+        from playwright.sync_api import sync_playwright
+        print("[*] Generating weekly post graphic...")
+        
+        html_path = os.path.join(BASE_DIR, "social_graphic.html")
+        out_graphic_path = os.path.join(BASE_DIR, "assets", "weekly_social_update.png")
+        out_brain_path = r"C:\Users\Bill\.gemini\antigravity\brain\22aa0b7a-2c33-47f8-af7a-3f462eaf2ee6\weekly_social_update.png"
+        
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page(viewport={'width': 1200, 'height': 1200})
+            url = f"file:///{html_path.replace(os.sep, '/')}"
+            page.goto(url)
+            page.evaluate("document.fonts.ready")
+            page.wait_for_timeout(2000) # give images time to load
+            
+            page.screenshot(path=out_graphic_path)
+            page.screenshot(path=out_brain_path)
+            browser.close()
+            
+        print(f"[+] Success: Standings graphic generated at {out_graphic_path}")
+    except Exception as e:
+        print(f"[!] Error generating graphic: {e}")
+
 def main():
     print("=" * 60)
     print("        BRL SOCIAL MEDIA POST AUTOMATION GENERATOR")
@@ -210,6 +315,7 @@ def main():
     
     # 5. Format Social Media Post Template
     post_text = f"""🏁 **BANDIT RACING LEAGUE - WEEKLY UPDATE** 🏁
+Custom Standing Graphic: assets/weekly_social_update.png
 
 What a race! Congratulations to **{winner_name}** for taking the checkered flag at **{track_name}** ({race_date})! 🏆
 
@@ -240,7 +346,10 @@ Who is your pick to win? Let us know in the comments below! 👇"""
         print(post_text.encode('ascii', errors='replace').decode('ascii'))
     print("-" * 50)
     
-    # 6. Copy to Clipboard
+    # 6. Generate Social Graphic
+    generate_social_graphic(winner_name, track_name, race_date, teams_data, fantasy_data)
+    
+    # 7. Copy to Clipboard
     try:
         copy_to_clipboard(post_text)
         print("\n[+] SUCCESS: Post text copied to your clipboard!")
@@ -248,7 +357,7 @@ Who is your pick to win? Let us know in the comments below! 👇"""
         print(f"\n[!] Clipboard Error: {e}")
         print("Please copy the text manually from the window above.")
         
-    # 7. Open Facebook Page URL
+    # 8. Open Facebook Page URL
     fb_url = "https://www.facebook.com/BanditRacingLeague/posts" # standard league path or general FB
     print(f"[+] Opening Facebook: {fb_url}")
     webbrowser.open(fb_url)
