@@ -6,65 +6,437 @@
     <title>Bandit Racing League Roster</title>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-dark: #0a0a0c; --bg-card: #15161a; --bg-card-hover: #1c1e23; --neon-green: #39ff14; --neon-green-glow: rgba(57, 255, 20, 0.3); --text-primary: #ffffff; --text-secondary: #9ba1a6; --border-color: #2a2c33; --status-available: #39ff14; --status-fulltime: #00e5ff; --status-parttime: #ffea00; --status-reserved: #ff1744; --status-pastchampion: #ffd700; }
-* { box-sizing: border-box; margin: 0px; padding: 0px; }
-body { font-family: Inter, sans-serif; background-color: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; background-image: radial-gradient(circle at 15% 50%, rgba(57, 255, 20, 0.05), transparent 25%), radial-gradient(circle at 85% 30%, rgba(0, 229, 255, 0.05), transparent 25%); }
-.app-container { max-width: 1400px; margin: 0px auto; }
-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); }
-.logo-area h1 { font-family: Teko, sans-serif; font-size: 3.5rem; font-weight: 700; letter-spacing: 2px; color: var(--text-primary); text-transform: uppercase; text-shadow: 0 0 10px var(--neon-green-glow); line-height: 1.1; }
-.logo-area p { color: var(--neon-green); font-weight: 600; letter-spacing: 3px; font-size: 0.9rem; text-transform: uppercase; }
-.actions { display: flex; gap: 1rem; }
-.btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 4px; font-family: Inter, sans-serif; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: 0.2s; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; text-transform: uppercase; letter-spacing: 1px; }
-.btn.primary { background-color: var(--neon-green); color: rgb(0, 0, 0); box-shadow: 0 0 15px var(--neon-green-glow); }
-.btn.primary:hover { background-color: rgb(44, 230, 15); box-shadow: 0 0 25px var(--neon-green-glow); transform: translateY(-2px); }
-.btn.secondary { background-color: transparent; color: var(--text-primary); border: 1px solid var(--border-color); }
-.btn.secondary:hover { background-color: rgba(255, 255, 255, 0.05); }
-.roster-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
-.card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; position: relative; overflow: hidden; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; }
-.card::before { content: ""; position: absolute; top: 0px; left: 0px; width: 4px; height: 100%; background-color: var(--status-available); transition: background-color 0.3s; }
+        :root {
+    --bg-dark: #0a0a0c;
+    --bg-card: #15161a;
+    --bg-card-hover: #1c1e23;
+    --neon-green: #39ff14;
+    --neon-green-glow: rgba(57, 255, 20, 0.3);
+    --text-primary: #ffffff;
+    --text-secondary: #9ba1a6;
+    --border-color: #2a2c33;
+    --status-available: #39ff14;
+    --status-fulltime: #00e5ff;
+    --status-parttime: #ffea00;
+    --status-reserved: #ff1744;
+    --status-pastchampion: #ffd700;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 2rem;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(57, 255, 20, 0.05), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(0, 229, 255, 0.05), transparent 25%);
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo-area h1 {
+    font-family: 'Teko', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    text-shadow: 0 0 10px var(--neon-green-glow);
+    line-height: 1.1;
+}
+
+.logo-area p {
+    color: var(--neon-green);
+    font-weight: 600;
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn.primary {
+    background-color: var(--neon-green);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-green-glow);
+}
+
+.btn.primary:hover {
+    background-color: #2ce60f;
+    box-shadow: 0 0 25px var(--neon-green-glow);
+    transform: translateY(-2px);
+}
+
+.btn.secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.roster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--status-available);
+    transition: background-color 0.3s ease;
+}
+
 .card[data-status="full-time"]::before { background-color: var(--status-fulltime); }
 .card[data-status="part-time"]::before { background-color: var(--status-parttime); }
 .card[data-status="reserved"]::before { background-color: var(--status-reserved); }
 .card[data-status="past-champion"]::before { background-color: var(--status-pastchampion); }
-.card:hover { transform: translateY(-4px); border-color: var(--neon-green); box-shadow: rgba(0, 0, 0, 0.4) 0px 8px 20px; }
-.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-.car-number { font-family: Teko, sans-serif; font-size: 4rem; font-weight: 700; line-height: 0.8; color: var(--text-primary); font-style: italic; text-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px; }
-.status-select { background-color: rgba(0, 0, 0, 0.3); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 0.4rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; outline: none; cursor: pointer; text-transform: uppercase; }
-.status-select:focus { border-color: var(--neon-green); }
-.input-group { display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto; }
-.input-group label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
-.driver-input { background-color: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-color); border-radius: 4px; padding: 0.8rem; color: var(--neon-green); font-family: Inter, sans-serif; font-weight: 600; font-size: 1rem; transition: 0.2s; outline: none; text-transform: uppercase; }
-.driver-input:focus { border-color: var(--neon-green); box-shadow: rgba(57, 255, 20, 0.1) 0px 0px 10px; }
-.driver-input::placeholder { color: rgba(255, 255, 255, 0.15); font-weight: 400; }
-.exporting { background-color: var(--bg-dark) !important; padding: 2rem !important; width: 2000px !important; }
-.exporting .app-container { max-width: none; width: 100%; }
-.exporting .logo-area h1 { font-size: 5rem; margin-bottom: 0.5rem; }
-.exporting .logo-area p { font-size: 1.5rem; }
-.exporting .actions { display: none; }
-.exporting .roster-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem 1.5rem; }
-.exporting .card { display: flex; flex-direction: row; align-items: center; border-width: medium medium 1px !important; border-style: none none solid !important; border-color: currentcolor currentcolor rgb(34, 34, 34) !important; border-image: initial !important; background: transparent !important; padding: 0px 0px 0.5rem !important; box-shadow: none !important; }
-.exporting .card::before { display: none; }
-.exporting .card-header { margin: 0px; padding: 0px; width: 80px; flex-shrink: 0; }
-.exporting .car-number { font-size: 3rem; text-shadow: none; }
-.exporting .input-group { margin: 0px; flex-grow: 1; display: flex; flex-direction: row; align-items: center; gap: 0.5rem; }
-.exporting .input-group label { display: none; }
-.exporting .driver-input { border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; background: transparent; padding: 0px; color: var(--text-primary); font-size: 1.6rem; font-weight: 700; margin: 0px; width: auto; }
-.exporting .status-select { appearance: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; background: transparent; padding: 0px; color: var(--neon-green); font-size: 1.1rem; margin-left: auto; text-align: right; }
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-green);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.car-number {
+    font-family: 'Teko', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 0.8;
+    color: var(--text-primary);
+    font-style: italic;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.status-select {
+    background-color: rgba(0,0,0,0.3);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.4rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.status-select:focus {
+    border-color: var(--neon-green);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.input-group label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.driver-input {
+    background-color: rgba(0,0,0,0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.8rem;
+    color: var(--neon-green);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    outline: none;
+    text-transform: uppercase;
+}
+
+.driver-input:focus {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.1);
+}
+
+.driver-input::placeholder {
+    color: rgba(255, 255, 255, 0.15);
+    font-weight: 400;
+}
+
+/* --- DISCORD EXPORT STYLES (DENSE LIST) --- */
+.exporting {
+    background-color: var(--bg-dark) !important;
+    padding: 2rem !important;
+    width: 2000px !important; /* Wide enough for 5-6 columns without wrapping */
+}
+
+.exporting .app-container {
+    max-width: none;
+    width: 100%;
+}
+
+.exporting .logo-area h1 {
+    font-size: 5rem;
+    margin-bottom: 0.5rem;
+}
+
+.exporting .logo-area p {
+    font-size: 1.5rem;
+}
+
+.exporting .actions {
+    display: none;
+}
+
+.exporting .roster-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 columns */
+    gap: 0.5rem 1.5rem; /* Very tight vertical gap, wider horizontal gap */
+}
+
+.exporting .card {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: row; /* Layout left to right */
+    align-items: center;
+    border-bottom: 1px solid #222 !important;
+    padding-bottom: 0.5rem !important;
+}
+
+.exporting .card::before {
+    display: none; /* Hide the color bar */
+}
+
+.exporting .card-header {
+    margin: 0;
+    padding: 0;
+    width: 80px; /* Fixed width for the number to align everything */
+    flex-shrink: 0;
+}
+
+.exporting .car-number {
+    font-size: 3rem;
+    text-shadow: none;
+}
+
+.exporting .input-group {
+    margin: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.exporting .input-group label {
+    display: none;
+}
+
+.exporting .driver-input {
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: var(--text-primary);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+    width: auto;
+}
+
+.exporting .status-select {
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: var(--neon-green);
+    font-size: 1.1rem;
+    margin-left: auto; /* Push status to the right */
+    text-align: right;
+}
+
+/* Color code the statuses text directly during export */
 .exporting .card[data-status="available"] .status-select { color: var(--status-available); }
 .exporting .card[data-status="full-time"] .status-select { color: var(--status-fulltime); }
 .exporting .card[data-status="part-time"] .status-select { color: var(--status-parttime); }
 .exporting .card[data-status="reserved"] .status-select { color: var(--status-reserved); }
 .exporting .card[data-status="past-champion"] .status-select { color: var(--status-pastchampion); }
 
+/* Option B Static Layout styles */
+.card {
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+.card-visual-banner {
+    position: relative;
+    height: 140px;
+    width: 100%;
+    background: #0f1012;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.truck-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.floating-number-badge {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    height: 42px;
+    width: 75px;
+    background: rgba(10, 10, 12, 0.85);
+    border: 1px solid var(--neon-green);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+.floating-number-badge.centered {
+    position: static;
+    margin: auto;
+    height: 90px;
+    width: 160px;
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    box-shadow: none;
+}
+.custom-number-img {
+    max-height: 34px;
+    max-width: 65px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+.floating-number-badge.centered .custom-number-img {
+    max-height: 85px;
+    max-width: 160px;
+}
+.status-badge-b {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+.status-badge-b.available {
+    background: rgba(57, 255, 20, 0.15);
+    color: var(--status-available);
+    border: 1px solid var(--status-available);
+}
+.status-badge-b.full-time {
+    background: rgba(0, 229, 255, 0.15);
+    color: var(--status-fulltime);
+    border: 1px solid var(--status-fulltime);
+}
+.status-badge-b.part-time {
+    background: rgba(255, 234, 0, 0.15);
+    color: var(--status-parttime);
+    border: 1px solid var(--status-parttime);
+}
+.status-badge-b.reserved {
+    background: rgba(255, 23, 68, 0.15);
+    color: var(--status-reserved);
+    border: 1px solid var(--status-reserved);
+}
+.status-badge-b.past-champion {
+    background: rgba(255, 215, 0, 0.15);
+    color: var(--status-pastchampion);
+    border: 1px solid var(--status-pastchampion);
+}
+.card-body-b {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+
+
         /* Hide actions on the public page */
         .actions { display: none !important; }
-        .status-select { background: rgba(0,0,0,0.3); padding: 0.4rem; border-radius: 4px; }
-        .card:hover { transform: none; box-shadow: none; border-color: var(--border-color); }
-        .card[data-status="available"] .status-select { color: var(--status-available); }
-        .card[data-status="full-time"] .status-select { color: var(--status-fulltime); }
-        .card[data-status="part-time"] .status-select { color: var(--status-parttime); }
-        .card[data-status="reserved"] .status-select { color: var(--status-reserved); }
-        .card[data-status="past-champion"] .status-select { color: var(--status-pastchampion); }
+        .card { padding: 0 !important; overflow: hidden !important; }
+        .card-body-b { padding: 1.25rem !important; }
+        .card:hover { transform: none !important; box-shadow: none !important; border-color: var(--border-color) !important; }
     </style>
 </head>
 <body>
@@ -78,1335 +450,1617 @@ header { display: flex; justify-content: space-between; align-items: center; mar
         <main class="roster-grid">
             
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_jackson_knaak.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-00').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-00" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jackson%20Knaak.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#00</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">Jackson Knaak</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">Jackson Knaak</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-01" class="floating-number-badge centered">
                     <span class="car-number">#01</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_nolan_gross.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-02').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-02" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Nolan%20Gross.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#02</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NOLAN GROSS</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NOLAN GROSS</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_justin_ziemiecki.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-03').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-03" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Justin%20Ziemiecki.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#03</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JUSTIN ZIEMIECKI</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JUSTIN ZIEMIECKI</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="past-champion">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_bret_guzik.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-04').classList.add('centered');">
+                <span class="status-badge-b past-champion">Past Champion Reserved</span>
+                <div id="num-badge-04" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Bret%20Guzik.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#04</span>'">
                 </div>
-                <span class="status-select">Past Champion Reserved</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRET GUZIK</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRET GUZIK</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-05" class="floating-number-badge centered">
                     <span class="car-number">#05</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-06" class="floating-number-badge centered">
                     <span class="car-number">#06</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-07" class="floating-number-badge centered">
                     <span class="car-number">#07</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_jackson_duke.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-08').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-08" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jackson_Duke.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#08</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JACKSON DUKE</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JACKSON DUKE</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-09" class="floating-number-badge centered">
                     <span class="car-number">#09</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_adam_tahan.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-0').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-0" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Adam%20Tahan.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#0</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">ADAM TAHAN</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">ADAM TAHAN</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="past-champion">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_ricky_hart.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-1').classList.add('centered');">
+                <span class="status-badge-b past-champion">Past Champion Reserved</span>
+                <div id="num-badge-1" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Ricky%20Hart.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#1</span>'">
                 </div>
-                <span class="status-select">Past Champion Reserved</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">RICKY HART</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">RICKY HART</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="past-champion">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_nick_nickerson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-2').classList.add('centered');">
+                <span class="status-badge-b past-champion">Past Champion Reserved</span>
+                <div id="num-badge-2" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Nick%20Nickerson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#2</span>'">
                 </div>
-                <span class="status-select">Past Champion Reserved</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NICK NICKERSON</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NICK NICKERSON</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-3" class="floating-number-badge centered">
                     <span class="car-number">#3</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_logan_murray.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-4').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-4" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Logan%20Murray.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#4</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">LOGAN MURRAY</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">LOGAN MURRAY</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_sean_britt.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-5').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-5" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Sean%20Britt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#5</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">SEAN BRITT</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">SEAN BRITT</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_nicole_kriesel.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-6').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-6" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Nicole%20Kriesel.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#6</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NICOLE KRIESEL</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NICOLE KRIESEL</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="past-champion">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_benjamin_lacy.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-7').classList.add('centered');">
+                <span class="status-badge-b past-champion">Past Champion Reserved</span>
+                <div id="num-badge-7" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Benjamin%20Lacy.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#7</span>'">
                 </div>
-                <span class="status-select">Past Champion Reserved</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BENJAMIN LACY</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BENJAMIN LACY</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="past-champion">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_kevin_foster.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-8').classList.add('centered');">
+                <span class="status-badge-b past-champion">Past Champion Reserved</span>
+                <div id="num-badge-8" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Kevin%20Foster.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#8</span>'">
                 </div>
-                <span class="status-select">Past Champion Reserved</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">KEVIN FOSTER</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">KEVIN FOSTER</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-9" class="floating-number-badge centered">
                     <span class="car-number">#9</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_cordell_mcfarlin.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-10').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-10" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Cordell%20McFarlin.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#10</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CORDELL MCFARLIN</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CORDELL MCFARLIN</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_jon_osborne.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-11').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-11" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jon%20Osborne.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#11</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JON OSBORNE</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JON OSBORNE</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_bill_harkins.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-12').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-12" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Bill%20Harkins.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#12</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BILL HARKINS</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BILL HARKINS</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_jonathon_platt.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-13').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-13" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jonathon%20Platt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#13</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JONATHON PLATT</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JONATHON PLATT</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_jason_allegrini.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-14').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-14" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jason%20Allegrini.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#14</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JASON ALLEGRINI</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JASON ALLEGRINI</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_matt_crockett.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-15').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-15" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Matt%20Crockett.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#15</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MATT CROCKETT</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MATT CROCKETT</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_joshua_sutherland.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-16').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-16" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Joshua%20Sutherland.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#16</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSHUA SUTHERLAND</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSHUA SUTHERLAND</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_di0nte_rader.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-17').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-17" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Di0nte%20Rader.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#17</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DI0NTE RADER</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DI0NTE RADER</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_victor_weaver.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-18').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-18" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Victor%20Weaver.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#18</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">VICTOR WEAVER</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">VICTOR WEAVER</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_matt_bailey.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-19').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-19" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Matt%20Bailey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#19</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MATT BAILEY</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MATT BAILEY</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-20" class="floating-number-badge centered">
                     <span class="car-number">#20</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_nathan_santos.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-21').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-21" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Nathan%20Santos.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#21</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NATHAN SANTOS</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NATHAN SANTOS</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_josh_adams.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-22').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-22" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Josh%20Adams.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#22</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSH ADAMS</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSH ADAMS</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_dylan_nicastro.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-23').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-23" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Dillon.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#23</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DYLAN NICASTRO</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DYLAN NICASTRO</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_ethan_sikorski.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-24').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-24" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Ethan%20Sikorski.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#24</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">ETHAN SIKORSKI</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">ETHAN SIKORSKI</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-25" class="floating-number-badge centered">
                     <span class="car-number">#25</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-26" class="floating-number-badge centered">
                     <span class="car-number">#26</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_michael_ramos.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-27').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-27" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Michael%20Ramos.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#27</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MICHAEL RAMOS</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MICHAEL RAMOS</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_jesse_vaughan.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-28').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-28" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jesse%20Vaughan.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#28</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">Jesse VAUGHAN</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">Jesse VAUGHAN</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_garret_bobo.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-29').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-29" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Garret%20Bobo.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#29</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">GARRET BOBO</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">GARRET BOBO</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_carter_phillips.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-30').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-30" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Carter%20Phillips.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#30</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CARTER PHILLIPS</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CARTER PHILLIPS</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_connor_gibson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-31').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-31" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Connor%20Gibson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#31</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CONNOR GIBSON</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CONNOR GIBSON</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_terry_kondus.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-32').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-32" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Terry%20Kondus.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#32</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TERRY KONDUS</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TERRY KONDUS</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-33" class="floating-number-badge centered">
                     <span class="car-number">#33</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-34" class="floating-number-badge centered">
                     <span class="car-number">#34</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_wes_fuller.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-35').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-35" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Wes%20Fuller.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#35</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">wES fULLER</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">wES fULLER</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-36" class="floating-number-badge centered">
                     <span class="car-number">#36</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-37" class="floating-number-badge centered">
                     <span class="car-number">#37</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_peter_murphy.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-38').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-38" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Peter%20Murphy.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#38</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">PETER MURPHY</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">PETER MURPHY</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-39" class="floating-number-badge centered">
                     <span class="car-number">#39</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-40" class="floating-number-badge centered">
                     <span class="car-number">#40</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_dalton_kilroe.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-41').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-41" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Dalton%20Kilroe.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#41</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DALTON KILROE</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DALTON KILROE</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-42" class="floating-number-badge centered">
                     <span class="car-number">#42</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="past-champion">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_jonathon_platt.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-43').classList.add('centered');">
+                <span class="status-badge-b past-champion">Past Champion Reserved</span>
+                <div id="num-badge-43" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jonathon%20Platt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#43</span>'">
                 </div>
-                <span class="status-select">Past Champion Reserved</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JONATHON PLATT</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JONATHON PLATT</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-44" class="floating-number-badge centered">
                     <span class="car-number">#44</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-45" class="floating-number-badge centered">
                     <span class="car-number">#45</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-46" class="floating-number-badge centered">
                     <span class="car-number">#46</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_michael_rakes.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-47').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-47" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Michael%20Rakes.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#47</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MICHAEL RAKES</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MICHAEL RAKES</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-48" class="floating-number-badge centered">
                     <span class="car-number">#48</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-49" class="floating-number-badge centered">
                     <span class="car-number">#49</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_davis_carroll.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-50').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-50" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Davis%20Carroll.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#50</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVIS CARROLL</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVIS CARROLL</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_curtis_yancey.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-51').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-51" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Curtis%20Yancey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#51</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CURTIS YANCEY</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CURTIS YANCEY</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_jackson_mummert.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-52').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-52" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jackson%20Mummert.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#52</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JACKSON MUMMERT</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JACKSON MUMMERT</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-53" class="floating-number-badge centered">
                     <span class="car-number">#53</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-54" class="floating-number-badge centered">
                     <span class="car-number">#54</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-55" class="floating-number-badge centered">
                     <span class="car-number">#55</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-56" class="floating-number-badge centered">
                     <span class="car-number">#56</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-57" class="floating-number-badge centered">
                     <span class="car-number">#57</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-58" class="floating-number-badge centered">
                     <span class="car-number">#58</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-59" class="floating-number-badge centered">
                     <span class="car-number">#59</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-60" class="floating-number-badge centered">
                     <span class="car-number">#60</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-61" class="floating-number-badge centered">
                     <span class="car-number">#61</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_ty_corino.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-62').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-62" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Ty%20Corino.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#62</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TY CORINO</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TY CORINO</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_dylan_mc_donald.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-63').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-63" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Dylan%20Mc%20Donald.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#63</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">Dylan MC DONALD</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">Dylan MC DONALD</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_adam_clark.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-64').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-64" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Adam%20Clark.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#64</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">ADAM CLARK</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">ADAM CLARK</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-65" class="floating-number-badge centered">
                     <span class="car-number">#65</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-66" class="floating-number-badge centered">
                     <span class="car-number">#66</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-67" class="floating-number-badge centered">
                     <span class="car-number">#67</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-68" class="floating-number-badge centered">
                     <span class="car-number">#68</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-69" class="floating-number-badge centered">
                     <span class="car-number">#69</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-70" class="floating-number-badge centered">
                     <span class="car-number">#70</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-71" class="floating-number-badge centered">
                     <span class="car-number">#71</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_mason_phlegar.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-72').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-72" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Mason%20Phlegar.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#72</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MASON PHLEGAR</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MASON PHLEGAR</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_brandon_geers.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-73').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-73" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Brandon%20Geers.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#73</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRANDON GEERS</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRANDON GEERS</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-74" class="floating-number-badge centered">
                     <span class="car-number">#74</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_bob_berry.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-75').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-75" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Bob%20Berry.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#75</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BOB BERRY</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BOB BERRY</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="past-champion">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_mark_alan_bivens.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-76').classList.add('centered');">
+                <span class="status-badge-b past-champion">Past Champion Reserved</span>
+                <div id="num-badge-76" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Mark%20Alan%20Bivens.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#76</span>'">
                 </div>
-                <span class="status-select">Past Champion Reserved</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MARK ALAN BIVENS</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MARK ALAN BIVENS</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_tyson_kopf.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-77').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-77" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Tyson%20Kopf.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#77</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TYSON KOPF</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TYSON KOPF</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-78" class="floating-number-badge centered">
                     <span class="car-number">#78</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-79" class="floating-number-badge centered">
                     <span class="car-number">#79</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-80" class="floating-number-badge centered">
                     <span class="car-number">#80</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-81" class="floating-number-badge centered">
                     <span class="car-number">#81</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-82" class="floating-number-badge centered">
                     <span class="car-number">#82</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_jason_greenwell.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-83').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-83" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jason%20Greenwell.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#83</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JASON GREENWELL</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JASON GREENWELL</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="full-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_david_leakey.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-84').classList.add('centered');">
+                <span class="status-badge-b full-time">Full Time</span>
+                <div id="num-badge-84" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/David%20Leakey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#84</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVID LEAKEY</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVID LEAKEY</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="reserved">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_cody_welch.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-85').classList.add('centered');">
+                <span class="status-badge-b reserved">Reserved / Practice</span>
+                <div id="num-badge-85" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Cody%20Welch.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#85</span>'">
                 </div>
-                <span class="status-select">Reserved / Practice</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CODY WELCH</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CODY WELCH</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_paul_wilson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-86').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-86" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Paul%20Wilson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#86</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">PAUL WILSON</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">PAUL WILSON</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-87" class="floating-number-badge centered">
                     <span class="car-number">#87</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_david_westover_jr.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-88').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-88" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/David%20Westover.pmg.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#88</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVID WESTOVER JR</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVID WESTOVER JR</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-89" class="floating-number-badge centered">
                     <span class="car-number">#89</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-90" class="floating-number-badge centered">
                     <span class="car-number">#90</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_brandon_jackson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-91').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-91" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Brandon%20Jackson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#91</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRANDON JACKSON</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRANDON JACKSON</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-92" class="floating-number-badge centered">
                     <span class="car-number">#92</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_scott_sanderson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-93').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-93" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Scott%20Sanderson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#93</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">SCOTT SANDERSON</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">SCOTT SANDERSON</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-94" class="floating-number-badge centered">
                     <span class="car-number">#94</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-95" class="floating-number-badge centered">
                     <span class="car-number">#95</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_lucas_wilson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-96').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-96" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Lucas%20Wilson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#96</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">LUCAS WILSON</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">LUCAS WILSON</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="past-champion">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_eddie_hagigh.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-97').classList.add('centered');">
+                <span class="status-badge-b past-champion">Past Champion Reserved</span>
+                <div id="num-badge-97" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Eddie%20Hagigh.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#97</span>'">
                 </div>
-                <span class="status-select">Past Champion Reserved</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">EDDIE HAGIGH</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">EDDIE HAGIGH</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="available">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <span class="status-badge-b available">Available</span>
+                <div id="num-badge-98" class="floating-number-badge centered">
                     <span class="car-number">#98</span>
                 </div>
-                <span class="status-select">Available</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="part-time">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_josh_billiter.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-99').classList.add('centered');">
+                <span class="status-badge-b part-time">Part Time</span>
+                <div id="num-badge-99" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Josh%20Billiter.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#99</span>'">
                 </div>
-                <span class="status-select">Part Time</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSH BILLITER</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSH BILLITER</div>
+                </div>
             </div>
         </div>
         <div class="card" data-status="reserved">
-            <div class="card-header">
-                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+            <div class="card-visual-banner">
+                <img src="assets/truck%20images/truck_image_unavailable.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-100').classList.add('centered');">
+                <span class="status-badge-b reserved">Reserved / Practice</span>
+                <div id="num-badge-100" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Unavailable.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#100</span>'">
                 </div>
-                <span class="status-select">Reserved / Practice</span>
             </div>
-            <div class="input-group">
-                <label style="display:block;">Driver Name</label>
-                <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">UNAVAILABLE</div>
+            <div class="card-body-b">
+                <div class="input-group">
+                    <label style="display:block;">Driver Name</label>
+                    <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">UNAVAILABLE</div>
+                </div>
             </div>
         </div>
         </main>
