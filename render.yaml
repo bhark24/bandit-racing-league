@@ -2,6 +2,7 @@ services:
   - type: web
     name: brl-relay-geezer
     env: python
+    plan: free
     buildCommand: pip install -r relay-server/requirements.txt
     startCommand: python relay-server/server.py
     envVars:
