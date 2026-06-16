@@ -337,6 +337,21 @@ const teamsData = {
       "city": "Kansas City, KS",
       "lat": 39.1156,
       "lon": -94.8311
+    },
+    "JACKSON DUKE": {
+      "city": "Athens, AL",
+      "lat": 34.8029,
+      "lon": -86.9717
+    },
+    "GARRET BOBO": {
+      "city": "Shreveport, LA",
+      "lat": 32.514,
+      "lon": -93.7477
+    },
+    "CORDELL MCFARLIN": {
+      "city": "Oklahoma City, OK",
+      "lat": 35.4676,
+      "lon": -97.5164
     }
   },
   "teams": [
@@ -937,6 +952,75 @@ const teamsData = {
         "Craftsman Tools"
       ],
       "passcodeHash": "7c80456012d9a93fbfd574ba3b0204b364d3e52c7370b8921f7fa69fd70bddfa"
+    },
+    {
+      "id": "pop-motorsports",
+      "name": "POP Motorsports",
+      "owner": "Jackson Duke & Garret Bobo",
+      "homeBase": "Athens, AL",
+      "logo": "assets/pop-motorsports.png",
+      "points": 0,
+      "wins": 0,
+      "balance": 2010000,
+      "loan": 0,
+      "drivers": {
+        "primary": [
+          "JACKSON DUKE",
+          "CORDELL MCFARLIN",
+          "VACANT",
+          "VACANT"
+        ],
+        "backup": [
+          "GARRET BOBO",
+          "VACANT"
+        ]
+      },
+      "trucks": [
+        {
+          "id": "truck-1",
+          "make": "Chevrolet",
+          "name": "POP Silverado #08",
+          "condition": 100
+        },
+        {
+          "id": "truck-2",
+          "make": "Chevrolet",
+          "name": "POP Silverado #10",
+          "condition": 100
+        },
+        {
+          "id": "truck-3",
+          "make": "Chevrolet",
+          "name": "POP Silverado #29",
+          "condition": 100
+        },
+        {
+          "id": "truck-4",
+          "make": "Chevrolet",
+          "name": "POP Silverado #TBD",
+          "condition": 100
+        }
+      ],
+      "ledger": [
+        {
+          "date": "2026-05-24",
+          "description": "Starting Franchise Balance",
+          "category": "income",
+          "amount": 2750000
+        },
+        {
+          "date": "2026-05-24",
+          "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
+          "category": "expense",
+          "amount": -740000
+        }
+      ],
+      "sponsors": [
+        "POP Motorsports",
+        "Chevrolet Accessories",
+        "Craftsman Tools"
+      ],
+      "passcodeHash": "06d4e8be5b07a51c4a0349a2a6f8b9f71c4222049e0c326e5e8e819b35bc456e"
     }
   ]
 };
