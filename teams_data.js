@@ -480,7 +480,7 @@ const teamsData = {
         {
           "id": "truck-5",
           "make": "Toyota",
-          "name": "937 Tundra #19",
+          "name": "937 Tundra #54",
           "condition": 100
         }
       ],

@@ -68,8 +68,8 @@ const rosterData = {
     "status": "full-time"
   },
   "19": {
-    "driver": "MATT BAILEY",
-    "status": "part-time"
+    "driver": "",
+    "status": "available"
   },
   "21": {
     "driver": "NATHAN SANTOS",
@@ -144,8 +144,8 @@ const rosterData = {
     "status": "part-time"
   },
   "54": {
-    "driver": "",
-    "status": "available"
+    "driver": "MATT BAILEY",
+    "status": "part-time"
   },
   "62": {
     "driver": "TY CORINO",
