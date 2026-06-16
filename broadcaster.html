@@ -475,89 +475,81 @@
         function scanActiveTelemetries() {
             console.log("Scanning active telemetry feeds...");
             
-            driverDatabase.forEach(driver => {
-                const pill = document.getElementById(`pill-${driver.id}`);
-                const pillText = document.getElementById(`pill-text-${driver.id}`);
-                
-                // If socket exists, close it
-                if (driver.wsConnection) {
-                    try {
-                        driver.wsConnection.close();
-                    } catch(e){}
-                }
-                
-                const wsUrl = `wss://demo.piesocket.com/v3/brl_telemetry_${driver.id}?api_key=VC1GdCszxuHAzzSF1otmQasZaZPDzchSfCHz0s10`;
-                const tempWs = new WebSocket(wsUrl);
-                driver.wsConnection = tempWs;
-                
-                let receivedPacket = false;
-                let lastPacketTime = Date.now();
-                let checkOfflineInterval = null;
-                
-                tempWs.onmessage = (e) => {
-                    lastPacketTime = Date.now();
+            driverDatabase.forEach((driver, index) => {
+                // Stagger connections to avoid hitting concurrent connection limits
+                setTimeout(() => {
+                    const pill = document.getElementById(`pill-${driver.id}`);
+                    const pillText = document.getElementById(`pill-text-${driver.id}`);
                     
-                    if (!receivedPacket) {
-                        receivedPacket = true;
-                        driver.status = 'online';
-                        
-                        // Parse name from telemetry packet if present
+                    // If socket exists, close it
+                    if (driver.wsConnection) {
                         try {
-                            const packet = JSON.parse(e.data);
-                            let playerRow = null;
-                            if (packet.relative && Array.isArray(packet.relative)) {
-                                playerRow = packet.relative.find(d => d.highlight);
-                            }
-                            if (playerRow && playerRow.name) {
-                                const resolvedName = playerRow.name.trim();
-                                if (resolvedName && resolvedName !== "PLAYER") {
-                                    driver.name = resolvedName;
-                                    localStorage.setItem(`driver_name_${driver.id}`, resolvedName);
-                                    
-                                    const nameEl = document.querySelector(`#card-${driver.id} .driver-card-name`);
-                                    if (nameEl) nameEl.innerText = resolvedName;
-                                    
-                                    // Update active stream header if this driver is selected
-                                    if (selectedDriverId === driver.id) {
-                                        document.getElementById('active-driver-header').innerText = `Active Stream: ${resolvedName} (#${driver.id})`;
+                            driver.wsConnection.close();
+                        } catch(e){}
+                    }
+                    
+                    const wsUrl = `wss://demo.piesocket.com/v3/brl_telemetry_${driver.id}?api_key=VC1GdCszxuHAzzSF1otmQasZaZPDzchSfCHz0s10`;
+                    const tempWs = new WebSocket(wsUrl);
+                    driver.wsConnection = tempWs;
+                    
+                    let receivedPacket = false;
+                    
+                    tempWs.onmessage = (e) => {
+                        if (!receivedPacket) {
+                            receivedPacket = true;
+                            driver.status = 'online';
+                            
+                            // Parse name from telemetry packet if present
+                            try {
+                                const packet = JSON.parse(e.data);
+                                let playerRow = null;
+                                if (packet.relative && Array.isArray(packet.relative)) {
+                                    playerRow = packet.relative.find(d => d.highlight);
+                                }
+                                if (playerRow && playerRow.name) {
+                                    const resolvedName = playerRow.name.trim();
+                                    if (resolvedName && resolvedName !== "PLAYER") {
+                                        driver.name = resolvedName;
+                                        localStorage.setItem(`driver_name_${driver.id}`, resolvedName);
+                                        
+                                        const nameEl = document.querySelector(`#card-${driver.id} .driver-card-name`);
+                                        if (nameEl) nameEl.innerText = resolvedName;
+                                        
+                                        // Update active stream header if this driver is selected
+                                        if (selectedDriverId === driver.id) {
+                                            document.getElementById('active-driver-header').innerText = `Active Stream: ${resolvedName} (#${driver.id})`;
+                                        }
                                     }
                                 }
+                            } catch(err){}
+                            
+                            // Update status visual
+                            if (pill) {
+                                pill.className = "status-pill pill-online";
+                                pillText.innerText = "ONLINE";
                             }
-                        } catch(err){}
-                        
-                        // Update status visual
-                        if (pill) {
-                            pill.className = "status-pill pill-online";
-                            pillText.innerText = "ONLINE";
+                            
+                            // Close socket immediately to free up connection slot
+                            try {
+                                tempWs.close();
+                            } catch(e){}
                         }
-                        
-                        // Start interval to monitor online/offline transition
-                        checkOfflineInterval = setInterval(() => {
-                            if (Date.now() - lastPacketTime > 6000) {
-                                driver.status = 'offline';
-                                if (pill) {
-                                    pill.className = "status-pill pill-offline";
-                                    pillText.innerText = "OFFLINE";
-                                }
-                                clearInterval(checkOfflineInterval);
-                                try { tempWs.close(); } catch(e){}
+                    };
+                    
+                    // Timeout after 3.5 seconds: if no message, mark offline and close socket
+                    setTimeout(() => {
+                        if (!receivedPacket) {
+                            driver.status = 'offline';
+                            if (pill) {
+                                pill.className = "status-pill pill-offline";
+                                pillText.innerText = "OFFLINE";
                             }
-                        }, 3000);
-                    }
-                };
-                
-                // Timeout after 3.5 seconds: if no message, mark offline and close socket
-                setTimeout(() => {
-                    if (!receivedPacket) {
-                        driver.status = 'offline';
-                        if (pill) {
-                            pill.className = "status-pill pill-offline";
-                            pillText.innerText = "OFFLINE";
+                            try {
+                                tempWs.close();
+                            } catch(e){}
                         }
-                        if (checkOfflineInterval) clearInterval(checkOfflineInterval);
-                        try { tempWs.close(); } catch(e){}
-                    }
-                }, 3500);
+                    }, 3500);
+                }, index * 300);
             });
         }
 
@@ -570,24 +562,26 @@
 
         function selectDriverStream(driverId, driverName) {
             selectedDriverId = driverId;
-            
+
             // Highlight card
             document.querySelectorAll('.driver-card').forEach(c => c.classList.remove('active-selection'));
             const selectedCard = document.getElementById(`card-${driverId}`);
             if (selectedCard) selectedCard.classList.add('active-selection');
-            
+
             // Setup viewport
             document.getElementById('viewport-placeholder-box').style.display = 'none';
             document.getElementById('viewport-header-bar').style.display = 'flex';
             document.getElementById('active-driver-header').innerText = `Active Stream: ${driverName} (#${driverId})`;
-            
+
+            // Bypass browser caching of iframe content using a timestamp query parameter
+            const cacheBuster = Date.now();
             const frame = document.getElementById('viewport-iframe');
             frame.style.display = 'block';
-            frame.src = `spotter.html?driver=${driverId}`;
-            
+            frame.src = `spotter.html?driver=${driverId}&t=${cacheBuster}`;
+
             // Setup popout link
             const popout = document.getElementById('popout-link');
-            popout.href = `spotter.html?driver=${driverId}`;
+            popout.href = `spotter.html?driver=${driverId}&t=${cacheBuster}`;
         }
     </script>
 </body>
