@@ -482,6 +482,23 @@
                         <h2 id="header-driver-name">Loading Driver...</h2>
                         <p>iRacing Customer ID: <span id="header-driver-id">00000</span> | Session Laps Remaining: <span id="header-laps-remain" style="color:var(--neon-green); font-weight:bold;">--</span></p>
                     </div>
+                    <!-- Stats Widget -->
+                    <div class="header-vitals" style="display: flex; gap: 30px; align-items: center; margin-left: 40px; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 8px 24px; border-radius: 8px;">
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Last Lap</span>
+                            <span id="header-last-lap" style="font-size: 1.15rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif;">--:--.---</span>
+                        </div>
+                        <div style="width: 1px; height: 25px; background: rgba(255,255,255,0.12);"></div>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Best Lap</span>
+                            <span id="header-best-lap" style="font-size: 1.15rem; font-weight: 900; color: var(--chase-yellow); font-style: italic; font-family: 'Outfit', sans-serif;">--:--.---</span>
+                        </div>
+                        <div style="width: 1px; height: 25px; background: rgba(255,255,255,0.12);"></div>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Fuel Laps</span>
+                            <span id="header-fuel-est" style="font-size: 1.15rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif;">--.-</span>
+                        </div>
+                    </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <button id="btn-spotter-fullscreen" class="btn-verify" style="width: auto; padding: 10px 18px; font-size: 0.85rem; margin: 0; background: rgba(57, 255, 20, 0.05); border: 2px solid var(--neon-green); color: var(--neon-green);">📺 Fullscreen</button>
@@ -840,6 +857,17 @@
             });
         }
 
+        function formatLapTime(secs) {
+            if (!secs || secs <= 0 || secs > 9999) return "--:--.---";
+            const m = Math.floor(secs / 60);
+            const s = Math.floor(secs % 60);
+            const ms = Math.floor((secs % 1) * 1000);
+            if (m > 0) {
+                return `${m}:${s.toString().padStart(2, '0')}.${ms.toString().padStart(3, '0')}`;
+            }
+            return `${secs.toFixed(3)}`;
+        }
+
         function handleTelemetryPacket(data) {
             lastPacketTime = Date.now();
             updateConnectionStatus(true, "ACTIVE");
@@ -849,6 +877,11 @@
             document.getElementById('header-driver-name').innerText = playerInfo ? playerInfo.name : "Bill Harkins";
             document.getElementById('header-track-name').innerText = data.trackName || "Unknown Track";
             document.getElementById('header-laps-remain').innerText = data.lapsRemaining || "--";
+
+            // Update Header Vitals
+            document.getElementById('header-last-lap').innerText = formatLapTime(data.lapCurrent);
+            document.getElementById('header-best-lap').innerText = formatLapTime(data.lapBest);
+            document.getElementById('header-fuel-est').innerText = data.lapsFuelRemaining !== undefined && data.lapsFuelRemaining >= 0 ? data.lapsFuelRemaining.toFixed(1) : "--.-";
 
             // Update Track Logo Layout dynamically
             updateTrackLogo(data.trackName);
@@ -889,12 +922,22 @@
             if (data.allDrivers) {
                 updateTrackMap(data.allDrivers);
             } else if (data.relative) {
-                // Fallback using relative driver subset percentages
-                const relativeSubset = data.relative.map(d => ({
-                    carNum: d.car,
-                    pct: d.gap / 60.0, // rough percentage offset fallback
-                    highlight: d.highlight
-                }));
+                // Fallback using relative driver subset percentages relative to player position
+                const playerPct = data.lapDistPct !== undefined ? data.lapDistPct : 0.0;
+                const estLapTime = data.lapCurrent && data.lapCurrent > 0 ? data.lapCurrent : (data.lapBest && data.lapBest > 0 ? data.lapBest : 45.0);
+                
+                const relativeSubset = data.relative.map(d => {
+                    const pctOffset = d.gap / estLapTime;
+                    let carPct = playerPct + pctOffset;
+                    carPct = carPct % 1.0;
+                    if (carPct < 0) carPct += 1.0;
+                    
+                    return {
+                        carNum: d.car,
+                        pct: carPct,
+                        highlight: d.highlight
+                    };
+                });
                 updateTrackMap(relativeSubset);
             }
 
@@ -1149,6 +1192,8 @@
                     avgFuel: 0.428,
                     lapsFuelRemaining: fuel / 0.428,
                     lapsRemaining: "28 / 50 Laps",
+                    lapCurrent: 46.254 + (Math.random() - 0.5) * 0.1,
+                    lapBest: 45.982,
                     prevStint: 26, // Simulated 26 laps completed on last tire set
                     penaltyReason: mockPenalty,
                     tires: {
