@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broadcaster Telemetry Hub | Bandit Racing League</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        body {
+            background-color: #0a0a0c;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hub-container {
+            max-width: 1600px;
+            width: 100%;
+            margin: 110px auto 40px auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Access Passcode Card */
+        .lock-screen {
+            max-width: 450px;
+            margin: 150px auto;
+            background: linear-gradient(135deg, #15161a 0%, #0d0d0f 100%);
+            border: 1px solid #2a2c33;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            position: relative;
+        }
+
+        .lock-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #ff1744; /* Alert color */
+            border-radius: 12px 12px 0 0;
+        }
+
+        /* Two-Column Broadcast Layout */
+        .broadcast-layout {
+            display: none; /* Hidden by default */
+            grid-template-columns: 450px 1fr;
+            gap: 30px;
+            height: calc(100vh - 200px);
+            min-height: 650px;
+        }
+
+        @media (max-width: 1024px) {
+            .broadcast-layout {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+
+        /* Left Side: Driver Directory */
+        .directory-panel {
+            background: rgba(21, 22, 26, 0.85);
+            border: 1px solid #1f2128;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .directory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 15px;
+        }
+
+        .directory-title {
+            font-size: 1.3rem;
+            font-style: italic;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 0;
+            color: #fff;
+            border-left: 4px solid var(--neon-green);
+            padding-left: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .driver-list {
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-right: 5px;
+        }
+
+        /* Driver Status Card */
+        .driver-card {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid #2a2c33;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .driver-card:hover {
+            border-color: var(--neon-green);
+            background: rgba(57, 255, 20, 0.03);
+            transform: translateX(4px);
+        }
+
+        .driver-card.active-selection {
+            border-color: var(--neon-green);
+            background: rgba(57, 255, 20, 0.08);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.15);
+        }
+
+        .driver-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .driver-card-name {
+            font-weight: 900;
+            font-style: italic;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+        }
+
+        .driver-card-id {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .status-pill {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pill-online {
+            background: rgba(57, 255, 20, 0.1);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+
+        .pill-offline {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border: 1px solid #2a2c33;
+        }
+
+        .pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: currentColor;
+        }
+
+        .pill-online .pill-dot {
+            animation: pulse-dot 1.5s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Right Side: Embedded Live Portal Viewport */
+        .viewport-panel {
+            background: rgba(21, 22, 26, 0.85);
+            border: 1px solid #1f2128;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .viewport-header {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .viewport-title {
+            font-size: 1.1rem;
+            font-style: italic;
+            font-weight: 700;
+            color: var(--chase-yellow);
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .viewport-frame {
+            flex: 1;
+            border: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0c;
+        }
+
+        .viewport-placeholder {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 40px;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-mobile-header">
+                <a href="/index.html" class="nav-brand-mobile">BANDIT RACING LEAGUE</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/apply.html" class="btn-secondary">Apply to League</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/standings.html">Standings</a></li>
+                <li><a href="/schedule.html">Schedule</a></li>
+                <li><a href="/results.html">Results</a></li>
+                <li><a href="/drivers.html">Drivers</a></li>
+                <li><a href="/teams.html">Teams</a></li>
+                <li><a href="/rulebook.html">Rulebook</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hub-container">
+        
+        <!-- Passcode Entry Screen -->
+        <div id="auth-gate" class="lock-screen">
+            <h3 class="italic-heavy" style="font-size: 1.8rem; color: #fff; text-transform: uppercase; margin-bottom: 5px;">Broadcaster Portal</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">Enter the secure Broadcaster Passcode to unlock the real-time telemetry list.</p>
+            
+            <input type="password" id="passcode-input" class="verify-input" style="width:100%; box-sizing:border-box; margin-bottom:20px;" placeholder="ENTER PASSCODE" onkeydown="if(event.key==='Enter') verifyBroadcasterAccess()">
+            <button class="btn-verify" onclick="verifyBroadcasterAccess()">Unlock Dashboard</button>
+            <div id="auth-status" class="status-msg" style="margin-top: 15px; color: #ff1744;"></div>
+        </div>
+
+        <!-- Broadcaster Dashboard Layout -->
+        <div id="broadcaster-dashboard" class="broadcast-layout">
+            
+            <!-- Left Panel: Driver list with active pings -->
+            <aside class="directory-panel">
+                <div class="directory-header">
+                    <h3 class="directory-title">League Telemetry</h3>
+                    <button class="btn-verify" onclick="refreshTelemetryDirectory()" style="width: auto; padding: 6px 14px; font-size: 0.75rem; margin: 0; background: rgba(57, 255, 20, 0.05); border: 1.5px solid var(--neon-green); color: var(--neon-green);">🔄 Scan</button>
+                </div>
+                <div class="driver-list" id="driver-cards-container">
+                    <!-- Cards will be populated here -->
+                </div>
+            </aside>
+
+            <!-- Right Panel: Embedded Spotter Dashboard -->
+            <main class="viewport-panel">
+                <div class="viewport-header" id="viewport-header-bar" style="display: none;">
+                    <h4 class="viewport-title" id="active-driver-header">Active Stream: --</h4>
+                    <a id="popout-link" href="#" target="_blank" class="btn-verify" style="width: auto; padding: 6px 12px; font-size: 0.75rem; margin: 0; text-decoration: none; display: inline-block;">↗️ Pop-out</a>
+                </div>
+                <div class="viewport-placeholder" id="viewport-placeholder-box">
+                    <div style="font-size: 3.5rem;">🎙️</div>
+                    <h3 style="margin: 0; font-style: italic; text-transform: uppercase; color: #fff;">Telemetry Viewport</h3>
+                    <p style="margin: 0; max-width: 400px; line-height: 1.5;">Select any driver from the scanned directory on the left to embed their live spotter portal telemetry here.</p>
+                </div>
+                <iframe class="viewport-frame" id="viewport-iframe" style="display: none;"></iframe>
+            </main>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Bandit Racing League. Broadcaster Access Level.</p>
+        </div>
+    </footer>
+
+    <!-- Passcode verification, dynamic WebSockets scanner, and iframe loader -->
+    <script>
+        // SHA-256 helper for client-side password hash check
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Check session storage on load
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('broadcaster_authenticated') === 'true') {
+                unlockBroadcasterDashboard();
+            }
+        });
+
+        async function verifyBroadcasterAccess() {
+            const inputVal = document.getElementById('passcode-input').value.trim();
+            const statusDiv = document.getElementById('auth-status');
+            
+            if (!inputVal) {
+                statusDiv.innerText = "Please enter passcode.";
+                return;
+            }
+
+            // Target Hash for passcode "SimTrax2026"
+            const targetHash = "e58daf96a2d6b59b7acf71dd31ed666b4a6315e7f5c00787aa2238b8188b9a61";
+            const hashed = await sha256(inputVal);
+
+            if (hashed === targetHash) {
+                sessionStorage.setItem('broadcaster_authenticated', 'true');
+                unlockBroadcasterDashboard();
+            } else {
+                statusDiv.innerText = "Access Denied. Incorrect Passcode.";
+            }
+        }
+
+        let driverDatabase = []; // Array of { id, name } loaded from file
+
+        function unlockBroadcasterDashboard() {
+            document.getElementById('auth-gate').style.display = 'none';
+            const dash = document.getElementById('broadcaster-dashboard');
+            dash.style.display = 'grid';
+            
+            // Load drivers and scan
+            loadDriversListAndScan();
+        }
+
+        async function loadDriversListAndScan() {
+            try {
+                // Fetch BRL drivers list
+                const response = await fetch('Geezer_Auth_IDs.txt');
+                if (!response.ok) throw new Error("Could not load Geezer_Auth_IDs.txt");
+                
+                const text = await response.text();
+                const lines = text.split('\n');
+                driverDatabase = [];
+                
+                // Fetch driver details (names) from standard teams_data if possible
+                // Fallback names are generated dynamically
+                lines.forEach(line => {
+                    line = line.trim();
+                    if (!line || line.startsWith('#') || line.startsWith('!')) return;
+                    
+                    driverDatabase.push({
+                        id: line,
+                        name: `Driver #${line}`, // Default fallback
+                        status: 'offline',
+                        wsConnection: null
+                    });
+                });
+                
+                // Attempt to resolve driver names using BRL's drivers database
+                await resolveDriverNames();
+                
+                // Render list & scan
+                renderDriverList();
+                scanActiveTelemetries();
+                
+            } catch (e) {
+                console.error("Hub init failed:", e);
+                // Fallback local list in case of network issue
+                driverDatabase = [
+                    { id: "375692", name: "League Driver 375692", status: 'offline' }
+                ];
+                renderDriverList();
+            }
+        }
+
+        // Resolve customer IDs to actual driver names using teams_data if available
+        async function resolveDriverNames() {
+            try {
+                // First load cached names from localStorage
+                driverDatabase.forEach(driver => {
+                    const cachedName = localStorage.getItem(`driver_name_${driver.id}`);
+                    if (cachedName) {
+                        driver.name = cachedName;
+                    }
+                });
+
+                // BRL page has teamsData defined in teams_data.js.
+                // We check if it is loaded. Since we are in the same folder, let's load it dynamically!
+                const script = document.createElement('script');
+                script.src = 'teams_data.js';
+                document.head.appendChild(script);
+                
+                await new Promise((resolve) => {
+                    script.onload = () => {
+                        if (typeof teamsData !== 'undefined' && teamsData.driverLocations) {
+                            // Map driver names if possible in the future, currently relying on localStorage
+                            // and live packets.
+                        }
+                        resolve();
+                    };
+                    script.onerror = () => resolve(); // Ignore on error
+                });
+            } catch (e) {
+                console.warn("Could not map driver names dynamically:", e);
+            }
+        }
+
+        function renderDriverList() {
+            const container = document.getElementById('driver-cards-container');
+            container.innerHTML = '';
+            
+            driverDatabase.forEach(driver => {
+                const card = document.createElement('div');
+                card.className = `driver-card`;
+                card.id = `card-${driver.id}`;
+                card.setAttribute('onclick', `selectDriverStream('${driver.id}', '${driver.name}')`);
+                
+                card.innerHTML = `
+                    <div class="driver-card-info">
+                        <span class="driver-card-name">${driver.name}</span>
+                        <span class="driver-card-id">Customer ID: ${driver.id}</span>
+                    </div>
+                    <span class="status-pill pill-offline" id="pill-${driver.id}">
+                        <span class="pill-dot"></span>
+                        <span id="pill-text-${driver.id}">OFFLINE</span>
+                    </span>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Main scanner logic: attempts connection to verify if streaming
+        function scanActiveTelemetries() {
+            console.log("Scanning active telemetry feeds...");
+            
+            driverDatabase.forEach(driver => {
+                const pill = document.getElementById(`pill-${driver.id}`);
+                const pillText = document.getElementById(`pill-text-${driver.id}`);
+                
+                // If socket exists, close it
+                if (driver.wsConnection) {
+                    try {
+                        driver.wsConnection.close();
+                    } catch(e){}
+                }
+                
+                const wsUrl = `wss://relay.geezerapp.com/ws/${driver.id}`;
+                const tempWs = new WebSocket(wsUrl);
+                driver.wsConnection = tempWs;
+                
+                let receivedPacket = false;
+                let lastPacketTime = Date.now();
+                let checkOfflineInterval = null;
+                
+                tempWs.onmessage = (e) => {
+                    lastPacketTime = Date.now();
+                    
+                    if (!receivedPacket) {
+                        receivedPacket = true;
+                        driver.status = 'online';
+                        
+                        // Parse name from telemetry packet if present
+                        try {
+                            const packet = JSON.parse(e.data);
+                            let playerRow = null;
+                            if (packet.relative && Array.isArray(packet.relative)) {
+                                playerRow = packet.relative.find(d => d.highlight);
+                            }
+                            if (playerRow && playerRow.name) {
+                                const resolvedName = playerRow.name.trim();
+                                if (resolvedName && resolvedName !== "PLAYER") {
+                                    driver.name = resolvedName;
+                                    localStorage.setItem(`driver_name_${driver.id}`, resolvedName);
+                                    
+                                    const nameEl = document.querySelector(`#card-${driver.id} .driver-card-name`);
+                                    if (nameEl) nameEl.innerText = resolvedName;
+                                    
+                                    // Update active stream header if this driver is selected
+                                    if (selectedDriverId === driver.id) {
+                                        document.getElementById('active-driver-header').innerText = `Active Stream: ${resolvedName} (#${driver.id})`;
+                                    }
+                                }
+                            }
+                        } catch(err){}
+                        
+                        // Update status visual
+                        if (pill) {
+                            pill.className = "status-pill pill-online";
+                            pillText.innerText = "ONLINE";
+                        }
+                        
+                        // Start interval to monitor online/offline transition
+                        checkOfflineInterval = setInterval(() => {
+                            if (Date.now() - lastPacketTime > 6000) {
+                                driver.status = 'offline';
+                                if (pill) {
+                                    pill.className = "status-pill pill-offline";
+                                    pillText.innerText = "OFFLINE";
+                                }
+                                clearInterval(checkOfflineInterval);
+                                try { tempWs.close(); } catch(e){}
+                            }
+                        }, 3000);
+                    }
+                };
+                
+                // Timeout after 3.5 seconds: if no message, mark offline and close socket
+                setTimeout(() => {
+                    if (!receivedPacket) {
+                        driver.status = 'offline';
+                        if (pill) {
+                            pill.className = "status-pill pill-offline";
+                            pillText.innerText = "OFFLINE";
+                        }
+                        if (checkOfflineInterval) clearInterval(checkOfflineInterval);
+                        try { tempWs.close(); } catch(e){}
+                    }
+                }, 3500);
+            });
+        }
+
+        function refreshTelemetryDirectory() {
+            // Re-scan active feeds
+            scanActiveTelemetries();
+        }
+
+        let selectedDriverId = null;
+
+        function selectDriverStream(driverId, driverName) {
+            selectedDriverId = driverId;
+            
+            // Highlight card
+            document.querySelectorAll('.driver-card').forEach(c => c.classList.remove('active-selection'));
+            const selectedCard = document.getElementById(`card-${driverId}`);
+            if (selectedCard) selectedCard.classList.add('active-selection');
+            
+            // Setup viewport
+            document.getElementById('viewport-placeholder-box').style.display = 'none';
+            document.getElementById('viewport-header-bar').style.display = 'flex';
+            document.getElementById('active-driver-header').innerText = `Active Stream: ${driverName} (#${driverId})`;
+            
+            const frame = document.getElementById('viewport-iframe');
+            frame.style.display = 'block';
+            frame.src = `spotter.html?driver=${driverId}`;
+            
+            // Setup popout link
+            const popout = document.getElementById('popout-link');
+            popout.href = `spotter.html?driver=${driverId}`;
+        }
+    </script>
+</body>
+</html>

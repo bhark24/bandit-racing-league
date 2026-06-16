@@ -95,11 +95,22 @@
     <!-- Main Content: Broadcast Assets Gallery -->
     <main class="container" style="margin-top: 40px; margin-bottom: 80px; position: relative; z-index: 5;">
         
-        <!-- Top Row: Centered Presenting Sponsor -->
-        <div style="display: flex; justify-content: center; margin-bottom: 30px;">
-            <div class="card neon-border" style="width: 100%; max-width: 600px; padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+        <!-- Top Row: Presenting Sponsor & Broadcaster Hub -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 30px;">
+            <!-- Presenting Sponsor Card -->
+            <div class="card neon-border" style="flex: 1; min-width: 300px; max-width: 550px; padding: 15px; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
                 <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.2rem; letter-spacing: 2px;">Presenting Sponsor</h3>
                 <img src="assets/Presenting-sponsor.png" alt="Presenting Sponsor" style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+            </div>
+
+            <!-- Broadcaster Portal Card -->
+            <div class="card neon-border" style="flex: 1; min-width: 300px; max-width: 550px; padding: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; background: linear-gradient(135deg, #15161a 0%, #0d0d0f 100%);" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+                <div style="font-size: 3rem; margin-bottom: 10px;">🎙️</div>
+                <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 10px; font-size: 1.2rem; letter-spacing: 2px;">Broadcaster Telemetry Hub</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; max-width: 400px;">Access real-time telemetry dashboards for all active drivers in the league. Secured portal for SimTrax race announcers only.</p>
+                <a href="/broadcaster.html" class="btn-primary" style="text-decoration: none; padding: 12px 24px; font-weight: bold; border-radius: 4px; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 8px;">
+                    <span>🔒 SECURE LOGIN</span>
+                </a>
             </div>
         </div>
 
