@@ -26,37 +26,104 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Teko:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .custom-number-img {
-            max-height: 85px; 
-            max-width: 160px; 
-            object-fit: contain;
-            transition: opacity 0.3s ease;
-        }
-        .card-image-container {
+        .card {
+            padding: 0;
+            overflow: hidden;
             position: relative;
-            height: 90px;
+        }
+        .card-visual-banner {
+            position: relative;
+            height: 140px;
+            width: 100%;
+            background: #0f1012;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            width: 160px;
         }
-        .truck-hover-img {
+        .truck-banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .floating-number-badge {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            bottom: 8px;
+            left: 8px;
+            height: 42px;
+            width: 75px;
+            background: rgba(10, 10, 12, 0.85);
+            border: 1px solid var(--neon-green);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        .floating-number-badge.centered {
+            position: static;
+            margin: auto;
+            height: 90px;
+            width: 160px;
+            background: transparent;
+            border: none;
+            backdrop-filter: none;
+            box-shadow: none;
+        }
+        .custom-number-img {
+            max-height: 34px;
+            max-width: 65px;
             object-fit: contain;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            pointer-events: none;
+            transition: all 0.3s ease;
         }
-        .card:hover .truck-hover-img.loaded {
-            opacity: 1;
-            transform: translateY(0);
+        .floating-number-badge.centered .custom-number-img {
+            max-height: 85px;
+            max-width: 160px;
         }
-        .card:has(.truck-hover-img.loaded):hover .custom-number-img {
-            opacity: 0.15;
+        .status-badge-b {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+        .status-badge-b.available {
+            background: rgba(57, 255, 20, 0.15);
+            color: var(--status-available);
+            border: 1px solid var(--status-available);
+        }
+        .status-badge-b.full-time {
+            background: rgba(0, 229, 255, 0.15);
+            color: var(--status-fulltime);
+            border: 1px solid var(--status-fulltime);
+        }
+        .status-badge-b.part-time {
+            background: rgba(255, 234, 0, 0.15);
+            color: var(--status-parttime);
+            border: 1px solid var(--status-parttime);
+        }
+        .status-badge-b.reserved {
+            background: rgba(255, 23, 68, 0.15);
+            color: var(--status-reserved);
+            border: 1px solid var(--status-reserved);
+        }
+        .status-badge-b.past-champion {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--status-pastchampion);
+            border: 1px solid var(--status-pastchampion);
+        }
+        .card-body-b {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
         }
     </style>
 </head>
@@ -120,7 +187,7 @@
         const grid = document.getElementById('driver-grid');
 
         // Compiled resolved SimRacerHub driver IDs (keys are normalized: uppercase, no spaces/punctuation)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        const SRH_IDS = {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                const SRH_IDS = {
             "ADAMS,JOSHUA": 30420,
             "ALLEN,RUST": 130921,
             "BENJAMINILACY": 50037,
@@ -382,20 +449,22 @@
                 }
                 
                 card.innerHTML = `
-                    <div class="card-header">
-                        <div class="card-image-container">
-                            ${hasDriver ? `
-                                <img src="${getDriverImgPath(data.driver)}" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>${num}</span>'">
-                                <img src="${getTruckImgPath(data.driver)}" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
-                            ` : `
-                                <span class="car-number">${num}</span>
-                            `}
-                        </div>
-                        <span class="status-badge">${statusMap[data.status] || 'Available'}</span>
+                    <div class="card-visual-banner">
+                        ${hasDriver ? `
+                            <img src="${getTruckImgPath(data.driver)}" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-${num}').classList.add('centered');">
+                            <span class="status-badge-b ${data.status}">${statusMap[data.status]}</span>
+                            <div id="num-badge-${num}" class="floating-number-badge">
+                                <img src="${getDriverImgPath(data.driver)}" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>#${num}</span>'">
+                            </div>
+                        ` : `
+                            <span class="status-badge-b ${data.status}">${statusMap[data.status]}</span>
+                            <div id="num-badge-${num}" class="floating-number-badge centered">
+                                <span class="car-number">#${num}</span>
+                            </div>
+                        `}
                     </div>
-                    <div class="input-group">
-                        ${hasDriver ? '' : '<label>Driver Name</label>'}
-                        <div class="driver-display" style="opacity: ${hasDriver ? '1' : '0.3'}; display: flex; align-items: center;">
+                    <div class="card-body-b">
+                        <div class="driver-display" style="opacity: ${hasDriver ? '1' : '0.3'};">
                             ${hasDriver ? data.driver.trim() : 'Available'}
                         </div>
                         ${teamInfoHtml}

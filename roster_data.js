@@ -145,7 +145,7 @@ const rosterData = {
   },
   "54": {
     "driver": "DAVIS CArroll",
-    "status": "full-time"
+    "status": "available"
   },
   "62": {
     "driver": "TY CORINO",

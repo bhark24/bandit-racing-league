@@ -6,1774 +6,55 @@
     <title>Bandit Racing League Roster</title>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-    /* Bandit Racing League Core Colors */
-    --bg-dark: #070707;
-    --bg-panel: #111111;
-    --bg-panel-hover: #1a1a1a;
-    --neon-green: #00ff00;
-    --neon-green-glow: rgba(0, 255, 0, 0.4);
-    --chase-yellow: #ffcc00;
-    --chase-yellow-glow: rgba(255, 204, 0, 0.4);
-    --text-light: #ffffff;
-    --text-muted: #a0a0a0;
-    
-    /* Status Colors */
-    --status-available: #39ff14;
-    --status-fulltime: #00e5ff;
-    --status-parttime: #ffea00;
-    --status-reserved: #ff1744;
-    --status-pastchampion: #ffd700;
-    
-    /* Fonts */
-    --font-heading: 'Outfit', sans-serif;
-    --font-body: 'Roboto', sans-serif;
-    
-    /* Transitions & Borders */
-    --transition-fast: 0.2s ease;
-    --border-radius: 8px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #050505; /* Deep, rich black */
-    color: var(--text-light);
-    font-family: var(--font-body);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-h1, h2, h3, h4 {
-    font-family: var(--font-heading);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-a {
-    text-decoration: none;
-    color: var(--text-light);
-    transition: color var(--transition-fast);
-}
-
-.accent {
-    color: var(--neon-green);
-    text-shadow: 0 0 10px var(--neon-green-glow);
-}
-
-.text-center {
-    text-align: center;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Navbar */
-.navbar {
-    background-color: rgba(11, 11, 11, 0.95);
-    border-bottom: 2px solid var(--neon-green);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(10px);
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 15px 20px;
-}
-
-.logo-text {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 900;
-    font-style: italic;
-}
-
-.logo-img {
-    height: 50px;
-    width: auto;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.nav-links a {
-    font-weight: 700;
-    font-family: var(--font-heading);
-    font-size: 0.95rem;
-    position: relative;
-    white-space: nowrap;
-}
-
-.nav-links a:hover, .nav-links a.active {
-    color: var(--neon-green);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background-color: var(--neon-green);
-    transition: width var(--transition-fast);
-}
-
-.nav-links a:hover::after, .nav-links a.active::after {
-    width: 100%;
-}
-
-.nav-links a[data-tooltip] {
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    vertical-align: middle;
-}
-
-.nav-links a[data-tooltip]::after {
-    display: none !important; /* Disable standard green underline for icon links */
-}
-
-.nav-icon-label {
-    display: block; /* Shown on desktop for clear visibility */
-    font-size: 0.65rem;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text-light);
-    margin-top: 2px;
-    text-align: center;
-}
-
-/* Mobile responsive labels for navigation drawer */
-@media (max-width: 1200px) {
-    .nav-links a[data-tooltip] {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .nav-icon-label {
-        display: inline-block;
-        font-size: 1.1rem;
-        font-weight: 700;
-        font-family: var(--font-heading);
-        color: var(--text-light);
-    }
-}
-
-.nav-links a.btn-secondary::after {
-    display: none;
-}
-
-.nav-links a.btn-secondary:hover {
-    color: var(--neon-green);
-    border-color: var(--neon-green);
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-}
-
-.nav-links a.btn-secondary.active {
-    color: var(--neon-green);
-    border-color: var(--neon-green);
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-    background-color: rgba(0, 255, 0, 0.05);
-}
-
-/* Mobile Navigation Header */
-.nav-mobile-header {
-    display: none;
-}
-
-.nav-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-.hamburger {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: var(--text-light);
-    position: relative;
-    transition: background 0.3s ease;
-}
-
-.hamburger::before,
-.hamburger::after {
-    content: '';
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: var(--text-light);
-    position: absolute;
-    left: 0;
-    transition: transform 0.3s ease, top 0.3s ease;
-}
-
-.hamburger::before {
-    top: -8px;
-}
-
-.hamburger::after {
-    top: 8px;
-}
-
-/* Open states for Hamburger animation */
-.nav-open .hamburger {
-    background: transparent;
-}
-
-.nav-open .hamburger::before {
-    top: 0;
-    transform: rotate(45deg);
-    background: var(--neon-green);
-}
-
-.nav-open .hamburger::after {
-    top: 0;
-    transform: rotate(-45deg);
-    background: var(--neon-green);
-}
-
-@media (min-width: 1201px) {
-    .nav-actions {
-        margin-left: 40px; /* Clear gap between SimTrax and the Join Discord button */
-    }
-}
-
-/* Medium-viewport navbar adjustments to prevent overflow on 1201px - 1399px screens */
-@media (min-width: 1201px) and (max-width: 1399px) {
-    .nav-container {
-        padding: 10px 15px;
-    }
-    .nav-links {
-        gap: 8px;
-    }
-    .nav-links a {
-        font-size: 0.85rem;
-    }
-    .nav-container .btn-primary,
-    .nav-container .btn-secondary {
-        padding: 6px 12px;
-        font-size: 0.85rem;
-    }
-    .nav-actions {
-        margin-left: 15px;
-    }
-    /* Scale down the Kyle Busch Tribute banner image */
-    .nav-links img[alt="Kyle Busch Memorial Tribute"] {
-        width: 130px !important;
-        height: 34px !important;
-    }
-}
-
-/* Media Query for Mobile Responsive Nav */
-@media (max-width: 1200px) {
-    .nav-mobile-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-    
-    .nav-toggle {
-        display: flex;
-    }
-    
-    .nav-brand-mobile {
-        font-family: var(--font-heading);
-        font-size: 1.2rem;
-        font-weight: 900;
-        font-style: italic;
-        color: var(--text-light);
-        letter-spacing: 1px;
-    }
-    
-    .nav-brand-mobile:hover {
-        color: var(--neon-green);
-    }
-    
-    .nav-links {
-        display: none !important;
-        flex-direction: column;
-        width: 100%;
-        gap: 20px;
-        align-items: center;
-        padding: 20px 0;
-        border-top: 1px solid #1a1a1a;
-    }
-    
-    .nav-actions {
-        display: none !important;
-        flex-direction: column;
-        width: 100%;
-        gap: 12px;
-        align-items: center;
-        padding-bottom: 20px;
-    }
-    
-    /* When navigation is open */
-    .nav-container.nav-open {
-        flex-direction: column;
-        align-items: flex-start;
-        max-height: calc(100vh - 20px);
-        overflow-y: auto;
-        width: 100%;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .nav-container.nav-open .nav-links {
-        display: flex !important;
-    }
-    
-    .nav-container.nav-open .nav-actions {
-        display: flex !important;
-    }
-}
-
-
-/* QR Code Popup */
-.qr-container {
-    position: relative;
-    cursor: pointer;
-}
-
-.qr-popup {
-    display: none;
-    position: absolute;
-    top: 55px;
-    right: 0;
-    background: #050505;
-    padding: 15px;
-    border: 2px solid var(--neon-green);
-    border-radius: var(--border-radius);
-    box-shadow: 0 0 20px rgba(0,255,0,0.3);
-    z-index: 1000;
-    width: 220px;
-    text-align: center;
-}
-
-.qr-container:hover .qr-popup {
-    display: block;
-}
-
-/* Buttons */
-.btn-primary, .btn-secondary {
-    display: inline-block;
-    padding: 10px 24px;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.btn-primary {
-    background-color: var(--neon-green);
-    color: #000;
-    border: 2px solid var(--neon-green);
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-}
-
-.btn-primary:hover {
-    background-color: transparent;
-    color: var(--neon-green);
-    box-shadow: 0 0 25px rgba(0, 255, 0, 0.5);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--text-light);
-    border: 2px solid var(--text-muted);
-}
-
-.btn-secondary:hover {
-    border-color: var(--text-light);
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.btn-large {
-    padding: 15px 35px;
-    font-size: 1.2rem;
-}
-
-/* Pulse animation for Live button */
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(0, 255, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
-}
-
-.pulse-glow {
-    animation: pulse 2s infinite;
-}
-
-/* Hero Section */
-.hero {
-    min-height: 70vh;
-    padding-top: 120px;
-    padding-bottom: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    background: linear-gradient(45deg, #050505 0%, #1a1a1a 100%);
-    overflow: hidden;
-}
-
-/* Deep radial vignette for hero overlay */
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
-    z-index: 1;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    max-width: 1000px;
-    padding: 0 20px;
-}
-
-.hero-title {
-    font-size: 5rem;
-    font-weight: 900;
-    font-style: italic;
-    line-height: 1.1;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-
-.hero-subtitle {
-    font-size: 1.3rem;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
-/* Command Center Dashboard */
-.command-center {
-    padding: 40px 20px 80px 20px;
-    margin-top: -60px; /* Pulls dashboard slightly up over hero */
-    position: relative;
-    z-index: 10;
-}
-
-/* Live Broadcast Embed */
-.broadcast-container {
-    margin-bottom: 30px;
-    background-color: #000;
-}
-
-.flex-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.live-dot {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    background-color: #ff0000;
-    border-radius: 50%;
-    margin-right: 10px;
-    box-shadow: 0 0 10px #ff0000;
-    animation: blink 1.5s infinite;
-}
-
-@keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
-
-.broadcast-status {
-    color: var(--text-muted);
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
-
-.video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-    height: 0;
-    overflow: hidden;
-    background-color: #000;
-}
-
-.video-wrapper iframe, .video-wrapper .promo-graphic {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    object-fit: cover;
-}
-
-/* Grid Layouts */
-.top-split-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 12px;
-    margin-bottom: 30px;
-}
-
-@media (max-width: 900px) {
-    .top-split-layout {
-        grid-template-columns: 1fr;
-    }
-}
-
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-/* Cards */
-.card {
-    background-color: var(--bg-panel);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    transition: transform var(--transition-fast);
-    border: 1px solid #222;
-    display: flex;
-    flex-direction: column;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    border-color: #333;
-}
-
-.neon-border {
-    position: relative;
-    border: 1px solid var(--neon-green);
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.1);
-}
-
-.neon-border::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background-color: var(--neon-green);
-    box-shadow: 0 0 10px var(--neon-green);
-    z-index: 5;
-}
-
-.card-header {
-    background-color: rgba(255,255,255,0.05);
-    padding: 15px 20px;
-    border-bottom: 1px solid #222;
-}
-
-.card-header h2 {
-    font-size: 1.2rem;
-}
-
-.card-body {
-    padding: 25px 20px;
-    flex-grow: 1;
-}
-
-/* Winner Spotlight */
-.placeholder-car {
-    background-color: #000;
-    border: 1px dashed #333;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #555;
-    font-family: var(--font-heading);
-    border-radius: var(--border-radius);
-    margin-bottom: 15px;
-}
-
-.winner-name {
-    font-size: 1.8rem;
-    color: var(--text-light);
-    margin-bottom: 5px;
-}
-
-.car-number {
-    font-size: 2rem;
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-style: italic;
-    margin-top: 10px;
-}
-
-/* Next Event Info */
-.next-track {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.event-info .date {
-    color: var(--neon-green);
-    margin-bottom: 25px;
-    font-weight: bold;
-}
-
-.countdown {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.time-box {
-    background-color: #000;
-    padding: 15px 10px;
-    border-radius: var(--border-radius);
-    text-align: center;
-    flex: 1;
-    border: 1px solid #333;
-    font-family: var(--font-heading);
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-}
-
-.time-box span {
-    display: block;
-    font-size: 2rem;
-    color: var(--text-light);
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 5px;
-}
-
-/* Standings List */
-.standings-list {
-    list-style: none;
-    margin-bottom: 15px;
-}
-
-.standings-list li {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    background-color: rgba(255,255,255,0.02);
-    margin-bottom: 8px;
-    border-radius: var(--border-radius);
-    transition: background-color var(--transition-fast);
-}
-
-.standings-list li:hover {
-    background-color: rgba(255,255,255,0.05);
-}
-
-.pos {
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 1.2rem;
-    width: 30px;
-    color: var(--text-muted);
-}
-
-.standings-list li:first-child .pos {
-    color: var(--neon-green);
-}
-
-.driver {
-    flex: 1;
-    font-weight: bold;
-    font-size: 1rem;
-}
-
-.pts {
-    font-family: var(--font-heading);
-    font-weight: bold;
-}
-
-.view-all-container {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.view-all {
-    color: var(--text-muted);
-    font-family: var(--font-heading);
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-}
-
-.view-all:hover {
-    color: var(--neon-green);
-}
-
-footer {
-    border-top: 1px solid #222;
-    padding: 40px 0;
-    text-align: center;
-    color: var(--text-muted);
-}
-
-/* --- SCHEDULE PAGE STYLES --- */
-
-.schedule-header {
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
-.title-massive {
-    font-size: 4.5rem;
-    line-height: 1;
-    margin-bottom: 5px;
-}
-
-.sub-heavy {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-.italic-heavy {
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-style: italic;
-    text-transform: uppercase;
-}
-
-.chase-text {
-    color: var(--chase-yellow);
-    text-shadow: 0 0 10px var(--chase-yellow-glow);
-}
-
-.text-light {
-    color: var(--text-light);
-}
-
-.schedule-grid {
-    display: grid;
-    grid-template-columns: 3fr 2fr; /* 60/40 split for Regular vs Chase */
-    gap: 12px;
-    margin-bottom: 80px;
-}
-
-.season-column {
-    display: flex;
-    flex-direction: column;
-}
-
-.bg-green-glow {
-    background-color: rgba(0, 255, 0, 0.1);
-    border-bottom: 2px solid var(--neon-green);
-}
-
-.bg-chase-glow {
-    background-color: rgba(255, 204, 0, 0.1);
-    border-bottom: 2px solid var(--chase-yellow);
-}
-
-.chase-border {
-    border: 1px solid var(--chase-yellow);
-    box-shadow: 0 0 15px rgba(255, 204, 0, 0.1);
-}
-
-.chase-border::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background-color: var(--chase-yellow);
-    box-shadow: 0 0 10px var(--chase-yellow);
-    z-index: 5;
-}
-
-.schedule-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: var(--font-heading);
-}
-
-.schedule-table th {
-    text-align: left;
-    padding: 10px;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    border-bottom: 1px solid #333;
-}
-
-.schedule-table td {
-    padding: 12px 10px;
-    border-bottom: 1px solid #222;
-    font-weight: bold;
-    font-style: italic;
-    vertical-align: middle;
-}
-
-.track-cell {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.track-logo {
-    height: 25px;
-    width: auto;
-    max-width: 60px;
-    object-fit: contain;
-}
-
-.schedule-table tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.03);
-}
-
-.off-week td {
-    background-color: rgba(255, 204, 0, 0.05);
-    padding: 20px 10px;
-}
-
-.race-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    color: #000;
-    font-weight: 900;
-    border-radius: 4px;
-}
-
-.race-badge.green {
-    background-color: var(--neon-green);
-    box-shadow: 0 0 8px var(--neon-green-glow);
-}
-
-.race-badge.yellow {
-    background-color: var(--chase-yellow);
-    box-shadow: 0 0 8px var(--chase-yellow-glow);
-}
-
-/* Trophy Box */
-.trophy-container {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: #050505;
-    border: 1px solid #222;
-    border-radius: var(--border-radius);
-    padding: 30px;
-    height: 100%;
-}
-
-.trophy-image-box {
-    margin-top: 20px;
-    width: 100%;
-    max-width: 300px;
-}
-
-.placeholder-trophy {
-    border: 2px dashed #444;
-    padding: 40px 20px;
-    border-radius: var(--border-radius);
-    color: var(--text-muted);
-}
-
-/* --- DRIVER ROSTER STYLES --- */
-.grid-4 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    margin-bottom: 60px;
-}
-
-.driver-card {
-    background: linear-gradient(180deg, #111 0%, #050505 100%);
-    border: 1px solid #222;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    position: relative;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.driver-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--neon-green);
-    box-shadow: 0 5px 20px rgba(0, 255, 0, 0.1);
-}
-
-.driver-img-box {
-    height: 180px;
-    background-color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 2px solid var(--neon-green);
-    position: relative;
-    overflow: hidden;
-}
-
-.driver-img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.placeholder-photo {
-    color: #444;
-    font-size: 0.8rem;
-    font-family: var(--font-heading);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.driver-info {
-    padding: 20px;
-    text-align: center;
-    position: relative;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.driver-info h3 {
-    font-size: 1.4rem;
-    color: var(--text-light);
-    margin-bottom: 5px;
-    z-index: 2;
-}
-
-.driver-number {
-    font-size: 3rem;
-    color: var(--neon-green);
-    font-weight: 900;
-    font-style: italic;
-    font-family: var(--font-heading);
-    line-height: 1;
-    margin-bottom: 15px;
-    text-shadow: 0 0 10px var(--neon-green-glow);
-    z-index: 2;
-}
-
-.watermark-number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 8rem;
-    color: rgba(255, 255, 255, 0.02);
-    font-weight: 900;
-    font-style: italic;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.btn-stats {
-    display: inline-block;
-    width: 100%;
-    padding: 10px;
-    background-color: rgba(0, 255, 0, 0.1);
-    color: var(--neon-green);
-    border: 1px solid var(--neon-green);
-    border-radius: 4px;
-    font-family: var(--font-heading);
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: all 0.2s ease;
-    z-index: 2;
-    margin-top: auto;
-}
-
-.btn-stats:hover {
-    background-color: var(--neon-green);
-    color: #000;
-    box-shadow: 0 0 15px var(--neon-green-glow);
-}
-
-/* --- DRIVER SPOTLIGHT --- */
-.spotlight-card {
-    display: flex;
-    flex-wrap: wrap;
-    background: linear-gradient(135deg, #0a0a0a 0%, #151515 100%);
-}
-
-.spotlight-card.vertical-layout {
-    flex-direction: column;
-}
-
-.spotlight-visual {
-    flex: 1;
-    min-width: 300px;
-    position: relative;
-    background-color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid #222;
-    overflow: hidden;
-}
-
-.spotlight-card.vertical-layout .spotlight-visual {
-    border-right: none;
-    border-bottom: 1px solid #222;
-    min-height: 250px;
-}
-
-.spotlight-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.8;
-}
-
-.spotlight-placeholder {
-    padding: 50px;
-    color: #444;
-    font-family: var(--font-heading);
-    letter-spacing: 2px;
-}
-
-.spotlight-number {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    max-height: 80px;
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
-    z-index: 5;
-}
-
-.spotlight-content {
-    flex: 2;
-    min-width: 300px;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.spotlight-card.vertical-layout .spotlight-content {
-    padding: 25px;
-    min-width: 0;
-}
-
-.spotlight-name {
-    font-size: 3rem;
-    color: var(--neon-green);
-    margin-bottom: 15px;
-    text-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-    line-height: 1.1;
-}
-
-.spotlight-card.vertical-layout .spotlight-name {
-    font-size: 2.2rem;
-}
-
-.spotlight-bio {
-    font-size: 1.1rem;
-    color: #ddd;
-    margin-bottom: 30px;
-    line-height: 1.8;
-}
-
-.spotlight-card.vertical-layout .spotlight-bio {
-    font-size: 1rem;
-    margin-bottom: 20px;
-}
-
-.spotlight-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-
-.spotlight-card.vertical-layout .spotlight-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.stat-box {
-    background: rgba(0, 255, 0, 0.05);
-    border: 1px solid rgba(0, 255, 0, 0.2);
-    border-radius: var(--border-radius);
-    padding: 15px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.stat-box:hover {
-    background: rgba(0, 255, 0, 0.1);
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.1);
-    transform: translateY(-3px);
-}
-
-.stat-label {
-    display: block;
-    font-family: var(--font-heading);
-    color: var(--text-muted);
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    margin-bottom: 5px;
-}
-
-.stat-value {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--text-light);
-    line-height: 1;
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-    .grid-4 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 992px) {
-    .grid-3 {
-        grid-template-columns: 1fr;
-    }
-    .grid-4 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .schedule-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 3.5rem;
-    }
-    
-    .title-massive {
-        font-size: 3rem;
-    }
-    
-    .nav-links {
-        display: none;
-    }
-    
-    .command-center {
-        margin-top: 0;
-    }
-    
-    .schedule-table th, .schedule-table td {
-        padding: 8px 5px;
-        font-size: 0.85rem;
-    }
-
-    .grid-4 {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* --- ROSTER 100 GRID STYLES --- */
-.roster-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
-.card {
-    background-color: var(--bg-panel);
-    border: 1px solid #2a2c33;
-    border-radius: 8px;
-    padding: 1.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background-color: var(--status-available);
-}
-
+        :root { --bg-dark: #0a0a0c; --bg-card: #15161a; --bg-card-hover: #1c1e23; --neon-green: #39ff14; --neon-green-glow: rgba(57, 255, 20, 0.3); --text-primary: #ffffff; --text-secondary: #9ba1a6; --border-color: #2a2c33; --status-available: #39ff14; --status-fulltime: #00e5ff; --status-parttime: #ffea00; --status-reserved: #ff1744; --status-pastchampion: #ffd700; }
+* { box-sizing: border-box; margin: 0px; padding: 0px; }
+body { font-family: Inter, sans-serif; background-color: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; background-image: radial-gradient(circle at 15% 50%, rgba(57, 255, 20, 0.05), transparent 25%), radial-gradient(circle at 85% 30%, rgba(0, 229, 255, 0.05), transparent 25%); }
+.app-container { max-width: 1400px; margin: 0px auto; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); }
+.logo-area h1 { font-family: Teko, sans-serif; font-size: 3.5rem; font-weight: 700; letter-spacing: 2px; color: var(--text-primary); text-transform: uppercase; text-shadow: 0 0 10px var(--neon-green-glow); line-height: 1.1; }
+.logo-area p { color: var(--neon-green); font-weight: 600; letter-spacing: 3px; font-size: 0.9rem; text-transform: uppercase; }
+.actions { display: flex; gap: 1rem; }
+.btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 4px; font-family: Inter, sans-serif; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: 0.2s; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; text-transform: uppercase; letter-spacing: 1px; }
+.btn.primary { background-color: var(--neon-green); color: rgb(0, 0, 0); box-shadow: 0 0 15px var(--neon-green-glow); }
+.btn.primary:hover { background-color: rgb(44, 230, 15); box-shadow: 0 0 25px var(--neon-green-glow); transform: translateY(-2px); }
+.btn.secondary { background-color: transparent; color: var(--text-primary); border: 1px solid var(--border-color); }
+.btn.secondary:hover { background-color: rgba(255, 255, 255, 0.05); }
+.roster-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; position: relative; overflow: hidden; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; }
+.card::before { content: ""; position: absolute; top: 0px; left: 0px; width: 4px; height: 100%; background-color: var(--status-available); transition: background-color 0.3s; }
 .card[data-status="full-time"]::before { background-color: var(--status-fulltime); }
 .card[data-status="part-time"]::before { background-color: var(--status-parttime); }
 .card[data-status="reserved"]::before { background-color: var(--status-reserved); }
 .card[data-status="past-champion"]::before { background-color: var(--status-pastchampion); }
-
-.card:hover {
-    transform: translateY(-4px);
-    border-color: var(--neon-green);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-}
-
-.car-number {
-    font-family: 'Teko', sans-serif;
-    font-size: 4.8rem;
-    font-weight: 900;
-    line-height: 0.8;
-    color: #fff;
-    font-style: italic;
-    text-shadow: 2.5px 2.5px 0px #000, -2.5px -2.5px 0px #000, 2.5px -2.5px 0px #000, -2.5px 2.5px 0px #000, 0px 4px 10px rgba(0,0,0,0.6);
-    letter-spacing: -2px;
-}
-
-.status-badge {
-    background-color: rgba(0,0,0,0.3);
-    border: 1px solid #2a2c33;
-    color: var(--text-muted);
-    padding: 0.4rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.card[data-status="available"] .status-badge { color: var(--status-available); }
-.card[data-status="full-time"] .status-badge { color: var(--status-fulltime); }
-.card[data-status="part-time"] .status-badge { color: var(--status-parttime); }
-.card[data-status="reserved"] .status-badge { color: var(--status-reserved); }
-.card[data-status="past-champion"] .status-badge { color: var(--status-pastchampion); }
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: auto;
-}
-
-.input-group label {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-}
-
-.driver-display {
-    background-color: rgba(0,0,0,0.2);
-    border: 1px solid #2a2c33;
-    border-radius: 4px;
-    padding: 0.8rem;
-    color: var(--neon-green);
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 1rem;
-    text-transform: uppercase;
-    min-height: 45px;
-}
-
-/* --- APPLY PAGE INSTRUCTION STEPS --- */
-.instruction-steps {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 30px 0;
-}
-
-.step-card {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    background: rgba(255,255,255,0.02);
-    padding: 25px;
-    border-radius: 8px;
-    border: 1px solid #2a2c33;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.step-card:hover {
-    transform: translateX(10px);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.step-number {
-    flex-shrink: 0;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #2a2c33;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--text-muted);
-}
-
-.step-content h3 {
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-.step-content p {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    line-height: 1.5;
-}
-
-@media (max-width: 768px) {
-    .step-card {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .step-card:hover {
-        transform: translateY(-5px);
-    }
-}
-
-/* ==========================================================================
-   Fantasy League Custom Styles
-   ========================================================================== */
-.fantasy-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 40px;
-    border-bottom: 1px solid #222;
-    padding-bottom: 20px;
-}
-
-.fantasy-tab-btn {
-    background: var(--bg-panel);
-    border: 2px solid #222;
-    color: var(--text-muted);
-    padding: 12px 30px;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    transition: all 0.3s ease;
-}
-
-.fantasy-tab-btn:hover {
-    color: #fff;
-    border-color: #555;
-    background-color: var(--bg-panel-hover);
-}
-
-.fantasy-tab-btn.active {
-    background: transparent;
-    color: var(--neon-green);
-    border-color: var(--neon-green);
-    box-shadow: 0 0 15px var(--neon-green-glow);
-}
-
-.fantasy-tab-content {
-    display: none;
-    animation: fadeIn 0.4s ease;
-}
-
-.fantasy-tab-content.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.fantasy-intro {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 40px;
-    background: rgba(255,255,255,0.02);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    border: 1px solid #1a1a1a;
-}
-
-.tier-section {
-    margin-bottom: 50px;
-}
-
-.tier-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-    border-radius: var(--border-radius);
-    margin-bottom: 20px;
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-}
-
-.tier-header.tier-a {
-    background: linear-gradient(90deg, #ffd70033 0%, transparent 100%);
-    border-left: 5px solid var(--status-pastchampion);
-    color: var(--status-pastchampion);
-}
-
-.tier-header.tier-b {
-    background: linear-gradient(90deg, #00ff0022 0%, transparent 100%);
-    border-left: 5px solid var(--neon-green);
-    color: var(--neon-green);
-}
-
-.tier-header.tier-c {
-    background: linear-gradient(90deg, #00e5ff22 0%, transparent 100%);
-    border-left: 5px solid var(--status-fulltime);
-    color: var(--status-fulltime);
-}
-
-.fantasy-driver-card {
-    background-color: var(--bg-panel);
-    border: 1px solid #222;
-    border-radius: var(--border-radius);
-    padding: 20px;
-    position: relative;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.fantasy-driver-card:hover {
-    transform: translateY(-5px);
-    border-color: #444;
-    background-color: var(--bg-panel-hover);
-}
-
-.fantasy-driver-card.selected {
-    background-color: #111;
-    border-color: var(--neon-green);
-    box-shadow: 0 0 15px var(--neon-green-glow);
-}
-
-.fantasy-card-check {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 2px solid #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: transparent;
-    font-size: 0.8rem;
-    font-weight: bold;
-    transition: all 0.2s ease;
-}
-
-.fantasy-driver-card.selected .fantasy-card-check {
-    color: #000;
-    border-color: transparent;
-}
-
-.fantasy-driver-card.selected .fantasy-card-check {
-    background-color: var(--neon-green);
-}
-
-.fantasy-driver-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
-}
-
-.fantasy-driver-num {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 900;
-    font-style: italic;
-    color: var(--text-light);
-    line-height: 1;
-}
-
-.fantasy-driver-name {
-    font-family: var(--font-heading);
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-.fantasy-driver-stats {
-    margin-top: auto;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    border-top: 1px solid #1a1a1a;
-    padding-top: 10px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.fantasy-panel {
-    background: rgba(17, 17, 17, 0.8);
-    border: 1px solid #222;
-    border-radius: var(--border-radius);
-    padding: 30px;
-    backdrop-filter: blur(10px);
-}
-
-.fantasy-selection-summary {
-    position: sticky;
-    bottom: 20px;
-    z-index: 90;
-    background: rgba(10, 10, 10, 0.95);
-    border: 2px solid var(--neon-green);
-    border-radius: var(--border-radius);
-    padding: 20px;
-    box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
-    backdrop-filter: blur(10px);
-}
-
-.summary-picks {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.summary-pick-slot {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-.summary-pick-slot strong {
-    color: #fff;
-    font-family: var(--font-heading);
-}
-
-.summary-pick-val {
-    color: var(--neon-green);
-    font-weight: bold;
-}
-
-.fantasy-form-container {
-    max-width: 600px;
-    margin: 40px auto 0;
-}
-
-.fantasy-form-group {
-    margin-bottom: 20px;
-}
-
-.fantasy-form-label {
-    display: block;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-.fantasy-form-input {
-    width: 100%;
-    background-color: rgba(5, 5, 5, 0.8);
-    border: 1px solid #333;
-    border-radius: var(--border-radius);
-    padding: 12px 15px;
-    color: #fff;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.fantasy-form-input:focus {
-    outline: none;
-    border-color: var(--neon-green);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-}
-
-.fantasy-leaderboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.fantasy-leaderboard-title h2 {
-    font-size: 1.8rem;
-    color: #fff;
-}
-
-.fantasy-leaderboard-meta {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-.fantasy-table-wrapper {
-    overflow-x: auto;
-    border: 1px solid #222;
-    border-radius: var(--border-radius);
-}
-
-.fantasy-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-.fantasy-table th, .fantasy-table td {
-    padding: 16px 20px;
-    border-bottom: 1px solid #1a1a1a;
-}
-
-.fantasy-table th {
-    background-color: #111;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    letter-spacing: 1px;
-}
-
-.fantasy-table tbody tr {
-    background-color: var(--bg-panel);
-    transition: background var(--transition-fast);
-}
-
-.fantasy-table tbody tr:hover {
-    background-color: var(--bg-panel-hover);
-}
-
-.fantasy-table tr.podium-1 {
-    border-left: 4px solid var(--status-pastchampion);
-}
-
-.fantasy-table tr.podium-2 {
-    border-left: 4px solid #c0c0c0;
-}
-
-.fantasy-table tr.podium-3 {
-    border-left: 4px solid #cd7f32;
-}
-
-.fantasy-rank {
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 1.2rem;
-    font-style: italic;
-    color: var(--text-muted);
-}
-
-.podium-1 .fantasy-rank {
-    color: var(--status-pastchampion);
-}
-
-.podium-2 .fantasy-rank {
-    color: #fff;
-}
-
-.podium-3 .fantasy-rank {
-    color: #cd7f32;
-}
-
-.fantasy-player-name {
-    font-weight: 700;
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
-}
-
-.fantasy-score {
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 1.3rem;
-    color: var(--neon-green);
-    text-shadow: 0 0 5px var(--neon-green-glow);
-}
-
-.fantasy-wins {
-    font-weight: bold;
-    color: var(--chase-yellow);
-}
-
-.fantasy-row-picks {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    font-size: 0.8rem;
-}
-
-.fantasy-row-pick-badge {
-    background-color: rgba(0, 255, 0, 0.02);
-    padding: 3px 8px;
-    border-radius: 4px;
-    border: 1px solid var(--neon-green);
-    color: #fff;
-}
-
-@media (max-width: 992px) {
-    .fantasy-selection-summary {
-        flex-direction: column;
-        gap: 20px;
-        align-items: stretch;
-    }
-    .summary-picks {
-        justify-content: space-between;
-    }
-}
-
+.card:hover { transform: translateY(-4px); border-color: var(--neon-green); box-shadow: rgba(0, 0, 0, 0.4) 0px 8px 20px; }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+.car-number { font-family: Teko, sans-serif; font-size: 4rem; font-weight: 700; line-height: 0.8; color: var(--text-primary); font-style: italic; text-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px; }
+.status-select { background-color: rgba(0, 0, 0, 0.3); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 0.4rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; outline: none; cursor: pointer; text-transform: uppercase; }
+.status-select:focus { border-color: var(--neon-green); }
+.input-group { display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto; }
+.input-group label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+.driver-input { background-color: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-color); border-radius: 4px; padding: 0.8rem; color: var(--neon-green); font-family: Inter, sans-serif; font-weight: 600; font-size: 1rem; transition: 0.2s; outline: none; text-transform: uppercase; }
+.driver-input:focus { border-color: var(--neon-green); box-shadow: rgba(57, 255, 20, 0.1) 0px 0px 10px; }
+.driver-input::placeholder { color: rgba(255, 255, 255, 0.15); font-weight: 400; }
+.exporting { background-color: var(--bg-dark) !important; padding: 2rem !important; width: 2000px !important; }
+.exporting .app-container { max-width: none; width: 100%; }
+.exporting .logo-area h1 { font-size: 5rem; margin-bottom: 0.5rem; }
+.exporting .logo-area p { font-size: 1.5rem; }
+.exporting .actions { display: none; }
+.exporting .roster-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem 1.5rem; }
+.exporting .card { display: flex; flex-direction: row; align-items: center; border-width: medium medium 1px !important; border-style: none none solid !important; border-color: currentcolor currentcolor rgb(34, 34, 34) !important; border-image: initial !important; background: transparent !important; padding: 0px 0px 0.5rem !important; box-shadow: none !important; }
+.exporting .card::before { display: none; }
+.exporting .card-header { margin: 0px; padding: 0px; width: 80px; flex-shrink: 0; }
+.exporting .car-number { font-size: 3rem; text-shadow: none; }
+.exporting .input-group { margin: 0px; flex-grow: 1; display: flex; flex-direction: row; align-items: center; gap: 0.5rem; }
+.exporting .input-group label { display: none; }
+.exporting .driver-input { border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; background: transparent; padding: 0px; color: var(--text-primary); font-size: 1.6rem; font-weight: 700; margin: 0px; width: auto; }
+.exporting .status-select { appearance: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; background: transparent; padding: 0px; color: var(--neon-green); font-size: 1.1rem; margin-left: auto; text-align: right; }
+.exporting .card[data-status="available"] .status-select { color: var(--status-available); }
+.exporting .card[data-status="full-time"] .status-select { color: var(--status-fulltime); }
+.exporting .card[data-status="part-time"] .status-select { color: var(--status-parttime); }
+.exporting .card[data-status="reserved"] .status-select { color: var(--status-reserved); }
+.exporting .card[data-status="past-champion"] .status-select { color: var(--status-pastchampion); }
 
         /* Hide actions on the public page */
         .actions { display: none !important; }
@@ -1784,40 +65,6 @@ footer {
         .card[data-status="part-time"] .status-select { color: var(--status-parttime); }
         .card[data-status="reserved"] .status-select { color: var(--status-reserved); }
         .card[data-status="past-champion"] .status-select { color: var(--status-pastchampion); }
-
-        /* Truck image hover transition inside exported cards */
-        .custom-number-img {
-            max-height: 85px; 
-            max-width: 160px; 
-            object-fit: contain;
-            transition: opacity 0.3s ease;
-        }
-        .card-image-container {
-            position: relative;
-            height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            width: 160px;
-        }
-        .truck-hover-img {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: contain;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            pointer-events: none;
-        }
-        .card:hover .truck-hover-img.loaded {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .card:has(.truck-hover-img.loaded):hover .custom-number-img {
-            opacity: 0.15;
-        }
     </style>
 </head>
 <body>
@@ -1832,10 +79,8 @@ footer {
             
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Jackson%20Knaak.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#00</span>'">
-                <img src="assets/truck%20images/truck_image_jackson_knaak.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Jackson%20Knaak.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#00</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -1846,7 +91,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#01</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -1858,10 +103,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Nolan%20Gross.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#02</span>'">
-                <img src="assets/truck%20images/truck_image_nolan_gross.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Nolan%20Gross.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#02</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -1872,10 +115,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Justin%20Ziemiecki.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#03</span>'">
-                <img src="assets/truck%20images/truck_image_justin_ziemiecki.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Justin%20Ziemiecki.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#03</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -1886,10 +127,8 @@ footer {
         </div>
         <div class="card" data-status="past-champion">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Bret%20Guzik.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#04</span>'">
-                <img src="assets/truck%20images/truck_image_bret_guzik.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Bret%20Guzik.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#04</span>'">
                 </div>
                 <span class="status-select">Past Champion Reserved</span>
             </div>
@@ -1900,7 +139,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#05</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -1912,7 +151,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#06</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -1924,7 +163,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#07</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -1936,10 +175,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Jackson_Duke.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#08</span>'">
-                <img src="assets/truck%20images/truck_image_jackson_duke.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Jackson_Duke.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#08</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -1950,7 +187,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#09</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -1962,10 +199,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Adam%20Tahan.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#0</span>'">
-                <img src="assets/truck%20images/truck_image_adam_tahan.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Adam%20Tahan.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#0</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -1976,10 +211,8 @@ footer {
         </div>
         <div class="card" data-status="past-champion">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Ricky%20Hart.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#1</span>'">
-                <img src="assets/truck%20images/truck_image_ricky_hart.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Ricky%20Hart.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#1</span>'">
                 </div>
                 <span class="status-select">Past Champion Reserved</span>
             </div>
@@ -1990,10 +223,8 @@ footer {
         </div>
         <div class="card" data-status="past-champion">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Nick%20Nickerson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#2</span>'">
-                <img src="assets/truck%20images/truck_image_nick_nickerson.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Nick%20Nickerson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#2</span>'">
                 </div>
                 <span class="status-select">Past Champion Reserved</span>
             </div>
@@ -2004,7 +235,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#3</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2016,10 +247,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Logan%20Murray.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#4</span>'">
-                <img src="assets/truck%20images/truck_image_logan_murray.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Logan%20Murray.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#4</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2030,10 +259,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Sean%20Britt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#5</span>'">
-                <img src="assets/truck%20images/truck_image_sean_britt.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Sean%20Britt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#5</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2044,10 +271,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Nicole%20Kriesel.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#6</span>'">
-                <img src="assets/truck%20images/truck_image_nicole_kriesel.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Nicole%20Kriesel.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#6</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2058,10 +283,8 @@ footer {
         </div>
         <div class="card" data-status="past-champion">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Benjamin%20Lacy.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#7</span>'">
-                <img src="assets/truck%20images/truck_image_benjamin_lacy.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Benjamin%20Lacy.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#7</span>'">
                 </div>
                 <span class="status-select">Past Champion Reserved</span>
             </div>
@@ -2072,10 +295,8 @@ footer {
         </div>
         <div class="card" data-status="past-champion">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Kevin%20Foster.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#8</span>'">
-                <img src="assets/truck%20images/truck_image_kevin_foster.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Kevin%20Foster.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#8</span>'">
                 </div>
                 <span class="status-select">Past Champion Reserved</span>
             </div>
@@ -2086,7 +307,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#9</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2098,10 +319,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Cordell%20McFarlin.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#10</span>'">
-                <img src="assets/truck%20images/truck_image_cordell_mcfarlin.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Cordell%20McFarlin.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#10</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2112,10 +331,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Jon%20Osborne.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#11</span>'">
-                <img src="assets/truck%20images/truck_image_jon_osborne.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Jon%20Osborne.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#11</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2126,10 +343,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Bill%20Harkins.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#12</span>'">
-                <img src="assets/truck%20images/truck_image_bill_harkins.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Bill%20Harkins.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#12</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2140,10 +355,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Jonathon%20Platt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#13</span>'">
-                <img src="assets/truck%20images/truck_image_jonathon_platt.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Jonathon%20Platt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#13</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2154,10 +367,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Jason%20Allegrini.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#14</span>'">
-                <img src="assets/truck%20images/truck_image_jason_allegrini.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Jason%20Allegrini.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#14</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2168,10 +379,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Matt%20Crockett.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#15</span>'">
-                <img src="assets/truck%20images/truck_image_matt_crockett.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Matt%20Crockett.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#15</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2182,10 +391,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Joshua%20Sutherland.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#16</span>'">
-                <img src="assets/truck%20images/truck_image_joshua_sutherland.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Joshua%20Sutherland.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#16</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2196,10 +403,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Di0nte%20Rader.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#17</span>'">
-                <img src="assets/truck%20images/truck_image_di0nte_rader.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Di0nte%20Rader.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#17</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2210,10 +415,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Victor%20Weaver.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#18</span>'">
-                <img src="assets/truck%20images/truck_image_victor_weaver.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Victor%20Weaver.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#18</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2224,10 +427,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Matt%20Bailey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#19</span>'">
-                <img src="assets/truck%20images/truck_image_matt_bailey.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Matt%20Bailey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#19</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2238,7 +439,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#20</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2250,10 +451,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Nathan%20Santos.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#21</span>'">
-                <img src="assets/truck%20images/truck_image_nathan_santos.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Nathan%20Santos.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#21</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2264,10 +463,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Josh%20Adams.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#22</span>'">
-                <img src="assets/truck%20images/truck_image_josh_adams.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Josh%20Adams.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#22</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2278,10 +475,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Dillon.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#23</span>'">
-                <img src="assets/truck%20images/truck_image_dylan_nicastro.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Dillon.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#23</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2292,10 +487,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Ethan%20Sikorski.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#24</span>'">
-                <img src="assets/truck%20images/truck_image_ethan_sikorski.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Ethan%20Sikorski.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#24</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2306,7 +499,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#25</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2318,7 +511,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#26</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2330,10 +523,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Michael%20Ramos.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#27</span>'">
-                <img src="assets/truck%20images/truck_image_michael_ramos.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Michael%20Ramos.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#27</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2344,10 +535,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Jesse%20Vaughan.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#28</span>'">
-                <img src="assets/truck%20images/truck_image_jesse_vaughan.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Jesse%20Vaughan.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#28</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2358,10 +547,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Garret%20Bobo.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#29</span>'">
-                <img src="assets/truck%20images/truck_image_garret_bobo.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Garret%20Bobo.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#29</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2372,10 +559,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Carter%20Phillips.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#30</span>'">
-                <img src="assets/truck%20images/truck_image_carter_phillips.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Carter%20Phillips.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#30</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2386,10 +571,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Connor%20Gibson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#31</span>'">
-                <img src="assets/truck%20images/truck_image_connor_gibson.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Connor%20Gibson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#31</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2400,10 +583,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Terry%20Kondus.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#32</span>'">
-                <img src="assets/truck%20images/truck_image_terry_kondus.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Terry%20Kondus.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#32</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2414,7 +595,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#33</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2426,7 +607,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#34</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2438,10 +619,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Wes%20Fuller.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#35</span>'">
-                <img src="assets/truck%20images/truck_image_wes_fuller.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Wes%20Fuller.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#35</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2452,7 +631,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#36</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2464,7 +643,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#37</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2476,10 +655,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Peter%20Murphy.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#38</span>'">
-                <img src="assets/truck%20images/truck_image_peter_murphy.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Peter%20Murphy.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#38</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2490,7 +667,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#39</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2502,7 +679,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#40</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2514,10 +691,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Dalton%20Kilroe.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#41</span>'">
-                <img src="assets/truck%20images/truck_image_dalton_kilroe.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Dalton%20Kilroe.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#41</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2528,7 +703,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#42</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2540,10 +715,8 @@ footer {
         </div>
         <div class="card" data-status="past-champion">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Jonathon%20Platt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#43</span>'">
-                <img src="assets/truck%20images/truck_image_jonathon_platt.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Jonathon%20Platt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#43</span>'">
                 </div>
                 <span class="status-select">Past Champion Reserved</span>
             </div>
@@ -2554,7 +727,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#44</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2566,7 +739,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#45</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2578,7 +751,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#46</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2590,10 +763,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Michael%20Rakes.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#47</span>'">
-                <img src="assets/truck%20images/truck_image_michael_rakes.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Michael%20Rakes.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#47</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2604,7 +775,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#48</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2616,7 +787,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#49</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2628,10 +799,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Davis%20Carroll.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#50</span>'">
-                <img src="assets/truck%20images/truck_image_davis_carroll.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Davis%20Carroll.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#50</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2642,10 +811,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Curtis%20Yancey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#51</span>'">
-                <img src="assets/truck%20images/truck_image_curtis_yancey.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Curtis%20Yancey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#51</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2656,10 +823,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Jackson%20Mummert.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#52</span>'">
-                <img src="assets/truck%20images/truck_image_jackson_mummert.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Jackson%20Mummert.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#52</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2670,7 +835,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#53</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2680,14 +845,12 @@ footer {
                 <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
             </div>
         </div>
-        <div class="card" data-status="full-time">
+        <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Davis%20Carroll.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#54</span>'">
-                <img src="assets/truck%20images/truck_image_davis_carroll.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Davis%20Carroll.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#54</span>'">
                 </div>
-                <span class="status-select">Full Time</span>
+                <span class="status-select">Available</span>
             </div>
             <div class="input-group">
                 <label style="display:block;">Driver Name</label>
@@ -2696,7 +859,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#55</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2708,7 +871,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#56</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2720,7 +883,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#57</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2732,7 +895,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#58</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2744,7 +907,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#59</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2756,7 +919,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#60</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2768,7 +931,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#61</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2780,10 +943,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Ty%20Corino.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#62</span>'">
-                <img src="assets/truck%20images/truck_image_ty_corino.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Ty%20Corino.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#62</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2794,10 +955,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Dylan%20Mc%20Donald.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#63</span>'">
-                <img src="assets/truck%20images/truck_image_dylan_mc_donald.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Dylan%20Mc%20Donald.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#63</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2808,10 +967,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Adam%20Clark.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#64</span>'">
-                <img src="assets/truck%20images/truck_image_adam_clark.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Adam%20Clark.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#64</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2822,7 +979,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#65</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2834,7 +991,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#66</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2846,7 +1003,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#67</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2858,7 +1015,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#68</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2870,7 +1027,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#69</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2882,7 +1039,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#70</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2894,7 +1051,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#71</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2906,10 +1063,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Mason%20Phlegar.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#72</span>'">
-                <img src="assets/truck%20images/truck_image_mason_phlegar.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Mason%20Phlegar.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#72</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2920,10 +1075,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Brandon%20Geers.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#73</span>'">
-                <img src="assets/truck%20images/truck_image_brandon_geers.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Brandon%20Geers.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#73</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -2934,7 +1087,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#74</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -2946,10 +1099,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Bob%20Berry.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#75</span>'">
-                <img src="assets/truck%20images/truck_image_bob_berry.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Bob%20Berry.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#75</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2960,10 +1111,8 @@ footer {
         </div>
         <div class="card" data-status="past-champion">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Mark%20Alan%20Bivens.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#76</span>'">
-                <img src="assets/truck%20images/truck_image_mark_alan_bivens.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Mark%20Alan%20Bivens.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#76</span>'">
                 </div>
                 <span class="status-select">Past Champion Reserved</span>
             </div>
@@ -2974,10 +1123,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Tyson%20Kopf.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#77</span>'">
-                <img src="assets/truck%20images/truck_image_tyson_kopf.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Tyson%20Kopf.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#77</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -2988,7 +1135,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#78</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3000,7 +1147,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#79</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3012,7 +1159,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#80</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3024,7 +1171,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#81</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3036,7 +1183,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#82</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3048,10 +1195,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Jason%20Greenwell.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#83</span>'">
-                <img src="assets/truck%20images/truck_image_jason_greenwell.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Jason%20Greenwell.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#83</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -3062,10 +1207,8 @@ footer {
         </div>
         <div class="card" data-status="full-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/David%20Leakey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#84</span>'">
-                <img src="assets/truck%20images/truck_image_david_leakey.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/David%20Leakey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#84</span>'">
                 </div>
                 <span class="status-select">Full Time</span>
             </div>
@@ -3076,10 +1219,8 @@ footer {
         </div>
         <div class="card" data-status="reserved">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Cody%20Welch.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#85</span>'">
-                <img src="assets/truck%20images/truck_image_cody_welch.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Cody%20Welch.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#85</span>'">
                 </div>
                 <span class="status-select">Reserved / Practice</span>
             </div>
@@ -3090,10 +1231,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Paul%20Wilson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#86</span>'">
-                <img src="assets/truck%20images/truck_image_paul_wilson.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Paul%20Wilson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#86</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -3104,7 +1243,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#87</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3116,10 +1255,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/David%20Westover.pmg.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#88</span>'">
-                <img src="assets/truck%20images/truck_image_david_westover_jr.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/David%20Westover.pmg.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#88</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -3130,7 +1267,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#89</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3142,7 +1279,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#90</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3154,10 +1291,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Brandon%20Jackson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#91</span>'">
-                <img src="assets/truck%20images/truck_image_brandon_jackson.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Brandon%20Jackson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#91</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -3168,7 +1303,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#92</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3180,10 +1315,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Scott%20Sanderson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#93</span>'">
-                <img src="assets/truck%20images/truck_image_scott_sanderson.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Scott%20Sanderson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#93</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -3194,7 +1327,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#94</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3206,7 +1339,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#95</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3218,10 +1351,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Lucas%20Wilson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#96</span>'">
-                <img src="assets/truck%20images/truck_image_lucas_wilson.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Lucas%20Wilson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#96</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -3232,10 +1363,8 @@ footer {
         </div>
         <div class="card" data-status="past-champion">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Eddie%20Hagigh.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#97</span>'">
-                <img src="assets/truck%20images/truck_image_eddie_hagigh.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Eddie%20Hagigh.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#97</span>'">
                 </div>
                 <span class="status-select">Past Champion Reserved</span>
             </div>
@@ -3246,7 +1375,7 @@ footer {
         </div>
         <div class="card" data-status="available">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
                     <span class="car-number">#98</span>
                 </div>
                 <span class="status-select">Available</span>
@@ -3258,10 +1387,8 @@ footer {
         </div>
         <div class="card" data-status="part-time">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Josh%20Billiter.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#99</span>'">
-                <img src="assets/truck%20images/truck_image_josh_billiter.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Josh%20Billiter.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#99</span>'">
                 </div>
                 <span class="status-select">Part Time</span>
             </div>
@@ -3272,10 +1399,8 @@ footer {
         </div>
         <div class="card" data-status="reserved">
             <div class="card-header">
-                <div class="card-image-container" style="margin-right: 15px;">
-                    
-                <img src="assets/drivers%20numbers/Unavailable.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#100</span>'">
-                <img src="assets/truck%20images/truck_image_unavailable.png" class="truck-hover-img" onload="this.classList.add('loaded')" onerror="this.remove()">
+                <div style="height: 90px; display:flex; align-items:center; margin-right: 15px;">
+                    <img src="assets/drivers%20numbers/Unavailable.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#100</span>'">
                 </div>
                 <span class="status-select">Reserved / Practice</span>
             </div>
