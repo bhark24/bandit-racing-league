@@ -144,7 +144,7 @@ const rosterData = {
     "status": "part-time"
   },
   "54": {
-    "driver": "DAVIS CArroll",
+    "driver": "",
     "status": "available"
   },
   "62": {
