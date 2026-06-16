@@ -654,7 +654,10 @@
 
     <!-- Spotter Portal WebSockets, SVG Oval Coordinates, and Demo Logic -->
     <script>
+        // Custom Render telemetry relay configuration
+        const RELAY_SERVER_URL = "wss://brl-relay-geezer.onrender.com";
         let ws = null;
+        let reconnectTimeout = null;
         let isDemoMode = false;
         let demoInterval = null;
         let lastPacketTime = 0;
@@ -686,13 +689,20 @@
             document.getElementById('header-driver-id').innerText = driverId;
             document.getElementById('header-avatar').innerText = driverId.substring(0, 2);
 
+            // Clear any pending reconnects to avoid double connection loops
+            if (reconnectTimeout) {
+                clearTimeout(reconnectTimeout);
+                reconnectTimeout = null;
+            }
+
             // Establish websocket connection to Cloud Relay Server
-            const relayHost = 'wss://demo.piesocket.com/v3/brl_telemetry_' + driverId + '?api_key=VC1GdCszxuHAzzSF1otmQasZaZPDzchSfCHz0s10';
+            const relayHost = `${RELAY_SERVER_URL}/ws/${driverId}`;
             
             updateConnectionStatus(false, "CONNECTING");
 
             try {
                 if (ws) {
+                    ws.onclose = null;
                     ws.close();
                 }
 
@@ -701,6 +711,10 @@
                 ws.onopen = () => {
                     console.log("Connected to spotter cloud relay:", relayHost);
                     updateConnectionStatus(false, "CONNECTED (WAITING)");
+                    if (reconnectTimeout) {
+                        clearTimeout(reconnectTimeout);
+                        reconnectTimeout = null;
+                    }
                 };
 
                 ws.onmessage = (event) => {
@@ -715,6 +729,15 @@
                 ws.onclose = () => {
                     console.log("Disconnected from spotter cloud relay.");
                     updateConnectionStatus(false, "OFFLINE");
+                    
+                    // Auto-reconnect if not in demo mode
+                    if (!isDemoMode && driverId) {
+                        console.log("Attempting reconnection in 5 seconds...");
+                        if (reconnectTimeout) clearTimeout(reconnectTimeout);
+                        reconnectTimeout = setTimeout(() => {
+                            connectDriverPortal(driverId);
+                        }, 5000);
+                    }
                 };
 
                 ws.onerror = (err) => {
