@@ -83,39 +83,39 @@
             max-height: 85px;
             max-width: 160px;
         }
-        .status-badge-b {
-            position: absolute;
-            top: 8px;
-            right: 8px;
+        .status-badge-inline {
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
             font-size: 0.65rem;
             text-transform: uppercase;
             font-weight: bold;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-            z-index: 2;
+            display: inline-block;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-left: 10px;
         }
-        .status-badge-b.available {
+        .status-badge-inline.available {
             background: rgba(57, 255, 20, 0.15);
             color: var(--status-available);
             border: 1px solid var(--status-available);
         }
-        .status-badge-b.full-time {
+        .status-badge-inline.full-time {
             background: rgba(0, 229, 255, 0.15);
             color: var(--status-fulltime);
             border: 1px solid var(--status-fulltime);
         }
-        .status-badge-b.part-time {
+        .status-badge-inline.part-time {
             background: rgba(255, 234, 0, 0.15);
             color: var(--status-parttime);
             border: 1px solid var(--status-parttime);
         }
-        .status-badge-b.reserved {
+        .status-badge-inline.reserved {
             background: rgba(255, 23, 68, 0.15);
             color: var(--status-reserved);
             border: 1px solid var(--status-reserved);
         }
-        .status-badge-b.past-champion {
+        .status-badge-inline.past-champion {
             background: rgba(255, 215, 0, 0.15);
             color: var(--status-pastchampion);
             border: 1px solid var(--status-pastchampion);
@@ -452,20 +452,21 @@
                     <div class="card-visual-banner">
                         ${hasDriver ? `
                             <img src="${getTruckImgPath(data.driver)}" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-${num}').classList.add('centered');">
-                            <span class="status-badge-b ${data.status}">${statusMap[data.status]}</span>
                             <div id="num-badge-${num}" class="floating-number-badge">
                                 <img src="${getDriverImgPath(data.driver)}" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>#${num}</span>'">
                             </div>
                         ` : `
-                            <span class="status-badge-b ${data.status}">${statusMap[data.status]}</span>
                             <div id="num-badge-${num}" class="floating-number-badge centered">
                                 <span class="car-number">#${num}</span>
                             </div>
                         `}
                     </div>
                     <div class="card-body-b">
-                        <div class="driver-display" style="opacity: ${hasDriver ? '1' : '0.3'};">
-                            ${hasDriver ? data.driver.trim() : 'Available'}
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div class="driver-display" style="opacity: ${hasDriver ? '1' : '0.3'};">
+                                ${hasDriver ? data.driver.trim() : 'Available'}
+                            </div>
+                            <span class="status-badge-inline ${data.status}">${statusMap[data.status]}</span>
                         </div>
                         ${teamInfoHtml}
                         ${statsButtonHtml}

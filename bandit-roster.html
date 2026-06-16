@@ -386,39 +386,39 @@ header {
     max-height: 85px;
     max-width: 160px;
 }
-.status-badge-b {
-    position: absolute;
-    top: 8px;
-    right: 8px;
+.status-badge-inline {
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
     font-size: 0.65rem;
     text-transform: uppercase;
     font-weight: bold;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    z-index: 2;
+    display: inline-block;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: 10px;
 }
-.status-badge-b.available {
+.status-badge-inline.available {
     background: rgba(57, 255, 20, 0.15);
     color: var(--status-available);
     border: 1px solid var(--status-available);
 }
-.status-badge-b.full-time {
+.status-badge-inline.full-time {
     background: rgba(0, 229, 255, 0.15);
     color: var(--status-fulltime);
     border: 1px solid var(--status-fulltime);
 }
-.status-badge-b.part-time {
+.status-badge-inline.part-time {
     background: rgba(255, 234, 0, 0.15);
     color: var(--status-parttime);
     border: 1px solid var(--status-parttime);
 }
-.status-badge-b.reserved {
+.status-badge-inline.reserved {
     background: rgba(255, 23, 68, 0.15);
     color: var(--status-reserved);
     border: 1px solid var(--status-reserved);
 }
-.status-badge-b.past-champion {
+.status-badge-inline.past-champion {
     background: rgba(255, 215, 0, 0.15);
     color: var(--status-pastchampion);
     border: 1px solid var(--status-pastchampion);
@@ -452,12 +452,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_jackson_knaak.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-00').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-00" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jackson%20Knaak.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#00</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">Jackson Knaak</div>
@@ -466,12 +469,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-01" class="floating-number-badge centered">
                     <span class="car-number">#01</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -481,12 +487,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_nolan_gross.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-02').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-02" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Nolan%20Gross.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#02</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NOLAN GROSS</div>
@@ -496,12 +505,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_justin_ziemiecki.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-03').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-03" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Justin%20Ziemiecki.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#03</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JUSTIN ZIEMIECKI</div>
@@ -511,12 +523,15 @@ header {
         <div class="card" data-status="past-champion">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_bret_guzik.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-04').classList.add('centered');">
-                <span class="status-badge-b past-champion">Past Champion Reserved</span>
                 <div id="num-badge-04" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Bret%20Guzik.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#04</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline past-champion">Past Champion Reserved</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRET GUZIK</div>
@@ -525,12 +540,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-05" class="floating-number-badge centered">
                     <span class="car-number">#05</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -539,12 +557,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-06" class="floating-number-badge centered">
                     <span class="car-number">#06</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -553,12 +574,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-07" class="floating-number-badge centered">
                     <span class="car-number">#07</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -568,12 +592,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_jackson_duke.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-08').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-08" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jackson_Duke.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#08</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JACKSON DUKE</div>
@@ -582,12 +609,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-09" class="floating-number-badge centered">
                     <span class="car-number">#09</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -597,12 +627,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_adam_tahan.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-0').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-0" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Adam%20Tahan.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#0</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">ADAM TAHAN</div>
@@ -612,12 +645,15 @@ header {
         <div class="card" data-status="past-champion">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_ricky_hart.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-1').classList.add('centered');">
-                <span class="status-badge-b past-champion">Past Champion Reserved</span>
                 <div id="num-badge-1" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Ricky%20Hart.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#1</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline past-champion">Past Champion Reserved</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">RICKY HART</div>
@@ -627,12 +663,15 @@ header {
         <div class="card" data-status="past-champion">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_nick_nickerson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-2').classList.add('centered');">
-                <span class="status-badge-b past-champion">Past Champion Reserved</span>
                 <div id="num-badge-2" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Nick%20Nickerson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#2</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline past-champion">Past Champion Reserved</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NICK NICKERSON</div>
@@ -641,12 +680,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-3" class="floating-number-badge centered">
                     <span class="car-number">#3</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -656,12 +698,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_logan_murray.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-4').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-4" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Logan%20Murray.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#4</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">LOGAN MURRAY</div>
@@ -671,12 +716,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_sean_britt.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-5').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-5" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Sean%20Britt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#5</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">SEAN BRITT</div>
@@ -686,12 +734,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_nicole_kriesel.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-6').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-6" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Nicole%20Kriesel.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#6</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NICOLE KRIESEL</div>
@@ -701,12 +752,15 @@ header {
         <div class="card" data-status="past-champion">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_benjamin_lacy.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-7').classList.add('centered');">
-                <span class="status-badge-b past-champion">Past Champion Reserved</span>
                 <div id="num-badge-7" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Benjamin%20Lacy.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#7</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline past-champion">Past Champion Reserved</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BENJAMIN LACY</div>
@@ -716,12 +770,15 @@ header {
         <div class="card" data-status="past-champion">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_kevin_foster.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-8').classList.add('centered');">
-                <span class="status-badge-b past-champion">Past Champion Reserved</span>
                 <div id="num-badge-8" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Kevin%20Foster.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#8</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline past-champion">Past Champion Reserved</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">KEVIN FOSTER</div>
@@ -730,12 +787,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-9" class="floating-number-badge centered">
                     <span class="car-number">#9</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -745,12 +805,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_cordell_mcfarlin.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-10').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-10" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Cordell%20McFarlin.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#10</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CORDELL MCFARLIN</div>
@@ -760,12 +823,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_jon_osborne.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-11').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-11" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jon%20Osborne.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#11</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JON OSBORNE</div>
@@ -775,12 +841,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_bill_harkins.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-12').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-12" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Bill%20Harkins.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#12</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BILL HARKINS</div>
@@ -790,12 +859,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_jonathon_platt.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-13').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-13" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jonathon%20Platt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#13</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JONATHON PLATT</div>
@@ -805,12 +877,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_jason_allegrini.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-14').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-14" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jason%20Allegrini.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#14</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JASON ALLEGRINI</div>
@@ -820,12 +895,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_matt_crockett.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-15').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-15" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Matt%20Crockett.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#15</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MATT CROCKETT</div>
@@ -835,12 +913,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_joshua_sutherland.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-16').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-16" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Joshua%20Sutherland.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#16</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSHUA SUTHERLAND</div>
@@ -850,12 +931,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_di0nte_rader.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-17').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-17" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Di0nte%20Rader.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#17</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DI0NTE RADER</div>
@@ -865,12 +949,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_victor_weaver.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-18').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-18" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Victor%20Weaver.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#18</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">VICTOR WEAVER</div>
@@ -880,12 +967,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_matt_bailey.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-19').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-19" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Matt%20Bailey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#19</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MATT BAILEY</div>
@@ -894,12 +984,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-20" class="floating-number-badge centered">
                     <span class="car-number">#20</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -909,12 +1002,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_nathan_santos.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-21').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-21" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Nathan%20Santos.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#21</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">NATHAN SANTOS</div>
@@ -924,12 +1020,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_josh_adams.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-22').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-22" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Josh%20Adams.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#22</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSH ADAMS</div>
@@ -939,12 +1038,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_dylan_nicastro.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-23').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-23" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Dillon.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#23</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DYLAN NICASTRO</div>
@@ -954,12 +1056,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_ethan_sikorski.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-24').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-24" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Ethan%20Sikorski.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#24</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">ETHAN SIKORSKI</div>
@@ -968,12 +1073,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-25" class="floating-number-badge centered">
                     <span class="car-number">#25</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -982,12 +1090,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-26" class="floating-number-badge centered">
                     <span class="car-number">#26</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -997,12 +1108,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_michael_ramos.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-27').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-27" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Michael%20Ramos.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#27</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MICHAEL RAMOS</div>
@@ -1012,12 +1126,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_jesse_vaughan.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-28').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-28" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jesse%20Vaughan.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#28</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">Jesse VAUGHAN</div>
@@ -1027,12 +1144,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_garret_bobo.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-29').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-29" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Garret%20Bobo.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#29</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">GARRET BOBO</div>
@@ -1042,12 +1162,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_carter_phillips.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-30').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-30" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Carter%20Phillips.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#30</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CARTER PHILLIPS</div>
@@ -1057,12 +1180,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_connor_gibson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-31').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-31" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Connor%20Gibson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#31</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CONNOR GIBSON</div>
@@ -1072,12 +1198,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_terry_kondus.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-32').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-32" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Terry%20Kondus.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#32</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TERRY KONDUS</div>
@@ -1086,12 +1215,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-33" class="floating-number-badge centered">
                     <span class="car-number">#33</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1100,12 +1232,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-34" class="floating-number-badge centered">
                     <span class="car-number">#34</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1115,12 +1250,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_wes_fuller.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-35').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-35" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Wes%20Fuller.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#35</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">wES fULLER</div>
@@ -1129,12 +1267,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-36" class="floating-number-badge centered">
                     <span class="car-number">#36</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1143,12 +1284,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-37" class="floating-number-badge centered">
                     <span class="car-number">#37</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1158,12 +1302,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_peter_murphy.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-38').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-38" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Peter%20Murphy.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#38</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">PETER MURPHY</div>
@@ -1172,12 +1319,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-39" class="floating-number-badge centered">
                     <span class="car-number">#39</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1186,12 +1336,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-40" class="floating-number-badge centered">
                     <span class="car-number">#40</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1201,12 +1354,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_dalton_kilroe.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-41').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-41" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Dalton%20Kilroe.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#41</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DALTON KILROE</div>
@@ -1215,12 +1371,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-42" class="floating-number-badge centered">
                     <span class="car-number">#42</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1230,12 +1389,15 @@ header {
         <div class="card" data-status="past-champion">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_jonathon_platt.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-43').classList.add('centered');">
-                <span class="status-badge-b past-champion">Past Champion Reserved</span>
                 <div id="num-badge-43" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jonathon%20Platt.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#43</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline past-champion">Past Champion Reserved</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JONATHON PLATT</div>
@@ -1244,12 +1406,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-44" class="floating-number-badge centered">
                     <span class="car-number">#44</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1258,12 +1423,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-45" class="floating-number-badge centered">
                     <span class="car-number">#45</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1272,12 +1440,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-46" class="floating-number-badge centered">
                     <span class="car-number">#46</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1287,12 +1458,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_michael_rakes.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-47').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-47" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Michael%20Rakes.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#47</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MICHAEL RAKES</div>
@@ -1301,12 +1475,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-48" class="floating-number-badge centered">
                     <span class="car-number">#48</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1315,12 +1492,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-49" class="floating-number-badge centered">
                     <span class="car-number">#49</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1330,12 +1510,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_davis_carroll.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-50').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-50" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Davis%20Carroll.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#50</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVIS CARROLL</div>
@@ -1345,12 +1528,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_curtis_yancey.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-51').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-51" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Curtis%20Yancey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#51</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CURTIS YANCEY</div>
@@ -1360,12 +1546,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_jackson_mummert.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-52').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-52" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jackson%20Mummert.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#52</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JACKSON MUMMERT</div>
@@ -1374,12 +1563,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-53" class="floating-number-badge centered">
                     <span class="car-number">#53</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1388,12 +1580,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-54" class="floating-number-badge centered">
                     <span class="car-number">#54</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1402,12 +1597,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-55" class="floating-number-badge centered">
                     <span class="car-number">#55</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1416,12 +1614,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-56" class="floating-number-badge centered">
                     <span class="car-number">#56</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1430,12 +1631,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-57" class="floating-number-badge centered">
                     <span class="car-number">#57</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1444,12 +1648,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-58" class="floating-number-badge centered">
                     <span class="car-number">#58</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1458,12 +1665,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-59" class="floating-number-badge centered">
                     <span class="car-number">#59</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1472,12 +1682,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-60" class="floating-number-badge centered">
                     <span class="car-number">#60</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1486,12 +1699,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-61" class="floating-number-badge centered">
                     <span class="car-number">#61</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1501,12 +1717,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_ty_corino.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-62').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-62" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Ty%20Corino.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#62</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TY CORINO</div>
@@ -1516,12 +1735,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_dylan_mc_donald.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-63').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-63" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Dylan%20Mc%20Donald.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#63</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">Dylan MC DONALD</div>
@@ -1531,12 +1753,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_adam_clark.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-64').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-64" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Adam%20Clark.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#64</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">ADAM CLARK</div>
@@ -1545,12 +1770,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-65" class="floating-number-badge centered">
                     <span class="car-number">#65</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1559,12 +1787,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-66" class="floating-number-badge centered">
                     <span class="car-number">#66</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1573,12 +1804,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-67" class="floating-number-badge centered">
                     <span class="car-number">#67</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1587,12 +1821,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-68" class="floating-number-badge centered">
                     <span class="car-number">#68</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1601,12 +1838,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-69" class="floating-number-badge centered">
                     <span class="car-number">#69</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1615,12 +1855,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-70" class="floating-number-badge centered">
                     <span class="car-number">#70</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1629,12 +1872,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-71" class="floating-number-badge centered">
                     <span class="car-number">#71</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1644,12 +1890,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_mason_phlegar.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-72').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-72" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Mason%20Phlegar.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#72</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MASON PHLEGAR</div>
@@ -1659,12 +1908,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_brandon_geers.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-73').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-73" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Brandon%20Geers.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#73</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRANDON GEERS</div>
@@ -1673,12 +1925,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-74" class="floating-number-badge centered">
                     <span class="car-number">#74</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1688,12 +1943,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_bob_berry.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-75').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-75" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Bob%20Berry.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#75</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BOB BERRY</div>
@@ -1703,12 +1961,15 @@ header {
         <div class="card" data-status="past-champion">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_mark_alan_bivens.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-76').classList.add('centered');">
-                <span class="status-badge-b past-champion">Past Champion Reserved</span>
                 <div id="num-badge-76" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Mark%20Alan%20Bivens.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#76</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline past-champion">Past Champion Reserved</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">MARK ALAN BIVENS</div>
@@ -1718,12 +1979,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_tyson_kopf.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-77').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-77" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Tyson%20Kopf.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#77</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">TYSON KOPF</div>
@@ -1732,12 +1996,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-78" class="floating-number-badge centered">
                     <span class="car-number">#78</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1746,12 +2013,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-79" class="floating-number-badge centered">
                     <span class="car-number">#79</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1760,12 +2030,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-80" class="floating-number-badge centered">
                     <span class="car-number">#80</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1774,12 +2047,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-81" class="floating-number-badge centered">
                     <span class="car-number">#81</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1788,12 +2064,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-82" class="floating-number-badge centered">
                     <span class="car-number">#82</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1803,12 +2082,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_jason_greenwell.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-83').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-83" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Jason%20Greenwell.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#83</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JASON GREENWELL</div>
@@ -1818,12 +2100,15 @@ header {
         <div class="card" data-status="full-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_david_leakey.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-84').classList.add('centered');">
-                <span class="status-badge-b full-time">Full Time</span>
                 <div id="num-badge-84" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/David%20Leakey.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#84</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline full-time">Full Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVID LEAKEY</div>
@@ -1833,12 +2118,15 @@ header {
         <div class="card" data-status="reserved">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_cody_welch.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-85').classList.add('centered');">
-                <span class="status-badge-b reserved">Reserved / Practice</span>
                 <div id="num-badge-85" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Cody%20Welch.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#85</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline reserved">Reserved / Practice</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">CODY WELCH</div>
@@ -1848,12 +2136,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_paul_wilson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-86').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-86" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Paul%20Wilson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#86</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">PAUL WILSON</div>
@@ -1862,12 +2153,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-87" class="floating-number-badge centered">
                     <span class="car-number">#87</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1877,12 +2171,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_david_westover_jr.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-88').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-88" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/David%20Westover.pmg.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#88</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">DAVID WESTOVER JR</div>
@@ -1891,12 +2188,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-89" class="floating-number-badge centered">
                     <span class="car-number">#89</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1905,12 +2205,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-90" class="floating-number-badge centered">
                     <span class="car-number">#90</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1920,12 +2223,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_brandon_jackson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-91').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-91" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Brandon%20Jackson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#91</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">BRANDON JACKSON</div>
@@ -1934,12 +2240,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-92" class="floating-number-badge centered">
                     <span class="car-number">#92</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1949,12 +2258,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_scott_sanderson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-93').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-93" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Scott%20Sanderson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#93</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">SCOTT SANDERSON</div>
@@ -1963,12 +2275,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-94" class="floating-number-badge centered">
                     <span class="car-number">#94</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1977,12 +2292,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-95" class="floating-number-badge centered">
                     <span class="car-number">#95</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -1992,12 +2310,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_lucas_wilson.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-96').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-96" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Lucas%20Wilson.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#96</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">LUCAS WILSON</div>
@@ -2007,12 +2328,15 @@ header {
         <div class="card" data-status="past-champion">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_eddie_hagigh.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-97').classList.add('centered');">
-                <span class="status-badge-b past-champion">Past Champion Reserved</span>
                 <div id="num-badge-97" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Eddie%20Hagigh.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#97</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline past-champion">Past Champion Reserved</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">EDDIE HAGIGH</div>
@@ -2021,12 +2345,15 @@ header {
         </div>
         <div class="card" data-status="available">
             <div class="card-visual-banner">
-                <span class="status-badge-b available">Available</span>
                 <div id="num-badge-98" class="floating-number-badge centered">
                     <span class="car-number">#98</span>
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline available">Available</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;"><span style="opacity: 0.3">Available</span></div>
@@ -2036,12 +2363,15 @@ header {
         <div class="card" data-status="part-time">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_josh_billiter.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-99').classList.add('centered');">
-                <span class="status-badge-b part-time">Part Time</span>
                 <div id="num-badge-99" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Josh%20Billiter.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#99</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline part-time">Part Time</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">JOSH BILLITER</div>
@@ -2051,12 +2381,15 @@ header {
         <div class="card" data-status="reserved">
             <div class="card-visual-banner">
                 <img src="assets/truck%20images/truck_image_unavailable.png" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-100').classList.add('centered');">
-                <span class="status-badge-b reserved">Reserved / Practice</span>
                 <div id="num-badge-100" class="floating-number-badge">
                     <img src="assets/drivers%20numbers/Unavailable.png" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\'car-number\'>#100</span>'">
                 </div>
             </div>
             <div class="card-body-b">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;">Status</span>
+                    <span class="status-badge-inline reserved">Reserved / Practice</span>
+                </div>
                 <div class="input-group">
                     <label style="display:block;">Driver Name</label>
                     <div class="driver-input" style="padding: 0.8rem 0; font-size: 1.5rem;">UNAVAILABLE</div>
