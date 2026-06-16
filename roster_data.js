@@ -87,6 +87,10 @@ const rosterData = {
     "driver": "ETHAN SIKORSKI",
     "status": "part-time"
   },
+  "25": {
+    "driver": "REAGAN FRUGE",
+    "status": "full-time"
+  },
   "27": {
     "driver": "MICHAEL RAMOS",
     "status": "full-time"

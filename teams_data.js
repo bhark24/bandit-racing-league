@@ -228,6 +228,11 @@ const teamsData = {
       "lat": 35.2271,
       "lon": -80.8431
     },
+    "REAGAN FRUGE": {
+      "city": "Keenesburg, CO",
+      "lat": 40.1088,
+      "lon": -104.5202
+    },
     "JASON ALLEGRINI": {
       "city": "Nashville, TN",
       "lat": 36.1627,
@@ -532,7 +537,7 @@ const teamsData = {
           "VACANT",
           "VACANT",
           "VACANT",
-          "VACANT"
+          "REAGAN FRUGE"
         ],
         "backup": [
           "DYLAN NICASTRO",
