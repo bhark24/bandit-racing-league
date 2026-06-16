@@ -79,6 +79,9 @@
             object-fit: contain;
             transition: all 0.3s ease;
         }
+        .custom-number-img.invert-white {
+            filter: brightness(0) invert(1);
+        }
         .floating-number-badge.centered .custom-number-img {
             max-height: 85px;
             max-width: 160px;
@@ -453,7 +456,7 @@
                         ${hasDriver ? `
                             <img src="${getTruckImgPath(data.driver)}" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-${num}').classList.add('centered');">
                             <div id="num-badge-${num}" class="floating-number-badge">
-                                <img src="${getDriverImgPath(data.driver)}" class="custom-number-img" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>#${num}</span>'">
+                                <img src="${getDriverImgPath(data.driver)}" class="custom-number-img ${num === '84' ? 'invert-white' : ''}" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>#${num}</span>'">
                             </div>
                         ` : `
                             <div id="num-badge-${num}" class="floating-number-badge centered">
