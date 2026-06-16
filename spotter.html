@@ -655,6 +655,74 @@
                         </div>
                     </div>
 
+                    <!-- Live Inputs & Race Status Widget -->
+                    <div class="dash-card" style="margin-top: 5px;">
+                        <h3 class="card-title">Live Telemetry & Race Status</h3>
+                        
+                        <!-- Speed, Gear, Incidents -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 12px 18px; border-radius: 8px;">
+                            <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
+                                <span style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-style: italic; font-weight: 700; letter-spacing: 0.5px;">Gear</span>
+                                <span id="telemetry-gear" style="font-size: 1.8rem; font-weight: 900; color: var(--chase-yellow); font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.1;">N</span>
+                            </div>
+                            <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.12);"></div>
+                            <div style="display: flex; flex-direction: column; align-items: center; width: 35%;">
+                                <span style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-style: italic; font-weight: 700; letter-spacing: 0.5px;">Speed</span>
+                                <span id="telemetry-speed" style="font-size: 1.5rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.1;">0 <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">MPH</span></span>
+                            </div>
+                            <div style="width: 1px; height: 35px; background: rgba(255,255,255,0.12);"></div>
+                            <div style="display: flex; flex-direction: column; align-items: center; width: 30%;">
+                                <span style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-style: italic; font-weight: 700; letter-spacing: 0.5px;">Incidents</span>
+                                <span id="telemetry-incidents" style="font-size: 1.3rem; font-weight: 900; color: #ff1744; font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.1;">0/99</span>
+                            </div>
+                        </div>
+                        
+                        <!-- RPM Bar -->
+                        <div style="margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-style: italic; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 5px;">
+                                <span>RPM</span>
+                                <span id="telemetry-rpm-val" style="color: #fff; font-family: monospace;">0</span>
+                            </div>
+                            <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.08); border-radius: 5px; overflow: hidden; border: 1px solid rgba(255,255,255,0.04);">
+                                <div id="telemetry-rpm-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--neon-green) 0%, var(--chase-yellow) 75%, #ff1744 100%); transition: width 0.05s linear;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Throttle & Brake Pedals -->
+                        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                            <div style="flex: 1;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-style: italic; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 5px;">
+                                    <span>Throttle</span>
+                                    <span id="telemetry-throttle-val" style="color: var(--neon-green); font-weight: bold;">0%</span>
+                                </div>
+                                <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden;">
+                                    <div id="telemetry-throttle-bar" style="width: 0%; height: 100%; background: var(--neon-green); transition: width 0.05s linear;"></div>
+                                </div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-style: italic; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 5px;">
+                                    <span>Brake</span>
+                                    <span id="telemetry-brake-val" style="color: #ff1744; font-weight: bold;">0%</span>
+                                </div>
+                                <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden;">
+                                    <div id="telemetry-brake-bar" style="width: 0%; height: 100%; background: #ff1744; transition: width 0.05s linear;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pit Status & Fast Repairs -->
+                        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700; background: rgba(0, 0, 0, 0.2); padding: 10px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="color: var(--text-muted);">Pit Status:</span>
+                                <span id="telemetry-pit-status" style="color: var(--neon-green); font-weight: 900;">ON TRACK</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="color: var(--text-muted);">Repairs Left:</span>
+                                <span id="telemetry-repairs" style="color: #fff; font-weight: 900;">-- / --</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -918,6 +986,63 @@
                 lastStintEl.innerText = data.prevStint !== undefined && data.prevStint > 0 ? data.prevStint : '--';
             }
 
+            // Update Live Telemetry & Race Status Widget
+            const gearVal = data.gear !== undefined ? data.gear : 0;
+            let gearText = gearVal;
+            if (gearVal === 0) gearText = 'N';
+            else if (gearVal === -1) gearText = 'R';
+            document.getElementById('telemetry-gear').innerText = gearText;
+
+            const speedVal = data.speed !== undefined ? data.speed : 0;
+            document.getElementById('telemetry-speed').innerHTML = `${Math.round(speedVal)} <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">MPH</span>`;
+
+            const incVal = data.incidents !== undefined ? data.incidents : 0;
+            const maxIncVal = data.maxIncidents !== undefined ? data.maxIncidents : "99";
+            document.getElementById('telemetry-incidents').innerText = `${incVal}/${maxIncVal}`;
+
+            const rpmVal = data.rpm !== undefined ? data.rpm : 0;
+            const maxRpmVal = data.maxRpm && data.maxRpm > 0 ? data.maxRpm : 8000;
+            let rpmPct = (rpmVal / maxRpmVal) * 100;
+            if (rpmPct > 100) rpmPct = 100;
+            if (rpmPct < 0) rpmPct = 0;
+            document.getElementById('telemetry-rpm-val').innerText = Math.round(rpmVal);
+            document.getElementById('telemetry-rpm-bar').style.width = `${rpmPct}%`;
+
+            const throttleVal = data.throttle !== undefined ? data.throttle : 0.0;
+            const throttlePct = throttleVal * 100;
+            document.getElementById('telemetry-throttle-val').innerText = `${Math.round(throttlePct)}%`;
+            document.getElementById('telemetry-throttle-bar').style.width = `${throttlePct}%`;
+
+            const brakeVal = data.brake !== undefined ? data.brake : 0.0;
+            const brakePct = brakeVal * 100;
+            document.getElementById('telemetry-brake-val').innerText = `${Math.round(brakePct)}%`;
+            document.getElementById('telemetry-brake-bar').style.width = `${brakePct}%`;
+
+            const pitStatusEl = document.getElementById('telemetry-pit-status');
+            if (data.onPitRoad) {
+                if (data.feetToStall !== undefined && data.feetToStall > 0) {
+                    pitStatusEl.innerText = `PITS (${data.feetToStall.toFixed(1)} FT)`;
+                } else {
+                    pitStatusEl.innerText = 'ON PIT ROAD';
+                }
+                pitStatusEl.style.color = 'var(--chase-yellow)';
+            } else {
+                pitStatusEl.innerText = 'ON TRACK';
+                pitStatusEl.style.color = 'var(--neon-green)';
+            }
+
+            const repairsAvail = data.repairsAvail !== undefined ? data.repairsAvail : 0;
+            const repairsUsed = data.repairsUsed !== undefined ? data.repairsUsed : 0;
+            const totalRepairs = repairsAvail + repairsUsed;
+            const repairsLeft = repairsAvail;
+            let repairsText = `-- / --`;
+            if (repairsAvail === -1 || totalRepairs > 100) {
+                repairsText = `UNLIMITED`;
+            } else {
+                repairsText = `${repairsLeft} / ${totalRepairs}`;
+            }
+            document.getElementById('telemetry-repairs').innerText = repairsText;
+
             // Update SVG Track Map positions
             if (data.allDrivers) {
                 updateTrackMap(data.allDrivers);
@@ -1155,6 +1280,14 @@
             let flags = ['green', 'yellow', 'green', 'blue', 'green'];
             let flagIndex = 0;
 
+            // Simulated live telemetry loop variables
+            let gear = 5;
+            let speed = 188;
+            let rpm = 7450;
+            let incidents = 2;
+            let repairsAvail = 1;
+            let repairsUsed = 0;
+
             demoInterval = setInterval(() => {
                 // Decay fuel slightly
                 fuel -= 0.03;
@@ -1185,6 +1318,45 @@
                     mockPenalty = Math.random() > 0.5 ? "Passing under Yellow" : "";
                 }
 
+                // Modulate speed, gear, rpm, throttle, brake based on flags
+                let isYellow = flags[flagIndex] === 'yellow';
+                let isBlack = flags[flagIndex] === 'black';
+                
+                let onPitRoad = isBlack; // simulate pit entry on black flag
+                let feetToStall = 0.0;
+                let throttle = 1.0;
+                let brake = 0.0;
+                
+                if (onPitRoad) {
+                    speed = Math.max(45, speed - 15);
+                    gear = speed > 55 ? 3 : 2;
+                    rpm = speed * 80;
+                    throttle = 0.2 + Math.random() * 0.2;
+                    brake = Math.random() > 0.5 ? 0.1 : 0.0;
+                    feetToStall = Math.max(0, 150 - (fuel % 5) * 40); // countdown feet to stall
+                } else if (isYellow) {
+                    speed = Math.max(70, speed - 8);
+                    gear = speed > 100 ? 4 : 3;
+                    rpm = speed * 60;
+                    throttle = 0.3 + Math.random() * 0.1;
+                    brake = Math.random() > 0.9 ? 0.15 : 0.0;
+                } else {
+                    // Green flag racing
+                    if (Math.random() > 0.95) {
+                        // random tiny lift
+                        throttle = 0.6 + Math.random() * 0.3;
+                        speed = Math.max(175, speed - 3);
+                        rpm = speed * 40;
+                        brake = 0.0;
+                    } else {
+                        throttle = 1.0;
+                        brake = 0.0;
+                        speed = Math.min(195, Math.max(182, speed + (Math.random() - 0.5) * 2));
+                        rpm = speed * 41 + (Math.random() - 0.5) * 50;
+                        gear = 5;
+                    }
+                }
+
                 const mockData = {
                     trackName: "Daytona International Speedway",
                     flagState: flags[flagIndex],
@@ -1203,7 +1375,20 @@
                         RR: { wear: Math.round(90 - (lap * 0.28)), temps: [215, 228, 235] }
                     },
                     relative: relativePositions,
-                    allDrivers: trackDrivers
+                    allDrivers: trackDrivers,
+                    // New simulated fields
+                    gear: gear,
+                    speed: speed,
+                    rpm: rpm,
+                    maxRpm: 8300,
+                    throttle: throttle,
+                    brake: brake,
+                    incidents: incidents,
+                    maxIncidents: "17",
+                    onPitRoad: onPitRoad,
+                    feetToStall: feetToStall,
+                    repairsAvail: repairsAvail,
+                    repairsUsed: repairsUsed
                 };
 
                 handleTelemetryPacket(mockData);
