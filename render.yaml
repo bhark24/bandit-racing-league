@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: brl-relay-geezer
+    env: python
+    buildCommand: pip install -r relay-server/requirements.txt
+    startCommand: python relay-server/server.py
+    envVars:
+      - key: PORT
+        value: 10000
