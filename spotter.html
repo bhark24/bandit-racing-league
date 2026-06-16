@@ -687,7 +687,7 @@
             document.getElementById('header-avatar').innerText = driverId.substring(0, 2);
 
             // Establish websocket connection to Cloud Relay Server
-            const relayHost = 'wss://relay.geezerapp.com/ws/' + driverId;
+            const relayHost = 'wss://demo.piesocket.com/v3/brl_telemetry_' + driverId + '?api_key=VC1GdCszxuHAzzSF1otmQasZaZPDzchSfCHz0s10';
             
             updateConnectionStatus(false, "CONNECTING");
 

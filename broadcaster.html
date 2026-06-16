@@ -486,7 +486,7 @@
                     } catch(e){}
                 }
                 
-                const wsUrl = `wss://relay.geezerapp.com/ws/${driver.id}`;
+                const wsUrl = `wss://demo.piesocket.com/v3/brl_telemetry_${driver.id}?api_key=VC1GdCszxuHAzzSF1otmQasZaZPDzchSfCHz0s10`;
                 const tempWs = new WebSocket(wsUrl);
                 driver.wsConnection = tempWs;
                 
