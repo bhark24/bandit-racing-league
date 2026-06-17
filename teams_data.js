@@ -647,7 +647,7 @@ const teamsData = {
         {
           "id": "truck-4",
           "make": "Chevrolet",
-          "name": "ZeroFoxtrot Silverado #00",
+          "name": "ZeroFoxtrot Silverado #27",
           "condition": 100
         }
       ],

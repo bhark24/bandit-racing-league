@@ -32,7 +32,7 @@ def load_roster_mapping():
         for num, info in data.items():
             driver_name = info.get("driver")
             if driver_name:
-                mapping.setdefault(driver_name.upper(), []).append(num)
+                mapping.setdefault(normalize_name(driver_name), []).append(num)
         return mapping
     except Exception as e:
         print(f"Warning: Error parsing rosterData JSON: {e}")
@@ -150,6 +150,7 @@ def normalize_name(name):
             name = f"{parts[1].strip()} {parts[0].strip()}"
     name = re.sub(r'\s+[a-z]\s+', ' ', name)
     name = re.sub(r'\s+', ' ', name).strip()
+    name = name.replace("mc ", "mc")
     
     name_map = {
         "josh": "joshua",
@@ -157,9 +158,10 @@ def normalize_name(name):
         "jon": "john",
         "dave": "david",
         "mike": "michael",
-        "diante": "dionte",
+        "diante": "di0nte",
+        "dionte": "di0nte",
         "roder": "rader",
-        "connor": "conor",
+        "conor": "connor",
         "kondas": "kondus"
     }
     
@@ -557,7 +559,7 @@ def main():
         for idx, (driver_name, is_backup, replaced_pri) in enumerate(active_lineup):
             norm_driver = normalize_name(driver_name)
             # Find the truck associated with this driver's number
-            driver_nums = roster_mapping.get(driver_name.upper(), [])
+            driver_nums = roster_mapping.get(normalize_name(driver_name), [])
             truck = None
             for num in driver_nums:
                 for t in team["trucks"]:
