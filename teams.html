@@ -2337,6 +2337,16 @@
                         localStorage.removeItem('bandit_teams_data');
                         return;
                     }
+
+                    // Force clear cache if it is missing the recent Roundy Motorsports driver signings or the ESR team.
+                    const localRoundy = localData.teams ? localData.teams.find(t => t.id === 'roundy-motorsports') : null;
+                    const hasLogan = localRoundy && localRoundy.ledger && localRoundy.ledger.some(e => e.description && e.description.includes("LOGAN MURRAY"));
+                    const hasESR = localData.teams && localData.teams.some(t => t.id === 'esr');
+                    if (localData.teams && (!hasLogan || !hasESR)) {
+                        console.log("Cache outdated (missing Logan/Matt signing or ESR team). Reverting cache.");
+                        localStorage.removeItem('bandit_teams_data');
+                        return;
+                    }
                     
                     const mergedTeams = serverTeams.map(serverTeam => {
                         const savedTeam = localData.teams.find(t => t.id === serverTeam.id);
