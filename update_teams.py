@@ -519,7 +519,10 @@ def main():
             "columbia, sc": (34.0007, -81.0348),
             "katy, tx": (29.7858, -95.8244),
             "toronto, ontario": (43.6532, -79.3832),
-            "athens, al": (34.8029, -86.9717)
+            "athens, al": (34.8029, -86.9717),
+            "new york, new york": (40.7128, -74.0060),
+            "new york, new york (it's currently on fire)": (40.7128, -74.0060),
+            "new york, new york (it’s currently on fire)": (40.7128, -74.0060)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates

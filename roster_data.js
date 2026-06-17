@@ -233,7 +233,7 @@ const rosterData = {
   },
   "00": {
     "driver": "Jackson Knaak",
-    "status": "full-time"
+    "status": "part-time"
   },
   "02": {
     "driver": "NOLAN GROSS",

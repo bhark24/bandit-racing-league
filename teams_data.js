@@ -1026,6 +1026,75 @@ const teamsData = {
         "Craftsman Tools"
       ],
       "passcodeHash": "06d4e8be5b07a51c4a0349a2a6f8b9f71c4222049e0c326e5e8e819b35bc456e"
+    },
+    {
+      "id": "esr",
+      "name": "ESR",
+      "owner": "Ethan Sikorski",
+      "homeBase": "New York, New York (it's currently on fire)",
+      "logo": "assets/esr.png",
+      "points": 0,
+      "wins": 0,
+      "balance": 2010000,
+      "loan": 0,
+      "drivers": {
+        "primary": [
+          "JACKSON KNAAK",
+          "VACANT",
+          "VACANT",
+          "VACANT"
+        ],
+        "backup": [
+          "ETHAN SIKORSKI",
+          "NATHAN SANTOS"
+        ]
+      },
+      "trucks": [
+        {
+          "id": "truck-1",
+          "make": "Chevrolet",
+          "name": "ESR Silverado #24",
+          "condition": 100
+        },
+        {
+          "id": "truck-2",
+          "make": "Chevrolet",
+          "name": "ESR Silverado #00",
+          "condition": 100
+        },
+        {
+          "id": "truck-3",
+          "make": "Chevrolet",
+          "name": "ESR Silverado #21",
+          "condition": 100
+        },
+        {
+          "id": "truck-4",
+          "make": "Chevrolet",
+          "name": "ESR Silverado #TBD",
+          "condition": 100
+        }
+      ],
+      "ledger": [
+        {
+          "date": "2026-05-24",
+          "description": "Starting Franchise Balance",
+          "category": "income",
+          "amount": 2750000
+        },
+        {
+          "date": "2026-05-24",
+          "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
+          "category": "expense",
+          "amount": -740000
+        }
+      ],
+      "sponsors": [
+        "ESR",
+        "Chevrolet Accessories",
+        "Craftsman Tools"
+      ],
+      "passcodeHash": "8350242b2df439d296a664c7c59b117507d0b3c537fa293304c84d84eb85cc43"
     }
   ]
 };
