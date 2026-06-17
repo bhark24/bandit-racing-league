@@ -361,7 +361,7 @@ const teamsData = {
     "MARK ALAN BIVENS": {
       "city": "Blytheville, AR",
       "lat": 35.9273,
-      "lon": -89.9190
+      "lon": -89.919
     },
     "MASON PHLEGAR": {
       "city": "Las Vegas, NV",
@@ -371,7 +371,7 @@ const teamsData = {
     "ADAM TAHAN": {
       "city": "Fontana, CA",
       "lat": 34.0922,
-      "lon": -117.4350
+      "lon": -117.435
     },
     "JOSHUA SUTHERLAND": {
       "city": "Seymour, IN",
@@ -480,7 +480,7 @@ const teamsData = {
       "logo": "assets/937-racing-logo.png",
       "points": 0,
       "wins": 0,
-      "balance": 1775000,
+      "balance": 1625000,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -550,6 +550,24 @@ const teamsData = {
           "description": "Purchased Fleet Truck: 937 Tundra #47",
           "category": "expense",
           "amount": -185000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: JOSH ADAMS (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: DIONTE RADER (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: MATT BAILEY (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
@@ -567,7 +585,7 @@ const teamsData = {
       "logo": "assets/wrists-up-racing-logo.png",
       "points": 0,
       "wins": 0,
-      "balance": 2010000,
+      "balance": 1910000,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -619,6 +637,18 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: REAGAN FRUGE (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: DAVID WESTOVER JR (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
@@ -636,7 +666,7 @@ const teamsData = {
       "logo": "assets/zerofoxtrot-logo.jpg",
       "points": 0,
       "wins": 0,
-      "balance": 1960000,
+      "balance": 1860000,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -694,6 +724,18 @@ const teamsData = {
           "description": "Signed Driver: MICHAEL RAMOS (Signing Bonus)",
           "category": "expense",
           "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: CONOR GIBSON (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: CURTIS YANCEY (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
@@ -711,7 +753,7 @@ const teamsData = {
       "logo": "assets/carter-phillips-racing-logo.jpg",
       "points": 0,
       "wins": 0,
-      "balance": 2010000,
+      "balance": 1910000,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -763,6 +805,18 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: EDDIE HAGIGH (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: JASON GREENWELL (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
@@ -778,7 +832,7 @@ const teamsData = {
       "logo": "assets/gfr.png",
       "points": 0,
       "wins": 0,
-      "balance": 1775000,
+      "balance": 1625000,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -848,6 +902,24 @@ const teamsData = {
           "description": "Purchased Fleet Truck: GFR Silverado #13",
           "category": "expense",
           "amount": -185000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: NICK NICKERSON (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: RICKY HART (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: BENJAMIN LACY (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
@@ -865,7 +937,7 @@ const teamsData = {
       "logo": "assets/Striped-maple-racing.png",
       "points": 0,
       "wins": 0,
-      "balance": 2010000,
+      "balance": 1860000,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -917,6 +989,24 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: DAVIS CARROLL (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: JOSH BILLITER (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: DYLAN MCDONALD (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
@@ -1003,7 +1093,7 @@ const teamsData = {
       "logo": "assets/pop-motorsports.png",
       "points": 0,
       "wins": 0,
-      "balance": 2010000,
+      "balance": 1960000,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -1055,6 +1145,12 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: CORDELL MCFARLIN (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
@@ -1072,7 +1168,7 @@ const teamsData = {
       "logo": "assets/esr.png",
       "points": 0,
       "wins": 0,
-      "balance": 2010000,
+      "balance": 1910000,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -1124,6 +1220,18 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: JACKSON KNAAK (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: NATHAN SANTOS (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
@@ -1141,7 +1249,7 @@ const teamsData = {
       "logo": "assets/yung_gunz.png",
       "points": 0,
       "wins": 0,
-      "balance": 2010000,
+      "balance": 1860000,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -1193,6 +1301,24 @@ const teamsData = {
           "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
           "category": "expense",
           "amount": -740000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: ADAM TAHAN (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: JOSHUA D SUTHERLAND (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: MASON PHLEGAR (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "sponsors": [
