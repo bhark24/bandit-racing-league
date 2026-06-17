@@ -368,7 +368,7 @@ const teamsData = {
       "logo": "assets/roundy-motorsports-logo.png",
       "points": 0,
       "wins": 0,
-      "balance": 1960000,
+      "balance": 1860000,
       "loan": 0,
       "drivers": {
         "primary": [
@@ -424,6 +424,18 @@ const teamsData = {
         {
           "date": "Jun 02, 2026",
           "description": "Signed Driver: TERRY KONDAS (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: LOGAN MURRAY (Signing Bonus)",
+          "category": "expense",
+          "amount": -50000
+        },
+        {
+          "date": "Jun 02, 2026",
+          "description": "Signed Driver: MATT CROCKETT (Signing Bonus)",
           "category": "expense",
           "amount": -50000
         }
