@@ -357,6 +357,31 @@ const teamsData = {
       "city": "Oklahoma City, OK",
       "lat": 35.4676,
       "lon": -97.5164
+    },
+    "MARK ALAN BIVENS": {
+      "city": "Blytheville, AR",
+      "lat": 35.9273,
+      "lon": -89.9190
+    },
+    "MASON PHLEGAR": {
+      "city": "Las Vegas, NV",
+      "lat": 36.1672,
+      "lon": -115.1486
+    },
+    "ADAM TAHAN": {
+      "city": "Fontana, CA",
+      "lat": 34.0922,
+      "lon": -117.4350
+    },
+    "JOSHUA SUTHERLAND": {
+      "city": "Seymour, IN",
+      "lat": 38.9592,
+      "lon": -85.8903
+    },
+    "JOSHUA D SUTHERLAND": {
+      "city": "Seymour, IN",
+      "lat": 38.9592,
+      "lon": -85.8903
     }
   },
   "teams": [
@@ -1107,6 +1132,75 @@ const teamsData = {
         "Craftsman Tools"
       ],
       "passcodeHash": "8350242b2df439d296a664c7c59b117507d0b3c537fa293304c84d84eb85cc43"
+    },
+    {
+      "id": "middle-aged-gunz-motorsports",
+      "name": "Middle Aged Gunz Motorsports",
+      "owner": "Mark Alan Bivens",
+      "homeBase": "Bat Cave, NC",
+      "logo": "assets/yung_gunz.png",
+      "points": 0,
+      "wins": 0,
+      "balance": 2010000,
+      "loan": 0,
+      "drivers": {
+        "primary": [
+          "ADAM TAHAN",
+          "JOSHUA D SUTHERLAND",
+          "VACANT",
+          "VACANT"
+        ],
+        "backup": [
+          "MARK ALAN BIVENS",
+          "MASON PHLEGAR"
+        ]
+      },
+      "trucks": [
+        {
+          "id": "truck-1",
+          "make": "Chevrolet",
+          "name": "Middle Aged Gunz Silverado #76",
+          "condition": 100
+        },
+        {
+          "id": "truck-2",
+          "make": "Chevrolet",
+          "name": "Middle Aged Gunz Silverado #72",
+          "condition": 100
+        },
+        {
+          "id": "truck-3",
+          "make": "Chevrolet",
+          "name": "Middle Aged Gunz Silverado #0",
+          "condition": 100
+        },
+        {
+          "id": "truck-4",
+          "make": "Chevrolet",
+          "name": "Middle Aged Gunz Silverado #16",
+          "condition": 100
+        }
+      ],
+      "ledger": [
+        {
+          "date": "2026-05-24",
+          "description": "Starting Franchise Balance",
+          "category": "income",
+          "amount": 2750000
+        },
+        {
+          "date": "2026-05-24",
+          "description": "Purchased Fleet of 4x Chevrolet Silverado Trucks",
+          "category": "expense",
+          "amount": -740000
+        }
+      ],
+      "sponsors": [
+        "Middle Aged Gunz Motorsports",
+        "Chevrolet Accessories",
+        "Craftsman Tools"
+      ],
+      "passcodeHash": "40c5f212269a2123d069b22a00062dfc9b83b3d4f1efb496d63e9f456c6ff396"
     }
   ]
 };

@@ -177,7 +177,7 @@ const rosterData = {
   },
   "76": {
     "driver": "MARK ALAN BIVENS",
-    "status": "past-champion"
+    "status": "part-time"
   },
   "77": {
     "driver": "TYSON KOPF",
