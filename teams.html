@@ -61,7 +61,7 @@
         }
         .teams-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
             margin-bottom: 50px;
         }
@@ -215,6 +215,24 @@
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem !important;
+            }
+            .hero h2 {
+                font-size: 1.1rem !important;
+                letter-spacing: 3px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.0rem !important;
+            }
+            .hero h2 {
+                font-size: 0.9rem !important;
+                letter-spacing: 1.5px !important;
             }
         }
         @keyframes fadeIn {
@@ -683,7 +701,9 @@
         <div class="container footer-content" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
             <div style="text-align: center;">
                 <img src="assets/discord-qr.png" alt="Join Discord QR Code" style="max-width: 150px; border-radius: 12px; border: 2px solid var(--neon-green); box-shadow: 0 0 15px rgba(0,255,0,0.2);">
-                <p style="margin-top: 10px; font-family: var(--font-heading); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: var(--neon-green);">Scan to Join our Discord!</p>
+                <p style="margin-top: 10px; font-family: var(--font-heading); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: var(--neon-green);">
+                    Scan or <a href="https://discord.gg/HSvP4UG2st" target="_blank" style="color: #fff; text-decoration: underline; transition: color 0.2s;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='#fff'">Click Here</a> to Join our Discord!
+                </p>
             </div>
             <p style="color: #666;">&copy; 2026 Bandit Racing League. All rights reserved.</p>
         </div>
