@@ -540,9 +540,7 @@ def main():
             "toronto, ontario": (43.6532, -79.3832),
             "athens, al": (34.8029, -86.9717),
             "new york, new york": (40.7128, -74.0060),
-            "new york, new york (it's currently on fire)": (40.7128, -74.0060),
             "bat cave, nc": (35.4515, -82.2871),
-            "new york, new york (it’s currently on fire)": (40.7128, -74.0060),
             "coal run village, ky": (37.4998, -82.5290)
         }
         home_base_norm = team["homeBase"].strip().lower()

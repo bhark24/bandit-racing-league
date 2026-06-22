@@ -2385,7 +2385,7 @@ const teamsData = {
       "id": "esr",
       "name": "ESR",
       "owner": "Ethan Sikorski",
-      "homeBase": "New York, New York (it's currently on fire)",
+      "homeBase": "New York, New York",
       "logo": "assets/esr.png",
       "points": 63,
       "wins": 0,
@@ -2456,7 +2456,7 @@ const teamsData = {
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Hauler Logistics: New York, New York (it's currently on fire) to Daytona Beach, FL (887 mi round trip)",
+          "description": "Hauler Logistics: New York, New York to Daytona Beach, FL (887 mi round trip)",
           "category": "expense",
           "amount": -8877
         },
