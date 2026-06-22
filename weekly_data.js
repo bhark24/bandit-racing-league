@@ -71,151 +71,151 @@ const weeklyData = {
   "driverStandings": [
     {
       "pos": 1,
-      "name": "Scott Sanderson",
-      "points": 44
+      "name": "Dylan McDonald",
+      "points": 46
     },
     {
       "pos": 2,
-      "name": "Dylan McDonald",
-      "points": 41
+      "name": "Scott Sanderson",
+      "points": 45
     },
     {
       "pos": 3,
-      "name": "Sean Britt",
-      "points": 40
+      "name": "Jackson Knaak",
+      "points": 39
     },
     {
       "pos": 4,
-      "name": "Jackson Knaak",
-      "points": 38
+      "name": "Michael Rakes",
+      "points": 36
     },
     {
       "pos": 5,
-      "name": "Michael Rakes",
+      "name": "Carter Phillips",
       "points": 35
     },
     {
       "pos": 6,
-      "name": "Carter Phillips",
+      "name": "Benjamin I Lacy",
       "points": 34
     },
     {
-      "pos": 7,
-      "name": "Benjamin I Lacy",
-      "points": 33
+      "pos": 6,
+      "name": "Bob Berry",
+      "points": 34
     },
     {
       "pos": 8,
-      "name": "Bob Berry",
-      "points": 33
+      "name": "Logan A Murray",
+      "points": 32
     },
     {
       "pos": 9,
-      "name": "Logan A Murray",
+      "name": "Wes Fuller",
       "points": 31
     },
     {
       "pos": 10,
-      "name": "Wes Fuller",
+      "name": "Kevin Foster",
       "points": 30
     },
     {
-      "pos": 11,
-      "name": "Kevin Foster",
-      "points": 29
-    },
-    {
-      "pos": 11,
+      "pos": 10,
       "name": "Johnathon Platt",
+      "points": 30
+    },
+    {
+      "pos": 12,
+      "name": "Reagan Fruge",
       "points": 29
     },
     {
-      "pos": 13,
-      "name": "Reagan Fruge",
-      "points": 28
+      "pos": 12,
+      "name": "Eddie Hagigh",
+      "points": 29
     },
     {
-      "pos": 13,
-      "name": "Eddie Hagigh",
+      "pos": 14,
+      "name": "Davis Carroll",
       "points": 28
     },
     {
       "pos": 15,
-      "name": "Davis Carroll",
+      "name": "Matt Crockett",
       "points": 27
     },
     {
-      "pos": 16,
-      "name": "Matt Crockett",
-      "points": 26
+      "pos": 15,
+      "name": "Nathan Santos",
+      "points": 27
     },
     {
-      "pos": 16,
-      "name": "Nathan Santos",
-      "points": 26
+      "pos": 17,
+      "name": "Joshua Billiter",
+      "points": 23
     },
     {
       "pos": 18,
-      "name": "Joshua Billiter",
-      "points": 22
-    },
-    {
-      "pos": 19,
       "name": "Jason Allegrini",
-      "points": 20
+      "points": 21
     },
     {
-      "pos": 19,
+      "pos": 18,
       "name": "Jon Osborne",
+      "points": 21
+    },
+    {
+      "pos": 20,
+      "name": "David Leakey",
       "points": 20
     },
     {
-      "pos": 21,
-      "name": "David Leakey",
-      "points": 19
-    },
-    {
-      "pos": 21,
+      "pos": 20,
       "name": "Michael R Ramos",
+      "points": 20
+    },
+    {
+      "pos": 22,
+      "name": "Chad Hartle",
       "points": 19
     },
     {
-      "pos": 23,
-      "name": "Chad Hartle",
-      "points": 18
+      "pos": 22,
+      "name": "Victor Weaver",
+      "points": 19
     },
     {
-      "pos": 23,
+      "pos": 24,
       "name": "Ethan Sikorski",
       "points": 18
     },
     {
-      "pos": 23,
-      "name": "Victor Weaver",
-      "points": 18
+      "pos": 25,
+      "name": "Garret Bobo",
+      "points": 17
     },
     {
       "pos": 26,
-      "name": "Garret Bobo",
-      "points": 16
+      "name": "Nicole Kriesel",
+      "points": 12
     },
     {
       "pos": 27,
-      "name": "Nicole Kriesel",
+      "name": "Brandon Jackson",
       "points": 11
     },
     {
-      "pos": 28,
-      "name": "Brandon Jackson",
-      "points": 10
-    },
-    {
-      "pos": 28,
+      "pos": 27,
       "name": "Cordell McFarlin",
-      "points": 10
+      "points": 11
     },
     {
-      "pos": 30,
+      "pos": 29,
+      "name": "Sean Britt",
+      "points": 9
+    },
+    {
+      "pos": 29,
       "name": "Connor Gibson",
       "points": 9
     },
