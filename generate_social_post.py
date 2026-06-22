@@ -454,7 +454,9 @@ def main():
     post_text = f"""🏁 **BANDIT RACING LEAGUE - WEEKLY UPDATE** 🏁
 Custom Standing Graphic: assets/weekly_social_update.png
 
-What a race! Congratulations to **{winner_name}** for taking the checkered flag at **{track_name}** ({race_date})! 🏆
+Controversy at Daytona! Sean Britt crossed the line first after contact sent Jonathon Platt spinning into the infield. However, after a post-race administrative review, the win was stripped from Britt and awarded to **{winner_name}**! Platt was scored where he crossed the line as the contact was ruled a racing incident.
+
+What a wild start to Season 16! Congratulations to **{winner_name}** and Legacy Racing for taking the checkered flag at **{track_name}** ({race_date})! 🏆
 
 💼 **FRANCHISE TEAM STANDINGS** 💼
 Here is how the Team Championship looks after this week:
