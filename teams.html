@@ -2363,18 +2363,19 @@
                         return;
                     }
 
-                    // Force clear cache if it is missing the recent Roundy Motorsports driver signings, the ESR team, the Gunz team, or the starting signing bonuses.
+                    // Force clear cache if it is missing the recent Roundy Motorsports driver signings, the ESR team, the Gunz team, the Legacy Racing team, or the starting signing bonuses.
                     const localRoundy = localData.teams ? localData.teams.find(t => t.id === 'roundy-motorsports') : null;
                     const hasLogan = localRoundy && localRoundy.ledger && localRoundy.ledger.some(e => e.description && e.description.includes("LOGAN MURRAY"));
                     const hasESR = localData.teams && localData.teams.some(t => t.id === 'esr');
                     const hasGunz = localData.teams && localData.teams.some(t => t.id === 'middle-aged-gunz-motorsports');
+                    const hasLegacy = localData.teams && localData.teams.some(t => t.id === 'legacy-racing');
                     
                     // Verify if the starting signing bonuses are present by checking GFR Nick Nickerson
                     const localGFR = localData.teams ? localData.teams.find(t => t.id === 'gfr-racing') : null;
                     const hasNick = localGFR && localGFR.ledger && localGFR.ledger.some(e => e.description && e.description.includes("NICK NICKERSON"));
                     
-                    if (localData.teams && (!hasLogan || !hasESR || !hasGunz || !hasNick)) {
-                        console.log("Cache outdated (missing Logan/Matt signing, ESR team, Gunz team, or starting signing bonuses). Reverting cache.");
+                    if (localData.teams && (!hasLogan || !hasESR || !hasGunz || !hasNick || !hasLegacy)) {
+                        console.log("Cache outdated (missing Logan/Matt signing, ESR, Gunz, Legacy team, or starting signing bonuses). Reverting cache.");
                         localStorage.removeItem('bandit_teams_data');
                         return;
                     }

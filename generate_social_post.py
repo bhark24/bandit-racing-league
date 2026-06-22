@@ -19,8 +19,13 @@ def clean_driver_name(raw_name):
     if ',' in raw_name:
         parts = raw_name.split(',')
         if len(parts) == 2:
-            return f"{parts[1].strip().title()} {parts[0].strip().title()}"
-    return raw_name.title()
+            first = re.sub(r'\d+$', '', parts[1].strip()).strip()
+            last = re.sub(r'\d+$', '', parts[0].strip()).strip()
+            res = f"{first.title()} {last.title()}"
+            return re.sub(r'\b(Mc)([a-z])', lambda m: m.group(1) + m.group(2).upper(), res)
+    raw_name = re.sub(r'\d+$', '', raw_name).strip()
+    res = raw_name.title()
+    return re.sub(r'\b(Mc)([a-z])', lambda m: m.group(1) + m.group(2).upper(), res)
 
 def copy_to_clipboard(text):
     # Native Win32 Clipboard integration via ctypes (zero external dependencies)
@@ -342,6 +347,8 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
             
             # Scrape driver standings
             driver_standings = scrape_driver_standings_playwright(browser, "29722")
+            for entry in driver_standings:
+                entry["name"] = clean_driver_name(entry["name"])
             
             # Construct weekly data dict
             winner_image = find_custom_winner_image(winner_name, BASE_DIR)
