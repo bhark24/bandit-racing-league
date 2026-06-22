@@ -715,12 +715,12 @@ def main():
                 driver_ir_data = fast_repairs.get(norm_driver, {})
                 used_fast_repair = driver_ir_data.get("fast_repairs_used", 0) > 0
                 
-                # Check for DNF due to excessive damage
+                # Check for DNF due to excessive damage or disconnection
                 driver_finish_status = score_data.get("status", "running").lower()
-                srh_damage_dnf = any(term in driver_finish_status for term in ["accident", "crash", "damage", "suspension", "contact"])
+                srh_damage_dnf = any(term in driver_finish_status for term in ["accident", "crash", "damage", "suspension", "contact", "disconnected", "did not finish", "dnf"])
                 
                 iracing_reason_out = driver_ir_data.get("reason_out", "").lower()
-                iracing_damage_dnf = any(term in iracing_reason_out for term in ["accident", "crash", "damage", "suspension", "contact"])
+                iracing_damage_dnf = any(term in iracing_reason_out for term in ["accident", "crash", "damage", "suspension", "contact", "disconnected", "did not finish", "dnf"])
                 
                 is_damage_dnf = srh_damage_dnf or iracing_damage_dnf
                 
@@ -774,6 +774,14 @@ def main():
                     # Reduce truck condition
                     truck["condition"] = max(0, truck["condition"] - total_wear)
                     print(f"  Slot {idx+1}: {driver_name} drove {truck['name']}. Incidents: {driver_inc}. Wear/Damage: -{total_wear}% (Condition: {truck['condition']}%)")
+                    
+                    if is_damage_dnf:
+                        team["ledger"].append({
+                            "date": race_date,
+                            "description": f"DNF: {driver_name} ({score_data.get('status', 'Damage')}) - Truck Condition: {truck['condition']}%",
+                            "category": "info",
+                            "amount": 0
+                        })
                     
             else:
                 # Driver DNS and no backup was subbed

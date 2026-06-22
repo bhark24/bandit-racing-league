@@ -1000,7 +1000,12 @@
             bodyHTML += `<p>**${winner.name}** executed a perfect hold-up, outrunning the law and the field to secure P1 and the largest loot payout of the night. </p>`;
 
             if (worstDriver && maxInc > 0) {
-                const teamOfWorst = teamsData.teams.find(t => t.drivers.primary.includes(worstDriver.name) || t.drivers.backup.includes(worstDriver.name));
+                const teamOfWorst = teamsData.teams.find(t => {
+                    const primary = t.drivers?.primary || [];
+                    const backup = t.drivers?.backup || [];
+                    return primary.some(d => normalizeName(d) === normalizeName(worstDriver.name)) || 
+                           backup.some(d => normalizeName(d) === normalizeName(worstDriver.name));
+                });
                 const teamName = teamOfWorst ? teamOfWorst.name : "their franchise";
                 bodyHTML += `<p>It wasn't a clean escape for everyone, though. **${worstDriver.name}** of **${teamName}** earned the infamous 'Wreck of the Week' citation. Racking up a brutal **${maxInc} incidents**, they left their crew sweeping up fiberglass all night. </p>`;
             }
@@ -2253,7 +2258,8 @@
         let localTeamsData = null;
 
         function normalizeRoster(team) {
-            if (!team || !team.drivers) return;
+            if (!team) return;
+            if (!team.drivers) team.drivers = {};
             if (!team.drivers.primary) team.drivers.primary = ['VACANT', 'VACANT', 'VACANT', 'VACANT'];
             if (!team.drivers.backup) team.drivers.backup = ['VACANT', 'VACANT'];
 
