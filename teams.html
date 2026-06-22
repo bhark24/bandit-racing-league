@@ -988,16 +988,29 @@
             netEl.style.color = netFlow >= 0 ? 'var(--neon-green)' : '#ff1744';
 
             // 7. Dynamic Article Writing
-            const headlines = [
-                `🚨 OUTLAW WIRE: ${winner.name.toUpperCase()} STEALS VICTORY AT ${latest.track.toUpperCase()}!`,
-                `🚨 DUST & DESTRUCTION: ${winner.name.toUpperCase()} DOMINATES ${latest.track.toUpperCase()}!`,
-                `🚨 THE HEIST IS IN: ${winner.name.toUpperCase()} TAKES THE COLD CASH AT ${latest.track.toUpperCase()}!`
-            ];
+            let headlines = [];
+            if (latest.track.toLowerCase().includes("daytona")) {
+                headlines = [
+                    `🚨 OUTLAW WIRE: ${winner.name.toUpperCase()} DECLARED DAYTONA WINNER AFTER POST-RACE PENALTY!`,
+                    `🚨 DAYTONA DRAMA: ${winner.name.toUpperCase()} INHERITS CHECKERED FLAG IN WILD OPENER!`,
+                    `🚨 THE DECISION IS IN: ${winner.name.toUpperCase()} TAKES VICTORY AFTER BRITT PENALTY!`
+                ];
+            } else {
+                headlines = [
+                    `🚨 OUTLAW WIRE: ${winner.name.toUpperCase()} STEALS VICTORY AT ${latest.track.toUpperCase()}!`,
+                    `🚨 DUST & DESTRUCTION: ${winner.name.toUpperCase()} DOMINATES ${latest.track.toUpperCase()}!`,
+                    `🚨 THE HEIST IS IN: ${winner.name.toUpperCase()} TAKES THE COLD CASH AT ${latest.track.toUpperCase()}!`
+                ];
+            }
             document.getElementById('telegram-headline').textContent = headlines[Math.floor(Math.random() * headlines.length)];
 
             let bodyHTML = `<p>The telegraph lines are buzzing tonight. The outlaws of the Bandit Racing League rode into **${latest.track}** and left a trail of smoking rubber, shattered body panels, and cash behind. </p>`;
             
-            bodyHTML += `<p>**${winner.name}** executed a perfect hold-up, outrunning the law and the field to secure P1 and the largest loot payout of the night. </p>`;
+            if (latest.track.toLowerCase().includes("daytona")) {
+                bodyHTML += `<p>A chaotic finish saw Sean Britt cross the line first after a last-lap collision with Jonathon Platt. However, after a post-race administrative review, league officials stripped the victory from Britt and awarded it to **${winner.name}**! </p>`;
+            } else {
+                bodyHTML += `<p>**${winner.name}** executed a perfect hold-up, outrunning the law and the field to secure P1 and the largest loot payout of the night. </p>`;
+            }
 
             if (worstDriver && maxInc > 0) {
                 const teamOfWorst = teamsData.teams.find(t => {
