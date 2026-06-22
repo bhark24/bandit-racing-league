@@ -31,6 +31,10 @@ const rosterData = {
     "driver": "KEVIN FOSTER",
     "status": "past-champion"
   },
+  "9": {
+    "driver": "Dylan MC DONALD",
+    "status": "part-time"
+  },
   "10": {
     "driver": "CORDELL MCFARLIN",
     "status": "full-time"
@@ -154,10 +158,6 @@ const rosterData = {
   "62": {
     "driver": "TY CORINO",
     "status": "full-time"
-  },
-  "63": {
-    "driver": "Dylan MC DONALD",
-    "status": "part-time"
   },
   "64": {
     "driver": "ADAM CLARK",
