@@ -187,6 +187,36 @@ TRACK_LOGOS = {
     "homestead miami": "Homestead Miami.jpg"
 }
 
+def normalize_name(name):
+    if not name:
+        return ""
+    name = name.strip().lower()
+    if ',' in name:
+        parts = name.split(',')
+        if len(parts) == 2:
+            name = f"{parts[1].strip()} {parts[0].strip()}"
+    name = re.sub(r'\d+$', '', name)
+    name = re.sub(r'\s+[a-z]\s+', ' ', name)
+    name = re.sub(r'\s+', ' ', name).strip()
+    name = name.replace("mc ", "mc")
+    
+    name_map = {
+        "josh": "joshua",
+        "jonathon": "johnathon",
+        "jon": "john",
+        "dave": "david",
+        "mike": "michael",
+        "diante": "di0nte",
+        "dionte": "di0nte",
+        "roder": "rader",
+        "conor": "connor",
+        "kondas": "kondus"
+    }
+    
+    words = name.split()
+    mapped_words = [name_map.get(w, w) for w in words]
+    return " ".join(mapped_words)
+
 def get_driver_number(winner_name, roster_data_path):
     if not os.path.exists(roster_data_path):
         return ""
@@ -196,12 +226,86 @@ def get_driver_number(winner_name, roster_data_path):
         match = re.search(r'const\s+rosterData\s*=\s*({.*?});', content, re.DOTALL)
         if match:
             roster_data = json.loads(match.group(1))
+            norm_winner = normalize_name(winner_name)
             for num, details in roster_data.items():
-                if details.get("driver", "").strip().upper() == winner_name.strip().upper():
+                if normalize_name(details.get("driver", "")) == norm_winner:
                     return num
     except Exception as e:
         print(f"Error loading roster: {e}")
     return ""
+
+def find_custom_winner_image(winner_name, base_dir):
+    winner_images_dir = os.path.join(base_dir, "assets", "WINNER IMAGES")
+    if not os.path.exists(winner_images_dir):
+        return ""
+        
+    # First priority: check for explicit name like dylan_winner_dylan
+    for f in os.listdir(winner_images_dir):
+        if "dylan_winner_dylan" in f.lower():
+            return f"assets/WINNER IMAGES/{f}"
+            
+    # Second priority: match winner name parts
+    norm_winner = winner_name.lower().replace(" ", "").replace("3", "").replace("2", "")
+    for f in os.listdir(winner_images_dir):
+        norm_f = f.lower().replace("_", "").replace("-", "")
+        if norm_winner in norm_f:
+            return f"assets/WINNER IMAGES/{f}"
+            
+    return ""
+
+def scrape_driver_standings_playwright(browser, season_id="29722"):
+    print("[*] Scraping driver standings from SimRacerHub...")
+    try:
+        page = browser.new_page()
+        url = f"https://simracerhub.com/season_standings.php?season_id={season_id}"
+        page.goto(url)
+        page.wait_for_selector("#standings_react_root", timeout=10000)
+        page.wait_for_timeout(3000)
+        
+        standings = page.evaluate("""() => {
+            const rows = [];
+            const table = document.querySelector('#standings_react_root table');
+            if (!table) return [];
+            
+            const headers = Array.from(table.querySelectorAll('thead th, tr th')).map(th => th.textContent.trim().toUpperCase());
+            const driverIdx = headers.findIndex(h => h.includes('DRIVER'));
+            const ptsIdx = headers.findIndex(h => h.includes('TOT') || h === 'PTS' || h.includes('POINTS'));
+            const posIdx = headers.findIndex(h => h === 'POS');
+            
+            const trs = Array.from(table.querySelectorAll('tbody tr'));
+            for (let tr of trs) {
+                const cells = Array.from(tr.querySelectorAll('td'));
+                if (cells.length < 5) continue;
+                
+                let name = "";
+                if (driverIdx !== -1 && driverIdx < cells.length) {
+                    name = cells[driverIdx].textContent.trim();
+                } else {
+                    const link = tr.querySelector('a[href*="driver_id="]');
+                    if (link) name = link.textContent.trim();
+                }
+                
+                if (!name) continue;
+                
+                let points = 0;
+                if (ptsIdx !== -1 && ptsIdx < cells.length) {
+                    points = parseInt(cells[ptsIdx].textContent.trim()) || 0;
+                }
+                
+                let pos = rows.length + 1;
+                if (posIdx !== -1 && posIdx < cells.length) {
+                    pos = parseInt(cells[posIdx].textContent.trim()) || pos;
+                }
+                
+                rows.push({ pos, name, points });
+            }
+            return rows;
+        }""")
+        page.close()
+        return standings
+    except Exception as e:
+        print(f"[!] Error scraping standings: {e}")
+        return []
 
 def generate_social_graphic(winner_name, track_name, race_date, teams_data, fantasy_data):
     # 1. Gather all weekly data
@@ -228,33 +332,47 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
                 "wins": fan.get("wins", 0)
             })
             
-    weekly_data = {
-        "winnerName": winner_name,
-        "winnerNumber": winner_number,
-        "trackName": track_name,
-        "trackLogo": track_logo,
-        "raceDate": race_date,
-        "teamStandings": team_list,
-        "fantasyLeaderboard": fantasy_list
-    }
-    
-    # 2. Write data to weekly_data.js
-    weekly_js_path = os.path.join(BASE_DIR, "weekly_data.js")
-    with open(weekly_js_path, "w", encoding="utf-8") as f:
-        f.write(f"const weeklyData = {json.dumps(weekly_data, indent=2)};\n")
-    print(f"[+] Standings and results data written to {weekly_js_path}")
-    
-    # 3. Generate image using Playwright
+    # 2. Generate standings and graphic using Playwright
     try:
         from playwright.sync_api import sync_playwright
-        print("[*] Generating weekly post graphic...")
-        
-        html_path = os.path.join(BASE_DIR, "social_graphic.html")
-        out_graphic_path = os.path.join(BASE_DIR, "assets", "weekly_social_update.png")
-        out_brain_path = r"C:\Users\Bill\.gemini\antigravity\brain\22aa0b7a-2c33-47f8-af7a-3f462eaf2ee6\weekly_social_update.png"
+        print("[*] Initializing Playwright...")
         
         with sync_playwright() as p:
             browser = p.chromium.launch()
+            
+            # Scrape driver standings
+            driver_standings = scrape_driver_standings_playwright(browser, "29722")
+            
+            # Construct weekly data dict
+            winner_image = find_custom_winner_image(winner_name, BASE_DIR)
+            weekly_data = {
+                "winnerName": winner_name,
+                "winnerNumber": winner_number,
+                "winnerImage": winner_image,
+                "trackName": track_name,
+                "trackLogo": track_logo,
+                "raceDate": race_date,
+                "teamStandings": team_list,
+                "fantasyLeaderboard": fantasy_list,
+                "driverStandings": driver_standings
+            }
+            
+            # Write data to weekly_data.js
+            weekly_js_path = os.path.join(BASE_DIR, "weekly_data.js")
+            with open(weekly_js_path, "w", encoding="utf-8") as f:
+                f.write(f"const weeklyData = {json.dumps(weekly_data, indent=2)};\n")
+            print(f"[+] Standings and results data written to {weekly_js_path}")
+            
+            # Render and capture weekly update graphic
+            print("[*] Generating weekly post graphic...")
+            html_path = os.path.join(BASE_DIR, "social_graphic.html")
+            out_graphic_path = os.path.join(BASE_DIR, "assets", "weekly_social_update.png")
+            out_brain_path = r"C:\Users\Bill\.gemini\antigravity\brain\0aeaaa4b-1ddf-44e2-ad3d-0f83196a5bc7\weekly_social_update.png"
+            
+            # Ensure parent directories for output exist
+            os.makedirs(os.path.dirname(out_graphic_path), exist_ok=True)
+            os.makedirs(os.path.dirname(out_brain_path), exist_ok=True)
+            
             page = browser.new_page(viewport={'width': 1200, 'height': 1200})
             url = f"file:///{html_path.replace(os.sep, '/')}"
             page.goto(url)
@@ -274,12 +392,24 @@ def main():
     print("        BRL SOCIAL MEDIA POST AUTOMATION GENERATOR")
     print("=" * 60)
     
-    # 1. Fetch Latest Results
-    winner_name, track_name, race_date = parse_simhub_results()
-    print(f"[+] Race Winner parsed: {winner_name} at {track_name}")
-    
-    # 2. Fetch Franchise Team Standings
+    # 1. Fetch Franchise Team Standings
     teams_data = load_js_variable(TEAMS_DATA_PATH, "teamsData")
+    
+    # 2. Fetch Latest Results from teams_data.js first
+    winner_name, track_name, race_date = "Unknown Driver", "Unknown Track", "Recent Date"
+    if teams_data and "latestRace" in teams_data:
+        latest = teams_data["latestRace"]
+        track_name = latest.get("track", "Unknown Track")
+        race_date = latest.get("date", "Recent Date")
+        results = latest.get("results", [])
+        if results:
+            winner_name = clean_driver_name(results[0].get("name", "Unknown Driver"))
+            print(f"[+] Race Winner loaded from teams_data.js: {winner_name} at {track_name}")
+    
+    if winner_name == "Unknown Driver":
+        winner_name, track_name, race_date = parse_simhub_results()
+        print(f"[+] Race Winner parsed from simhub.html: {winner_name} at {track_name}")
+    
     team_rows = []
     if teams_data and "teams" in teams_data:
         sorted_teams = sorted(teams_data["teams"], key=lambda x: x.get("points", 0), reverse=True)

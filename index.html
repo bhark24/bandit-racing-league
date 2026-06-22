@@ -172,17 +172,17 @@
                     <h2>Latest Winner</h2>
                 </div>
                 <div class="card-body winner-spotlight text-center">
-                    <div class="winner-img" style="cursor: pointer;" onclick="window.open('https://simracerhub.com/driver_stats.php?driver_id=63408&season_id=28135', '_blank')">
+                    <div class="winner-img" style="cursor: pointer;" id="winner-car-click" onclick="window.open('https://simracerhub.com/driver_stats.php?driver_id=63408&season_id=29722', '_blank')">
                         <!-- Update the src below to match your new image file name each week! -->
-                        <img src="assets/j.knaakslinger.png" alt="Winning Car" style="width: 100%; border-radius: 4px; object-fit: cover;" onerror="this.onerror=null; this.outerHTML='<div class=\'placeholder-car\'>WINNING CAR IMAGE</div>'">
+                        <img id="winner-car-img" src="assets/j.knaakslinger.png" alt="Winning Car" style="width: 100%; border-radius: 4px; object-fit: cover;" onerror="this.onerror=null; this.outerHTML='<div class=\'placeholder-car\'>WINNING CAR IMAGE</div>'">
                     </div>
-                    <a href="https://simracerhub.com/driver_stats.php?driver_id=63408&season_id=28135" target="_blank" style="text-decoration: none;">
-                        <h3 class="winner-name">Jackson Knaak</h3>
+                    <a id="winner-profile-link" href="https://simracerhub.com/driver_stats.php?driver_id=63408&season_id=29722" target="_blank" style="text-decoration: none;">
+                        <h3 class="winner-name" id="winner-name">Jackson Knaak</h3>
                     </a>
-                    <p class="track-name">Slinger Speedway</p>
-                    <div style="margin: 15px 0;">
+                    <p class="track-name" id="winner-track">Slinger Speedway</p>
+                    <div style="margin: 15px 0;" id="winner-num-container">
                         <!-- Automatically loads the custom number if you drop it in assets/drivers numbers/ -->
-                        <img src="assets/drivers numbers/Jackson Knaak.png" alt="Custom Number" style="max-height: 50px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<p class=\'car-number accent\'>#00</p>'">
+                        <img id="winner-num-img" src="assets/drivers numbers/Jackson Knaak.png" alt="Custom Number" style="max-height: 50px; object-fit: contain;">
                     </div>
                     <div class="view-all-container" style="margin-top: 20px;">
                         <a class='view-all' href='/results'>View Full Race Results &rarr;</a>
@@ -216,7 +216,7 @@
                     <h2>Top 5 Standings</h2>
                 </div>
                 <div class="card-body">
-                    <ul class="standings-list">
+                    <ul class="standings-list" id="homepage-standings-list">
                         <li><span class="pos">1</span><span class="driver">N. Nickerson</span><span class="pts accent">690</span></li>
                         <li><span class="pos">2</span><span class="driver">J. Platt</span><span class="pts">650</span></li>
                         <li><span class="pos">3</span><span class="driver">K. Foster</span><span class="pts">624</span></li>
@@ -359,6 +359,7 @@
     </script>
     
     <!-- Roster and Teams Database script files -->
+    <script src="weekly_data.js"></script>
     <script src="teams_data.js"></script>
     <script src="roster_data.js"></script>
     <script>
@@ -367,7 +368,7 @@
             // Helper function to normalize name strings for matching
             function normalizeName(name) {
                 if (!name) return "";
-                return name.toUpperCase().trim().replace(/[\s\.\-_,]/g, "");
+                return name.toUpperCase().trim().replace(/[\s\.\-_,]/g, "").replace(/\d+$/, "");
             }
             
             // SimRacerHub Driver IDs mapping for dynamic profile links
@@ -632,11 +633,80 @@
                     srhLinkContainer.style.marginTop = '15px';
                     srhLinkContainer.style.textAlign = 'right';
                     srhLinkContainer.innerHTML = `
-                        <a href="https://simracerhub.com/driver_stats.php?driver_id=${srhId}&season_id=28135" target="_blank" style="color: var(--neon-green); font-size: 0.8rem; text-decoration: none; border: 1.5px solid var(--neon-green); padding: 5px 12px; border-radius: 4px; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; transition: all 0.3s ease; display: inline-block;" onmouseover="this.style.background='rgba(0,255,0,0.05)'" onmouseout="this.style.background='transparent'">
+                        <a href="https://simracerhub.com/driver_stats.php?driver_id=${srhId}&season_id=29722" target="_blank" style="color: var(--neon-green); font-size: 0.8rem; text-decoration: none; border: 1.5px solid var(--neon-green); padding: 5px 12px; border-radius: 4px; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; transition: all 0.3s ease; display: inline-block;" onmouseover="this.style.background='rgba(0,255,0,0.05)'" onmouseout="this.style.background='transparent'">
                             View Driver Hub Profile &rarr;
                         </a>
                     `;
                     document.querySelector('.spotlight-content').appendChild(srhLinkContainer);
+                }
+
+                // 4. Update Latest Winner Card Dynamically
+                if (typeof weeklyData !== 'undefined' && weeklyData.winnerName) {
+                    const wName = weeklyData.winnerName;
+                    const wTrack = weeklyData.trackName;
+                    const wNum = weeklyData.winnerNumber;
+                    
+                    const wCleanName = wName.trim().toUpperCase().split(' ').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ');
+                    
+                    const nameEl = document.getElementById('winner-name');
+                    const trackEl = document.getElementById('winner-track');
+                    if (nameEl) nameEl.innerText = wCleanName;
+                    if (trackEl) trackEl.innerText = wTrack;
+                    
+                    const normWName = normalizeName(wName);
+                    const wSrhId = SRH_IDS[normWName];
+                    const wProfileUrl = wSrhId ? `https://simracerhub.com/driver_stats.php?driver_id=${wSrhId}&season_id=29722` : `https://simracerhub.com/season_standings.php?season_id=29722`;
+                    
+                    const clickEl = document.getElementById('winner-car-click');
+                    const linkEl = document.getElementById('winner-profile-link');
+                    if (clickEl) clickEl.onclick = function() { window.open(wProfileUrl, '_blank'); };
+                    if (linkEl) linkEl.href = wProfileUrl;
+                    
+                    const wCarImg = document.getElementById('winner-car-img');
+                    const wNumImg = document.getElementById('winner-num-img');
+                    
+                    if (wCarImg) {
+                        const wCarImgSrc = weeklyData.winnerImage || getTruckImgPath(wName);
+                        wCarImg.src = wCarImgSrc;
+                        wCarImg.onerror = function() {
+                            wCarImg.onerror = null;
+                            wCarImg.outerHTML = `<div class="placeholder-car">WINNING CAR IMAGE</div>`;
+                        };
+                    }
+                    
+                    if (wNumImg) {
+                        wNumImg.onerror = function() {
+                            wNumImg.onerror = null;
+                            wNumImg.outerHTML = `<p class="car-number accent">#${wNum || '00'}</p>`;
+                        };
+                        const wNumImgSrc = getDriverImgPath(wName);
+                        wNumImg.src = wNumImgSrc;
+                    }
+                }
+                
+                // 5. Update Top 5 Standings Card Dynamically
+                if (typeof weeklyData !== 'undefined' && weeklyData.driverStandings && weeklyData.driverStandings.length > 0) {
+                    const list = document.getElementById('homepage-standings-list');
+                    if (list) {
+                        list.innerHTML = '';
+                        weeklyData.driverStandings.slice(0, 5).forEach((item, idx) => {
+                            const li = document.createElement('li');
+                            const nameParts = item.name.trim().split(' ');
+                            let shortName = item.name;
+                            if (nameParts.length > 1) {
+                                const firstInit = nameParts[0].charAt(0).toUpperCase();
+                                const lastName = nameParts[nameParts.length - 1];
+                                shortName = `${firstInit}. ${lastName}`;
+                            }
+                            
+                            li.innerHTML = `
+                                <span class="pos">${idx + 1}</span>
+                                <span class="driver">${shortName}</span>
+                                <span class="pts${idx === 0 ? ' accent' : ''}">${item.points}</span>
+                            `;
+                            list.appendChild(li);
+                        });
+                    }
                 }
             });
         })();
