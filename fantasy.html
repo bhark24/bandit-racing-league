@@ -255,19 +255,24 @@
                 <h3 style="color: #fff; margin-bottom: 20px; font-size: 1.5rem; text-align: center; border-bottom: 1px solid #222; padding-bottom: 15px;">Complete Your Entry</h3>
                 
                 <div class="fantasy-form-container">
-                    <form id="fantasy-picks-form" onsubmit="submitFantasyForm(event)">
+                    <form id="fantasy-picks-form" action="https://docs.google.com/forms/d/e/1FAIpQLScgUSQNAfVpdD0BHqH4afJdEMV9xNvorSkQ-ZTumX9RrxLYKw/formResponse" method="POST" target="hidden_iframe" onsubmit="return submitFantasyForm(event)">
+                        <!-- Hidden inputs for picks -->
+                        <input type="hidden" name="entry.660537648" id="hidden-pick-0">
+                        <input type="hidden" name="entry.1220374346" id="hidden-pick-1">
+                        <input type="hidden" name="entry.202307613" id="hidden-pick-2">
+                        <input type="hidden" name="entry.1542867592" id="hidden-pick-3">
                         
                         <!-- Tiebreaker -->
                         <div class="fantasy-form-group">
                             <label class="fantasy-form-label" for="tiebreaker">Tiebreaker: Caution Laps</label>
                             <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: -5px; margin-bottom: 10px;">Predict the exact number of caution laps in this race. Closest guess wins scoring ties.</p>
-                            <input class="fantasy-form-input" type="number" id="tiebreaker" min="0" max="150" required placeholder="e.g. 12">
+                            <input class="fantasy-form-input" type="number" id="tiebreaker" name="entry.900395544" min="0" max="150" required placeholder="e.g. 12">
                         </div>
 
                         <!-- Name -->
                         <div class="fantasy-form-group">
                             <label class="fantasy-form-label" for="fan-name">Your Name / Alias</label>
-                            <input class="fantasy-form-input" type="text" id="fan-name" maxlength="50" required placeholder="Enter the name for the leaderboard">
+                            <input class="fantasy-form-input" type="text" id="fan-name" name="entry.600556052" maxlength="50" required placeholder="Enter the name for the leaderboard">
                         </div>
 
                         <!-- Email -->
@@ -278,6 +283,7 @@
                         </div>
 
                     </form>
+                    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(typeof submitted !== 'undefined' && submitted) { console.log('Successfully posted picks to Google Form iframe'); }"></iframe>
                 </div>
             </div>
 
@@ -420,6 +426,7 @@
     <!-- Page Logic -->
     <script>
         let currentPicks = [null, null, null, null];
+        var submitted = false;
 
         function getDriverImgPath(name) {
             if (!name) return '';
@@ -674,6 +681,12 @@
                     valEl.textContent = "None Selected";
                     slotEl.classList.remove('filled');
                 }
+
+                // Update hidden inputs for native form submission
+                const hiddenInput = document.getElementById(`hidden-pick-${i}`);
+                if (hiddenInput) {
+                    hiddenInput.value = driver || '';
+                }
             }
 
             // Enable/Disable Submit Button
@@ -827,15 +840,14 @@
 
         // Form Submit Handler
         function submitFantasyForm(event) {
-            event.preventDefault();
-
             const name = document.getElementById('fan-name').value.trim();
             const email = document.getElementById('fan-email').value.trim();
             const tiebreaker = document.getElementById('tiebreaker').value;
 
             if (currentPicks.some(p => p === null) || !name) {
                 alert("Please select a complete roster of 4 drivers before submitting!");
-                return;
+                event.preventDefault();
+                return false;
             }
 
             // Save to localStorage
@@ -854,28 +866,11 @@
             // Display Success Overlay
             document.getElementById('success-overlay').classList.add('active');
 
-            // Send to Google Form
-            const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLScgUSQNAfVpdD0BHqH4afJdEMV9xNvorSkQ-ZTumX9RrxLYKw/formResponse';
-            const formData = new URLSearchParams();
-            formData.append('entry.600556052', name);
-            formData.append('entry.660537648', currentPicks[0]);
-            formData.append('entry.1220374346', currentPicks[1]);
-            formData.append('entry.202307613', currentPicks[2]);
-            formData.append('entry.1542867592', currentPicks[3]);
-            formData.append('entry.900395544', tiebreaker);
-
-            fetch(formUrl, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: formData
-            }).then(() => {
-                console.log("Successfully posted picks to Google Form");
-            }).catch(err => {
-                console.error("Error submitting to Google Form", err);
-            });
+            // Set flag to true so the iframe load handler knows a submit occurred
+            submitted = true;
+            
+            // Allow the form to submit natively to the hidden iframe target
+            return true;
         }
 
         function closeSuccessOverlay() {
