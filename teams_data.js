@@ -2638,6 +2638,7 @@ const teamsData = {
       "name": "Legacy Racing",
       "owner": "Josh Billiter",
       "homeBase": "Coal Run Village, KY",
+      "logo": "assets/legacy.png",
       "balance": 2138845,
       "loan": 0,
       "points": 75,
