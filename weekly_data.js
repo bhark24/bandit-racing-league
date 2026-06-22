@@ -9,12 +9,12 @@ const weeklyData = {
     {
       "name": "GFR Racing",
       "points": 89,
-      "wins": 1
+      "wins": 0
     },
     {
       "name": "Legacy Racing",
       "points": 75,
-      "wins": 0
+      "wins": 1
     },
     {
       "name": "Roundy Motorsports",
@@ -63,7 +63,7 @@ const weeklyData = {
     },
     {
       "name": "Middle Aged Gunz Motorsports",
-      "points": 4,
+      "points": 0,
       "wins": 0
     }
   ],

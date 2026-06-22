@@ -479,6 +479,22 @@ def main():
         primaries = team["drivers"]["primary"]
         backups = team["drivers"]["backup"]
         
+        # Check if at least one rostered driver from this team participated in the real race
+        team_rostered_drivers = [d for d in primaries if d and d != "VACANT"] + \
+                                [d for d in backups if d and d != "VACANT"]
+        team_has_participation = any(normalize_name(d) in driver_scores for d in team_rostered_drivers)
+        
+        if not team_has_participation:
+            print(f"  No rostered drivers participated in the real-world race. Scoring DNS (0 pts) and bypassing economics.")
+            team["ledger"].append({
+                "date": race_date,
+                "description": "DNS: No team participation",
+                "category": "info",
+                "amount": 0
+            })
+            weekly_team_points[team_id] = 0
+            continue
+            
         active_lineup = [] # list of (driver_name, is_backup, replaced_primary_name)
         backup_index = 0
         
@@ -526,7 +542,8 @@ def main():
             "new york, new york": (40.7128, -74.0060),
             "new york, new york (it's currently on fire)": (40.7128, -74.0060),
             "bat cave, nc": (35.4515, -82.2871),
-            "new york, new york (it’s currently on fire)": (40.7128, -74.0060)
+            "new york, new york (it’s currently on fire)": (40.7128, -74.0060),
+            "coal run village, ky": (37.4998, -82.5290)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates
@@ -869,16 +886,25 @@ def main():
         loan_str = f", Loan = ${team['loan']}" if team.get("loan", 0) > 0 else ""
         print(f"  Weekly Summary: Points = {team_points_this_week}, Earnings = +${team_earnings}, Expenses = -${team_expenses}, New Balance = ${team['balance']}{loan_str}")
         
-    # Determine weekly winner and credit points/wins
+    # Find the race winner (driver who finished P1) and credit team win
+    race_winner_team_id = None
+    for norm_name, score_data in driver_scores.items():
+        if score_data["finish"] == 1:
+            for team in teams_db["teams"]:
+                if any(normalize_name(d) == norm_name for d in team["drivers"]["primary"] if d) or \
+                   any(normalize_name(d) == norm_name for d in team["drivers"]["backup"] if d):
+                    race_winner_team_id = team["id"]
+                    team["wins"] += 1
+                    print(f"Race Winner: {score_data['driver_name']} ({team['name']}) wins the race! Credit +1 Win to team.")
+                    break
+            break
+
     if weekly_team_points:
         highest_score = max(weekly_team_points.values())
         weekly_winners = [t_id for t_id, pts in weekly_team_points.items() if pts == highest_score and pts > 0]
-        
-        # Credit wins
         for team in teams_db["teams"]:
             if team["id"] in weekly_winners:
-                team["wins"] += 1
-                print(f"Weekly Winner: {team['name']} with {highest_score} points! Credit +1 Win.")
+                print(f"Weekly Fantasy Points Winner: {team['name']} with {highest_score} points.")
                 
     # Record the latest race telemetry
     results_list = []
