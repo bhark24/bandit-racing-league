@@ -360,88 +360,18 @@ def save_teams_database_file(data):
         print(f"[!] Error saving teams_data.js: {e}")
 
 def correct_driver_standings(driver_standings):
-    config_path = os.path.join(BASE_DIR, "fantasy_config.json")
-    finish_points = {}
-    if os.path.exists(config_path):
-        try:
-            with open(config_path, "r", encoding="utf-8") as f:
-                config = json.load(f)
-            finish_points = {int(k): int(v) for k, v in config.get("scoring", {}).get("finish_points", {}).items()}
-        except Exception as e:
-            print(f"[!] Error loading finish points from config: {e}")
-            
-    if not finish_points:
-        finish_points = {
-            1: 40, 2: 35, 3: 34, 4: 33, 5: 32, 6: 31, 7: 30, 8: 29, 9: 28, 10: 27,
-            11: 26, 12: 25, 13: 24, 14: 23, 15: 22, 16: 21, 17: 20, 18: 19, 19: 18, 20: 17,
-            21: 16, 22: 15, 23: 14, 24: 13, 25: 12, 26: 11, 27: 10, 28: 9, 29: 8, 30: 7,
-            31: 6, 32: 5, 33: 4, 34: 3, 35: 2, 36: 1
-        }
-        
-    if not os.path.exists(SIMHUB_PATH):
-        print(f"[!] simhub.html not found, skipping standings correction.")
-        return driver_standings
-        
-    try:
-        with open(SIMHUB_PATH, "r", encoding="utf-8", errors="ignore") as f:
-            html = f.read()
-            
-        match = re.search(r'drivers\s*=\s*(\[.*?\])\s*;', html, re.DOTALL)
-        if not match:
-            print(f"[!] Could not parse drivers from simhub.html, skipping standings correction.")
-            return driver_standings
-            
-        drivers_raw_js = match.group(1)
-        json_str = re.sub(r'(\b\w+\b)\s*:', r'"\1":', drivers_raw_js)
-        json_str = re.sub(r',\s*\}', '}', json_str)
-        json_str = re.sub(r',\s*\]', ']', json_str)
-        
-        drivers_results = json.loads(json_str)
-    except Exception as e:
-        print(f"[!] Error parsing drivers from simhub.html: {e}")
-        return driver_standings
-        
-    results_by_name = {}
-    for d in drivers_results:
-        norm = normalize_name(d.get("name", ""))
-        results_by_name[norm] = d
-        
+    # SimRacerHub points have been corrected on the server, so we use scraped points directly.
+    # We still sort them and calculate tie positions and clean driver names for the UI.
     corrected_standings = []
     for entry in driver_standings:
         name = entry.get("name", "")
-        norm = normalize_name(name)
         scraped_pts = entry.get("points", 0)
         wins = entry.get("wins", 0)
-        
-        if norm in results_by_name:
-            d = results_by_name[norm]
-            fp = int(d.get("fp", 99))
-            
-            correct_rpts = finish_points.get(fp, 1) if fp <= 36 else 1
-            spts = int(d.get("spts", 0))
-            bns = 3 if fp == 1 else int(d.get("bpts", 0))
-            correct_tpts = correct_rpts + spts + bns
-            
-            is_winner = (wins == 1) or (norm == normalize_name("Dylan McDonald"))
-            if is_winner:
-                srh_tpts = int(d.get("rpts", 0)) + int(d.get("spts", 0)) + 3
-            else:
-                srh_tpts = int(d.get("tpts", 0))
-                
-            diff = correct_tpts - srh_tpts
-            corrected_pts = scraped_pts + diff
-            
-            corrected_standings.append({
-                "name": name,
-                "points": corrected_pts,
-                "wins": 1 if fp == 1 else 0
-            })
-        else:
-            corrected_standings.append({
-                "name": name,
-                "points": scraped_pts,
-                "wins": wins
-            })
+        corrected_standings.append({
+            "name": name,
+            "points": scraped_pts,
+            "wins": wins
+        })
             
     corrected_standings.sort(key=lambda x: x["points"], reverse=True)
     
@@ -585,7 +515,7 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
             print("[*] Generating weekly post graphic...")
             html_path = os.path.join(BASE_DIR, "social_graphic.html")
             out_graphic_path = os.path.join(BASE_DIR, "assets", "weekly_social_update.png")
-            out_brain_path = r"C:\Users\Bill\.gemini\antigravity\brain\0aeaaa4b-1ddf-44e2-ad3d-0f83196a5bc7\weekly_social_update.png"
+            out_brain_path = r"C:\Users\Bill\.gemini\antigravity\brain\9ba04bcf-37da-404f-858c-21209e2562f2\weekly_social_update.png"
             
             # Ensure parent directories for output exist
             os.makedirs(os.path.dirname(out_graphic_path), exist_ok=True)
