@@ -32,8 +32,8 @@ const rosterData = {
     "status": "past-champion"
   },
   "9": {
-    "driver": "Dylan MC DONALD",
-    "status": "part-time"
+    "driver": "DYLAN MCDONALD",
+    "status": "full-time"
   },
   "10": {
     "driver": "CORDELL MCFARLIN",
@@ -122,6 +122,10 @@ const rosterData = {
   "35": {
     "driver": "WES FULLER",
     "status": "part-time"
+  },
+  "37": {
+    "driver": "CHAD HARTLE",
+    "status": "full-time"
   },
   "38": {
     "driver": "PETER MURPHY",
