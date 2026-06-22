@@ -342,6 +342,23 @@ def get_latest_youtube_video_id(channel_id="UC8D9f0DOxaf8hdyxIuk2NeQ"):
     # Fallback to the current Daytona video ID if fetch fails
     return "oF84lT2ODkw"
 
+def save_teams_database_file(data):
+    try:
+        with open(TEAMS_DATA_PATH, "r", encoding="utf-8") as f:
+            content = f.read()
+        js_content = json.dumps(data, indent=2)
+        new_content = re.sub(
+            r'const\s+teamsData\s*=\s*({.*?});',
+            f'const teamsData = {js_content};',
+            content,
+            flags=re.DOTALL
+        )
+        with open(TEAMS_DATA_PATH, "w", encoding="utf-8") as f:
+            f.write(new_content)
+        print(f"[+] Successfully saved updated database to {TEAMS_DATA_PATH}")
+    except Exception as e:
+        print(f"[!] Error saving teams_data.js: {e}")
+
 def correct_driver_standings(driver_standings):
     config_path = os.path.join(BASE_DIR, "fantasy_config.json")
     finish_points = {}
@@ -484,6 +501,63 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
             driver_standings = scrape_driver_standings_playwright(browser, "29722")
             driver_standings = correct_driver_standings(driver_standings)
             
+            # 1.5. Determine Spotlight Driver based on new rules
+            # Rules: 
+            # - Participated in the latest race (not isMock)
+            # - Advanced position (finish < qualify)
+            # - Not selected in the previous 4 races (not in last 4 of spotlightHistory, matching normalized names)
+            import hashlib
+            spotlight_history = teams_data.get("spotlightHistory", []) if teams_data else []
+            selected_spotlight = "Kevin Foster" # Default fallback
+            
+            existing_spotlight = next((h["driver"] for h in spotlight_history if h["date"] == race_date), None)
+            if existing_spotlight:
+                selected_spotlight = clean_driver_name(existing_spotlight)
+                print(f"[+] Reusing existing spotlight driver from history: {selected_spotlight}")
+            else:
+                latest_race_data = teams_data.get("latestRace", {}) if teams_data else {}
+                results = latest_race_data.get("results", [])
+                
+                eligible_drivers = []
+                for r in results:
+                    if r.get("isMock", False):
+                        continue
+                    name = r.get("name", "")
+                    finish = int(r.get("finish", 99))
+                    qualify = int(r.get("qualify", 99) or 99)
+                    if finish < qualify:
+                        cleaned_name = clean_driver_name(name)
+                        if cleaned_name:
+                            eligible_drivers.append(cleaned_name)
+                
+                # Filter out drivers selected in the previous 4 races (excluding current race_date)
+                previous_history = [h for h in spotlight_history if h["date"] != race_date]
+                recent_drivers_normalized = {normalize_name(h["driver"]) for h in previous_history[-4:]}
+                
+                filtered_eligible = [d for d in eligible_drivers if normalize_name(d) not in recent_drivers_normalized]
+                
+                if not filtered_eligible:
+                    filtered_eligible = eligible_drivers
+                    
+                eligible_names = sorted(list(set(filtered_eligible)))
+                if eligible_names:
+                    seed_str = f"{track_name}-{race_date}"
+                    hash_digest = hashlib.md5(seed_str.encode('utf-8')).hexdigest()
+                    index = int(hash_digest, 16) % len(eligible_names)
+                    selected_spotlight = eligible_names[index]
+                    
+                    if teams_data:
+                        if "spotlightHistory" not in teams_data:
+                            teams_data["spotlightHistory"] = []
+                        teams_data["spotlightHistory"].append({
+                            "date": race_date,
+                            "driver": selected_spotlight
+                        })
+                        save_teams_database_file(teams_data)
+                else:
+                    print("[!] No eligible spotlight drivers found (no one gained positions). Falling back.")
+                    selected_spotlight = "Kevin Foster"
+
             # Construct weekly data dict
             winner_image = find_custom_winner_image(winner_name, BASE_DIR)
             latest_video_id = get_latest_youtube_video_id("UC8D9f0DOxaf8hdyxIuk2NeQ")
@@ -497,7 +571,8 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
                 "teamStandings": team_list,
                 "fantasyLeaderboard": fantasy_list,
                 "driverStandings": driver_standings,
-                "latestBroadcastVideoId": latest_video_id
+                "latestBroadcastVideoId": latest_video_id,
+                "spotlightDriver": selected_spotlight
             }
             
             # Write data to weekly_data.js

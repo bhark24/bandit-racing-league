@@ -370,6 +370,25 @@
                 if (!name) return "";
                 return name.toUpperCase().trim().replace(/[\s\.\-_,]/g, "").replace(/\d+$/, "");
             }
+
+            // Helper function to clean driver name (commas, casing, numbers)
+            function cleanDriverName(rawName) {
+                if (!rawName) return "";
+                let name = rawName.trim();
+                if (name.includes(',')) {
+                    const parts = name.split(',');
+                    if (parts.length === 2) {
+                        const first = parts[1].replace(/\d+$/, '').trim();
+                        const last = parts[0].replace(/\d+$/, '').trim();
+                        name = first + " " + last;
+                    }
+                } else {
+                    name = name.replace(/\d+$/, '').trim();
+                }
+                let formatted = name.toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                formatted = formatted.replace(/\b(Mc)([a-z])/g, (m, p1, p2) => p1 + p2.toUpperCase());
+                return formatted;
+            }
             
             // SimRacerHub Driver IDs mapping for dynamic profile links
             const SRH_IDS = {
@@ -505,9 +524,47 @@
                 if (latestRace && !latestRace.isPreview && latestRace.results && latestRace.results.length > 0) {
                     // Results exist for the latest race - Dynamic Post-Daytona Mode!
                     isPreview = false;
-                    const participants = latestRace.results.filter(r => !r.isMock).map(r => r.name);
-                    seed = latestRace.date + "-" + latestRace.track;
-                    driverName = getWeeklyDriver(participants, seed);
+                    
+                    // Use build-time selected spotlight driver if available, otherwise fallback to deterministic search
+                    if (typeof weeklyData !== 'undefined' && weeklyData.spotlightDriver) {
+                        driverName = weeklyData.spotlightDriver;
+                    } else {
+                        const spotlightHistory = teamsData.spotlightHistory || [];
+                        const raceDate = latestRace.date;
+                        
+                        // Filter participants who advanced position
+                        const eligibleDrivers = [];
+                        for (let r of latestRace.results) {
+                            if (r.isMock) continue;
+                            const finish = parseInt(r.finish) || 99;
+                            const qualify = parseInt(r.qualify) || 99;
+                            if (finish < qualify) {
+                                const cleaned = cleanDriverName(r.name);
+                                if (cleaned) {
+                                    eligibleDrivers.push(cleaned);
+                                }
+                            }
+                        }
+                        
+                        // Filter out drivers selected in the previous 4 races (excluding current race date)
+                        const previousHistory = spotlightHistory.filter(h => h.date !== raceDate);
+                        const recentDriversNormalized = previousHistory.slice(-4).map(h => normalizeName(h.driver));
+                        
+                        let filteredEligible = eligibleDrivers.filter(d => !recentDriversNormalized.includes(normalizeName(d)));
+                        if (filteredEligible.length === 0) {
+                            filteredEligible = eligibleDrivers;
+                        }
+                        
+                        // Deduplicate and sort
+                        const uniqueEligible = Array.from(new Set(filteredEligible)).sort();
+                        
+                        if (uniqueEligible.length > 0) {
+                            seed = latestRace.track + "-" + latestRace.date;
+                            driverName = getWeeklyDriver(uniqueEligible, seed);
+                        } else {
+                            driverName = "Kevin Foster";
+                        }
+                    }
                     latestStats = latestRace.results.find(r => normalizeName(r.name) === normalizeName(driverName));
                 } else {
                     // Pre-season or pre-Daytona mode - hardcode to Kevin Foster
@@ -520,7 +577,7 @@
                 const teamName = getDriverTeam(driverName);
                 
                 // Capitalize Name nicely for presentation
-                const cleanName = driverName.trim().toUpperCase().split(' ').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ');
+                const cleanName = cleanDriverName(driverName);
 
                 // 1. Populate Name and Bio
                 document.getElementById('spotlight-name').innerText = cleanName;

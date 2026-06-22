@@ -2841,6 +2841,12 @@ const teamsData = {
       ],
       "passcodeHash": "3154c9cc4526142b6c75f88dc9137ab19ca25643a9e8879fdcd921cb2f1ff8cf"
     }
+  ],
+  "spotlightHistory": [
+    {
+      "date": "Jun 17, 2026",
+      "driver": "Scott Sanderson"
+    }
   ]
 };
 

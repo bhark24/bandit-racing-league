@@ -285,5 +285,6 @@ const weeklyData = {
       "points": 1
     }
   ],
-  "latestBroadcastVideoId": "oF84lT2ODkw"
+  "latestBroadcastVideoId": "oF84lT2ODkw",
+  "spotlightDriver": "Scott Sanderson"
 };
