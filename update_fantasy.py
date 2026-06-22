@@ -110,9 +110,11 @@ def normalize_name(name):
         if len(parts) == 2:
             name = f"{parts[1].strip()} {parts[0].strip()}"
             
+    name = re.sub(r'\d+$', '', name)
     # Remove single character initials (middle initials)
     name = re.sub(r'\s+[a-z]\s+', ' ', name)
     name = re.sub(r'\s+', ' ', name).strip()
+    name = name.replace("mc ", "mc")
     
     # Nickname and spelling variations mapping
     name_map = {
@@ -433,7 +435,7 @@ def main():
     if args.schedule_id:
         url = f"https://simracerhub.com/season_race.php?schedule_id={args.schedule_id}"
     else:
-        url = f"https://simracerhub.com/season_race.php?season_id={config.get('season_id', '28135')}"
+        url = f"https://simracerhub.com/season_race.php?season_id={config.get('season_id', '29722')}"
         
     # Get HTML
     if args.test:

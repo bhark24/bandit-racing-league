@@ -56,7 +56,7 @@ srh_ids = {
 }
 
 urls = [
-    "https://simracerhub.com/season_standings.php?season_id=28135",
+    "https://simracerhub.com/season_standings.php?season_id=29722",
     "https://simracerhub.com/season_standings.php?season_id=25504"
 ]
 

@@ -148,6 +148,7 @@ def normalize_name(name):
         parts = name.split(',')
         if len(parts) == 2:
             name = f"{parts[1].strip()} {parts[0].strip()}"
+    name = re.sub(r'\d+$', '', name)
     name = re.sub(r'\s+[a-z]\s+', ' ', name)
     name = re.sub(r'\s+', ' ', name).strip()
     name = name.replace("mc ", "mc")
