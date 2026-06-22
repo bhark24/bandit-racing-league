@@ -505,7 +505,7 @@
                 if (latestRace && !latestRace.isPreview && latestRace.results && latestRace.results.length > 0) {
                     // Results exist for the latest race - Dynamic Post-Daytona Mode!
                     isPreview = false;
-                    const participants = latestRace.results.map(r => r.name);
+                    const participants = latestRace.results.filter(r => !r.isMock).map(r => r.name);
                     seed = latestRace.date + "-" + latestRace.track;
                     driverName = getWeeklyDriver(participants, seed);
                     latestStats = latestRace.results.find(r => normalizeName(r.name) === normalizeName(driverName));

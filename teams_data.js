@@ -10,7 +10,8 @@ const teamsData = {
         "qualify": 6,
         "incidents": 22,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "SCOTT SANDERSON",
@@ -18,7 +19,8 @@ const teamsData = {
         "qualify": 16,
         "incidents": 8,
         "status": "Running",
-        "led": 1
+        "led": 1,
+        "isMock": false
       },
       {
         "name": "BENJAMIN LACY",
@@ -26,7 +28,8 @@ const teamsData = {
         "qualify": 14,
         "incidents": 25,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "CARTER PHILLIPS",
@@ -34,7 +37,8 @@ const teamsData = {
         "qualify": 11,
         "incidents": 16,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "LOGAN MURRAY",
@@ -42,7 +46,8 @@ const teamsData = {
         "qualify": 17,
         "incidents": 20,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "WES FULLER",
@@ -50,7 +55,8 @@ const teamsData = {
         "qualify": 21,
         "incidents": 15,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "JACKSON KNAAK",
@@ -58,7 +64,8 @@ const teamsData = {
         "qualify": 7,
         "incidents": 12,
         "status": "Running",
-        "led": 6
+        "led": 6,
+        "isMock": false
       },
       {
         "name": "JOHNATHON PLATT",
@@ -66,7 +73,8 @@ const teamsData = {
         "qualify": 34,
         "incidents": 8,
         "status": "Running",
-        "led": 6
+        "led": 6,
+        "isMock": false
       },
       {
         "name": "DAVIS CARROLL",
@@ -74,7 +82,8 @@ const teamsData = {
         "qualify": 31,
         "incidents": 24,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "MATT CROCKETT",
@@ -82,7 +91,8 @@ const teamsData = {
         "qualify": 15,
         "incidents": 16,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "NATHAN SANTOS2",
@@ -90,7 +100,8 @@ const teamsData = {
         "qualify": 22,
         "incidents": 20,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "MICHAEL RAKES",
@@ -98,7 +109,8 @@ const teamsData = {
         "qualify": 24,
         "incidents": 16,
         "status": "Running",
-        "led": 5
+        "led": 5,
+        "isMock": false
       },
       {
         "name": "KEVIN FOSTER",
@@ -106,7 +118,8 @@ const teamsData = {
         "qualify": 9,
         "incidents": 20,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "JOSHUA BILLITER",
@@ -114,7 +127,8 @@ const teamsData = {
         "qualify": 28,
         "incidents": 27,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "REAGAN FRUGE",
@@ -122,7 +136,8 @@ const teamsData = {
         "qualify": 19,
         "incidents": 24,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "JASON ALLEGRINI",
@@ -130,7 +145,8 @@ const teamsData = {
         "qualify": 30,
         "incidents": 29,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "JON OSBORNE",
@@ -138,7 +154,8 @@ const teamsData = {
         "qualify": 5,
         "incidents": 24,
         "status": "Running",
-        "led": 3
+        "led": 3,
+        "isMock": false
       },
       {
         "name": "VICTOR WEAVER",
@@ -146,7 +163,8 @@ const teamsData = {
         "qualify": 40,
         "incidents": 20,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "EDDIE HAGIGH",
@@ -154,7 +172,8 @@ const teamsData = {
         "qualify": 10,
         "incidents": 16,
         "status": "Running",
-        "led": 24
+        "led": 24,
+        "isMock": false
       },
       {
         "name": "BOB BERRY",
@@ -162,7 +181,8 @@ const teamsData = {
         "qualify": 25,
         "incidents": 16,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "GARRET BOBO",
@@ -170,7 +190,8 @@ const teamsData = {
         "qualify": 41,
         "incidents": 16,
         "status": "Running",
-        "led": 3
+        "led": 3,
+        "isMock": false
       },
       {
         "name": "CHAD HARTLE",
@@ -178,7 +199,8 @@ const teamsData = {
         "qualify": 35,
         "incidents": 22,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "DAVID LEAKEY",
@@ -186,7 +208,8 @@ const teamsData = {
         "qualify": 23,
         "incidents": 20,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "MICHAEL RAMOS",
@@ -194,7 +217,8 @@ const teamsData = {
         "qualify": 2,
         "incidents": 17,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "NICOLE KRIESEL",
@@ -202,7 +226,8 @@ const teamsData = {
         "qualify": 33,
         "incidents": 32,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "CORDELL MCFARLIN",
@@ -210,7 +235,8 @@ const teamsData = {
         "qualify": 43,
         "incidents": 28,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "BRANDON JACKSON",
@@ -218,7 +244,8 @@ const teamsData = {
         "qualify": 4,
         "incidents": 20,
         "status": "Running",
-        "led": 1
+        "led": 1,
+        "isMock": false
       },
       {
         "name": "SEAN BRITT",
@@ -226,7 +253,8 @@ const teamsData = {
         "qualify": 38,
         "incidents": 20,
         "status": "Running",
-        "led": 1
+        "led": 1,
+        "isMock": false
       },
       {
         "name": "CONNOR GIBSON",
@@ -234,7 +262,8 @@ const teamsData = {
         "qualify": 20,
         "incidents": 28,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "ETHAN SIKORSKI",
@@ -242,7 +271,8 @@ const teamsData = {
         "qualify": 3,
         "incidents": 12,
         "status": "Running",
-        "led": 6
+        "led": 6,
+        "isMock": false
       },
       {
         "name": "JACKSON DUKE",
@@ -250,7 +280,8 @@ const teamsData = {
         "qualify": 42,
         "incidents": 21,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "BILL HARKINS",
@@ -258,7 +289,8 @@ const teamsData = {
         "qualify": 37,
         "incidents": 18,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "JASON GREENWELL",
@@ -266,7 +298,8 @@ const teamsData = {
         "qualify": 13,
         "incidents": 12,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "LUCAS WILSON2",
@@ -274,7 +307,8 @@ const teamsData = {
         "qualify": 36,
         "incidents": 26,
         "status": "Disconnected",
-        "led": 5
+        "led": 5,
+        "isMock": false
       },
       {
         "name": "BRET GUZIK",
@@ -282,7 +316,8 @@ const teamsData = {
         "qualify": 8,
         "incidents": 24,
         "status": "Disconnected",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "RICKY HART JR",
@@ -290,7 +325,8 @@ const teamsData = {
         "qualify": 39,
         "incidents": 12,
         "status": "Disconnected",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "CURTIS YANCEY",
@@ -298,7 +334,8 @@ const teamsData = {
         "qualify": 27,
         "incidents": 16,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "TY CORINO",
@@ -306,7 +343,8 @@ const teamsData = {
         "qualify": 29,
         "incidents": 21,
         "status": "Running",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "JOSHUA ADAMS",
@@ -314,7 +352,8 @@ const teamsData = {
         "qualify": 1,
         "incidents": 12,
         "status": "Running",
-        "led": 27
+        "led": 27,
+        "isMock": false
       },
       {
         "name": "PAUL WILSON",
@@ -322,7 +361,8 @@ const teamsData = {
         "qualify": 18,
         "incidents": 8,
         "status": "Disconnected",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "TRE ELLIS",
@@ -330,7 +370,8 @@ const teamsData = {
         "qualify": 12,
         "incidents": 4,
         "status": "Disconnected",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "TERRY KONDAS",
@@ -338,7 +379,8 @@ const teamsData = {
         "qualify": 32,
         "incidents": 2,
         "status": "Disconnected",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "DYLAN NICASTRO",
@@ -346,7 +388,8 @@ const teamsData = {
         "qualify": 26,
         "incidents": 8,
         "status": "Disconnected",
-        "led": 0
+        "led": 0,
+        "isMock": false
       },
       {
         "name": "DIONTE RADER",
@@ -354,7 +397,8 @@ const teamsData = {
         "qualify": 24,
         "incidents": 3,
         "status": "running",
-        "led": 0
+        "led": 0,
+        "isMock": true
       },
       {
         "name": "MATT BAILEY",
@@ -362,7 +406,8 @@ const teamsData = {
         "qualify": 36,
         "incidents": 3,
         "status": "running",
-        "led": 0
+        "led": 0,
+        "isMock": true
       },
       {
         "name": "DAVID WESTOVER JR",
@@ -370,7 +415,8 @@ const teamsData = {
         "qualify": 28,
         "incidents": 4,
         "status": "running",
-        "led": 0
+        "led": 0,
+        "isMock": true
       },
       {
         "name": "NICK NICKERSON",
@@ -378,7 +424,8 @@ const teamsData = {
         "qualify": 30,
         "incidents": 3,
         "status": "running",
-        "led": 0
+        "led": 0,
+        "isMock": true
       },
       {
         "name": "RICKY HART",
@@ -386,7 +433,8 @@ const teamsData = {
         "qualify": 27,
         "incidents": 3,
         "status": "running",
-        "led": 0
+        "led": 0,
+        "isMock": true
       },
       {
         "name": "RICKY GONZALES",
@@ -394,7 +442,8 @@ const teamsData = {
         "qualify": 28,
         "incidents": 3,
         "status": "running",
-        "led": 0
+        "led": 0,
+        "isMock": true
       }
     ]
   },

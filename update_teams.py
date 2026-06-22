@@ -621,7 +621,8 @@ def main():
                     "incidents": mock_inc,
                     "total_points": mock_total_points,
                     "status": "running",
-                    "led": 0
+                    "led": 0,
+                    "is_mock": True
                 }
                 print(f"  [MOCK RESULTS] Generated mock results for {driver_name} (P{mock_fp})")
 
@@ -928,7 +929,8 @@ def main():
             "qualify": score_data["qualify"],
             "incidents": score_data["incidents"],
             "status": score_data["status"],
-            "led": score_data["led"]
+            "led": score_data["led"],
+            "isMock": score_data.get("is_mock", False)
         })
     
     # Sort results by finish position ascending
