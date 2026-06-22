@@ -17,6 +17,11 @@ const weeklyData = {
       "wins": 1
     },
     {
+      "name": "ZeroFoxtrot",
+      "points": 73,
+      "wins": 0
+    },
+    {
       "name": "Roundy Motorsports",
       "points": 65,
       "wins": 0
@@ -34,11 +39,6 @@ const weeklyData = {
     {
       "name": "Carter Phillips Racing",
       "points": 55,
-      "wins": 0
-    },
-    {
-      "name": "ZeroFoxtrot",
-      "points": 36,
       "wins": 0
     },
     {
