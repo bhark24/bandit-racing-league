@@ -318,6 +318,30 @@ def scrape_driver_standings_playwright(browser, season_id="29722"):
         print(f"[!] Error scraping standings: {e}")
         return []
 
+def get_latest_youtube_video_id(channel_id="UC8D9f0DOxaf8hdyxIuk2NeQ"):
+    import urllib.request
+    import xml.etree.ElementTree as ET
+    print(f"[*] Fetching latest YouTube video ID for channel {channel_id}...")
+    url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    try:
+        with urllib.request.urlopen(req, timeout=5) as response:
+            xml_data = response.read().decode('utf-8')
+        root = ET.fromstring(xml_data)
+        namespaces = {
+            '': 'http://www.w3.org/2005/Atom',
+            'yt': 'http://www.youtube.com/xml/schemas/2015'
+        }
+        entries = root.findall('entry', namespaces)
+        if entries:
+            video_id = entries[0].find('yt:videoId', namespaces).text
+            print(f"[+] Found latest YouTube video ID: {video_id}")
+            return video_id
+    except Exception as e:
+        print(f"[!] Error fetching YouTube video ID: {e}")
+    # Fallback to the current Daytona video ID if fetch fails
+    return "oF84lT2ODkw"
+
 def correct_driver_standings(driver_standings):
     config_path = os.path.join(BASE_DIR, "fantasy_config.json")
     finish_points = {}
@@ -462,6 +486,7 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
             
             # Construct weekly data dict
             winner_image = find_custom_winner_image(winner_name, BASE_DIR)
+            latest_video_id = get_latest_youtube_video_id("UC8D9f0DOxaf8hdyxIuk2NeQ")
             weekly_data = {
                 "winnerName": winner_name,
                 "winnerNumber": winner_number,
@@ -471,7 +496,8 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
                 "raceDate": race_date,
                 "teamStandings": team_list,
                 "fantasyLeaderboard": fantasy_list,
-                "driverStandings": driver_standings
+                "driverStandings": driver_standings,
+                "latestBroadcastVideoId": latest_video_id
             }
             
             # Write data to weekly_data.js

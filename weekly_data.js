@@ -284,5 +284,6 @@ const weeklyData = {
       "name": "Paul Wilson",
       "points": 1
     }
-  ]
+  ],
+  "latestBroadcastVideoId": "oF84lT2ODkw"
 };

@@ -115,7 +115,7 @@
 
                     <!-- STATE 2: PREVIOUS RACE VOD -->
                     <!-- Swap the VIDEO_ID below with last week's race ID to show the replay -->
-                    <iframe src="https://www.youtube.com/embed/6QFN7eOKLZs?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe id="broadcast-iframe" src="https://www.youtube.com/embed/6QFN7eOKLZs?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                     <!-- STATE 3: UPCOMING RACE GRAPHIC -->
                     <!-- Uncomment the img below 2 days before the race (save image in assets folder) -->
@@ -707,6 +707,39 @@
                             list.appendChild(li);
                         });
                     }
+                }
+
+                // 6. Automatically Update Broadcast Embed (YouTube RSS Integration)
+                const iframe = document.getElementById("broadcast-iframe");
+                if (iframe) {
+                    const channelId = "UC8D9f0DOxaf8hdyxIuk2NeQ";
+                    
+                    // A. Use weeklyData video ID if available
+                    if (typeof weeklyData !== 'undefined' && weeklyData.latestBroadcastVideoId) {
+                        iframe.src = `https://www.youtube.com/embed/${weeklyData.latestBroadcastVideoId}?rel=0`;
+                    }
+
+                    // B. Attempt dynamic real-time retrieval from YouTube RSS feed (e.g. for live stream or new uploads)
+                    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+                    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+                    fetch(apiUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data && data.status === 'ok' && data.items && data.items.length > 0) {
+                                const latestVideo = data.items[0];
+                                const videoUrl = latestVideo.link;
+                                const match = videoUrl.match(/[?&]v=([^&#]+)/);
+                                if (match && match[1]) {
+                                    const latestVideoId = match[1];
+                                    iframe.src = `https://www.youtube.com/embed/${latestVideoId}?rel=0`;
+                                    console.log("Dynamically updated broadcast to latest YouTube video:", latestVideoId);
+                                }
+                            }
+                        })
+                        .catch(err => {
+                            console.warn("Could not fetch latest YouTube video dynamically, using weeklyData fallback:", err);
+                        });
                 }
             });
         })();
