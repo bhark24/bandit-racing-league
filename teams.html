@@ -2393,7 +2393,19 @@
                     const localGFR = localData.teams ? localData.teams.find(t => t.id === 'gfr-racing') : null;
                     const hasNick = localGFR && localGFR.ledger && localGFR.ledger.some(e => e.description && e.description.includes("NICK NICKERSON"));
                     
+                    // Check for duplicate DNF entries in the ledger to force-clear legacy duplicates
+                    const hasDnfDuplicate = localRoundy && localRoundy.ledger && 
+                        localRoundy.ledger.filter(e => e.description && e.description.includes("DNF: TERRY KONDUS")).length > 1;
+
+                    if (hasDnfDuplicate) {
+                        console.log("Duplicate DNF logs detected in local storage. Reverting cache to server data.");
+                        localStorage.removeItem('bandit_teams_data');
+                        window.location.reload();
+                        return;
+                    }
+
                     if (localData.teams && (!hasLogan || !hasESR || !hasGunz || !hasNick || !hasLegacy)) {
+
                         console.log("Cache outdated (missing Logan/Matt signing, ESR, Gunz, Legacy team, or starting signing bonuses). Reverting cache.");
                         localStorage.removeItem('bandit_teams_data');
                         return;
