@@ -12,6 +12,11 @@ const weeklyData = {
       "wins": 0
     },
     {
+      "name": "Roundy Motorsports",
+      "points": 87,
+      "wins": 0
+    },
+    {
       "name": "Legacy Racing",
       "points": 75,
       "wins": 1
@@ -19,11 +24,6 @@ const weeklyData = {
     {
       "name": "ZeroFoxtrot",
       "points": 73,
-      "wins": 0
-    },
-    {
-      "name": "Roundy Motorsports",
-      "points": 65,
       "wins": 0
     },
     {
@@ -47,18 +47,18 @@ const weeklyData = {
       "wins": 0
     },
     {
-      "name": "Title Town Racing",
-      "points": 32,
-      "wins": 0
-    },
-    {
       "name": "Striped Maple Racing",
       "points": 31,
       "wins": 0
     },
     {
+      "name": "Title Town Racing",
+      "points": 31,
+      "wins": 0
+    },
+    {
       "name": "Wrist's Up Racing",
-      "points": 24,
+      "points": 2,
       "wins": 0
     },
     {
@@ -71,13 +71,13 @@ const weeklyData = {
   "driverStandings": [
     {
       "pos": 1,
-      "name": "Dylan McDonald",
-      "points": 46
+      "name": "Scott Sanderson",
+      "points": 45
     },
     {
       "pos": 2,
-      "name": "Scott Sanderson",
-      "points": 45
+      "name": "Dylan McDonald",
+      "points": 44
     },
     {
       "pos": 3,
