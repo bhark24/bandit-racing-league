@@ -899,12 +899,6 @@ const teamsData = {
         },
         {
           "date": "Jun 17, 2026",
-          "description": "DNF: TERRY KONDUS (Disconnected) - Truck Condition: 90%",
-          "category": "info",
-          "amount": 0
-        },
-        {
-          "date": "Jun 17, 2026",
           "description": "Hauler Logistics: Cleveland, OH to Daytona Beach, FL (849 mi round trip)",
           "category": "expense",
           "amount": -8498
@@ -1346,12 +1340,6 @@ const teamsData = {
           "description": "Signed Driver: DAVID WESTOVER JR (Signing Bonus)",
           "category": "expense",
           "amount": -50000
-        },
-        {
-          "date": "Jun 17, 2026",
-          "description": "DNF: DYLAN NICASTRO (Disconnected) - Truck Condition: 66%",
-          "category": "info",
-          "amount": 0
         },
         {
           "date": "Jun 17, 2026",
@@ -2106,12 +2094,6 @@ const teamsData = {
           "description": "Signed Driver: DYLAN MCDONALD (Signing Bonus)",
           "category": "expense",
           "amount": -50000
-        },
-        {
-          "date": "Jun 17, 2026",
-          "description": "DNF: LUCAS WILSON (Disconnected) - Truck Condition: 0%",
-          "category": "info",
-          "amount": 0
         },
         {
           "date": "Jun 17, 2026",
