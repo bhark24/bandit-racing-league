@@ -209,8 +209,26 @@
             <!-- ACTIVE SUBMISSIONS FOR CURRENT WEEK -->
             <div class="fantasy-panel" id="active-submissions-panel" style="margin-bottom: 30px; display: none;">
                 <h4 style="color:#fff; font-size:1.1rem; font-family:var(--font-heading); text-transform:uppercase; margin-top:0; margin-bottom:15px; letter-spacing:1px; border-left: 3px solid var(--neon-green); padding-left: 10px;">Submitted Entries for the Upcoming Race</h4>
-                <div id="active-submissions-list" style="display:flex; flex-wrap:wrap; gap:10px;">
+                <div id="active-submissions-list" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 20px;">
                     <!-- Dynamically filled by Supabase -->
+                </div>
+                <div id="active-submissions-table-container" style="overflow-x: auto; border-top: 1px dashed #222; padding-top: 20px;">
+                    <h5 style="color:var(--text-muted); font-size:0.85rem; font-family:var(--font-heading); text-transform:uppercase; margin-top:0; margin-bottom:15px; letter-spacing:0.5px;">Live Roster Picks Sheet</h5>
+                    <table class="points-table" style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid #222; text-align: left;">
+                                <th style="padding: 10px; color: var(--text-muted);">Competitor</th>
+                                <th style="padding: 10px; color: var(--text-muted);">Pick 1</th>
+                                <th style="padding: 10px; color: var(--text-muted);">Pick 2</th>
+                                <th style="padding: 10px; color: var(--text-muted);">Pick 3</th>
+                                <th style="padding: 10px; color: var(--text-muted);">Pick 4</th>
+                                <th style="padding: 10px; color: var(--text-muted); text-align: right;">Cautions Guess</th>
+                            </tr>
+                        </thead>
+                        <tbody id="active-submissions-table-body">
+                            <!-- Filled dynamically -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -559,6 +577,8 @@
         function renderActiveSubmissions() {
             const panel = document.getElementById('active-submissions-panel');
             const listEl = document.getElementById('active-submissions-list');
+            const tbodyEl = document.getElementById('active-submissions-table-body');
+            
             if (!panel || !listEl) return;
 
             if (activeWeeklyPicks.length === 0) {
@@ -568,11 +588,13 @@
 
             panel.style.display = 'block';
             listEl.innerHTML = '';
+            if (tbodyEl) tbodyEl.innerHTML = '';
 
             // Sort competitors alphabetically by name
             const sortedPicks = [...activeWeeklyPicks].sort((a, b) => a.name.localeCompare(b.name));
 
             sortedPicks.forEach(pick => {
+                // 1. Render badges
                 const badge = document.createElement('span');
                 badge.className = 'competitor-badge';
                 badge.style.cssText = `
@@ -592,6 +614,33 @@
                 `;
                 badge.innerHTML = `<span style="color: var(--neon-green); font-weight: bold;">✓</span> ${pick.name}`;
                 listEl.appendChild(badge);
+
+                // 2. Render table row
+                if (tbodyEl) {
+                    const tr = document.createElement('tr');
+                    tr.style.borderBottom = '1px solid #1a1a1a';
+                    tr.style.background = 'transparent';
+                    
+                    const p = pick.picks || ['', '', '', ''];
+                    
+                    const getPickCellHTML = (drv) => {
+                        if (!drv) return `<span style="color: var(--text-muted); font-style: italic;">None</span>`;
+                        return `<div style="display:flex; align-items:center; gap:8px;">
+                            <img src="${getDriverImgPath(drv)}" style="max-height:20px; max-width:40px; object-fit:contain;" onerror="this.style.display='none'">
+                            <span style="font-weight:bold; color:#fff;">${drv}</span>
+                        </div>`;
+                    };
+
+                    tr.innerHTML = `
+                        <td style="padding: 12px 10px; font-weight: bold; color: var(--neon-green); text-transform: uppercase;">${pick.name}</td>
+                        <td style="padding: 12px 10px;">${getPickCellHTML(p[0])}</td>
+                        <td style="padding: 12px 10px;">${getPickCellHTML(p[1])}</td>
+                        <td style="padding: 12px 10px;">${getPickCellHTML(p[2])}</td>
+                        <td style="padding: 12px 10px;">${getPickCellHTML(p[3])}</td>
+                        <td style="padding: 12px 10px; text-align: right; font-weight: bold; font-family: var(--font-heading); font-size: 1.1rem; color: #fff;">${pick.tiebreaker || 0}</td>
+                    `;
+                    tbodyEl.appendChild(tr);
+                }
             });
         }
 
