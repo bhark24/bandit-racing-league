@@ -34,3 +34,9 @@ if __name__ == "__main__":
         name="Generate Website Promo Post",
         workdir=base_dir
     )
+    
+    create_shortcut(
+        target=os.path.join(base_dir, "AUTO_UPDATE.bat"),
+        name="Update League and Fantasy",
+        workdir=base_dir
+    )
