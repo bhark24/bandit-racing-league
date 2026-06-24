@@ -359,6 +359,7 @@
     </script>
     
     <!-- Roster and Teams Database script files -->
+    <script src="supabase_config.js"></script>
     <script src="weekly_data.js"></script>
     <script src="teams_data.js"></script>
     <script src="roster_data.js"></script>
@@ -368,7 +369,17 @@
             // Helper function to normalize name strings for matching
             function normalizeName(name) {
                 if (!name) return "";
-                return name.toUpperCase().trim().replace(/[\s\.\-_,]/g, "").replace(/\d+$/, "");
+                let n = name.toUpperCase().trim().replace(/[\s\.\-_,]/g, "").replace(/\d+$/, "");
+                const spellingMap = {
+                    "TERRYKONDAS": "TERRYKONDUS",
+                    "CONORGIBSON": "CONNORGIBSON",
+                    "DIONTERADER": "DI0NTERADER",
+                    "DIANTERODER": "DI0NTERADER",
+                    "JONATHONPLATT": "JONATHONPLATT",
+                    "JOHNATHONPLATT": "JONATHONPLATT",
+                    "JOSHUADSUTHERLAND": "JOSHUASUTHERLAND"
+                };
+                return spellingMap[n] || n;
             }
 
             // Helper function to clean driver name (commas, casing, numbers)
@@ -508,7 +519,28 @@
             }
 
             // Main execution logic
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', async function() {
+                // Fetch latest database updates from Supabase
+                const hasSupabase = typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL && !SUPABASE_URL.includes("your-project-id");
+                if (hasSupabase) {
+                    try {
+                        const response = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.1`, {
+                            headers: {
+                                'apikey': SUPABASE_KEY,
+                                'Authorization': `Bearer ${SUPABASE_KEY}`
+                            }
+                        });
+                        const result = await response.json();
+                        if (result && result.length > 0 && result[0].data && Object.keys(result[0].data).length > 0) {
+                            teamsData.teams = result[0].data.teams;
+                            teamsData.latestRace = result[0].data.latestRace || teamsData.latestRace;
+                            console.log("Homepage loaded latest teams data from Supabase.");
+                        }
+                    } catch (e) {
+                        console.error("Homepage failed to load from Supabase:", e);
+                    }
+                }
+
                 if (typeof teamsData === 'undefined' || typeof rosterData === 'undefined') {
                     console.error("Teams or Roster database missing. Cannot initialize spotlight.");
                     return;

@@ -45,29 +45,87 @@ def load_config():
     with open(CONFIG_PATH, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def get_supabase_config():
+    config_path = os.path.join(BASE_DIR, "supabase_config.js")
+    if not os.path.exists(config_path):
+        return None, None
+    try:
+        with open(config_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        url_match = re.search(r'SUPABASE_URL\s*=\s*"(.*?)"', content)
+        key_match = re.search(r'SUPABASE_KEY\s*=\s*"(.*?)"', content)
+        
+        url = url_match.group(1) if url_match else None
+        key = key_match.group(1) if key_match else None
+        
+        if not url or "your-project-id" in url or not key or "your-anon-public" in key:
+            return None, None
+            
+        return url, key
+    except Exception as e:
+        print(f"Warning parsing supabase_config.js: {e}")
+        return None, None
+
 def load_teams_database():
     if not os.path.exists(TEAMS_DATA_PATH):
         print(f"Error: teams_data.js not found at {TEAMS_DATA_PATH}")
         sys.exit(1)
+        
     with open(TEAMS_DATA_PATH, "r", encoding="utf-8") as f:
-        content = f.read()
-    
-    # Extract JSON object from JS variable
-    match = re.search(r'const\s+teamsData\s*=\s*({.*?});', content, re.DOTALL)
-    if not match:
-        print("Error: Could not extract teamsData from teams_data.js")
-        sys.exit(1)
-    
+        original_content = f.read()
+        
+    url, key = get_supabase_config()
+    if not url or not key:
+        # Fallback to local file database
+        match = re.search(r'const\s+teamsData\s*=\s*({.*?});', original_content, re.DOTALL)
+        if not match:
+            print("Error: Could not extract teamsData from teams_data.js")
+            sys.exit(1)
+        try:
+            return json.loads(match.group(1)), original_content
+        except Exception as e:
+            print(f"Error parsing teamsData JSON: {e}")
+            sys.exit(1)
+            
+    # Try fetching from Supabase database
+    print(f"[*] Connecting to Supabase at {url}...")
     try:
-        data = json.loads(match.group(1))
-        return data, content
+        headers = {
+            'apikey': key,
+            'Authorization': f'Bearer {key}'
+        }
+        req_url = f"{url}/rest/v1/league_data?id=eq.1"
+        req = urllib.request.Request(req_url, headers=headers)
+        with urllib.request.urlopen(req) as response:
+            res_data = json.loads(response.read().decode('utf-8'))
+            if res_data and len(res_data) > 0 and res_data[0].get("data") and res_data[0]["data"] != {}:
+                print("[+] Successfully loaded teams database from Supabase.")
+                return res_data[0]["data"], original_content
+            else:
+                # Table is empty, seed it with local file content
+                print("[!] Supabase database table is empty. Seeding with local teams_data.js...")
+                match = re.search(r'const\s+teamsData\s*=\s*({.*?});', original_content, re.DOTALL)
+                if not match:
+                    print("Error: Could not extract teamsData to seed Supabase.")
+                    sys.exit(1)
+                local_data = json.loads(match.group(1))
+                save_teams_database(local_data, original_content)
+                return local_data, original_content
     except Exception as e:
-        print(f"Error parsing teamsData JSON: {e}")
-        sys.exit(1)
+        print(f"[!] Error loading from Supabase: {e}. Falling back to local file.")
+        match = re.search(r'const\s+teamsData\s*=\s*({.*?});', original_content, re.DOTALL)
+        if not match:
+            print("Error: Could not extract teamsData from teams_data.js")
+            sys.exit(1)
+        try:
+            return json.loads(match.group(1)), original_content
+        except Exception as e:
+            print(f"Error parsing teamsData JSON: {e}")
+            sys.exit(1)
 
 def save_teams_database(data, original_content):
+    # 1. Always save a local copy as backup & offline compatibility
     js_content = json.dumps(data, indent=2)
-    # Replace the old json block with new json
     new_content = re.sub(
         r'const\s+teamsData\s*=\s*({.*?});',
         f'const teamsData = {js_content};',
@@ -76,7 +134,30 @@ def save_teams_database(data, original_content):
     )
     with open(TEAMS_DATA_PATH, "w", encoding="utf-8") as f:
         f.write(new_content)
-    print(f"Successfully saved updated database to {TEAMS_DATA_PATH}")
+    print(f"[+] Successfully saved local backup database to {TEAMS_DATA_PATH}")
+    
+    # 2. Upload to Supabase database if configured
+    url, key = get_supabase_config()
+    if url and key:
+        print("[*] Uploading updated database to Supabase...")
+        try:
+            headers = {
+                'apikey': key,
+                'Authorization': f'Bearer {key}',
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            }
+            req_url = f"{url}/rest/v1/league_data?id=eq.1"
+            payload = {
+                "data": data,
+                "updated_at": datetime.now().isoformat()
+            }
+            req_data = json.dumps(payload).encode('utf-8')
+            req = urllib.request.Request(req_url, data=req_data, headers=headers, method='PATCH')
+            with urllib.request.urlopen(req) as response:
+                print("[+] Successfully updated database in Supabase.")
+        except Exception as e:
+            print(f"[!] Error updating Supabase: {e}")
 
 def fetch_html(url):
     print(f"Fetching: {url}")

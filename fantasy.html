@@ -533,17 +533,22 @@
             }
 
             const allDrivers = [];
+            const seenNames = new Set();
             for (let num in rosterData) {
                 const driverDetail = rosterData[num];
                 // Include all active drivers (filter out empty/vacant slots)
                 if (driverDetail.driver && 
                     driverDetail.driver.toLowerCase() !== 'available' && 
                     driverDetail.driver.toLowerCase() !== 'vacant') {
-                    allDrivers.push({
-                        name: driverDetail.driver,
-                        number: num,
-                        status: driverDetail.status
-                    });
+                    const normName = driverDetail.driver.trim().toUpperCase();
+                    if (!seenNames.has(normName)) {
+                        seenNames.add(normName);
+                        allDrivers.push({
+                            name: driverDetail.driver,
+                            number: num,
+                            status: driverDetail.status
+                        });
+                    }
                 }
             }
 
@@ -815,6 +820,29 @@
                     `;
                 });
 
+                // Get all competitors sorted alphabetically
+                let competitorsHtml = '';
+                if (race.results && race.results.length > 0) {
+                    const sortedResults = [...race.results].sort((a, b) => a.name.localeCompare(b.name));
+                    competitorsHtml = `
+                        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed #333;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px;">Weekly Competitors (${race.results.length})</span>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                ${sortedResults.map(res => {
+                                    return `<span class="competitor-badge" style="background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; color: #ccc; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--neon-green)'; this.style.background='rgba(0,255,0,0.02)';" onmouseout="this.style.borderColor='#222'; this.style.background='rgba(255,255,255,0.02)';">${res.name} <span style="color: var(--neon-green); font-weight: 700; margin-left: 4px;">(${res.total} pts)</span></span>`;
+                                }).join('')}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    competitorsHtml = `
+                        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed #333;">
+                            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px;">Weekly Competitors (0)</span>
+                            <span style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">No entries recorded for this race.</span>
+                        </div>
+                    `;
+                }
+
                 raceCard.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; padding-bottom:15px; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
                         <div>
@@ -833,6 +861,7 @@
                             ${podiumRows}
                         </tbody>
                     </table>
+                    ${competitorsHtml}
                 `;
                 container.appendChild(raceCard);
             });

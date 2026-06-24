@@ -400,7 +400,17 @@
 
         function normalizeName(name) {
             if (!name) return '';
-            return name.trim().toUpperCase().replace(/[^A-Z]/g, '');
+            let n = name.trim().toUpperCase().replace(/[^A-Z]/g, '');
+            const spellingMap = {
+                "TERRYKONDAS": "TERRYKONDUS",
+                "CONORGIBSON": "CONNORGIBSON",
+                "DIONTERADER": "DINTERADER",
+                "DIANTERODER": "DINTERADER",
+                "JONATHONPLATT": "JONATHONPLATT",
+                "JOHNATHONPLATT": "JONATHONPLATT",
+                "JOSHUADSUTHERLAND": "JOSHUASUTHERLAND"
+            };
+            return spellingMap[n] || n;
         }
 
         function getDriverImgPath(name) {

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Atlanta Broadcast Banner</title>
+  <!-- Google Fonts for racing typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,800;1,900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #08080a;
+      --neon-blue: #00d2ff;
+      --neon-red: #ff1744;
+      --glow-blue: rgba(0, 210, 255, 0.6);
+      --glow-red: rgba(255, 23, 68, 0.6);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 1024px;
+      height: 576px;
+      background-color: var(--bg-dark);
+      font-family: 'Outfit', sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .banner-container {
+      width: 1024px;
+      height: 576px;
+      background-image: linear-gradient(to bottom, rgba(8, 8, 10, 0.95) 0%, rgba(10, 10, 12, 0.85) 40%, rgba(0, 30, 60, 0.9) 100%), url('assets/carbon_fiber_texture.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      box-sizing: border-box;
+      border: 4px solid #111215;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px;
+    }
+
+    /* Template Overlay: Layered on top of everything to lock size/positions of logos */
+    .template-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1024px;
+      height: 576px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Bottom Section Layout (Occupies y=200 to 576px) */
+    .bottom-section {
+      width: 100%;
+      height: 330px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 5;
+      gap: 30px;
+      box-sizing: border-box;
+      padding-top: 10px;
+    }
+
+    /* Left Side: Perfect Shine Auto Spa Sponsor Card */
+    .sponsor-card {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1.5px solid rgba(0, 210, 255, 0.25);
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.12);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 440px;
+      height: 280px;
+      box-sizing: border-box;
+      backdrop-filter: blur(5px);
+    }
+
+    .car-logo {
+      max-height: 160px;
+      max-width: 380px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.55)) drop-shadow(0 0 8px rgba(0, 210, 255, 0.3));
+    }
+
+    .text-logo {
+      max-height: 55px;
+      max-width: 360px;
+      object-fit: contain;
+      margin-top: 10px;
+      filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.35));
+    }
+
+    /* Right Side: Race Details */
+    .details-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      height: 280px;
+      box-sizing: border-box;
+      padding-left: 10px;
+    }
+
+    .race-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: 38px;
+      line-height: 1.1;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin: 5px 0;
+      transform: skewX(-6deg);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+
+    .race-title .highlight {
+      color: var(--neon-blue);
+      text-shadow: 0 0 10px var(--glow-blue);
+    }
+
+    .track-name {
+      font-size: 26px;
+      font-weight: 900;
+      font-style: italic;
+      color: #e0e0e5;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 5px 0 15px 0;
+      border-left: 4px solid var(--neon-blue);
+      padding-left: 12px;
+    }
+
+    .info-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      background: rgba(255, 23, 68, 0.08);
+      border: 1.5px solid var(--neon-red);
+      border-radius: 4px;
+      padding: 8px 16px;
+      color: #ffffff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px rgba(255, 23, 68, 0.15);
+      margin-bottom: 8px;
+    }
+
+    .time-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      background: rgba(0, 210, 255, 0.08);
+      border: 1.5px solid var(--neon-blue);
+      border-radius: 4px;
+      padding: 8px 16px;
+      color: #ffffff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.15);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="banner-container">
+    <!-- Template Overlay: Strictly preserves top logo sizes and coordinates -->
+    <img src="assets/broadcast_banner_template.png" class="template-overlay" alt="Broadcast Banner Template">
+
+    <!-- Bottom Section: Race Sponsor and Information -->
+    <div class="bottom-section">
+      <!-- Left: Perfect Shine Auto Spa Brand Card -->
+      <div class="sponsor-card">
+        <img src="assets/perfect_shine_car_clean.png" class="car-logo" alt="Perfect Shine Truck">
+        <img src="assets/perfect_shine_logo_text.png" class="text-logo" alt="Perfect Shine Auto Spa">
+      </div>
+
+      <!-- Right: Race Details and Live Air Info -->
+      <div class="details-card">
+        <div class="race-title">
+          THE <span class="highlight">PERFECT SHINE</span> 110
+        </div>
+        <div class="track-name">Atlanta Motor Speedway</div>
+        <div class="info-badge">Wednesday, June 24th</div>
+        <div class="time-badge">Broadcast Live at 9:00 PM EST</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

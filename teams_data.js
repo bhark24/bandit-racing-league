@@ -392,7 +392,7 @@ const teamsData = {
         "isMock": false
       },
       {
-        "name": "DIONTE RADER",
+        "name": "DI0NTE RADER",
         "finish": 44,
         "qualify": 25,
         "incidents": 4,
@@ -691,7 +691,7 @@ const teamsData = {
       "lat": 34.9496,
       "lon": -81.932
     },
-    "DIONTE RADER": {
+    "DI0NTE RADER": {
       "city": "Miamisburg, OH",
       "lat": 39.6428,
       "lon": -84.2866
@@ -701,7 +701,7 @@ const teamsData = {
       "lat": 30.7621,
       "lon": -86.5694
     },
-    "CONOR GIBSON": {
+    "CONNOR GIBSON": {
       "city": "Halifax, NS",
       "lat": 44.6488,
       "lon": -63.5752
@@ -811,7 +811,7 @@ const teamsData = {
       "lat": 38.9592,
       "lon": -85.8903
     },
-    "JOSHUA D SUTHERLAND": {
+    "JOSHUA SUTHERLAND": {
       "city": "Seymour, IN",
       "lat": 38.9592,
       "lon": -85.8903
@@ -1055,7 +1055,7 @@ const teamsData = {
           "VACANT"
         ],
         "backup": [
-          "DIONTE RADER",
+          "DI0NTE RADER",
           "MATT BAILEY"
         ]
       },
@@ -1124,7 +1124,7 @@ const teamsData = {
         },
         {
           "date": "Jun 02, 2026",
-          "description": "Signed Driver: DIONTE RADER (Signing Bonus)",
+          "description": "Signed Driver: DI0NTE RADER (Signing Bonus)",
           "category": "expense",
           "amount": -50000
         },
@@ -1214,25 +1214,25 @@ const teamsData = {
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Standard Race Prep: 937 Tundra #17 (DIONTE RADER)",
+          "description": "Standard Race Prep: 937 Tundra #17 (DI0NTE RADER)",
           "category": "expense",
           "amount": -2000
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Flight & Lodging: DIONTE RADER from Miamisburg, OH (744 mi)",
+          "description": "Flight & Lodging: DI0NTE RADER from Miamisburg, OH (744 mi)",
           "category": "expense",
           "amount": -508
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Sponsor Start Bonus: DIONTE RADER",
+          "description": "Sponsor Start Bonus: DI0NTE RADER",
           "category": "income",
           "amount": 15000
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Prize Money: DIONTE RADER (P44)",
+          "description": "Prize Money: DI0NTE RADER (P44)",
           "category": "income",
           "amount": 12000
         },
@@ -1422,7 +1422,7 @@ const teamsData = {
       "drivers": {
         "primary": [
           "DAVID LEAKEY",
-          "CONOR GIBSON",
+          "CONNOR GIBSON",
           "MICHAEL RAMOS",
           "BOB BERRY"
         ],
@@ -1478,7 +1478,7 @@ const teamsData = {
         },
         {
           "date": "Jun 02, 2026",
-          "description": "Signed Driver: CONOR GIBSON (Signing Bonus)",
+          "description": "Signed Driver: CONNOR GIBSON (Signing Bonus)",
           "category": "expense",
           "amount": -50000
         },
@@ -1520,25 +1520,25 @@ const teamsData = {
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Standard Race Prep: ZeroFoxtrot Silverado #31 (CONOR GIBSON)",
+          "description": "Standard Race Prep: ZeroFoxtrot Silverado #31 (CONNOR GIBSON)",
           "category": "expense",
           "amount": -2000
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Flight & Lodging: CONOR GIBSON from Halifax, NS (1431 mi)",
+          "description": "Flight & Lodging: CONNOR GIBSON from Halifax, NS (1431 mi)",
           "category": "expense",
           "amount": -732
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Sponsor Start Bonus: CONOR GIBSON",
+          "description": "Sponsor Start Bonus: CONNOR GIBSON",
           "category": "income",
           "amount": 15000
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Prize Money: CONOR GIBSON (P29)",
+          "description": "Prize Money: CONNOR GIBSON (P29)",
           "category": "income",
           "amount": 12000
         },
@@ -2587,7 +2587,7 @@ const teamsData = {
       "drivers": {
         "primary": [
           "ADAM TAHAN",
-          "JOSHUA D SUTHERLAND",
+          "JOSHUA SUTHERLAND",
           "VACANT",
           "VACANT"
         ],
@@ -2643,7 +2643,7 @@ const teamsData = {
         },
         {
           "date": "Jun 02, 2026",
-          "description": "Signed Driver: JOSHUA D SUTHERLAND (Signing Bonus)",
+          "description": "Signed Driver: JOSHUA SUTHERLAND (Signing Bonus)",
           "category": "expense",
           "amount": -50000
         },

@@ -540,8 +540,11 @@
                 <div style="display:flex; align-items:center; gap:25px; flex-wrap:wrap;">
                     <img id="detail-team-logo" src="" alt="Team Logo" style="max-height: 80px; max-width: 160px; object-fit: contain;">
                     <div>
-                        <h2 id="detail-team-name" style="font-size: 2.2rem; color: #fff; margin:0; font-style: italic;">Team Name</h2>
-                        <p style="color:var(--text-muted); margin: 5px 0 0 0; font-size: 1rem;">Owner: <strong id="detail-team-owner" style="color:#fff;">Owner Name</strong> | Team Base Location: <span id="detail-team-base">City, State</span> | Highest Earner: <span id="detail-team-earner" style="color:var(--neon-green); font-weight:bold;">None</span></p>
+                        <div style="display:flex; align-items:center; gap:15px; margin-bottom:5px;">
+                            <h2 id="detail-team-name" style="font-size: 2.2rem; color: #fff; margin:0; font-style: italic;">Team Name</h2>
+                            <span id="save-indicator" style="font-size: 0.75rem; color: var(--neon-green); font-weight: bold; text-transform: uppercase; background: rgba(0,255,0,0.1); border: 1px solid var(--neon-green); padding: 3px 8px; border-radius: 4px; display: none; box-shadow: 0 0 8px rgba(0,255,0,0.2);">Saving...</span>
+                        </div>
+                        <p style="color:var(--text-muted); margin: 0; font-size: 1rem;">Owner: <strong id="detail-team-owner" style="color:#fff;">Owner Name</strong> | Team Base Location: <span id="detail-team-base">City, State</span> | Highest Earner: <span id="detail-team-earner" style="color:var(--neon-green); font-weight:bold;">None</span></p>
                     </div>
                 </div>
             </div>
@@ -697,6 +700,54 @@
 
     </main>
 
+    <!-- Administrator Panel -->
+    <section class="container" style="margin-bottom: 40px; border-top: 1px solid #1c1c1c; padding-top: 40px;">
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid #1c1c1c; border-radius: var(--border-radius); padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <h3 style="color: #fff; font-family: var(--font-heading); margin-top: 0; margin-bottom: 10px; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px;">
+                ⚙️ League Administrator Console
+            </h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">
+                As the league administrator, after performing franchise updates, signings, driver releases, or truck repairs on this web interface, use the tools below to save your changes permanently to the league repository. Download or copy the updated data file and replace <code>teams_data.js</code> in the project directory before running automated updates or committing changes.
+            </p>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <button class="btn-primary" style="padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="copyTeamsDataToClipboard()">
+                    📋 Copy teams_data.js Content
+                </button>
+                <button class="btn-secondary" style="padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: var(--border-radius); background: rgba(255,255,255,0.05); border: 1px solid #333; color: #fff;" onclick="downloadTeamsDataFile()">
+                    💾 Download teams_data.js File
+                </button>
+                <button class="reset-db-btn" style="margin-left: auto;" onclick="resetState()">
+                    ⚠️ Reset Database Cache
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        async function copyTeamsDataToClipboard() {
+            try {
+                const jsText = `const teamsData = ${JSON.stringify(teamsData, null, 2)};`;
+                await navigator.clipboard.writeText(jsText);
+                alert("Success! The updated teams_data.js file content has been copied to your clipboard.\\n\\nYou can now open your local teams_data.js file, select all, and paste to overwrite it.");
+            } catch (err) {
+                alert("Failed to copy: " + err);
+            }
+        }
+
+        function downloadTeamsDataFile() {
+            const jsText = `const teamsData = ${JSON.stringify(teamsData, null, 2)};`;
+            const blob = new Blob([jsText], { type: 'text/javascript' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'teams_data.js';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+
     <footer>
         <div class="container footer-content" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
             <div style="text-align: center;">
@@ -710,6 +761,7 @@
     </footer>
 
     <!-- Load the JavaScript Mock Database first -->
+    <script src="supabase_config.js"></script>
     <script src="teams_data.js"></script>
     <script src="roster_data.js"></script>
     <script>
@@ -803,8 +855,8 @@
             return null;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            loadState();
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadState();
             renderFranchiseStandings();
             renderTeamsDirectory();
             renderOutlawTelegraph();
@@ -2366,67 +2418,81 @@
             team.drivers.backup = compactBackup;
         }
 
-        function loadState() {
-            const saved = localStorage.getItem('bandit_teams_data');
-            if (saved) {
+        async function loadState() {
+            const hasSupabase = typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL && !SUPABASE_URL.includes("your-project-id");
+            
+            if (hasSupabase) {
+                console.log("Supabase config detected. Loading database...");
+                const saveIndicator = document.getElementById('save-indicator');
+                if (saveIndicator) {
+                    saveIndicator.style.display = 'inline-block';
+                    saveIndicator.textContent = "Loading...";
+                }
                 try {
-                    const localData = JSON.parse(saved);
-                    const serverTeams = teamsData.teams;
-                    
-                    // If the latest race date doesn't match or is missing, a new simulation
-                    // or database reset occurred. Revert cache to server data.
-                    const serverRaceDate = teamsData.latestRace ? teamsData.latestRace.date : null;
-                    if (!localData.latestRaceDate || localData.latestRaceDate !== serverRaceDate) {
-                        console.log("Database version mismatch or new simulation. Reverting cache.");
-                        localStorage.removeItem('bandit_teams_data');
-                        return;
-                    }
-
-                    // Force clear cache if it is missing the recent Roundy Motorsports driver signings, the ESR team, the Gunz team, the Legacy Racing team, or the starting signing bonuses.
-                    const localRoundy = localData.teams ? localData.teams.find(t => t.id === 'roundy-motorsports') : null;
-                    const hasLogan = localRoundy && localRoundy.ledger && localRoundy.ledger.some(e => e.description && e.description.includes("LOGAN MURRAY"));
-                    const hasESR = localData.teams && localData.teams.some(t => t.id === 'esr');
-                    const hasGunz = localData.teams && localData.teams.some(t => t.id === 'middle-aged-gunz-motorsports');
-                    const hasLegacy = localData.teams && localData.teams.some(t => t.id === 'legacy-racing');
-                    
-                    // Verify if the starting signing bonuses are present by checking GFR Nick Nickerson
-                    const localGFR = localData.teams ? localData.teams.find(t => t.id === 'gfr-racing') : null;
-                    const hasNick = localGFR && localGFR.ledger && localGFR.ledger.some(e => e.description && e.description.includes("NICK NICKERSON"));
-                    
-                    // Check for duplicate DNF entries in the ledger to force-clear legacy duplicates
-                    const hasDnfDuplicate = localRoundy && localRoundy.ledger && 
-                        localRoundy.ledger.filter(e => e.description && e.description.includes("DNF: TERRY KONDUS")).length > 1;
-
-                    if (hasDnfDuplicate) {
-                        console.log("Duplicate DNF logs detected in local storage. Reverting cache to server data.");
-                        localStorage.removeItem('bandit_teams_data');
-                        window.location.reload();
-                        return;
-                    }
-
-                    if (localData.teams && (!hasLogan || !hasESR || !hasGunz || !hasNick || !hasLegacy)) {
-
-                        console.log("Cache outdated (missing Logan/Matt signing, ESR, Gunz, Legacy team, or starting signing bonuses). Reverting cache.");
-                        localStorage.removeItem('bandit_teams_data');
-                        return;
-                    }
-                    
-                    const mergedTeams = serverTeams.map(serverTeam => {
-                        const savedTeam = localData.teams.find(t => t.id === serverTeam.id);
-                        if (savedTeam) {
-                            // Copy server metadata to savedTeam to preserve server updates
-                            savedTeam.name = serverTeam.name;
-                            savedTeam.owner = serverTeam.owner;
-                            savedTeam.homeBase = serverTeam.homeBase;
-                            savedTeam.logo = serverTeam.logo;
-                            savedTeam.passcodeHash = serverTeam.passcodeHash;
-                            return savedTeam;
+                    const response = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.1`, {
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`
                         }
-                        return serverTeam;
                     });
-                    teamsData.teams = mergedTeams;
+                    const result = await response.json();
+                    if (result && result.length > 0 && result[0].data && Object.keys(result[0].data).length > 0) {
+                        teamsData.teams = result[0].data.teams;
+                        teamsData.latestRace = result[0].data.latestRace || teamsData.latestRace;
+                        console.log("Successfully loaded teams data from Supabase.");
+                        if (saveIndicator) {
+                            saveIndicator.textContent = "Database Connected";
+                            setTimeout(() => { saveIndicator.style.display = 'none'; }, 2000);
+                        }
+                    } else {
+                        console.log("Supabase table is empty or invalid. Seeding with local script data...");
+                        await saveState(); // Seed database
+                        if (saveIndicator) saveIndicator.style.display = 'none';
+                    }
                 } catch (e) {
-                    console.error("Failed to parse saved state:", e);
+                    console.error("Failed to load from Supabase:", e);
+                    if (saveIndicator) {
+                        saveIndicator.textContent = "Offline Mode";
+                        saveIndicator.style.borderColor = '#ff1744';
+                        saveIndicator.style.color = '#ff1744';
+                        saveIndicator.style.background = 'rgba(255,23,68,0.1)';
+                        setTimeout(() => { saveIndicator.style.display = 'none'; }, 4000);
+                    }
+                }
+            } else {
+                console.log("Supabase config not set. Loading from localStorage fallback...");
+                const saved = localStorage.getItem('bandit_teams_data');
+                if (saved) {
+                    try {
+                        const localData = JSON.parse(saved);
+                        const serverTeams = teamsData.teams;
+                        
+                        // If the latest race date doesn't match or is missing, a new simulation
+                        // or database reset occurred. Revert cache to server data.
+                        const serverRaceDate = teamsData.latestRace ? teamsData.latestRace.date : null;
+                        if (!localData.latestRaceDate || localData.latestRaceDate !== serverRaceDate) {
+                            console.log("Database version mismatch or new simulation. Reverting cache.");
+                            localStorage.removeItem('bandit_teams_data');
+                            return;
+                        }
+                        
+                        const mergedTeams = serverTeams.map(serverTeam => {
+                            const savedTeam = localData.teams.find(t => t.id === serverTeam.id);
+                            if (savedTeam) {
+                                // Copy server metadata to savedTeam to preserve server updates
+                                savedTeam.name = serverTeam.name;
+                                savedTeam.owner = serverTeam.owner;
+                                savedTeam.homeBase = serverTeam.homeBase;
+                                savedTeam.logo = serverTeam.logo;
+                                savedTeam.passcodeHash = serverTeam.passcodeHash;
+                                return savedTeam;
+                            }
+                            return serverTeam;
+                        });
+                        teamsData.teams = mergedTeams;
+                    } catch (e) {
+                        console.error("Failed to parse saved state:", e);
+                    }
                 }
             }
             // Always normalize all rosters
@@ -2437,11 +2503,67 @@
             }
         }
 
-        function saveState() {
+        async function saveState() {
+            // Save to localStorage as a fallback/backup
             localStorage.setItem('bandit_teams_data', JSON.stringify({ 
                 teams: teamsData.teams,
                 latestRaceDate: teamsData.latestRace ? teamsData.latestRace.date : null
             }));
+
+            const hasSupabase = typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL && !SUPABASE_URL.includes("your-project-id");
+            if (hasSupabase) {
+                console.log("Saving database update to Supabase...");
+                const saveIndicator = document.getElementById('save-indicator');
+                if (saveIndicator) {
+                    saveIndicator.style.display = 'inline-block';
+                    saveIndicator.style.borderColor = 'var(--neon-green)';
+                    saveIndicator.style.color = 'var(--neon-green)';
+                    saveIndicator.style.background = 'rgba(0,255,0,0.1)';
+                    saveIndicator.textContent = "Saving...";
+                }
+                
+                try {
+                    const response = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.1`, {
+                        method: 'PATCH',
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`,
+                            'Content-Type': 'application/json',
+                            'Prefer': 'return=minimal'
+                        },
+                        body: JSON.stringify({
+                            data: {
+                                teams: teamsData.teams,
+                                latestRace: teamsData.latestRace
+                            },
+                            updated_at: new Date().toISOString()
+                        })
+                    });
+                    if (response.ok) {
+                        console.log("Successfully saved database update to Supabase.");
+                        if (saveIndicator) {
+                            saveIndicator.textContent = "Saved";
+                            setTimeout(() => { saveIndicator.style.display = 'none'; }, 2000);
+                        }
+                    } else {
+                        console.error("Failed to save to Supabase. Status code:", response.status);
+                        if (saveIndicator) {
+                            saveIndicator.textContent = "Save Failed";
+                            saveIndicator.style.borderColor = '#ff1744';
+                            saveIndicator.style.color = '#ff1744';
+                            saveIndicator.style.background = 'rgba(255,23,68,0.1)';
+                        }
+                    }
+                } catch (e) {
+                    console.error("Failed to save database update to Supabase:", e);
+                    if (saveIndicator) {
+                        saveIndicator.textContent = "Net Error";
+                        saveIndicator.style.borderColor = '#ff1744';
+                        saveIndicator.style.color = '#ff1744';
+                        saveIndicator.style.background = 'rgba(255,23,68,0.1)';
+                    }
+                }
+            }
         }
 
         function resetState() {
@@ -2459,9 +2581,7 @@
                 (team.drivers.backup || []).forEach(name => { if (name && name !== 'VACANT') signedNames.add(normalizeName(name)); });
             });
 
-            function normalizeName(name) {
-                return name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
-            }
+            // Uses global normalizeName
 
             const freeAgents = [];
             for (let num in rosterData) {

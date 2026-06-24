@@ -184,6 +184,7 @@
         </div>
     </section>
 
+    <script src="supabase_config.js"></script>
     <script src="teams_data.js"></script>
     <script src="roster_data.js"></script>
     <script>
@@ -319,7 +320,17 @@
 
         function normalizeName(name) {
             if (!name) return "";
-            return name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
+            let n = name.toUpperCase().trim().replace(/[\s\.\-_]/g, "");
+            const spellingMap = {
+                "TERRYKONDAS": "TERRYKONDUS",
+                "CONORGIBSON": "CONNORGIBSON",
+                "DIONTERADER": "DI0NTERADER",
+                "DIANTERODER": "DI0NTERADER",
+                "JONATHONPLATT": "JONATHONPLATT",
+                "JOHNATHONPLATT": "JONATHONPLATT",
+                "JOSHUADSUTHERLAND": "JOSHUASUTHERLAND"
+            };
+            return spellingMap[n] || n;
         }
 
         function getDriverImgPath(name) {
@@ -479,6 +490,28 @@
             });
         }
 
+        async function loadTeamsDataFromSupabase() {
+            const hasSupabase = typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL && !SUPABASE_URL.includes("your-project-id");
+            if (hasSupabase) {
+                try {
+                    const response = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.1`, {
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                        }
+                    });
+                    const result = await response.json();
+                    if (result && result.length > 0 && result[0].data && Object.keys(result[0].data).length > 0) {
+                        teamsData.teams = result[0].data.teams;
+                        teamsData.latestRace = result[0].data.latestRace || teamsData.latestRace;
+                        console.log("Drivers directory loaded latest teams data from Supabase.");
+                    }
+                } catch (e) {
+                    console.error("Drivers directory failed to load from Supabase:", e);
+                }
+            }
+        }
+
         function loadRosterDynamically() {
             const oldScript = document.getElementById('dynamic-roster-script');
             if (oldScript) {
@@ -489,8 +522,9 @@
             script.id = 'dynamic-roster-script';
             script.src = 'roster_data.js?t=' + Date.now();
             
-            script.onload = function() {
+            script.onload = async function() {
                 if (typeof rosterData !== 'undefined' && typeof numbersList !== 'undefined') {
+                    await loadTeamsDataFromSupabase();
                     const currentHash = JSON.stringify(rosterData);
                     if (currentHash === lastRosterJson) {
                         return;
@@ -502,18 +536,20 @@
             document.body.appendChild(script);
         }
 
-        // Run dynamically
-        if (typeof rosterData === 'undefined' || typeof numbersList === 'undefined') {
-            grid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;'>No roster data found. Please drop your exported <code>roster_data.js</code> file from the Car Number Tracker into the folder!</p>";
-            setTimeout(loadRosterDynamically, 3000);
-        } else {
-            lastRosterJson = JSON.stringify(rosterData);
-            renderDriverGrid();
-            setInterval(loadRosterDynamically, 3000);
-        }
+        // Toggle mobile navigation menu and run initial load
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadTeamsDataFromSupabase();
 
-        // Toggle mobile navigation menu
-        document.addEventListener('DOMContentLoaded', function() {
+            // Run dynamically
+            if (typeof rosterData === 'undefined' || typeof numbersList === 'undefined') {
+                grid.innerHTML = "<p style='grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px;'>No roster data found. Please drop your exported <code>roster_data.js</code> file from the Car Number Tracker into the folder!</p>";
+                setTimeout(loadRosterDynamically, 3000);
+            } else {
+                lastRosterJson = JSON.stringify(rosterData);
+                renderDriverGrid();
+                setInterval(loadRosterDynamically, 3000);
+            }
+
             const toggleBtn = document.querySelector('.nav-toggle');
             const navContainer = document.querySelector('.nav-container');
             
