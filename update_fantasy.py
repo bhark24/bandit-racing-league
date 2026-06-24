@@ -19,6 +19,27 @@ def load_config():
     with open(CONFIG_PATH, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def get_supabase_config():
+    config_path = os.path.join(BASE_DIR, "supabase_config.js")
+    if not os.path.exists(config_path):
+        return None, None
+    try:
+        with open(config_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        url_match = re.search(r'SUPABASE_URL\s*=\s*"(.*?)"', content)
+        key_match = re.search(r'SUPABASE_KEY\s*=\s*"(.*?)"', content)
+        
+        url = url_match.group(1) if url_match else None
+        key = key_match.group(1) if key_match else None
+        
+        if not url or "your-project-id" in url or not key or "your-anon-public" in key:
+            return None, None
+            
+        return url, key
+    except Exception as e:
+        print(f"Warning parsing supabase_config.js: {e}")
+        return None, None
+
 def fetch_html(url):
     print(f"Fetching: {url}")
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -191,10 +212,45 @@ def calculate_driver_scores(drivers, config):
     return driver_scores
 
 def load_picks(config):
-    csv_url = config.get("google_sheet_csv_url", "")
     picks = []
     
-    # If no URL is set, read/create test_picks.csv
+    # 1. Try loading from Supabase first if configured
+    url, key = get_supabase_config()
+    if url and key:
+        print("[*] Connecting to Supabase to load fantasy picks...")
+        try:
+            headers = {
+                'apikey': key,
+                'Authorization': f'Bearer {key}'
+            }
+            req_url = f"{url}/rest/v1/league_data?id=eq.2"
+            req = urllib.request.Request(req_url, headers=headers)
+            with urllib.request.urlopen(req) as response:
+                res_data = json.loads(response.read().decode('utf-8'))
+                if res_data and len(res_data) > 0 and res_data[0].get("data") and "picks" in res_data[0]["data"]:
+                    db_picks = res_data[0]["data"]["picks"]
+                    if db_picks:
+                        print(f"[+] Loaded {len(db_picks)} active picks from Supabase.")
+                        # Format list: [Timestamp, Name, Pick A, Pick B1, Pick B2, Pick C, Tiebreaker]
+                        for p in db_picks:
+                            row = [
+                                p.get("submitted_at", datetime.now().isoformat()),
+                                p.get("name", "Anonymous"),
+                                p.get("picks", ["", "", "", ""])[0] if len(p.get("picks", [])) > 0 else "",
+                                p.get("picks", ["", "", "", ""])[1] if len(p.get("picks", [])) > 1 else "",
+                                p.get("picks", ["", "", "", ""])[2] if len(p.get("picks", [])) > 2 else "",
+                                p.get("picks", ["", "", "", ""])[3] if len(p.get("picks", [])) > 3 else "",
+                                str(p.get("tiebreaker", 0))
+                            ]
+                            picks.append(row)
+                        return picks
+                    else:
+                        print("[!] No active picks found in Supabase (picks array is empty).")
+        except Exception as e:
+            print(f"[!] Error loading picks from Supabase: {e}. Falling back to Google Sheet / CSV.")
+
+    # 2. Fallback to Google Sheets/CSV URL
+    csv_url = config.get("google_sheet_csv_url", "")
     if not csv_url:
         test_csv = os.path.join(BASE_DIR, "test_picks.csv")
         print(f"Google Sheet CSV URL is empty. Checking local test file: {test_csv}")
@@ -422,6 +478,31 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, config):
         
     print(f"Successfully updated fantasy_data.js with {len(leaderboard)} players!")
     print(f"Weekly Winner: {', '.join(weekly_winners)} with {best_score} points!")
+
+    # Clear active picks in Supabase since this week is now scored!
+    url, key = get_supabase_config()
+    if url and key:
+        print("[*] Resetting active weekly picks in Supabase for the next race...")
+        try:
+            headers = {
+                'apikey': key,
+                'Authorization': f'Bearer {key}',
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            }
+            req_url = f"{url}/rest/v1/league_data?id=eq.2"
+            payload = {
+                "data": {
+                    "picks": []
+                },
+                "updated_at": datetime.now().isoformat()
+            }
+            req_data = json.dumps(payload).encode('utf-8')
+            req = urllib.request.Request(req_url, data=req_data, headers=headers, method='PATCH')
+            with urllib.request.urlopen(req) as response:
+                print("[+] Successfully cleared active picks in Supabase.")
+        except Exception as e:
+            print(f"[!] Error clearing Supabase picks: {e}")
 
 def main():
     parser = argparse.ArgumentParser(description="Calculate fantasy league scores from SimRacerHub and Google Sheets.")

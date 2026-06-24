@@ -206,6 +206,14 @@
                 </div>
             </div>
 
+            <!-- ACTIVE SUBMISSIONS FOR CURRENT WEEK -->
+            <div class="fantasy-panel" id="active-submissions-panel" style="margin-bottom: 30px; display: none;">
+                <h4 style="color:#fff; font-size:1.1rem; font-family:var(--font-heading); text-transform:uppercase; margin-top:0; margin-bottom:15px; letter-spacing:1px; border-left: 3px solid var(--neon-green); padding-left: 10px;">Submitted Entries for the Upcoming Race</h4>
+                <div id="active-submissions-list" style="display:flex; flex-wrap:wrap; gap:10px;">
+                    <!-- Dynamically filled by Supabase -->
+                </div>
+            </div>
+
             <!-- LINEUP BOARD -->
             <div class="fantasy-panel" style="margin-bottom: 30px;">
                 <h3 style="color:#fff; font-size:1.5rem; font-family:var(--font-heading); text-transform:uppercase; text-align:center; border-bottom:1px solid #222; padding-bottom:15px; margin-bottom:20px; letter-spacing:1px;">My Lineup Draft Board</h3>
@@ -420,6 +428,7 @@
     </footer>
 
     <!-- Roster Data and Standings Data -->
+    <script src="supabase_config.js"></script>
     <script src="roster_data.js"></script>
     <script src="fantasy_data.js"></script>
     
@@ -448,6 +457,194 @@
 
             // Find tab panel
             document.getElementById(tabId).classList.add('active');
+        }
+
+        let activeWeeklyPicks = [];
+
+        // Check if Supabase configuration is set and valid
+        function isSupabaseConfigured() {
+            return typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL && !SUPABASE_URL.includes("your-project-id");
+        }
+
+        // Mock fetch for local screenshot testing when placeholder URL is present
+        if (typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL && SUPABASE_URL.includes("your-project-id")) {
+            const originalFetch = window.fetch;
+            window.fetch = async function(url, options) {
+                if (url.includes("/rest/v1/league_data?id=eq.2")) {
+                    return {
+                        ok: true,
+                        json: async () => [
+                            {
+                                id: 2,
+                                data: {
+                                    picks: [
+                                        { name: "John Smith" },
+                                        { name: "RaceFan99" },
+                                        { name: "LateModelLover" }
+                                    ]
+                                }
+                            }
+                        ]
+                    };
+                }
+                return originalFetch(url, options);
+            };
+            // Override configured check to allow rendering the mock panel
+            isSupabaseConfigured = () => true;
+        }
+
+        async function loadPicksFromSupabase() {
+            if (!isSupabaseConfigured()) {
+                console.log("Supabase config not set. Offline mode.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                    method: 'GET',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result && result.length > 0) {
+                    activeWeeklyPicks = (result[0].data && result[0].data.picks) || [];
+                    console.log("Successfully loaded active picks from Supabase:", activeWeeklyPicks);
+                } else {
+                    // Row id = 2 does not exist, initialize it!
+                    console.log("Supabase row id = 2 does not exist. Initializing...");
+                    await initializeFantasyDatabaseRow();
+                }
+
+                renderActiveSubmissions();
+            } catch (e) {
+                console.error("Failed to load picks from Supabase:", e);
+            }
+        }
+
+        async function initializeFantasyDatabaseRow() {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/league_data`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({
+                        id: 2,
+                        data: { picks: [] },
+                        updated_at: new Date().toISOString()
+                    })
+                });
+                if (response.ok) {
+                    console.log("Successfully initialized fantasy database row (id = 2) in Supabase.");
+                    activeWeeklyPicks = [];
+                } else {
+                    console.error("Failed to initialize fantasy database row. Status:", response.status);
+                }
+            } catch (e) {
+                console.error("Error initializing fantasy database row:", e);
+            }
+        }
+
+        function renderActiveSubmissions() {
+            const panel = document.getElementById('active-submissions-panel');
+            const listEl = document.getElementById('active-submissions-list');
+            if (!panel || !listEl) return;
+
+            if (activeWeeklyPicks.length === 0) {
+                panel.style.display = 'none';
+                return;
+            }
+
+            panel.style.display = 'block';
+            listEl.innerHTML = '';
+
+            // Sort competitors alphabetically by name
+            const sortedPicks = [...activeWeeklyPicks].sort((a, b) => a.name.localeCompare(b.name));
+
+            sortedPicks.forEach(pick => {
+                const badge = document.createElement('span');
+                badge.className = 'competitor-badge';
+                badge.style.cssText = `
+                    background: rgba(0, 255, 0, 0.05);
+                    border: 1px solid var(--neon-green);
+                    padding: 6px 14px;
+                    border-radius: 20px;
+                    font-size: 0.85rem;
+                    color: #fff;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    box-shadow: 0 0 5px rgba(0, 255, 0, 0.1);
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                `;
+                badge.innerHTML = `<span style="color: var(--neon-green); font-weight: bold;">✓</span> ${pick.name}`;
+                listEl.appendChild(badge);
+            });
+        }
+
+        async function savePickToSupabase(name, picks, tiebreaker, email) {
+            if (!isSupabaseConfigured()) {
+                return;
+            }
+
+            // Create the new/updated pick object
+            const newPick = {
+                name: name,
+                picks: picks,
+                tiebreaker: parseInt(tiebreaker) || 0,
+                email: email || '',
+                submitted_at: new Date().toISOString()
+            };
+
+            // Overwrite or append in activeWeeklyPicks
+            const existingIndex = activeWeeklyPicks.findIndex(p => p.name.trim().toLowerCase() === name.trim().toLowerCase());
+            if (existingIndex > -1) {
+                activeWeeklyPicks[existingIndex] = newPick;
+            } else {
+                activeWeeklyPicks.push(newPick);
+            }
+
+            // Render list locally immediately for instant feedback
+            renderActiveSubmissions();
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                    method: 'PATCH',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({
+                        data: {
+                            picks: activeWeeklyPicks
+                        },
+                        updated_at: new Date().toISOString()
+                    })
+                });
+
+                if (response.ok) {
+                    console.log("Successfully saved picks to Supabase.");
+                } else {
+                    console.error("Failed to save picks to Supabase. Status:", response.status);
+                }
+            } catch (e) {
+                console.error("Error saving picks to Supabase:", e);
+            }
         }
 
         // Initialize Fantasy Form & Roster grids
@@ -496,6 +693,9 @@
 
             // Render countdown details
             updateCountdownText();
+
+            // Load active weekly picks from Supabase
+            loadPicksFromSupabase();
         });
 
         // Map status
@@ -897,6 +1097,9 @@
 
             // Set flag to true so the iframe load handler knows a submit occurred
             submitted = true;
+            
+            // Save to Supabase if configured
+            savePickToSupabase(name, currentPicks, tiebreaker, email);
             
             // Allow the form to submit natively to the hidden iframe target
             return true;
