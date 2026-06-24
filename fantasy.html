@@ -969,17 +969,11 @@
             while (nextRaceDate.getDay() !== 3) { // 3 is Wednesday
                 nextRaceDate.setDate(nextRaceDate.getDate() + 1);
             }
-            
-            // Set lock time to 9:00 PM EDT (UTC-4 in June)
-            // 9:00 PM EDT = 1:00 AM UTC Thursday (next day)
-            const lockTimeUTC = Date.UTC(
-                nextRaceDate.getFullYear(),
-                nextRaceDate.getMonth(),
-                nextRaceDate.getDate(),
-                1, 0, 0
-            );
-            
-            const lockDate = new Date(lockTimeUTC);
+            // Set lock time to 9:00 PM EDT (UTC-4) on that Wednesday
+            const year = nextRaceDate.getFullYear();
+            const month = String(nextRaceDate.getMonth() + 1).padStart(2, '0');
+            const day = String(nextRaceDate.getDate()).padStart(2, '0');
+            const lockDate = new Date(`${year}-${month}-${day}T21:00:00-04:00`);
             const now = new Date();
             
             if (now >= lockDate) {
