@@ -1436,7 +1436,7 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #84",
-          "condition": 0
+          "condition": 17
         },
         {
           "id": "truck-2",
@@ -1455,6 +1455,18 @@ const teamsData = {
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #75",
           "condition": 34
+        },
+        {
+          "id": "truck-5",
+          "make": "Chevrolet",
+          "name": "ZeroFoxtrot Silverado #11",
+          "condition": 1
+        },
+        {
+          "id": "truck-6",
+          "make": "Chevrolet",
+          "name": "ZeroFoxtrot Silverado #51",
+          "condition": 33
         }
       ],
       "ledger": [
@@ -1592,7 +1604,7 @@ const teamsData = {
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Standard Race Prep: ZeroFoxtrot Silverado #84 (JON OSBORNE)",
+          "description": "Standard Race Prep: ZeroFoxtrot Silverado #11 (JON OSBORNE)",
           "category": "expense",
           "amount": -2000
         },
@@ -1616,7 +1628,7 @@ const teamsData = {
         },
         {
           "date": "Jun 17, 2026",
-          "description": "Standard Race Prep: ZeroFoxtrot Silverado #31 (CURTIS YANCEY)",
+          "description": "Standard Race Prep: ZeroFoxtrot Silverado #51 (CURTIS YANCEY)",
           "category": "expense",
           "amount": -2000
         },
