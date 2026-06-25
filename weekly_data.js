@@ -336,6 +336,6 @@ const weeklyData = {
       "points": 1
     }
   ],
-  "latestBroadcastVideoId": "B9lDkCVdX7M",
+  "latestBroadcastVideoId": "oF84lT2ODkw",
   "spotlightDriver": "Joshua Billiter"
 };

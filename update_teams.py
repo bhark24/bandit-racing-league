@@ -585,6 +585,22 @@ def main():
                 "category": "info",
                 "amount": 0
             })
+            for primary in primaries:
+                if primary and primary != "VACANT":
+                    team["ledger"].append({
+                        "date": race_date,
+                        "description": f"{primary} DNS",
+                        "category": "info",
+                        "amount": 0
+                    })
+            for backup in backups:
+                if backup and backup != "VACANT":
+                    team["ledger"].append({
+                        "date": race_date,
+                        "description": f"{backup} DNS",
+                        "category": "info",
+                        "amount": 0
+                    })
             weekly_team_points[team_id] = 0
             continue
             

@@ -187,7 +187,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (614 mi)",
           "category": "expense",
-          "amount": -270
+          "amount": -246
         },
         {
           "date": "Jun 24, 2026",
@@ -217,7 +217,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: MATT CROCKETT from Salt Lake City, UT (1596 mi)",
           "category": "expense",
-          "amount": -408
+          "amount": -410
         },
         {
           "date": "Jun 24, 2026",
@@ -265,7 +265,7 @@ const teamsData = {
           "condition": 88
         }
       ],
-      "balance": 2065024,
+      "balance": 2065046,
       "drivers": {
         "backup": [
           "REAGAN FRUGE",
@@ -478,7 +478,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (438 mi)",
           "category": "expense",
-          "amount": -450
+          "amount": -467
         },
         {
           "date": "Jun 24, 2026",
@@ -508,7 +508,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (424 mi)",
           "category": "expense",
-          "amount": -384
+          "amount": -427
         },
         {
           "date": "Jun 24, 2026",
@@ -532,7 +532,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: MICHAEL RAKES from Roanoke, VA (362 mi)",
           "category": "expense",
-          "amount": -515
+          "amount": -566
         },
         {
           "date": "Jun 24, 2026",
@@ -562,7 +562,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: DI0NTE RADER from Miamisburg, OH (430 mi)",
           "category": "expense",
-          "amount": -425
+          "amount": -487
         },
         {
           "date": "Jun 24, 2026",
@@ -575,12 +575,6 @@ const teamsData = {
           "description": "Prize Money: DI0NTE RADER (P16)",
           "category": "income",
           "amount": 15000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Craftsman Tools (Downward Performance: 25.1 Avg Finish over 2 weeks)</span>",
-          "category": "info",
-          "amount": 0
         }
       ],
       "points": 137,
@@ -607,7 +601,7 @@ const teamsData = {
           "id": "truck-4",
           "make": "Toyota",
           "name": "937 Tundra #17",
-          "condition": 3
+          "condition": 5
         },
         {
           "id": "truck-5",
@@ -616,7 +610,7 @@ const teamsData = {
           "condition": 86
         }
       ],
-      "balance": 1864040,
+      "balance": 1863867,
       "drivers": {
         "backup": [
           "DI0NTE RADER",
@@ -632,7 +626,8 @@ const teamsData = {
       "homeBase": "Dayton, OH",
       "sponsors": [
         "937 Racing",
-        "Toyota Racing Development"
+        "Toyota Racing Development",
+        "Craftsman Tools"
       ],
       "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305"
     },
@@ -768,7 +763,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: DYLAN NICASTRO from Cleveland, OH (576 mi)",
           "category": "expense",
-          "amount": -273
+          "amount": -283
         },
         {
           "date": "Jun 24, 2026",
@@ -784,7 +779,13 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "DNF: DYLAN NICASTRO (Disconnected) - Truck Condition: 7%",
+          "description": "DNF: DYLAN NICASTRO (Disconnected) - Truck Condition: 8%",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Wrist's Up Racing (Downward Performance: 40.3 Avg Finish over 2 weeks)</span>",
           "category": "info",
           "amount": 0
         }
@@ -795,7 +796,7 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Wrist's Up Silverado #23",
-          "condition": 7
+          "condition": 8
         },
         {
           "id": "truck-2",
@@ -816,7 +817,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 1969902,
+      "balance": 1969892,
       "drivers": {
         "backup": [
           "DYLAN NICASTRO",
@@ -831,7 +832,6 @@ const teamsData = {
       },
       "homeBase": "Cleveland, OH",
       "sponsors": [
-        "Wrist's Up Racing",
         "Chevrolet Accessories",
         "Craftsman Tools"
       ],
@@ -1065,7 +1065,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: CONNOR GIBSON from Halifax, NS (1349 mi)",
           "category": "expense",
-          "amount": -619
+          "amount": -618
         },
         {
           "date": "Jun 24, 2026",
@@ -1113,7 +1113,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: BOB BERRY from Fort Worth, TX (756 mi)",
           "category": "expense",
-          "amount": -457
+          "amount": -577
         },
         {
           "date": "Jun 24, 2026",
@@ -1191,7 +1191,7 @@ const teamsData = {
           "condition": 33
         }
       ],
-      "balance": 2229996,
+      "balance": 2229877,
       "drivers": {
         "backup": [
           "JON OSBORNE",
@@ -1609,7 +1609,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: KEVIN FOSTER from Katy, TX (723 mi)",
           "category": "expense",
-          "amount": -485
+          "amount": -558
         },
         {
           "date": "Jun 24, 2026",
@@ -1633,7 +1633,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Phoenix, AZ (1597 mi)",
           "category": "expense",
-          "amount": -810
+          "amount": -803
         },
         {
           "date": "Jun 24, 2026",
@@ -1663,7 +1663,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: BENJAMIN LACY from Loma Linda, CA (1887 mi)",
           "category": "expense",
-          "amount": -810
+          "amount": -848
         },
         {
           "date": "Jun 24, 2026",
@@ -1687,7 +1687,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: JONATHON PLATT from Concord, NC (252 mi)",
           "category": "expense",
-          "amount": -362
+          "amount": -380
         },
         {
           "date": "Jun 24, 2026",
@@ -1714,7 +1714,7 @@ const teamsData = {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "GFR Silverado #2",
-          "condition": 29
+          "condition": 30
         },
         {
           "id": "truck-3",
@@ -1732,10 +1732,10 @@ const teamsData = {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "GFR Silverado #13",
-          "condition": 12
+          "condition": 11
         }
       ],
-      "balance": 1976134,
+      "balance": 1976012,
       "drivers": {
         "backup": [
           "JONATHON PLATT",
@@ -1870,7 +1870,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: DAVIS CARROLL from TBD (252 mi)",
           "category": "expense",
-          "amount": -389
+          "amount": -358
         },
         {
           "date": "Jun 24, 2026",
@@ -1912,7 +1912,7 @@ const teamsData = {
           "condition": 0
         }
       ],
-      "balance": 1936997,
+      "balance": 1937028,
       "drivers": {
         "backup": [
           "LUCAS WILSON",
@@ -1999,7 +1999,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: WES FULLER from Kansas City, KS (706 mi)",
           "category": "expense",
-          "amount": -434
+          "amount": -584
         },
         {
           "date": "Jun 24, 2026",
@@ -2030,12 +2030,6 @@ const teamsData = {
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Virtual Sponsorship Earned: DraftMasters (Upward Performance: 6.0 Avg Finish over 2 weeks)",
-          "category": "income",
-          "amount": 30005
         }
       ],
       "points": 65,
@@ -2065,7 +2059,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2108197,
+      "balance": 2078042,
       "drivers": {
         "backup": [
           "VACANT",
@@ -2082,8 +2076,7 @@ const teamsData = {
       "sponsors": [
         "Title Town Racing",
         "RAM Trucks",
-        "Craftsman Tools",
-        "DraftMasters"
+        "Craftsman Tools"
       ],
       "passcodeHash": "7c80456012d9a93fbfd574ba3b0204b364d3e52c7370b8921f7fa69fd70bddfa"
     },
@@ -2249,7 +2242,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: GARRET BOBO from Shreveport, LA (551 mi)",
           "category": "expense",
-          "amount": -409
+          "amount": -481
         },
         {
           "date": "Jun 24, 2026",
@@ -2262,12 +2255,6 @@ const teamsData = {
           "description": "Prize Money: GARRET BOBO (P17)",
           "category": "income",
           "amount": 15000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Chevrolet Accessories (Downward Performance: 22.0 Avg Finish over 2 weeks)</span>",
-          "category": "info",
-          "amount": 0
         }
       ],
       "points": 75,
@@ -2297,7 +2284,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2086795,
+      "balance": 2086723,
       "drivers": {
         "backup": [
           "GARRET BOBO",
@@ -2313,6 +2300,7 @@ const teamsData = {
       "homeBase": "Athens, AL",
       "sponsors": [
         "POP Motorsports",
+        "Chevrolet Accessories",
         "Craftsman Tools"
       ],
       "passcodeHash": "c1bec9a68374fee3d995ef5268a2d04922bc1aa96df6668c6e06df8e46109ff5"
@@ -2443,7 +2431,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: JACKSON KNAAK from Concord, NC (252 mi)",
           "category": "expense",
-          "amount": -350
+          "amount": -368
         },
         {
           "date": "Jun 24, 2026",
@@ -2528,12 +2516,6 @@ const teamsData = {
           "description": "Prize Money: NATHAN SANTOS (P29)",
           "category": "income",
           "amount": 12000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Craftsman Tools (Downward Performance: 21.5 Avg Finish over 2 weeks)</span>",
-          "category": "info",
-          "amount": 0
         }
       ],
       "points": 98,
@@ -2563,7 +2545,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2065766,
+      "balance": 2065748,
       "drivers": {
         "backup": [
           "ETHAN SIKORSKI",
@@ -2579,7 +2561,8 @@ const teamsData = {
       "homeBase": "New York, New York",
       "sponsors": [
         "ESR",
-        "Chevrolet Accessories"
+        "Chevrolet Accessories",
+        "Craftsman Tools"
       ],
       "passcodeHash": "8350242b2df439d296a664c7c59b117507d0b3c537fa293304c84d84eb85cc43"
     },
@@ -2642,6 +2625,30 @@ const teamsData = {
         {
           "date": "Jun 24, 2026",
           "description": "DNS: No team participation",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "ADAM TAHAN DNS",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "JOSHUA SUTHERLAND DNS",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "MARK ALAN BIVENS DNS",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "MASON PHLEGAR DNS",
           "category": "info",
           "amount": 0
         }
@@ -2802,7 +2809,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: JOSH BILLITER from Coal Run Village, KY (299 mi)",
           "category": "expense",
-          "amount": -395
+          "amount": -371
         },
         {
           "date": "Jun 24, 2026",
@@ -2826,7 +2833,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: DYLAN MCDONALD from TBD (252 mi)",
           "category": "expense",
-          "amount": -435
+          "amount": -348
         },
         {
           "date": "Jun 24, 2026",
@@ -2898,7 +2905,7 @@ const teamsData = {
           "condition": 0
         }
       ],
-      "balance": 2209938,
+      "balance": 2210049,
       "drivers": {
         "backup": [
           "VACANT",
