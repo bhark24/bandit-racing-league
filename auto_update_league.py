@@ -175,7 +175,7 @@ def main():
             print("[*] Commited updates locally. Pushing to GitHub remote...")
             push_res = subprocess.run(["git", "push"], cwd=BASE_DIR, capture_output=True, text=True)
             if push_res.returncode == 0:
-                print("[+] Successfully pushed changes to GitHub! Netlify build triggered.")
+                print("[+] Successfully pushed changes to GitHub! Pages build triggered.")
             else:
                 print(f"[!] Git push failed:\n{push_res.stderr}")
             
