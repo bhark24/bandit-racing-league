@@ -100,7 +100,19 @@ def load_teams_database():
             res_data = json.loads(response.read().decode('utf-8'))
             if res_data and len(res_data) > 0 and res_data[0].get("data") and res_data[0]["data"] != {}:
                 print("[+] Successfully loaded teams database from Supabase.")
-                return res_data[0]["data"], original_content
+                db_data = res_data[0]["data"]
+                # Auto-heal: merge any missing root keys from the local teams_data.js file (e.g., 'tracks')
+                try:
+                    match = re.search(r'const\s+teamsData\s*=\s*({.*?});', original_content, re.DOTALL)
+                    if match:
+                        local_data = json.loads(match.group(1))
+                        for k, v in local_data.items():
+                            if k not in db_data:
+                                db_data[k] = v
+                                print(f"[+] Restored missing database key '{k}' from local teams_data.js.")
+                except Exception as merge_err:
+                    print(f"[!] Warning: failed to auto-heal missing database keys: {merge_err}")
+                return db_data, original_content
             else:
                 # Table is empty, seed it with local file content
                 print("[!] Supabase database table is empty. Seeding with local teams_data.js...")
