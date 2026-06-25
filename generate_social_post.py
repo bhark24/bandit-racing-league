@@ -529,6 +529,21 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
             
             page.screenshot(path=out_graphic_path)
             page.screenshot(path=out_brain_path)
+            page.close()
+
+            # Render and capture story graphic
+            print("[*] Generating facebook story graphic...")
+            story_html_path = os.path.join(BASE_DIR, "story_graphic.html")
+            out_story_path = os.path.join(BASE_DIR, "final_facebook_story_graphic.png")
+            
+            story_page = browser.new_page(viewport={'width': 1080, 'height': 1350})
+            story_url = f"file:///{story_html_path.replace(os.sep, '/')}"
+            story_page.goto(story_url)
+            story_page.evaluate("document.fonts.ready")
+            story_page.wait_for_timeout(2000)
+            story_page.screenshot(path=out_story_path)
+            story_page.close()
+
             browser.close()
             
         print(f"[+] Success: Standings graphic generated at {out_graphic_path}")

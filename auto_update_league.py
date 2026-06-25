@@ -170,7 +170,7 @@ def main():
         git_dir = os.path.join(BASE_DIR, ".git")
         if os.path.exists(git_dir):
             print("\n[*] Git repository detected. Staging changes...")
-            subprocess.run(["git", "add", "teams_data.js", "weekly_data.js", "fantasy_data.js", "assets/weekly_social_update.png"], cwd=BASE_DIR)
+            subprocess.run(["git", "add", "teams_data.js", "weekly_data.js", "fantasy_data.js", "assets/weekly_social_update.png", "final_facebook_story_graphic.png"], cwd=BASE_DIR)
             subprocess.run(["git", "commit", "-m", "Auto-update race results and standings"], cwd=BASE_DIR)
             print("[*] Commited updates locally. Pushing to GitHub remote...")
             push_res = subprocess.run(["git", "push"], cwd=BASE_DIR, capture_output=True, text=True)

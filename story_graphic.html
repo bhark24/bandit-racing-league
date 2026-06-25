@@ -118,28 +118,54 @@
 </head>
 <body>
 
-  <div class="image-container"></div>
+  <div class="image-container" id="story-image"></div>
 
   <div class="content">
     <div class="title-section">
-      <h1 class="title">THE CLIMAX IS NOW</h1>
-      <div class="subtitle">A NEW ERA OF DOMINANCE</div>
+      <h1 class="title" id="story-title">VICTORY LANE</h1>
+      <div class="subtitle" id="story-subtitle">WEEKLY RACE UPDATE</div>
     </div>
 
-    <div class="story">
-      It takes pure talent to win a race. It takes relentless grit to win a championship. But to win <span class="highlight">FOUR</span> of them? That takes a legend.<br><br>
-      Nick Nickerson didn’t just survive Season 16 of the Bandit Racing League—he completely conquered it. Through grinding battles and nerve-wracking photo finishes, one thing became abundantly clear:<br><br>
-      <span class="highlight" style="font-size: 28px; font-style: italic;">You can chase Nickerson, but catching him is a completely different story.</span>
+    <div class="story" id="dynamic-story">
+      Loading race results...
     </div>
 
     <div class="footer">
-      <img src="new_logo.png" class="logo" />
+      <img src="assets/main-logo.png" class="logo" id="story-logo" />
       <div class="footer-text">
-        <p class="footer-title">NICK NICKERSON</p>
-        <p class="footer-sub">SEASON 16 CHAMPION</p>
+        <p class="footer-title" id="footer-driver">TBD</p>
+        <p class="footer-sub" id="footer-sub">RACE WINNER</p>
       </div>
     </div>
   </div>
 
+  <script src="weekly_data.js"></script>
+  <script>
+    if (typeof weeklyData !== 'undefined') {
+      const winnerName = weeklyData.winnerName || "TBD";
+      const trackName = weeklyData.trackName || "Unknown Track";
+      const raceDate = weeklyData.raceDate || "Date TBD";
+      const winnerNumber = weeklyData.winnerNumber ? `#${weeklyData.winnerNumber}` : "";
+      
+      // Update subtitle
+      document.getElementById('story-subtitle').innerText = `${trackName.toUpperCase()} • ${raceDate.toUpperCase()}`;
+      
+      // Update story text
+      document.getElementById('dynamic-story').innerHTML = `
+        It takes pure speed, flawless execution, and immense focus to conquer the competition.<br><br>
+        At <span class="highlight">${trackName}</span>, <span class="highlight">${winnerName}</span> did exactly that, driving a masterful race to claim a spectacular victory in Season 16 of the Bandit Racing League!<br><br>
+        <span class="highlight" style="font-size: 28px; font-style: italic;">A dominant performance in Victory Lane!</span>
+      `;
+      
+      // Update footer
+      document.getElementById('footer-driver').innerText = winnerName.toUpperCase();
+      document.getElementById('footer-sub').innerText = `RACE WINNER` + (winnerNumber ? ` • ${winnerNumber}` : '');
+      
+      // Update image if winner image exists
+      if (weeklyData.winnerImage) {
+        document.getElementById('story-image').style.backgroundImage = `url('${weeklyData.winnerImage}')`;
+      }
+    }
+  </script>
 </body>
 </html>
