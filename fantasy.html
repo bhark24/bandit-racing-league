@@ -992,6 +992,38 @@
             }
         }
 
+        function normalizeName(name) {
+            if (!name) return "";
+            let n = name.trim().toLowerCase();
+            if (n.includes(',')) {
+                const parts = n.split(',');
+                if (parts.length === 2) {
+                    n = `${parts[1].trim()} ${parts[0].trim()}`;
+                }
+            }
+            n = n.replace(/\d+$/, '');
+            n = n.replace(/\s+[a-z]\s+/g, ' ');
+            n = n.replace(/\s+/g, ' ').trim();
+            n = n.replace("mc ", "mc");
+            
+            const nameMap = {
+                "josh": "joshua",
+                "jonathon": "johnathon",
+                "jon": "john",
+                "dave": "david",
+                "mike": "michael",
+                "diante": "di0nte",
+                "dionte": "di0nte",
+                "roder": "rader",
+                "conor": "connor",
+                "kondas": "kondus"
+            };
+            
+            const words = n.split(' ');
+            const mappedWords = words.map(w => nameMap[w] || w);
+            return mappedWords.join(' ');
+        }
+
         // Render Leaderboard
         function renderLeaderboard() {
             const tbody = document.getElementById('leaderboard-body');
@@ -1009,6 +1041,18 @@
             if (fantasyData.latest_race && fantasyData.latest_race.track) {
                 latestTrackEl.innerHTML = `${fantasyData.latest_race.track}<br><span style="font-size:0.8rem; color:var(--text-muted);">${fantasyData.latest_race.date || ''}</span>`;
                 latestWinnerEl.textContent = `Weekly Winner: ${fantasyData.latest_race.winner || 'None'}`;
+            }
+
+            const driverScores = (fantasyData.latest_race && fantasyData.latest_race.driver_scores) || {};
+            
+            function getDriverBadge(driverName) {
+                if (!driverName) return 'N/A';
+                const norm = normalizeName(driverName);
+                const scoreInfo = driverScores[norm];
+                if (scoreInfo && typeof scoreInfo.total_points !== 'undefined') {
+                    return `${driverName} (${scoreInfo.total_points})`;
+                }
+                return driverName;
             }
 
             // Render Rows
@@ -1030,10 +1074,10 @@
                     
                     picksHtml = `
                         <div class="fantasy-row-picks">
-                            <span class="fantasy-row-pick-badge">${picks[0] || 'N/A'}</span>
-                            <span class="fantasy-row-pick-badge">${picks[1] || 'N/A'}</span>
-                            <span class="fantasy-row-pick-badge">${picks[2] || 'N/A'}</span>
-                            <span class="fantasy-row-pick-badge">${picks[3] || 'N/A'}</span>
+                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[0])}</span>
+                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[1])}</span>
+                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[2])}</span>
+                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[3])}</span>
                         </div>
                     `;
                 } else {

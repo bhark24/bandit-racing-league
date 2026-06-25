@@ -355,7 +355,7 @@ def score_picks(picks, driver_scores, caution_laps, config):
         
     return fan_results
 
-def update_data_js(fan_results, track_name, race_date, caution_laps, config):
+def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scores, config):
     # Load existing standings from data_js
     existing_standings = {}
     races_history = []
@@ -464,7 +464,8 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, config):
             "track": track_name,
             "date": race_date,
             "caution_laps": caution_laps,
-            "winner": ", ".join(weekly_winners) + f" ({best_score} pts)"
+            "winner": ", ".join(weekly_winners) + f" ({best_score} pts)",
+            "driver_scores": driver_scores
         },
         "tiers": config.get("tiers", {}),
         "leaderboard": leaderboard,
@@ -547,7 +548,7 @@ def main():
     fan_results = score_picks(picks, driver_scores, caution_laps, config)
     
     # Update standings JS file
-    update_data_js(fan_results, track_name, race_date, caution_laps, config)
+    update_data_js(fan_results, track_name, race_date, caution_laps, driver_scores, config)
 
 if __name__ == "__main__":
     main()
