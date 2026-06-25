@@ -8,7 +8,7 @@ const weeklyData = {
   "teamStandings": [
     {
       "name": "GFR Racing",
-      "points": 212,
+      "points": 211,
       "wins": 1
     },
     {
@@ -23,7 +23,7 @@ const weeklyData = {
     },
     {
       "name": "Roundy Motorsports",
-      "points": 116,
+      "points": 114,
       "wins": 0
     },
     {
@@ -38,12 +38,12 @@ const weeklyData = {
     },
     {
       "name": "POP Motorsports",
-      "points": 76,
+      "points": 75,
       "wins": 0
     },
     {
       "name": "Carter Phillips Racing",
-      "points": 71,
+      "points": 69,
       "wins": 0
     },
     {
@@ -336,6 +336,6 @@ const weeklyData = {
       "points": 1
     }
   ],
-  "latestBroadcastVideoId": "oF84lT2ODkw",
+  "latestBroadcastVideoId": "B9lDkCVdX7M",
   "spotlightDriver": "Joshua Billiter"
 };

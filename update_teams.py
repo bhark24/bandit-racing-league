@@ -683,41 +683,8 @@ def main():
             if not truck:
                 truck = team["trucks"][idx % len(team["trucks"])]
             
-            # Generate mock results for any driver on the team roster who didn't run in real life
-            if norm_driver not in driver_scores and driver_name != 'VACANT':
-                import random
-                
-                # Get all currently taken finishing positions
-                taken_positions = {info["finish"] for info in driver_scores.values() if "finish" in info}
-                
-                # Find a unique mock finish position
-                mock_fp = random.randint(15, 43)
-                while mock_fp in taken_positions:
-                    mock_fp += 1
-                    
-                mock_qp = random.randint(15, 43)
-                mock_inc = random.randint(2, 6)
-                
-                scoring = config["scoring"]
-                finish_points = scoring["finish_points"]
-                default_pts = scoring["default_finish_points"]
-                clean_race_bonus = scoring["clean_race_bonus"]
-                
-                base = finish_points.get(str(mock_fp), default_pts)
-                clean = clean_race_bonus if mock_inc == 0 else 0
-                mock_total_points = base + clean
-                
-                driver_scores[norm_driver] = {
-                    "driver_name": driver_name,
-                    "finish": mock_fp,
-                    "qualify": mock_qp,
-                    "incidents": mock_inc,
-                    "total_points": mock_total_points,
-                    "status": "running",
-                    "led": 0,
-                    "is_mock": True
-                }
-                print(f"  [MOCK RESULTS] Generated mock results for {driver_name} (P{mock_fp})")
+            # DNS drivers who did not start receive 0 points and 0% wear, no mock results are generated
+            pass
 
             # Check if this driver actually participated
             if norm_driver in driver_scores:
@@ -878,14 +845,14 @@ def main():
                         })
                     
             else:
-                # Driver DNS and no backup was subbed
+                # Driver DNS
                 team["ledger"].append({
                     "date": race_date,
-                    "description": f"{driver_name} DNS - No active backup available",
-                    "category": "expense",
+                    "description": f"{driver_name} DNS",
+                    "category": "info",
                     "amount": 0
                 })
-                print(f"  Slot {idx+1}: {driver_name} DNS - No active backup available")
+                print(f"  Slot {idx+1}: {driver_name} DNS")
                 
         # Ensure sponsors array exists in database
         if "sponsors" not in team:

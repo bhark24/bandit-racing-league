@@ -173,13 +173,6 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -131500,
-          "category": "expense",
-          "description": "Repaired Fleet: Roundy F-150 #12 (+100%), Roundy F-150 #4 (+82%), Roundy F-150 #15 (+69%), Roundy F-150 #32 (+12%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Cleveland, OH to Hampton, GA (576 mi round trip)",
           "category": "expense",
           "amount": -5767
@@ -194,7 +187,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (614 mi)",
           "category": "expense",
-          "amount": -291
+          "amount": -270
         },
         {
           "date": "Jun 24, 2026",
@@ -210,27 +203,9 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "Standard Race Prep: Roundy F-150 #4 (LOGAN MURRAY)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Flight & Lodging: LOGAN MURRAY from West Plains, MO (485 mi)",
-          "category": "expense",
-          "amount": -596
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Sponsor Start Bonus: LOGAN MURRAY",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Prize Money: LOGAN MURRAY (P36)",
-          "category": "income",
-          "amount": 12000
+          "description": "LOGAN MURRAY DNS",
+          "category": "info",
+          "amount": 0
         },
         {
           "date": "Jun 24, 2026",
@@ -242,7 +217,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: MATT CROCKETT from Salt Lake City, UT (1596 mi)",
           "category": "expense",
-          "amount": -493
+          "amount": -408
         },
         {
           "date": "Jun 24, 2026",
@@ -258,57 +233,39 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "Standard Race Prep: Roundy F-150 #32 (TERRY KONDUS)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Drive & Lodging: TERRY KONDUS (Location N/A)",
-          "category": "expense",
-          "amount": -100
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Sponsor Start Bonus: TERRY KONDUS",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Prize Money: TERRY KONDUS (P37)",
-          "category": "income",
-          "amount": 12000
+          "description": "TERRY KONDUS DNS",
+          "category": "info",
+          "amount": 0
         }
       ],
-      "points": 116,
+      "points": 114,
       "trucks": [
         {
           "id": "truck-1",
           "make": "Ford",
           "name": "Roundy F-150 #12",
-          "condition": 2
+          "condition": 0
         },
         {
           "id": "truck-2",
           "make": "Ford",
           "name": "Roundy F-150 #4",
-          "condition": 83
+          "condition": 18
         },
         {
           "id": "truck-3",
           "make": "Ford",
           "name": "Roundy F-150 #15",
-          "condition": 50
+          "condition": 0
         },
         {
           "id": "truck-4",
           "make": "Ford",
           "name": "Roundy F-150 #32",
-          "condition": 85
+          "condition": 88
         }
       ],
-      "balance": 1982722,
+      "balance": 2065024,
       "drivers": {
         "backup": [
           "REAGAN FRUGE",
@@ -507,13 +464,6 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -118500,
-          "category": "expense",
-          "description": "Repaired Fleet: 937 Tundra #18 (+84%), 937 Tundra #22 (+52%), 937 Tundra #47 (+67%), 937 Tundra #17 (+20%), 937 Tundra #54 (+14%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Dayton, OH to Hampton, GA (438 mi round trip)",
           "category": "expense",
           "amount": -4388
@@ -528,7 +478,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (438 mi)",
           "category": "expense",
-          "amount": -464
+          "amount": -450
         },
         {
           "date": "Jun 24, 2026",
@@ -558,7 +508,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (424 mi)",
           "category": "expense",
-          "amount": -482
+          "amount": -384
         },
         {
           "date": "Jun 24, 2026",
@@ -582,7 +532,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: MICHAEL RAKES from Roanoke, VA (362 mi)",
           "category": "expense",
-          "amount": -510
+          "amount": -515
         },
         {
           "date": "Jun 24, 2026",
@@ -598,8 +548,8 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
@@ -612,7 +562,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: DI0NTE RADER from Miamisburg, OH (430 mi)",
           "category": "expense",
-          "amount": -410
+          "amount": -425
         },
         {
           "date": "Jun 24, 2026",
@@ -625,6 +575,12 @@ const teamsData = {
           "description": "Prize Money: DI0NTE RADER (P16)",
           "category": "income",
           "amount": 15000
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Craftsman Tools (Downward Performance: 25.1 Avg Finish over 2 weeks)</span>",
+          "category": "info",
+          "amount": 0
         }
       ],
       "points": 137,
@@ -639,28 +595,28 @@ const teamsData = {
           "id": "truck-2",
           "make": "Toyota",
           "name": "937 Tundra #22",
-          "condition": 49
+          "condition": 0
         },
         {
           "id": "truck-3",
           "make": "Toyota",
           "name": "937 Tundra #47",
-          "condition": 49
+          "condition": 0
         },
         {
           "id": "truck-4",
           "make": "Toyota",
           "name": "937 Tundra #17",
-          "condition": 26
+          "condition": 3
         },
         {
           "id": "truck-5",
           "make": "Toyota",
           "name": "937 Tundra #54",
-          "condition": 100
+          "condition": 86
         }
       ],
-      "balance": 1745448,
+      "balance": 1864040,
       "drivers": {
         "backup": [
           "DI0NTE RADER",
@@ -676,8 +632,7 @@ const teamsData = {
       "homeBase": "Dayton, OH",
       "sponsors": [
         "937 Racing",
-        "Toyota Racing Development",
-        "Craftsman Tools"
+        "Toyota Racing Development"
       ],
       "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305"
     },
@@ -775,39 +730,32 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -29500,
-          "category": "expense",
-          "description": "Repaired Fleet: Wrist's Up Silverado #23 (+34%), Wrist's Up Silverado #88 (+25%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Cleveland, OH to Hampton, GA (576 mi round trip)",
           "category": "expense",
           "amount": -5767
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
@@ -820,7 +768,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: DYLAN NICASTRO from Cleveland, OH (576 mi)",
           "category": "expense",
-          "amount": -276
+          "amount": -273
         },
         {
           "date": "Jun 24, 2026",
@@ -836,7 +784,7 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "DNF: DYLAN NICASTRO (Disconnected) - Truck Condition: 39%",
+          "description": "DNF: DYLAN NICASTRO (Disconnected) - Truck Condition: 7%",
           "category": "info",
           "amount": 0
         }
@@ -847,13 +795,13 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Wrist's Up Silverado #23",
-          "condition": 39
+          "condition": 7
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Wrist's Up Silverado #88",
-          "condition": 100
+          "condition": 75
         },
         {
           "id": "truck-3",
@@ -868,7 +816,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 1940399,
+      "balance": 1969902,
       "drivers": {
         "backup": [
           "DYLAN NICASTRO",
@@ -1079,13 +1027,6 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -243000,
-          "category": "expense",
-          "description": "Repaired Fleet: ZeroFoxtrot Silverado #84 (+83%), ZeroFoxtrot Silverado #31 (+100%), ZeroFoxtrot Silverado #27 (+71%), ZeroFoxtrot Silverado #75 (+66%), ZeroFoxtrot Silverado #11 (+99%), ZeroFoxtrot Silverado #51 (+67%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Weeki Wachee, FL to Hampton, GA (352 mi round trip)",
           "category": "expense",
           "amount": -3527
@@ -1124,7 +1065,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: CONNOR GIBSON from Halifax, NS (1349 mi)",
           "category": "expense",
-          "amount": -730
+          "amount": -619
         },
         {
           "date": "Jun 24, 2026",
@@ -1172,7 +1113,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: BOB BERRY from Fort Worth, TX (756 mi)",
           "category": "expense",
-          "amount": -555
+          "amount": -457
         },
         {
           "date": "Jun 24, 2026",
@@ -1217,40 +1158,40 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #84",
-          "condition": 26
+          "condition": 0
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #31",
-          "condition": 9
+          "condition": 0
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #27",
-          "condition": 61
+          "condition": 0
         },
         {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #75",
-          "condition": 49
+          "condition": 0
         },
         {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #11",
-          "condition": 55
+          "condition": 0
         },
         {
           "id": "truck-6",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #51",
-          "condition": 100
+          "condition": 33
         }
       ],
-      "balance": 1986787,
+      "balance": 2229996,
       "drivers": {
         "backup": [
           "JON OSBORNE",
@@ -1383,64 +1324,21 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -92000,
-          "category": "expense",
-          "description": "Repaired Fleet: Carter Phillips Silverado #97 (+66%), Carter Phillips Silverado #83 (+51%), Carter Phillips Silverado #30 (+67%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Columbia, SC to Hampton, GA (191 mi round trip)",
           "category": "expense",
           "amount": -1911
         },
         {
           "date": "Jun 24, 2026",
-          "description": "Standard Race Prep: Carter Phillips Silverado #97 (EDDIE HAGIGH)",
-          "category": "expense",
-          "amount": -2000
+          "description": "EDDIE HAGIGH DNS",
+          "category": "info",
+          "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "Flight & Lodging: EDDIE HAGIGH from Severna Park, MD (581 mi)",
-          "category": "expense",
-          "amount": -408
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Sponsor Start Bonus: EDDIE HAGIGH",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Prize Money: EDDIE HAGIGH (P38)",
-          "category": "income",
-          "amount": 12000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Standard Race Prep: Carter Phillips Silverado #83 (JASON GREENWELL)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Flight & Lodging: JASON GREENWELL from Plymouth, MI (620 mi)",
-          "category": "expense",
-          "amount": -455
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Sponsor Start Bonus: JASON GREENWELL",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Prize Money: JASON GREENWELL (P39)",
-          "category": "income",
-          "amount": 12000
+          "description": "JASON GREENWELL DNS",
+          "category": "info",
+          "amount": 0
         },
         {
           "date": "Jun 24, 2026",
@@ -1468,24 +1366,24 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         }
       ],
-      "points": 71,
+      "points": 69,
       "trucks": [
         {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #97",
-          "condition": 81
+          "condition": 34
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #83",
-          "condition": 80
+          "condition": 49
         },
         {
           "id": "truck-3",
@@ -1500,7 +1398,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 1986282,
+      "balance": 2029145,
       "drivers": {
         "backup": [
           "VACANT",
@@ -1697,13 +1595,6 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -127500,
-          "category": "expense",
-          "description": "Repaired Fleet: GFR Silverado #8 (+82%), GFR Silverado #2 (+27%), GFR Silverado #1 (+10%), GFR Silverado #7 (+100%), GFR Silverado #13 (+36%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Katy, TX to Hampton, GA (723 mi round trip)",
           "category": "expense",
           "amount": -7233
@@ -1718,7 +1609,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: KEVIN FOSTER from Katy, TX (723 mi)",
           "category": "expense",
-          "amount": -456
+          "amount": -485
         },
         {
           "date": "Jun 24, 2026",
@@ -1742,7 +1633,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: NICK NICKERSON from Phoenix, AZ (1597 mi)",
           "category": "expense",
-          "amount": -699
+          "amount": -810
         },
         {
           "date": "Jun 24, 2026",
@@ -1758,27 +1649,9 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "Standard Race Prep: GFR Silverado #1 (RICKY HART)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Flight & Lodging: RICKY HART from West Chester, PA (659 mi)",
-          "category": "expense",
-          "amount": -444
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Sponsor Start Bonus: RICKY HART",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Prize Money: RICKY HART (P43)",
-          "category": "income",
-          "amount": 12000
+          "description": "RICKY HART DNS",
+          "category": "info",
+          "amount": 0
         },
         {
           "date": "Jun 24, 2026",
@@ -1790,7 +1663,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: BENJAMIN LACY from Loma Linda, CA (1887 mi)",
           "category": "expense",
-          "amount": -933
+          "amount": -810
         },
         {
           "date": "Jun 24, 2026",
@@ -1814,7 +1687,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: JONATHON PLATT from Concord, NC (252 mi)",
           "category": "expense",
-          "amount": -430
+          "amount": -362
         },
         {
           "date": "Jun 24, 2026",
@@ -1829,40 +1702,40 @@ const teamsData = {
           "amount": 75000
         }
       ],
-      "points": 212,
+      "points": 211,
       "trucks": [
         {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "GFR Silverado #8",
-          "condition": 48
+          "condition": 0
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "GFR Silverado #2",
-          "condition": 57
+          "condition": 29
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "GFR Silverado #1",
-          "condition": 79
+          "condition": 90
         },
         {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "GFR Silverado #7",
-          "condition": 65
+          "condition": 0
         },
         {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "GFR Silverado #13",
-          "condition": 47
+          "condition": 12
         }
       ],
-      "balance": 1873139,
+      "balance": 1976134,
       "drivers": {
         "backup": [
           "JONATHON PLATT",
@@ -1983,13 +1856,6 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -50000,
-          "category": "expense",
-          "description": "Repaired Fleet: Striped Maple Silverado #50 (+100%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Toronto, Ontario to Hampton, GA (755 mi round trip)",
           "category": "expense",
           "amount": -7554
@@ -2004,7 +1870,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: DAVIS CARROLL from TBD (252 mi)",
           "category": "expense",
-          "amount": -413
+          "amount": -389
         },
         {
           "date": "Jun 24, 2026",
@@ -2020,20 +1886,20 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         }
       ],
@@ -2043,10 +1909,10 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Striped Maple Silverado #50",
-          "condition": 48
+          "condition": 0
         }
       ],
-      "balance": 1886973,
+      "balance": 1936997,
       "drivers": {
         "backup": [
           "LUCAS WILSON",
@@ -2119,40 +1985,9 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -31500,
-          "category": "expense",
-          "description": "Repaired Fleet: Title Town Ram #35 (+63%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Kansas City, KS to Hampton, GA (252 mi round trip)",
           "category": "expense",
           "amount": -2523
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
-          "amount": 0
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
-          "amount": 0
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
-          "amount": 0
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
-          "amount": 0
         },
         {
           "date": "Jun 24, 2026",
@@ -2164,7 +1999,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: WES FULLER from Kansas City, KS (706 mi)",
           "category": "expense",
-          "amount": -542
+          "amount": -434
         },
         {
           "date": "Jun 24, 2026",
@@ -2180,9 +2015,27 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "Virtual Sponsorship Earned: Veloce Simulators (Upward Performance: 6.0 Avg Finish over 2 weeks)",
+          "description": "VACANT DNS",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "VACANT DNS",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "VACANT DNS",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "Virtual Sponsorship Earned: DraftMasters (Upward Performance: 6.0 Avg Finish over 2 weeks)",
           "category": "income",
-          "amount": 26670
+          "amount": 30005
         }
       ],
       "points": 65,
@@ -2191,7 +2044,7 @@ const teamsData = {
           "id": "truck-1",
           "make": "RAM",
           "name": "Title Town Ram #35",
-          "condition": 98
+          "condition": 33
         },
         {
           "id": "truck-2",
@@ -2212,14 +2065,14 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2073254,
+      "balance": 2108197,
       "drivers": {
         "backup": [
-          "WES FULLER",
+          "VACANT",
           "VACANT"
         ],
         "primary": [
-          "VACANT",
+          "WES FULLER",
           "VACANT",
           "VACANT",
           "VACANT"
@@ -2230,7 +2083,7 @@ const teamsData = {
         "Title Town Racing",
         "RAM Trucks",
         "Craftsman Tools",
-        "Veloce Simulators"
+        "DraftMasters"
       ],
       "passcodeHash": "7c80456012d9a93fbfd574ba3b0204b364d3e52c7370b8921f7fa69fd70bddfa"
     },
@@ -2340,13 +2193,6 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -127000,
-          "category": "expense",
-          "description": "Repaired Fleet: POP Silverado #08 (+87%), POP Silverado #10 (+100%), POP Silverado #29 (+67%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Athens, AL to Hampton, GA (181 mi round trip)",
           "category": "expense",
           "amount": -1815
@@ -2377,38 +2223,20 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "Standard Race Prep: POP Silverado #10 (CORDELL MCFARLIN)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Flight & Lodging: CORDELL MCFARLIN from Oklahoma City, OK (766 mi)",
-          "category": "expense",
-          "amount": -483
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Sponsor Start Bonus: CORDELL MCFARLIN",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Prize Money: CORDELL MCFARLIN (P40)",
-          "category": "income",
-          "amount": 12000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "CORDELL MCFARLIN DNS",
+          "category": "info",
           "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
@@ -2421,7 +2249,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: GARRET BOBO from Shreveport, LA (551 mi)",
           "category": "expense",
-          "amount": -482
+          "amount": -409
         },
         {
           "date": "Jun 24, 2026",
@@ -2434,27 +2262,33 @@ const teamsData = {
           "description": "Prize Money: GARRET BOBO (P17)",
           "category": "income",
           "amount": 15000
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Chevrolet Accessories (Downward Performance: 22.0 Avg Finish over 2 weeks)</span>",
+          "category": "info",
+          "amount": 0
         }
       ],
-      "points": 76,
+      "points": 75,
       "trucks": [
         {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "POP Silverado #08",
-          "condition": 9
+          "condition": 0
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "POP Silverado #10",
-          "condition": 84
+          "condition": 0
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "POP Silverado #29",
-          "condition": 31
+          "condition": 0
         },
         {
           "id": "truck-4",
@@ -2463,7 +2297,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 1984239,
+      "balance": 2086795,
       "drivers": {
         "backup": [
           "GARRET BOBO",
@@ -2479,7 +2313,6 @@ const teamsData = {
       "homeBase": "Athens, AL",
       "sponsors": [
         "POP Motorsports",
-        "Chevrolet Accessories",
         "Craftsman Tools"
       ],
       "passcodeHash": "c1bec9a68374fee3d995ef5268a2d04922bc1aa96df6668c6e06df8e46109ff5"
@@ -2596,13 +2429,6 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -92500,
-          "category": "expense",
-          "description": "Repaired Fleet: ESR Silverado #24 (+50%), ESR Silverado #00 (+51%), ESR Silverado #21 (+84%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: New York, New York to Hampton, GA (757 mi round trip)",
           "category": "expense",
           "amount": -7578
@@ -2617,7 +2443,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: JACKSON KNAAK from Concord, NC (252 mi)",
           "category": "expense",
-          "amount": -393
+          "amount": -350
         },
         {
           "date": "Jun 24, 2026",
@@ -2633,26 +2459,26 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "DNF: JACKSON KNAAK (Disconnected) - Truck Condition: 18%",
+          "description": "DNF: JACKSON KNAAK (Disconnected) - Truck Condition: 0%",
           "category": "info",
           "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
@@ -2702,6 +2528,12 @@ const teamsData = {
           "description": "Prize Money: NATHAN SANTOS (P29)",
           "category": "income",
           "amount": 12000
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Craftsman Tools (Downward Performance: 21.5 Avg Finish over 2 weeks)</span>",
+          "category": "info",
+          "amount": 0
         }
       ],
       "points": 98,
@@ -2710,19 +2542,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "ESR Silverado #24",
-          "condition": 32
+          "condition": 0
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "ESR Silverado #00",
-          "condition": 18
+          "condition": 0
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "ESR Silverado #21",
-          "condition": 27
+          "condition": 0
         },
         {
           "id": "truck-4",
@@ -2731,7 +2563,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 1973223,
+      "balance": 2065766,
       "drivers": {
         "backup": [
           "ETHAN SIKORSKI",
@@ -2747,8 +2579,7 @@ const teamsData = {
       "homeBase": "New York, New York",
       "sponsors": [
         "ESR",
-        "Chevrolet Accessories",
-        "Craftsman Tools"
+        "Chevrolet Accessories"
       ],
       "passcodeHash": "8350242b2df439d296a664c7c59b117507d0b3c537fa293304c84d84eb85cc43"
     },
@@ -2957,16 +2788,33 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "local": true,
-          "amount": -145000,
-          "category": "expense",
-          "description": "Repaired Fleet: Legacy Racing Silverado #99 (+100%), Legacy Racing Silverado #9 (+90%), Legacy Racing Silverado #6 (+100%)"
-        },
-        {
-          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Coal Run Village, KY to Hampton, GA (299 mi round trip)",
           "category": "expense",
           "amount": -2994
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "Standard Race Prep: Legacy Racing Silverado #99 (JOSH BILLITER)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "Flight & Lodging: JOSH BILLITER from Coal Run Village, KY (299 mi)",
+          "category": "expense",
+          "amount": -395
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "Sponsor Start Bonus: JOSH BILLITER",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "Jun 24, 2026",
+          "description": "Prize Money: JOSH BILLITER (P31)",
+          "category": "income",
+          "amount": 12000
         },
         {
           "date": "Jun 24, 2026",
@@ -2978,7 +2826,7 @@ const teamsData = {
           "date": "Jun 24, 2026",
           "description": "Flight & Lodging: DYLAN MCDONALD from TBD (252 mi)",
           "category": "expense",
-          "amount": -395
+          "amount": -435
         },
         {
           "date": "Jun 24, 2026",
@@ -3018,39 +2866,15 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "VACANT DNS",
+          "category": "info",
           "amount": 0
         },
         {
           "date": "Jun 24, 2026",
-          "description": "VACANT DNS - No active backup available",
-          "category": "expense",
+          "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Chevrolet Accessories (Downward Performance: 22.3 Avg Finish over 2 weeks)</span>",
+          "category": "info",
           "amount": 0
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Standard Race Prep: Legacy Racing Silverado #99 (JOSH BILLITER)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Flight & Lodging: JOSH BILLITER from Coal Run Village, KY (299 mi)",
-          "category": "expense",
-          "amount": -350
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Sponsor Start Bonus: JOSH BILLITER",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Jun 24, 2026",
-          "description": "Prize Money: JOSH BILLITER (P31)",
-          "category": "income",
-          "amount": 12000
         }
       ],
       "points": 92,
@@ -3059,43 +2883,204 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #99",
-          "condition": 58
+          "condition": 0
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #9",
-          "condition": 32
+          "condition": 0
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #6",
-          "condition": 64
+          "condition": 0
         }
       ],
-      "balance": 2065023,
+      "balance": 2209938,
       "drivers": {
         "backup": [
-          "JOSH BILLITER",
+          "VACANT",
           "VACANT"
         ],
         "primary": [
+          "JOSH BILLITER",
           "DYLAN MCDONALD",
           "NICOLE KRIESEL",
-          "VACANT",
           "VACANT"
         ]
       },
       "homeBase": "Coal Run Village, KY",
       "sponsors": [
         "Legacy Racing",
-        "Chevrolet Accessories",
         "Craftsman Tools"
       ],
       "passcodeHash": "3154c9cc4526142b6c75f88dc9137ab19ca25643a9e8879fdcd921cb2f1ff8cf"
     }
   ],
+  "tracks": {
+    "irp": {
+      "lat": 39.8114,
+      "lon": -86.3422,
+      "city": "Indianapolis, IN",
+      "name": "Lucas Oil Indianapolis Raceway Park",
+      "airport": "IND",
+      "distance": 500
+    },
+    "texas": {
+      "lat": 33.0267,
+      "lon": -97.2825,
+      "city": "Fort Worth, TX",
+      "name": "Texas Motor Speedway",
+      "airport": "DFW",
+      "distance": 1050
+    },
+    "vegas": {
+      "lat": 36.2714,
+      "lon": -115.0114,
+      "city": "Las Vegas, NV",
+      "name": "Las Vegas Motor Speedway",
+      "airport": "LAS",
+      "distance": 2100
+    },
+    "kansas": {
+      "lat": 39.1156,
+      "lon": -94.8311,
+      "city": "Kansas City, KS",
+      "name": "Kansas Speedway",
+      "airport": "MCI",
+      "distance": 980
+    },
+    "pocono": {
+      "lat": 41.0544,
+      "lon": -75.5114,
+      "city": "Long Pond, PA",
+      "name": "Pocono Raceway",
+      "airport": "AVP",
+      "distance": 550
+    },
+    "atlanta": {
+      "lat": 33.4076,
+      "lon": -84.2831,
+      "city": "Hampton, GA",
+      "name": "Atlanta Motor Speedway",
+      "airport": "ATL",
+      "distance": 250
+    },
+    "bristol": {
+      "lat": 36.5156,
+      "lon": -82.2569,
+      "city": "Bristol, TN",
+      "name": "Bristol Motor Speedway",
+      "airport": "TRI",
+      "distance": 150
+    },
+    "daytona": {
+      "lat": 29.2108,
+      "lon": -81.0228,
+      "city": "Daytona Beach, FL",
+      "name": "Daytona International Speedway",
+      "airport": "DAB",
+      "distance": 400
+    },
+    "gateway": {
+      "lat": 38.6492,
+      "lon": -90.1364,
+      "city": "Madison, IL",
+      "name": "World Wide Technology Raceway",
+      "airport": "STL",
+      "distance": 700
+    },
+    "phoenix": {
+      "lat": 33.3747,
+      "lon": -112.3111,
+      "city": "Avondale, AZ",
+      "name": "Phoenix Raceway",
+      "airport": "PHX",
+      "distance": 2150
+    },
+    "watkins": {
+      "lat": 42.3372,
+      "lon": -76.9244,
+      "city": "Watkins Glen, NY",
+      "name": "Watkins Glen International",
+      "airport": "ELM",
+      "distance": 630
+    },
+    "michigan": {
+      "lat": 42.0664,
+      "lon": -84.2406,
+      "city": "Brooklyn, MI",
+      "name": "Michigan International Speedway",
+      "airport": "DTW",
+      "distance": 620
+    },
+    "richmond": {
+      "lat": 37.5925,
+      "lon": -77.4194,
+      "city": "Richmond, VA",
+      "name": "Richmond Raceway",
+      "airport": "RIC",
+      "distance": 280
+    },
+    "charlotte": {
+      "lat": 35.3516,
+      "lon": -80.6867,
+      "city": "Concord, NC",
+      "name": "Charlotte Motor Speedway",
+      "airport": "CLT",
+      "distance": 0
+    },
+    "homestead": {
+      "lat": 25.4619,
+      "lon": -80.4789,
+      "city": "Homestead, FL",
+      "name": "Homestead-Miami Speedway",
+      "airport": "MIA",
+      "distance": 680
+    },
+    "nashville": {
+      "lat": 36.1486,
+      "lon": -86.4022,
+      "city": "Lebanon, TN",
+      "name": "Nashville Superspeedway",
+      "airport": "BNA",
+      "distance": 400
+    },
+    "talladega": {
+      "lat": 33.5672,
+      "lon": -86.0658,
+      "city": "Lincoln, AL",
+      "name": "Talladega Superspeedway",
+      "airport": "BHM",
+      "distance": 380
+    },
+    "darlington": {
+      "lat": 34.2953,
+      "lon": -79.9056,
+      "city": "Darlington, SC",
+      "name": "Darlington Raceway",
+      "airport": "CAE",
+      "distance": 120
+    },
+    "martinsville": {
+      "lat": 36.6342,
+      "lon": -79.8517,
+      "city": "Martinsville, VA",
+      "name": "Martinsville Speedway",
+      "airport": "GSO",
+      "distance": 130
+    },
+    "road_america": {
+      "lat": 43.7997,
+      "lon": -87.9947,
+      "city": "Elkhart Lake, WI",
+      "name": "Road America",
+      "airport": "MKE",
+      "distance": 850
+    }
+  },
   "latestRace": {
     "track": "EchoPark Speedway (Atlanta)",
     "date": "Jun 24, 2026",
@@ -3414,435 +3399,219 @@ const teamsData = {
         "status": "Running",
         "led": 0,
         "isMock": false
-      },
-      {
-        "name": "LOGAN MURRAY",
-        "finish": 36,
-        "qualify": 17,
-        "incidents": 3,
-        "status": "running",
-        "led": 0,
-        "isMock": true
-      },
-      {
-        "name": "TERRY KONDUS",
-        "finish": 37,
-        "qualify": 26,
-        "incidents": 3,
-        "status": "running",
-        "led": 0,
-        "isMock": true
-      },
-      {
-        "name": "EDDIE HAGIGH",
-        "finish": 38,
-        "qualify": 17,
-        "incidents": 4,
-        "status": "running",
-        "led": 0,
-        "isMock": true
-      },
-      {
-        "name": "JASON GREENWELL",
-        "finish": 39,
-        "qualify": 24,
-        "incidents": 4,
-        "status": "running",
-        "led": 0,
-        "isMock": true
-      },
-      {
-        "name": "CORDELL MCFARLIN",
-        "finish": 40,
-        "qualify": 39,
-        "incidents": 3,
-        "status": "running",
-        "led": 0,
-        "isMock": true
-      },
-      {
-        "name": "RICKY HART",
-        "finish": 43,
-        "qualify": 31,
-        "incidents": 4,
-        "status": "running",
-        "led": 0,
-        "isMock": true
       }
     ]
   },
-  "tracks": {
-    "irp": {
-      "name": "Lucas Oil Indianapolis Raceway Park",
-      "city": "Indianapolis, IN",
-      "distance": 500,
-      "airport": "IND",
-      "lat": 39.8114,
-      "lon": -86.3422
-    },
-    "daytona": {
-      "name": "Daytona International Speedway",
-      "city": "Daytona Beach, FL",
-      "distance": 400,
-      "airport": "DAB",
-      "lat": 29.2108,
-      "lon": -81.0228
-    },
-    "atlanta": {
-      "name": "Atlanta Motor Speedway",
-      "city": "Hampton, GA",
-      "distance": 250,
-      "airport": "ATL",
-      "lat": 33.4076,
-      "lon": -84.2831
-    },
-    "charlotte": {
-      "name": "Charlotte Motor Speedway",
-      "city": "Concord, NC",
-      "distance": 0,
-      "airport": "CLT",
-      "lat": 35.3516,
-      "lon": -80.6867
-    },
-    "bristol": {
-      "name": "Bristol Motor Speedway",
-      "city": "Bristol, TN",
-      "distance": 150,
-      "airport": "TRI",
-      "lat": 36.5156,
-      "lon": -82.2569
-    },
-    "nashville": {
-      "name": "Nashville Superspeedway",
-      "city": "Lebanon, TN",
-      "distance": 400,
-      "airport": "BNA",
-      "lat": 36.1486,
-      "lon": -86.4022
-    },
-    "pocono": {
-      "name": "Pocono Raceway",
-      "city": "Long Pond, PA",
-      "distance": 550,
-      "airport": "AVP",
-      "lat": 41.0544,
-      "lon": -75.5114
-    },
-    "richmond": {
-      "name": "Richmond Raceway",
-      "city": "Richmond, VA",
-      "distance": 280,
-      "airport": "RIC",
-      "lat": 37.5925,
-      "lon": -77.4194
-    },
-    "michigan": {
-      "name": "Michigan International Speedway",
-      "city": "Brooklyn, MI",
-      "distance": 620,
-      "airport": "DTW",
-      "lat": 42.0664,
-      "lon": -84.2406
-    },
-    "gateway": {
-      "name": "World Wide Technology Raceway",
-      "city": "Madison, IL",
-      "distance": 700,
-      "airport": "STL",
-      "lat": 38.6492,
-      "lon": -90.1364
-    },
-    "darlington": {
-      "name": "Darlington Raceway",
-      "city": "Darlington, SC",
-      "distance": 120,
-      "airport": "CAE",
-      "lat": 34.2953,
-      "lon": -79.9056
-    },
-    "kansas": {
-      "name": "Kansas Speedway",
-      "city": "Kansas City, KS",
-      "distance": 980,
-      "airport": "MCI",
-      "lat": 39.1156,
-      "lon": -94.8311
-    },
-    "texas": {
-      "name": "Texas Motor Speedway",
-      "city": "Fort Worth, TX",
-      "distance": 1050,
-      "airport": "DFW",
-      "lat": 33.0267,
-      "lon": -97.2825
-    },
-    "vegas": {
-      "name": "Las Vegas Motor Speedway",
-      "city": "Las Vegas, NV",
-      "distance": 2100,
-      "airport": "LAS",
-      "lat": 36.2714,
-      "lon": -115.0114
-    },
-    "watkins": {
-      "name": "Watkins Glen International",
-      "city": "Watkins Glen, NY",
-      "distance": 630,
-      "airport": "ELM",
-      "lat": 42.3372,
-      "lon": -76.9244
-    },
-    "phoenix": {
-      "name": "Phoenix Raceway",
-      "city": "Avondale, AZ",
-      "distance": 2150,
-      "airport": "PHX",
-      "lat": 33.3747,
-      "lon": -112.3111
-    },
-    "martinsville": {
-      "name": "Martinsville Speedway",
-      "city": "Martinsville, VA",
-      "distance": 130,
-      "airport": "GSO",
-      "lat": 36.6342,
-      "lon": -79.8517
-    },
-    "talladega": {
-      "name": "Talladega Superspeedway",
-      "city": "Lincoln, AL",
-      "distance": 380,
-      "airport": "BHM",
-      "lat": 33.5672,
-      "lon": -86.0658
-    },
-    "road_america": {
-      "name": "Road America",
-      "city": "Elkhart Lake, WI",
-      "distance": 850,
-      "airport": "MKE",
-      "lat": 43.7997,
-      "lon": -87.9947
-    },
-    "homestead": {
-      "name": "Homestead-Miami Speedway",
-      "city": "Homestead, FL",
-      "distance": 680,
-      "airport": "MIA",
-      "lat": 25.4619,
-      "lon": -80.4789
-    }
-  },
   "driverLocations": {
-    "BILL HARKINS": {
-      "city": "Ashtabula, OH",
-      "lat": 41.8651,
-      "lon": -80.7898
-    },
-    "LOGAN MURRAY": {
-      "city": "West Plains, MO",
-      "lat": 36.7281,
-      "lon": -91.8515
-    },
-    "NICK NICKERSON": {
-      "city": "Phoenix, AZ",
-      "lat": 33.4484,
-      "lon": -112.074
-    },
-    "RICKY HART": {
-      "city": "West Chester, PA",
-      "lat": 39.9607,
-      "lon": -75.6055
-    },
-    "SEAN BRITT": {
-      "city": "Greensboro, NC",
-      "lat": 36.0726,
-      "lon": -79.792
-    },
-    "JONATHON PLATT": {
-      "city": "Concord, NC",
-      "lat": 35.4088,
-      "lon": -80.5795
-    },
-    "NICOLE KRIESEL": {
-      "city": "Charlotte, NC",
-      "lat": 35.2271,
-      "lon": -80.8431
-    },
-    "VICTOR WEAVER": {
-      "city": "Dayton, OH",
-      "lat": 39.7589,
-      "lon": -84.1916
-    },
     "BOB BERRY": {
-      "city": "Fort Worth, TX",
       "lat": 32.7555,
-      "lon": -97.3308
-    },
-    "JASON GREENWELL": {
-      "city": "Plymouth, MI",
-      "lat": 42.3714,
-      "lon": -83.4702
-    },
-    "DYLAN NICASTRO": {
-      "city": "Cleveland, OH",
-      "lat": 41.4993,
-      "lon": -81.6944
-    },
-    "ETHAN SIKORSKI": {
-      "city": "Charlotte, NC",
-      "lat": 35.2271,
-      "lon": -80.8431
-    },
-    "REAGAN FRUGE": {
-      "city": "Keenesburg, CO",
-      "lat": 40.1088,
-      "lon": -104.5202
-    },
-    "JASON ALLEGRINI": {
-      "city": "Nashville, TN",
-      "lat": 36.1627,
-      "lon": -86.7816
-    },
-    "MATT CROCKETT": {
-      "city": "Salt Lake City, UT",
-      "lat": 40.7608,
-      "lon": -111.8911
-    },
-    "JOSH ADAMS": {
-      "city": "Springboro, OH",
-      "lat": 39.5523,
-      "lon": -84.2333
-    },
-    "MATT BAILEY": {
-      "city": "Xenia, OH",
-      "lat": 39.6848,
-      "lon": -83.9297
-    },
-    "NATHAN SANTOS": {
-      "city": "Spartanburg, SC",
-      "lat": 34.9496,
-      "lon": -81.932
-    },
-    "DI0NTE RADER": {
-      "city": "Miamisburg, OH",
-      "lat": 39.6428,
-      "lon": -84.2866
-    },
-    "DAVID LEAKEY": {
-      "city": "Crestview, FL",
-      "lat": 30.7621,
-      "lon": -86.5694
-    },
-    "CONNOR GIBSON": {
-      "city": "Halifax, NS",
-      "lat": 44.6488,
-      "lon": -63.5752
-    },
-    "CURTIS YANCEY": {
-      "city": "Clearwater, FL",
-      "lat": 27.9659,
-      "lon": -82.8001
-    },
-    "JACKSON KNAAK": {
-      "city": "Concord, NC",
-      "lat": 35.4088,
-      "lon": -80.5795
-    },
-    "KEVIN FOSTER": {
-      "city": "Katy, TX",
-      "lat": 29.7858,
-      "lon": -95.8244
-    },
-    "DAVID WESTOVER JR": {
-      "city": "Ashtabula, OH",
-      "lat": 41.8651,
-      "lon": -80.7898
-    },
-    "CARTER PHILLIPS": {
-      "city": "Columbia, SC",
-      "lat": 34.0007,
-      "lon": -81.0348
-    },
-    "EDDIE HAGIGH": {
-      "city": "Severna Park, MD",
-      "lat": 39.0696,
-      "lon": -76.5452
-    },
-    "BENJAMIN LACY": {
-      "city": "Loma Linda, CA",
-      "lat": 34.0483,
-      "lon": -117.2612
-    },
-    "LUCAS WILSON": {
-      "city": "Toronto, Ontario",
-      "lat": 43.6532,
-      "lon": -79.3832
-    },
-    "DAVIS CARROLL": {
-      "city": "TBD",
-      "lat": 35.4088,
-      "lon": -80.5795
-    },
-    "DYLAN MCDONALD": {
-      "city": "TBD",
-      "lat": 35.4088,
-      "lon": -80.5795
-    },
-    "JOSH BILLITER": {
-      "city": "Coal Run Village, KY",
-      "lat": 37.5132,
-      "lon": -82.5585
-    },
-    "MICHAEL RAKES": {
-      "city": "Roanoke, VA",
-      "lat": 37.271,
-      "lon": -79.9414
-    },
-    "WES FULLER": {
-      "city": "Kansas City, KS",
-      "lat": 39.1156,
-      "lon": -94.8311
-    },
-    "RICKY GONZALES": {
-      "city": "Kansas City, KS",
-      "lat": 39.1156,
-      "lon": -94.8311
-    },
-    "JACKSON DUKE": {
-      "city": "Athens, AL",
-      "lat": 34.8029,
-      "lon": -86.9717
-    },
-    "GARRET BOBO": {
-      "city": "Shreveport, LA",
-      "lat": 32.514,
-      "lon": -93.7477
-    },
-    "CORDELL MCFARLIN": {
-      "city": "Oklahoma City, OK",
-      "lat": 35.4676,
-      "lon": -97.5164
-    },
-    "MARK ALAN BIVENS": {
-      "city": "Blytheville, AR",
-      "lat": 35.9273,
-      "lon": -89.919
-    },
-    "MASON PHLEGAR": {
-      "city": "Las Vegas, NV",
-      "lat": 36.1672,
-      "lon": -115.1486
+      "lon": -97.3308,
+      "city": "Fort Worth, TX"
     },
     "ADAM TAHAN": {
-      "city": "Fontana, CA",
       "lat": 34.0922,
-      "lon": -117.435
+      "lon": -117.435,
+      "city": "Fontana, CA"
+    },
+    "JOSH ADAMS": {
+      "lat": 39.5523,
+      "lon": -84.2333,
+      "city": "Springboro, OH"
+    },
+    "RICKY HART": {
+      "lat": 39.9607,
+      "lon": -75.6055,
+      "city": "West Chester, PA"
+    },
+    "SEAN BRITT": {
+      "lat": 36.0726,
+      "lon": -79.792,
+      "city": "Greensboro, NC"
+    },
+    "WES FULLER": {
+      "lat": 39.1156,
+      "lon": -94.8311,
+      "city": "Kansas City, KS"
+    },
+    "GARRET BOBO": {
+      "lat": 32.514,
+      "lon": -93.7477,
+      "city": "Shreveport, LA"
+    },
+    "MATT BAILEY": {
+      "lat": 39.6848,
+      "lon": -83.9297,
+      "city": "Xenia, OH"
+    },
+    "BILL HARKINS": {
+      "lat": 41.8651,
+      "lon": -80.7898,
+      "city": "Ashtabula, OH"
+    },
+    "DAVID LEAKEY": {
+      "lat": 30.7621,
+      "lon": -86.5694,
+      "city": "Crestview, FL"
+    },
+    "DI0NTE RADER": {
+      "lat": 39.6428,
+      "lon": -84.2866,
+      "city": "Miamisburg, OH"
+    },
+    "EDDIE HAGIGH": {
+      "lat": 39.0696,
+      "lon": -76.5452,
+      "city": "Severna Park, MD"
+    },
+    "JACKSON DUKE": {
+      "lat": 34.8029,
+      "lon": -86.9717,
+      "city": "Athens, AL"
+    },
+    "KEVIN FOSTER": {
+      "lat": 29.7858,
+      "lon": -95.8244,
+      "city": "Katy, TX"
+    },
+    "LOGAN MURRAY": {
+      "lat": 36.7281,
+      "lon": -91.8515,
+      "city": "West Plains, MO"
+    },
+    "LUCAS WILSON": {
+      "lat": 43.6532,
+      "lon": -79.3832,
+      "city": "Toronto, Ontario"
+    },
+    "REAGAN FRUGE": {
+      "lat": 40.1088,
+      "lon": -104.5202,
+      "city": "Keenesburg, CO"
+    },
+    "BENJAMIN LACY": {
+      "lat": 34.0483,
+      "lon": -117.2612,
+      "city": "Loma Linda, CA"
+    },
+    "CONNOR GIBSON": {
+      "lat": 44.6488,
+      "lon": -63.5752,
+      "city": "Halifax, NS"
+    },
+    "CURTIS YANCEY": {
+      "lat": 27.9659,
+      "lon": -82.8001,
+      "city": "Clearwater, FL"
+    },
+    "DAVIS CARROLL": {
+      "lat": 35.4088,
+      "lon": -80.5795,
+      "city": "TBD"
+    },
+    "JACKSON KNAAK": {
+      "lat": 35.4088,
+      "lon": -80.5795,
+      "city": "Concord, NC"
+    },
+    "JOSH BILLITER": {
+      "lat": 37.5132,
+      "lon": -82.5585,
+      "city": "Coal Run Village, KY"
+    },
+    "MASON PHLEGAR": {
+      "lat": 36.1672,
+      "lon": -115.1486,
+      "city": "Las Vegas, NV"
+    },
+    "MATT CROCKETT": {
+      "lat": 40.7608,
+      "lon": -111.8911,
+      "city": "Salt Lake City, UT"
+    },
+    "MICHAEL RAKES": {
+      "lat": 37.271,
+      "lon": -79.9414,
+      "city": "Roanoke, VA"
+    },
+    "NATHAN SANTOS": {
+      "lat": 34.9496,
+      "lon": -81.932,
+      "city": "Spartanburg, SC"
+    },
+    "VICTOR WEAVER": {
+      "lat": 39.7589,
+      "lon": -84.1916,
+      "city": "Dayton, OH"
+    },
+    "DYLAN MCDONALD": {
+      "lat": 35.4088,
+      "lon": -80.5795,
+      "city": "TBD"
+    },
+    "DYLAN NICASTRO": {
+      "lat": 41.4993,
+      "lon": -81.6944,
+      "city": "Cleveland, OH"
+    },
+    "ETHAN SIKORSKI": {
+      "lat": 35.2271,
+      "lon": -80.8431,
+      "city": "Charlotte, NC"
+    },
+    "JONATHON PLATT": {
+      "lat": 35.4088,
+      "lon": -80.5795,
+      "city": "Concord, NC"
+    },
+    "NICK NICKERSON": {
+      "lat": 33.4484,
+      "lon": -112.074,
+      "city": "Phoenix, AZ"
+    },
+    "NICOLE KRIESEL": {
+      "lat": 35.2271,
+      "lon": -80.8431,
+      "city": "Charlotte, NC"
+    },
+    "RICKY GONZALES": {
+      "lat": 39.1156,
+      "lon": -94.8311,
+      "city": "Kansas City, KS"
+    },
+    "CARTER PHILLIPS": {
+      "lat": 34.0007,
+      "lon": -81.0348,
+      "city": "Columbia, SC"
+    },
+    "JASON ALLEGRINI": {
+      "lat": 36.1627,
+      "lon": -86.7816,
+      "city": "Nashville, TN"
+    },
+    "JASON GREENWELL": {
+      "lat": 42.3714,
+      "lon": -83.4702,
+      "city": "Plymouth, MI"
+    },
+    "CORDELL MCFARLIN": {
+      "lat": 35.4676,
+      "lon": -97.5164,
+      "city": "Oklahoma City, OK"
+    },
+    "MARK ALAN BIVENS": {
+      "lat": 35.9273,
+      "lon": -89.919,
+      "city": "Blytheville, AR"
+    },
+    "DAVID WESTOVER JR": {
+      "lat": 41.8651,
+      "lon": -80.7898,
+      "city": "Ashtabula, OH"
     },
     "JOSHUA SUTHERLAND": {
-      "city": "Seymour, IN",
       "lat": 38.9592,
-      "lon": -85.8903
+      "lon": -85.8903,
+      "city": "Seymour, IN"
     }
   },
   "spotlightHistory": [
