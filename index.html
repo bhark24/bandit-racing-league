@@ -95,7 +95,10 @@
                 </div>
                 <div class="spotlight-content" style="padding: 30px; min-width: 0; display: flex; flex-direction: column; justify-content: center;">
                     <h3 class="spotlight-name" id="winner-driver-name" style="font-size: 2.2rem; color: var(--neon-green); margin-bottom: 5px; text-shadow: 0 0 15px rgba(0, 255, 0, 0.2); line-height: 1.1;">Loading...</h3>
-                    <p style="color: var(--chase-yellow); font-family: var(--font-heading); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 0.95rem; margin-top: 0; margin-bottom: 15px;" id="winner-team-name">Loading Team...</p>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-top: 5px; margin-bottom: 15px;">
+                        <img id="winner-team-logo" src="" alt="Team Logo" style="display: none; height: 28px; width: auto; object-fit: contain; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));">
+                        <p style="color: var(--chase-yellow); font-family: var(--font-heading); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 0.95rem; margin: 0;" id="winner-team-name">Loading Team...</p>
+                    </div>
                     <p class="spotlight-bio" id="winner-recap-text" style="font-size: 1.05rem; color: #ddd; margin-bottom: 20px; line-height: 1.8;">Loading race report...</p>
                     
                     <div class="spotlight-stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin-top: 10px;">
@@ -462,6 +465,14 @@
                 return '';
             }
 
+            // Find team's logo path from team name
+            function getTeamLogo(teamName) {
+                if (typeof teamsData === 'undefined' || !teamsData.teams || !teamName) return '';
+                const cleanTName = teamName.toLowerCase().trim();
+                const team = teamsData.teams.find(t => t.name.toLowerCase().trim() === cleanTName);
+                return team ? team.logo : '';
+            }
+
             // Generate biography dynamically
             function getDynamicBio(name, number, teamName, seed) {
                 const normName = normalizeName(name);
@@ -740,6 +751,17 @@
                     
                     document.getElementById('winner-driver-name').innerText = wCleanName;
                     document.getElementById('winner-team-name').innerText = wTeam.toUpperCase();
+                    
+                    const wTeamLogoSrc = getTeamLogo(wTeam);
+                    const wTeamLogoImg = document.getElementById('winner-team-logo');
+                    if (wTeamLogoImg) {
+                        if (wTeamLogoSrc) {
+                            wTeamLogoImg.src = wTeamLogoSrc;
+                            wTeamLogoImg.style.display = 'block';
+                        } else {
+                            wTeamLogoImg.style.display = 'none';
+                        }
+                    }
                     
                     // Set up track and date details
                     document.getElementById('winner-stat-track').innerHTML = `<strong>${wTrack}</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">${wDate}</span>`;
