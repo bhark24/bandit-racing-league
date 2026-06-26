@@ -1901,6 +1901,12 @@ const teamsData = {
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
+        },
+        {
+          "date": "Jun 25, 2026",
+          "description": "BANKRUPTCY: Striped Maple Racing ceased operations. All assets liquidated; franchise officially put up for sale.",
+          "category": "info",
+          "amount": 0
         }
       ],
       "points": 57,
@@ -1915,11 +1921,11 @@ const teamsData = {
       "balance": 1937028,
       "drivers": {
         "backup": [
-          "LUCAS WILSON",
+          "VACANT",
           "VACANT"
         ],
         "primary": [
-          "DAVIS CARROLL",
+          "VACANT",
           "VACANT",
           "VACANT",
           "VACANT"
