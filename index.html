@@ -139,7 +139,11 @@
                     </div>
                 </div>
                 <div class="spotlight-content" style="padding: 30px; min-width: 0; display: flex; flex-direction: column; justify-content: center;">
-                    <h3 class="spotlight-name" id="spotlight-name" style="font-size: 2.2rem; color: var(--neon-green); margin-bottom: 15px; text-shadow: 0 0 15px rgba(0, 255, 0, 0.2); line-height: 1.1;">Loading...</h3>
+                    <h3 class="spotlight-name" id="spotlight-name" style="font-size: 2.2rem; color: var(--neon-green); margin-bottom: 5px; text-shadow: 0 0 15px rgba(0, 255, 0, 0.2); line-height: 1.1;">Loading...</h3>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-top: 5px; margin-bottom: 15px;">
+                        <img id="spotlight-team-logo" src="" alt="Team Logo" style="display: none; height: 28px; width: auto; object-fit: contain; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));">
+                        <p style="color: var(--chase-yellow); font-family: var(--font-heading); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 0.95rem; margin: 0;" id="spotlight-team-name">Loading Team...</p>
+                    </div>
                     <p class="spotlight-bio" id="spotlight-bio" style="font-size: 1.05rem; color: #ddd; margin-bottom: 20px; line-height: 1.8;">Loading driver profile...</p>
                     
                     <div class="spotlight-stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin-top: 10px;">
@@ -615,6 +619,22 @@
                 // 1. Populate Name and Bio
                 document.getElementById('spotlight-name').innerText = cleanName;
                 document.getElementById('spotlight-bio').innerText = getDynamicBio(cleanName, carNum, teamName, isPreview ? ("preview-" + getWeekOfYear()) : seed);
+                
+                // Populate Team Name and Team Logo in Spotlight
+                const spotlightTeamName = document.getElementById('spotlight-team-name');
+                if (spotlightTeamName) {
+                    spotlightTeamName.innerText = teamName ? teamName.toUpperCase() : "INDEPENDENT";
+                }
+                const spotlightTeamLogoSrc = getTeamLogo(teamName);
+                const spotlightTeamLogoImg = document.getElementById('spotlight-team-logo');
+                if (spotlightTeamLogoImg) {
+                    if (spotlightTeamLogoSrc) {
+                        spotlightTeamLogoImg.src = spotlightTeamLogoSrc;
+                        spotlightTeamLogoImg.style.display = 'block';
+                    } else {
+                        spotlightTeamLogoImg.style.display = 'none';
+                    }
+                }
 
                 // 2. Populate stats grid
                 if (!isPreview && latestStats) {
