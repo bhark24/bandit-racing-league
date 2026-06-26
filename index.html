@@ -79,74 +79,44 @@
     <!-- Command Center -->
     <section class="command-center container">
         
-        <!-- Top Split Section: Broadcast + Spotlight -->
-        <div class="top-split-layout">
-            
-            <!-- Live Broadcast Embed -->
-            <div id="broadcast" class="broadcast-container card neon-border" style="margin-bottom: 0; display: flex; flex-direction: column;">
-                <div class="card-header flex-header">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span class="live-dot"></span>
-                        <img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 45px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));">
+        <!-- Driver Spotlight Section -->
+        <div class="card neon-border" style="display: flex; flex-direction: column; width: 100%; margin-bottom: 25px;">
+            <div class="card-header flex-header">
+                <h2 id="spotlight-header-title"><span class="live-dot" style="background: var(--chase-yellow); box-shadow: 0 0 10px var(--chase-yellow);"></span> DRIVER SPOTLIGHT</h2>
+            </div>
+            <div class="spotlight-card" style="flex-grow: 1;">
+                <div class="spotlight-visual" id="spotlight-visual-container" style="position: relative; background-color: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 250px;">
+                    <img id="spotlight-img" src="" alt="Driver Car" class="spotlight-img" style="display: none; width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+                    <img id="spotlight-number-img" src="" alt="Car Number" class="spotlight-number" style="display: none; position: absolute; bottom: 20px; left: 20px; max-height: 80px; filter: drop-shadow(0 0 10px rgba(0,0,0,0.8)); z-index: 5;">
+                    <div id="spotlight-visual-placeholder" class="spotlight-placeholder" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 50px; text-align: center;">
+                        <span id="spotlight-fallback-number" style="font-family: var(--font-heading); font-size: 5.5rem; font-weight: 900; color: var(--neon-green); text-shadow: 0 0 20px rgba(0, 255, 0, 0.4); line-height: 1; font-style: italic;">--</span>
+                        <span id="spotlight-fallback-name" style="font-family: var(--font-heading); font-style: italic; font-size: 1rem; color: var(--text-muted); text-transform: uppercase; margin-top: 10px; font-weight: bold; letter-spacing: 1.5px; text-align: center;">DRIVER PROFILE</span>
                     </div>
-                    <span class="broadcast-status">Online</span>
                 </div>
-                <div class="video-wrapper" style="flex-grow: 1;">
+                <div class="spotlight-content" style="padding: 30px; min-width: 0; display: flex; flex-direction: column; justify-content: center;">
+                    <h3 class="spotlight-name" id="spotlight-name" style="font-size: 2.2rem; color: var(--neon-green); margin-bottom: 15px; text-shadow: 0 0 15px rgba(0, 255, 0, 0.2); line-height: 1.1;">Loading...</h3>
+                    <p class="spotlight-bio" id="spotlight-bio" style="font-size: 1.05rem; color: #ddd; margin-bottom: 20px; line-height: 1.8;">Loading driver profile...</p>
                     
-                    <!-- STATE 1: PERMANENT LIVE BROADCAST -->
-                    <!-- Uncomment the iframe below ONLY on race day -->
-                    <!-- <iframe src="https://www.youtube.com/embed/live_stream?channel=UCN_xKkH2qU6_0eF9nC44uGg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-
-                    <!-- STATE 2: PREVIOUS RACE VOD -->
-                    <!-- Swap the VIDEO_ID below with last week's race ID to show the replay -->
-                    <iframe id="broadcast-iframe" src="https://www.youtube.com/embed/6QFN7eOKLZs?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-                    <!-- STATE 3: UPCOMING RACE GRAPHIC -->
-                    <!-- Uncomment the img below 2 days before the race (save image in assets folder) -->
-                    <!-- <img src="assets/promo-graphic.png" class="promo-graphic" alt="Next Race Promo"> -->
-                </div>
-            </div>
-
-            <!-- Driver Spotlight Section -->
-            <div class="card neon-border spotlight-vertical" style="display: flex; flex-direction: column;">
-                <div class="card-header flex-header">
-                    <h2 id="spotlight-header-title"><span class="live-dot" style="background: var(--chase-yellow); box-shadow: 0 0 10px var(--chase-yellow);"></span> DRIVER SPOTLIGHT</h2>
-                </div>
-                <div class="spotlight-card vertical-layout" style="flex-grow: 1;">
-                    <div class="spotlight-visual" id="spotlight-visual-container" style="position: relative; background-color: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 250px;">
-                        <img id="spotlight-img" src="" alt="Driver Car" class="spotlight-img" style="display: none; width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
-                        <img id="spotlight-number-img" src="" alt="Car Number" class="spotlight-number" style="display: none; position: absolute; bottom: 20px; left: 20px; max-height: 80px; filter: drop-shadow(0 0 10px rgba(0,0,0,0.8)); z-index: 5;">
-                        <div id="spotlight-visual-placeholder" class="spotlight-placeholder" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 50px; text-align: center;">
-                            <span id="spotlight-fallback-number" style="font-family: var(--font-heading); font-size: 5.5rem; font-weight: 900; color: var(--neon-green); text-shadow: 0 0 20px rgba(0, 255, 0, 0.4); line-height: 1; font-style: italic;">--</span>
-                            <span id="spotlight-fallback-name" style="font-family: var(--font-heading); font-style: italic; font-size: 1rem; color: var(--text-muted); text-transform: uppercase; margin-top: 10px; font-weight: bold; letter-spacing: 1.5px; text-align: center;">DRIVER PROFILE</span>
+                    <div class="spotlight-stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin-top: 10px;">
+                        <div class="stat-box">
+                            <span class="stat-label" id="spotlight-stat-l1">Wins</span>
+                            <span class="stat-value" id="spotlight-stat-v1">--</span>
                         </div>
-                    </div>
-                    <div class="spotlight-content" style="padding: 25px; min-width: 0; display: flex; flex-direction: column; justify-content: center;">
-                        <h3 class="spotlight-name" id="spotlight-name" style="font-size: 2.2rem; color: var(--neon-green); margin-bottom: 15px; text-shadow: 0 0 15px rgba(0, 255, 0, 0.2); line-height: 1.1;">Loading...</h3>
-                        <p class="spotlight-bio" id="spotlight-bio" style="font-size: 1rem; color: #ddd; margin-bottom: 20px; line-height: 1.8;">Loading driver profile...</p>
-                        
-                        <div class="spotlight-stats-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                            <div class="stat-box">
-                                <span class="stat-label" id="spotlight-stat-l1">Wins</span>
-                                <span class="stat-value" id="spotlight-stat-v1">--</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label" id="spotlight-stat-l2">Top 5s</span>
-                                <span class="stat-value" id="spotlight-stat-v2">--</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label" id="spotlight-stat-l3">Laps Led</span>
-                                <span class="stat-value" id="spotlight-stat-v3">--</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label" id="spotlight-stat-l4">Win %</span>
-                                <span class="stat-value" id="spotlight-stat-v4">--</span>
-                            </div>
+                        <div class="stat-box">
+                            <span class="stat-label" id="spotlight-stat-l2">Top 5s</span>
+                            <span class="stat-value" id="spotlight-stat-v2">--</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label" id="spotlight-stat-l3">Laps Led</span>
+                            <span class="stat-value" id="spotlight-stat-v3">--</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label" id="spotlight-stat-l4">Win %</span>
+                            <span class="stat-value" id="spotlight-stat-v4">--</span>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="grid-3">
@@ -793,38 +763,8 @@
                     }
                 }
 
-                // 6. Automatically Update Broadcast Embed (YouTube RSS Integration)
-                const iframe = document.getElementById("broadcast-iframe");
-                if (iframe) {
-                    const channelId = "UC8D9f0DOxaf8hdyxIuk2NeQ";
-                    
-                    // A. Use weeklyData video ID if available
-                    if (typeof weeklyData !== 'undefined' && weeklyData.latestBroadcastVideoId) {
-                        iframe.src = `https://www.youtube.com/embed/${weeklyData.latestBroadcastVideoId}?rel=0`;
-                    }
+                // 6. Broadcast logic moved to simtrax.html
 
-                    // B. Attempt dynamic real-time retrieval from YouTube RSS feed (e.g. for live stream or new uploads)
-                    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-                    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
-                    fetch(apiUrl)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data && data.status === 'ok' && data.items && data.items.length > 0) {
-                                const latestVideo = data.items[0];
-                                const videoUrl = latestVideo.link;
-                                const match = videoUrl.match(/[?&]v=([^&#]+)/);
-                                if (match && match[1]) {
-                                    const latestVideoId = match[1];
-                                    iframe.src = `https://www.youtube.com/embed/${latestVideoId}?rel=0`;
-                                    console.log("Dynamically updated broadcast to latest YouTube video:", latestVideoId);
-                                }
-                            }
-                        })
-                        .catch(err => {
-                            console.warn("Could not fetch latest YouTube video dynamically, using weeklyData fallback:", err);
-                        });
-                }
             });
         })();
     </script>

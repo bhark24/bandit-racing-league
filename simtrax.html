@@ -142,6 +142,25 @@
 
         </div>
 
+        <!-- Live Broadcast Embed (SimTrax Window) -->
+        <div id="broadcast" class="card neon-border" style="width: 100%; margin-top: 40px; margin-bottom: 40px; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="card-header flex-header" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid rgba(0, 255, 0, 0.15); background: rgba(10, 10, 10, 0.6);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span class="live-dot" style="width: 10px; height: 10px; background-color: var(--neon-green); border-radius: 50%; display: inline-block; box-shadow: 0 0 10px var(--neon-green); animation: pulse 1.5s infinite;"></span>
+                    <span style="font-family: var(--font-heading); font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 1px; font-size: 1.1rem; font-style: italic;">🔴 Live Broadcast Feed</span>
+                </div>
+                <span class="broadcast-status" style="font-family: var(--font-heading); font-size: 0.75rem; background: rgba(0, 255, 0, 0.15); color: var(--neon-green); padding: 4px 10px; border-radius: 4px; font-weight: bold; text-transform: uppercase; border: 1px solid var(--neon-green);">Online</span>
+            </div>
+            <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
+                <!-- STATE 1: PERMANENT LIVE BROADCAST -->
+                <!-- Uncomment the iframe below ONLY on race day -->
+                <!-- <iframe src="https://www.youtube.com/embed/live_stream?channel=UC8D9f0DOxaf8hdyxIuk2NeQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe> -->
+
+                <!-- STATE 2: PREVIOUS RACE VOD -->
+                <iframe id="broadcast-iframe" src="https://www.youtube.com/embed/6QFN7eOKLZs?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+            </div>
+        </div>
+
         <!-- Broadcaster Hub Row -->
         <div style="display: flex; justify-content: center; margin-top: 50px;">
             <!-- Broadcaster Portal Card -->
@@ -161,6 +180,7 @@
             <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
         </div>
     </footer>
+    <script src="weekly_data.js"></script>
     <script>
         // Toggle mobile navigation menu
         document.addEventListener('DOMContentLoaded', function() {
@@ -171,6 +191,39 @@
                 toggleBtn.addEventListener('click', function() {
                     navContainer.classList.toggle('nav-open');
                 });
+            }
+
+            // Automatically Update Broadcast Embed (YouTube RSS Integration)
+            const iframe = document.getElementById("broadcast-iframe");
+            if (iframe) {
+                const channelId = "UC8D9f0DOxaf8hdyxIuk2NeQ";
+                
+                // A. Use weeklyData video ID if available
+                if (typeof weeklyData !== 'undefined' && weeklyData.latestBroadcastVideoId) {
+                    iframe.src = `https://www.youtube.com/embed/${weeklyData.latestBroadcastVideoId}?rel=0`;
+                }
+
+                // B. Attempt dynamic real-time retrieval from YouTube RSS feed (e.g. for live stream or new uploads)
+                const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.status === 'ok' && data.items && data.items.length > 0) {
+                            const latestVideo = data.items[0];
+                            const videoUrl = latestVideo.link;
+                            const match = videoUrl.match(/[?&]v=([^&#]+)/);
+                            if (match && match[1]) {
+                                const latestVideoId = match[1];
+                                iframe.src = `https://www.youtube.com/embed/${latestVideoId}?rel=0`;
+                                console.log("Dynamically updated broadcast to latest YouTube video:", latestVideoId);
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        console.warn("Could not fetch latest YouTube video dynamically, using weeklyData fallback:", err);
+                    });
             }
         });
     </script>
