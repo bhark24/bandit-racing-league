@@ -562,6 +562,22 @@
                 </div>
             </div>
 
+            <!-- Bandit Realty Listing Banner -->
+            <div id="bandit-realty-listing-banner" style="display:none; background: rgba(255, 204, 0, 0.04); border: 2px solid var(--chase-yellow); border-radius: var(--border-radius); padding: 22px; margin-bottom: 25px; align-items: center; gap: 25px; box-shadow: 0 0 25px rgba(255, 204, 0, 0.12); flex-wrap: wrap;">
+                <img src="assets/bandit_realtor_logo.png" alt="Bandit Realty Group" style="height: 80px; width: auto; object-fit: contain; filter: drop-shadow(0 0 10px rgba(0,255,0,0.25)); background: rgba(0,0,0,0.5); padding: 5px; border-radius: 6px; border: 1.5px solid var(--chase-yellow);">
+                <div style="flex-grow: 1; min-width: 250px;">
+                    <h3 style="margin: 0 0 8px 0; color: var(--chase-yellow); font-family: var(--font-heading); text-transform: uppercase; font-size: 1.4rem; letter-spacing: 1px; font-style: italic;">OFFICIAL BANDIT REALTY LISTING</h3>
+                    <p style="margin: 0 0 12px 0; color: #eee; font-size: 0.95rem; line-height: 1.6; max-width: 800px;">This franchise has been officially liquidated due to league bankruptcy and is listed for immediate acquisition. Roster driver seats are vacant, fleet garage condition has been liquidated, and all league franchise transaction rights are locked until a new owner acquires this license.</p>
+                    <div style="display: flex; gap: 15px; font-size: 0.85rem; text-transform: uppercase; font-weight: bold; color: var(--text-muted); flex-wrap: wrap;">
+                        <span>Listed Price: <strong style="color: var(--neon-green); font-size: 0.95rem;">$1,937,028</strong></span>
+                        <span style="color:#444;">|</span>
+                        <span>Broker: <strong style="color: #fff;">Bandit Realty Group</strong></span>
+                        <span style="color:#444;">|</span>
+                        <span>Franchise Status: <strong style="color: #ff1744;">Bankrupt / For Sale</strong></span>
+                    </div>
+                </div>
+            </div>
+
             <!-- Tab Buttons -->
             <div class="team-tabs">
                 <button class="team-tab-btn active" onclick="switchTeamTab('roster-tab')">DRIVERS AND THE GARAGE</button>
@@ -890,20 +906,30 @@
                 const isForSale = team.id === 'striped-maple-racing';
 
                 const homeBaseBadge = isForSale 
-                    ? `<span style="font-size:0.7rem; background:var(--chase-yellow); color:#000; padding:4px 8px; border-radius:4px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px;">FOR SALE</span>`
+                    ? `<span style="font-size:0.65rem; background:var(--chase-yellow); color:#000; padding:3px 6px; border-radius:4px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px;">BANKRUPT</span>`
                     : `<span style="font-size:0.75rem; background:rgba(255,255,255,0.05); padding:4px 8px; border-radius:4px; color:var(--text-muted); font-weight:700; text-transform:uppercase;">${team.homeBase}</span>`;
 
                 card.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <img src="${team.logo}" alt="${team.name}" class="team-overview-logo" ${isForSale ? 'style="filter: grayscale(1) opacity(0.4);"' : ''}>
+                        <img src="${team.logo}" alt="${team.name}" class="team-overview-logo" style="height: 45px; ${isForSale ? 'filter: grayscale(1) opacity(0.35);' : ''}">
                         ${homeBaseBadge}
                     </div>
-                    <h3 style="color:#fff; font-family:var(--font-heading); font-size:1.3rem; margin:10px 0 5px 0; font-style: italic; ${isForSale ? 'text-decoration: line-through; color: #888;' : ''}">${team.name}</h3>
+                    <h3 style="color:#fff; font-family:var(--font-heading); font-size:1.3rem; margin:5px 0; font-style: italic; ${isForSale ? 'text-decoration: line-through; color: #666;' : ''}">${team.name}</h3>
+                    
+                    ${isForSale ? `
+                        <div style="background: rgba(255, 204, 0, 0.08); border: 2.5px dashed var(--chase-yellow); border-radius: 6px; padding: 12px; margin: 10px 0; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255,204,0,0.12);">
+                            <div style="position: absolute; top: -15px; left: -15px; width: 35px; height: 35px; background: var(--chase-yellow); transform: rotate(45deg); z-index: 1;"></div>
+                            <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.45rem; color: var(--chase-yellow); text-shadow: 0 0 8px rgba(255,204,0,0.4); text-transform: uppercase; line-height: 1; font-style: italic; z-index: 2; margin-bottom: 5px; letter-spacing: 0.5px;">FOR SALE</div>
+                            <img src="assets/bandit_realtor_logo.png" alt="Bandit Realty Group" style="height: 38px; width: auto; object-fit: contain; margin-bottom: 4px; filter: drop-shadow(0 0 4px rgba(0,255,0,0.25)); z-index: 2;">
+                            <div style="font-size: 0.65rem; color: #fff; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; z-index: 2;">Listed by Bandit Realty</div>
+                        </div>
+                    ` : ''}
+
                     <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">${isForSale ? 'Former Owner: Lucas Wilson' : 'Owner: ' + team.owner}</p>
-                    <div class="team-overview-balance" style="${isForSale ? 'color: var(--chase-yellow); font-size: 1.45rem;' : ''}">${isForSale ? 'ACQUISITION VAL: $1,937,028' : formattedBalance}</div>
+                    <div class="team-overview-balance" style="${isForSale ? 'color: var(--chase-yellow); font-size: 1.35rem; margin-top: 5px;' : ''}">${isForSale ? 'ACQUISITION VAL: $1,937,028' : formattedBalance}</div>
                     <div style="font-size:0.8rem; color:var(--text-muted); border-top:1px solid #1c1c1c; padding-top:10px; margin-top:auto; display:flex; justify-content:space-between;">
-                        <span>RACE CHASSIS CONDITION:</span>
-                        <strong style="${isForSale ? 'color: #ff1744;' : 'color:var(--neon-green);'}">${isForSale ? '0% (LIQUIDATED)' : calculateFleetCondition(team) + '% Avg'}</strong>
+                        <span>RACE CHASSIS:</span>
+                        <strong style="${isForSale ? 'color: #ff1744;' : 'color:var(--neon-green);'}">${isForSale ? 'LIQUIDATED' : calculateFleetCondition(team) + '% Avg'}</strong>
                     </div>
                 `;
                 container.appendChild(card);
@@ -1177,6 +1203,16 @@
             }
             document.getElementById('detail-team-base').textContent = team.homeBase;
             document.getElementById('detail-team-logo').src = team.logo;
+
+            // Toggle Bandit Realty Listing Banner
+            const realtyBanner = document.getElementById('bandit-realty-listing-banner');
+            if (realtyBanner) {
+                if (isForSale) {
+                    realtyBanner.style.display = 'flex';
+                } else {
+                    realtyBanner.style.display = 'none';
+                }
+            }
 
             // Emergency Loan UI Updates
             const loan = team.loan || 0;
