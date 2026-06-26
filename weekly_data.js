@@ -1,7 +1,12 @@
 const weeklyData = {
   "winnerName": "Johnathon Platt",
   "winnerNumber": "13",
-  "winnerImage": "assets/WINNER IMAGES/DYLAN_WINNER_DYLAN.PNG.jpg",
+  "winnerImage": "assets/WINNER IMAGES/Johnathon_Platt_Atlanta.png",
+  "actionShots": [
+    "assets/WINNER IMAGES/action shots/Atlanta_3_Wide.png",
+    "assets/WINNER IMAGES/action shots/Atlanta_Group_1.png",
+    "assets/WINNER IMAGES/action shots/Atlanta_Single_File.png"
+  ],
   "trackName": "EchoPark Speedway (Atlanta)",
   "trackLogo": "",
   "raceDate": "Jun 24, 2026",
@@ -336,6 +341,6 @@ const weeklyData = {
       "points": 1
     }
   ],
-  "latestBroadcastVideoId": "oF84lT2ODkw",
+  "latestBroadcastVideoId": "B9lDkCVdX7M",
   "spotlightDriver": "Joshua Billiter"
 };

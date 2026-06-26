@@ -244,10 +244,11 @@ def find_custom_winner_image(winner_name, base_dir):
     if not os.path.exists(winner_images_dir):
         return ""
         
-    # First priority: check for explicit name like dylan_winner_dylan
-    for f in os.listdir(winner_images_dir):
-        if "dylan_winner_dylan" in f.lower():
-            return f"assets/WINNER IMAGES/{f}"
+    # First priority: check for explicit name if the winner name matches
+    if "dylan" in winner_name.lower():
+        for f in os.listdir(winner_images_dir):
+            if "dylan_winner_dylan" in f.lower():
+                return f"assets/WINNER IMAGES/{f}"
             
     # Second priority: match winner name parts
     norm_winner = winner_name.lower().replace(" ", "").replace("3", "").replace("2", "")
@@ -257,6 +258,29 @@ def find_custom_winner_image(winner_name, base_dir):
             return f"assets/WINNER IMAGES/{f}"
             
     return ""
+
+def find_track_action_shots(track_name, base_dir):
+    action_shots_dir = os.path.join(base_dir, "assets", "WINNER IMAGES", "action shots")
+    if not os.path.exists(action_shots_dir):
+        return []
+    
+    # Extract track keywords (e.g. "Atlanta" or "Daytona")
+    track_norm = track_name.lower()
+    match = re.search(r'\((.*?)\)', track_norm)
+    if match:
+        track_norm = match.group(1).strip()
+    else:
+        # Clean track name
+        track_norm = track_norm.replace("speedway", "").replace("oval", "").replace("superspeedway", "").strip()
+    
+    # We will search for files that contain this track name
+    matched_files = []
+    for f in os.listdir(action_shots_dir):
+        if track_norm in f.lower():
+            # Standardize paths to use forward slashes for web consistency
+            matched_files.append(f"assets/WINNER IMAGES/action shots/{f}")
+    return sorted(matched_files)
+
 
 def scrape_driver_standings_playwright(browser, season_id="29722"):
     print("[*] Scraping driver standings from SimRacerHub...")
@@ -490,11 +514,13 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
 
             # Construct weekly data dict
             winner_image = find_custom_winner_image(winner_name, BASE_DIR)
+            action_shots = find_track_action_shots(track_name, BASE_DIR)
             latest_video_id = get_latest_youtube_video_id("UC8D9f0DOxaf8hdyxIuk2NeQ")
             weekly_data = {
                 "winnerName": winner_name,
                 "winnerNumber": winner_number,
                 "winnerImage": winner_image,
+                "actionShots": action_shots,
                 "trackName": track_name,
                 "trackLogo": track_logo,
                 "raceDate": race_date,
@@ -607,10 +633,17 @@ def main():
     next_track, next_date = get_next_race()
     
     # 5. Format Social Media Post Template
+    if "daytona" in track_name.lower():
+        story_lead = f"Controversy at Daytona! Sean Britt crossed the line first after contact sent Jonathon Platt spinning into the infield. However, after a post-race administrative review, the win was stripped from Britt and awarded to **{winner_name}**! Platt was scored where he crossed the line as the contact was ruled a racing incident."
+    elif "atlanta" in track_name.lower():
+        story_lead = f"Redemption in the Peach State! After the heartbreak of the opener, **{winner_name}** drove a masterful race to secure victory at **{track_name}**! Platt qualified 10th but charged forward, leading 32 laps to seal the win. Meanwhile, Connor Gibson earned Hard Charger honors, slicing from 19th all the way to a brilliant 2nd-place finish!"
+    else:
+        story_lead = f"What a race! **{winner_name}** executed a perfect game plan, outrunning the field to secure P1 and the largest loot payout of the night at **{track_name}**!"
+
     post_text = f"""🏁 **BANDIT RACING LEAGUE - WEEKLY UPDATE** 🏁
 Custom Standing Graphic: assets/weekly_social_update.png
 
-Controversy at Daytona! Sean Britt crossed the line first after contact sent Jonathon Platt spinning into the infield. However, after a post-race administrative review, the win was stripped from Britt and awarded to **{winner_name}**! Platt was scored where he crossed the line as the contact was ruled a racing incident.
+{story_lead}
 
 What a wild start to Season 16! Congratulations to **{winner_name}** and Legacy Racing for taking the checkered flag at **{track_name}** ({race_date})! 🏆
 

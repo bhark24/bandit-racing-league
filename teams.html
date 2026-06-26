@@ -467,6 +467,10 @@
                 <!-- Left Column: News Dispatch -->
                 <div style="border-right: 1px dashed rgba(255,255,255,0.07); padding-right: 30px;" id="telegram-left">
                     <h3 style="color: #fff; font-family: 'Outfit', var(--font-heading); font-size: 1.6rem; font-style: italic; margin-top: 0; margin-bottom: 15px; letter-spacing: 0.5px; line-height: 1.2;" id="telegram-headline">Knaak Conquers Slinger Speedway!</h3>
+                    <div id="telegram-action-shot-container" style="margin-bottom: 20px; display: none;">
+                        <img id="telegram-action-shot" src="" alt="Race Action Shot" style="width: 100%; max-height: 380px; object-fit: cover; border-radius: 6px; border: 1px solid rgba(0, 255, 0, 0.2); box-shadow: 0 0 15px rgba(0, 255, 0, 0.05); transition: all 0.3s ease;">
+                        <div id="telegram-action-shot-caption" style="font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-top: 6px; text-align: center; font-family: var(--font-body); letter-spacing: 0.5px;"></div>
+                    </div>
                     <div style="color: #ccc; line-height: 1.6; font-size: 0.95rem; margin-bottom: 20px; text-align: justify;" id="telegram-body">
                         <!-- Dynamically generated news article -->
                     </div>
@@ -919,6 +923,37 @@
 
             document.getElementById('telegram-track').textContent = latest.track;
             document.getElementById('telegram-date').textContent = latest.date;
+
+            // Set up action shot if available
+            const actionShotContainer = document.getElementById('telegram-action-shot-container');
+            const actionShotImg = document.getElementById('telegram-action-shot');
+            const actionShotCaption = document.getElementById('telegram-action-shot-caption');
+            
+            if (!latest.isPreview && typeof weeklyData !== 'undefined' && weeklyData.actionShots && weeklyData.actionShots.length > 0) {
+                let currentShotIdx = 0;
+                const shots = weeklyData.actionShots;
+                
+                const updateShot = (idx) => {
+                    const shotPath = shots[idx];
+                    actionShotImg.src = shotPath;
+                    let filename = shotPath.split('/').pop().replace(/\.[^/.]+$/, "").replace(/_/g, " ");
+                    actionShotCaption.innerHTML = `🎥 <strong>RACE DISPATCH (${idx + 1}/${shots.length}):</strong> ${filename} <span style="color: var(--neon-green); font-size: 0.75rem; cursor: pointer; margin-left: 10px; text-decoration: underline;">(Click photo to cycle)</span>`;
+                };
+                
+                updateShot(0);
+                actionShotContainer.style.display = 'block';
+                
+                // Click to cycle
+                actionShotImg.style.cursor = 'pointer';
+                actionShotImg.onclick = () => {
+                    currentShotIdx = (currentShotIdx + 1) % shots.length;
+                    updateShot(currentShotIdx);
+                };
+            } else {
+                actionShotContainer.style.display = 'none';
+                actionShotImg.onclick = null;
+                actionShotImg.style.cursor = 'default';
+            }
 
             if (latest.isPreview) {
                 document.getElementById('telegram-headline').textContent = "🚨 SEASON OPENER: GEEZER AUTHENTIC'S APP 80 @ DAYTONA!";
