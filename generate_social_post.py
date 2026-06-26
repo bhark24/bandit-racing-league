@@ -282,6 +282,19 @@ def find_track_action_shots(track_name, base_dir):
     return sorted(matched_files)
 
 
+def find_driver_team(driver_name, teams_data):
+    if not teams_data or "teams" not in teams_data:
+        return "Legacy Racing"
+    norm_driver = normalize_name(driver_name)
+    for team in teams_data["teams"]:
+        drivers = team.get("drivers", {})
+        primary = [normalize_name(d) for d in drivers.get("primary", [])]
+        backup = [normalize_name(d) for d in drivers.get("backup", [])]
+        if norm_driver in primary or norm_driver in backup:
+            return team.get("name", "Legacy Racing")
+    return "Legacy Racing"
+
+
 def scrape_driver_standings_playwright(browser, season_id="29722"):
     print("[*] Scraping driver standings from SimRacerHub...")
     try:
@@ -640,12 +653,14 @@ def main():
     else:
         story_lead = f"What a race! **{winner_name}** executed a perfect game plan, outrunning the field to secure P1 and the largest loot payout of the night at **{track_name}**!"
 
+    winner_team = find_driver_team(winner_name, teams_data)
+
     post_text = f"""🏁 **BANDIT RACING LEAGUE - WEEKLY UPDATE** 🏁
 Custom Standing Graphic: assets/weekly_social_update.png
 
 {story_lead}
 
-What a wild start to Season 16! Congratulations to **{winner_name}** and Legacy Racing for taking the checkered flag at **{track_name}** ({race_date})! 🏆
+What a wild start to Season 16! Congratulations to **{winner_name}** and {winner_team} for taking the checkered flag at **{track_name}** ({race_date})! 🏆
 
 💼 **FRANCHISE TEAM STANDINGS** 💼
 Here is how the Team Championship looks after this week:

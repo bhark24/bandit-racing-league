@@ -72,43 +72,7 @@ const weeklyData = {
       "wins": 0
     }
   ],
-  "fantasyLeaderboard": [
-    {
-      "name": "Bob Berry",
-      "score": 101,
-      "wins": 1
-    },
-    {
-      "name": "Rebekah Weaver",
-      "score": 101,
-      "wins": 1
-    },
-    {
-      "name": "Bobo",
-      "score": 93,
-      "wins": 0
-    },
-    {
-      "name": "Bhark24",
-      "score": 91,
-      "wins": 0
-    },
-    {
-      "name": "Sean Britt",
-      "score": 0,
-      "wins": 0
-    },
-    {
-      "name": "Eddie Hagigh",
-      "score": 0,
-      "wins": 0
-    },
-    {
-      "name": "Michael Rakes",
-      "score": 0,
-      "wins": 0
-    }
-  ],
+  "fantasyLeaderboard": [],
   "driverStandings": [
     {
       "pos": 1,
