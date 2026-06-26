@@ -119,31 +119,49 @@
             </div>
         </div>
 
-        <div class="grid-3">
-            <!-- Latest Winner -->
-            <div class="card">
-                <div class="card-header">
-                    <h2>Latest Winner</h2>
+        <!-- Latest Winner Spotlight Section -->
+        <div class="card neon-border" style="display: flex; flex-direction: column; width: 100%; margin-bottom: 25px;">
+            <div class="card-header flex-header" style="border-bottom: 1px solid rgba(0, 255, 0, 0.15); background: rgba(10, 10, 10, 0.6);">
+                <h2><span class="live-dot" style="background: var(--neon-green); box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);"></span> LATEST RACE WINNER SPOTLIGHT</h2>
+            </div>
+            <div class="spotlight-card" style="flex-grow: 1;">
+                <div class="spotlight-visual" id="winner-visual-container" style="position: relative; background-color: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 250px;">
+                    <img id="winner-car-img" src="" alt="Winning Car" class="spotlight-img" style="display: none; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; cursor: pointer;">
+                    <img id="winner-num-img" src="" alt="Car Number" class="spotlight-number" style="display: none; position: absolute; bottom: 20px; left: 20px; max-height: 80px; filter: drop-shadow(0 0 10px rgba(0,0,0,0.8)); z-index: 5;">
+                    <div id="winner-visual-placeholder" class="spotlight-placeholder" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 50px; text-align: center;">
+                        <span id="winner-fallback-number" style="font-family: var(--font-heading); font-size: 5.5rem; font-weight: 900; color: var(--neon-green); text-shadow: 0 0 20px rgba(0, 255, 0, 0.4); line-height: 1; font-style: italic;">#00</span>
+                        <span id="winner-fallback-name" style="font-family: var(--font-heading); font-style: italic; font-size: 1rem; color: var(--text-muted); text-transform: uppercase; margin-top: 10px; font-weight: bold; letter-spacing: 1.5px; text-align: center;">WINNER PROFILE</span>
+                    </div>
                 </div>
-                <div class="card-body winner-spotlight text-center">
-                    <div class="winner-img" style="cursor: pointer;" id="winner-car-click" onclick="window.open('https://simracerhub.com/driver_stats.php?driver_id=63408&season_id=29722', '_blank')">
-                        <!-- Update the src below to match your new image file name each week! -->
-                        <img id="winner-car-img" src="assets/j.knaakslinger.png" alt="Winning Car" style="width: 100%; border-radius: 4px; object-fit: cover;" onerror="this.onerror=null; this.outerHTML='<div class=\'placeholder-car\'>WINNING CAR IMAGE</div>'">
-                    </div>
-                    <a id="winner-profile-link" href="https://simracerhub.com/driver_stats.php?driver_id=63408&season_id=29722" target="_blank" style="text-decoration: none;">
-                        <h3 class="winner-name" id="winner-name">Jackson Knaak</h3>
-                    </a>
-                    <p class="track-name" id="winner-track">Slinger Speedway</p>
-                    <div style="margin: 15px 0;" id="winner-num-container">
-                        <!-- Automatically loads the custom number if you drop it in assets/drivers numbers/ -->
-                        <img id="winner-num-img" src="assets/drivers numbers/Jackson Knaak.png" alt="Custom Number" style="max-height: 50px; object-fit: contain;">
-                    </div>
-                    <div class="view-all-container" style="margin-top: 20px;">
-                        <a class='view-all' href='/results'>View Full Race Results &rarr;</a>
+                <div class="spotlight-content" style="padding: 30px; min-width: 0; display: flex; flex-direction: column; justify-content: center;">
+                    <h3 class="spotlight-name" id="winner-driver-name" style="font-size: 2.2rem; color: var(--neon-green); margin-bottom: 5px; text-shadow: 0 0 15px rgba(0, 255, 0, 0.2); line-height: 1.1;">Loading...</h3>
+                    <p style="color: var(--chase-yellow); font-family: var(--font-heading); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 0.95rem; margin-top: 0; margin-bottom: 15px;" id="winner-team-name">Loading Team...</p>
+                    <p class="spotlight-bio" id="winner-recap-text" style="font-size: 1.05rem; color: #ddd; margin-bottom: 20px; line-height: 1.8;">Loading race report...</p>
+                    
+                    <div class="spotlight-stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin-top: 10px;">
+                        <div class="stat-box">
+                            <span class="stat-label">Start / Finish</span>
+                            <span class="stat-value" id="winner-stat-finish">--</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Laps Led</span>
+                            <span class="stat-value" id="winner-stat-led">--</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Incidents</span>
+                            <span class="stat-value" id="winner-stat-inc">--</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Track / Date</span>
+                            <span class="stat-value" id="winner-stat-track" style="font-size: 0.85rem; line-height: 1.3;">--</span>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- Next Race & Standings Grid -->
+        <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-bottom: 25px;">
             <!-- Next Race -->
             <div class="card">
                 <div class="card-header">
@@ -694,47 +712,93 @@
                     document.querySelector('.spotlight-content').appendChild(srhLinkContainer);
                 }
 
-                // 4. Update Latest Winner Card Dynamically
+                // 4. Update Latest Winner Spotlight Dynamically
                 if (typeof weeklyData !== 'undefined' && weeklyData.winnerName) {
                     const wName = weeklyData.winnerName;
                     const wTrack = weeklyData.trackName;
                     const wNum = weeklyData.winnerNumber;
+                    const wDate = weeklyData.raceDate || "Recent Date";
+                    const wTeam = getDriverTeam(wName) || "Independent";
                     
-                    const wCleanName = wName.trim().toUpperCase().split(' ').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ');
+                    const wCleanName = cleanDriverName(wName);
                     
-                    const nameEl = document.getElementById('winner-name');
-                    const trackEl = document.getElementById('winner-track');
-                    if (nameEl) nameEl.innerText = wCleanName;
-                    if (trackEl) trackEl.innerText = wTrack;
+                    document.getElementById('winner-driver-name').innerText = wCleanName;
+                    document.getElementById('winner-team-name').innerText = wTeam.toUpperCase();
                     
+                    // Set up track and date details
+                    document.getElementById('winner-stat-track').innerHTML = `<strong>${wTrack}</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">${wDate}</span>`;
+                    
+                    // Set up race stats if available in teamsData
+                    const latestRace = (typeof teamsData !== 'undefined') ? teamsData.latestRace : null;
+                    const wResult = (latestRace && latestRace.results) ? latestRace.results.find(r => normalizeName(r.name) === normalizeName(wName)) : null;
+                    
+                    if (wResult) {
+                        document.getElementById('winner-stat-finish').innerText = `P${wResult.qualify} ➔ P${wResult.finish}`;
+                        document.getElementById('winner-stat-led').innerText = wResult.led || '0';
+                        document.getElementById('winner-stat-inc').innerText = wResult.incidents || '0';
+                    } else {
+                        document.getElementById('winner-stat-finish').innerText = wNum ? `#${wNum}` : '--';
+                        document.getElementById('winner-stat-led').innerText = '--';
+                        document.getElementById('winner-stat-inc').innerText = '--';
+                    }
+                    
+                    // Dynamic description text
+                    let recapText = "";
+                    if (wTrack.toLowerCase().includes("daytona")) {
+                        recapText = `A chaotic finish at the Season 16 opener saw a last-lap collision strip the initial winner of the win, declaring Dylan McDonald the official winner for Legacy Racing.`;
+                    } else if (wTrack.toLowerCase().includes("atlanta")) {
+                        recapText = `After the heartbreak of the season opener, **${wCleanName}** bounced back in spectacular fashion, driving a masterful race to secure victory at **${wTrack}**! Platt qualified 10th but carved forward, leading 32 laps to seal the win.`;
+                    } else {
+                        recapText = `Congratulations to **${wCleanName}** for executing a perfect race strategy, outrunning the field to take the checkered flag at **${wTrack}**!`;
+                    }
+                    // Convert markdown bold to html
+                    document.getElementById('winner-recap-text').innerHTML = recapText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    
+                    // Resolve Profile URLs
                     const normWName = normalizeName(wName);
                     const wSrhId = SRH_IDS[normWName];
                     const wProfileUrl = wSrhId ? `https://simracerhub.com/driver_stats.php?driver_id=${wSrhId}&season_id=29722` : `https://simracerhub.com/season_standings.php?season_id=29722`;
                     
-                    const clickEl = document.getElementById('winner-car-click');
-                    const linkEl = document.getElementById('winner-profile-link');
-                    if (clickEl) clickEl.onclick = function() { window.open(wProfileUrl, '_blank'); };
-                    if (linkEl) linkEl.href = wProfileUrl;
-                    
+                    // Resolve Images
                     const wCarImg = document.getElementById('winner-car-img');
                     const wNumImg = document.getElementById('winner-num-img');
+                    const wFallbackBlock = document.getElementById('winner-visual-placeholder');
+                    const wFallbackNum = document.getElementById('winner-fallback-number');
+                    const wFallbackName = document.getElementById('winner-fallback-name');
+                    
+                    const wCarImgSrc = weeklyData.winnerImage || getTruckImgPath(wName);
+                    const wNumImgSrc = getDriverImgPath(wName);
                     
                     if (wCarImg) {
-                        const wCarImgSrc = weeklyData.winnerImage || getTruckImgPath(wName);
-                        wCarImg.src = wCarImgSrc;
-                        wCarImg.onerror = function() {
-                            wCarImg.onerror = null;
-                            wCarImg.outerHTML = `<div class="placeholder-car">WINNING CAR IMAGE</div>`;
+                        wCarImg.onclick = function() { window.open(wProfileUrl, '_blank'); };
+                        
+                        const tempWCar = new Image();
+                        tempWCar.src = wCarImgSrc;
+                        tempWCar.onload = function() {
+                            wCarImg.src = wCarImgSrc;
+                            wCarImg.style.display = 'block';
+                            wFallbackBlock.style.display = 'none';
+                        };
+                        tempWCar.onerror = function() {
+                            wCarImg.style.display = 'none';
+                            wFallbackNum.innerText = wNum ? `#${wNum}` : '#00';
+                            wFallbackName.innerText = wCleanName;
+                            wFallbackBlock.style.display = 'flex';
+                            wFallbackBlock.onclick = function() { window.open(wProfileUrl, '_blank'); };
+                            wFallbackBlock.style.cursor = 'pointer';
                         };
                     }
                     
                     if (wNumImg) {
-                        wNumImg.onerror = function() {
-                            wNumImg.onerror = null;
-                            wNumImg.outerHTML = `<p class="car-number accent">#${wNum || '00'}</p>`;
+                        const tempWNum = new Image();
+                        tempWNum.src = wNumImgSrc;
+                        tempWNum.onload = function() {
+                            wNumImg.src = wNumImgSrc;
+                            wNumImg.style.display = 'block';
                         };
-                        const wNumImgSrc = getDriverImgPath(wName);
-                        wNumImg.src = wNumImgSrc;
+                        tempWNum.onerror = function() {
+                            wNumImg.style.display = 'none';
+                        };
                     }
                 }
                 
