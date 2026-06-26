@@ -345,10 +345,11 @@
 
         function getTruckImgPath(name) {
             if (!name) return '';
-            const norm = name.toLowerCase().trim()
+            let clean = name.toLowerCase().trim()
+                .replace(/\s+jr\.?$/i, '') // Remove "Jr" suffix
                 .replace(/[\s\+\-\.]+/g, '_')
                 .replace(/_+/g, '_');
-            return `assets/truck images/truck_image_${norm}.png`;
+            return `assets/truck images/truck_image_${clean}.png`;
         }
 
         function findTeamsForDriver(driverName) {
