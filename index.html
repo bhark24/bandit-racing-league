@@ -360,7 +360,8 @@
                     "DIANTERODER": "DI0NTERADER",
                     "JONATHONPLATT": "JONATHONPLATT",
                     "JOHNATHONPLATT": "JONATHONPLATT",
-                    "JOSHUADSUTHERLAND": "JOSHUASUTHERLAND"
+                    "JOSHUADSUTHERLAND": "JOSHUASUTHERLAND",
+                    "JOSHUABILLITER": "JOSHBILLITER"
                 };
                 return spellingMap[n] || n;
             }
@@ -462,11 +463,15 @@
 
             // Generate biography dynamically
             function getDynamicBio(name, number, teamName, seed) {
-                if (normalizeName(name) === "KEVINFOSTER") {
+                const normName = normalizeName(name);
+                if (normName === "KEVINFOSTER") {
                     return "A past champion and the owner of GFR Racing, Kevin Foster is a model of supreme consistency in the Bandit Racing League. Driving the #8 GFR Silverado, Foster is a perennial title threat known for his clean racing and high Top 5 finish rate.";
                 }
-                if (normalizeName(name) === "NICKNICKERSON") {
+                if (normName === "NICKNICKERSON") {
                     return "A dominant force in the Bandit Racing League, Nick Nickerson is the undeniable favorite for the Season 16 Championship. With a staggering 27% career win rate and an incredible 62% Top 5 finish rate over nearly 300 starts, Nickerson is a master of consistency.";
+                }
+                if (normName === "JOSHBILLITER") {
+                    return `A hardcore competitor in the Bandit Racing League, Joshua Billiter pilots the #${number} truck${teamName ? ' for ' + teamName : ''} with absolute intensity. Billiter is known for his aggressive short-track style, fearless overtaking, and refusal to back down from any challenge, making him a driver you can never count out.`;
                 }
                 
                 const templates = [
