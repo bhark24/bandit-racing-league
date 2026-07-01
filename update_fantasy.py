@@ -211,14 +211,16 @@ def calculate_driver_scores(drivers, config):
         
     return driver_scores
 
-def load_picks(config):
-    picks = []
+def load_picks(config, race_lock_dt):
+    scored_picks = []
+    future_picks = []
     
     # 1. Try loading from Supabase first if configured
     url, key = get_supabase_config()
     if url and key:
         print("[*] Connecting to Supabase to load fantasy picks...")
         try:
+            from datetime import timezone, timedelta
             headers = {
                 'apikey': key,
                 'Authorization': f'Bearer {key}'
@@ -233,8 +235,17 @@ def load_picks(config):
                         print(f"[+] Loaded {len(db_picks)} active picks from Supabase.")
                         # Format list: [Timestamp, Name, Pick A, Pick B1, Pick B2, Pick C, Tiebreaker]
                         for p in db_picks:
+                            sub_time_str = p.get("submitted_at", datetime.now().isoformat())
+                            clean_time_str = sub_time_str.replace("Z", "+00:00") if sub_time_str.endswith("Z") else sub_time_str
+                            try:
+                                p_dt = datetime.fromisoformat(clean_time_str)
+                                # Convert to naive local time (assume EDT/EST, UTC-4)
+                                p_local = p_dt.astimezone(timezone.utc).replace(tzinfo=None) - timedelta(hours=4)
+                            except Exception as e:
+                                p_local = datetime.now()
+                                
                             row = [
-                                p.get("submitted_at", datetime.now().isoformat()),
+                                sub_time_str,
                                 p.get("name", "Anonymous"),
                                 p.get("picks", ["", "", "", ""])[0] if len(p.get("picks", [])) > 0 else "",
                                 p.get("picks", ["", "", "", ""])[1] if len(p.get("picks", [])) > 1 else "",
@@ -242,8 +253,14 @@ def load_picks(config):
                                 p.get("picks", ["", "", "", ""])[3] if len(p.get("picks", [])) > 3 else "",
                                 str(p.get("tiebreaker", 0))
                             ]
-                            picks.append(row)
-                        return picks
+                            
+                            if p_local <= race_lock_dt:
+                                scored_picks.append(row)
+                            else:
+                                print(f"[-] Skipping future pick by '{p.get('name')}' (submitted {p_local} after race lock {race_lock_dt})")
+                                future_picks.append(p)
+                                
+                        return scored_picks, future_picks
                     else:
                         print("[!] No active picks found in Supabase (picks array is empty).")
         except Exception as e:
@@ -251,6 +268,7 @@ def load_picks(config):
 
     # 2. Fallback to Google Sheets/CSV URL
     csv_url = config.get("google_sheet_csv_url", "")
+    picks = []
     if not csv_url:
         test_csv = os.path.join(BASE_DIR, "test_picks.csv")
         print(f"Google Sheet CSV URL is empty. Checking local test file: {test_csv}")
@@ -284,8 +302,8 @@ def load_picks(config):
             print(f"Error fetching CSV from Google Sheets: {e}")
             sys.exit(1)
             
-    print(f"Loaded {len(picks)} fan picks.")
-    return picks
+    print(f"Loaded {len(picks)} fan picks from CSV.")
+    return picks, []
 
 def score_picks(picks, driver_scores, caution_laps, config):
     # Match headers to figure out columns
@@ -355,7 +373,7 @@ def score_picks(picks, driver_scores, caution_laps, config):
         
     return fan_results
 
-def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scores, config):
+def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scores, config, future_picks):
     # Load existing standings from data_js
     existing_standings = {}
     races_history = []
@@ -381,8 +399,6 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
         print(f"Warning: Race '{race_key}' is already recorded. Overwriting standings for this race.")
         # Filter out the existing race from history
         races_history = [r for r in races_history if r["race"] != race_key]
-        # Recalculate standings scores from other races
-        # (For simplicity in this automated script, we overwrite and reconstruct scores)
         
     # Find the weekly winner (highest score)
     best_score = -9999
@@ -394,7 +410,6 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
             weekly_winners = [res["name"]]
         elif res["total"] == best_score:
             # Handle tie with tiebreaker (closest to caution laps)
-            # Find current best's tiebreaker diff
             current_best_diff = next((x["tiebreaker_diff"] for x in fan_results if x["name"] in weekly_winners), 9999)
             if res["tiebreaker_diff"] < current_best_diff:
                 weekly_winners = [res["name"]]
@@ -418,19 +433,14 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
     leaderboard_map = {}
     
     for r in races_history:
-        # Find weekly winner(s) for this historical race
         race_best = -9999
         race_winners = []
-        # First pass to find highest score
         for entry in r["results"]:
             if entry["total"] > race_best:
                 race_best = entry["total"]
                 
-        # Find who achieved it
         for entry in r["results"]:
             if entry["total"] == race_best:
-                # We won't re-run complex tiebreaker logic for past races unless saved, 
-                # we'll just reward wins based on max score for historical rebuild
                 race_winners.append(entry["name"])
                 
         for entry in r["results"]:
@@ -464,7 +474,7 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
             "track": track_name,
             "date": race_date,
             "caution_laps": caution_laps,
-            "winner": ", ".join(weekly_winners) + f" ({best_score} pts)",
+            "winner": ", ".join(weekly_winners) + f" ({best_score} pts)" if weekly_winners else "None",
             "driver_scores": driver_scores
         },
         "tiers": config.get("tiers", {}),
@@ -478,12 +488,13 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
         f.write(js_output)
         
     print(f"Successfully updated fantasy_data.js with {len(leaderboard)} players!")
-    print(f"Weekly Winner: {', '.join(weekly_winners)} with {best_score} points!")
+    if weekly_winners:
+        print(f"Weekly Winner: {', '.join(weekly_winners)} with {best_score} points!")
 
-    # Clear active picks in Supabase since this week is now scored!
+    # Preserve future picks in Supabase instead of wiping everything!
     url, key = get_supabase_config()
     if url and key:
-        print("[*] Resetting active weekly picks in Supabase for the next race...")
+        print(f"[*] Preserving {len(future_picks)} future picks in Supabase...")
         try:
             headers = {
                 'apikey': key,
@@ -494,16 +505,16 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
             req_url = f"{url}/rest/v1/league_data?id=eq.2"
             payload = {
                 "data": {
-                    "picks": []
+                    "picks": future_picks
                 },
                 "updated_at": datetime.now().isoformat()
             }
             req_data = json.dumps(payload).encode('utf-8')
             req = urllib.request.Request(req_url, data=req_data, headers=headers, method='PATCH')
             with urllib.request.urlopen(req) as response:
-                print("[+] Successfully cleared active picks in Supabase.")
+                print(f"[+] Supabase successfully updated. Preserved {len(future_picks)} future picks.")
         except Exception as e:
-            print(f"[!] Error clearing Supabase picks: {e}")
+            print(f"[!] Error updating Supabase picks: {e}")
 
 def main():
     parser = argparse.ArgumentParser(description="Calculate fantasy league scores from SimRacerHub and Google Sheets.")
@@ -529,7 +540,6 @@ def main():
             with open(test_html_path, "r", encoding="utf-8") as f:
                 html = f.read()
         else:
-            # Fallback to fetching live
             print("Local file not found, fetching live instead.")
             html = fetch_html(url)
     else:
@@ -541,14 +551,21 @@ def main():
     # Calculate driver fantasy scores
     driver_scores = calculate_driver_scores(drivers_list, config)
     
-    # Load fan picks from sheet/local file
-    picks = load_picks(config)
+    # Calculate lock date of the race being scored
+    # race_date is e.g. "Jun 24, 2026"
+    dt = datetime.strptime(race_date, "%b %d, %Y")
+    # Locks at 9:15 PM local time (EDT/EST) on race day
+    race_lock_dt = datetime(dt.year, dt.month, dt.day, 21, 15, 0)
+    print(f"[*] Scoring race with lock date boundary: {race_lock_dt}")
+    
+    # Load fan picks from Supabase/CSV, filtering out future picks
+    picks, future_picks = load_picks(config, race_lock_dt)
     
     # Calculate scores for picks
     fan_results = score_picks(picks, driver_scores, caution_laps, config)
     
     # Update standings JS file
-    update_data_js(fan_results, track_name, race_date, caution_laps, driver_scores, config)
+    update_data_js(fan_results, track_name, race_date, caution_laps, driver_scores, config, future_picks)
 
 if __name__ == "__main__":
     main()
