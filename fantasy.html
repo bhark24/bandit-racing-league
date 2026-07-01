@@ -208,7 +208,7 @@
 
             <!-- ACTIVE SUBMISSIONS FOR CURRENT WEEK -->
             <div class="fantasy-panel" id="active-submissions-panel" style="margin-bottom: 30px; display: none;">
-                <h4 style="color:#fff; font-size:1.1rem; font-family:var(--font-heading); text-transform:uppercase; margin-top:0; margin-bottom:15px; letter-spacing:1px; border-left: 3px solid var(--neon-green); padding-left: 10px;">Submitted Entries for the Upcoming Race</h4>
+                <h4 id="submissions-header" style="color:#fff; font-size:1.1rem; font-family:var(--font-heading); text-transform:uppercase; margin-top:0; margin-bottom:15px; letter-spacing:1px; border-left: 3px solid var(--neon-green); padding-left: 10px;">Submitted Entries for the Upcoming Race</h4>
                 <div id="active-submissions-list" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 20px;">
                     <!-- Dynamically filled by Supabase -->
                 </div>
@@ -996,6 +996,11 @@
             if (!nextRace || !lockDate) {
                 countdownEl.innerHTML = `LOCKED / SCORING NEXT EVENT — Next picks open after race scoring completes.`;
                 return;
+            }
+
+            const headerEl = document.getElementById('submissions-header');
+            if (headerEl && nextRace) {
+                headerEl.textContent = `Submitted Entries for ${nextRace.track}`;
             }
 
             const diffMs = lockDate.getTime() - now.getTime();
