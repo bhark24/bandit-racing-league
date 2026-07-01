@@ -157,6 +157,16 @@
             padding: 20px 0;
         }
 
+        .winner-photo {
+            width: 440px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            border: 3px solid var(--neon-green);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.35);
+            margin: 15px 0;
+        }
+
         .winner-number-img {
             max-height: 120px;
             object-fit: contain;
@@ -323,6 +333,7 @@
                     <img id="winner-num-img" class="winner-number-img" src="" style="display: none;">
                     <div id="winner-fallback-num" class="winner-fallback-number">#00</div>
                     <div id="winner-driver-name" class="winner-name">Winner Driver</div>
+                    <img id="winner-photo" class="winner-photo" src="" style="display: none;">
                     <div class="winner-details-divider"></div>
                     <div class="winner-track-container">
                         <img id="winner-track-logo" class="winner-track-logo" src="" style="display: none;">
@@ -428,6 +439,20 @@
             document.getElementById('winner-driver-name').innerText = weeklyData.winnerName || "TBD";
             document.getElementById('winner-track-name').innerText = weeklyData.trackName || "Unknown Track";
             document.getElementById('winner-race-date').innerText = weeklyData.raceDate || "Date TBD";
+            
+            // Try loading winner photo
+            if (weeklyData.winnerImage) {
+                const winnerPhotoImg = document.getElementById('winner-photo');
+                const tempPhotoImg = new Image();
+                tempPhotoImg.src = weeklyData.winnerImage;
+                tempPhotoImg.onload = function() {
+                    winnerPhotoImg.src = weeklyData.winnerImage;
+                    winnerPhotoImg.style.display = 'block';
+                };
+                tempPhotoImg.onerror = function() {
+                    winnerPhotoImg.style.display = 'none';
+                };
+            }
             
             // Try loading driver number
             const numImg = document.getElementById('winner-num-img');
