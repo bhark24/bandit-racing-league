@@ -34,14 +34,15 @@ if __name__ == "__main__":
     )
     
     create_shortcut(
-        target=os.path.join(base_dir, "GENERATE_PROMO_POST.bat"),
-        name="Generate Website Promo Post",
-        workdir=base_dir
-    )
-    
-    create_shortcut(
         target=os.path.join(base_dir, "AUTO_SYNC.bat"),
         name="League and Fantasy Sync",
+        workdir=base_dir,
+        icon=os.path.join(base_dir, "assets", "bandit_icon.ico")
+    )
+
+    create_shortcut(
+        target=os.path.join(base_dir, "GENERATE_FANTASY_PROMO.bat"),
+        name="Generate Fantasy League Promo",
         workdir=base_dir,
         icon=os.path.join(base_dir, "assets", "bandit_icon.ico")
     )
