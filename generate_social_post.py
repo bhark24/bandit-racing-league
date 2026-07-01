@@ -11,6 +11,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SIMHUB_PATH = os.path.join(BASE_DIR, "simhub.html")
 FANTASY_DATA_PATH = os.path.join(BASE_DIR, "fantasy_data.js")
 TEAMS_DATA_PATH = os.path.join(BASE_DIR, "teams_data.js")
+WEEKLY_DATA_PATH = os.path.join(BASE_DIR, "weekly_data.js")
 INDEX_PATH = os.path.join(BASE_DIR, "index.html")
 
 def clean_driver_name(raw_name):
@@ -612,6 +613,21 @@ def main():
         winner_name, track_name, race_date = parse_simhub_results()
         print(f"[+] Race Winner parsed from simhub.html: {winner_name} at {track_name}")
     
+    # 2b. Fetch Driver Standings from weekly_data.js (Top 10)
+    driver_rows = []
+    weekly_data = load_js_variable(WEEKLY_DATA_PATH, "weeklyData")
+    if weekly_data and "driverStandings" in weekly_data:
+        sorted_drivers = weekly_data["driverStandings"][:10] # Top 10
+        emojis = ["🥇", "🥈", "🥉", "🏎️", "🏎️", "🏎️", "🏎️", "🏎️", "🏎️", "🏎️"]
+        for idx, d in enumerate(sorted_drivers):
+            emoji = emojis[idx] if idx < len(emojis) else "🏎️"
+            name = clean_driver_name(d.get("name", "Driver"))
+            pts = d.get("points", 0)
+            pos = d.get("pos", idx + 1)
+            driver_rows.append(f"{emoji} {pos}. {name} — {pts} pts")
+    else:
+        driver_rows.append("No active driver standings available.")
+
     team_rows = []
     if teams_data and "teams" in teams_data:
         sorted_teams = sorted(teams_data["teams"], key=lambda x: x.get("points", 0), reverse=True)
@@ -661,6 +677,10 @@ Custom Standing Graphic: assets/weekly_social_update.png
 {story_lead}
 
 What a wild start to Season 16! Congratulations to **{winner_name}** and {winner_team} for taking the checkered flag at **{track_name}** ({race_date})! 🏆
+
+🏆 **BRL DRIVER STANDINGS** 🏆
+Here is the current Top 10 in the Driver Championship:
+{"\n".join(driver_rows)}
 
 💼 **FRANCHISE TEAM STANDINGS** 💼
 Here is how the Team Championship looks after this week:
