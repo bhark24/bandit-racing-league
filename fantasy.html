@@ -952,43 +952,61 @@
         // Render Countdown Text
         function updateCountdownText() {
             const countdownEl = document.getElementById('lock-countdown');
-            if (typeof fantasyData === 'undefined' || !fantasyData.latest_race || !fantasyData.latest_race.date) {
-                countdownEl.innerHTML = "Selections open for the next race!";
-                return;
-            }
-
-            // Find the next race date (Wednesday following the latest race date)
-            const latestRaceDate = new Date(fantasyData.latest_race.date);
-            if (isNaN(latestRaceDate.getTime())) {
-                countdownEl.innerHTML = "Selections open for the next race!";
-                return;
-            }
-
-            const nextRaceDate = new Date(latestRaceDate.getTime());
-            nextRaceDate.setDate(nextRaceDate.getDate() + 1);
-            while (nextRaceDate.getDay() !== 3) { // 3 is Wednesday
-                nextRaceDate.setDate(nextRaceDate.getDate() + 1);
-            }
-            // Set lock time to 9:15 PM EDT (UTC-4) on that Wednesday
-            const year = nextRaceDate.getFullYear();
-            const month = String(nextRaceDate.getMonth() + 1).padStart(2, '0');
-            const day = String(nextRaceDate.getDate()).padStart(2, '0');
-            const lockDate = new Date(`${year}-${month}-${day}T21:15:00-04:00`);
-            const now = new Date();
             
-            if (now >= lockDate) {
-                countdownEl.innerHTML = `LOCKED / SCORING NEXT EVENT — Next picks open after race scoring completes.`;
-            } else {
-                const diffMs = lockDate.getTime() - now.getTime();
-                const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-                const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-                
-                if (diffHours > 24) {
-                    const days = Math.floor(diffHours / 24);
-                    countdownEl.innerHTML = `SELECTIONS OPEN — Locks in ${days} days, ${diffHours % 24} hours`;
-                } else {
-                    countdownEl.innerHTML = `SELECTIONS OPEN — Locks in ${diffHours}h ${diffMins}m (9:15 PM EST)`;
+            // Official Season 16 Schedule
+            const schedule = [
+                { track: "Daytona Oval", date: "2026-06-17" },
+                { track: "Atlanta", date: "2026-06-24" },
+                { track: "Charlotte", date: "2026-07-08" },
+                { track: "Bristol", date: "2026-07-15" },
+                { track: "Nashville Superspeedway", date: "2026-07-22" },
+                { track: "Pocono", date: "2026-07-29" },
+                { track: "Richmond", date: "2026-08-05" },
+                { track: "Michigan", date: "2026-08-12" },
+                { track: "Gateway", date: "2026-08-19" },
+                { track: "Darlington", date: "2026-09-02" },
+                { track: "Kansas", date: "2026-09-09" },
+                { track: "Texas", date: "2026-09-16" },
+                { track: "Las Vegas", date: "2026-09-23" },
+                { track: "Watkins Glen", date: "2026-09-30" },
+                { track: "Phoenix", date: "2026-10-07" },
+                { track: "Martinsville", date: "2026-10-14" },
+                { track: "Talladega", date: "2026-10-21" },
+                { track: "Kansas", date: "2026-10-28" },
+                { track: "Road America", date: "2026-11-04" },
+                { track: "Phoenix", date: "2026-11-11" },
+                { track: "Homestead Miami", date: "2026-11-18" }
+            ];
+
+            const now = new Date();
+            let nextRace = null;
+            let lockDate = null;
+
+            // Find the next scheduled race date that locks in the future
+            for (const race of schedule) {
+                // Lock time is 9:15 PM EDT (UTC-4) on race day
+                const raceLockDate = new Date(`${race.date}T21:15:00-04:00`);
+                if (raceLockDate > now) {
+                    nextRace = race;
+                    lockDate = raceLockDate;
+                    break;
                 }
+            }
+
+            if (!nextRace || !lockDate) {
+                countdownEl.innerHTML = `LOCKED / SCORING NEXT EVENT — Next picks open after race scoring completes.`;
+                return;
+            }
+
+            const diffMs = lockDate.getTime() - now.getTime();
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+            
+            if (diffHours > 24) {
+                const days = Math.floor(diffHours / 24);
+                countdownEl.innerHTML = `SELECTIONS OPEN — Locks in ${days} days, ${diffHours % 24} hours`;
+            } else {
+                countdownEl.innerHTML = `SELECTIONS OPEN — Locks in ${diffHours}h ${diffMins}m (9:15 PM EST)`;
             }
         }
 
