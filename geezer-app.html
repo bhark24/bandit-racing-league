@@ -2154,56 +2154,60 @@
 
             <!-- Fuel projections Panel -->
             <div class="glass-panel module" id="mod-fuel" style="flex: 0.75;">
-                <div class="panel-title">Fuel</div>
-                <div class="fuel-projections-table">
+                <div class="panel-title">Fuel Projections</div>
+                
+                <!-- Top Row: Large Vitals -->
+                <div class="fuel-vitals-row" style="display: flex; gap: 15px; margin-bottom: 12px; border-bottom: 1.5px solid rgba(255,255,255,0.06); padding-bottom: 10px;">
+                    <div class="fuel-vital-card" style="flex: 1; background: rgba(0,0,0,0.3); border: 1.5px solid rgba(0, 255, 102, 0.2); border-radius: 8px; padding: 8px 12px; text-align: center;">
+                        <span style="display: block; font-family: var(--font-header); font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">Laps In Tank</span>
+                        <span id="fuel-worst-intank" style="font-family: var(--font-data); font-size: 26px; font-weight: 700; color: var(--neon-yellow); text-shadow: 0 0 8px rgba(255, 235, 59, 0.25);">0.0</span>
+                    </div>
+                    <div class="fuel-vital-card" style="flex: 1; background: rgba(0,0,0,0.3); border: 1.5px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 8px 12px; text-align: center;">
+                        <span style="display: block; font-family: var(--font-header); font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">Laps To Go</span>
+                        <span id="fuel-worst-togo" style="font-family: var(--font-data); font-size: 26px; font-weight: 700; color: #fff;">0.0</span>
+                    </div>
+                </div>
+                
+                <!-- Middle Table: Projections -->
+                <div class="fuel-table-redesign" style="display: grid; grid-template-columns: 120px 1fr 1fr; gap: 1px; background: rgba(0, 255, 102, 0.2); border: 1.5px solid rgba(0, 255, 102, 0.3); border-radius: 8px; overflow: hidden; margin-bottom: 12px;">
                     <!-- Header -->
-                    <div class="fuel-projections-cell header"></div>
-                    <div class="fuel-projections-cell header">Worst</div>
-                    <div class="fuel-projections-cell header">2 Laps</div>
+                    <div class="fuel-cell header" style="background: rgba(0, 255, 102, 0.05); padding: 5px 8px; font-family: var(--font-header); font-weight: 700; color: var(--neon-green); font-size: 11px; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center;">METRIC</div>
+                    <div class="fuel-cell header" style="background: rgba(0, 255, 102, 0.05); padding: 5px 8px; font-family: var(--font-header); font-weight: 700; color: var(--neon-green); font-size: 11px; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center;">WORST LAP</div>
+                    <div class="fuel-cell header" style="background: rgba(0, 255, 102, 0.05); padding: 5px 8px; font-family: var(--font-header); font-weight: 700; color: var(--neon-green); font-size: 11px; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center;">2-LAP AVG</div>
 
-                    <!-- To Go -->
-                    <div class="fuel-projections-cell row-label">To Go</div>
-                    <div class="fuel-projections-cell" id="fuel-worst-togo">0.0</div>
-                    <div class="fuel-projections-cell" id="fuel-2lap-togo">0.0</div>
+                    <!-- Fuel To Finish (Gal) -->
+                    <div class="fuel-cell label" style="background: rgba(10, 14, 18, 0.94); padding: 6px 10px; font-family: var(--font-header); font-weight: 600; color: var(--text-muted); font-size: 13px; text-align: left; display: flex; align-items: center; justify-content: flex-start;">To Finish (gal)</div>
+                    <div class="fuel-cell value" id="fuel-worst-tofinish" style="background: rgba(10, 14, 18, 0.94); padding: 6px 10px; font-family: var(--font-data); font-size: 13px; color: #fff; text-align: center; display: flex; align-items: center; justify-content: center;">0.0</div>
+                    <div class="fuel-cell value" id="fuel-2lap-tofinish" style="background: rgba(10, 14, 18, 0.94); padding: 6px 10px; font-family: var(--font-data); font-size: 13px; color: #fff; text-align: center; display: flex; align-items: center; justify-content: center;">0.0</div>
 
-                    <!-- In Tank -->
-                    <div class="fuel-projections-cell row-label">In Tank</div>
-                    <div class="fuel-projections-cell" id="fuel-worst-intank" style="color: var(--neon-red);">0.0</div>
-                    <div class="fuel-projections-cell" id="fuel-2lap-intank" style="color: var(--neon-red);">0.0</div>
+                    <!-- Deficit / Needed -->
+                    <div class="fuel-cell label" style="background: rgba(10, 14, 18, 0.94); padding: 6px 10px; font-family: var(--font-header); font-weight: 600; color: var(--text-muted); font-size: 13px; text-align: left; display: flex; align-items: center; justify-content: flex-start;">Needed (gal)</div>
+                    <div class="fuel-cell value" id="fuel-worst-needed" style="background: rgba(10, 14, 18, 0.94); padding: 6px 10px; font-family: var(--font-data); font-size: 13px; color: #fff; text-align: center; display: flex; align-items: center; justify-content: center;">0.0</div>
+                    <div class="fuel-cell value" id="fuel-2lap-needed" style="background: rgba(10, 14, 18, 0.94); padding: 6px 10px; font-family: var(--font-data); font-size: 13px; color: #fff; text-align: center; display: flex; align-items: center; justify-content: center;">0.0</div>
 
-                    <!-- Per Tank -->
-                    <div class="fuel-projections-cell row-label">Per Tank</div>
-                    <div class="fuel-projections-cell" id="fuel-worst-pertank">0.0</div>
-                    <div class="fuel-projections-cell" id="fuel-2lap-pertank">0.0</div>
-
-                    <!-- To Finish -->
-                    <div class="fuel-projections-cell row-label">To Finish</div>
-                    <div class="fuel-projections-cell" id="fuel-worst-tofinish">0.0</div>
-                    <div class="fuel-projections-cell" id="fuel-2lap-tofinish">0.0</div>
-
-                    <!-- In Tank (Gal) -->
-                    <div class="fuel-projections-cell row-label">In Tank (Gal)</div>
-                    <div class="fuel-projections-cell" id="fuel-worst-intankgal">0.0</div>
-                    <div class="fuel-projections-cell" id="fuel-2lap-intankgal">0.0</div>
-
-                    <!-- Needed -->
-                    <div class="fuel-projections-cell row-label">Needed</div>
-                    <div class="fuel-projections-cell" id="fuel-worst-needed" style="color: var(--neon-red);">0.0</div>
-                    <div class="fuel-projections-cell" id="fuel-2lap-needed" style="color: var(--neon-red);">0.0</div>
-
-                    <!-- Adding -->
-                    <div class="fuel-projections-cell row-label">Adding</div>
-                    <div class="fuel-projections-cell" id="fuel-worst-adding">0.0</div>
-                    <div class="fuel-projections-cell" id="fuel-2lap-adding">0.0</div>
-
-                    <!-- Pit Stops -->
-                    <div class="fuel-projections-cell row-label">Pit Stops</div>
-                    <div class="fuel-projections-cell" id="fuel-worst-pitstops">0</div>
-                    <div class="fuel-projections-cell" id="fuel-2lap-pitstops">0</div>
+                    <!-- Adding (+Safety) -->
+                    <div class="fuel-cell label" style="background: rgba(10, 14, 18, 0.94); padding: 6px 10px; font-family: var(--font-header); font-weight: 600; color: var(--text-muted); font-size: 13px; text-align: left; display: flex; align-items: center; justify-content: flex-start;">Adding (gal)</div>
+                    <div class="fuel-cell value" id="fuel-worst-adding" style="background: rgba(10, 14, 18, 0.94); padding: 6px 10px; font-family: var(--font-data); font-size: 13px; color: #fff; text-align: center; display: flex; align-items: center; justify-content: center;">0.0</div>
+                    <div class="fuel-cell value" id="fuel-2lap-adding" style="background: rgba(10, 14, 18, 0.94); padding: 6px 10px; font-family: var(--font-data); font-size: 13px; color: #fff; text-align: center; display: flex; align-items: center; justify-content: center;">0.0</div>
+                </div>
+                
+                <!-- Bottom Metadata Row: Pit stops & Laps/tank -->
+                <div style="display: flex; justify-content: space-between; font-size: 11px; font-family: var(--font-header); font-weight: 700; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 10px; user-select: none;">
+                    <span>STOPS: <span id="fuel-worst-pitstops" style="color: #fff; font-family: var(--font-data); font-weight: 700; margin-right: 10px;">0</span> (2-LAP: <span id="fuel-2lap-pitstops" style="color: #fff; font-family: var(--font-data); font-weight: 700;">0</span>)</span>
+                    <span>LAPS/TANK: <span id="fuel-worst-pertank" style="color: #fff; font-family: var(--font-data); font-weight: 700; margin-right: 10px;">0.0</span> (2-LAP: <span id="fuel-2lap-pertank" style="color: #fff; font-family: var(--font-data); font-weight: 700;">0.0</span>)</span>
                 </div>
 
-                <div style="font-family: 'Outfit'; font-size: 15px; font-weight: 700; text-align: center; color: #fff; margin-top: 10px;">
-                    FUEL: <span id="fuel-current-gal" style="color: var(--neon-green); font-family: 'Roboto Mono';">0.0</span> / <span id="fuel-max-gal" style="font-family: 'Roboto Mono';">0.0</span> <span style="font-size: 11px; color: var(--text-muted);">gal</span>
+                <!-- Bottom Capacity Text -->
+                <div style="font-family: var(--font-header); font-size: 14px; font-weight: 700; text-align: center; color: #fff; margin-top: auto; padding-top: 5px;">
+                    TANK: <span id="fuel-current-gal" style="color: var(--neon-green); font-family: var(--font-data);">0.0</span> / <span id="fuel-max-gal" style="font-family: var(--font-data);">0.0</span> <span style="font-size: 11px; color: var(--text-muted);">gal</span>
+                </div>
+
+                <!-- Hidden elements required to prevent JS crashes -->
+                <div style="display: none;">
+                    <span id="fuel-2lap-togo">0.0</span>
+                    <span id="fuel-2lap-intank">0.0</span>
+                    <span id="fuel-worst-intankgal">0.0</span>
+                    <span id="fuel-2lap-intankgal">0.0</span>
                 </div>
             </div>
 
