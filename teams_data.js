@@ -1991,6 +1991,13 @@ const teamsData = {
         },
         {
           "date": "Jun 24, 2026",
+          "local": true,
+          "amount": -31500,
+          "category": "expense",
+          "description": "Repaired Fleet: Title Town Ram #35 (+63%)"
+        },
+        {
+          "date": "Jun 24, 2026",
           "description": "Hauler Logistics: Kansas City, KS to Hampton, GA (252 mi round trip)",
           "category": "expense",
           "amount": -2523
@@ -2044,7 +2051,7 @@ const teamsData = {
           "id": "truck-1",
           "make": "RAM",
           "name": "Title Town Ram #35",
-          "condition": 33
+          "condition": 96
         },
         {
           "id": "truck-2",
@@ -2065,7 +2072,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2078042,
+      "balance": 2046542,
       "drivers": {
         "backup": [
           "VACANT",
