@@ -260,6 +260,793 @@
             }
         }
     </style>
+
+    <!-- GEEZER TELEMETRY DEMO STYLES -->
+    <style id="geezer-demo-styles">
+:root {
+    --neon-green: #00ff66;
+    --neon-yellow: #ffff00;
+    --neon-blue: #00ccff;
+    --neon-red: #ff3333;
+    --neon-purple: #d942f5;
+    --bg-dark: rgba(10, 14, 18, 0.84);
+    --glass-border: rgba(0, 255, 102, 0.4);
+    --text-main: #f0f5ff;
+    --text-muted: #7f8a9e;
+    --glass-blur: blur(35px);
+    --font-header: 'Outfit', sans-serif;
+    --font-data: 'Roboto Mono', monospace;
+}
+
+#geezer-demo-container * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+#geezer-demo-container, #geezer-demo-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#geezer-demo-container {
+    background-image: linear-gradient(rgba(10, 12, 18, 0.72), rgba(10, 12, 18, 0.78)), url('assets/car_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: #040507;
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+}
+
+#geezer-demo-container #dashboard-grid {
+    display: grid;
+    grid-template-columns: 410px 1fr 700px;
+    gap: 12px;
+    padding: 12px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#geezer-demo-container .dash-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+}
+
+/* Premium Glowing Glassmorphic Panels */
+#geezer-demo-container .glass-panel {
+    background: var(--bg-dark);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 2px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(0, 255, 102, 0.12), inset 0 2px 4px rgba(255,255,255,0.03);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    padding: 15px 18px;
+}
+
+/* Card titles matching mockup */
+#geezer-demo-container .panel-title {
+    font-family: var(--font-header);
+    font-size: 20px;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Left Column Top: Metadata Rows */
+#geezer-demo-container .meta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+#geezer-demo-container .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.05);
+}
+#geezer-demo-container .meta-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+#geezer-demo-container .meta-label {
+    font-family: var(--font-header);
+    font-size: 15px;
+    color: var(--text-main);
+    font-weight: 500;
+}
+#geezer-demo-container .meta-val {
+    font-family: var(--font-data);
+    font-size: 17px;
+    color: #fff;
+    font-weight: 700;
+}
+
+/* Speedometer Display */
+#geezer-demo-container .speedo-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0 10px 0;
+}
+#geezer-demo-container .speedo-value {
+    font-family: var(--font-data);
+    font-size: 70px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+}
+#geezer-demo-container .speedo-label {
+    font-family: var(--font-header);
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+}
+
+/* Dual Vertical Gauges (Input and RPM) */
+#geezer-demo-container .gauges-layout {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 130px;
+    gap: 25px;
+    margin-bottom: 15px;
+}
+#geezer-demo-container .gauge-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+#geezer-demo-container .gauge-track-container {
+    display: flex;
+    align-items: stretch;
+}
+#geezer-demo-container .vertical-gauge-track {
+    width: 32px;
+    height: 110px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+#geezer-demo-container .vertical-gauge-fill {
+    width: 100%;
+    height: 0%;
+}
+#geezer-demo-container .vertical-gauge-fill.throttle {
+    background: var(--neon-green);
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
+#geezer-demo-container .vertical-gauge-fill.brake {
+    background: var(--neon-red);
+    box-shadow: 0 0 10px rgba(255, 51, 51, 0.4);
+}
+#geezer-demo-container .vertical-gauge-scale {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 110px;
+    font-family: var(--font-data);
+    font-size: 10px;
+    color: var(--text-muted);
+    padding-left: 6px;
+    line-height: 1;
+}
+#geezer-demo-container .gauge-title {
+    font-family: var(--font-header);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+/* Horizontal RPM Input Bar */
+#geezer-demo-container .rpm-bar-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 15px;
+}
+#geezer-demo-container .pedal-bar-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-header);
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+}
+#geezer-demo-container .rpm-bar-track {
+    height: 14px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    overflow: hidden;
+}
+#geezer-demo-container .rpm-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #00ccff 0%, #00ff00 100%);
+    box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+    transition: width 0.05s linear;
+}
+
+/* Water/Oil Temperatures block */
+#geezer-demo-container .engine-temps-block {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+#geezer-demo-container .engine-temp-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+#geezer-demo-container .engine-temp-label {
+    font-family: var(--font-header);
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+}
+#geezer-demo-container .engine-temp-val {
+    font-family: var(--font-data);
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Center Column: Live Standings / Relative List */
+#geezer-demo-container .unified-standings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    overflow-y: auto;
+}
+#geezer-demo-container .standings-row-grid {
+    display: grid;
+    grid-template-columns: 50px 1fr 90px 90px 90px;
+    padding: 6px 10px;
+    align-items: center;
+    font-family: var(--font-data);
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+    border-left: 3px solid transparent;
+}
+#geezer-demo-container .standings-row-grid.header {
+    background: transparent;
+    font-family: var(--font-header);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--neon-green);
+    border-bottom: 2px solid rgba(0, 255, 102, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-left: none;
+    border-radius: 0;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+}
+#geezer-demo-container .standings-row-grid.player {
+    background: rgba(0, 255, 102, 0.14);
+    border-left-color: var(--neon-green);
+    color: var(--neon-green);
+    font-weight: 700;
+}
+#geezer-demo-container .standings-row-grid.player .standings-name {
+    color: var(--neon-green);
+}
+#geezer-demo-container .standings-row-grid .standings-pos {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+#geezer-demo-container .standings-row-grid.player .standings-pos {
+    color: var(--neon-green);
+}
+#geezer-demo-container .standings-row-grid .standings-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+    padding-right: 15px;
+}
+#geezer-demo-container .standings-row-grid .standings-val {
+    text-align: right;
+    color: #fff;
+}
+#geezer-demo-container .standings-row-grid .standings-val.best {
+    color: var(--neon-purple);
+}
+
+/* Center Bottom: Lap Times and delta chart */
+#geezer-demo-container .lap-times-layout {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+#geezer-demo-container .lap-times-text-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+#geezer-demo-container .lap-times-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#geezer-demo-container .lap-times-label {
+    font-family: var(--font-header);
+    font-size: 15px;
+    color: var(--text-muted);
+}
+#geezer-demo-container .lap-times-value {
+    font-family: var(--font-data);
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+#geezer-demo-container .lap-times-value.best {
+    color: var(--neon-green);
+}
+#geezer-demo-container .lap-times-value.delta-fast {
+    color: var(--neon-green);
+}
+#geezer-demo-container .lap-times-value.delta-slow {
+    color: var(--neon-red);
+}
+#geezer-demo-container .delta-visual-container {
+    width: 140px;
+    height: 90px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 6px;
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    padding: 8px;
+}
+#geezer-demo-container .delta-visual-bar {
+    width: 16px;
+    background: var(--neon-green);
+    border-radius: 2px 2px 0 0;
+    min-height: 2px;
+}
+#geezer-demo-container .delta-visual-bar.slow {
+    background: var(--neon-red);
+    border-radius: 0 0 2px 2px;
+}
+
+/* Right Column Top: Tire Grid Mockup */
+#geezer-demo-container .tires-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+    flex: 1;
+}
+#geezer-demo-container .tire-corner-card {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+#geezer-demo-container .tire-graphics {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+#geezer-demo-container .tire-title {
+    font-family: var(--font-header);
+    font-weight: 900;
+    font-size: 14px;
+    color: #fff;
+    width: 18px;
+}
+#geezer-demo-container .tire-grid-data {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    justify-content: space-around;
+}
+#geezer-demo-container .tire-data-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    min-width: 30px;
+}
+#geezer-demo-container .tire-label {
+    font-family: var(--font-header);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+#geezer-demo-container .tire-wear {
+    font-family: var(--font-data);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--neon-green);
+}
+#geezer-demo-container .tire-wear.wear-warn {
+    color: var(--neon-yellow);
+}
+#geezer-demo-container .tire-wear.wear-danger {
+    color: var(--neon-red);
+}
+#geezer-demo-container .tire-temp {
+    font-family: var(--font-data);
+    font-size: 11px;
+    color: #fff;
+    font-weight: 600;
+}
+#geezer-demo-container .tire-svg {
+    filter: drop-shadow(0 0 4px rgba(0, 255, 102, 0.3));
+    width: 26px;
+    height: 42px;
+    transition: all 0.3s ease;
+}
+
+/* Fuel projections table */
+#geezer-demo-container .fuel-projections-table {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr;
+    grid-template-rows: repeat(9, 1fr);
+    gap: 1px;
+    background: rgba(0, 255, 102, 0.25);
+    border: 1.5px solid rgba(0, 255, 102, 0.4);
+    border-radius: 6px;
+    overflow: hidden;
+    flex: 1;
+}
+#geezer-demo-container .fuel-projections-cell {
+    background: rgba(10, 14, 18, 0.94);
+    padding: 5px 8px;
+    font-family: var(--font-data);
+    font-size: 13px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#geezer-demo-container .fuel-projections-cell.header {
+    font-family: var(--font-header);
+    font-weight: 700;
+    color: var(--neon-green);
+    font-size: 12px;
+    text-transform: uppercase;
+    background: rgba(0, 255, 102, 0.05);
+}
+#geezer-demo-container .fuel-projections-cell.row-label {
+    font-family: var(--font-header);
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: left;
+    justify-content: flex-start;
+}
+
+/* Pit Controls */
+#geezer-demo-container .pit-controls-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+#geezer-demo-container .brake-bias-slider-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+#geezer-demo-container .brake-bias-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-header);
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+}
+#geezer-demo-container .brake-bias-slider-track {
+    height: 10px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+#geezer-demo-container .brake-bias-slider-fill {
+    height: 100%;
+    background: var(--neon-green);
+    box-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+    width: 50%;
+    transition: width 0.1s ease;
+}
+#geezer-demo-container .pit-checkboxes-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+#geezer-demo-container .pit-custom-check {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #fff;
+    font-family: var(--font-header);
+    font-weight: 600;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+#geezer-demo-container .pit-custom-check:hover {
+    border-color: var(--neon-green);
+    background: rgba(0, 255, 102, 0.05);
+}
+#geezer-demo-container .pit-custom-check input {
+    margin-right: 8px;
+    accent-color: var(--neon-green);
+    width: 14px;
+    height: 14px;
+}
+
+
+#geezer-demo-container #settings-drawer {
+    display: none;
+    position: absolute;
+    top: 55px;
+    right: 20px;
+    width: 320px;
+    background: rgba(8, 9, 13, 0.98);
+    border: 2px solid var(--neon-green);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    z-index: 1400;
+    flex-direction: column;
+    gap: 12px;
+    backdrop-filter: blur(20px);
+}
+
+/* Flag border override classes */
+#geezer-demo-container .glass-panel.theme-green {
+    border-color: rgba(0, 255, 102, 0.8) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(0, 255, 102, 0.3) !important;
+}
+#geezer-demo-container .glass-panel.theme-yellow {
+    border-color: rgba(255, 255, 0, 0.8) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(255, 255, 0, 0.3) !important;
+}
+#geezer-demo-container .glass-panel.theme-red {
+    border-color: rgba(255, 51, 51, 0.8) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(255, 51, 51, 0.3) !important;
+}
+#geezer-demo-container .glass-panel.theme-blue {
+    border-color: rgba(0, 204, 255, 0.8) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(0, 204, 255, 0.3) !important;
+}
+#geezer-demo-container .glass-panel.theme-white {
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(255, 255, 255, 0.3) !important;
+}
+#geezer-demo-container .glass-panel.theme-orange {
+    border-color: rgba(255, 136, 0, 0.8) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(255, 136, 0, 0.3) !important;
+}
+#geezer-demo-container .glass-panel.theme-checkered {
+    border-style: dashed;
+    border-color: #ffffff !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(255, 255, 255, 0.4) !important;
+}
+#geezer-demo-container .glass-panel.theme-black {
+    border-color: #000000 !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75) !important;
+}
+#geezer-demo-container .incident-warn {
+    border-color: var(--neon-yellow) !important;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.3) !important;
+}
+#geezer-demo-container .incident-danger {
+    border-color: var(--neon-red) !important;
+    box-shadow: 0 0 20px rgba(255, 51, 51, 0.5) !important;
+}
+#geezer-demo-container .danger-strobe {
+    animation: strobe-red-danger 0.3s infinite !important;
+    border-color: red !important;
+    box-shadow: 0 0 20px red !important;
+}
+@keyframes strobe-red-danger {
+    0%, 100% { background: rgba(255, 0, 0, 0.6) !important; color: white !important; }
+    50% { background: rgba(0, 0, 0, 0.6) !important; color: red !important; }
+}
+
+/* VR Overlay Mode */
+#geezer-demo-container body.vr-mode {
+    background: #000000 !important;
+    background-image: none !important;
+}
+#geezer-demo-container body.vr-mode .glass-panel {
+    background: #000000 !important;
+    box-shadow: none !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+}
+#geezer-demo-container body.vr-mode .glass-panel.theme-green {
+#geezer-demo-container body.vr-mode .glass-panel.theme-yellow {
+#geezer-demo-container body.vr-mode .glass-panel.theme-red {
+
+/* Custom Scale-Aware Resizers */
+#geezer-demo-container .resizer-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    cursor: ew-resize;
+    z-index: 100;
+}
+#geezer-demo-container .resizer-bottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 6px;
+    cursor: ns-resize;
+    z-index: 100;
+}
+#geezer-demo-container .resizer-corner {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    cursor: nwse-resize;
+    z-index: 101;
+}
+
+/* Dragging visual helpers */
+#geezer-demo-container .module.dragging {
+    opacity: 0.82;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 255, 102, 0.3) !important;
+    transform: scale(1.015);
+    transition: none !important;
+}
+#geezer-demo-container .module.placeholder {
+    border: 2px dashed var(--neon-blue) !important;
+    background: rgba(0, 204, 255, 0.04) !important;
+    border-radius: 16px;
+    box-shadow: none !important;
+}
+
+/* Draggable headers cursor */
+#geezer-demo-container .panel-title, #geezer-demo-container .panel-header-row {
+    cursor: grab;
+}
+#geezer-demo-container .panel-title:active, #geezer-demo-container .panel-header-row:active {
+    cursor: grabbing;
+}
+
+/* Dashboard Quick Actions Bar and Buttons */
+#geezer-demo-container .action-buttons-bar {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+#geezer-demo-container .glass-button {
+    flex: 1;
+    background: var(--bg-dark);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 2px solid var(--glass-border);
+    border-radius: 10px;
+    color: #fff;
+    font-family: var(--font-header);
+    font-size: 11px;
+    font-weight: 900;
+    padding: 12px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255,255,255,0.03);
+}
+#geezer-demo-container .glass-button:hover {
+    background: rgba(0, 255, 102, 0.12);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.25), inset 0 0 5px rgba(0, 255, 102, 0.1);
+    color: var(--neon-green);
+    transform: translateY(-1.5px);
+}
+#geezer-demo-container .glass-button:active {
+    transform: translateY(0);
+    background: rgba(0, 255, 102, 0.22);
+}
+
+/* Pit Speed Limit Display Warning States */
+#geezer-demo-container .pit-limit-safe {
+    background: rgba(0, 255, 102, 0.12) !important;
+    border-color: var(--neon-green) !important;
+    color: var(--neon-green) !important;
+    text-shadow: 0 0 10px var(--neon-green) !important;
+}
+#geezer-demo-container .pit-limit-warn {
+    background: rgba(255, 255, 0, 0.12) !important;
+    border-color: var(--neon-yellow) !important;
+    color: var(--neon-yellow) !important;
+    text-shadow: 0 0 10px var(--neon-yellow) !important;
+}
+#geezer-demo-container .pit-limit-danger {
+    animation: flash-danger 0.5s infinite;
+    border-color: var(--neon-red) !important;
+    color: var(--neon-red) !important;
+    text-shadow: 0 0 15px var(--neon-red) !important;
+}
+@keyframes flash-danger {
+    0% { background: rgba(255, 51, 51, 0.5); }
+    50% { background: rgba(255, 51, 51, 0.1); }
+    100% { background: rgba(255, 51, 51, 0.5); }
+}
+
+/* Center Column Pit Checkbox Grid */
+#geezer-demo-container .pit-custom-check-center {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    font-family: var(--font-header);
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+#geezer-demo-container .pit-custom-check-center:hover {
+    border-color: var(--neon-green);
+    background: rgba(0, 255, 102, 0.08);
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.15);
+}
+#geezer-demo-container .pit-custom-check-center input {
+    margin-right: 10px;
+    accent-color: var(--neon-green);
+    transform: scale(1.3);
+}
+
+    </style>
 </head>
 <body>
 
@@ -331,6 +1118,7 @@
             </div>
 
             <button id="verify-btn" class="btn-verify" onclick="verifyDriverId()">Verify & Unlock Download</button>
+            <button class="btn-download" style="margin-top: 10px; border-color: #ff9800; color: #ff9800; background: rgba(255, 152, 0, 0.02); font-weight: 900; font-family: var(--font-heading); text-transform: uppercase;" onclick="launchGeezerDemo()">Launch Visual Demo</button>
             
             <div class="spinner" id="verify-spinner"></div>
             <div id="verification-status" class="status-msg"></div>
@@ -548,9 +1336,932 @@
             }
         }
 
+
+        // ================= GEEZER APP DEMO ENGINE =================
+        let demoInterval = null;
+        let demoTime = 0;
+        let isDemoActive = false;
+        let stintLaps = 14;
+        let fuelInTank = 12.4;
+
+        function launchGeezerDemo() {
+            isDemoActive = true;
+            document.body.style.overflow = "hidden";
+            const container = document.getElementById("geezer-demo-container");
+            container.style.display = "block";
+            
+            // Set initial static values
+            document.getElementById("val-trackName").textContent = "Oswego Speedway";
+            document.getElementById("val-rel-remaining").textContent = "50 Laps";
+            document.getElementById("val-best-lap").textContent = "0:14.285";
+            document.getElementById("val-max-incidents").textContent = "17";
+            document.getElementById("val-incidents").textContent = "2";
+            document.getElementById("val-trackTemp").textContent = "73";
+            document.getElementById("val-airTemp").textContent = "73";
+            document.getElementById("val-brakeBias").textContent = "61.5";
+            document.getElementById("val-bias-slider").style.width = "61.5%";
+            
+            // Initialize standalone scale canvas
+            scaleDemoCanvas();
+            window.addEventListener('resize', scaleDemoCanvas);
+
+            // Mock Standing List (Leaderboard)
+            const leadersList = document.getElementById("leaders-list");
+            leadersList.innerHTML = `
+                <div class="standings-row-grid">
+                    <span class="standings-pos">1</span>
+                    <span class="standings-name">Jonathon Platt</span>
+                    <span class="standings-val best" style="color:var(--neon-purple);">14.230</span>
+                    <span class="standings-val">14.280</span>
+                    <span class="standings-val">Leader</span>
+                </div>
+                <div class="standings-row-grid">
+                    <span class="standings-pos">2</span>
+                    <span class="standings-name">Nick Nickerson</span>
+                    <span class="standings-val best" style="color:var(--neon-purple);">14.256</span>
+                    <span class="standings-val">14.295</span>
+                    <span class="standings-val">+0.14s</span>
+                </div>
+                <div class="standings-row-grid">
+                    <span class="standings-pos">3</span>
+                    <span class="standings-name">Kevin Foster</span>
+                    <span class="standings-val best" style="color:var(--neon-purple);">14.267</span>
+                    <span class="standings-val">14.301</span>
+                    <span class="standings-val">+0.25s</span>
+                </div>
+            `;
+
+            demoTime = 0;
+            fuelInTank = 12.4;
+            stintLaps = 14;
+            
+            demoInterval = setInterval(runGeezerDemoLoop, 100);
+        }
+
+        function stopGeezerDemo() {
+            isDemoActive = false;
+            document.body.style.overflow = "auto";
+            document.getElementById("geezer-demo-container").style.display = "none";
+            if (demoInterval) clearInterval(demoInterval);
+            window.removeEventListener('resize', scaleDemoCanvas);
+            
+            document.body.style.zoom = 1;
+            document.body.style.width = "auto";
+            document.body.style.height = "auto";
+        }
+
+        function scaleDemoCanvas() {
+            if (!isDemoActive) return;
+            let scaleX = window.innerWidth / 1920;
+            let scaleY = window.innerHeight / 1080;
+            let scale = Math.min(scaleX, scaleY);
+            
+            const container = document.getElementById("geezer-demo-container");
+            container.style.zoom = scale;
+            container.style.width = (window.innerWidth / scale) + "px";
+            container.style.height = (window.innerHeight / scale) + "px";
+        }
+
+        function runGeezerDemoLoop() {
+            demoTime += 0.1;
+            
+            // Clock time
+            const now = new Date();
+            document.getElementById("val-clock").textContent = now.toLocaleTimeString('en-US', { hour12: true });
+
+            // Cycle time: 40 seconds loop
+            // 0s-22s: Driving/racing
+            // 22s-30s: Pitting
+            // 30s-40s: Re-accelerating
+            const cycle = demoTime % 40;
+            
+            const relativePanel = document.getElementById("mod-relative");
+            const pitPanel = document.getElementById("mod-pitroad-center");
+            
+            const valSpeed = document.getElementById("val-speed");
+            const valGear = document.getElementById("val-gear");
+            const valRpm = document.getElementById("val-rpm");
+            const valRpmBar = document.getElementById("val-rpm-bar");
+            const valThrottle = document.getElementById("val-throttle");
+            const valBrake = document.getElementById("val-brake");
+            
+            if (cycle < 22) {
+                // RACING MODE
+                relativePanel.style.display = "flex";
+                pitPanel.style.display = "none";
+                
+                const lapPos = (demoTime % 14) / 14; // Position in lap (0 to 1)
+                
+                let speed = 0;
+                let gear = "N";
+                let rpm = 0;
+                let throttle = 0;
+                let brake = 0;
+                
+                if (lapPos < 0.35) {
+                    // Straightaway acceleration
+                    throttle = 100;
+                    brake = 0;
+                    speed = Math.floor(130 + (lapPos / 0.35) * 60); // 130 -> 190 MPH
+                    gear = speed > 165 ? "5" : "4";
+                    rpm = Math.floor(6500 + ((speed % 35) / 35) * 2000);
+                } else if (lapPos < 0.6) {
+                    // Braking and turning
+                    throttle = 0;
+                    brake = Math.floor(40 + ((lapPos - 0.35) / 0.25) * 35); // 40% to 75%
+                    speed = Math.floor(190 - ((lapPos - 0.35) / 0.25) * 70); // 190 -> 120 MPH
+                    gear = speed < 140 ? "3" : "4";
+                    rpm = Math.floor(8200 - ((lapPos - 0.35) / 0.25) * 3000);
+                } else {
+                    // Corner exit acceleration
+                    throttle = Math.floor(30 + ((lapPos - 0.6) / 0.4) * 70); // 30% -> 100%
+                    brake = 0;
+                    speed = Math.floor(120 + ((lapPos - 0.6) / 0.4) * 35); // 120 -> 155 MPH
+                    gear = "4";
+                    rpm = Math.floor(5800 + ((speed - 120) / 35) * 1500);
+                }
+                
+                valSpeed.textContent = speed;
+                valGear.textContent = gear;
+                valGear.style.color = "var(--neon-blue)";
+                valRpm.textContent = rpm;
+                valRpmBar.style.width = `${(rpm / 9000) * 100}%`;
+                valThrottle.style.height = `${throttle}%`;
+                valBrake.style.height = `${brake}%`;
+                
+                // Incidents, lap, and stint laps
+                const lapNumber = Math.floor(demoTime / 14) + 12;
+                document.getElementById("val-lap").textContent = lapNumber;
+                document.getElementById("val-current-stint").textContent = stintLaps;
+                document.getElementById("lap-stint").textContent = stintLaps;
+                
+                // Slow fuel consumption
+                fuelInTank = Math.max(1.5, 12.4 - (demoTime * 0.05));
+                document.getElementById("fuel-current-gal").textContent = fuelInTank.toFixed(2);
+                document.getElementById("fuel-max-gal").textContent = "18.5";
+                
+                // Fuel projections calculations
+                document.getElementById("fuel-worst-togo").textContent = "28.0";
+                document.getElementById("fuel-2lap-togo").textContent = "28.0";
+                
+                const fuelNeeded = (28 * 0.45) - fuelInTank; // 0.45 gal/lap
+                document.getElementById("fuel-worst-needed").textContent = fuelNeeded.toFixed(2);
+                document.getElementById("fuel-2lap-needed").textContent = fuelNeeded.toFixed(2);
+                
+                document.getElementById("fuel-worst-pitstops").textContent = "1";
+                document.getElementById("fuel-2lap-pitstops").textContent = "1";
+                
+                // Live lap timer
+                const lapTimeMs = (demoTime % 14) * 1000;
+                const lapTimeMin = Math.floor(lapTimeMs / 60000);
+                const lapTimeSec = Math.floor((lapTimeMs % 60000) / 1000);
+                const lapTimeSub = Math.floor((lapTimeMs % 1000));
+                document.getElementById("val-current-lap").textContent = `${lapTimeMin}:${String(lapTimeSec).padStart(2, '0')}.${String(lapTimeSub).padStart(3, '0')}`;
+                
+                // Tires wear down slowly
+                const wearLF = (92 - (demoTime * 0.08)).toFixed(0);
+                const wearRF = (87 - (demoTime * 0.12)).toFixed(0);
+                const wearLR = (94 - (demoTime * 0.05)).toFixed(0);
+                const wearRR = (89 - (demoTime * 0.09)).toFixed(0);
+                
+                document.getElementById("val-lf-wear-i").textContent = `${wearLF}%`;
+                document.getElementById("val-lf-wear-m").textContent = `${wearLF}%`;
+                document.getElementById("val-lf-wear-o").textContent = `${wearLF}%`;
+                document.getElementById("val-rf-wear-i").textContent = `${wearRF}%`;
+                document.getElementById("val-rf-wear-m").textContent = `${wearRF}%`;
+                document.getElementById("val-rf-wear-o").textContent = `${wearRF}%`;
+                document.getElementById("val-lr-wear-i").textContent = `${wearLR}%`;
+                document.getElementById("val-lr-wear-m").textContent = `${wearLR}%`;
+                document.getElementById("val-lr-wear-o").textContent = `${wearLR}%`;
+                document.getElementById("val-rr-wear-i").textContent = `${wearRR}%`;
+                document.getElementById("val-rr-wear-m").textContent = `${wearRR}%`;
+                document.getElementById("val-rr-wear-o").textContent = `${wearRR}%`;
+
+                // Set tire SVGs color
+                document.getElementById("svg-lf").querySelector("rect").setAttribute("stroke", wearLF > 70 ? "var(--neon-green)" : "var(--neon-yellow)");
+                document.getElementById("svg-rf").querySelector("rect").setAttribute("stroke", wearRF > 70 ? "var(--neon-green)" : "var(--neon-yellow)");
+                document.getElementById("svg-lr").querySelector("rect").setAttribute("stroke", wearLR > 70 ? "var(--neon-green)" : "var(--neon-yellow)");
+                document.getElementById("svg-rr").querySelector("rect").setAttribute("stroke", wearRR > 70 ? "var(--neon-green)" : "var(--neon-yellow)");
+
+                // Gaps
+                const gapSean = (1.42 + Math.sin(demoTime) * 0.08).toFixed(2);
+                const gapNicole = (2.15 + Math.cos(demoTime) * 0.12).toFixed(2);
+                const gapWes = (3.58 - Math.sin(demoTime) * 0.05).toFixed(2);
+
+                document.getElementById("relative-list").innerHTML = `
+                    <div class="standings-row-grid">
+                        <span class="standings-pos">15</span>
+                        <span class="standings-name">Dionte Rader</span>
+                        <span class="standings-val best">14.391</span>
+                        <span class="standings-val">14.412</span>
+                        <span class="standings-val" style="color:var(--neon-red);">-1.24s</span>
+                    </div>
+                    <div class="standings-row-grid player">
+                        <span class="standings-pos">16</span>
+                        <span class="standings-name">Bill Harkins (YOU)</span>
+                        <span class="standings-val best">14.285</span>
+                        <span class="standings-val">14.305</span>
+                        <span class="standings-val">PIT IN: 8L</span>
+                    </div>
+                    <div class="standings-row-grid">
+                        <span class="standings-pos">17</span>
+                        <span class="standings-name">Sean Britt</span>
+                        <span class="standings-val best">14.312</span>
+                        <span class="standings-val">14.312</span>
+                        <span class="standings-val" style="color:var(--neon-green);">+${gapSean}s</span>
+                    </div>
+                    <div class="standings-row-grid">
+                        <span class="standings-pos">18</span>
+                        <span class="standings-name">Nicole Kriesel</span>
+                        <span class="standings-val best">14.332</span>
+                        <span class="standings-val">14.351</span>
+                        <span class="standings-val" style="color:var(--neon-green);">+${gapNicole}s</span>
+                    </div>
+                    <div class="standings-row-grid">
+                        <span class="standings-pos">19</span>
+                        <span class="standings-name">Wes Fuller</span>
+                        <span class="standings-val best">14.340</span>
+                        <span class="standings-val">14.362</span>
+                        <span class="standings-val" style="color:var(--neon-green);">+${gapWes}s</span>
+                    </div>
+                `;
+            } else if (cycle < 30) {
+                // PIT ROAD MODE
+                relativePanel.style.display = "none";
+                pitPanel.style.display = "flex";
+                
+                const pitPos = (cycle - 22) / 8;
+                
+                let speed = 0;
+                let gear = "N";
+                let throttle = 0;
+                let brake = 0;
+                let rpm = 0;
+                
+                if (pitPos < 0.2) {
+                    speed = 43;
+                    gear = "2";
+                    throttle = 15;
+                    brake = 0;
+                    rpm = 3200;
+                    document.getElementById("pit-speed-box").style.borderColor = "var(--neon-green)";
+                    document.getElementById("pit-speed-box").style.background = "rgba(0, 255, 102, 0.05)";
+                } else if (pitPos < 0.7) {
+                    speed = 0;
+                    gear = "N";
+                    throttle = 0;
+                    brake = 100;
+                    rpm = 900;
+                    
+                    fuelInTank = Math.min(18.5, 4.2 + (pitPos - 0.2) * 2 * 14.3);
+                    document.getElementById("fuel-current-gal").textContent = fuelInTank.toFixed(2);
+                    
+                    document.getElementById("val-lf-wear-i").textContent = "100%";
+                    document.getElementById("val-lf-wear-m").textContent = "100%";
+                    document.getElementById("val-lf-wear-o").textContent = "100%";
+                    document.getElementById("val-rf-wear-i").textContent = "100%";
+                    document.getElementById("val-rf-wear-m").textContent = "100%";
+                    document.getElementById("val-rf-wear-o").textContent = "100%";
+                    
+                    document.getElementById("svg-lf").querySelector("rect").setAttribute("stroke", "var(--neon-green)");
+                    document.getElementById("svg-rf").querySelector("rect").setAttribute("stroke", "var(--neon-green)");
+                    document.getElementById("svg-lr").querySelector("rect").setAttribute("stroke", "var(--neon-green)");
+                    document.getElementById("svg-rr").querySelector("rect").setAttribute("stroke", "var(--neon-green)");
+                    
+                    document.getElementById("pit-speed-box").style.borderColor = "var(--neon-yellow)";
+                    document.getElementById("pit-speed-box").style.background = "rgba(255, 255, 0, 0.03)";
+                } else {
+                    speed = 28;
+                    gear = "1";
+                    throttle = 45;
+                    brake = 0;
+                    rpm = 4500;
+                    
+                    document.getElementById("pit-speed-box").style.borderColor = "var(--neon-green)";
+                    document.getElementById("pit-speed-box").style.background = "rgba(0, 255, 102, 0.05)";
+                    stintLaps = 0;
+                }
+                
+                valSpeed.textContent = speed;
+                document.getElementById("val-pit-speed").textContent = speed;
+                valGear.textContent = gear;
+                document.getElementById("val-pit-gear").textContent = gear;
+                valRpm.textContent = rpm;
+                valRpmBar.style.width = `${(rpm / 9000) * 100}%`;
+                valThrottle.style.height = `${throttle}%`;
+                valBrake.style.height = `${brake}%`;
+            } else {
+                // ACCELERATING OUT
+                relativePanel.style.display = "flex";
+                pitPanel.style.display = "none";
+                
+                const exitPos = (cycle - 30) / 10;
+                
+                let speed = Math.floor(45 + exitPos * 90);
+                let gear = speed > 105 ? "4" : (speed > 70 ? "3" : "2");
+                let throttle = 100;
+                let brake = 0;
+                let rpm = Math.floor(5000 + ((speed % 35) / 35) * 3000);
+                
+                valSpeed.textContent = speed;
+                valGear.textContent = gear;
+                valRpm.textContent = rpm;
+                valRpmBar.style.width = `${(rpm / 9000) * 100}%`;
+                valThrottle.style.height = `${throttle}%`;
+                valBrake.style.height = `${brake}%`;
+                
+                if (stintLaps === 0) stintLaps = 1;
+            }
+        }
+
         function trackDownload() {
             console.log("Installer download triggered.");
         }
+
     </script>
+
+    <!-- GEEZER APP DEMO CONTAINER -->
+    <div id="geezer-demo-container" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-color: #040507; overflow: hidden; background-image: linear-gradient(rgba(10, 12, 18, 0.72), rgba(10, 12, 18, 0.78)), url('assets/car_bg.jpg'); background-size: cover; background-position: center;">
+        <!-- Close Bar -->
+        <div style="position: absolute; top: 15px; right: 20px; z-index: 10000; display: flex; gap: 15px; align-items: center; user-select: none;">
+            <span style="color: #ff9800; font-family: 'Outfit'; font-weight: 900; text-transform: uppercase; font-size: 0.85rem; background: rgba(255, 152, 0, 0.1); border: 1px solid #ff9800; padding: 6px 12px; border-radius: 4px; letter-spacing: 1px; font-style: italic;">Visual Demo Active</span>
+            <button onclick="stopGeezerDemo()" style="padding: 8px 18px; background: #ff1744; border: 1.5px solid #ff1744; color: #fff; font-family: 'Outfit'; font-weight: 900; cursor: pointer; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85rem; font-style: italic; transition: 0.2s;" onmouseover="this.style.background='transparent'; this.style.color='#ff1744';" onmouseout="this.style.background='#ff1744'; this.style.color='#fff';">Exit Demo</button>
+        </div>
+        
+        <!-- Floating Settings Panel Drawer -->
+    <div id="settings-drawer" class="glass-panel">
+        <div style="font-family: 'Outfit'; font-size: 14px; font-weight: 900; color: var(--neon-blue); letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 10px; text-transform: uppercase;">DASHBOARD SETTINGS</div>
+        
+        <!-- Interactive Logo Size Controller -->
+        <div style="font-family: 'Outfit'; font-size: 11px; font-weight: 800; color: #FFF; margin-top: 5px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;">LOGO SIZE</div>
+        <div style="display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 6px; border: 1.5px solid rgba(255,255,255,0.06);">
+            <input type="range" id="logo-size-slider" min="20" max="150" value="78" style="flex: 1; accent-color: var(--neon-green); cursor: pointer;">
+            <span id="logo-size-val" style="font-family: 'Roboto Mono'; font-size: 13px; color: var(--neon-green); font-weight: 700; width: 38px; text-align: right;">78%</span>
+        </div>
+    </div>
+<!-- QR Modal -->
+    <div id="qr-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; flex-direction: column; backdrop-filter: blur(10px);">
+        <div class="glass-panel" style="padding: 40px; border-radius: 20px; display: flex; flex-direction: column; align-items: center; background: rgba(20, 20, 25, 0.95); max-width: 500px; text-align: center; border: 2px solid var(--neon-green);">
+            <h2 style="font-family: 'Outfit'; font-size: 31px; margin-bottom: 10px; color: #fff;">SCAN TO CONNECT</h2>
+            <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 30px;">Point your phone camera at this code to load the dashboard.</p>
+            <div id="qrcode" style="background: #FFF; padding: 15px; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);"></div>
+            <button id="btn-close-qr" style="padding: 12px 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: #FFF; font-family: 'Inter'; font-weight: 800; border-radius: 8px; cursor: pointer; transition: all 0.2s;">CLOSE</button>
+        </div>
+    </div>
+<!-- VR Popout Modal -->
+    <div id="vr-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; flex-direction: column; backdrop-filter: blur(10px);">
+        <div class="glass-panel" style="padding: 40px; border-radius: 20px; display: flex; flex-direction: column; align-items: center; background: rgba(20, 20, 25, 0.95); max-width: 600px; text-align: center; border: 2px solid var(--neon-green);">
+            <h2 style="font-family: 'Outfit'; font-size: 31px; margin-bottom: 10px; color: #fff;">VR OVERLAY MANAGER</h2>
+            <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 30px;">Choose how you want to display the dashboard in your VR headset.</p>
+            <button id="btn-vr-full" style="width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(0, 255, 102, 0.15); border: 1px solid var(--neon-green); color: #FFF; font-family: 'Inter'; font-weight: 800; font-size: 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s;">ENABLE FULL-SCREEN VR MODE</button>
+            <button id="btn-close-vr" style="padding: 12px 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: #FFF; font-family: 'Inter'; font-weight: 800; border-radius: 8px; cursor: pointer; transition: all 0.2s;">CLOSE</button>
+        </div>
+    </div>
+<!-- Stint Analytics Modal -->
+    <div id="analytics-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.95); z-index: 2500; justify-content: center; align-items: center; flex-direction: column; backdrop-filter: blur(15px);">
+        <div class="glass-panel" style="padding: 40px; border-radius: 20px; display: flex; flex-direction: column; align-items: center; background: rgba(20, 20, 25, 0.95); width: 80%; height: 80%; border: 2px solid var(--neon-green); overflow: hidden;">
+            <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-family: 'Outfit'; font-size: 31px; color: #fff; margin: 0;">STINT ANALYTICS</h2>
+                <button id="btn-close-analytics" style="padding: 10px 30px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: #FFF; font-family: 'Inter'; font-weight: 800; border-radius: 8px; cursor: pointer; transition: all 0.2s;">CLOSE</button>
+            </div>
+            <div style="flex: 1; width: 100%; display: flex; gap: 20px; min-height: 0;">
+                <div style="flex: 3; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); padding: 20px; position: relative; min-height: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center;">
+                        <button id="btn-graph-pace" style="padding: 8px 20px; background: rgba(0, 229, 255, 0.2); border: 1px solid var(--neon-blue); color: #FFF; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">LAP PACE</button>
+                        <button id="btn-graph-fuel" style="padding: 8px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2); color: #AAA; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">FUEL USAGE</button>
+                    </div>
+                    <canvas id="analytics-chart" style="width: 100%; flex: 1;"></canvas>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 15px;">
+                    <div style="display: flex; gap: 15px;">
+                        <div class="glass-panel" style="padding: 15px; border-radius: 12px; text-align: center; flex: 1; border: 1px solid rgba(255,255,255,0.05);">
+                            <span style="color: var(--text-muted); font-size: 12px; font-weight: 800; display: block; margin-bottom: 5px;">AVERAGE LAP</span>
+                            <span id="stat-avg-lap" style="font-family: 'Outfit'; font-size: 31px; color: #fff; font-weight: 900;">--:--.---</span>
+                        </div>
+                        <div class="glass-panel" style="padding: 15px; border-radius: 12px; text-align: center; flex: 1; border: 1px solid rgba(255,255,255,0.05);">
+                            <span style="color: var(--text-muted); font-size: 12px; font-weight: 800; display: block; margin-bottom: 5px;">CONSISTENCY</span>
+                            <span id="stat-consistency" style="font-family: 'Outfit'; font-size: 31px; color: var(--neon-green); font-weight: 900; text-shadow: 0 0 10px var(--neon-green);">--%</span>
+                        </div>
+                    </div>
+                    <div class="glass-panel" style="padding: 15px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.05);">
+                        <span style="color: var(--text-muted); font-size: 12px; font-weight: 800; display: block; margin-bottom: 5px;">LAPS RECORDED</span>
+                        <span id="stat-laps-count" style="font-family: 'Outfit'; font-size: 41px; color: var(--neon-blue); font-weight: 900; line-height: 1;">0</span>
+                    </div>
+                    <div class="glass-panel" style="padding: 20px; border-radius: 12px; flex: 1; overflow-y: auto; text-align: left; border: 1px solid rgba(255,255,255,0.05);">
+                        <span style="color: var(--text-muted); font-size: 12px; font-weight: 800; display: block; margin-bottom: 10px; text-align: center;">COMPARE STINTS</span>
+                        <div id="stint-toggles" style="display: flex; flex-direction: column; gap: 10px;">
+                            <span style="color: #666; font-size: 12px; text-align: center; display: block;">No past stints yet</span>
+                        </div>
+                    </div>
+                    <button onclick="clearAnalytics()" style="margin-top: auto; padding: 15px; background: rgba(255,0,0,0.2); border: 1px solid rgba(255,0,0,0.5); color: #FFF; font-family: 'Inter'; font-weight: 800; border-radius: 8px; cursor: pointer; transition: all 0.2s;">CLEAR ALL DATA</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div id="dashboard-grid">
+        <!-- COLUMN 1: METADATA & ENGINE DASHBOARD -->
+        <div class="dash-column">
+            <!-- Dashboard Engine Panel -->
+            <div class="glass-panel module" id="mod-vitals" style="flex: 1;">
+                <div class="panel-title">Dashboard</div>
+                
+                <!-- Speedometer -->
+                <div class="speedo-display" style="flex-direction: row; gap: 30px; align-items: center; justify-content: center; margin: 5px 0 10px 0;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <span class="speedo-value" id="val-speed">0</span>
+                        <span class="speedo-label">MPH</span>
+                    </div>
+                    <div style="width: 2px; height: 60px; background: rgba(255,255,255,0.15);"></div>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <span class="speedo-value" id="val-gear" style="color: var(--neon-blue);">N</span>
+                        <span class="speedo-label">GEAR</span>
+                    </div>
+                </div>
+
+                <!-- Dual Vertical Input Traces (Brake and Throttle) -->
+                <div class="gauges-layout">
+                    <!-- Brake Trace (Left) -->
+                    <div class="gauge-column">
+                        <div class="gauge-track-container">
+                            <div class="vertical-gauge-track">
+                                <div class="vertical-gauge-fill brake" id="val-brake" style="height: 0%;"></div>
+                            </div>
+                            <div class="vertical-gauge-scale">
+                                <span>100%</span>
+                                <span>80%</span>
+                                <span>60%</span>
+                                <span>40%</span>
+                                <span>20%</span>
+                                <span>0%</span>
+                            </div>
+                        </div>
+                        <span class="gauge-title">Brake</span>
+                    </div>
+
+                    <!-- Throttle Trace (Right) -->
+                    <div class="gauge-column">
+                        <div class="gauge-track-container">
+                            <div class="vertical-gauge-track">
+                                <div class="vertical-gauge-fill throttle" id="val-throttle" style="height: 0%;"></div>
+                            </div>
+                            <div class="vertical-gauge-scale">
+                                <span>100%</span>
+                                <span>80%</span>
+                                <span>60%</span>
+                                <span>40%</span>
+                                <span>20%</span>
+                                <span>0%</span>
+                            </div>
+                        </div>
+                        <span class="gauge-title">Throttle</span>
+                    </div>
+                </div>
+
+                <!-- Horizontal RPM Slider -->
+                <div class="rpm-bar-row">
+                    <div class="pedal-bar-meta">
+                        <span>Engine RPM</span>
+                        <span><span id="val-rpm">0</span> RPM</span>
+                    </div>
+                    <div class="rpm-bar-track">
+                        <div class="rpm-bar-fill" id="val-rpm-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- Engine Vitals (Water/Oil Temperature) -->
+                <div class="engine-temps-block" style="margin-bottom: 10px;">
+                    <div class="engine-temp-item">
+                        <span class="engine-temp-label">Water Temp</span>
+                        <span class="engine-temp-val"><span id="val-waterTemp">210</span>°</span>
+                    </div>
+                    <div class="engine-temp-item">
+                        <span class="engine-temp-label">Oil Temp</span>
+                        <span class="engine-temp-val"><span id="val-oilTemp">235</span>°</span>
+                    </div>
+                </div>
+
+                <!-- Centered Logo inside Dashboard Card -->
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: auto; flex: 1; min-height: 85px; padding: 15px 0 5px 0; overflow: hidden; width: 100%;">
+                    <img id="app-logo-img" src="assets/geezer-logo.png" style="width: 78%; max-height: 130px; max-width: 100%; object-fit: contain; opacity: 0.88; filter: drop-shadow(0 0 10px rgba(0, 255, 102, 0.25));" alt="Geezer Performance Logo">
+                </div>
+            </div>
+
+            <!-- Metadata Panel -->
+            <div class="glass-panel module" id="mod-raceinfo">
+                <div class="panel-header-row" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(0, 255, 102, 0.3); padding-bottom: 12px; margin-bottom: 12px;">
+                    <span id="val-trackName" style="font-family: 'Outfit'; font-size: 22px; font-weight: 900; font-style: italic; color: #fff; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px;">AWAITING CON.</span>
+                    <span id="val-clock" style="font-family: 'Roboto Mono'; font-size: 20px; font-weight: 700; color: var(--neon-blue);">12:00 AM</span>
+                </div>
+                <div class="meta-list">
+                    <div class="meta-row">
+                        <span class="meta-label">Track Temp.</span>
+                        <span class="meta-val"><span id="val-trackTemp">-</span> °F</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Air Temp.</span>
+                        <span class="meta-val"><span id="val-airTemp">-</span> °F</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Position</span>
+                        <span class="meta-val" id="val-position">1</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Lap</span>
+                        <span class="meta-val"><span id="val-lap">0</span>/<span id="val-rel-remaining">-</span></span>
+                    </div>
+                    <div class="meta-row" id="incident-container" style="border-radius: 6px; padding: 4px 8px; margin: 0 -8px;">
+                        <span class="meta-label" style="font-weight: 600;">Incidents</span>
+                        <span class="meta-val"><span id="val-incidents">0</span> / <span id="val-max-incidents">17</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUMN 2: LIVE STANDINGS & LAP TIMES -->
+        <div class="dash-column">
+            <!-- Dashboard Quick Actions Bar -->
+            <div class="action-buttons-bar">
+                <button id="btn-analytics" class="glass-button">📊 ANALYTICS</button>
+                <button id="btn-vr-mode" class="glass-button">👓 VR MODE</button>
+                <button id="btn-qr-connect" class="glass-button">📱 CONNECT DEVICE</button>
+                <button id="btn-fullscreen" class="glass-button">📺 FULLSCREEN</button>
+            </div>
+
+            <!-- Unified Standings Panel -->
+            <div class="glass-panel module" id="mod-relative" style="flex: 1;">
+                <div class="panel-title">Top 3 and Relative Standings</div>
+                
+                <div class="unified-standings-list">
+                    <!-- Leaderboard Table Header -->
+                    <div class="standings-row-grid header">
+                        <span class="standings-pos">POS</span>
+                        <span class="standings-name">DRIVER</span>
+                        <span class="standings-val" style="color: var(--neon-purple);">BEST</span>
+                        <span class="standings-val">LAST</span>
+                        <span class="standings-val">DIFF</span>
+                    </div>
+
+                    <!-- Leaders List Slot -->
+                    <div id="leaders-list" style="display: flex; flex-direction: column; gap: 5px;">
+                        <div class="standings-row-grid">
+                            <span class="standings-pos">--</span>
+                            <span class="standings-name">Awaiting session data...</span>
+                            <span class="standings-val best">--.---</span>
+                            <span class="standings-val">--.---</span>
+                            <span class="standings-val">--.---</span>
+                        </div>
+                    </div>
+
+                    <!-- Relative List Slot -->
+                    <div id="relative-list" style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px; border-top: 1.5px solid rgba(255,255,255,0.06); padding-top: 10px;">
+                        <div class="standings-row-grid">
+                            <span class="standings-pos">--</span>
+                            <span class="standings-name">Awaiting relative...</span>
+                            <span class="standings-val best">--.---</span>
+                            <span class="standings-val">--.---</span>
+                            <span class="standings-val">--.---</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Pit Road Panel (Active on Pit Road) -->
+            <div class="glass-panel module" id="mod-pitroad-center" style="display: none; flex: 1; flex-direction: column; justify-content: flex-start; align-items: stretch;">
+                <div class="panel-title">Pit Road Manager</div>
+                
+                <!-- Speedometer / Limit warning box -->
+                <div id="pit-speed-box" class="pit-limit-safe" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px 20px; border-radius: 12px; border: 3px solid; margin-bottom: 20px; text-shadow: 0 0 10px rgba(0, 255, 102, 0.4); box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+                    <div style="font-size: 84px; font-weight: 900; font-family: 'Roboto Mono'; line-height: 1; color: #fff;">
+                        <span id="val-pit-speed">0</span>
+                    </div>
+                    <div style="font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; color: var(--text-main); font-family: 'Outfit';">
+                        MPH (LIMIT <span id="val-pit-limit">45</span>)
+                    </div>
+                    <div style="font-size: 26px; font-weight: 900; margin-top: 15px; color: #fff; font-family: 'Outfit'; letter-spacing: 1px;">
+                        GEAR: <span id="val-pit-gear" style="color: var(--neon-blue);">N</span>
+                    </div>
+                </div>
+
+                <!-- Sync'd Pit Service Controls -->
+                <div style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+                    <div style="font-family: 'Outfit'; font-size: 15px; font-weight: 800; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 1px; border-bottom: 1.5px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
+                        Pit Service Options
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <label class="pit-custom-check-center" style="grid-column: span 2;">
+                            <input type="checkbox" id="pit-autofuel-center"> Auto Fill Fuel
+                        </label>
+                        <label class="pit-custom-check-center">
+                            <input type="checkbox" id="pit-lstires-center"> Left Side
+                        </label>
+                        <label class="pit-custom-check-center">
+                            <input type="checkbox" id="pit-rstires-center"> Right Side
+                        </label>
+                        <label class="pit-custom-check-center">
+                            <input type="checkbox" id="pit-4tires-center"> 4 Tires
+                        </label>
+                        <label class="pit-custom-check-center">
+                            <input type="checkbox" id="pit-fastrepair-center"> Fast Repair
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Stint Laps inside Pit Overlay -->
+                <div style="display: flex; justify-content: space-between; font-size: 14px; font-family: 'Outfit'; font-weight: 700; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 12px 20px; border-radius: 8px; margin-top: auto; border: 1.5px solid rgba(255,255,255,0.06);">
+                    <span>CURRENT STINT: <span id="val-stint-laps-center" style="color: #fff; font-family: 'Roboto Mono';">0</span> LAPS</span>
+                    <span>PREV STINT: <span id="val-prev-stint-center" style="color: #fff; font-family: 'Roboto Mono';">0</span> LAPS</span>
+                </div>
+            </div>
+
+            <!-- Lap Times Panel -->
+            <div class="glass-panel module" id="mod-laptimes">
+                <div class="panel-title">Lap Times</div>
+                <div class="lap-times-layout">
+                    <div class="lap-times-text-group">
+                        <div class="lap-times-meta-row">
+                            <span class="lap-times-label">Current Stint Laps</span>
+                            <span class="lap-times-value" id="val-current-stint">0</span>
+                        </div>
+                        <div class="lap-times-meta-row">
+                            <span class="lap-times-label">Current</span>
+                            <span class="lap-times-value" id="val-current-lap">0:00.000</span>
+                        </div>
+                        <div class="lap-times-meta-row">
+                            <span class="lap-times-label">Best</span>
+                            <span class="lap-times-value best" id="val-best-lap">0:00.000</span>
+                        </div>
+                        <div class="lap-times-meta-row">
+                            <span class="lap-times-label">Vs Best</span>
+                            <span class="lap-times-value" id="val-delta">0.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUMN 3: TIRES, FUEL & PIT CONTROLS -->
+        <div class="dash-column">
+            <div class="glass-panel module" id="mod-tireinfo" style="flex: 1;">
+                <div class="panel-title">Tire Data</div>
+                <div style="font-family: 'Outfit'; font-size: 13px; font-weight: 700; text-align: center; color: var(--text-muted); margin-bottom: 8px;">
+                    LAST TIRE STINT: <span id="val-tire-stint" style="color: var(--neon-yellow); font-family: 'Roboto Mono'; font-weight: 700;">0</span> LAPS
+                    <span style="margin-left: 10px; font-weight: 500;">(SETS AVAILABLE: <span id="val-tires-avail" style="color: #fff; font-family: 'Roboto Mono'; font-weight: 700;">-</span>)</span>
+                </div>
+                
+                <!-- Tire Wear Legend References -->
+                <div style="display: flex; justify-content: center; gap: 15px; font-family: 'Outfit'; font-size: 11px; font-weight: 700; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                    <span style="display: flex; align-items: center; gap: 5px; color: var(--neon-green);"><span style="width: 8px; height: 8px; background: var(--neon-green); border-radius: 50%; display: inline-block; box-shadow: 0 0 6px var(--neon-green);"></span> LOW WEAR (71%+)</span>
+                    <span style="display: flex; align-items: center; gap: 5px; color: var(--neon-yellow);"><span style="width: 8px; height: 8px; background: var(--neon-yellow); border-radius: 50%; display: inline-block; box-shadow: 0 0 6px var(--neon-yellow);"></span> MID WEAR (50-70%)</span>
+                    <span style="display: flex; align-items: center; gap: 5px; color: var(--neon-red);"><span style="width: 8px; height: 8px; background: var(--neon-red); border-radius: 50%; display: inline-block; box-shadow: 0 0 6px var(--neon-red);"></span> HIGH WEAR (&lt;50%)</span>
+                </div>
+                
+                <div class="tires-layout-grid">
+                    <!-- LF -->
+                    <div class="tire-corner-card">
+                        <div class="tire-graphics">
+                            <span class="tire-title">LF</span>
+                            <svg class="tire-svg" id="svg-lf" viewBox="0 0 34 60" width="34" height="60">
+                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#00ff66" stroke-width="2" />
+                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <div class="tire-grid-data">
+                            <div class="tire-data-col">
+                                <span class="tire-label">O</span>
+                                <span class="tire-wear" id="val-lf-wear-o">--%</span>
+                                <span class="tire-temp" id="val-lf-temp-o">--°</span>
+                            </div>
+                            <div class="tire-data-col">
+                                <span class="tire-label">M</span>
+                                <span class="tire-wear" id="val-lf-wear-m">--%</span>
+                                <span class="tire-temp" id="val-lf-temp-m">--°</span>
+                            </div>
+                            <div class="tire-data-col">
+                                <span class="tire-label">I</span>
+                                <span class="tire-wear" id="val-lf-wear-i">--%</span>
+                                <span class="tire-temp" id="val-lf-temp-i">--°</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RF -->
+                    <div class="tire-corner-card">
+                        <div class="tire-graphics">
+                            <span class="tire-title">RF</span>
+                            <svg class="tire-svg" id="svg-rf" viewBox="0 0 34 60" width="34" height="60">
+                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#00ff66" stroke-width="2" />
+                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <div class="tire-grid-data">
+                            <div class="tire-data-col">
+                                <span class="tire-label">I</span>
+                                <span class="tire-wear" id="val-rf-wear-i">--%</span>
+                                <span class="tire-temp" id="val-rf-temp-i">--°</span>
+                            </div>
+                            <div class="tire-data-col">
+                                <span class="tire-label">M</span>
+                                <span class="tire-wear" id="val-rf-wear-m">--%</span>
+                                <span class="tire-temp" id="val-rf-temp-m">--°</span>
+                            </div>
+                            <div class="tire-data-col">
+                                <span class="tire-label">O</span>
+                                <span class="tire-wear" id="val-rf-wear-o">--%</span>
+                                <span class="tire-temp" id="val-rf-temp-o">--°</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LR -->
+                    <div class="tire-corner-card">
+                        <div class="tire-graphics">
+                            <span class="tire-title">LR</span>
+                            <svg class="tire-svg" id="svg-lr" viewBox="0 0 34 60" width="34" height="60">
+                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#00ff66" stroke-width="2" />
+                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <div class="tire-grid-data">
+                            <div class="tire-data-col">
+                                <span class="tire-label">O</span>
+                                <span class="tire-wear" id="val-lr-wear-o">--%</span>
+                                <span class="tire-temp" id="val-lr-temp-o">--°</span>
+                            </div>
+                            <div class="tire-data-col">
+                                <span class="tire-label">M</span>
+                                <span class="tire-wear" id="val-lr-wear-m">--%</span>
+                                <span class="tire-temp" id="val-lr-temp-m">--°</span>
+                            </div>
+                            <div class="tire-data-col">
+                                <span class="tire-label">I</span>
+                                <span class="tire-wear" id="val-lr-wear-i">--%</span>
+                                <span class="tire-temp" id="val-lr-temp-i">--°</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RR -->
+                    <div class="tire-corner-card">
+                        <div class="tire-graphics">
+                            <span class="tire-title">RR</span>
+                            <svg class="tire-svg" id="svg-rr" viewBox="0 0 34 60" width="34" height="60">
+                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#00ff66" stroke-width="2" />
+                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <div class="tire-grid-data">
+                            <div class="tire-data-col">
+                                <span class="tire-label">I</span>
+                                <span class="tire-wear" id="val-rr-wear-i">--%</span>
+                                <span class="tire-temp" id="val-rr-temp-i">--°</span>
+                            </div>
+                            <div class="tire-data-col">
+                                <span class="tire-label">M</span>
+                                <span class="tire-wear" id="val-rr-wear-m">--%</span>
+                                <span class="tire-temp" id="val-rr-temp-m">--°</span>
+                            </div>
+                            <div class="tire-data-col">
+                                <span class="tire-label">O</span>
+                                <span class="tire-wear" id="val-rr-wear-o">--%</span>
+                                <span class="tire-temp" id="val-rr-temp-o">--°</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fuel projections Panel -->
+            <div class="glass-panel module" id="mod-fuel" style="flex: 1;">
+                <div class="panel-title">Fuel</div>
+                <div class="fuel-projections-table">
+                    <!-- Header -->
+                    <div class="fuel-projections-cell header"></div>
+                    <div class="fuel-projections-cell header">Worst</div>
+                    <div class="fuel-projections-cell header">2 Laps</div>
+
+                    <!-- To Go -->
+                    <div class="fuel-projections-cell row-label">To Go</div>
+                    <div class="fuel-projections-cell" id="fuel-worst-togo">0.0</div>
+                    <div class="fuel-projections-cell" id="fuel-2lap-togo">0.0</div>
+
+                    <!-- In Tank -->
+                    <div class="fuel-projections-cell row-label">In Tank</div>
+                    <div class="fuel-projections-cell" id="fuel-worst-intank" style="color: var(--neon-red);">0.0</div>
+                    <div class="fuel-projections-cell" id="fuel-2lap-intank" style="color: var(--neon-red);">0.0</div>
+
+                    <!-- Per Tank -->
+                    <div class="fuel-projections-cell row-label">Per Tank</div>
+                    <div class="fuel-projections-cell" id="fuel-worst-pertank">0.0</div>
+                    <div class="fuel-projections-cell" id="fuel-2lap-pertank">0.0</div>
+
+                    <!-- To Finish -->
+                    <div class="fuel-projections-cell row-label">To Finish</div>
+                    <div class="fuel-projections-cell" id="fuel-worst-tofinish">0.0</div>
+                    <div class="fuel-projections-cell" id="fuel-2lap-tofinish">0.0</div>
+
+                    <!-- In Tank (Gal) -->
+                    <div class="fuel-projections-cell row-label">In Tank (Gal)</div>
+                    <div class="fuel-projections-cell" id="fuel-worst-intankgal">0.0</div>
+                    <div class="fuel-projections-cell" id="fuel-2lap-intankgal">0.0</div>
+
+                    <!-- Needed -->
+                    <div class="fuel-projections-cell row-label">Needed</div>
+                    <div class="fuel-projections-cell" id="fuel-worst-needed" style="color: var(--neon-red);">0.0</div>
+                    <div class="fuel-projections-cell" id="fuel-2lap-needed" style="color: var(--neon-red);">0.0</div>
+
+                    <!-- Adding -->
+                    <div class="fuel-projections-cell row-label">Adding</div>
+                    <div class="fuel-projections-cell" id="fuel-worst-adding">0.0</div>
+                    <div class="fuel-projections-cell" id="fuel-2lap-adding">0.0</div>
+
+                    <!-- Pit Stops -->
+                    <div class="fuel-projections-cell row-label">Pit Stops</div>
+                    <div class="fuel-projections-cell" id="fuel-worst-pitstops">0</div>
+                    <div class="fuel-projections-cell" id="fuel-2lap-pitstops">0</div>
+                </div>
+
+                <div style="font-family: 'Outfit'; font-size: 15px; font-weight: 700; text-align: center; color: #fff; margin-top: 10px;">
+                    FUEL: <span id="fuel-current-gal" style="color: var(--neon-green); font-family: 'Roboto Mono';">0.0</span> / <span id="fuel-max-gal" style="font-family: 'Roboto Mono';">0.0</span> <span style="font-size: 11px; color: var(--text-muted);">gal</span>
+                </div>
+            </div>
+
+            <!-- Pit Controls Panel -->
+            <div class="glass-panel module" id="mod-pitinfo">
+                <div class="panel-title">Pit Controls</div>
+                <div class="pit-controls-grid">
+                    <!-- Brake Bias -->
+                    <div class="brake-bias-slider-group">
+                        <div class="brake-bias-header">
+                            <span>Brake Bias</span>
+                            <span><span id="val-brakeBias" style="color: var(--neon-green); font-family: 'Roboto Mono'; font-weight: 700;">-.-</span>%</span>
+                        </div>
+                        <div class="brake-bias-slider-track">
+                            <div class="brake-bias-slider-fill" id="val-bias-slider" style="width: 50%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Checkboxes -->
+                    <div class="pit-checkboxes-container">
+                        <label class="pit-custom-check" style="grid-column: span 2;">
+                            <input type="checkbox" id="pit-autofuel" checked> Auto Fill Fuel
+                        </label>
+                        <label class="pit-custom-check">
+                            <input type="checkbox" id="pit-lstires"> Left Side
+                        </label>
+                        <label class="pit-custom-check">
+                            <input type="checkbox" id="pit-4tires"> 4 Tires
+                        </label>
+                        <label class="pit-custom-check">
+                            <input type="checkbox" id="pit-rstires"> Right Side
+                        </label>
+                        <label class="pit-custom-check">
+                            <input type="checkbox" id="pit-fastrepair"> Fast Repair
+                        </label>
+                    </div>
+
+                    <!-- Left / Prev Stint Metadata -->
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; font-family: 'Outfit'; font-weight: 700; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 6px;">
+                        <span>STINT LAPS: <span id="lap-stint" style="color: #fff; font-family: 'Roboto Mono';">0</span></span>
+                        <span>PREV STINT: <span id="prev-stint" style="color: #fff; font-family: 'Roboto Mono';">0</span></span>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Hidden elements required by JS -->
+    <div style="display: none;">
+        <span id="val-distance">-</span>
+        <input type="radio" name="fuel-mode" id="pit-manualfuel">
+        <input type="number" id="pit-fuel-amount" value="0">
+        <input type="checkbox" id="pit-none">
+        <span id="val-lf-i">0</span><span id="val-lf-m">0</span><span id="val-lf-o">0</span>
+        <span id="val-rf-i">0</span><span id="val-rf-m">0</span><span id="val-rf-o">0</span>
+        <span id="val-lr-i">0</span><span id="val-lr-m">0</span><span id="val-lr-o">0</span>
+        <span id="val-rr-i">0</span><span id="val-rr-m">0</span><span id="val-rr-o">0</span>
+    </div>
 </body>
 </html>
