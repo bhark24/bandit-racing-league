@@ -1249,10 +1249,10 @@
                     for (let i = 0; i < 3; i++) {
                         const tempEl = document.getElementById(`tire-${cornerId}-t${i+1}`);
                         if (tempEl) {
-                            tempEl.innerText = tireData.temps[i] + '°';
+                            tempEl.innerText = Math.round(tireData.temps[i]) + '°';
                             
                             // Visual heat color scaling (assuming Fahrenheit)
-                            const t = tireData.temps[i];
+                            const t = Math.round(tireData.temps[i]);
                             if (t > 240) tempEl.style.background = 'rgba(255, 23, 68, 0.4)';
                             else if (t > 200) tempEl.style.background = 'rgba(255, 152, 0, 0.3)';
                             else if (t > 150) tempEl.style.background = 'rgba(76, 175, 80, 0.2)';
