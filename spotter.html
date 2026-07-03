@@ -173,6 +173,10 @@
             transform: translateY(0);
         }
 
+        .dashboard-grid > div {
+            min-height: 0; /* Prevent column expansion from stretching the row */
+        }
+
         .dash-card {
             background: rgba(21, 22, 26, 0.8);
             border: 1px solid #1f2128;
@@ -182,6 +186,7 @@
             backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
+            min-height: 0; /* Let flex children shrink inside grid constraint */
         }
 
         .card-title {
@@ -674,7 +679,7 @@
                                     <span id="flag-status-text" style="font-size: 0.9rem; font-weight: 900; color: var(--neon-green); text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; letter-spacing: 0.5px;">GREEN</span>
                                 </div>
                             </div>
-                            <div id="penalty-reason-container" style="display: none; font-size: 0.8rem; font-weight: bold; color: #ff1744; text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 6px; width: 100%; text-align: center; letter-spacing: 0.5px; margin-top: 2px;">
+                            <div id="penalty-reason-container" style="visibility: hidden; opacity: 0; font-size: 0.8rem; font-weight: bold; color: #ff1744; text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; border-top: 1px solid transparent; padding-top: 6px; width: 100%; text-align: center; letter-spacing: 0.5px; margin-top: 2px; transition: opacity 0.2s ease, border-color 0.2s ease;">
                                 Infraction: <span id="penalty-reason-text" style="color: #fff;">None</span>
                             </div>
                         </div>
@@ -1000,9 +1005,13 @@
             if (penaltyContainer && penaltyText) {
                 if (data.penaltyReason) {
                     penaltyText.innerText = data.penaltyReason;
-                    penaltyContainer.style.display = 'block';
+                    penaltyContainer.style.visibility = 'visible';
+                    penaltyContainer.style.opacity = '1';
+                    penaltyContainer.style.borderTopColor = 'rgba(255, 255, 255, 0.1)';
                 } else {
-                    penaltyContainer.style.display = 'none';
+                    penaltyContainer.style.visibility = 'hidden';
+                    penaltyContainer.style.opacity = '0';
+                    penaltyContainer.style.borderTopColor = 'transparent';
                 }
             }
 
