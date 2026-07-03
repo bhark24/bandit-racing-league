@@ -1335,8 +1335,11 @@
                 { car: 14, carNum: "14", pct: 0.55, highlight: false }
             ];
 
-            let flags = ['green', 'yellow', 'green', 'blue', 'green'];
-            let flagIndex = 0;
+            let demoStep = 0;
+            let currentWearLF = 98;
+            let currentWearRF = 92;
+            let currentWearLR = 97;
+            let currentWearRR = 90;
 
             // Simulated live telemetry loop variables
             let gear = 5;
@@ -1347,9 +1350,7 @@
             let repairsUsed = 0;
 
             demoInterval = setInterval(() => {
-                // Decay fuel slightly
-                fuel -= 0.03;
-                if (fuel <= 1.0) fuel = 18.5;
+                demoStep = (demoStep + 1) % 500; // 50 seconds loop cycle
 
                 // Move drivers along the track loop
                 trackDrivers.forEach(d => {
@@ -1362,79 +1363,125 @@
                 relativePositions[3].gap += (Math.random() - 0.5) * 0.03;
                 relativePositions[4].gap += (Math.random() - 0.5) * 0.04;
 
-                // Randomly trigger flags
-                if (Math.random() > 0.92) {
-                    flagIndex = (flagIndex + 1) % flags.length;
-                }
-
-                // Determine simulated penalty reason based on flags
+                let flagState = 'green';
+                let onPitRoad = false;
                 let mockPenalty = "";
-                if (flags[flagIndex] === 'black') {
-                    mockPenalty = "Speeding on Pit Road";
-                } else if (flags[flagIndex] === 'yellow') {
-                    // Occasionally simulate a pace car infraction under yellow
-                    mockPenalty = Math.random() > 0.5 ? "Passing under Yellow" : "";
-                }
-
-                // Modulate speed, gear, rpm, throttle, brake based on flags
-                let isYellow = flags[flagIndex] === 'yellow';
-                let isBlack = flags[flagIndex] === 'black';
-                
-                let onPitRoad = isYellow || isBlack; // simulate pit entry on yellow (caution) or black flag
                 let feetToStall = 0.0;
                 let throttle = 1.0;
                 let brake = 0.0;
-                
-                if (onPitRoad) {
-                    speed = Math.max(45, speed - 15);
-                    gear = speed > 55 ? 3 : 2;
-                    rpm = speed * 80;
-                    throttle = 0.2 + Math.random() * 0.2;
-                    brake = Math.random() > 0.5 ? 0.1 : 0.0;
-                    feetToStall = Math.max(0, 150 - (fuel % 5) * 40); // countdown feet to stall
-                } else if (isYellow) {
-                    speed = Math.max(70, speed - 8);
+
+                if (demoStep < 250) {
+                    // 1. Green Flag Racing
+                    flagState = 'green';
+                    onPitRoad = false;
+                    mockPenalty = "";
+                    
+                    throttle = 1.0;
+                    brake = 0.0;
+                    speed = Math.min(195, Math.max(182, speed + (Math.random() - 0.5) * 2));
+                    rpm = speed * 41 + (Math.random() - 0.5) * 50;
+                    gear = 5;
+
+                    fuel -= 0.03;
+                    if (fuel <= 1.0) fuel = 18.5;
+
+                    // Tires slowly wear down
+                    currentWearLF = Math.max(40, currentWearLF - 0.02);
+                    currentWearRF = Math.max(35, currentWearRF - 0.03);
+                    currentWearLR = Math.max(45, currentWearLR - 0.015);
+                    currentWearRR = Math.max(38, currentWearRR - 0.025);
+                }
+                else if (demoStep >= 250 && demoStep < 320) {
+                    // 2. Caution Flag Slowing Down
+                    flagState = 'yellow';
+                    onPitRoad = false;
+                    mockPenalty = "Caution Flag Active";
+
+                    throttle = 0.1;
+                    brake = 0.2;
+                    speed = Math.max(70, speed - 3.5); // smoothly decelerate to pace speed
+                    rpm = speed * 45;
                     gear = speed > 100 ? 4 : 3;
-                    rpm = speed * 60;
-                    throttle = 0.3 + Math.random() * 0.1;
-                    brake = Math.random() > 0.9 ? 0.15 : 0.0;
-                } else {
-                    // Green flag racing
-                    if (Math.random() > 0.95) {
-                        // random tiny lift
-                        throttle = 0.6 + Math.random() * 0.3;
-                        speed = Math.max(175, speed - 3);
-                        rpm = speed * 40;
-                        brake = 0.0;
-                    } else {
-                        throttle = 1.0;
-                        brake = 0.0;
-                        speed = Math.min(195, Math.max(182, speed + (Math.random() - 0.5) * 2));
-                        rpm = speed * 41 + (Math.random() - 0.5) * 50;
-                        gear = 5;
+
+                    fuel -= 0.01; // slower consumption under yellow
+                }
+                else if (demoStep >= 320 && demoStep < 450) {
+                    // 3. Pitting Cycle under Caution
+                    flagState = 'yellow';
+                    onPitRoad = true;
+
+                    if (demoStep < 350) {
+                        // 3a. Entering Pit Road
+                        speed = Math.max(45, speed - 4.0); // decelerating smoothly to pit speed limit
+                        gear = speed > 55 ? 3 : 2;
+                        rpm = speed * 80;
+                        throttle = 0.1;
+                        brake = 0.3;
+                        feetToStall = Math.max(0, 300 - (demoStep - 320) * 10);
+                        mockPenalty = speed > 45.5 ? "Slowing Down on Pit Lane" : "Pit Lane Speed Limit Safe";
                     }
+                    else if (demoStep >= 350 && demoStep < 420) {
+                        // 3b. Stationary Pit Stop Service
+                        speed = 0;
+                        gear = 0; // display as N
+                        rpm = 900;
+                        throttle = 0.0;
+                        brake = 1.0;
+                        feetToStall = 0.0;
+                        mockPenalty = "Pit Service: Refueling & Tires";
+                        
+                        // Refuel slowly
+                        fuel = Math.min(18.5, fuel + 0.25);
+                        
+                        // Tires replaced to new set
+                        currentWearLF = 100;
+                        currentWearRF = 100;
+                        currentWearLR = 100;
+                        currentWearRR = 100;
+                    }
+                    else {
+                        // 3c. Exiting Pit lane
+                        speed = Math.min(45, (demoStep - 420) * 1.5); // accelerate back to pit speed
+                        gear = speed > 15 ? 2 : 1;
+                        rpm = speed * 85 + 1000;
+                        throttle = 0.4;
+                        brake = 0.0;
+                        feetToStall = 0.0;
+                        mockPenalty = "Exiting Pit Lane";
+                    }
+                }
+                else {
+                    // 4. Green Flag Re-accelerating
+                    flagState = 'green';
+                    onPitRoad = false;
+                    mockPenalty = "";
+
+                    throttle = 1.0;
+                    brake = 0.0;
+                    speed = Math.min(185, speed + 4.5);
+                    gear = speed > 150 ? 5 : (speed > 100 ? 4 : 3);
+                    rpm = speed * 41 + 1000;
                 }
 
                 const mockData = {
                     trackName: "Daytona International Speedway",
-                    flagState: flags[flagIndex],
+                    flagState: flagState,
                     fuel: fuel,
                     avgFuel: 0.428,
                     lapsFuelRemaining: fuel / 0.428,
                     lapsRemaining: "28 / 50 Laps",
                     lapCurrent: 46.254 + (Math.random() - 0.5) * 0.1,
                     lapBest: 45.982,
-                    prevStint: 26, // Simulated 26 laps completed on last tire set
+                    prevStint: 26, 
                     penaltyReason: mockPenalty,
                     tires: {
-                        LF: { wear: Math.round(98 - (lap * 0.15)), temps: [180, 185, 190] },
-                        RF: { wear: Math.round(92 - (lap * 0.25)), temps: [210, 220, 230] },
-                        LR: { wear: Math.round(97 - (lap * 0.12)), temps: [178, 181, 184] },
-                        RR: { wear: Math.round(90 - (lap * 0.28)), temps: [215, 228, 235] }
+                        LF: { wear: Math.round(currentWearLF), temps: onPitRoad && demoStep >= 350 && demoStep < 420 ? [100, 100, 100] : [180 + Math.sin(demoStep/5)*2, 185, 190] },
+                        RF: { wear: Math.round(currentWearRF), temps: onPitRoad && demoStep >= 350 && demoStep < 420 ? [100, 100, 100] : [210 + Math.sin(demoStep/5)*3, 220, 230] },
+                        LR: { wear: Math.round(currentWearLR), temps: onPitRoad && demoStep >= 350 && demoStep < 420 ? [100, 100, 100] : [178 + Math.sin(demoStep/5)*1, 181, 184] },
+                        RR: { wear: Math.round(currentWearRR), temps: onPitRoad && demoStep >= 350 && demoStep < 420 ? [100, 100, 100] : [215 + Math.sin(demoStep/5)*2, 228, 235] }
                     },
                     relative: relativePositions,
                     allDrivers: trackDrivers,
-                    // New simulated fields
                     gear: gear,
                     speed: speed,
                     rpm: rpm,
