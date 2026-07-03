@@ -1541,6 +1541,21 @@
                 document.getElementById("val-rr-wear-m").textContent = `${wearRR}%`;
                 document.getElementById("val-rr-wear-o").textContent = `${wearRR}%`;
 
+                // Tire temperatures dynamically fluctuating
+                const tSin = Math.sin(demoTime);
+                document.getElementById("val-lf-temp-i").textContent = `${(215 + tSin * 2).toFixed(0)}°`;
+                document.getElementById("val-lf-temp-m").textContent = `${(210 + tSin * 2).toFixed(0)}°`;
+                document.getElementById("val-lf-temp-o").textContent = `${(205 + tSin * 1).toFixed(0)}°`;
+                document.getElementById("val-rf-temp-i").textContent = `${(230 + tSin * 3).toFixed(0)}°`;
+                document.getElementById("val-rf-temp-m").textContent = `${(225 + tSin * 2).toFixed(0)}°`;
+                document.getElementById("val-rf-temp-o").textContent = `${(220 + tSin * 2).toFixed(0)}°`;
+                document.getElementById("val-lr-temp-i").textContent = `${(210 + tSin * 1).toFixed(0)}°`;
+                document.getElementById("val-lr-temp-m").textContent = `${(205 + tSin * 1).toFixed(0)}°`;
+                document.getElementById("val-lr-temp-o").textContent = `${(200 + tSin * 1).toFixed(0)}°`;
+                document.getElementById("val-rr-temp-i").textContent = `${(220 + tSin * 2).toFixed(0)}°`;
+                document.getElementById("val-rr-temp-m").textContent = `${(215 + tSin * 2).toFixed(0)}°`;
+                document.getElementById("val-rr-temp-o").textContent = `${(210 + tSin * 1).toFixed(0)}°`;
+
                 // Set tire SVGs color
                 document.getElementById("svg-lf").querySelector("rect").setAttribute("stroke", wearLF > 70 ? "var(--neon-green)" : "var(--neon-yellow)");
                 document.getElementById("svg-rf").querySelector("rect").setAttribute("stroke", wearRF > 70 ? "var(--neon-green)" : "var(--neon-yellow)");
@@ -1627,6 +1642,25 @@
                     document.getElementById("val-rf-wear-i").textContent = "100%";
                     document.getElementById("val-rf-wear-m").textContent = "100%";
                     document.getElementById("val-rf-wear-o").textContent = "100%";
+                    document.getElementById("val-lr-wear-i").textContent = "100%";
+                    document.getElementById("val-lr-wear-m").textContent = "100%";
+                    document.getElementById("val-lr-wear-o").textContent = "100%";
+                    document.getElementById("val-rr-wear-i").textContent = "100%";
+                    document.getElementById("val-rr-wear-m").textContent = "100%";
+                    document.getElementById("val-rr-wear-o").textContent = "100%";
+                    
+                    document.getElementById("val-lf-temp-i").textContent = "100°";
+                    document.getElementById("val-lf-temp-m").textContent = "100°";
+                    document.getElementById("val-lf-temp-o").textContent = "100°";
+                    document.getElementById("val-rf-temp-i").textContent = "100°";
+                    document.getElementById("val-rf-temp-m").textContent = "100°";
+                    document.getElementById("val-rf-temp-o").textContent = "100°";
+                    document.getElementById("val-lr-temp-i").textContent = "100°";
+                    document.getElementById("val-lr-temp-m").textContent = "100°";
+                    document.getElementById("val-lr-temp-o").textContent = "100°";
+                    document.getElementById("val-rr-temp-i").textContent = "100°";
+                    document.getElementById("val-rr-temp-m").textContent = "100°";
+                    document.getElementById("val-rr-temp-o").textContent = "100°";
                     
                     document.getElementById("svg-lf").querySelector("rect").setAttribute("stroke", "var(--neon-green)");
                     document.getElementById("svg-rf").querySelector("rect").setAttribute("stroke", "var(--neon-green)");
