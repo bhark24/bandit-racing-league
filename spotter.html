@@ -649,13 +649,17 @@
                             </div>
                         </div>
                         
-                        <!-- Pit Status & Fast Repairs -->
-                        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700; background: rgba(0, 0, 0, 0.2); padding: 10px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 15px;">
-                            <div style="display: flex; align-items: center; gap: 6px;">
+                        <!-- Pit Status, Tires & Fast Repairs -->
+                        <div style="display: flex; justify-content: space-between; font-size: 0.72rem; text-transform: uppercase; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700; background: rgba(0, 0, 0, 0.2); padding: 10px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 15px;">
+                            <div style="display: flex; align-items: center; gap: 5px;">
                                 <span style="color: var(--text-muted);">Pit Status:</span>
                                 <span id="telemetry-pit-status" style="color: var(--neon-green); font-weight: 900;">ON TRACK</span>
                             </div>
-                            <div style="display: flex; align-items: center; gap: 6px;">
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <span style="color: var(--text-muted);">Tires Left:</span>
+                                <span id="telemetry-tires-avail" style="color: var(--neon-yellow); font-weight: 900;">--</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 5px;">
                                 <span style="color: var(--text-muted);">Repairs Left:</span>
                                 <span id="telemetry-repairs" style="color: #fff; font-weight: 900;">-- / --</span>
                             </div>
@@ -702,7 +706,10 @@
                     <!-- Tires Widget -->
                     <div class="dash-card">
                         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
-                            <h3 class="card-title" style="margin-bottom: 0;">Tire Wear</h3>
+                            <div style="display: flex; flex-direction: column;">
+                                <h3 class="card-title" style="margin-bottom: 2px;">Tire Wear</h3>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 0.5px;">Sets Available: <span id="val-tires-avail" style="color: #fff; font-family: 'Roboto Mono', monospace; font-weight: bold;">--</span></span>
+                            </div>
                             <div style="text-align: right; margin-top: -5px;">
                                 <div id="last-stint-laps" style="font-size: 1.3rem; font-weight: 900; color: var(--chase-yellow); font-family: 'Outfit', sans-serif; font-style: italic; line-height: 1.1;">--</div>
                                 <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-style: italic; font-weight: 700; letter-spacing: 0.5px;">Laps on Last Set</div>
@@ -1073,6 +1080,14 @@
             }
             document.getElementById('telemetry-repairs').innerText = repairsText;
 
+            // Update Tires Available
+            const tiresAvailVal = data.tiresAvail !== undefined ? data.tiresAvail : 0;
+            const tiresAvailText = (tiresAvailVal === -1 || tiresAvailVal > 100) ? 'UNLIMITED' : tiresAvailVal;
+            const elTiresAvailSpotter = document.getElementById('telemetry-tires-avail');
+            if (elTiresAvailSpotter) elTiresAvailSpotter.innerText = tiresAvailText;
+            const elTiresAvailTireCard = document.getElementById('val-tires-avail');
+            if (elTiresAvailTireCard) elTiresAvailTireCard.innerText = tiresAvailText;
+
             // Update Pit Road Speed Box for Spotter
             const pitSpeedBox = document.getElementById('pit-speed-box');
             if (pitSpeedBox) {
@@ -1352,6 +1367,15 @@
             demoInterval = setInterval(() => {
                 demoStep = (demoStep + 1) % 500; // 50 seconds loop cycle
 
+                // Cycle resources under demo mode
+                if (demoStep === 0) {
+                    repairsAvail = 1;
+                    repairsUsed = 0;
+                } else if (demoStep === 350) {
+                    repairsAvail = 0;
+                    repairsUsed = 1;
+                }
+
                 // Move drivers along the track loop
                 trackDrivers.forEach(d => {
                     d.pct = (d.pct + 0.004) % 1.0;
@@ -1493,7 +1517,8 @@
                     onPitRoad: onPitRoad,
                     feetToStall: feetToStall,
                     repairsAvail: repairsAvail,
-                    repairsUsed: repairsUsed
+                    repairsUsed: repairsUsed,
+                    tiresAvail: demoStep >= 350 ? 1 : 2
                 };
 
                 handleTelemetryPacket(mockData);
