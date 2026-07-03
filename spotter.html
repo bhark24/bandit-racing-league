@@ -426,6 +426,36 @@
         .is-fullscreen .dash-card > div {
             flex: 1 !important;
         }
+
+        /* Pit Speed Box Styles */
+        #pit-speed-box {
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2.5px solid transparent;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+        .pit-limit-safe {
+            background: rgba(0, 255, 102, 0.05);
+            border-color: rgba(0, 255, 102, 0.3) !important;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.1);
+        }
+        .pit-limit-warn {
+            background: rgba(255, 235, 59, 0.05);
+            border-color: rgba(255, 235, 59, 0.4) !important;
+            box-shadow: 0 0 15px rgba(255, 235, 59, 0.15);
+        }
+        .pit-limit-danger {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: rgba(244, 67, 54, 0.6) !important;
+            box-shadow: 0 0 20px rgba(244, 67, 54, 0.25);
+            animation: danger-pulse 1s infinite alternate;
+        }
+        @keyframes danger-pulse {
+            from { box-shadow: 0 0 10px rgba(244, 67, 54, 0.2); }
+            to { box-shadow: 0 0 25px rgba(244, 67, 54, 0.5); }
+        }
     </style>
 </head>
 <body>
@@ -515,6 +545,16 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    
+                    <!-- Pit Road Speed Box for Spotter -->
+                    <div id="pit-speed-box" class="pit-limit-safe" style="display: none; margin-top: 15px;">
+                        <span style="font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); display: block; text-align: center;">Pit Road Speed</span>
+                        <div style="display: flex; align-items: baseline; gap: 4px; justify-content: center; margin: 4px 0;">
+                            <span id="val-pit-speed" style="font-family: 'Roboto Mono', monospace; font-size: 40px; font-weight: 700; color: #fff; line-height: 1;">0</span>
+                            <span style="font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-muted);">MPH</span>
+                        </div>
+                        <span style="font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; display: block; text-align: center;">LIMIT: <span id="val-pit-limit" style="color: #fff; font-family: 'Roboto Mono', monospace;">45</span> MPH | GEAR: <span id="val-pit-gear" style="color: #fff; font-family: 'Roboto Mono', monospace;">N</span></span>
                     </div>
                 </div>
 
@@ -1032,6 +1072,34 @@
                 repairsText = `${repairsLeft} / ${totalRepairs}`;
             }
             document.getElementById('telemetry-repairs').innerText = repairsText;
+
+            // Update Pit Road Speed Box for Spotter
+            const pitSpeedBox = document.getElementById('pit-speed-box');
+            if (pitSpeedBox) {
+                if (data.onPitRoad) {
+                    pitSpeedBox.style.display = 'block';
+                    let pLimit = data.pitSpeedLimit || 45;
+                    let pSpeed = data.speed || 0;
+                    
+                    document.getElementById('val-pit-speed').innerText = Math.round(pSpeed);
+                    document.getElementById('val-pit-limit').innerText = pLimit;
+                    
+                    let pitGearText = 'N';
+                    if (data.gear === -1) pitGearText = 'R';
+                    else if (data.gear > 0) pitGearText = data.gear;
+                    document.getElementById('val-pit-gear').innerText = pitGearText;
+                    
+                    if (pSpeed > pLimit) {
+                        pitSpeedBox.className = 'pit-limit-danger';
+                    } else if (pSpeed >= pLimit - 3) {
+                        pitSpeedBox.className = 'pit-limit-warn';
+                    } else {
+                        pitSpeedBox.className = 'pit-limit-safe';
+                    }
+                } else {
+                    pitSpeedBox.style.display = 'none';
+                }
+            }
 
             // Update SVG Track Map positions
             if (data.allDrivers) {
