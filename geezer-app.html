@@ -1439,6 +1439,7 @@
             
             const relativePanel = document.getElementById("mod-relative");
             const pitPanel = document.getElementById("mod-pitroad-center");
+            const lapTimesPanel = document.getElementById("mod-laptimes");
             
             const valSpeed = document.getElementById("val-speed");
             const valGear = document.getElementById("val-gear");
@@ -1450,6 +1451,7 @@
             if (cycle < 22) {
                 // RACING MODE
                 relativePanel.style.display = "flex";
+                if (lapTimesPanel) lapTimesPanel.style.display = "flex";
                 pitPanel.style.display = "none";
                 
                 const lapPos = (demoTime % 14) / 14; // Position in lap (0 to 1)
@@ -1589,7 +1591,8 @@
                 `;
             } else if (cycle < 30) {
                 // PIT ROAD MODE
-                relativePanel.style.display = "none";
+                relativePanel.style.display = "flex";
+                if (lapTimesPanel) lapTimesPanel.style.display = "none";
                 pitPanel.style.display = "flex";
                 
                 const pitPos = (cycle - 22) / 8;
@@ -1655,6 +1658,7 @@
             } else {
                 // ACCELERATING OUT
                 relativePanel.style.display = "flex";
+                if (lapTimesPanel) lapTimesPanel.style.display = "flex";
                 pitPanel.style.display = "none";
                 
                 const exitPos = (cycle - 30) / 10;
@@ -1928,6 +1932,33 @@
             </div>
 
             <!-- Center Pit Road Panel (Active on Pit Road) -->
+            
+
+            <!-- Lap Times Panel -->
+            <div class="glass-panel module" id="mod-laptimes">
+                <div class="panel-title">Lap Times</div>
+                <div class="lap-times-layout">
+                    <div class="lap-times-text-group">
+                        <div class="lap-times-meta-row">
+                            <span class="lap-times-label">Current Stint Laps</span>
+                            <span class="lap-times-value" id="val-current-stint">0</span>
+                        </div>
+                        <div class="lap-times-meta-row">
+                            <span class="lap-times-label">Current</span>
+                            <span class="lap-times-value" id="val-current-lap">0:00.000</span>
+                        </div>
+                        <div class="lap-times-meta-row">
+                            <span class="lap-times-label">Best</span>
+                            <span class="lap-times-value best" id="val-best-lap">0:00.000</span>
+                        </div>
+                        <div class="lap-times-meta-row">
+                            <span class="lap-times-label">Vs Best</span>
+                            <span class="lap-times-value" id="val-delta">0.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="glass-panel module" id="mod-pitroad-center" style="display: none; flex: 1; flex-direction: column; justify-content: flex-start; align-items: stretch;">
                 <div class="panel-title">Pit Road Manager</div>
                 
@@ -1972,31 +2003,6 @@
                 <div style="display: flex; justify-content: space-between; font-size: 14px; font-family: 'Outfit'; font-weight: 700; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 12px 20px; border-radius: 8px; margin-top: auto; border: 1.5px solid rgba(255,255,255,0.06);">
                     <span>CURRENT STINT: <span id="val-stint-laps-center" style="color: #fff; font-family: 'Roboto Mono';">0</span> LAPS</span>
                     <span>PREV STINT: <span id="val-prev-stint-center" style="color: #fff; font-family: 'Roboto Mono';">0</span> LAPS</span>
-                </div>
-            </div>
-
-            <!-- Lap Times Panel -->
-            <div class="glass-panel module" id="mod-laptimes">
-                <div class="panel-title">Lap Times</div>
-                <div class="lap-times-layout">
-                    <div class="lap-times-text-group">
-                        <div class="lap-times-meta-row">
-                            <span class="lap-times-label">Current Stint Laps</span>
-                            <span class="lap-times-value" id="val-current-stint">0</span>
-                        </div>
-                        <div class="lap-times-meta-row">
-                            <span class="lap-times-label">Current</span>
-                            <span class="lap-times-value" id="val-current-lap">0:00.000</span>
-                        </div>
-                        <div class="lap-times-meta-row">
-                            <span class="lap-times-label">Best</span>
-                            <span class="lap-times-value best" id="val-best-lap">0:00.000</span>
-                        </div>
-                        <div class="lap-times-meta-row">
-                            <span class="lap-times-label">Vs Best</span>
-                            <span class="lap-times-value" id="val-delta">0.000</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
