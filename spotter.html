@@ -1380,7 +1380,7 @@
                 let isYellow = flags[flagIndex] === 'yellow';
                 let isBlack = flags[flagIndex] === 'black';
                 
-                let onPitRoad = isBlack; // simulate pit entry on black flag
+                let onPitRoad = isYellow || isBlack; // simulate pit entry on yellow (caution) or black flag
                 let feetToStall = 0.0;
                 let throttle = 1.0;
                 let brake = 0.0;
