@@ -422,8 +422,8 @@
             flex-direction: column !important;
         }
 
-        :fullscreen .dash-card > div,
-        .is-fullscreen .dash-card > div {
+        :fullscreen .dash-card > div:not(#pit-speed-box),
+        .is-fullscreen .dash-card > div:not(#pit-speed-box) {
             flex: 1 !important;
         }
 
@@ -528,7 +528,7 @@
                 <!-- Column 1: Standings / Relative -->
                 <div class="dash-card">
                     <h3 class="card-title">Driver Standings</h3>
-                    <div style="overflow-y: auto; flex: 1; min-height: 380px;">
+                    <div style="overflow-y: auto; flex: 1; min-height: 280px; scrollbar-gutter: stable;">
                         <table class="relative-table">
                             <thead>
                                 <tr>
