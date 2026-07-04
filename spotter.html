@@ -790,11 +790,15 @@
         let lastPacketTime = 0;
         let offlineCheckTimer = null;
 
-        // Auto-connect if query parameter exists
+        // Auto-connect or auto-demo if query parameters exist
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const driverId = urlParams.get('driver');
-            if (driverId) {
+            const autoDemo = urlParams.get('autodemo') === 'true' || urlParams.get('demo') === 'true';
+            
+            if (autoDemo) {
+                activateDemoMode();
+            } else if (driverId) {
                 document.getElementById('driver-input').value = driverId;
                 connectDriverPortal(driverId);
             }
