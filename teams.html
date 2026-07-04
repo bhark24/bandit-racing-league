@@ -909,15 +909,20 @@
                 const isForSale = team.id === 'striped-maple-racing';
 
                 const homeBaseBadge = isForSale 
-                    ? `<span style="font-size:0.65rem; background:var(--chase-yellow); color:#000; padding:3px 6px; border-radius:4px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px;">BANKRUPT</span>`
+                    ? ''
                     : `<span style="font-size:0.75rem; background:rgba(255,255,255,0.05); padding:4px 8px; border-radius:4px; color:var(--text-muted); font-weight:700; text-transform:uppercase;">${team.homeBase}</span>`;
+
+                const teamNameStyle = isForSale
+                    ? 'color: #00ff00; font-family: var(--font-heading); font-size: 1.3rem; margin: 5px 0; font-style: italic; font-weight: 900; text-transform: uppercase;'
+                    : 'color: #fff; font-family: var(--font-heading); font-size: 1.3rem; margin: 5px 0; font-style: italic;';
+                const teamNameText = isForSale ? 'FRANCHISE AVAILABLE' : team.name;
 
                 card.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                         <img src="${team.logo}" alt="${team.name}" class="team-overview-logo" style="height: 45px; ${isForSale ? 'filter: grayscale(1) opacity(0.35);' : ''}">
                         ${homeBaseBadge}
                     </div>
-                    <h3 style="color:#fff; font-family:var(--font-heading); font-size:1.3rem; margin:5px 0; font-style: italic; ${isForSale ? 'text-decoration: line-through; color: #666;' : ''}">${team.name}</h3>
+                    <h3 style="${teamNameStyle}">${teamNameText}</h3>
                     
                     ${isForSale ? `
                         <div style="background: rgba(255, 204, 0, 0.08); border: 2.5px dashed var(--chase-yellow); border-radius: 6px; padding: 12px; margin: 10px 0; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255,204,0,0.12);">
@@ -928,7 +933,7 @@
                         </div>
                     ` : ''}
 
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">${isForSale ? 'Former Owner: Lucas Wilson' : 'Owner: ' + team.owner}</p>
+                    ${isForSale ? '' : `<p style="font-size:0.85rem; color:var(--text-muted); margin:0;">Owner: ${team.owner}</p>`}
                     <div class="team-overview-balance" style="${isForSale ? 'color: var(--chase-yellow); font-size: 1.35rem; margin-top: 5px;' : ''}">${isForSale ? 'ACQUISITION VAL: $1,937,028' : formattedBalance}</div>
                     <div style="font-size:0.8rem; color:var(--text-muted); border-top:1px solid #1c1c1c; padding-top:10px; margin-top:auto; display:flex; justify-content:space-between;">
                         <span>RACE CHASSIS:</span>
@@ -1193,8 +1198,8 @@
             // Update Panel Headers
             const isForSale = team.id === 'striped-maple-racing';
             if (isForSale) {
-                document.getElementById('detail-team-name').innerHTML = `${team.name} <span style="font-size:0.8rem; background:var(--chase-yellow); color:#000; padding:2px 6px; border-radius:3px; font-weight:bold; margin-left:10px; vertical-align:middle; font-family:var(--font-heading); font-style:normal;">FOR SALE</span>`;
-                document.getElementById('detail-team-owner').innerHTML = `<span style="text-decoration:line-through; color:#888;">${team.owner}</span> <span style="color:var(--chase-yellow); margin-left:10px; font-weight:bold;">(LIQUIDATED)</span>`;
+                document.getElementById('detail-team-name').innerHTML = `<span style="color: #00ff00; font-family: var(--font-heading); font-style: italic; font-weight: 900; text-transform: uppercase;">FRANCHISE AVAILABLE</span> <span style="font-size:0.8rem; background:var(--chase-yellow); color:#000; padding:2px 6px; border-radius:3px; font-weight:bold; margin-left:10px; vertical-align:middle; font-family:var(--font-heading); font-style:normal;">FOR SALE</span>`;
+                document.getElementById('detail-team-owner').innerHTML = `<span style="color:#888; font-style:italic;">None (Liquidated)</span>`;
                 document.getElementById('detail-team-balance-large').textContent = 'ACQUISITION VALUE: $1,937,028';
                 document.getElementById('detail-team-logo').style.filter = 'grayscale(1) opacity(0.4)';
             } else {
