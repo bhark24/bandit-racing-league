@@ -484,11 +484,6 @@
 </head>
 <body>
 
-    <!-- Under Construction Banner Ribbon -->
-    <div class="construction-banner">
-        ⚠️ under construction <span>Sneak Peek Only</span> under construction ⚠️
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -536,6 +531,9 @@
                 <img src="assets/geezer-authentics-logo.png" alt="Geezer Authentic's" style="width: 100%; max-width: 430px; height: auto; filter: drop-shadow(0 0 20px rgba(0, 255, 0, 0.4));">
             </h1>
             <h2 class="hero-subtitle italic-heavy" style="text-transform: uppercase; letter-spacing: 2px; color: var(--chase-yellow); font-size: 1.4rem;">OFFICIAL MERCHANDISE OF THE BANDIT RACING LEAGUE</h2>
+            <a href="https://geezerauthentics.printful.me/" target="_blank" class="btn-primary" style="background-color: var(--neon-green); border-color: var(--neon-green); color: #000; padding: 12px 30px; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-weight: bold; text-transform: uppercase; box-shadow: 0 0 15px rgba(0, 255, 0, 0.3); transition: all 0.3s ease; border-radius: var(--border-radius); font-family: var(--font-heading); margin-top: 15px; font-style: italic;" onmouseover="this.style.boxShadow='0 0 25px rgba(0, 255, 0, 0.6)'; this.style.backgroundColor='transparent'; this.style.color='var(--neon-green)';" onmouseout="this.style.boxShadow='0 0 15px rgba(0, 255, 0, 0.3)'; this.style.backgroundColor='var(--neon-green)'; this.style.color='#000';">
+                <span>🛒</span> Visit Printful Storefront
+            </a>
         </div>
     </header>
 
@@ -545,14 +543,14 @@
         <!-- Welcome Info -->
         <div class="card neon-border" style="padding: 30px; margin-bottom: 50px;">
             <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: space-between;">
-                <div style="max-width: 700px;">
-                    <h3 style="color: var(--neon-green); margin-bottom: 10px;">Welcome to the Sneak Peek!</h3>
+                <div style="max-width: 730px;">
+                    <h3 style="color: var(--neon-green); margin-bottom: 10px;">Official League Merchandise</h3>
                     <p style="color: var(--text-muted); line-height: 1.5;">
-                        We are currently preparing the official merchandise store for the Bandit Racing League! Below is a preview of the upcoming BRL gear. You can browse other official gear from our provider at <a href="https://geezerauthentics.printful.me/" target="_blank" style="color: var(--neon-green); text-decoration: underline; font-weight: bold;">Geezer Authentic's</a>, or try out this mock shopping cart (use code <strong style="color: var(--neon-green);">BANDIT10</strong> for a mock 10% discount!).
+                        Welcome to the official Bandit Racing League merchandise portal, operated in collaboration with <a href="https://geezerauthentics.printful.me/" target="_blank" style="color: var(--neon-green); text-decoration: underline; font-weight: bold;">Geezer Authentics</a>. All our gear is custom-printed on demand and shipped directly to your door. You can add items to your local selection bag below to build your cart, and proceed to checkout securely on our official Printful storefront!
                     </p>
                 </div>
-                <div style="background-color: rgba(255, 204, 0, 0.1); border: 1.5px solid var(--chase-yellow); padding: 15px; border-radius: 6px; font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; text-align: center; color: var(--chase-yellow); letter-spacing: 0.5px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.1);">
-                    ⚠️ Cart is in Sandbox Mode
+                <div style="background-color: rgba(57, 255, 20, 0.05); border: 1.5px solid var(--neon-green); padding: 15px; border-radius: 6px; font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; text-align: center; color: var(--neon-green); letter-spacing: 0.5px; box-shadow: 0 0 10px rgba(0, 255, 0, 0.15);">
+                    ✅ Storefront is Active
                 </div>
             </div>
         </div>
@@ -560,7 +558,31 @@
         <!-- Merch Catalog -->
         <div class="merch-grid">
             
-            <!-- Hoodie -->
+            <!-- Season 16 T-Shirt -->
+            <div class="product-card" data-id="brl-s16-tshirt">
+                <span class="product-badge">New Release</span>
+                <div class="product-image-container">
+                    <img src="assets/brl_s16_tshirt.png" alt="BRL Season 16 T-Shirt" class="product-image" onerror="this.src='assets/merch_hoodie.png';">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">BRL Season 16 T-Shirt</h3>
+                    <p class="product-description">Official double-sided printed t-shirt. Features the BRL cowboy shield logo on the left chest, and the massive BRL shield logo with the official league website text graphic on the back.</p>
+                    <select class="product-options" id="opt-tshirt">
+                        <option value="S">Size: Small</option>
+                        <option value="M" selected>Size: Medium</option>
+                        <option value="L">Size: Large</option>
+                        <option value="XL">Size: X-Large</option>
+                        <option value="2XL">Size: 2-Large</option>
+                        <option value="3XL">Size: 3-Large</option>
+                        <option value="4XL">Size: 4-Large</option>
+                        <option value="5XL">Size: 5-Large</option>
+                    </select>
+                    <div class="product-bottom">
+                        <span class="product-price">$24.99</span>
+                        <a href="https://geezerauthentics.printful.me/product/brl-s16" target="_blank" class="btn-primary add-to-cart-btn" data-id="brl-s16-tshirt" data-name="BRL Season 16 T-Shirt" data-price="24.99" data-img="assets/brl_s16_tshirt.png" data-select="opt-tshirt" style="text-decoration: none; text-align: center;">View on Store</a>
+                    </div>
+                </div>
+            </div>
             <div class="product-card" data-id="brl-hoodie">
                 <span class="product-badge">Top Seller</span>
                 <div class="product-image-container">
@@ -690,20 +712,20 @@
         </div>
     </div>
 
-    <!-- Under Construction Modal popup -->
+    <!-- Secure Checkout Redirect Modal popup -->
     <div class="cart-overlay" id="modalOverlay" style="z-index: 1999;"></div>
-    <div class="construction-modal" id="constructionModal">
-        <div class="modal-icon">⚠️</div>
-        <h2 style="margin-bottom: 15px; color: var(--chase-yellow);">Under Construction</h2>
-        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 25px;">
-            The Bandit Racing League merchandise store is currently in development. Online ordering is disabled during this sneak peek. 
+    <div class="construction-modal" id="constructionModal" style="border-color: var(--neon-green); box-shadow: 0 0 30px rgba(0, 255, 0, 0.35);">
+        <div class="modal-icon" style="color: var(--neon-green); font-size: 3.5rem; margin-bottom: 15px;">🛒</div>
+        <h2 style="margin-bottom: 15px; color: #fff; font-family: var(--font-heading); text-transform: uppercase; font-style: italic; font-weight: 900; font-size: 1.6rem;">Redirecting to Printful</h2>
+        <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 25px; font-size: 0.95rem;">
+            Official Bandit Racing League apparel is securely processed and fulfilled on-demand by our partner, **Geezer Authentics**, on Printful. Click below to open the storefront and select your sizes to complete your order.
         </p>
-        <p style="color: var(--text-light); font-weight: bold; margin-bottom: 30px;">
-            Visit our official merchandise provider, Geezer Authentics, to browse other available gear!
+        <p style="color: var(--text-light); font-weight: bold; margin-bottom: 30px; font-family: var(--font-heading); font-size: 1.1rem; text-transform: uppercase;">
+            Use Code: <span style="color: var(--neon-green);">BANDIT10</span> for 10% Off!
         </p>
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <a href="https://geezerauthentics.printful.me/" target="_blank" class="btn-primary" style="padding: 12px 25px; text-decoration: none;">Visit Geezer Authentics</a>
-            <button class="btn-secondary" id="modalCloseBtn" style="padding: 12px 25px;">Back to Preview</button>
+            <a href="https://geezerauthentics.printful.me/" target="_blank" class="btn-primary" style="padding: 12px 28px; text-decoration: none; font-family: var(--font-heading); font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: 0.5px;">Open Printful Shop</a>
+            <button class="btn-secondary" id="modalCloseBtn" style="padding: 12px 28px; font-family: var(--font-heading); font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: 0.5px;">Review Bag</button>
         </div>
     </div>
 
