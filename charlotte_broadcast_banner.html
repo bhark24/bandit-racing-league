@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Charlotte Broadcast Banner</title>
+  <!-- Google Fonts for racing typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,800;1,900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #060608;
+      --neon-red: #ff1744;
+      --glow-red: rgba(255, 23, 68, 0.65);
+      --card-bg: rgba(5, 5, 6, 0.75);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 1024px;
+      height: 576px;
+      background-color: var(--bg-dark);
+      font-family: 'Outfit', sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .banner-container {
+      width: 1024px;
+      height: 576px;
+      background-image: 
+        linear-gradient(to bottom, rgba(6, 6, 8, 0.96) 0%, rgba(8, 8, 10, 0.88) 40%, rgba(45, 6, 10, 0.93) 100%), 
+        url('assets/carbon_fiber_texture.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      box-sizing: border-box;
+      border: 4px solid #0c0d10;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px;
+    }
+
+    /* Template Overlay: Layered on top of everything to lock size/positions of logos */
+    .template-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1024px;
+      height: 576px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Bottom Section Layout (Occupies y=200 to 576px) */
+    .bottom-section {
+      width: 100%;
+      height: 330px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 5;
+      gap: 30px;
+      box-sizing: border-box;
+      padding-top: 10px;
+    }
+
+    /* Left Side: Matco Tools Sponsor Card */
+    .sponsor-card {
+      background: var(--card-bg);
+      border: 2px solid rgba(255, 23, 68, 0.35);
+      box-shadow: 0 0 25px rgba(255, 23, 68, 0.15);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 440px;
+      height: 280px;
+      box-sizing: border-box;
+      backdrop-filter: blur(5px);
+    }
+
+    /* SVG logo styling */
+    .matco-logo-svg {
+      filter: drop-shadow(0 0 15px rgba(255, 23, 68, 0.45));
+      margin-bottom: 5px;
+    }
+
+    .matco-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: 38px;
+      color: #ffffff;
+      letter-spacing: -1.5px;
+      margin-top: 6px;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(255, 23, 68, 0.4);
+      transform: skewX(-4deg);
+    }
+
+    .distributor-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      color: #b0b5be;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-top: 2px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Right Side: Race Details */
+    .details-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      height: 280px;
+      box-sizing: border-box;
+      padding-left: 10px;
+    }
+
+    .race-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: 38px;
+      line-height: 1.1;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin: 5px 0;
+      transform: skewX(-6deg);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+
+    .race-title .highlight {
+      color: var(--neon-red);
+      text-shadow: 0 0 12px var(--glow-red);
+    }
+
+    .track-name {
+      font-size: 26px;
+      font-weight: 900;
+      font-style: italic;
+      color: #e0e0e5;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 5px 0 15px 0;
+      border-left: 4px solid var(--neon-red);
+      padding-left: 12px;
+      text-shadow: 0 0 10px rgba(255, 23, 68, 0.1);
+    }
+
+    .info-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      background: rgba(255, 23, 68, 0.08);
+      border: 1.5px solid var(--neon-red);
+      border-radius: 4px;
+      padding: 8px 16px;
+      color: #ffffff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      box-shadow: 0 0 12px rgba(255, 23, 68, 0.15);
+      margin-bottom: 8px;
+    }
+
+    .time-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 4px;
+      padding: 8px 16px;
+      color: #ffffff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="banner-container">
+    <!-- Template Overlay: Strictly preserves top logo sizes and coordinates -->
+    <img src="assets/charlotte_banner_template.png" class="template-overlay" alt="Broadcast Banner Template">
+
+    <!-- Bottom Section: Race Sponsor and Information -->
+    <div class="bottom-section">
+      <!-- Left: Matco Tools Sponsor Card -->
+      <div class="sponsor-card">
+        <!-- High-fidelity custom SVG of the Matco Tools Hexagon Symbol -->
+        <svg class="matco-logo-svg" viewBox="0 0 100 100" width="110" height="110" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff3b46" />
+              <stop offset="100%" stop-color="#9d0a11" />
+            </linearGradient>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <drop-shadow dx="0" dy="4" stdDeviation="5" flood-color="#ff1744" flood-opacity="0.45"/>
+            </filter>
+          </defs>
+          <!-- Outer hexagon polygon (pointed top/bottom, flat sides) -->
+          <polygon points="50,4 91,27.5 91,72.5 50,96 9,72.5 9,27.5" fill="url(#redGrad)" stroke="#ffffff" stroke-width="2.5" filter="url(#shadow)" />
+          
+          <!-- Inner hexagon border -->
+          <polygon points="50,11 84,30.5 84,69.5 50,89 16,69.5 16,30.5" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+          
+          <!-- Stylized Hex Socket Inner Emblem -->
+          <polygon points="50,22 75,36.5 75,63.5 50,78 25,63.5 25,36.5" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+          
+          <!-- Core hexagon shape -->
+          <polygon points="50,30 68,40.5 68,59.5 50,70 32,59.5 32,40.5" fill="#ffffff" />
+          
+          <!-- Accent red center notch -->
+          <polygon points="50,36 61,42.5 61,53.5 50,60 39,53.5 39,42.5" fill="url(#redGrad)" />
+        </svg>
+        <div class="matco-text">MATCO TOOLS</div>
+        <div class="distributor-text">BY PATRICK MORRISON</div>
+      </div>
+
+      <!-- Right: Race Details and Live Air Info -->
+      <div class="details-card">
+        <div class="race-title">
+          THE <span class="highlight">MATCO TOOLS</span> 120
+        </div>
+        <div class="track-name">Charlotte Motor Speedway</div>
+        <div class="info-badge">Wednesday, July 8th</div>
+        <div class="time-badge">Broadcast Live at 9:00 PM EST</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
