@@ -1597,9 +1597,32 @@
                     repairsUsed = 1;
                 }
 
-                // Move drivers along the track loop
+                // Move drivers along the track loop with caution/pitting pace
                 trackDrivers.forEach(d => {
-                    d.pct = (d.pct + 0.004) % 1.0;
+                    if (d.highlight) {
+                        // Player movement logic
+                        if (demoStep >= 350 && demoStep < 420) {
+                            // Stopped in pit stall: do not advance position
+                        } else if ((demoStep >= 320 && demoStep < 350) || (demoStep >= 420 && demoStep < 450)) {
+                            // Moving slowly on pit lane (pit road speed limit)
+                            d.pct = (d.pct + 0.001) % 1.0;
+                        } else if (demoStep >= 250 && demoStep < 320) {
+                            // Slowing down under caution on track
+                            d.pct = (d.pct + 0.0015) % 1.0;
+                        } else {
+                            // Full speed green flag racing
+                            d.pct = (d.pct + 0.004) % 1.0;
+                        }
+                    } else {
+                        // Opponents movement logic
+                        if (demoStep >= 250 && demoStep < 450) {
+                            // Slowing down under caution pace car
+                            d.pct = (d.pct + 0.0015) % 1.0;
+                        } else {
+                            // Full speed green flag racing
+                            d.pct = (d.pct + 0.004) % 1.0;
+                        }
+                    }
                 });
 
                 // Modulate standings gap numbers slightly
