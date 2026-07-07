@@ -632,7 +632,7 @@
                 <div style="display: flex; flex-direction: column; gap: 15px;">
                     
                     <!-- Session Lap Times Card -->
-                    <div class="dash-card">
+                    <div id="lap-times-card" class="dash-card">
                         <h3 class="card-title">Session Lap Times</h3>
                         <div class="card-content-stretch" style="display: flex; flex-direction: column; gap: 10px; justify-content: center; flex: 1;">
                             <!-- Last Lap -->
@@ -661,6 +661,48 @@
                                 </div>
                                 <span id="header-fuel-est" style="font-size: 1.5rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif;">--.-</span>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Pit Road & Track Map Card -->
+                    <div id="pit-road-card" class="dash-card" style="display: none; flex-direction: column;">
+                        <h3 class="card-title">Pit Lane Telemetry</h3>
+                        
+                        <!-- Pit stop stats -->
+                        <div style="display: flex; justify-content: space-around; width: 100%; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 10px; border-radius: 8px; margin-bottom: 10px; box-sizing: border-box;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 0.5px;">Stationary</div>
+                                <div id="pit-stationary-timer" style="font-size: 1.4rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">0.0s</div>
+                            </div>
+                            <div style="width: 1px; height: 26px; background: rgba(255,255,255,0.12);"></div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 0.5px;">Total Pit</div>
+                                <div id="pit-total-timer" style="font-size: 1.4rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">0.0s</div>
+                            </div>
+                            <div style="width: 1px; height: 26px; background: rgba(255,255,255,0.12);"></div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 0.5px;">Positions +/-</div>
+                                <div id="pit-position-change" style="font-size: 1.4rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">--</div>
+                            </div>
+                        </div>
+                        
+                        <!-- SVG Live Track Path -->
+                        <div style="position: relative; width: 100%; height: 110px; background: rgba(0,0,0,0.45); border: 1px solid #2a2c33; border-radius: 8px; padding: 5px; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                            <svg viewBox="0 0 400 200" width="100%" height="100%" id="track-svg" style="display: block;">
+                                <!-- Gray background track line -->
+                                <path d="M 100 20 L 300 20 A 80 80 0 0 1 300 180 L 100 180 A 80 80 0 0 1 100 20 Z" fill="none" stroke="#22252e" stroke-width="24" stroke-linecap="round"></path>
+                                <!-- Inner indicator line -->
+                                <path d="M 100 20 L 300 20 A 80 80 0 0 1 300 180 L 100 180 A 80 80 0 0 1 100 20 Z" fill="none" stroke="#101115" stroke-width="2" stroke-linecap="round"></path>
+                                
+                                <!-- Moving driver dots group -->
+                                <g id="track-dots-group"></g>
+                            </svg>
+                        </div>
+                        
+                        <!-- Track Map Legend -->
+                        <div style="display: flex; justify-content: center; gap: 15px; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; margin-top: 8px; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700;">
+                            <span style="display:flex; align-items:center; gap:5px;"><span style="width:8px; height:8px; border-radius:50%; background:var(--neon-green); box-shadow:0 0 5px var(--neon-green)"></span> Player</span>
+                            <span style="display:flex; align-items:center; gap:5px;"><span style="width:8px; height:8px; border-radius:50%; background:#ff1744;"></span> Opponents</span>
                         </div>
                     </div>
 
@@ -854,6 +896,15 @@
         let demoInterval = null;
         let lastPacketTime = 0;
         let offlineCheckTimer = null;
+
+        // Pit Stop Telemetry state tracking
+        let pitRoadActive = false;
+        let pitRoadStartTime = 0;
+        let pitStationaryActive = false;
+        let pitStationaryStartTime = 0;
+        let pitStationaryDuration = 0.0;
+        let pitTotalDuration = 0.0;
+        let pitEntryPosition = null;
 
         // Auto-connect or auto-demo if query parameters exist
         window.addEventListener('DOMContentLoaded', () => {
@@ -1069,6 +1120,75 @@
 
             // Update Track Logo Layout dynamically
             updateTrackLogo(data.trackName);
+
+            // Handle Pit Stop Timers & UI Toggling
+            const lapTimesCard = document.getElementById('lap-times-card');
+            const pitRoadCard = document.getElementById('pit-road-card');
+
+            if (data.onPitRoad) {
+                // Show pit road card, hide lap times card
+                if (lapTimesCard) lapTimesCard.style.display = 'none';
+                if (pitRoadCard) pitRoadCard.style.display = 'flex';
+
+                // 1. Pit Road Total Timer
+                if (!pitRoadActive) {
+                    pitRoadActive = true;
+                    pitRoadStartTime = Date.now();
+                    pitTotalDuration = 0.0;
+                    
+                    // Track entry position
+                    const playerStanding = data.relative?.find(d => d.highlight);
+                    pitEntryPosition = playerStanding ? playerStanding.pos : null;
+                } else {
+                    pitTotalDuration = (Date.now() - pitRoadStartTime) / 1000;
+                }
+                document.getElementById('pit-total-timer').innerText = pitTotalDuration.toFixed(1) + 's';
+
+                // 2. Pit Stationary Timer
+                const isStationary = (data.speed !== undefined && Math.round(data.speed) === 0);
+                if (isStationary) {
+                    if (!pitStationaryActive) {
+                        pitStationaryActive = true;
+                        pitStationaryStartTime = Date.now();
+                        pitStationaryDuration = 0.0;
+                    } else {
+                        pitStationaryDuration = (Date.now() - pitStationaryStartTime) / 1000;
+                    }
+                }
+                document.getElementById('pit-stationary-timer').innerText = pitStationaryDuration.toFixed(1) + 's';
+
+                // 3. Positions Gained / Lost
+                const playerStandingNow = data.relative?.find(d => d.highlight);
+                const currentPos = playerStandingNow ? playerStandingNow.pos : null;
+                
+                const posChangeEl = document.getElementById('pit-position-change');
+                if (posChangeEl) {
+                    if (pitEntryPosition !== null && currentPos !== null) {
+                        const diff = pitEntryPosition - currentPos; // positive is gained, negative is lost
+                        if (diff > 0) {
+                            posChangeEl.innerText = `+${diff}`;
+                            posChangeEl.style.color = 'var(--neon-green)';
+                        } else if (diff < 0) {
+                            posChangeEl.innerText = `${diff}`;
+                            posChangeEl.style.color = '#ff1744';
+                        } else {
+                            posChangeEl.innerText = `0`;
+                            posChangeEl.style.color = '#fff';
+                        }
+                    } else {
+                        posChangeEl.innerText = `--`;
+                        posChangeEl.style.color = '#fff';
+                    }
+                }
+            } else {
+                // Not on pit road: show lap times card, hide pit road card
+                if (lapTimesCard) lapTimesCard.style.display = 'flex';
+                if (pitRoadCard) pitRoadCard.style.display = 'none';
+
+                // Reset pit timers state for the next stop
+                pitRoadActive = false;
+                pitStationaryActive = false;
+            }
 
             // Update Flag States
             updateFlagState(data.flagState);
@@ -1469,6 +1589,19 @@
                 relativePositions[1].gap += (Math.random() - 0.5) * 0.03;
                 relativePositions[3].gap += (Math.random() - 0.5) * 0.03;
                 relativePositions[4].gap += (Math.random() - 0.5) * 0.04;
+
+                // Simulate positions lost/gained during pit stop in demo mode
+                if (demoStep >= 350 && demoStep < 380) {
+                    relativePositions[2].pos = 6;
+                } else if (demoStep >= 380 && demoStep < 410) {
+                    relativePositions[2].pos = 7;
+                } else if (demoStep >= 410 && demoStep < 430) {
+                    relativePositions[2].pos = 8;
+                } else if (demoStep >= 430 && demoStep < 470) {
+                    relativePositions[2].pos = 7;
+                } else {
+                    relativePositions[2].pos = 5;
+                }
 
                 let flagState = 'green';
                 let onPitRoad = false;
