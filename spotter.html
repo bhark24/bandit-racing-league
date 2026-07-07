@@ -913,6 +913,8 @@
         let pitStationaryDuration = 0.0;
         let pitTotalDuration = 0.0;
         let pitEntryPosition = null;
+        let pitStatsPersist = false;
+        let pitExitTime = 0;
 
         // Auto-connect or auto-demo if query parameters exist
         window.addEventListener('DOMContentLoaded', () => {
@@ -1142,15 +1144,12 @@
             const trackCardTitle = document.getElementById('track-card-title');
             const trackMapStatus = document.getElementById('track-map-status');
 
+            const isCaution = (data.flagState === 'yellow');
+            const isGreen = (data.flagState === 'green');
+
             if (data.onPitRoad) {
-                // Show pit stats section, hide lap times section
-                if (lapTimesContainer) lapTimesContainer.style.display = 'none';
-                if (pitStatsContainer) pitStatsContainer.style.display = 'grid';
-                if (trackCardTitle) trackCardTitle.innerText = "Pit Lane Telemetry";
-                if (trackMapStatus) {
-                    trackMapStatus.innerText = "Pitting";
-                    trackMapStatus.style.color = "var(--chase-yellow)";
-                }
+                pitStatsPersist = true;
+                pitExitTime = 0;
 
                 // 1. Pit Road Total Timer
                 if (!pitRoadActive) {
@@ -1203,6 +1202,46 @@
                     }
                 }
             } else {
+                // If they were previously active on pit road, they just exited!
+                if (pitRoadActive) {
+                    pitRoadActive = false;
+                    pitStationaryActive = false;
+                    pitExitTime = Date.now();
+                }
+
+                // Under green, expire pit stats screen after 15 seconds. Under caution, persist it indefinitely.
+                if (pitExitTime > 0) {
+                    if (isGreen) {
+                        if (Date.now() - pitExitTime > 15000) {
+                            pitStatsPersist = false;
+                            pitExitTime = 0;
+                        }
+                    }
+                } else {
+                    // Fallback to clear persistence if not in caution
+                    if (isGreen) {
+                        pitStatsPersist = false;
+                    }
+                }
+            }
+
+            const showPitStats = data.onPitRoad || pitStatsPersist;
+
+            if (showPitStats) {
+                // Show pit stats section, hide lap times section
+                if (lapTimesContainer) lapTimesContainer.style.display = 'none';
+                if (pitStatsContainer) pitStatsContainer.style.display = 'grid';
+                if (trackCardTitle) trackCardTitle.innerText = "Pit Lane Telemetry";
+                if (trackMapStatus) {
+                    if (data.onPitRoad) {
+                        trackMapStatus.innerText = "Pitting";
+                        trackMapStatus.style.color = "var(--chase-yellow)";
+                    } else {
+                        trackMapStatus.innerText = "Pit Stop Info (Caution)";
+                        trackMapStatus.style.color = "var(--text-muted)";
+                    }
+                }
+            } else {
                 // Not on pit road: show lap times section, hide pit stats section
                 if (lapTimesContainer) lapTimesContainer.style.display = 'grid';
                 if (pitStatsContainer) pitStatsContainer.style.display = 'none';
@@ -1211,10 +1250,6 @@
                     trackMapStatus.innerText = "Track Map Active";
                     trackMapStatus.style.color = "var(--neon-green)";
                 }
-
-                // Reset pit timers state for the next stop
-                pitRoadActive = false;
-                pitStationaryActive = false;
             }
 
             // Update Flag States
