@@ -1601,6 +1601,15 @@
                 if (demoStep === 0) {
                     repairsAvail = 1;
                     repairsUsed = 0;
+                    
+                    // Reset positions at the start of each cycle to synchronize pit stops with the front stretch
+                    trackDrivers[0].pct = 0.295;
+                    trackDrivers[1].pct = 0.275;
+                    trackDrivers[2].pct = 0.245;
+                    trackDrivers[3].pct = 0.225;
+                    trackDrivers[4].pct = 0.195;
+                    trackDrivers[5].pct = 0.645;
+                    trackDrivers[6].pct = 0.795;
                 } else if (demoStep === 350) {
                     repairsAvail = 0;
                     repairsUsed = 1;
