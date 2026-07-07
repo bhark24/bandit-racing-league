@@ -631,63 +631,12 @@
                 <!-- Column 2: Active Track Map & Live Telemetry -->
                 <div style="display: flex; flex-direction: column; gap: 15px;">
                     
-                    <!-- Session Lap Times Card -->
-                    <div id="lap-times-card" class="dash-card">
-                        <h3 class="card-title">Session Lap Times</h3>
-                        <div class="card-content-stretch" style="display: flex; flex-direction: column; gap: 10px; justify-content: center; flex: 1;">
-                            <!-- Last Lap -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 8px 14px; border-radius: 8px;">
-                                <div style="display: flex; flex-direction: column;">
-                                    <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Last Lap Time</span>
-                                    <span style="font-size: 0.65rem; color: var(--text-muted); font-style: italic;">Most recent completed lap</span>
-                                </div>
-                                <span id="header-last-lap" style="font-size: 1.5rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif;">--:--.---</span>
-                            </div>
-                            
-                            <!-- Best Lap -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 8px 14px; border-radius: 8px;">
-                                <div style="display: flex; flex-direction: column;">
-                                    <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Personal Best</span>
-                                    <span style="font-size: 0.65rem; color: var(--text-muted); font-style: italic;">Fastest lap in session</span>
-                                </div>
-                                <span id="header-best-lap" style="font-size: 1.5rem; font-weight: 900; color: var(--chase-yellow); font-style: italic; font-family: 'Outfit', sans-serif;">--:--.---</span>
-                            </div>
-                            
-                            <!-- Fuel Laps Remaining -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 8px 14px; border-radius: 8px;">
-                                <div style="display: flex; flex-direction: column;">
-                                    <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Fuel Est. Laps</span>
-                                    <span style="font-size: 0.65rem; color: var(--text-muted); font-style: italic;">Laps remaining on fuel</span>
-                                </div>
-                                <span id="header-fuel-est" style="font-size: 1.5rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif;">--.-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pit Road & Track Map Card -->
-                    <div id="pit-road-card" class="dash-card" style="display: none; flex-direction: column;">
-                        <h3 class="card-title">Pit Lane Telemetry</h3>
+                    <!-- Track Map & Session Stats Card -->
+                    <div class="dash-card">
+                        <h3 class="card-title" id="track-card-title">Active Track Map</h3>
                         
-                        <!-- Pit stop stats -->
-                        <div style="display: flex; justify-content: space-around; width: 100%; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 10px; border-radius: 8px; margin-bottom: 10px; box-sizing: border-box;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 0.5px;">Stationary</div>
-                                <div id="pit-stationary-timer" style="font-size: 1.4rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">0.0s</div>
-                            </div>
-                            <div style="width: 1px; height: 26px; background: rgba(255,255,255,0.12);"></div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 0.5px;">Total Pit</div>
-                                <div id="pit-total-timer" style="font-size: 1.4rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">0.0s</div>
-                            </div>
-                            <div style="width: 1px; height: 26px; background: rgba(255,255,255,0.12);"></div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-family: 'Outfit', sans-serif; font-weight: 700; letter-spacing: 0.5px;">Positions +/-</div>
-                                <div id="pit-position-change" style="font-size: 1.4rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">--</div>
-                            </div>
-                        </div>
-                        
-                        <!-- SVG Live Track Path -->
-                        <div style="position: relative; width: 100%; height: 110px; background: rgba(0,0,0,0.45); border: 1px solid #2a2c33; border-radius: 8px; padding: 5px; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        <!-- SVG Live Track Path (Always Visible) -->
+                        <div style="position: relative; width: 100%; height: 110px; background: rgba(0,0,0,0.45); border: 1px solid #2a2c33; border-radius: 8px; padding: 5px; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
                             <svg viewBox="0 0 400 200" width="100%" height="100%" id="track-svg" style="display: block;">
                                 <!-- Gray background track line -->
                                 <path d="M 100 20 L 300 20 A 80 80 0 0 1 300 180 L 100 180 A 80 80 0 0 1 100 20 Z" fill="none" stroke="#22252e" stroke-width="24" stroke-linecap="round"></path>
@@ -699,10 +648,51 @@
                             </svg>
                         </div>
                         
-                        <!-- Track Map Legend -->
-                        <div style="display: flex; justify-content: center; gap: 15px; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; margin-top: 8px; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700;">
-                            <span style="display:flex; align-items:center; gap:5px;"><span style="width:8px; height:8px; border-radius:50%; background:var(--neon-green); box-shadow:0 0 5px var(--neon-green)"></span> Player</span>
-                            <span style="display:flex; align-items:center; gap:5px;"><span style="width:8px; height:8px; border-radius:50%; background:#ff1744;"></span> Opponents</span>
+                        <!-- Track Map Legend & Status (Always Visible, Compact) -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700;">
+                            <div style="display: flex; gap: 10px;">
+                                <span style="display:flex; align-items:center; gap:4px;"><span style="width:6px; height:6px; border-radius:50%; background:var(--neon-green); box-shadow:0 0 4px var(--neon-green)"></span> Player</span>
+                                <span style="display:flex; align-items:center; gap:4px;"><span style="width:6px; height:6px; border-radius:50%; background:#ff1744;"></span> Opponents</span>
+                            </div>
+                            <span id="track-map-status" style="color: var(--neon-green);">Track Map Active</span>
+                        </div>
+
+                        <!-- Lap Times Section (Visible by Default) -->
+                        <div id="lap-times-container" style="display: flex; flex-direction: column; gap: 8px; justify-content: center; width: 100%;">
+                            <!-- Last Lap -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 12px; border-radius: 6px;">
+                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Last Lap</span>
+                                <span id="header-last-lap" style="font-size: 1.3rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif;">--:--.---</span>
+                            </div>
+                            <!-- Best Lap -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 12px; border-radius: 6px;">
+                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Best Lap</span>
+                                <span id="header-best-lap" style="font-size: 1.3rem; font-weight: 900; color: var(--chase-yellow); font-style: italic; font-family: 'Outfit', sans-serif;">--:--.---</span>
+                            </div>
+                            <!-- Fuel Laps Remaining -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 12px; border-radius: 6px;">
+                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Fuel Laps</span>
+                                <span id="header-fuel-est" style="font-size: 1.3rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif;">--.-</span>
+                            </div>
+                        </div>
+
+                        <!-- Pit Stop Stats Section (Hidden by Default) -->
+                        <div id="pit-stats-container" style="display: none; flex-direction: column; gap: 8px; width: 100%;">
+                            <!-- Stationary Timer -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.15); padding: 6px 12px; border-radius: 6px;">
+                                <span style="font-size: 0.7rem; color: var(--neon-green); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Stationary Time</span>
+                                <span id="pit-stationary-timer" style="font-size: 1.3rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif;">0.0s</span>
+                            </div>
+                            <!-- Total Pit Timer -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 12px; border-radius: 6px;">
+                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Total Pit Time</span>
+                                <span id="pit-total-timer" style="font-size: 1.3rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif;">0.0s</span>
+                            </div>
+                            <!-- Position Net -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 12px; border-radius: 6px;">
+                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Positions +/-</span>
+                                <span id="pit-position-change" style="font-size: 1.3rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif;">--</span>
+                            </div>
                         </div>
                     </div>
 
@@ -1122,13 +1112,20 @@
             updateTrackLogo(data.trackName);
 
             // Handle Pit Stop Timers & UI Toggling
-            const lapTimesCard = document.getElementById('lap-times-card');
-            const pitRoadCard = document.getElementById('pit-road-card');
+            const lapTimesContainer = document.getElementById('lap-times-container');
+            const pitStatsContainer = document.getElementById('pit-stats-container');
+            const trackCardTitle = document.getElementById('track-card-title');
+            const trackMapStatus = document.getElementById('track-map-status');
 
             if (data.onPitRoad) {
-                // Show pit road card, hide lap times card
-                if (lapTimesCard) lapTimesCard.style.display = 'none';
-                if (pitRoadCard) pitRoadCard.style.display = 'flex';
+                // Show pit stats section, hide lap times section
+                if (lapTimesContainer) lapTimesContainer.style.display = 'none';
+                if (pitStatsContainer) pitStatsContainer.style.display = 'flex';
+                if (trackCardTitle) trackCardTitle.innerText = "Pit Lane Telemetry";
+                if (trackMapStatus) {
+                    trackMapStatus.innerText = "Pitting";
+                    trackMapStatus.style.color = "var(--chase-yellow)";
+                }
 
                 // 1. Pit Road Total Timer
                 if (!pitRoadActive) {
@@ -1181,9 +1178,14 @@
                     }
                 }
             } else {
-                // Not on pit road: show lap times card, hide pit road card
-                if (lapTimesCard) lapTimesCard.style.display = 'flex';
-                if (pitRoadCard) pitRoadCard.style.display = 'none';
+                // Not on pit road: show lap times section, hide pit stats section
+                if (lapTimesContainer) lapTimesContainer.style.display = 'flex';
+                if (pitStatsContainer) pitStatsContainer.style.display = 'none';
+                if (trackCardTitle) trackCardTitle.innerText = "Active Track Map";
+                if (trackMapStatus) {
+                    trackMapStatus.innerText = "Track Map Active";
+                    trackMapStatus.style.color = "var(--neon-green)";
+                }
 
                 // Reset pit timers state for the next stop
                 pitRoadActive = false;
@@ -1560,7 +1562,7 @@
             let currentWearRR = 90;
 
             // Simulated live telemetry loop variables
-            let gear = 5;
+            let gear = 4;
             let speed = 188;
             let rpm = 7450;
             let incidents = 2;
@@ -1620,7 +1622,7 @@
                     brake = 0.0;
                     speed = Math.min(195, Math.max(182, speed + (Math.random() - 0.5) * 2));
                     rpm = speed * 41 + (Math.random() - 0.5) * 50;
-                    gear = 5;
+                    gear = 4;
 
                     fuel -= 0.03;
                     if (fuel <= 1.0) fuel = 18.5;
