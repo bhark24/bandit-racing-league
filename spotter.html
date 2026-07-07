@@ -636,7 +636,7 @@
                         <h3 class="card-title" id="track-card-title">Active Track Map</h3>
                         
                         <!-- SVG Live Track Path (Always Visible) -->
-                        <div style="position: relative; width: 100%; height: 110px; background: rgba(0,0,0,0.45); border: 1px solid #2a2c33; border-radius: 8px; padding: 5px; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                        <div style="position: relative; width: 100%; height: 85px; background: rgba(0,0,0,0.45); border: 1px solid #2a2c33; border-radius: 8px; padding: 5px; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 6px;">
                             <svg viewBox="0 0 400 200" width="100%" height="100%" id="track-svg" style="display: block;">
                                 <!-- Gray background track line -->
                                 <path d="M 100 20 L 300 20 A 80 80 0 0 1 300 180 L 100 180 A 80 80 0 0 1 100 20 Z" fill="none" stroke="#22252e" stroke-width="24" stroke-linecap="round"></path>
@@ -649,7 +649,7 @@
                         </div>
                         
                         <!-- Track Map Legend & Status (Always Visible, Compact) -->
-                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px; font-family:'Outfit', sans-serif; font-style:italic; font-weight:700;">
                             <div style="display: flex; gap: 10px;">
                                 <span style="display:flex; align-items:center; gap:4px;"><span style="width:6px; height:6px; border-radius:50%; background:var(--neon-green); box-shadow:0 0 4px var(--neon-green)"></span> Player</span>
                                 <span style="display:flex; align-items:center; gap:4px;"><span style="width:6px; height:6px; border-radius:50%; background:#ff1744;"></span> Opponents</span>
@@ -657,41 +657,41 @@
                             <span id="track-map-status" style="color: var(--neon-green);">Track Map Active</span>
                         </div>
 
-                        <!-- Lap Times Section (Visible by Default) -->
-                        <div id="lap-times-container" style="display: flex; flex-direction: column; gap: 8px; justify-content: center; width: 100%;">
+                        <!-- Lap Times Section (Visible by Default, Horizontal Layout) -->
+                        <div id="lap-times-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%;">
                             <!-- Last Lap -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 12px; border-radius: 6px;">
-                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Last Lap</span>
-                                <span id="header-last-lap" style="font-size: 1.3rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif;">--:--.---</span>
+                            <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 5px; border-radius: 6px; text-align: center;">
+                                <div id="header-last-lap" style="font-size: 1.15rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">--:--.---</div>
+                                <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px;">Last Lap</div>
                             </div>
                             <!-- Best Lap -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 12px; border-radius: 6px;">
-                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Best Lap</span>
-                                <span id="header-best-lap" style="font-size: 1.3rem; font-weight: 900; color: var(--chase-yellow); font-style: italic; font-family: 'Outfit', sans-serif;">--:--.---</span>
+                            <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 5px; border-radius: 6px; text-align: center;">
+                                <div id="header-best-lap" style="font-size: 1.15rem; font-weight: 900; color: var(--chase-yellow); font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">--:--.---</div>
+                                <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px;">Best Lap</div>
                             </div>
                             <!-- Fuel Laps Remaining -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 12px; border-radius: 6px;">
-                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Fuel Laps</span>
-                                <span id="header-fuel-est" style="font-size: 1.3rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif;">--.-</span>
+                            <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 5px; border-radius: 6px; text-align: center;">
+                                <div id="header-fuel-est" style="font-size: 1.15rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">--.-</div>
+                                <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px;">Fuel Laps</div>
                             </div>
                         </div>
 
-                        <!-- Pit Stop Stats Section (Hidden by Default) -->
-                        <div id="pit-stats-container" style="display: none; flex-direction: column; gap: 8px; width: 100%;">
+                        <!-- Pit Stop Stats Section (Hidden by Default, Horizontal Layout) -->
+                        <div id="pit-stats-container" style="display: none; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%;">
                             <!-- Stationary Timer -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.15); padding: 6px 12px; border-radius: 6px;">
-                                <span style="font-size: 0.7rem; color: var(--neon-green); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Stationary Time</span>
-                                <span id="pit-stationary-timer" style="font-size: 1.3rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif;">0.0s</span>
+                            <div style="background: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.15); padding: 5px; border-radius: 6px; text-align: center;">
+                                <div id="pit-stationary-timer" style="font-size: 1.15rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">0.0s</div>
+                                <div style="font-size: 0.6rem; color: var(--neon-green); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px;">Stationary</div>
                             </div>
                             <!-- Total Pit Timer -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 12px; border-radius: 6px;">
-                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Total Pit Time</span>
-                                <span id="pit-total-timer" style="font-size: 1.3rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif;">0.0s</span>
+                            <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 5px; border-radius: 6px; text-align: center;">
+                                <div id="pit-total-timer" style="font-size: 1.15rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">0.0s</div>
+                                <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px;">Total Pit</div>
                             </div>
                             <!-- Position Net -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 6px 12px; border-radius: 6px;">
-                                <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; font-style: italic;">Positions +/-</span>
-                                <span id="pit-position-change" style="font-size: 1.3rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif;">--</span>
+                            <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); padding: 5px; border-radius: 6px; text-align: center;">
+                                <div id="pit-position-change" style="font-size: 1.15rem; font-weight: 900; color: #fff; font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">--</div>
+                                <div style="font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px;">Positions +/-</div>
                             </div>
                         </div>
                     </div>
@@ -1120,7 +1120,7 @@
             if (data.onPitRoad) {
                 // Show pit stats section, hide lap times section
                 if (lapTimesContainer) lapTimesContainer.style.display = 'none';
-                if (pitStatsContainer) pitStatsContainer.style.display = 'flex';
+                if (pitStatsContainer) pitStatsContainer.style.display = 'grid';
                 if (trackCardTitle) trackCardTitle.innerText = "Pit Lane Telemetry";
                 if (trackMapStatus) {
                     trackMapStatus.innerText = "Pitting";
@@ -1179,7 +1179,7 @@
                 }
             } else {
                 // Not on pit road: show lap times section, hide pit stats section
-                if (lapTimesContainer) lapTimesContainer.style.display = 'flex';
+                if (lapTimesContainer) lapTimesContainer.style.display = 'grid';
                 if (pitStatsContainer) pitStatsContainer.style.display = 'none';
                 if (trackCardTitle) trackCardTitle.innerText = "Active Track Map";
                 if (trackMapStatus) {
