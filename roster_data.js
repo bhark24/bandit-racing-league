@@ -109,7 +109,7 @@ const rosterData = {
   },
   "29": {
     "driver": "GARRET BOBO",
-    "status": "part-time"
+    "status": "full-time"
   },
   "30": {
     "driver": "CARTER PHILLIPS",

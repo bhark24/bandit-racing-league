@@ -2075,11 +2075,11 @@ const teamsData = {
       "balance": 2046542,
       "drivers": {
         "backup": [
-          "VACANT",
+          "WES FULLER",
           "VACANT"
         ],
         "primary": [
-          "WES FULLER",
+          "VACANT",
           "VACANT",
           "VACANT",
           "VACANT"
@@ -2300,13 +2300,13 @@ const teamsData = {
       "balance": 2086723,
       "drivers": {
         "backup": [
-          "GARRET BOBO",
+          "VACANT",
           "VACANT"
         ],
         "primary": [
           "JACKSON DUKE",
           "CORDELL MCFARLIN",
-          "VACANT",
+          "GARRET BOBO",
           "VACANT"
         ]
       },
@@ -2921,13 +2921,13 @@ const teamsData = {
       "balance": 2210049,
       "drivers": {
         "backup": [
-          "VACANT",
+          "JOSH BILLITER",
           "VACANT"
         ],
         "primary": [
-          "JOSH BILLITER",
           "DYLAN MCDONALD",
           "NICOLE KRIESEL",
+          "VACANT",
           "VACANT"
         ]
       },
