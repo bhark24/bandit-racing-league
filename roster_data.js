@@ -11,6 +11,10 @@ const rosterData = {
     "driver": "NICK NICKERSON",
     "status": "past-champion"
   },
+  "3": {
+    "driver": "MARK GALLOWAY",
+    "status": "part-time"
+  },
   "4": {
     "driver": "LOGAN MURRAY",
     "status": "full-time"
