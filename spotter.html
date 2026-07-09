@@ -596,10 +596,11 @@
                     <div class="driver-avatar" id="header-avatar">DR</div>
                     <div class="driver-meta">
                         <h2 id="header-driver-name">Loading Driver...</h2>
-                        <p>Track: <span id="header-track-name" style="color:var(--chase-yellow); font-weight:bold; text-transform:uppercase;">Determining Track...</span> | iRacing Customer ID: <span id="header-driver-id">00000</span> | Session Laps Remaining: <span id="header-laps-remain" style="color:var(--neon-green); font-weight:bold;">--</span></p>
+                        <p>Track: <span id="header-track-name" style="color:var(--chase-yellow); font-weight:bold; text-transform:uppercase;">Determining Track...</span> | ID: <span id="header-driver-id">00000</span> | Laps Run: <span id="header-driver-lap" style="color:var(--neon-blue); font-weight:bold;">--</span> | Session Laps Remaining: <span id="header-laps-remain" style="color:var(--neon-green); font-weight:bold;">--</span></p>
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 15px;">
+                    <button id="btn-spotter-disconnect" class="btn-secondary" style="width: auto; padding: 10px 18px; font-size: 0.85rem; margin: 0; border: 2px solid #ff1744; color: #ff1744;" onclick="disconnectDriverPortal()">Disconnect</button>
                     <button id="btn-spotter-fullscreen" class="btn-verify" style="width: auto; padding: 10px 18px; font-size: 0.85rem; margin: 0; background: rgba(57, 255, 20, 0.05); border: 2px solid var(--neon-green); color: var(--neon-green);">📺 Fullscreen</button>
                     <div class="status-badge status-offline" id="connection-badge">
                         <div class="status-dot"></div>
@@ -919,7 +920,7 @@
         // Auto-connect or auto-demo if query parameters exist
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const driverId = urlParams.get('driver');
+            let driverId = urlParams.get('driver');
             const autoDemo = urlParams.get('autodemo') === 'true' || urlParams.get('demo') === 'true';
             
             // Auto-hide navbar/footer when embedded in an iframe (demo view)
@@ -929,9 +930,14 @@
             
             if (autoDemo) {
                 activateDemoMode();
-            } else if (driverId) {
-                document.getElementById('driver-input').value = driverId;
-                connectDriverPortal(driverId);
+            } else {
+                if (!driverId) {
+                    driverId = localStorage.getItem('spotter_driver_id');
+                }
+                if (driverId) {
+                    document.getElementById('driver-input').value = driverId;
+                    connectDriverPortal(driverId);
+                }
             }
         });
 
@@ -944,6 +950,9 @@
                 alert("Please enter a valid iRacing Customer ID.");
                 return;
             }
+
+            // Save to localStorage for convenience on refresh
+            localStorage.setItem('spotter_driver_id', driverId);
 
             // Hide portal login, show dashboard shell
             document.getElementById('portal-setup').style.display = 'none';
@@ -1019,6 +1028,18 @@
                     updateConnectionStatus(false, "OFFLINE");
                 }
             }, 2000);
+        }
+
+        function disconnectDriverPortal() {
+            localStorage.removeItem('spotter_driver_id');
+            if (ws) {
+                ws.onclose = null;
+                ws.close();
+            }
+            if (reconnectTimeout) clearTimeout(reconnectTimeout);
+            document.getElementById('dashboard-layout').style.display = 'none';
+            document.getElementById('portal-setup').style.display = 'block';
+            updateConnectionStatus(false, "OFFLINE");
         }
 
         /* SVG Oval Coordinate Mapper (Counter-Clockwise) */
@@ -1136,6 +1157,7 @@
             document.getElementById('header-driver-name').innerText = playerInfo ? playerInfo.name : "Bill Harkins";
             document.getElementById('header-track-name').innerText = data.trackName || "Unknown Track";
             document.getElementById('header-laps-remain').innerText = data.lapsRemaining || "--";
+            document.getElementById('header-driver-lap').innerText = data.lap !== undefined ? data.lap : "--";
 
             // Update Header Vitals
             document.getElementById('header-last-lap').innerText = formatLapTime(data.lapCurrent);
@@ -1807,6 +1829,7 @@
                 const mockData = {
                     trackName: "Daytona International Speedway",
                     flagState: flagState,
+                    lap: lap + Math.floor(demoStep / 10),
                     fuel: fuel,
                     avgFuel: 0.428,
                     lapsFuelRemaining: fuel / 0.428,
