@@ -235,8 +235,18 @@
                     </div>
                 </div>
 
-                <!-- Atlanta Race Recap -->
+                <!-- Charlotte Race Recap -->
                 <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green);">
+                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                    <a href='/article_charlotte_recap.html' style='text-decoration: none;'>
+                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Adams Ascends at Charlotte: Dominant Run Earns 937 Racing its First Win</h3>
+                    </a>
+                    <p style="color: #ccc; margin-bottom: 15px;">Josh Adams drove a flawless race in the #22 TRD Tundra to take victory at Charlotte Motor Speedway, leading a race-high 54 laps. GFR Racing's Johnathon Platt fought from 14th to finish 2nd, while Benjamin Lacy completed the podium in 3rd. Read the full report.</p>
+                    <a class='btn-primary' href='/article_charlotte_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
+                </div>
+
+                <!-- Atlanta Race Recap -->
+                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.9;">
                     <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
                     <a href='/article_atlanta_recap.html' style='text-decoration: none;'>
                         <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Redemption in the Peach State: Johnathon Platt Conquers Atlanta</h3>
@@ -246,7 +256,7 @@
                 </div>
 
                 <!-- Daytona Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.85;">
+                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.75;">
                     <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
                     <a href='/article_daytona_controversy.html' style='text-decoration: none;'>
                         <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Controversy at Daytona: Britt Stripped of Win, McDonald Declared Winner</h3>
@@ -824,6 +834,8 @@
                         recapText = `A chaotic finish at the Season 16 opener saw a last-lap collision strip the initial winner of the win, declaring Dylan McDonald the official winner for Legacy Racing.`;
                     } else if (wTrack.toLowerCase().includes("atlanta")) {
                         recapText = `After the heartbreak of the season opener, **${wCleanName}** bounced back in spectacular fashion, driving a masterful race to secure victory at **${wTrack}**! Platt qualified 10th but carved forward, leading 32 laps to seal the win.`;
+                    } else if (wTrack.toLowerCase().includes("charlotte")) {
+                        recapText = `A dominant performance by **${wCleanName}** earned 937 Racing its first win of Season 16! Adams qualified 6th and led 54 laps, holding off a late-race charge from Platt to secure victory at **${wTrack}**.`;
                     } else {
                         recapText = `Congratulations to **${wCleanName}** for executing a perfect race strategy, outrunning the field to take the checkered flag at **${wTrack}**!`;
                     }

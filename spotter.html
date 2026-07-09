@@ -1102,10 +1102,10 @@
                 let pos = getOvalCoordinates(d.pct);
                 
                 // Visual offset for pitting vehicle (dive onto pit lane line)
-                if (d.highlight && pitRoadActive) {
-                    if (pos.y > 150) {
-                        pos.y = 160;
-                    }
+                if (d.onPitRoad || (d.highlight && pitRoadActive)) {
+                    pos.y = 160;
+                    if (pos.x < 120) pos.x = 120;
+                    if (pos.x > 280) pos.x = 280;
                 }
                 
                 // Vehicle dot element
@@ -1157,7 +1157,7 @@
             document.getElementById('header-driver-name').innerText = playerInfo ? playerInfo.name : "Bill Harkins";
             document.getElementById('header-track-name').innerText = data.trackName || "Unknown Track";
             document.getElementById('header-laps-remain').innerText = data.lapsRemaining || "--";
-            document.getElementById('header-driver-lap').innerText = data.lap !== undefined ? data.lap : "--";
+            document.getElementById('header-driver-lap').innerText = data.lapsCompleted !== undefined ? data.lapsCompleted : "--";
 
             // Update Header Vitals
             document.getElementById('header-last-lap').innerText = formatLapTime(data.lapCurrent);

@@ -1309,8 +1309,15 @@
             }
         }
 
-        // Call loadAuthData on startup
-        window.addEventListener('DOMContentLoaded', loadAuthData);
+        // Call loadAuthData on startup and auto-verify if ID is saved
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadAuthData();
+            const savedId = localStorage.getItem('verified_iracing_id');
+            if (savedId && authorizedIds.includes(savedId)) {
+                document.getElementById("iracing-id").value = savedId;
+                verifyDriverId();
+            }
+        });
 
         function verifyDriverId() {
             const inputVal = document.getElementById("iracing-id").value.trim();
@@ -1347,6 +1354,9 @@
                     statusDiv.innerHTML = "Access Granted. Welcome Driver!";
                     statusDiv.style.color = "var(--neon-green)";
                     
+                    // Save to localStorage for convenience on refresh
+                    localStorage.setItem('verified_iracing_id', inputVal);
+                    
                     // Generate dynamic Spotter URL
                     const spotterUrlBox = document.getElementById("spotter-url-box");
                     if (spotterUrlBox) {
@@ -1358,6 +1368,7 @@
                 } else {
                     statusDiv.innerHTML = "Access Denied. Account Number Not Registered.";
                     statusDiv.style.color = "#ff1744";
+                    localStorage.removeItem('verified_iracing_id');
                 }
             }, 1000);
         }
@@ -1442,7 +1453,18 @@
         function stopGeezerDemo() {
             isDemoActive = false;
             document.body.style.overflow = "auto";
-            document.getElementById("geezer-demo-container").style.display = "none";
+            const container = document.getElementById("geezer-demo-container");
+            container.style.display = "none";
+            const grid = container.querySelector("#dashboard-grid");
+            if (grid) {
+                grid.style.transform = "";
+                grid.style.transformOrigin = "";
+                grid.style.width = "";
+                grid.style.height = "";
+                grid.style.position = "";
+                grid.style.left = "";
+                grid.style.top = "";
+            }
             if (demoInterval) clearInterval(demoInterval);
             window.removeEventListener('resize', scaleDemoCanvas);
             
@@ -1476,9 +1498,23 @@
             let scale = Math.min(scaleX, scaleY);
             
             const container = document.getElementById("geezer-demo-container");
-            container.style.zoom = scale;
-            container.style.width = (window.innerWidth / scale) + "px";
-            container.style.height = (window.innerHeight / scale) + "px";
+            const grid = container.querySelector("#dashboard-grid");
+            
+            if (grid) {
+                grid.style.transform = `scale(${scale})`;
+                grid.style.transformOrigin = 'top left';
+                grid.style.width = '1920px';
+                grid.style.height = '1080px';
+                
+                const offsetX = (window.innerWidth - (1920 * scale)) / 2;
+                const offsetY = (window.innerHeight - (1080 * scale)) / 2;
+                grid.style.position = 'absolute';
+                grid.style.left = `${offsetX}px`;
+                grid.style.top = `${offsetY}px`;
+            }
+            
+            container.style.width = "100vw";
+            container.style.height = "100vh";
         }
 
         function runGeezerDemoLoop() {
@@ -2356,9 +2392,9 @@
     </div>
 
     <!-- SPOTTER APP DEMO CONTAINER -->
-    <div id="spotter-demo-container" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-color: #040507; overflow: hidden;">
+    <div id="spotter-demo-container" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-color: #040507; overflow-y: auto; -webkit-overflow-scrolling: touch;">
         <!-- Close Bar -->
-        <div style="position: absolute; top: 15px; right: 20px; z-index: 10000; display: flex; gap: 15px; align-items: center; user-select: none;">
+        <div style="position: fixed; top: 15px; right: 20px; z-index: 10000; display: flex; gap: 15px; align-items: center; user-select: none;">
             <span style="color: #39ff14; font-family: 'Outfit'; font-weight: 900; text-transform: uppercase; font-size: 0.85rem; background: rgba(57, 255, 20, 0.1); border: 1px solid #39ff14; padding: 6px 12px; border-radius: 4px; letter-spacing: 1px; font-style: italic;">Visual Demo Active</span>
             <button onclick="stopSpotterDemo()" style="padding: 8px 18px; background: #ff1744; border: 1.5px solid #ff1744; color: #fff; font-family: 'Outfit'; font-weight: 900; cursor: pointer; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85rem; font-style: italic; transition: 0.2s;" onmouseover="this.style.background='transparent'; this.style.color='#ff1744';" onmouseout="this.style.background='#ff1744'; this.style.color='#fff';">Exit Demo</button>
         </div>
