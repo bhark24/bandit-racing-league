@@ -1030,8 +1030,15 @@
             const curveLen = Math.PI * 80;
             const totalLen = (straightLen * 2) + (curveLen * 2);
             
+            // Shift telemetry pct so start/finish line (pct = 0.0) is at the center of the bottom straightaway (front stretch)
+            let mappedPct = pct;
+            if (!isDemoMode) {
+                mappedPct = (pct + 0.389) % 1.0;
+                if (mappedPct < 0) mappedPct += 1.0;
+            }
+
             // Reverse direction to make it counter-clockwise (oval-style track mapping)
-            let reversedPct = 1.0 - (pct % 1.0);
+            let reversedPct = 1.0 - (mappedPct % 1.0);
             if (reversedPct < 0) reversedPct += 1.0;
             
             let d = reversedPct * totalLen;
