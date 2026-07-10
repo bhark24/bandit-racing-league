@@ -673,9 +673,7 @@ def main():
 
     winner_team = find_driver_team(winner_name, teams_data)
 
-    post_text = f"""🏁 **BANDIT RACING LEAGUE - WEEKLY UPDATE** 🏁
-Custom Standing Graphic: assets/weekly_social_update.png
-
+    post_text = f"""**BANDIT RACING LEAGUE - WEEKLY UPDATE** 🏁
 {story_lead}
 
 What a wild start to Season 16! Congratulations to **{winner_name}** and {winner_team} for taking the checkered flag at **{track_name}** ({race_date})! 🏆
