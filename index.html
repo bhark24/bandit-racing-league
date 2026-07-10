@@ -727,6 +727,7 @@
                 tempImg.onload = function() {
                     spotlightImg.src = carImgSrc;
                     spotlightImg.style.display = 'block';
+                    spotlightImg.style.objectFit = 'cover';
                     fallbackBlock.style.display = 'none';
                     imgLoaded = true;
                 };
@@ -738,6 +739,7 @@
                     tempTruck.onload = function() {
                         spotlightImg.src = truckImgSrc;
                         spotlightImg.style.display = 'block';
+                        spotlightImg.style.objectFit = 'contain';
                         fallbackBlock.style.display = 'none';
                         imgLoaded = true;
                     };
@@ -865,6 +867,11 @@
                         tempWCar.onload = function() {
                             wCarImg.src = wCarImgSrc;
                             wCarImg.style.display = 'block';
+                            if (wCarImgSrc.includes('truck_image_')) {
+                                wCarImg.style.objectFit = 'contain';
+                            } else {
+                                wCarImg.style.objectFit = 'cover';
+                            }
                             wFallbackBlock.style.display = 'none';
                         };
                         tempWCar.onerror = function() {
