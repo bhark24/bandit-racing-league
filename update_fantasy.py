@@ -554,9 +554,10 @@ def main():
     # Calculate lock date of the race being scored
     # race_date is e.g. "Jun 24, 2026"
     dt = datetime.strptime(race_date, "%b %d, %Y")
-    # Locks at 9:15 PM local time (EDT/EST) on race day
-    race_lock_dt = datetime(dt.year, dt.month, dt.day, 21, 15, 0)
-    print(f"[*] Scoring race with lock date boundary: {race_lock_dt}")
+    # Locks at 9:15 PM local time (EDT/EST) on race day (with a 5-minute grace period)
+    from datetime import timedelta
+    race_lock_dt = datetime(dt.year, dt.month, dt.day, 21, 15, 0) + timedelta(minutes=5)
+    print(f"[*] Scoring race with lock date boundary (with 5m grace period): {race_lock_dt}")
     
     # Load fan picks from Supabase/CSV, filtering out future picks
     picks, future_picks = load_picks(config, race_lock_dt)
