@@ -417,6 +417,9 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
     # Check if this race is already recorded to avoid duplicate updates
     race_key = f"{track_name} ({race_date})"
     if any(r["race"] == race_key for r in races_history):
+        if not fan_results:
+            print(f"[!] Warning: Race '{race_key}' is already recorded and the new run has 0 picks. Skipping overwrite to prevent wiping out standings.")
+            return
         print(f"Warning: Race '{race_key}' is already recorded. Overwriting standings for this race.")
         # Filter out the existing race from history
         races_history = [r for r in races_history if r["race"] != race_key]
