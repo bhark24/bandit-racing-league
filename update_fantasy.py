@@ -389,7 +389,7 @@ def score_picks(picks, driver_scores, caution_laps, config):
             "scores": [score_a, score_b1, score_b2, score_c],
             "total": total_score,
             "tiebreaker_guess": tiebreaker,
-            "tiebreaker_diff": abs(tiebreaker - caution_laps)
+            "tiebreaker_diff": (0 if tiebreaker <= caution_laps else 1, abs(tiebreaker - caution_laps))
         })
         
     return fan_results
@@ -435,8 +435,8 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
             best_score = res["total"]
             weekly_winners = [res["name"]]
         elif res["total"] == best_score:
-            # Handle tie with tiebreaker (closest to caution laps)
-            current_best_diff = next((x["tiebreaker_diff"] for x in fan_results if x["name"] in weekly_winners), 9999)
+            # Handle tie with tiebreaker (closest to caution laps without going over)
+            current_best_diff = next((x["tiebreaker_diff"] for x in fan_results if x["name"] in weekly_winners), (1, 9999))
             if res["tiebreaker_diff"] < current_best_diff:
                 weekly_winners = [res["name"]]
             elif res["tiebreaker_diff"] == current_best_diff:
