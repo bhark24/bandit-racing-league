@@ -217,6 +217,7 @@ def load_picks(config, race_lock_dt):
     
     # 1. Try loading from Supabase first if configured
     url, key = get_supabase_config()
+    db_picks = []
     if url and key:
         print("[*] Connecting to Supabase to load fantasy picks...")
         try:
@@ -230,65 +231,15 @@ def load_picks(config, race_lock_dt):
             with urllib.request.urlopen(req) as response:
                 res_data = json.loads(response.read().decode('utf-8'))
                 if res_data and len(res_data) > 0 and res_data[0].get("data") and "picks" in res_data[0]["data"]:
-                    db_picks = res_data[0]["data"]["picks"]
-                    if db_picks:
-                        print(f"[+] Loaded {len(db_picks)} active picks from Supabase.")
-                        # Format list: [Timestamp, Name, Pick A, Pick B1, Pick B2, Pick C, Tiebreaker]
-                        for p in db_picks:
-                            sub_time_str = p.get("submitted_at", datetime.now().isoformat())
-                            clean_time_str = sub_time_str.replace("Z", "+00:00") if sub_time_str.endswith("Z") else sub_time_str
-                            try:
-                                p_dt = datetime.fromisoformat(clean_time_str)
-                                # Convert to naive local time (assume EDT/EST, UTC-4)
-                                p_local = p_dt.astimezone(timezone.utc).replace(tzinfo=None) - timedelta(hours=4)
-                            except Exception as e:
-                                p_local = datetime.now()
-                                
-                            row = [
-                                sub_time_str,
-                                p.get("name", "Anonymous"),
-                                p.get("picks", ["", "", "", ""])[0] if len(p.get("picks", [])) > 0 else "",
-                                p.get("picks", ["", "", "", ""])[1] if len(p.get("picks", [])) > 1 else "",
-                                p.get("picks", ["", "", "", ""])[2] if len(p.get("picks", [])) > 2 else "",
-                                p.get("picks", ["", "", "", ""])[3] if len(p.get("picks", [])) > 3 else "",
-                                str(p.get("tiebreaker", 0))
-                            ]
-                            
-                            if p_local <= race_lock_dt:
-                                scored_picks.append(row)
-                            else:
-                                print(f"[-] Skipping future pick by '{p.get('name')}' (submitted {p_local} after race lock {race_lock_dt})")
-                                future_picks.append(p)
-                                
-                        return scored_picks, future_picks
-                    else:
-                        print("[!] No active picks found in Supabase (picks array is empty).")
+                    db_picks = res_data[0]["data"]["picks"] or []
+                    print(f"[+] Loaded {len(db_picks)} active picks from Supabase.")
         except Exception as e:
-            print(f"[!] Error loading picks from Supabase: {e}. Falling back to Google Sheet / CSV.")
+            print(f"[!] Error loading picks from Supabase: {e}")
 
-    # 2. Fallback to Google Sheets/CSV URL
+    # 2. Load from Google Sheets/CSV URL
     csv_url = config.get("google_sheet_csv_url", "")
-    picks = []
-    if not csv_url:
-        test_csv = os.path.join(BASE_DIR, "test_picks.csv")
-        print(f"Google Sheet CSV URL is empty. Checking local test file: {test_csv}")
-        if not os.path.exists(test_csv):
-            # Create a sample picks file
-            with open(test_csv, "w", encoding="utf-8", newline="") as f:
-                writer = csv.writer(f)
-                writer.writerow(["Timestamp", "Fan Name", "Tier A Driver", "Tier B Driver 1", "Tier B Driver 2", "Tier C Driver", "Caution Laps"])
-                writer.writerow(["2026-05-20 12:00:00", "John Smith", "Benjamin Lacy", "Jackson Knaak", "Josh Adams", "Curtis Yancey", "12"])
-                writer.writerow(["2026-05-20 12:05:00", "RaceFan99", "Nick Nickerson", "Bill Harkins", "Nicole Kriesel", "Nolan Gross", "5"])
-                writer.writerow(["2026-05-20 12:10:00", "LateModelLover", "Jonathon Platt", "Sean Britt", "Matt Crockett", "Curtis Yancey", "0"])
-            print(f"Created sample mock picks in {test_csv}")
-            
-        with open(test_csv, "r", encoding="utf-8") as f:
-            reader = csv.reader(f)
-            headers = next(reader)
-            for row in reader:
-                if len(row) >= 6:
-                    picks.append(row)
-    else:
+    sheet_picks = []
+    if csv_url:
         print("Downloading picks CSV from Google Sheet...")
         req = urllib.request.Request(csv_url, headers={'User-Agent': 'Mozilla/5.0'})
         try:
@@ -297,13 +248,83 @@ def load_picks(config, race_lock_dt):
                 reader = csv.reader(csv_data.splitlines())
                 headers = next(reader)
                 for row in reader:
-                    picks.append(row)
+                    sheet_picks.append(row)
+            print(f"Loaded {len(sheet_picks)} fan picks from CSV.")
         except Exception as e:
             print(f"Error fetching CSV from Google Sheets: {e}")
-            sys.exit(1)
+            if not db_picks:
+                sys.exit(1)
+    else:
+        test_csv = os.path.join(BASE_DIR, "test_picks.csv")
+        print(f"Google Sheet CSV URL is empty. Checking local test file: {test_csv}")
+        if os.path.exists(test_csv):
+            with open(test_csv, "r", encoding="utf-8") as f:
+                reader = csv.reader(f)
+                headers = next(reader)
+                for row in reader:
+                    if len(row) >= 6:
+                        sheet_picks.append(row)
+            print(f"Loaded {len(sheet_picks)} fan picks from test CSV.")
+
+    # 3. Merge picks (Supabase picks + Sheet picks, matched by name)
+    merged_picks_map = {}
+    
+    # Process Google Sheet picks
+    for row in sheet_picks:
+        if len(row) < 6:
+            continue
+        name = row[1].strip()
+        tiebreaker = 0
+        if len(row) > 6:
+            try:
+                tiebreaker = int(row[6])
+            except ValueError:
+                pass
+        merged_picks_map[name.lower()] = {
+            "name": name,
+            "picks": [row[2], row[3], row[4], row[5]],
+            "tiebreaker": tiebreaker,
+            "email": "",
+            "submitted_at": row[0]
+        }
+        
+    # Process Supabase picks (overwrite or add new)
+    for p in db_picks:
+        name = p.get("name", "").strip()
+        if not name:
+            continue
+        merged_picks_map[name.lower()] = p
+
+    # 4. Filter picks into scored and future based on race_lock_dt
+    for p in merged_picks_map.values():
+        sub_time_str = p.get("submitted_at", datetime.now().isoformat())
+        clean_time_str = sub_time_str.replace("Z", "+00:00") if sub_time_str.endswith("Z") else sub_time_str
+        try:
+            p_dt = datetime.fromisoformat(clean_time_str)
+            from datetime import timezone, timedelta
+            # Convert to naive local time (assume EDT/EST, UTC-4)
+            p_local = p_dt.astimezone(timezone.utc).replace(tzinfo=None) - timedelta(hours=4)
+        except Exception as e:
+            p_local = datetime.now()
             
-    print(f"Loaded {len(picks)} fan picks from CSV.")
-    return picks, []
+        row = [
+            sub_time_str,
+            p.get("name", "Anonymous"),
+            p.get("picks", ["", "", "", ""])[0] if len(p.get("picks", [])) > 0 else "",
+            p.get("picks", ["", "", "", ""])[1] if len(p.get("picks", [])) > 1 else "",
+            p.get("picks", ["", "", "", ""])[2] if len(p.get("picks", [])) > 2 else "",
+            p.get("picks", ["", "", "", ""])[3] if len(p.get("picks", [])) > 3 else "",
+            str(p.get("tiebreaker", 0))
+        ]
+        
+        if p_local <= race_lock_dt:
+            scored_picks.append(row)
+        else:
+            print(f"[-] Skipping future pick by '{p.get('name')}' (submitted {p_local} after race lock {race_lock_dt})")
+            future_picks.append(p)
+
+    print(f"Total merged scored picks: {len(scored_picks)}, future picks: {len(future_picks)}")
+    return scored_picks, future_picks
 
 def score_picks(picks, driver_scores, caution_laps, config):
     # Match headers to figure out columns
