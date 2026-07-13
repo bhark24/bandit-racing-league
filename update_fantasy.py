@@ -398,6 +398,7 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
     # Load existing standings from data_js
     existing_standings = {}
     races_history = []
+    recap_story = None
     
     if os.path.exists(DATA_JS_PATH):
         try:
@@ -411,6 +412,7 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
                 data = json.loads(match.group(1))
                 existing_standings = {player["name"]: player for player in data.get("leaderboard", [])}
                 races_history = data.get("races", [])
+                recap_story = data.get("recap_story", None)
         except Exception as e:
             print(f"Warning: Could not parse existing standings, starting fresh. Details: {e}")
             
@@ -508,6 +510,15 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
     for rank, player in enumerate(leaderboard, 1):
         player["rank"] = rank
         
+    # Update or generate recap story
+    if not recap_story or (recap_story.get("race_key") != race_key and weekly_winners):
+        recap_story = {
+            "race_key": race_key,
+            "title": f"{', '.join(weekly_winners)} Wins at {track_name}!",
+            "date": datetime.now().strftime("%B %d, %Y"),
+            "content": f"A fantastic week of racing at {track_name} saw {', '.join(weekly_winners)} claim the weekly fantasy victory with a score of {best_score} points! The race ran with {caution_laps} caution laps, which resolved any scoring ties using caution lap tiebreaker guesses. Check back soon for the full weekly results and roster breakdowns!"
+        }
+
     output_data = {
         "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "latest_race": {
@@ -518,6 +529,7 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
             "driver_scores": driver_scores
         },
         "tiers": config.get("tiers", {}),
+        "recap_story": recap_story,
         "leaderboard": leaderboard,
         "races": races_history
     }
