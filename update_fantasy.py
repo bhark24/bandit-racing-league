@@ -474,6 +474,7 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
                     "name": name,
                     "score": 0,
                     "wins": 0,
+                    "wins_list": [],
                     "history": []
                 }
             leaderboard_map[name]["score"] += entry["total"]
@@ -484,6 +485,15 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
             })
             if name in race_winners:
                 leaderboard_map[name]["wins"] += 1
+                # Format a shortened track name (e.g. "EchoPark Speedway (Atlanta)" -> "Atlanta")
+                track = r.get("track", "")
+                short_track = track
+                m_paren = re.search(r'\((.*?)\)', track)
+                if m_paren:
+                    short_track = m_paren.group(1)
+                else:
+                    short_track = short_track.replace(" Motor Speedway", "").replace(" International Speedway", "").replace(" Speedway", "").replace(" Superspeedway", "")
+                leaderboard_map[name]["wins_list"].append(short_track)
                 
     # Sort leaderboard by score desc
     leaderboard = sorted(leaderboard_map.values(), key=lambda x: x["score"], reverse=True)

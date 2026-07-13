@@ -1107,11 +1107,16 @@
                     picksHtml = '<span style="color:var(--text-muted); font-size:0.85rem;">No picks recorded</span>';
                 }
 
+                let winsHtml = `<div style="font-weight: bold;">${player.wins || 0}</div>`;
+                if (player.wins_list && player.wins_list.length > 0) {
+                    winsHtml += `<div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 3px; font-weight: normal; font-style: italic; text-transform: uppercase; letter-spacing: 0.5px;">${player.wins_list.join(', ')}</div>`;
+                }
+
                 tr.innerHTML = `
                     <td class="fantasy-rank">${player.rank}</td>
                     <td class="fantasy-player-name">${player.name}</td>
                     <td class="fantasy-score">${player.score} pts</td>
-                    <td class="fantasy-wins">${player.wins || 0}</td>
+                    <td class="fantasy-wins" style="line-height: 1.2; padding: 10px 8px;">${winsHtml}</td>
                     <td>${picksHtml}</td>
                 `;
                 tbody.appendChild(tr);
