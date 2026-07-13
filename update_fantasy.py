@@ -446,6 +446,7 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
         "track": track_name,
         "date": race_date,
         "caution_laps": caution_laps,
+        "winner": ", ".join(weekly_winners) if weekly_winners else "None",
         "results": [{
             "name": res["name"],
             "picks": res["picks"],
@@ -457,18 +458,23 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
     leaderboard_map = {}
     
     for r in races_history:
-        race_best = -9999
-        race_winners = []
-        for entry in r["results"]:
-            if entry["total"] > race_best:
-                race_best = entry["total"]
-                
-        for entry in r["results"]:
-            if entry["total"] == race_best:
-                race_winners.append(entry["name"])
-                
+        winner_str = r.get("winner", "")
+        # Fallback to score tie if no winner is saved
+        if not winner_str or winner_str == "None":
+            race_best = -9999
+            race_winners = []
+            for entry in r["results"]:
+                if entry["total"] > race_best:
+                    race_best = entry["total"]
+            for entry in r["results"]:
+                if entry["total"] == race_best:
+                    race_winners.append(entry["name"].lower().strip())
+        else:
+            race_winners = [w.strip().lower() for w in winner_str.split(",")]
+            
         for entry in r["results"]:
             name = entry["name"]
+            norm_name = name.strip().lower()
             if name not in leaderboard_map:
                 leaderboard_map[name] = {
                     "name": name,
@@ -483,7 +489,7 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
                 "total": entry["total"],
                 "picks": entry["picks"]
             })
-            if name in race_winners:
+            if norm_name in race_winners:
                 leaderboard_map[name]["wins"] += 1
                 # Format a shortened track name (e.g. "EchoPark Speedway (Atlanta)" -> "Atlanta")
                 track = r.get("track", "")
