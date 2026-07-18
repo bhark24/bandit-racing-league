@@ -637,6 +637,35 @@ const fantasyData = {
       "rank": 3
     },
     {
+      "name": "Bhark24",
+      "score": 155,
+      "wins": 0,
+      "wins_list": [],
+      "history": [
+        {
+          "race": "EchoPark Speedway (Atlanta) (Jun 24, 2026)",
+          "total": 91,
+          "picks": [
+            "BRET GUZIK",
+            "DYLAN MCDONALD",
+            "JONATHON PLATT",
+            "SCOTT SANDERSON"
+          ]
+        },
+        {
+          "race": "Bristol Motor Speedway (Jul 15, 2026)",
+          "total": 64,
+          "picks": [
+            "NICK NICKERSON",
+            "SCOTT SANDERSON",
+            "EDDIE HAGIGH",
+            "BRANDON JACKSON"
+          ]
+        }
+      ],
+      "rank": 4
+    },
+    {
       "name": "robin allens bigest fan",
       "score": 116,
       "wins": 0,
@@ -653,7 +682,7 @@ const fantasyData = {
           ]
         }
       ],
-      "rank": 4
+      "rank": 5
     },
     {
       "name": "Matt Crockett",
@@ -672,14 +701,24 @@ const fantasyData = {
           ]
         }
       ],
-      "rank": 5
+      "rank": 6
     },
     {
-      "name": "Michael rakes",
+      "name": "Michael Rakes",
       "score": 107,
       "wins": 0,
       "wins_list": [],
       "history": [
+        {
+          "race": "EchoPark Speedway (Atlanta) (Jun 24, 2026)",
+          "total": 0,
+          "picks": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
         {
           "race": "Bristol Motor Speedway (Jul 15, 2026)",
           "total": 107,
@@ -691,7 +730,7 @@ const fantasyData = {
           ]
         }
       ],
-      "rank": 6
+      "rank": 7
     },
     {
       "name": "LacyB",
@@ -707,25 +746,6 @@ const fantasyData = {
             "MICHAEL RAMOS",
             "KEVIN FOSTER",
             "NICK NICKERSON"
-          ]
-        }
-      ],
-      "rank": 7
-    },
-    {
-      "name": "Bhark24",
-      "score": 91,
-      "wins": 0,
-      "wins_list": [],
-      "history": [
-        {
-          "race": "EchoPark Speedway (Atlanta) (Jun 24, 2026)",
-          "total": 91,
-          "picks": [
-            "BRET GUZIK",
-            "DYLAN MCDONALD",
-            "JONATHON PLATT",
-            "SCOTT SANDERSON"
           ]
         }
       ],
@@ -829,25 +849,6 @@ const fantasyData = {
       "rank": 13
     },
     {
-      "name": "bhark24",
-      "score": 64,
-      "wins": 0,
-      "wins_list": [],
-      "history": [
-        {
-          "race": "Bristol Motor Speedway (Jul 15, 2026)",
-          "total": 64,
-          "picks": [
-            "NICK NICKERSON",
-            "SCOTT SANDERSON",
-            "EDDIE HAGIGH",
-            "BRANDON JACKSON"
-          ]
-        }
-      ],
-      "rank": 14
-    },
-    {
       "name": "RaceFan99",
       "score": 17,
       "wins": 0,
@@ -864,7 +865,7 @@ const fantasyData = {
           ]
         }
       ],
-      "rank": 15
+      "rank": 14
     },
     {
       "name": "Sean Britt",
@@ -883,7 +884,7 @@ const fantasyData = {
           ]
         }
       ],
-      "rank": 16
+      "rank": 15
     },
     {
       "name": "Eddie Hagigh",
@@ -902,26 +903,7 @@ const fantasyData = {
           ]
         }
       ],
-      "rank": 17
-    },
-    {
-      "name": "Michael Rakes",
-      "score": 0,
-      "wins": 0,
-      "wins_list": [],
-      "history": [
-        {
-          "race": "EchoPark Speedway (Atlanta) (Jun 24, 2026)",
-          "total": 0,
-          "picks": [
-            "",
-            "",
-            "",
-            ""
-          ]
-        }
-      ],
-      "rank": 18
+      "rank": 16
     }
   ],
   "races": [

@@ -477,22 +477,27 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
         for entry in r["results"]:
             name = entry["name"]
             norm_name = name.strip().lower()
-            if name not in leaderboard_map:
-                leaderboard_map[name] = {
+            if norm_name not in leaderboard_map:
+                leaderboard_map[norm_name] = {
                     "name": name,
                     "score": 0,
                     "wins": 0,
                     "wins_list": [],
                     "history": []
                 }
-            leaderboard_map[name]["score"] += entry["total"]
-            leaderboard_map[name]["history"].append({
+            else:
+                # If we encounter a version with capitals but the stored name doesn't have them, update the display name
+                stored_name = leaderboard_map[norm_name]["name"]
+                if name != norm_name and stored_name == norm_name:
+                    leaderboard_map[norm_name]["name"] = name
+            leaderboard_map[norm_name]["score"] += entry["total"]
+            leaderboard_map[norm_name]["history"].append({
                 "race": r["race"],
                 "total": entry["total"],
                 "picks": entry["picks"]
             })
             if norm_name in race_winners:
-                leaderboard_map[name]["wins"] += 1
+                leaderboard_map[norm_name]["wins"] += 1
                 # Format a shortened track name (e.g. "EchoPark Speedway (Atlanta)" -> "Atlanta")
                 track = r.get("track", "")
                 short_track = track
@@ -501,7 +506,7 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
                     short_track = m_paren.group(1)
                 else:
                     short_track = short_track.replace(" Motor Speedway", "").replace(" International Speedway", "").replace(" Speedway", "").replace(" Superspeedway", "")
-                leaderboard_map[name]["wins_list"].append(short_track)
+                leaderboard_map[norm_name]["wins_list"].append(short_track)
                 
     # Sort leaderboard by score desc
     leaderboard = sorted(leaderboard_map.values(), key=lambda x: x["score"], reverse=True)
