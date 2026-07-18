@@ -523,25 +523,25 @@ const teamsData = {
           "id": "truck-1",
           "make": "Ford",
           "name": "Roundy F-150 #12",
-          "condition": 0
+          "condition": -160
         },
         {
           "id": "truck-2",
           "make": "Ford",
           "name": "Roundy F-150 #4",
-          "condition": 66
+          "condition": 65
         },
         {
           "id": "truck-3",
           "make": "Ford",
           "name": "Roundy F-150 #15",
-          "condition": 1
+          "condition": -18
         },
         {
           "id": "truck-4",
           "make": "Ford",
           "name": "Roundy F-150 #32",
-          "condition": 79
+          "condition": 12
         }
       ],
       "balance": 2054179,
@@ -1048,19 +1048,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Toyota",
           "name": "937 Tundra #18",
-          "condition": 41
+          "condition": -59
         },
         {
           "id": "truck-2",
           "make": "Toyota",
           "name": "937 Tundra #22",
-          "condition": 0
+          "condition": -115
         },
         {
           "id": "truck-3",
           "make": "Toyota",
           "name": "937 Tundra #47",
-          "condition": 15
+          "condition": -83
         },
         {
           "id": "truck-4",
@@ -1943,13 +1943,13 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #84",
-          "condition": 0
+          "condition": -88
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #31",
-          "condition": 0
+          "condition": -126
         },
         {
           "id": "truck-3",
@@ -1961,19 +1961,19 @@ const teamsData = {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #75",
-          "condition": 18
+          "condition": 12
         },
         {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #11",
-          "condition": 34
+          "condition": -12
         },
         {
           "id": "truck-6",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #51",
-          "condition": 0
+          "condition": -31
         }
       ],
       "balance": 2135979,
@@ -2336,19 +2336,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #97",
-          "condition": 0
+          "condition": -51
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #83",
-          "condition": 0
+          "condition": -42
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #30",
-          "condition": 0
+          "condition": -43
         },
         {
           "id": "truck-4",
@@ -2877,7 +2877,7 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "GFR Silverado #8",
-          "condition": 0
+          "condition": -51
         },
         {
           "id": "truck-2",
@@ -2895,13 +2895,13 @@ const teamsData = {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "GFR Silverado #7",
-          "condition": 0
+          "condition": -3
         },
         {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "GFR Silverado #13",
-          "condition": 0
+          "condition": -99
         }
       ],
       "balance": 2347575,
@@ -3741,19 +3741,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "POP Silverado #08",
-          "condition": 34
+          "condition": -28
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "POP Silverado #10",
-          "condition": 0
+          "condition": -31
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "POP Silverado #29",
-          "condition": 0
+          "condition": -43
         },
         {
           "id": "truck-4",
@@ -4164,7 +4164,7 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "ESR Silverado #24",
-          "condition": 0
+          "condition": -115
         },
         {
           "id": "truck-2",
@@ -4176,7 +4176,7 @@ const teamsData = {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "ESR Silverado #21",
-          "condition": 0
+          "condition": -115
         },
         {
           "id": "truck-4",
@@ -4813,7 +4813,7 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #99",
-          "condition": 0
+          "condition": -80
         },
         {
           "id": "truck-2",
@@ -4831,7 +4831,7 @@ const teamsData = {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #50",
-          "condition": 0
+          "condition": -58
         }
       ],
       "balance": 2042090,
