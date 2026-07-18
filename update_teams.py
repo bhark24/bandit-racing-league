@@ -848,8 +848,8 @@ def main():
                         })
                         print(f"  Slot {idx+1}: {driver_name} used Fast Repair on {truck['name']}! Cost: $83,250")
                 else:
-                    # Reduce truck condition
-                    truck["condition"] = max(0, truck["condition"] - total_wear)
+                    # Reduce truck condition (allows negative condition to stack repairs)
+                    truck["condition"] = truck["condition"] - total_wear
                     print(f"  Slot {idx+1}: {driver_name} drove {truck['name']}. Incidents: {driver_inc}. Wear/Damage: -{total_wear}% (Condition: {truck['condition']}%)")
                     
                     if is_damage_dnf:
