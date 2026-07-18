@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geezer Performance App - Sci-Fi HUD Preview</title>
+    <title>Geezer Performance App - Sci-Fi HUD Edition</title>
     <link rel="icon" type="image/png" href="assets/geezer-logo.png">
     
     <!-- Premium Google Fonts -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Roboto+Mono:wght@300;700&family=Orbitron:wght@500;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Orbitron:wght@500;700;900&family=Roboto+Mono:wght@400;700&display=swap');
 
         :root {
-            --bg-dark: #030307;
-            --bg-panel: rgba(12, 8, 20, 0.55);
-            --border-color: rgba(143, 0, 255, 0.15);
-            --border-glow: rgba(255, 0, 127, 0.3);
+            --bg-dark: #020205;
+            --bg-panel: rgba(10, 6, 16, 0.65);
+            --border-color: rgba(143, 0, 255, 0.18);
+            --border-glow: rgba(255, 0, 127, 0.4);
             
-            /* Futuristic Cyberpunk Color Scheme */
+            /* Mockup Visual Palette */
             --magenta-accent: #ff007f;
             --magenta-glow: rgba(255, 0, 127, 0.35);
-            --violet-accent: #8f00ff;
-            --violet-glow: rgba(143, 0, 255, 0.35);
+            --violet-accent: #bf5af2;
+            --violet-glow: rgba(191, 90, 242, 0.35);
             --cyan-accent: #00f0ff;
             --cyan-glow: rgba(0, 240, 255, 0.35);
+            --green-active: #00e676;
             
             --text-white: #f0eff5;
-            --text-muted: #746d88;
+            --text-muted: #7d7594;
             
             --font-sans: 'Outfit', sans-serif;
             --font-mono: 'Roboto Mono', monospace;
@@ -40,635 +41,615 @@
 
         body {
             background-color: var(--bg-dark);
-            /* Sci-Fi Grid Background */
+            /* Sci-Fi Glowing Hex Grid */
             background-image: 
-                linear-gradient(rgba(143, 0, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(143, 0, 255, 0.03) 1px, transparent 1px),
-                radial-gradient(circle at 50% 20%, #150a25 0%, var(--bg-dark) 70%);
-            background-size: 30px 30px, 30px 30px, 100% 100%;
+                radial-gradient(circle at 50% 30%, rgba(25, 10, 45, 0.5) 0%, var(--bg-dark) 80%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill='none' stroke='rgba(143, 0, 255, 0.05)' stroke-width='1.2' d='M0 0 L14 8 L28 0 M14 8 L14 24 M0 32 L14 24 L28 32 M14 40 L14 24 M0 32 L14 40 L28 32 M0 49 L14 41 L28 49'/%3E%3C/svg%3E");
             color: var(--text-white);
             font-family: var(--font-sans);
-            padding: 24px;
+            padding: 16px;
             overflow-x: hidden;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* Sci-Fi Top Banner */
-        .flag-banner {
+        /* Top Status Bar */
+        .top-status-bar {
             width: 100%;
-            padding: 14px 24px;
             background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border-color);
-            border-left: 5px solid var(--cyan-accent);
-            border-radius: 6px;
+            border-bottom: 2px solid var(--border-color);
+            padding: 10px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-family: var(--font-hud);
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.5), inset 0 0 15px rgba(143, 0, 255, 0.05);
-            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
         }
 
-        .flag-banner.green {
-            border-left-color: var(--cyan-accent);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.05);
+        .top-status-item span {
+            color: #fff;
         }
 
-        .flag-banner.caution {
-            border-left-color: var(--magenta-accent);
-            box-shadow: 0 0 25px rgba(255, 0, 127, 0.2);
-            animation: warningPulse 1s infinite alternate;
+        .top-status-item.active span {
+            color: var(--magenta-accent);
+            text-shadow: 0 0 8px var(--magenta-glow);
         }
 
-        @keyframes warningPulse {
-            0% { box-shadow: 0 0 10px rgba(255, 0, 127, 0.1); }
-            100% { box-shadow: 0 0 25px rgba(255, 0, 127, 0.3); }
+        /* Bottom Status Bar */
+        .bottom-status-bar {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border-top: 2px solid var(--border-color);
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-hud);
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-top: 16px;
         }
 
-        /* Grid Layout */
+        /* Grid Container */
         .dashboard-container {
             display: grid;
-            grid-template-columns: 1fr 1.4fr 1fr;
-            gap: 24px;
-            max-width: 1680px;
+            grid-template-columns: 1.15fr 1.7fr 1.15fr;
+            gap: 20px;
+            max-width: 1600px;
             margin: 0 auto;
+            flex: 1;
+            width: 100%;
         }
 
-        @media (max-width: 1300px) {
+        @media (max-width: 1280px) {
             .dashboard-container {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Sci-Fi Angular Glass Card */
-        .sci-card {
+        /* Sci-Fi Panels */
+        .hud-card {
             background: var(--bg-panel);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 24px;
+            padding: 20px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-            /* Cyberpunk corner cut visual style */
-            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
         }
 
-        .sci-card:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, var(--violet-accent), transparent);
-            opacity: 0.5;
+        .hud-card:hover {
+            border-color: rgba(255, 0, 127, 0.35);
+            box-shadow: 0 0 20px rgba(143, 0, 255, 0.05);
         }
 
-        .sci-card:hover {
-            border-color: var(--border-glow);
-            box-shadow: 0 10px 40px rgba(255, 0, 127, 0.08);
-        }
-
-        .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 1px solid rgba(143, 0, 255, 0.1);
-            padding-bottom: 16px;
-        }
-
-        .panel-title {
-            font-family: var(--font-hud);
-            font-size: 1rem;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(143, 0, 255, 0.3);
-        }
-
-        .panel-subtitle {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 2px;
-        }
-
-        /* LED Shift Lights - Sleek glowing nodes */
-        .shift-light-bar {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            background: rgba(0,0,0,0.4);
-            padding: 8px 12px;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-            width: 100%;
-        }
-
-        .led-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.02);
-            transition: background 0.05s, box-shadow 0.05s;
-        }
-
-        .led-dot.green  { background: var(--cyan-accent); box-shadow: 0 0 10px var(--cyan-accent); }
-        .led-dot.yellow { background: var(--magenta-accent); box-shadow: 0 0 10px var(--magenta-accent); }
-        .led-dot.red    { background: var(--violet-accent); box-shadow: 0 0 10px var(--violet-accent); }
-        .led-dot.blue   { background: #ffffff; box-shadow: 0 0 15px #ffffff; }
-
-        /* Left Column: Sci-Fi Multi-Ring Gauge */
-        .circular-hud-container {
-            position: relative;
-            width: 220px;
-            height: 220px;
-            margin: 0 auto;
+        /* Circular HUD */
+        .circular-telemetry-row {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .circular-dial-box {
+            position: relative;
+            width: 150px;
+            height: 150px;
         }
 
         .svg-ring-bg {
             fill: none;
-            stroke: rgba(143, 0, 255, 0.03);
-            stroke-width: 6;
+            stroke: rgba(143, 0, 255, 0.06);
+            stroke-width: 5;
         }
 
         .svg-ring-fill {
             fill: none;
-            stroke-width: 6;
+            stroke: var(--magenta-accent);
+            stroke-width: 5;
             stroke-linecap: round;
-            stroke-dasharray: 565; /* 2 * PI * r (r=90) */
-            stroke-dashoffset: 565;
+            stroke-dasharray: 440; /* r=70 */
+            stroke-dashoffset: 440;
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
+            filter: drop-shadow(0 0 4px var(--magenta-glow));
             transition: stroke-dashoffset 0.05s linear;
         }
 
-        .svg-ring-fill.rpm {
-            stroke: url(#magenta-gradient);
-            stroke-width: 8;
-        }
-
-        .svg-ring-fill.inner {
-            stroke: var(--cyan-accent);
-            stroke-dasharray: 440; /* r=70 */
-            stroke-dashoffset: 440;
-            stroke-width: 4;
-        }
-
-        .hud-digital-readout {
+        .dial-labels {
             position: absolute;
-            text-align: center;
+            top: 0; left: 0; width: 100%; height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
 
-        .hud-speed {
-            font-family: var(--font-hud);
-            font-size: 3.5rem;
-            font-weight: 900;
-            line-height: 1;
-            color: #fff;
-            text-shadow: 0 0 15px rgba(255,255,255,0.15);
-        }
-
-        .hud-unit {
-            font-size: 0.7rem;
-            text-transform: uppercase;
+        .dial-label-sm {
+            font-size: 0.55rem;
             color: var(--text-muted);
-            letter-spacing: 2px;
-            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .hud-gear-badge {
-            margin-top: 8px;
-            background: rgba(255, 0, 127, 0.1);
-            border: 1px solid rgba(255, 0, 127, 0.3);
-            color: var(--magenta-accent);
-            border-radius: 4px;
-            padding: 2px 14px;
-            font-size: 1.1rem;
-            font-weight: 900;
+        .dial-val-main {
             font-family: var(--font-hud);
-            box-shadow: 0 0 12px var(--magenta-glow);
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #fff;
+            margin: 1px 0;
         }
 
-        /* Real-Time Oscilloscope Telemetry Wave */
-        .wave-container {
-            width: 100%;
-            height: 60px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            overflow: hidden;
-            position: relative;
+        /* Digital Speed HUD */
+        .digital-speed-box {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            flex: 1;
+            padding-left: 10px;
         }
 
-        .wave-svg {
-            width: 100%;
-            height: 100%;
+        .speed-label-top {
+            font-family: var(--font-hud);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
         }
 
-        .wave-path {
-            fill: none;
-            stroke: var(--cyan-accent);
-            stroke-width: 1.5;
-            stroke-linecap: round;
-            filter: drop-shadow(0 0 4px var(--cyan-glow));
+        .speed-digits {
+            font-family: var(--font-hud);
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--violet-accent);
+            line-height: 1;
+            text-shadow: 0 0 10px var(--violet-glow);
         }
 
-        /* Vitals Layout */
-        .vitals-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+        .speed-sub {
+            font-family: var(--font-hud);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-top: 1px;
         }
 
-        .vital-card {
-            background: rgba(143, 0, 255, 0.02);
-            border: 1px solid rgba(143, 0, 255, 0.08);
-            border-radius: 6px;
+        .gear-val-big {
+            font-family: var(--font-hud);
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--cyan-accent);
+            text-shadow: 0 0 15px var(--cyan-glow);
+            line-height: 1;
+            margin-top: 4px;
+        }
+
+        /* Wave Oscilloscope */
+        .oscilloscope-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(143, 0, 255, 0.1);
+            border-radius: 8px;
             padding: 12px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
 
-        .vital-lbl {
-            font-size: 0.65rem;
-            text-transform: uppercase;
+        .oscilloscope-header {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-hud);
+            font-size: 0.6rem;
             color: var(--text-muted);
             letter-spacing: 1px;
         }
 
-        .vital-val {
-            font-family: var(--font-mono);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .vital-card.danger {
-            border-color: var(--magenta-accent);
-            background: rgba(255, 0, 127, 0.03);
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.08);
-        }
-
-        .vital-card.danger .vital-val {
-            color: var(--magenta-accent);
-        }
-
-        /* Center Column: 3D Hologram Car Layout */
-        .chassis-layout-wrapper {
-            display: grid;
-            grid-template-columns: 1.15fr 1fr 1.15fr;
-            align-items: center;
-            gap: 15px;
-            height: 100%;
+        .oscilloscope-screen {
+            width: 100%;
+            height: 50px;
             position: relative;
-        }
-
-        @media (max-width: 768px) {
-            .chassis-layout-wrapper {
-                grid-template-columns: 1fr;
-            }
-            .chassis-visual {
-                display: none;
-            }
-        }
-
-        .chassis-column-left, .chassis-column-right {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .chassis-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            height: 100%;
-        }
-
-        .car-hologram {
-            filter: drop-shadow(0 0 15px rgba(143, 0, 255, 0.15));
-            animation: hologramFloat 3s infinite ease-in-out;
-        }
-
-        @keyframes hologramFloat {
-            0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-            50% { transform: translateY(-8px) rotate(0.5deg); opacity: 0.95; }
-            100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-        }
-
-        /* Tire holographic boxes */
-        .tire-holo-card {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 16px;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .tire-holo-card:hover {
-            border-color: var(--magenta-glow);
-            box-shadow: inset 0 0 10px rgba(255, 0, 127, 0.05);
-        }
-
-        .tire-card-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-        }
-
-        .tire-card-meta.active-load {
-            color: var(--magenta-accent);
-        }
-
-        .tire-psi-val {
-            font-family: var(--font-mono);
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .tire-temp-spread {
-            display: flex;
-            justify-content: space-between;
-            background: rgba(143, 0, 255, 0.04);
-            border: 1px solid rgba(143, 0, 255, 0.08);
-            border-radius: 4px;
-            padding: 6px;
-            margin-top: 8px;
-        }
-
-        .temp-node {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-        }
-
-        .temp-node:not(:last-child) {
-            border-right: 1px solid rgba(143, 0, 255, 0.1);
-        }
-
-        .temp-lbl {
-            font-size: 0.55rem;
-            color: var(--text-muted);
-            margin-bottom: 2px;
-        }
-
-        .temp-val {
-            font-weight: 700;
-            color: var(--cyan-accent);
-        }
-
-        .tire-holo-card.right-side .temp-val {
-            color: var(--magenta-accent);
-        }
-
-        .tire-wear-bar-container {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-top: 8px;
-        }
-
-        .tire-wear-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-        }
-
-        .tire-wear-track {
-            height: 4px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 2px;
             overflow: hidden;
         }
 
-        .tire-wear-fill {
+        .oscilloscope-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .osc-path {
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+        }
+
+        .osc-path.throttle {
+            stroke: var(--cyan-accent);
+            filter: drop-shadow(0 0 4px var(--cyan-glow));
+        }
+
+        .osc-path.brake {
+            stroke: var(--magenta-accent);
+            filter: drop-shadow(0 0 4px var(--magenta-glow));
+        }
+
+        /* Center Column: 3D Holographic vehicle view */
+        .center-hud-diagnostics {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            gap: 20px;
+        }
+
+        .center-hud-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-hud);
+            border-bottom: 1px solid rgba(143, 0, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .center-hud-title {
+            font-size: 0.75rem;
+            font-weight: 900;
+            color: var(--text-white);
+            letter-spacing: 1.5px;
+        }
+
+        .center-hud-status {
+            font-size: 0.75rem;
+            color: var(--cyan-accent);
+            text-shadow: 0 0 8px var(--cyan-glow);
+        }
+
+        .hologram-layout-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 10px 0;
+        }
+
+        .hologram-car-img {
+            max-width: 280px;
+            width: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.2));
+            animation: floatingHologram 4s infinite ease-in-out;
+        }
+
+        @keyframes floatingHologram {
+            0% { transform: translateY(0) scale(1); opacity: 0.85; }
+            50% { transform: translateY(-6px) scale(1.02); opacity: 1; }
+            100% { transform: translateY(0) scale(1); opacity: 0.85; }
+        }
+
+        /* Tire Cards positioned around the center hologram */
+        .tire-floater-card {
+            background: rgba(10, 6, 18, 0.75);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px;
+            width: 135px;
+            position: absolute;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .tire-floater-card:hover {
+            border-color: var(--magenta-accent);
+        }
+
+        .tire-floater-card.fl { top: 0; left: 10px; }
+        .tire-floater-card.fr { top: 0; right: 10px; }
+        .tire-floater-card.rl { bottom: 0; left: 10px; }
+        .tire-floater-card.rr { bottom: 0; right: 10px; }
+
+        .floater-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 3px;
+        }
+
+        .tire-floater-card.right-side .floater-meta {
+            color: var(--magenta-accent);
+        }
+
+        .floater-psi {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 4px;
+        }
+
+        .floater-temps {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            margin-top: 4px;
+            background: rgba(0,0,0,0.2);
+            padding: 3px 5px;
+            border-radius: 3px;
+        }
+
+        .floater-temp-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .floater-temp-val {
+            color: var(--cyan-accent);
+            font-weight: 700;
+        }
+
+        .tire-floater-card.right-side .floater-temp-val {
+            color: var(--magenta-accent);
+        }
+
+        .floater-wear-bar {
+            height: 3px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 1.5px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        .floater-wear-fill {
             height: 100%;
             background: var(--cyan-accent);
-            transition: width 0.3s;
+            width: 90%;
         }
 
-        .tire-wear-fill.wear-caution {
-            background: var(--magenta-accent);
+        /* Right Column: Strategic Cockpit Controls */
+        .pit-status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(143, 0, 255, 0.1);
+            padding-bottom: 10px;
         }
 
-        .tire-wear-fill.wear-danger {
-            background: var(--violet-accent);
-        }
-
-        /* Column 3: Timing, Strategy & Fuel */
-        .clean-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .clean-table td {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(143, 0, 255, 0.05);
-            font-size: 0.85rem;
-        }
-
-        .lbl-clean {
+        .pit-status-lbl {
+            font-family: var(--font-hud);
+            font-size: 0.75rem;
+            font-weight: 900;
             color: var(--text-muted);
-            text-transform: uppercase;
-            font-size: 0.7rem;
             letter-spacing: 1px;
         }
 
-        .val-clean {
-            text-align: right;
-            font-family: var(--font-mono);
-            font-weight: 700;
-            color: #fff;
+        .pit-status-val {
+            font-family: var(--font-hud);
+            font-size: 0.75rem;
+            font-weight: 900;
+            color: var(--cyan-accent);
+            text-shadow: 0 0 6px var(--cyan-glow);
         }
 
-        /* Premium Sci-Fi sliding switch */
-        .toggle-switch-wrapper {
+        /* Strategic sliders and toggles */
+        .strat-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .strat-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .strat-val-readout {
+            color: #fff;
+            font-family: var(--font-mono);
+            font-weight: 700;
+        }
+
+        .strat-slider {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .strat-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--violet-accent);
+            box-shadow: 0 0 6px var(--violet-accent);
+            cursor: pointer;
+        }
+
+        /* Toggle pill buttons */
+        .toggle-pill-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            background: rgba(0,0,0,0.3);
+            padding: 4px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .toggle-pill-btn {
+            padding: 6px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--text-muted);
+            border-radius: 4px;
+            font-family: var(--font-hud);
+            font-size: 0.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .toggle-pill-btn.active {
+            background: rgba(255, 0, 127, 0.15);
+            border-color: var(--magenta-accent);
+            color: var(--magenta-accent);
+            text-shadow: 0 0 5px var(--magenta-glow);
+        }
+
+        /* Toggle switches */
+        .holo-switch-wrapper {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 14px;
-            background: rgba(143, 0, 255, 0.01);
+            padding: 8px 10px;
+            background: rgba(255,255,255,0.01);
             border: 1px solid rgba(143, 0, 255, 0.05);
             border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .toggle-switch-wrapper:hover {
-            border-color: rgba(255,0,127,0.15);
-            background: rgba(143, 0, 255, 0.03);
-        }
-
-        .toggle-lbl {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-white);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .switch {
             position: relative;
             display: inline-block;
-            width: 40px;
-            height: 20px;
+            width: 34px;
+            height: 18px;
         }
 
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+        .switch input { opacity: 0; width: 0; height: 0; }
 
         .slider {
             position: absolute;
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: rgba(255,255,255,0.05);
-            transition: .3s;
-            border-radius: 4px;
+            transition: .2s;
+            border-radius: 10px;
             border: 1px solid rgba(143, 0, 255, 0.15);
         }
 
         .slider:before {
             position: absolute;
             content: "";
-            height: 12px;
-            width: 12px;
+            height: 10px;
+            width: 10px;
             left: 3px;
             bottom: 3px;
             background-color: var(--text-muted);
-            transition: .3s;
-            border-radius: 2px;
+            transition: .2s;
+            border-radius: 50%;
         }
 
         input:checked + .slider {
-            background-color: rgba(255, 0, 127, 0.1);
-            border-color: var(--magenta-accent);
-            box-shadow: 0 0 10px var(--magenta-glow);
+            background-color: rgba(0, 240, 255, 0.1);
+            border-color: var(--cyan-accent);
         }
 
         input:checked + .slider:before {
-            transform: translateX(20px);
-            background-color: var(--magenta-accent);
-            box-shadow: 0 0 5px var(--magenta-accent);
+            transform: translateX(16px);
+            background-color: var(--cyan-accent);
+            box-shadow: 0 0 5px var(--cyan-accent);
         }
 
-        /* Sci-Fi Core Recovery System (Fast Repair) */
-        .tactical-btn {
+        /* Large indicator slider block */
+        .indicator-track {
             width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: var(--font-hud);
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            height: 8px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 4px;
         }
 
-        .tactical-btn.active {
-            background: rgba(255, 0, 127, 0.08);
-            border: 1px solid var(--magenta-accent);
-            color: var(--magenta-accent);
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.1);
+        .indicator-fill {
+            height: 100%;
+            background: var(--violet-accent);
+            box-shadow: 0 0 6px var(--violet-glow);
+            width: 30%;
         }
 
-        .tactical-btn.disabled {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255,255,255,0.05);
-            color: var(--text-muted);
-            cursor: pointer;
-        }
-
-        /* Simulator Controller */
-        .controller-panel {
-            max-width: 1680px;
-            margin: 30px auto 0 auto;
-            background: rgba(0, 0, 0, 0.5);
+        /* Controllers */
+        .controls-row {
+            max-width: 1600px;
+            margin: 20px auto 0 auto;
+            background: rgba(0,0,0,0.5);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 20px;
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
-        .ctl-btn {
-            padding: 8px 16px;
+        .sim-title {
+            font-family: var(--font-hud);
+            font-size: 0.65rem;
+            color: var(--cyan-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 900;
+        }
+
+        .btn-ctl {
+            padding: 6px 12px;
+            background: rgba(143, 0, 255, 0.05);
+            border: 1px solid rgba(143, 0, 255, 0.25);
+            color: #fff;
             border-radius: 4px;
             font-family: var(--font-hud);
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
+            font-size: 0.6rem;
+            font-weight: 700;
             cursor: pointer;
+            text-transform: uppercase;
             transition: all 0.2s;
-            background: rgba(143, 0, 255, 0.05);
-            border: 1px solid rgba(143, 0, 255, 0.2);
-            color: #fff;
         }
 
-        .ctl-btn:hover {
+        .btn-ctl:hover {
             border-color: var(--cyan-accent);
             color: var(--cyan-accent);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
         }
 
-        .ctl-btn.active {
+        .btn-ctl.active {
             background: var(--cyan-accent);
             border-color: var(--cyan-accent);
             color: #000;
-            box-shadow: 0 0 15px var(--cyan-glow);
+            box-shadow: 0 0 10px var(--cyan-glow);
         }
 
-        .ctl-btn.caution {
+        .btn-ctl.caution {
             background: rgba(255, 0, 127, 0.05);
             border-color: var(--magenta-accent);
             color: var(--magenta-accent);
         }
 
-        .ctl-btn.caution:hover {
+        .btn-ctl.caution:hover {
             background: var(--magenta-accent);
             color: #000;
         }
@@ -676,26 +657,27 @@
 </head>
 <body>
 
-    <!-- Top Flag Notification Banner -->
-    <div id="flag-banner" class="flag-banner green">
-        <span>🚥 STATUS // SEC_A_GREEN: RACING SYSTEM NOMINAL</span>
-        <span id="banner-clock" style="font-family: var(--font-mono); font-weight: 300;">12:00:00 PM</span>
+    <!-- Top Status Bar -->
+    <div class="top-status-bar">
+        <div class="top-status-item">CIRCUIT: <span id="val-circuit">NEO-TOKYO</span></div>
+        <div class="top-status-item active">LAP <span>14/45</span></div>
+        <div class="top-status-item">TEMP: <span>21°C</span></div>
+        <div class="top-status-item">SESSION: <span id="val-session">R-ACE 02</span></div>
     </div>
 
     <!-- Main Grid Dashboard -->
     <div class="dashboard-container">
         
-        <!-- Column 1: Cockpit Telemetry -->
-        <div class="sci-card">
+        <!-- Column 1: Telemetry HUD -->
+        <div class="hud-card">
             <div class="panel-header">
                 <div>
                     <h3 class="panel-title">TELEMETRY HUD</h3>
-                    <p class="panel-subtitle">CORE SYSTEM DIAGNOSTICS</p>
+                    <p class="panel-subtitle">Race sync v4.1 // Active</p>
                 </div>
-                <div style="font-family: var(--font-hud); font-size: 0.75rem; color: var(--cyan-accent); text-shadow: 0 0 8px var(--cyan-glow);">SYS_OK</div>
             </div>
 
-            <!-- LED Shift lights (Integrated circular light bar) -->
+            <!-- LED Shift Lights -->
             <div class="shift-light-bar" id="shift-lights">
                 <div class="led-dot" id="led-1"></div>
                 <div class="led-dot" id="led-2"></div>
@@ -711,40 +693,59 @@
                 <div class="led-dot" id="led-12"></div>
             </div>
 
-            <!-- Nested Multi-Ring circular speedometer -->
-            <div class="circular-hud-container">
-                <svg width="200" height="200" viewBox="0 0 200 200">
-                    <defs>
-                        <linearGradient id="magenta-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#ff007f" />
-                            <stop offset="100%" stop-color="#8f00ff" />
-                        </linearGradient>
-                    </defs>
-                    <!-- Outer RPM Track -->
-                    <circle class="svg-ring-bg" cx="100" cy="100" r="90" />
-                    <circle class="svg-ring-fill rpm" id="rpm-ring" cx="100" cy="100" r="90" />
-                    
-                    <!-- Inner Input Track -->
-                    <circle class="svg-ring-bg" cx="100" cy="100" r="70" style="stroke: rgba(143, 0, 255, 0.02);" />
-                    <circle class="svg-ring-fill inner" id="input-ring" cx="100" cy="100" r="70" />
-                </svg>
-                <div class="hud-digital-readout">
-                    <span class="hud-speed" id="hud-speed">182</span>
-                    <span class="hud-unit">MPH</span>
-                    <div class="hud-gear-badge" id="hud-gear">4</div>
+            <!-- Multi-Ring HUD and Digital Speed -->
+            <div class="circular-telemetry-row">
+                <div class="circular-dial-box">
+                    <svg width="150" height="150" viewBox="0 0 200 200">
+                        <!-- Outer RPM Arc -->
+                        <circle class="svg-ring-bg" cx="100" cy="100" r="90" />
+                        <circle class="svg-ring-fill" id="rpm-ring" cx="100" cy="100" r="90" />
+                        
+                        <!-- Inner Input Arc -->
+                        <circle class="svg-ring-bg" cx="100" cy="100" r="70" />
+                        <circle class="svg-ring-fill" id="inner-input-ring" cx="100" cy="100" r="70" style="stroke: var(--cyan-accent); stroke-dasharray: 440; stroke-dashoffset: 440;" />
+                    </svg>
+                    <div class="dial-labels">
+                        <span class="dial-label-sm">RPM</span>
+                        <span class="dial-val-main" id="val-rpm-digital">9750</span>
+                        <span class="dial-label-sm" id="val-gforce-lbl">G-FORCE</span>
+                        <span style="font-weight: 700; font-size: 0.7rem;" id="val-gforce">4.2 G</span>
+                    </div>
+                </div>
+                
+                <div class="digital-speed-box">
+                    <span class="speed-label-top">SPEED</span>
+                    <span class="speed-digits" id="hud-speed">324</span>
+                    <span class="speed-sub">KM/H</span>
+                    <span class="speed-label-top" style="margin-top: 6px;">GEAR</span>
+                    <div class="gear-val-big" id="hud-gear">4</div>
                 </div>
             </div>
 
-            <!-- Real-Time Wave Oscilloscope -->
-            <div class="wave-container">
-                <svg class="wave-svg">
-                    <path class="wave-path" id="wave-path" d="M 0,30 Q 30,30 60,30 T 120,30 T 180,30 T 240,30 T 300,30 T 360,30 T 420,30 L 420,60 L 0,60 Z" />
-                </svg>
+            <!-- Throttle Graph -->
+            <div class="oscilloscope-card">
+                <div class="oscilloscope-header">
+                    <span>THROTTLE %</span>
+                    <span>2:14:45</span>
+                </div>
+                <div class="oscilloscope-screen">
+                    <svg class="oscilloscope-svg">
+                        <path class="osc-path throttle" id="throttle-wave" d="M 0,25 Q 20,25 40,25 T 80,25 T 120,25 T 160,25 T 200,25 L 200,50 L 0,50 Z" />
+                    </svg>
+                </div>
             </div>
 
-            <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
-                <span>TELEMETRY WAVE</span>
-                <span>FREQ: <span id="val-wave-freq" style="color: var(--cyan-accent);">82.0</span> Hz</span>
+            <!-- Brake Graph -->
+            <div class="oscilloscope-card">
+                <div class="oscilloscope-header">
+                    <span>BRAKE %</span>
+                    <span>2:14:45</span>
+                </div>
+                <div class="oscilloscope-screen">
+                    <svg class="oscilloscope-svg">
+                        <path class="osc-path brake" id="brake-wave" d="M 0,25 Q 20,25 40,25 T 80,25 T 120,25 T 160,25 T 200,25 L 200,50 L 0,50 Z" />
+                    </svg>
+                </div>
             </div>
 
             <!-- Vitals Grid -->
@@ -762,294 +763,225 @@
                     <span class="vital-val"><span id="val-oilpress">62</span> PSI</span>
                 </div>
                 <div class="vital-card">
-                    <span class="vital-lbl">Water Press</span>
-                    <span class="vital-val"><span id="val-waterpress">26</span> PSI</span>
+                    <span class="vital-lbl">Voltage</span>
+                    <span class="vital-val"><span id="val-volts">13.8</span> V</span>
                 </div>
             </div>
         </div>
 
-        <!-- Column 2: Holographic Chassis Layout -->
-        <div class="sci-card">
-            <div class="panel-header">
-                <div>
-                    <h3 class="panel-title">HOLO DIAGNOSTICS</h3>
-                    <p class="panel-subtitle">CHASSIS & FORCE LOADS</p>
-                </div>
-                <span style="font-size: 0.75rem; font-family: var(--font-hud); color: var(--magenta-accent);">LOAD CONFIG_3</span>
+        <!-- Column 2: Hologram Schematic Diagnostics -->
+        <div class="hud-card">
+            <div class="center-hud-header">
+                <span class="center-hud-title">STOCK CAR // RACE-SYNC v4.1</span>
+                <span class="center-hud-status" id="hud-status">CHASSIS: ACTIVE</span>
             </div>
 
-            <!-- Interactive Hologram Chassis Layout -->
-            <div class="chassis-layout-wrapper">
+            <!-- Holographic Car Layout Area -->
+            <div class="hologram-layout-container">
                 
-                <!-- Left Side -->
-                <div class="chassis-column-left">
-                    <!-- Front Left -->
-                    <div class="tire-holo-card">
-                        <div class="tire-card-meta">
-                            <span>FRONT LEFT</span>
-                            <span>FL</span>
+                <!-- Cropped transparent 3D hologram asset -->
+                <img class="hologram-car-img" src="assets/futuristic_car_hologram.png" alt="3D Hologram Silhouette" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 200\'%3E%3Cpath d=\'M30,20 C30,10 70,10 70,20 L75,50 C78,80 78,120 75,150 L70,190 C70,195 30,195 30,190 L25,150 C22,120 22,80 25,50 Z\' fill=\'none\' stroke=\'%238f00ff\' stroke-width=\'2\'/%3E%3C/svg%3E';">
+
+                <!-- Front Left Tire -->
+                <div class="tire-floater-card fl">
+                    <div class="floater-meta">
+                        <span>FRONT LEFT</span>
+                        <span>FL</span>
+                    </div>
+                    <div class="floater-psi" id="tire-fl-psi">28.5 PSI</div>
+                    <div class="floater-temps">
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-fl-i">185°</span>
                         </div>
-                        <div class="tire-psi-val" id="tire-fl-psi">28.5 PSI</div>
-                        <div class="tire-temp-spread">
-                            <div class="temp-node">
-                                <span class="temp-lbl">I</span>
-                                <span class="temp-val" id="tire-fl-i">185°</span>
-                            </div>
-                            <div class="temp-node">
-                                <span class="temp-lbl">M</span>
-                                <span class="temp-val" id="tire-fl-m">180°</span>
-                            </div>
-                            <div class="temp-node">
-                                <span class="temp-lbl">O</span>
-                                <span class="temp-val" id="tire-fl-o">172°</span>
-                            </div>
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-fl-m">180°</span>
                         </div>
-                        <div class="tire-wear-bar-container">
-                            <div class="tire-wear-label">
-                                <span>WEAR</span>
-                                <span id="tire-fl-wear">98%</span>
-                            </div>
-                            <div class="tire-wear-track">
-                                <div class="tire-wear-fill" id="tire-fl-wear-fill" style="width: 98%;"></div>
-                            </div>
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-fl-o">172°</span>
                         </div>
                     </div>
-
-                    <!-- Rear Left -->
-                    <div class="tire-holo-card">
-                        <div class="tire-card-meta">
-                            <span>REAR LEFT</span>
-                            <span>RL</span>
-                        </div>
-                        <div class="tire-psi-val" id="tire-rl-psi">29.0 PSI</div>
-                        <div class="tire-temp-spread">
-                            <div class="temp-node">
-                                <span class="temp-lbl">I</span>
-                                <span class="temp-val" id="tire-rl-i">180°</span>
-                            </div>
-                            <div class="temp-node">
-                                <span class="temp-lbl">M</span>
-                                <span class="temp-val" id="tire-rl-m">176°</span>
-                            </div>
-                            <div class="temp-node">
-                                <span class="temp-lbl">O</span>
-                                <span class="temp-val" id="tire-rl-o">168°</span>
-                            </div>
-                        </div>
-                        <div class="tire-wear-bar-container">
-                            <div class="tire-wear-label">
-                                <span>WEAR</span>
-                                <span id="tire-rl-wear">99%</span>
-                            </div>
-                            <div class="tire-wear-track">
-                                <div class="tire-wear-fill" id="tire-rl-wear-fill" style="width: 99%;"></div>
-                            </div>
-                        </div>
+                    <div class="floater-wear-bar">
+                        <div class="floater-wear-fill" id="tire-fl-wear-fill" style="width: 98%;"></div>
                     </div>
                 </div>
 
-                <!-- Center Hologram SVG Silhouette -->
-                <div class="chassis-visual">
-                    <svg class="car-hologram" viewBox="0 0 100 200" width="100" height="200">
-                        <!-- Holographic Car Body -->
-                        <path d="M 30,20 C 30,10 70,10 70,20 L 75,50 C 78,80 78,120 75,150 L 70,190 C 70,195 30,195 30,190 L 25,150 C 22,120 22,80 25,50 Z" fill="rgba(143, 0, 255, 0.05)" stroke="var(--violet-accent)" stroke-width="1.5" />
-                        <line x1="26" y1="185" x2="74" y2="185" stroke="var(--magenta-accent)" stroke-width="2" />
-                        
-                        <!-- Scanning Grid overlay -->
-                        <line x1="20" y1="50" x2="80" y2="50" stroke="rgba(143,0,255,0.15)" stroke-width="0.5" />
-                        <line x1="20" y1="90" x2="80" y2="90" stroke="rgba(143,0,255,0.15)" stroke-width="0.5" />
-                        <line x1="20" y1="130" x2="80" y2="130" stroke="rgba(143,0,255,0.15)" stroke-width="0.5" />
-                        
-                        <!-- Wheels -->
-                        <rect x="18" y="30" width="10" height="22" rx="2" fill="#030307" stroke="var(--cyan-accent)" stroke-width="1.5" />
-                        <rect x="72" y="30" width="10" height="22" rx="2" fill="#030307" stroke="var(--magenta-accent)" stroke-width="1.5" />
-                        <rect x="18" y="145" width="10" height="22" rx="2" fill="#030307" stroke="var(--cyan-accent)" stroke-width="1.5" />
-                        <rect x="72" y="145" width="10" height="22" rx="2" fill="#030307" stroke="var(--magenta-accent)" stroke-width="1.5" />
-                    </svg>
-                </div>
-
-                <!-- Right Side -->
-                <div class="chassis-column-right">
-                    <!-- Front Right -->
-                    <div class="tire-holo-card right-side">
-                        <div class="tire-card-meta active-load">
-                            <span>FRONT RIGHT (LOAD)</span>
-                            <span>FR</span>
+                <!-- Front Right -->
+                <div class="tire-floater-card fr right-side">
+                    <div class="floater-meta">
+                        <span>FRONT RIGHT</span>
+                        <span>FR</span>
+                    </div>
+                    <div class="floater-psi" id="tire-fr-psi">48.2 PSI</div>
+                    <div class="floater-temps">
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-fr-i">238°</span>
                         </div>
-                        <div class="tire-psi-val" id="tire-fr-psi">48.2 PSI</div>
-                        <div class="tire-temp-spread">
-                            <div class="temp-node">
-                                <span class="temp-lbl">I</span>
-                                <span class="temp-val" id="tire-fr-i">238°</span>
-                            </div>
-                            <div class="temp-node">
-                                <span class="temp-lbl">M</span>
-                                <span class="temp-val" id="tire-fr-m">225°</span>
-                            </div>
-                            <div class="temp-node">
-                                <span class="temp-lbl">O</span>
-                                <span class="temp-val" id="tire-fr-o">210°</span>
-                            </div>
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-fr-m">225°</span>
                         </div>
-                        <div class="tire-wear-bar-container">
-                            <div class="tire-wear-label">
-                                <span>WEAR</span>
-                                <span id="tire-fr-wear">92%</span>
-                            </div>
-                            <div class="tire-wear-track">
-                                <div class="tire-wear-fill" id="tire-fr-wear-fill" style="width: 92%;"></div>
-                            </div>
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-fr-o">210°</span>
                         </div>
                     </div>
-
-                    <!-- Rear Right -->
-                    <div class="tire-holo-card right-side">
-                        <div class="tire-card-meta active-load">
-                            <span>REAR RIGHT (LOAD)</span>
-                            <span>RR</span>
-                        </div>
-                        <div class="tire-psi-val" id="tire-rr-psi">46.5 PSI</div>
-                        <div class="tire-temp-spread">
-                            <div class="temp-node">
-                                <span class="temp-lbl">I</span>
-                                <span class="temp-val" id="tire-rr-i">228°</span>
-                            </div>
-                            <div class="temp-node">
-                                <span class="temp-lbl">M</span>
-                                <span class="temp-val" id="tire-rr-m">218°</span>
-                            </div>
-                            <div class="temp-node">
-                                <span class="temp-lbl">O</span>
-                                <span class="temp-val" id="tire-rr-o">205°</span>
-                            </div>
-                        </div>
-                        <div class="tire-wear-bar-container">
-                            <div class="tire-wear-label">
-                                <span>WEAR</span>
-                                <span id="tire-rr-wear">90%</span>
-                            </div>
-                            <div class="tire-wear-track">
-                                <div class="tire-wear-fill" id="tire-rr-wear-fill" style="width: 90%;"></div>
-                            </div>
-                        </div>
+                    <div class="floater-wear-bar">
+                        <div class="floater-wear-fill" id="tire-fr-wear-fill" style="width: 92%;"></div>
                     </div>
                 </div>
+
+                <!-- Rear Left -->
+                <div class="tire-floater-card rl">
+                    <div class="floater-meta">
+                        <span>REAR LEFT</span>
+                        <span>RL</span>
+                    </div>
+                    <div class="floater-psi" id="tire-rl-psi">29.0 PSI</div>
+                    <div class="floater-temps">
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-rl-i">180°</span>
+                        </div>
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-rl-m">176°</span>
+                        </div>
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-rl-o">168°</span>
+                        </div>
+                    </div>
+                    <div class="floater-wear-bar">
+                        <div class="floater-wear-fill" id="tire-rl-wear-fill" style="width: 99%;"></div>
+                    </div>
+                </div>
+
+                <!-- Rear Right -->
+                <div class="tire-floater-card rr right-side">
+                    <div class="floater-meta">
+                        <span>REAR RIGHT</span>
+                        <span>RR</span>
+                    </div>
+                    <div class="floater-psi" id="tire-rr-psi">46.5 PSI</div>
+                    <div class="floater-temps">
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-rr-i">228°</span>
+                        </div>
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-rr-m">218°</span>
+                        </div>
+                        <div class="floater-temp-item">
+                            <span class="floater-temp-val" id="tire-rr-o">205°</span>
+                        </div>
+                    </div>
+                    <div class="floater-wear-bar">
+                        <div class="floater-wear-fill" id="tire-rr-wear-fill" style="width: 90%;"></div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Active Brake Bias display -->
-            <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                <span style="font-weight: 700; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px;">ACTIVE BRAKE BIAS</span>
-                <span id="val-brakebias" style="font-family: var(--font-hud); font-size: 1.1rem; font-weight: 900; color: var(--cyan-accent); text-shadow: 0 0 8px var(--cyan-glow);">62.5%</span>
+            <!-- Hex Grid footer widget -->
+            <div style="background: rgba(143, 0, 255, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; display: flex; justify-content: space-between; align-items: center; margin-top: auto; font-family: var(--font-hud); font-size: 0.7rem; color: var(--text-muted);">
+                <span>TRANSMISSION: NOMINAL</span>
+                <span>DATAFLOW: INBOUND</span>
             </div>
         </div>
 
-        <!-- Column 3: Timing, Strategy & Fuel -->
-        <div class="sci-card">
-            <div class="panel-header">
-                <div>
-                    <h3 class="panel-title">TACTICAL STRAT</h3>
-                    <p class="panel-subtitle">PREDICTION NETWORKS</p>
+        <!-- Column 3: Pit strategy controls -->
+        <div class="hud-card">
+            <div class="pit-status-header">
+                <span class="pit-status-lbl">PIT STATUS</span>
+                <span class="pit-status-val" id="val-pitstatus">STANDBY</span>
+            </div>
+
+            <!-- Fuel load slider -->
+            <div class="strat-row">
+                <div class="strat-meta">
+                    <span>Fuel Load</span>
+                    <span class="strat-val-readout"><span id="lbl-fuel-load">78</span>%</span>
                 </div>
-                <div style="font-family: var(--font-hud); font-size: 0.8rem; color: var(--text-muted);" id="val-pos">P 12 / 36</div>
+                <input type="range" class="strat-slider" id="pit-fuel-load" min="10" max="100" value="78" oninput="updateFuelLoadReadout()">
             </div>
 
-            <!-- Timing table -->
-            <div>
-                <h4 style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--cyan-accent); margin-bottom: 6px;">TIMING ENGINE</h4>
-                <table class="clean-table">
-                    <tr>
-                        <td class="lbl-clean">Last Lap</td>
-                        <td class="val-clean" id="val-lastlap">15.242</td>
-                    </tr>
-                    <tr>
-                        <td class="lbl-clean">Best Lap</td>
-                        <td class="val-clean" id="val-bestlap">15.110</td>
-                    </tr>
-                    <tr>
-                        <td class="lbl-clean">Lap Delta</td>
-                        <td class="val-clean" id="val-delta" style="color: var(--cyan-accent);">0.000</td>
-                    </tr>
-                    <tr>
-                        <td class="lbl-clean">5-Lap Average</td>
-                        <td class="val-clean" id="val-avg-5">15.285</td>
-                    </tr>
-                    <tr>
-                        <td class="lbl-clean">10-Lap Average</td>
-                        <td class="val-clean" id="val-avg-10">15.340</td>
-                    </tr>
-                </table>
-            </div>
-
-            <!-- Fuel Strategy table -->
-            <div>
-                <h4 style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--cyan-accent); margin-bottom: 6px;">FUEL PROJECTIONS</h4>
-                <table class="clean-table">
-                    <tr>
-                        <td class="lbl-clean">Remaining</td>
-                        <td class="val-clean"><span id="val-fuel-pct">42</span>% (<span id="val-fuel-gals">7.5</span> gal)</td>
-                    </tr>
-                    <tr>
-                        <td class="lbl-clean">Est. Laps (Green)</td>
-                        <td class="val-clean" id="val-laps-left-green" style="color: var(--magenta-accent);">38.2 Laps</td>
-                    </tr>
-                    <tr>
-                        <td class="lbl-clean">Est. Laps (Caution)</td>
-                        <td class="val-clean" id="val-laps-left-caution">78.5 Laps</td>
-                    </tr>
-                </table>
-            </div>
-
-            <!-- Pit Selection Controls (2026 sliding toggles) -->
-            <div>
-                <h4 style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--cyan-accent); margin-bottom: 10px;">Pit Settings (Next Stop)</h4>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    
-                    <div class="toggle-switch-wrapper">
-                        <span class="toggle-lbl">Left Tires</span>
-                        <label class="switch">
-                            <input type="checkbox" id="pit-tires-l" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    
-                    <div class="toggle-switch-wrapper">
-                        <span class="toggle-lbl">Right Tires</span>
-                        <label class="switch">
-                            <input type="checkbox" id="pit-tires-r" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="toggle-switch-wrapper">
-                        <span class="toggle-lbl">Refuel Tank</span>
-                        <label class="switch">
-                            <input type="checkbox" id="pit-fuel" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    
-                    <!-- Tactical Fast Repair -->
-                    <button class="tactical-btn disabled" id="pit-fastrepair" onclick="toggleFastRepair()">
-                        <span>⚠️ CORE RECOVERY</span>
-                        <span id="fastrepair-state-text">ON</span>
-                    </button>
+            <!-- Tyre choice toggles -->
+            <div class="strat-row">
+                <div class="strat-meta">
+                    <span>Tyre Choice</span>
                 </div>
+                <div class="toggle-pill-grid">
+                    <button class="toggle-pill-btn active" id="pill-tyre-soft" onclick="selectTyre('soft')">Soft</button>
+                    <button class="toggle-pill-btn" id="pill-tyre-hard" onclick="selectTyre('hard')">Hard</button>
+                    <button class="toggle-pill-btn" id="pill-tyre-rain" onclick="selectTyre('rain')">Rain</button>
+                </div>
+            </div>
+
+            <!-- Wing Adjustment slider -->
+            <div class="strat-row">
+                <div class="strat-meta">
+                    <span>Wing Adj</span>
+                    <span class="strat-val-readout"><span id="lbl-wing-adj">4.1</span>°</span>
+                </div>
+                <input type="range" class="strat-slider" id="pit-wing-adj" min="0" max="10" step="0.1" value="4.1" oninput="updateWingReadout()">
+            </div>
+
+            <!-- Crew Ready toggle -->
+            <div class="holo-switch-wrapper">
+                <span class="toggle-lbl">Crew Ready</span>
+                <label class="switch">
+                    <input type="checkbox" id="pit-crew" checked onchange="toggleCrewReady()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Pit ETA indicator -->
+            <div class="strat-row">
+                <div class="strat-meta">
+                    <span>Pit ETA</span>
+                    <span class="strat-val-readout" id="lbl-pit-eta">14s</span>
+                </div>
+                <div class="indicator-track">
+                    <div class="indicator-fill" id="pit-eta-fill" style="width: 40%;"></div>
+                </div>
+            </div>
+
+            <!-- Repairs selection matrix -->
+            <div class="strat-row">
+                <div class="strat-meta">
+                    <span>Repairs</span>
+                </div>
+                <div class="toggle-pill-grid">
+                    <button class="toggle-pill-btn" id="pill-repair-soft" onclick="selectRepair('soft')">Soft</button>
+                    <button class="toggle-pill-btn" id="pill-repair-hard" onclick="selectRepair('hard')">Hard</button>
+                    <button class="toggle-pill-btn active" id="pill-repair-none" onclick="selectRepair('none')">None</button>
+                </div>
+            </div>
+
+            <div style="margin-top: auto;">
+                <button class="tactical-btn active" id="pit-fastrepair" onclick="toggleFastRepair()">
+                    <span>🔧 FAST RECOVERY</span>
+                    <span id="fastrepair-state-text">ON</span>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Simulator Controller -->
-    <div class="controller-panel">
-        <span style="font-family: var(--font-hud); font-weight: 900; font-size: 0.75rem; text-transform: uppercase; color: var(--cyan-accent); letter-spacing: 1px;">Telemetry Grid Controller</span>
-        <button class="ctl-btn active" id="sim-toggle" onclick="toggleSimulator()">Pause Matrix</button>
-        <button class="ctl-btn caution" id="caution-toggle" onclick="toggleCaution()">Caution State</button>
-        <button class="ctl-btn" onclick="causeCrashDamage()">Damage Simulation</button>
-        <div style="color: var(--text-muted); font-size: 0.75rem; margin-left: auto;">
-            Cybernetic 2026 interface proposal showing radial dials, floating holograms, and real-time waveforms.
+    <!-- Bottom Status Bar -->
+    <div class="bottom-status-bar">
+        <span>NEON-900</span>
+        <div style="display: flex; gap: 20px;">
+            <span>BAT <span id="val-bat" style="color: var(--cyan-accent);">91%</span></span>
+            <span id="btn-ers" style="color: var(--magenta-accent); text-shadow: 0 0 5px var(--magenta-glow);">[ ERS ]</span>
+            <span id="btn-drs" style="color: var(--cyan-accent); text-shadow: 0 0 5px var(--cyan-glow);">[ DRS ]</span>
+            <span>FUEL <span id="val-fuel-remain">14L</span></span>
         </div>
+        <span>DATAFLOW</span>
     </div>
 
-    <!-- Simulator Script -->
+    <!-- Live Telemetry Controls -->
+    <div class="controls-row">
+        <span class="sim-title">Holo-Sim Telemetry Controller</span>
+        <button class="btn-ctl active" id="sim-toggle" onclick="toggleSimulator()">Pause Simulation</button>
+        <button class="btn-ctl caution" id="caution-toggle" onclick="toggleCaution()">Caution Flag</button>
+        <button class="btn-ctl" onclick="causeCrashDamage()">Damage Simulation</button>
+    </div>
+
+    <!-- JavaScript Simulator -->
     <script>
         let simInterval = null;
         let isSimRunning = true;
@@ -1072,19 +1004,17 @@
         let rlI = 180, rlM = 176, rlO = 168;
         let rrI = 228, rrM = 218, rrO = 205;
         
-        let fuelGals = 7.5;
-        let fuelPct = 42;
-        
+        let fuelGals = 14.0;
+        let battery = 91;
         let isFastRepairEnabled = true;
+
+        // Wave tracking lists
+        let throttleHistory = Array(20).fill(50);
+        let brakeHistory = Array(20).fill(0);
 
         function startSimulation() {
             let step = 0;
-            const maxDashArray = 565; // rpm circle r=90
-            const maxInnerDashArray = 440; // inner input circle r=70
-
-            // Set the fast repair button styles on load
-            const fastBtn = document.getElementById("pit-fastrepair");
-            fastBtn.className = "tactical-btn active";
+            const maxDashArray = 440; // r=70 inner, r=90 outer is 565
 
             simInterval = setInterval(() => {
                 step++;
@@ -1113,6 +1043,7 @@
                     rlI = Math.max(138, rlI - 0.7); rlM = Math.max(136, rlM - 0.6); rlO = Math.max(132, rlO - 0.5);
                     rrI = Math.max(148, rrI - 1.1); rrM = Math.max(142, rrM - 1.0); rrO = Math.max(138, rrO - 0.9);
                     
+                    battery = Math.min(100, battery + 0.1);
                 } else {
                     if (cycle < 15) { // Turns
                         throttle = Math.max(40, throttle - 10);
@@ -1126,6 +1057,7 @@
                         
                         frWear = Math.max(10, frWear - 0.05);
                         rrWear = Math.max(10, rrWear - 0.04);
+                        battery = Math.max(50, battery - 0.05);
                     } else { // Straights
                         throttle = Math.min(100, throttle + 8);
                         brake = 0;
@@ -1135,6 +1067,7 @@
                         
                         frI = Math.max(225, frI - 0.5); frM = Math.max(215, frM - 0.4); frO = Math.max(200, frO - 0.3);
                         rrI = Math.max(218, rrI - 0.4); rrM = Math.max(208, rrM - 0.3); rrO = Math.max(198, rrO - 0.2);
+                        battery = Math.max(50, battery - 0.08);
                     }
                     
                     waterTemp = Math.min(235, waterTemp + (throttle > 80 ? 0.15 : -0.05));
@@ -1145,17 +1078,24 @@
                 // Fuel burn
                 const burnRate = isCautionActive ? 0.02 : 0.12;
                 fuelGals = Math.max(0, fuelGals - (burnRate / 40));
-                fuelPct = Math.floor((fuelGals / 18.0) * 100);
 
-                // Update text
+                // Save to history lists
+                throttleHistory.push(throttle);
+                throttleHistory.shift();
+                brakeHistory.push(brake);
+                brakeHistory.shift();
+
+                // Update text values
                 document.getElementById("hud-gear").textContent = gear;
                 document.getElementById("hud-speed").textContent = speed;
-                document.getElementById("hud-rpm").textContent = rpm;
-                document.getElementById("val-wave-freq").textContent = (rpm / 100).toFixed(1);
+                document.getElementById("val-rpm-digital").textContent = rpm;
+                document.getElementById("val-gforce").textContent = (1.5 + (speed / 100) + Math.sin(step * 0.2) * 0.3).toFixed(1) + " G";
                 
                 document.getElementById("val-water").textContent = waterTemp.toFixed(0);
                 document.getElementById("val-oil").textContent = oilTemp.toFixed(0);
                 document.getElementById("val-oilpress").textContent = oilPress.toFixed(0);
+                document.getElementById("val-bat").textContent = Math.floor(battery) + "%";
+                document.getElementById("val-fuel-remain").textContent = fuelGals.toFixed(0) + "L";
                 
                 toggleAlertClass("water-card", waterTemp > 225);
                 toggleAlertClass("oil-card", oilTemp > 245);
@@ -1183,64 +1123,52 @@
                 document.getElementById("tire-rr-m").textContent = rrM.toFixed(0) + "°";
                 document.getElementById("tire-rr-o").textContent = rrO.toFixed(0) + "°";
 
-                // Tire Wear
-                document.getElementById("tire-fl-wear").textContent = flWear.toFixed(0) + "%";
+                // Tire Wear fills
                 document.getElementById("tire-fl-wear-fill").style.width = flWear.toFixed(0) + "%";
-                
-                document.getElementById("tire-fr-wear").textContent = frWear.toFixed(0) + "%";
                 document.getElementById("tire-fr-wear-fill").style.width = frWear.toFixed(0) + "%";
-                
-                document.getElementById("tire-rl-wear").textContent = rlWear.toFixed(0) + "%";
                 document.getElementById("tire-rl-wear-fill").style.width = rlWear.toFixed(0) + "%";
-                
-                document.getElementById("tire-rr-wear").textContent = rrWear.toFixed(0) + "%";
                 document.getElementById("tire-rr-wear-fill").style.width = rrWear.toFixed(0) + "%";
 
-                setWearColor("tire-fl-wear-fill", flWear);
-                setWearColor("tire-fr-wear-fill", frWear);
-                setWearColor("tire-rl-wear-fill", rlWear);
-                setWearColor("tire-rr-wear-fill", rrWear);
-
-                // Fuel
-                document.getElementById("val-fuel-pct").textContent = fuelPct;
-                document.getElementById("val-fuel-gals").textContent = fuelGals.toFixed(1);
+                // Fuel 전략 stats
                 document.getElementById("val-laps-left-green").textContent = (fuelGals / 0.195).toFixed(1) + " Laps";
                 document.getElementById("val-laps-left-caution").textContent = (fuelGals / 0.08).toFixed(1) + " Laps";
 
-                // Animate Outer RPM ring
-                const percentRpm = Math.min(1, rpm / 8500);
-                const offset = maxDashArray * (1 - percentRpm);
-                document.getElementById("rpm-ring").style.strokeDashoffset = offset;
+                // Outer RPM ring fill: 0-12000 RPM (max 8500 in this car)
+                const outerPercent = Math.min(1, rpm / 9000);
+                const outerOffset = 440 * (1 - outerPercent);
+                document.getElementById("rpm-ring").style.strokeDashoffset = outerOffset;
 
-                // Animate Inner Input ring: sweeps with throttle (up to 100%)
-                const percentInput = Math.min(1, throttle / 100);
-                const innerOffset = maxInnerDashArray * (1 - percentInput);
-                document.getElementById("input-ring").style.strokeDashoffset = innerOffset;
+                // Inner Input ring fill: Throttle/Brake combo
+                const innerPercent = Math.min(1, throttle / 100);
+                const innerOffset = 440 * (1 - innerPercent);
+                document.getElementById("inner-input-ring").style.strokeDashoffset = innerOffset;
 
                 // Update shift lights
                 updateShiftLights(rpm);
 
-                // Animate Oscilloscope Telemetry Wave
-                animateWave(rpm, throttle, brake);
+                // Draw oscilloscopes
+                drawOscilloscope("throttle-wave", throttleHistory, "#00f0ff");
+                drawOscilloscope("brake-wave", brakeHistory, "#ff007f");
 
             }, 100);
         }
 
-        // Oscilloscope drawing logic
-        function animateWave(rpm, throttle, brake) {
-            const path = document.getElementById("wave-path");
-            let dString = "M 0,30";
+        // Oscilloscope drawer using path history
+        function drawOscilloscope(elementId, history, color) {
+            const path = document.getElementById(elementId);
+            const w = 200; // width of screen
+            const h = 50;  // height of screen
+            const stepWidth = w / (history.length - 1);
             
-            // Draw a high frequency sine wave based on RPM and throttle
-            const amp = 10 + (throttle / 15) + (brake / 8);
-            const freq = 0.04 + (rpm / 80000);
-            const timeOffset = Date.now() * 0.01;
-
-            for (let x = 0; x <= 360; x += 15) {
-                const y = 30 + Math.sin((x * freq) - timeOffset) * amp;
+            let dString = `M 0,${h}`; // Start at bottom-left for fill shape
+            
+            for (let i = 0; i < history.length; i++) {
+                const x = i * stepWidth;
+                const valuePercent = history[i] / 100;
+                const y = h - (valuePercent * (h - 10)) - 5;
                 dString += ` L ${x},${y}`;
             }
-            dString += " L 360,60 L 0,60 Z"; // Fill bottom
+            dString += ` L ${w},${h} Z`; // Close path to bottom-right
             path.setAttribute("d", dString);
         }
 
@@ -1253,21 +1181,10 @@
             }
         }
 
-        function setWearColor(elementId, wear) {
-            const fill = document.getElementById(elementId);
-            fill.className = "tire-wear-fill";
-            if (wear < 40) {
-                fill.classList.add("wear-danger");
-            } else if (wear < 75) {
-                fill.classList.add("wear-caution");
-            }
-        }
-
         function updateShiftLights(currentRpm) {
-            // RPM ranges: Redline 8500
             for (let i = 1; i <= 12; i++) {
                 const node = document.getElementById(`led-${i}`);
-                node.className = "led-dot"; // reset
+                node.className = "led-dot";
                 const threshold = 6800 + (i * 135);
                 if (currentRpm >= threshold) {
                     if (i <= 4) {
@@ -1277,7 +1194,7 @@
                     } else if (i <= 11) {
                         node.classList.add("red");
                     } else {
-                        node.classList.add("blue"); // white/blue flash
+                        node.classList.add("blue");
                     }
                 }
             }
@@ -1299,15 +1216,22 @@
             isCautionActive = !isCautionActive;
             const btn = document.getElementById("caution-toggle");
             const banner = document.getElementById("flag-banner");
+            const status = document.getElementById("hud-status");
             
             if (isCautionActive) {
-                btn.textContent = "Clear Caution (Green)";
+                btn.textContent = "Clear Caution";
                 banner.className = "flag-banner caution";
                 banner.firstElementChild.textContent = "⚠️ ATTENTION // CAUTION_FLAG: SPEED_RESTRICTED";
+                status.textContent = "CHASSIS: CAUTION LIMIT";
+                status.style.color = "var(--magenta-accent)";
+                status.style.textShadow = "0 0 8px var(--magenta-glow)";
             } else {
                 btn.textContent = "Caution State";
                 banner.className = "flag-banner green";
                 banner.firstElementChild.textContent = "🚥 STATUS // SEC_A_GREEN: RACING SYSTEM NOMINAL";
+                status.textContent = "CHASSIS: ACTIVE";
+                status.style.color = "var(--cyan-accent)";
+                status.style.textShadow = "0 0 8px var(--cyan-glow)";
             }
         }
 
@@ -1333,12 +1257,54 @@
                 text.textContent = "ON";
             } else {
                 btn.className = "tactical-btn disabled";
-                text.textContent = "OFF (DISABLED)";
+                text.textContent = "OFF";
+            }
+        }
+
+        // Pit Controls updates
+        function updateFuelLoadReadout() {
+            const slider = document.getElementById("pit-fuel-load");
+            document.getElementById("lbl-fuel-load").textContent = slider.value;
+        }
+
+        function updateWingReadout() {
+            const slider = document.getElementById("pit-wing-adj");
+            document.getElementById("lbl-wing-adj").textContent = parseFloat(slider.value).toFixed(1);
+        }
+
+        function selectTyre(type) {
+            document.getElementById("pill-tyre-soft").classList.remove("active");
+            document.getElementById("pill-tyre-hard").classList.remove("active");
+            document.getElementById("pill-tyre-rain").classList.remove("active");
+            
+            document.getElementById(`pill-tyre-${type}`).classList.add("active");
+        }
+
+        function selectRepair(type) {
+            document.getElementById("pill-repair-soft").classList.remove("active");
+            document.getElementById("pill-repair-hard").classList.remove("active");
+            document.getElementById("pill-repair-none").classList.remove("active");
+            
+            document.getElementById(`pill-repair-${type}`).classList.add("active");
+        }
+
+        function toggleCrewReady() {
+            const chk = document.getElementById("pit-crew");
+            const statusVal = document.getElementById("val-pitstatus");
+            if (chk.checked) {
+                statusVal.textContent = "READY";
+                statusVal.style.color = "var(--green-active)";
+                statusVal.style.textShadow = "0 0 8px rgba(0, 230, 118, 0.4)";
+            } else {
+                statusVal.textContent = "STANDBY";
+                statusVal.style.color = "var(--cyan-accent)";
+                statusVal.style.textShadow = "0 0 6px var(--cyan-glow)";
             }
         }
 
         // Initialize simulation
         startSimulation();
+        toggleCrewReady(); // set initial pit status
     </script>
 </body>
 </html>
