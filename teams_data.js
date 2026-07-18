@@ -515,6 +515,12 @@ const teamsData = {
           "description": "Prize Money: REAGAN FRUGE (P6)",
           "category": "income",
           "amount": 25000
+        },
+        {
+          "date": "Jul 17, 2026",
+          "description": "Repaired Fleet: Roundy F-150 #12 (+297%), Roundy F-150 #4 (+34%), Roundy F-150 #15 (+99%), Roundy F-150 #32 (+21%)",
+          "category": "expense",
+          "amount": -225500
         }
       ],
       "points": 232,
@@ -523,28 +529,28 @@ const teamsData = {
           "id": "truck-1",
           "make": "Ford",
           "name": "Roundy F-150 #12",
-          "condition": -197
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Ford",
           "name": "Roundy F-150 #4",
-          "condition": 66
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Ford",
           "name": "Roundy F-150 #15",
-          "condition": 1
+          "condition": 100
         },
         {
           "id": "truck-4",
           "make": "Ford",
           "name": "Roundy F-150 #32",
-          "condition": 79
+          "condition": 100
         }
       ],
-      "balance": 2054179,
+      "balance": 1828679,
       "drivers": {
         "backup": [
           "REAGAN FRUGE",
@@ -1040,6 +1046,12 @@ const teamsData = {
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
+        },
+        {
+          "date": "Jul 17, 2026",
+          "description": "Repaired Fleet: 937 Tundra #18 (+59%), 937 Tundra #22 (+114%), 937 Tundra #47 (+85%)",
+          "category": "expense",
+          "amount": -129000
         }
       ],
       "points": 300,
@@ -1048,19 +1060,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Toyota",
           "name": "937 Tundra #18",
-          "condition": 41
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Toyota",
           "name": "937 Tundra #22",
-          "condition": -14
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Toyota",
           "name": "937 Tundra #47",
-          "condition": 15
+          "condition": 100
         },
         {
           "id": "truck-4",
@@ -1075,7 +1087,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 1909953,
+      "balance": 1780953,
       "drivers": {
         "backup": [
           "DI0NTE RADER",
@@ -1289,6 +1301,12 @@ const teamsData = {
           "description": "DAVID WESTOVER JR DNS",
           "category": "info",
           "amount": 0
+        },
+        {
+          "date": "Jul 17, 2026",
+          "description": "Repaired Fleet: Wrist's Up Silverado #23 (+92%), Wrist's Up Silverado #88 (+25%)",
+          "category": "expense",
+          "amount": -58500
         }
       ],
       "points": 7,
@@ -1297,13 +1315,13 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Wrist's Up Silverado #23",
-          "condition": 8
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Wrist's Up Silverado #88",
-          "condition": 75
+          "condition": 100
         },
         {
           "id": "truck-3",
@@ -1318,7 +1336,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 1969892,
+      "balance": 1911392,
       "drivers": {
         "backup": [
           "DYLAN NICASTRO",
@@ -1935,6 +1953,12 @@ const teamsData = {
           "description": "Prize Money: CURTIS YANCEY (P8)",
           "category": "income",
           "amount": 25000
+        },
+        {
+          "date": "Jul 17, 2026",
+          "description": "Repaired Fleet: ZeroFoxtrot Silverado #84 (+141%), ZeroFoxtrot Silverado #31 (+163%), ZeroFoxtrot Silverado #75 (+82%), ZeroFoxtrot Silverado #11 (+66%), ZeroFoxtrot Silverado #51 (+130%)",
+          "category": "expense",
+          "amount": -291000
         }
       ],
       "points": 418,
@@ -1943,13 +1967,13 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #84",
-          "condition": -41
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #31",
-          "condition": -63
+          "condition": 100
         },
         {
           "id": "truck-3",
@@ -1961,22 +1985,22 @@ const teamsData = {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #75",
-          "condition": 18
+          "condition": 100
         },
         {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #11",
-          "condition": 34
+          "condition": 100
         },
         {
           "id": "truck-6",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #51",
-          "condition": -30
+          "condition": 100
         }
       ],
-      "balance": 2135979,
+      "balance": 1844979,
       "drivers": {
         "backup": [
           "JON OSBORNE",
@@ -2328,6 +2352,12 @@ const teamsData = {
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
+        },
+        {
+          "date": "Jul 17, 2026",
+          "description": "Repaired Fleet: Carter Phillips Silverado #97 (+153%), Carter Phillips Silverado #83 (+144%), Carter Phillips Silverado #30 (+144%)",
+          "category": "expense",
+          "amount": -220500
         }
       ],
       "points": 133,
@@ -2336,19 +2366,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #97",
-          "condition": -53
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #83",
-          "condition": -44
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #30",
-          "condition": -44
+          "condition": 100
         },
         {
           "id": "truck-4",
@@ -2357,7 +2387,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2158904,
+      "balance": 1938404,
       "drivers": {
         "backup": [
           "VACANT",
@@ -2869,6 +2899,12 @@ const teamsData = {
           "description": "Virtual Sponsorship Earned: Veloce Simulators (Upward Performance: 6.4 Avg Finish over 2 weeks)",
           "category": "income",
           "amount": 13932
+        },
+        {
+          "date": "Jul 17, 2026",
+          "description": "Repaired Fleet: GFR Silverado #8 (+151%), GFR Silverado #2 (+100%), GFR Silverado #1 (+110%), GFR Silverado #7 (+102%), GFR Silverado #13 (+200%)",
+          "category": "expense",
+          "amount": -331500
         }
       ],
       "points": 430,
@@ -2877,34 +2913,34 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "GFR Silverado #8",
-          "condition": -51
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "GFR Silverado #2",
-          "condition": 0
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "GFR Silverado #1",
-          "condition": -10
+          "condition": 100
         },
         {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "GFR Silverado #7",
-          "condition": -2
+          "condition": 100
         },
         {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "GFR Silverado #13",
-          "condition": -100
+          "condition": 100
         }
       ],
-      "balance": 2347575,
+      "balance": 2016075,
       "drivers": {
         "backup": [
           "JONATHON PLATT",
@@ -3090,6 +3126,12 @@ const teamsData = {
           "description": "DNS: No team participation",
           "category": "info",
           "amount": 0
+        },
+        {
+          "date": "Jul 17, 2026",
+          "description": "Repaired Fleet: Striped Maple Silverado #50 (+100%)",
+          "category": "expense",
+          "amount": -50000
         }
       ],
       "points": 57,
@@ -3098,10 +3140,10 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Striped Maple Silverado #50",
-          "condition": 0
+          "condition": 100
         }
       ],
-      "balance": 1937028,
+      "balance": 1887028,
       "drivers": {
         "backup": [
           "VACANT",
@@ -3733,6 +3775,12 @@ const teamsData = {
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
+        },
+        {
+          "date": "Jul 17, 2026",
+          "description": "Repaired Fleet: POP Silverado #08 (+66%), POP Silverado #10 (+133%), POP Silverado #29 (+106%)",
+          "category": "expense",
+          "amount": -152500
         }
       ],
       "points": 169,
@@ -3741,19 +3789,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "POP Silverado #08",
-          "condition": 34
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "POP Silverado #10",
-          "condition": -33
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "POP Silverado #29",
-          "condition": -6
+          "condition": 100
         },
         {
           "id": "truck-4",
@@ -3762,7 +3810,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 1976353,
+      "balance": 1823853,
       "drivers": {
         "backup": [
           "MARK GALLOWAY",
@@ -4156,6 +4204,12 @@ const teamsData = {
           "description": "<span style=\"color:#ff4d4d;\">Lost Sponsor: Chevrolet Accessories (Downward Performance: 23.2 Avg Finish over 2 weeks)</span>",
           "category": "info",
           "amount": 0
+        },
+        {
+          "date": "Jul 17, 2026",
+          "description": "Repaired Fleet: ESR Silverado #24 (+214%), ESR Silverado #00 (+100%), ESR Silverado #21 (+217%)",
+          "category": "expense",
+          "amount": -265500
         }
       ],
       "points": 186,
@@ -4164,19 +4218,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "ESR Silverado #24",
-          "condition": -114
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "ESR Silverado #00",
-          "condition": 0
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "ESR Silverado #21",
-          "condition": -117
+          "condition": 100
         },
         {
           "id": "truck-4",
@@ -4185,7 +4239,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2175930,
+      "balance": 1910430,
       "drivers": {
         "backup": [
           "ETHAN SIKORSKI",
@@ -4805,6 +4859,12 @@ const teamsData = {
           "description": "Prize Money: JOSH BILLITER (P17)",
           "category": "income",
           "amount": 15000
+        },
+        {
+          "date": "Jul 17, 2026",
+          "description": "Repaired Fleet: Legacy Racing Silverado #99 (+264%), Legacy Racing Silverado #9 (+188%), Legacy Racing Silverado #6 (+55%), Legacy Racing Silverado #50 (+159%)",
+          "category": "expense",
+          "amount": -333000
         }
       ],
       "points": 231,
@@ -4813,28 +4873,28 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #99",
-          "condition": -164
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #9",
-          "condition": -88
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #6",
-          "condition": 45
+          "condition": 100
         },
         {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #50",
-          "condition": -59
+          "condition": 100
         }
       ],
-      "balance": 2042090,
+      "balance": 1709090,
       "drivers": {
         "backup": [
           "JOSH BILLITER",
