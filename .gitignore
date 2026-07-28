@@ -14,3 +14,8 @@ __pycache__/
 
 # Local weekly data JS file
 weekly_data.js
+
+# GFR offline assets
+assets/truck images/gfr_cutouts/
+assets/merch/gfr_tshirt/
+*.bak
