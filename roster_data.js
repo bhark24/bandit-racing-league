@@ -159,6 +159,10 @@ const rosterData = {
     "driver": "JACKSON MUMMERT",
     "status": "part-time"
   },
+  "53": {
+    "driver": "RYAN PERRONE",
+    "status": "part-time"
+  },
   "54": {
     "driver": "MATT BAILEY",
     "status": "part-time"

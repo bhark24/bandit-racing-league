@@ -4402,7 +4402,7 @@ const teamsData = {
       "drivers": {
         "backup": [
           "MARK GALLOWAY",
-          "VACANT"
+          "RYAN PERRONE"
         ],
         "primary": [
           "JACKSON DUKE",
@@ -6408,6 +6408,11 @@ const teamsData = {
       "lat": 38.9592,
       "lon": -85.8903,
       "city": "Seymour, IN"
+    },
+    "RYAN PERRONE": {
+      "lat": 35.4088,
+      "lon": -80.5795,
+      "city": "TBD"
     }
   },
   "spotlightHistory": [
