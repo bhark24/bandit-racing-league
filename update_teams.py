@@ -245,6 +245,7 @@ def normalize_name(name):
     name = re.sub(r'\s+[a-z]\s+', ' ', name)
     name = re.sub(r'\s+', ' ', name).strip()
     name = name.replace("mc ", "mc")
+    name = re.sub(r'\s+(jr|sr)\.?$', '', name)
     
     name_map = {
         "josh": "joshua",
