@@ -660,17 +660,22 @@ def main():
         
     # 4. Fetch Next Race Details
     next_track, next_date = get_next_race()
-    
-    # 5. Format Social Media Post Template
+        # 5. Format Social Media Post Template
     if "daytona" in track_name.lower():
         story_lead = f"Controversy at Daytona! Sean Britt crossed the line first after contact sent Jonathon Platt spinning into the infield. However, after a post-race administrative review, the win was stripped from Britt and awarded to **{winner_name}**! Platt was scored where he crossed the line as the contact was ruled a racing incident."
     elif "atlanta" in track_name.lower():
         story_lead = f"Redemption in the Peach State! After the heartbreak of the opener, **{winner_name}** drove a masterful race to secure victory at **{track_name}**! Platt qualified 10th but charged forward, leading 32 laps to seal the win. Meanwhile, Connor Gibson earned Hard Charger honors, slicing from 19th all the way to a brilliant 2nd-place finish!"
     elif "charlotte" in track_name.lower():
         story_lead = f"937 Racing Dominates Charlotte! **{winner_name}** drove a flawless race in the #22 Toyota Tundra to claim victory, leading a race-high 54 laps! It was a double top-5 for 937 Racing as Michael Rakes charged from a distant 21st on the grid to finish a spectacular 4th. Johnathon Platt (GFR Racing) continued his strong season, fighting from 14th to finish 2nd, while Benjamin Lacy secured 3rd after leading 27 laps!"
+    elif "bristol" in track_name.lower():
+        story_lead = f"Lacy Conquers Bristol! **{winner_name}** executed a flawless race strategy in the GFR Racing Chevrolet #7, surviving a caution-heavy concrete battle to take the checkered flag at Bristol Motor Speedway! Bob Berry finished a strong 2nd, while Wes Fuller completed the podium in 3rd."
+    elif "nashville" in track_name.lower():
+        story_lead = f"Adams Ascends at Nashville! **{winner_name}** drove a patient and calculated race, slicing through the pack from 18th on the grid to lead a race-high 44 laps and capture the victory for 937 Racing! Connor Gibson finished 2nd, while Dylan McDonald completed the podium in 3rd. Jon Osborne was the hard charger of the night, climbing from 28th to 4th!"
+    elif "pocono" in track_name.lower():
+        story_lead = f"GFR Racing Sweeps Pocono! **{winner_name}** led 21 laps and drove a masterful race to secure the victory at the Tricky Triangle! GFR teammate Nick Nickerson finished a close 2nd to seal a spectacular 1-2 sweep for the team, while Eddie Hagigh claimed 3rd. Pole-sitter Adam Tahan dominated early, leading 37 laps to finish 4th."
     else:
         story_lead = f"What a race! **{winner_name}** executed a perfect game plan, outrunning the field to secure P1 and the largest loot payout of the night at **{track_name}**!"
-
+    
     winner_team = find_driver_team(winner_name, teams_data)
 
     post_text = f"""**BANDIT RACING LEAGUE - WEEKLY UPDATE** 🏁
