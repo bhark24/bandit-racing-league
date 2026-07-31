@@ -9,42 +9,42 @@ const weeklyData = {
   "teamStandings": [
     {
       "name": "ZeroFoxtrot",
-      "points": 933,
+      "points": 810,
       "wins": 0
     },
     {
       "name": "GFR Racing",
-      "points": 903,
-      "wins": 4
-    },
-    {
-      "name": "Legacy Racing",
-      "points": 624,
-      "wins": 2
-    },
-    {
-      "name": "937 Racing",
-      "points": 609,
+      "points": 788,
       "wins": 3
     },
     {
+      "name": "937 Racing",
+      "points": 588,
+      "wins": 3
+    },
+    {
+      "name": "Legacy Racing",
+      "points": 547,
+      "wins": 2
+    },
+    {
       "name": "Roundy Motorsports",
-      "points": 553,
+      "points": 505,
       "wins": 0
     },
     {
       "name": "POP Motorsports",
-      "points": 522,
+      "points": 431,
       "wins": 0
     },
     {
       "name": "ESR",
-      "points": 453,
+      "points": 423,
       "wins": 0
     },
     {
       "name": "Carter Phillips Racing",
-      "points": 328,
+      "points": 290,
       "wins": 0
     },
     {
@@ -53,13 +53,13 @@ const weeklyData = {
       "wins": 0
     },
     {
-      "name": "Middle Aged Gunz Motorsports",
-      "points": 86,
+      "name": "Striped Maple Racing",
+      "points": 57,
       "wins": 0
     },
     {
-      "name": "Striped Maple Racing",
-      "points": 57,
+      "name": "Middle Aged Gunz Motorsports",
+      "points": 43,
       "wins": 0
     },
     {
