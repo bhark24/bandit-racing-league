@@ -804,6 +804,7 @@
 
             // Render countdown details
             updateCountdownText();
+            window.countdownInterval = setInterval(updateCountdownText, 1000);
 
             // Load active weekly picks from Supabase
             loadPicksFromSupabase();
@@ -933,6 +934,7 @@
         }
 
         function selectDriverCard(cardElement, driverName) {
+            if (window.isFantasyLocked) return;
             const index = currentPicks.indexOf(driverName);
             if (index > -1) {
                 cardElement.classList.remove('selected');
@@ -1007,8 +1009,17 @@
 
             // Enable/Disable Submit Button
             const submitBtn = document.getElementById('submit-picks-btn');
-            const formValid = currentPicks.every(p => p !== null);
-            submitBtn.disabled = !formValid;
+            if (window.isFantasyLocked) {
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Submissions Locked';
+                }
+            } else {
+                if (submitBtn) {
+                    const formValid = currentPicks.every(p => p !== null);
+                    submitBtn.disabled = !formValid;
+                }
+            }
         }
 
         // Render Countdown Text
@@ -1057,6 +1068,12 @@
 
             if (!nextRace || !lockDate) {
                 countdownEl.innerHTML = `LOCKED / SCORING NEXT EVENT — Next picks open after race scoring completes.`;
+                countdownEl.style.color = '#ff1744';
+                setFantasyLocked(true);
+                if (window.countdownInterval) {
+                    clearInterval(window.countdownInterval);
+                    window.countdownInterval = null;
+                }
                 return;
             }
 
@@ -1066,14 +1083,78 @@
             }
 
             const diffMs = lockDate.getTime() - now.getTime();
-            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-            const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
             
-            if (diffHours > 24) {
-                const days = Math.floor(diffHours / 24);
-                countdownEl.innerHTML = `SELECTIONS OPEN — Locks in ${days} days, ${diffHours % 24} hours`;
+            if (diffMs <= 0) {
+                countdownEl.innerHTML = `LOCKED / SCORING NEXT EVENT — Next picks open after race scoring completes.`;
+                countdownEl.style.color = '#ff1744';
+                setFantasyLocked(true);
+                if (window.countdownInterval) {
+                    clearInterval(window.countdownInterval);
+                    window.countdownInterval = null;
+                }
+                return;
+            }
+
+            setFantasyLocked(false);
+
+            const diffSecs = Math.floor((diffMs / 1000) % 60);
+            const diffMins = Math.floor((diffMs / (1000 * 60)) % 60);
+            const diffHours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+            let countdownText = 'SELECTIONS OPEN — Locks in ';
+            if (diffDays > 0) {
+                countdownText += `${diffDays}d ${diffHours}h ${diffMins}m ${diffSecs}s`;
             } else {
-                countdownEl.innerHTML = `SELECTIONS OPEN — Locks in ${diffHours}h ${diffMins}m (9:15 PM EST)`;
+                countdownText += `${diffHours}h ${diffMins}m ${diffSecs}s (9:15 PM EST)`;
+            }
+            countdownEl.innerHTML = countdownText;
+            countdownEl.style.color = 'var(--neon-green)';
+        }
+
+        function setFantasyLocked(isLocked) {
+            window.isFantasyLocked = isLocked;
+            const submitBtn = document.getElementById('submit-picks-btn');
+            const tiebreakerInput = document.getElementById('tiebreaker');
+            const nameInput = document.getElementById('fan-name');
+            const emailInput = document.getElementById('fan-email');
+            const gridContainer = document.getElementById('unified-driver-pool-grid');
+
+            if (isLocked) {
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Submissions Locked';
+                    submitBtn.style.background = '#333';
+                    submitBtn.style.borderColor = '#333';
+                    submitBtn.style.color = 'rgba(255,255,255,0.3)';
+                    submitBtn.style.cursor = 'not-allowed';
+                }
+                if (tiebreakerInput) tiebreakerInput.disabled = true;
+                if (nameInput) nameInput.disabled = true;
+                if (emailInput) emailInput.disabled = true;
+                if (gridContainer) {
+                    gridContainer.style.pointerEvents = 'none';
+                    gridContainer.style.opacity = '0.6';
+                }
+                // Hide all remove buttons
+                document.querySelectorAll('.btn-remove-pick').forEach(btn => {
+                    btn.style.display = 'none';
+                });
+            } else {
+                if (submitBtn && submitBtn.textContent === 'Submissions Locked') {
+                    submitBtn.textContent = 'Submit Roster';
+                    submitBtn.style.background = '';
+                    submitBtn.style.borderColor = '';
+                    submitBtn.style.color = '';
+                    submitBtn.style.cursor = '';
+                }
+                if (tiebreakerInput) tiebreakerInput.disabled = false;
+                if (nameInput) nameInput.disabled = false;
+                if (emailInput) emailInput.disabled = false;
+                if (gridContainer) {
+                    gridContainer.style.pointerEvents = 'auto';
+                    gridContainer.style.opacity = '1';
+                }
             }
         }
 
@@ -1317,6 +1398,11 @@
 
         // Form Submit Handler
         function submitFantasyForm(event) {
+            if (window.isFantasyLocked) {
+                alert("Submissions are currently locked for this event!");
+                event.preventDefault();
+                return false;
+            }
             const name = document.getElementById('fan-name').value.trim();
             const email = document.getElementById('fan-email').value.trim();
             const tiebreaker = document.getElementById('tiebreaker').value;
