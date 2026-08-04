@@ -1,0 +1,41 @@
+📣 **BRL TIER 1 DRIVING STANDARDS ADJUSTMENTS** 📣
+
+Admins have met and finalized a set of rule adjustments in effort to clean up the overall quality of the league. Goal is to reduce caution flags, and improve the actual race quality. These adjustments are in effect starting with our next event at **Richmond**.
+
+---
+
+### 1️⃣ START FROM PIT ROAD PENALTY (DRIVER IS NOT ALLOWED TO QUALIFY DUE TO A PENALTY THEY RECEIVED)
+Any driver who has received a start from pit road penalty must follow these procedures:
+* **1** The penalized driver cannot attempt to qualify.
+* **2** Once qualifying is complete, the penalized driver is required to start from pit road. Driver may not start on the grid. 
+* **3** Race start procedure: Any penalized driver, once the GREEN FLAG has BEEN DISPLAYED, is allowed to roll down pit road. No penalized driver is allowed to cross the pit exit line (end of pit road where the speed limit ends). Drivers must stay on pit lane until the red light changes to green. Failure to follow procedure will result in a penalty.
+* **Penalty:** Crossing the pit exit line early will result in an automatic **Green-Flag Drive-Through Penalty**. *(Note: iRacing's built-in red exit light takes precedence—do not run a red light).*
+
+---
+
+### 2️⃣ No 3-Wide Passing on Starts & Restarts
+To prevent Turn 1 pileups on cold tires:
+* **The Rule:** Drivers are strictly prohibited from initiating or entering a **3-wide passing lane** on all starts and restarts **until the field has cleared the exit of Turn 2**.
+* **Penalty:** Any driver found to have forced a 3-wide situation before exiting Turn 2 will be issued an immediate **DRIVE THRU PENALTY UNDER GREEN FLAG CONDITIONS**.
+
+---
+
+### 3️⃣ The 15-Lap Caution Rule
+Cautions breed cautions, especially early in runs. The penalty for triggering an early yellow has been heavily increased:
+* **ALL RESTARTS WILL NOW HAVE THE 15 LAP RULE IN EFFECT CONCERNING ALL OVAL TRACKS REGARDLESS OF TRACK SIZE.**
+* **The Rule:** Any driver identified by Race Control as the primary cause of a caution flag within the **first 15 laps** of THE INITIAL START AND ALL RESTARTS! will be issued an immediate **Green-Flag Drive-Through Penalty**.
+* **Execution:** Once the race restarts and goes green, the penalized driver has exactly **3 laps** to drive through pit road at pit speed.
+* **Failure to Serve:** Failure to serve the drive-through within 3 green-flag laps will result in an automatic **Disqualification (DQ)**.
+* **ANY DRIVER FOUND AT FAULT FOR THE INCIDENT WILL BE PENALIZED. IF IT IS DETERMINED TO BE A RACING INCIDENT THEN BOTH DRIVERS WILL BE FOUND AT FAULT AND WILL BE REVIEWED AT THE END OF THE SESSION.**
+* *(Note: Race Control still reserves the right to rule an incident a "Racing Deal" with no penalty if it is a multi-car squeeze where no single driver is clearly at fault).*
+
+---
+
+### 4️⃣ POST RACE REPORT (Incident Summaries)
+To keep competition standards transparent, we are introducing social accountability:
+* **The Report:** Following each race, Race Control will post a public **Post Race Report** on Discord summarizing driver incident statistics (Starts, Involvements, and Cautions Caused).
+* **Watchlist Status:** Drivers with high involvement or caution-causing rates will be highlighted. Continued presence on the watchlist will lead to Tier 2 action (mandatory probation, qualifying bans, or suspensions).
+
+---
+
+*Admins maintain all rights of clearing flags and issuing penalties. Let's keep the racing tight, respect our competitors' space, and put on a clean show for the remainder of Season 16!*

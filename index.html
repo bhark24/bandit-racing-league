@@ -478,7 +478,7 @@
                 "MARKALANBIVENS": "Mark Alan Bivens.png", "MATTCROCKETT": "Matt Crockett.png", "MICHAELRAKES": "Michael Rakes.png",
                 "NATHANSANTOS": "Nathan Santos.png", "SEANBRITT": "Sean Britt.png", "TYCORINO": "Ty Corino.png",
                 "VICTORWEAVER": "Victor Weaver.png", "DYLANNICASTRO": "Dillon.png", "NICOLEKRIESEL": "Nicole Kriesel.png",
-                "NICOLEKREISEL": "Nicole Kriesel.png"
+                "NICOLEKREISEL": "Nicole Kriesel.png", "TREELLIS": "Tre_Ellis.png"
             };
 
             // Get path for the driver's number image
@@ -868,6 +868,12 @@
                         recapText = `After the heartbreak of the season opener, **${wCleanName}** bounced back in spectacular fashion, driving a masterful race to secure victory at **${wTrack}**! Platt qualified 10th but carved forward, leading 32 laps to seal the win.`;
                     } else if (wTrack.toLowerCase().includes("charlotte")) {
                         recapText = `A dominant performance by **${wCleanName}** earned 937 Racing its first win of Season 16! Adams qualified 6th and led 54 laps, holding off a late-race charge from Platt to secure victory at **${wTrack}**.`;
+                    } else if (wTrack.toLowerCase().includes("bristol")) {
+                        recapText = `Lacy Conquers Bristol! **${wCleanName}** executed a flawless race strategy in the GFR Racing Chevrolet #7, surviving a caution-heavy concrete battle to take the checkered flag at Bristol Motor Speedway! Bob Berry finished a strong 2nd, while Wes Fuller completed the podium in 3rd.`;
+                    } else if (wTrack.toLowerCase().includes("nashville")) {
+                        recapText = `Adams Ascends at Nashville! **${wCleanName}** drove a patient and calculated race, slicing through the pack from 18th on the grid to lead a race-high 44 laps and capture the victory for 937 Racing! Connor Gibson finished 2nd, while Dylan McDonald completed the podium in 3rd.`;
+                    } else if (wTrack.toLowerCase().includes("pocono")) {
+                        recapText = `GFR Racing Sweeping Pocono! **${wCleanName}** led 21 laps and drove a masterful race to secure the victory at the Tricky Triangle! GFR teammate Nick Nickerson finished a close 2nd to seal a spectacular 1-2 sweep for the team, while Eddie Hagigh claimed 3rd.`;
                     } else {
                         recapText = `Congratulations to **${wCleanName}** for executing a perfect race strategy, outrunning the field to take the checkered flag at **${wTrack}**!`;
                     }

@@ -171,6 +171,10 @@ const rosterData = {
     "driver": "TY CORINO",
     "status": "full-time"
   },
+  "63": {
+    "driver": "TRE ELLIS",
+    "status": "full-time"
+  },
   "64": {
     "driver": "ADAM CLARK",
     "status": "part-time"
