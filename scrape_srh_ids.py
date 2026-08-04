@@ -4,6 +4,11 @@ import os
 
 # Baseline of known IDs
 srh_ids = {
+    "JACKSONMUMMERT": 54034,
+    "ADAMCLARK": 105478,
+    "MASONPHLEGAR": 60630,
+    "CODYWELCH": 41419,
+    "JOSHUASUTHERLAND": 85221,
     "JACKSONKNAAK": 63408,
     "NOLANGROSS": 41381,
     "BRETGUZIK": 39652,
@@ -58,7 +63,13 @@ srh_ids = {
 
 urls = [
     "https://simracerhub.com/season_standings.php?season_id=29722",
-    "https://simracerhub.com/season_standings.php?season_id=25504"
+    "https://simracerhub.com/season_standings.php?season_id=25504",
+    "https://simracerhub.com/season_race.php?schedule_id=363203",
+    "https://simracerhub.com/season_race.php?schedule_id=363204",
+    "https://simracerhub.com/season_race.php?schedule_id=363206",
+    "https://simracerhub.com/season_race.php?schedule_id=363207",
+    "https://simracerhub.com/season_race.php?schedule_id=363209",
+    "https://simracerhub.com/season_race.php?schedule_id=363211"
 ]
 
 def normalize_name(name):
