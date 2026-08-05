@@ -407,6 +407,6 @@ const weeklyData = {
       "points": 2
     }
   ],
-  "latestBroadcastVideoId": "p4Ss_3VgTaE",
+  "latestBroadcastVideoId": "upGp9mBJUP8",
   "spotlightDriver": "Davis Carroll"
 };
