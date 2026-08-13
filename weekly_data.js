@@ -1,45 +1,45 @@
 const weeklyData = {
-  "winnerName": "Nick Nickerson",
-  "winnerNumber": "2",
-  "winnerImage": "",
+  "winnerName": "Benjamin Lacy",
+  "winnerNumber": "7",
+  "winnerImage": "assets/WINNER IMAGES/Bandit_Season_16_Winner_Photo_Benjamin_Lacy_Bristol.png",
   "actionShots": [],
-  "trackName": "Richmond Raceway",
+  "trackName": "Michigan International Speedway",
   "trackLogo": "",
-  "raceDate": "Aug 5, 2026",
+  "raceDate": "Aug 12, 2026",
   "teamStandings": [
     {
       "name": "GFR Racing",
-      "points": 947,
-      "wins": 4
+      "points": 1107,
+      "wins": 5
     },
     {
       "name": "ZeroFoxtrot",
-      "points": 859,
+      "points": 891,
       "wins": 0
     },
     {
       "name": "937 Racing",
-      "points": 670,
+      "points": 759,
       "wins": 3
     },
     {
       "name": "Legacy Racing",
-      "points": 604,
+      "points": 696,
       "wins": 2
     },
     {
       "name": "Roundy Motorsports",
-      "points": 564,
+      "points": 611,
+      "wins": 0
+    },
+    {
+      "name": "POP Motorsports",
+      "points": 559,
       "wins": 0
     },
     {
       "name": "ESR",
       "points": 480,
-      "wins": 0
-    },
-    {
-      "name": "POP Motorsports",
-      "points": 479,
       "wins": 0
     },
     {
@@ -54,7 +54,7 @@ const weeklyData = {
     },
     {
       "name": "Middle Aged Gunz Motorsports",
-      "points": 65,
+      "points": 77,
       "wins": 0
     },
     {
@@ -71,22 +71,22 @@ const weeklyData = {
   "fantasyLeaderboard": [
     {
       "name": "Bob Berry",
-      "score": 588,
-      "wins": 4
+      "score": 711,
+      "wins": 5
     },
     {
       "name": "Rebekah Weaver",
-      "score": 549,
+      "score": 653,
       "wins": 1
     },
     {
       "name": "Bhark24",
-      "score": 403,
+      "score": 505,
       "wins": 0
     },
     {
       "name": "Matt Crockett",
-      "score": 311,
+      "score": 404,
       "wins": 1
     },
     {
@@ -159,182 +159,182 @@ const weeklyData = {
     {
       "pos": 1,
       "name": "Benjamin I Lacy",
-      "points": 284
+      "points": 334
     },
     {
       "pos": 2,
       "name": "Scott Sanderson",
-      "points": 282
+      "points": 313
     },
     {
       "pos": 3,
       "name": "Kevin Foster",
-      "points": 245
+      "points": 285
     },
     {
       "pos": 4,
+      "name": "Joshua L Adams",
+      "points": 273
+    },
+    {
+      "pos": 5,
       "name": "Dylan McDonald",
-      "points": 231
-    },
-    {
-      "pos": 4,
-      "name": "Johnathon Platt",
-      "points": 231
+      "points": 271
     },
     {
       "pos": 6,
-      "name": "Joshua L Adams",
-      "points": 222
+      "name": "Johnathon Platt",
+      "points": 254
     },
     {
       "pos": 7,
-      "name": "Bob Berry",
-      "points": 215
+      "name": "Connor Gibson",
+      "points": 237
     },
     {
       "pos": 8,
+      "name": "Nick Nickerson",
+      "points": 235
+    },
+    {
+      "pos": 9,
+      "name": "Michael Rakes",
+      "points": 229
+    },
+    {
+      "pos": 10,
+      "name": "Bob Berry",
+      "points": 222
+    },
+    {
+      "pos": 11,
       "name": "Jackson Knaak",
       "points": 205
     },
     {
-      "pos": 9,
-      "name": "Nick Nickerson",
-      "points": 199
-    },
-    {
-      "pos": 10,
-      "name": "Eddie Hagigh",
-      "points": 194
-    },
-    {
-      "pos": 11,
-      "name": "Michael Rakes",
-      "points": 193
-    },
-    {
       "pos": 12,
-      "name": "Connor Gibson",
-      "points": 192
+      "name": "Garret Bobo",
+      "points": 204
     },
     {
       "pos": 13,
-      "name": "Garret Bobo",
-      "points": 156
+      "name": "Eddie Hagigh",
+      "points": 201
     },
     {
       "pos": 14,
       "name": "Davis Carroll",
-      "points": 153
+      "points": 180
     },
     {
       "pos": 15,
+      "name": "Matt Crockett",
+      "points": 164
+    },
+    {
+      "pos": 16,
       "name": "Jon Osborne",
       "points": 147
     },
     {
-      "pos": 16,
+      "pos": 17,
       "name": "Ethan Sikorski",
       "points": 146
     },
     {
-      "pos": 17,
-      "name": "Matt Crockett",
-      "points": 138
+      "pos": 18,
+      "name": "Ty Corino",
+      "points": 144
     },
     {
       "pos": 18,
-      "name": "Jackson C Duke",
-      "points": 129
-    },
-    {
-      "pos": 19,
-      "name": "Ty Corino",
-      "points": 124
+      "name": "Victor Weaver",
+      "points": 144
     },
     {
       "pos": 20,
-      "name": "Victor Weaver",
-      "points": 119
+      "name": "Jackson C Duke",
+      "points": 142
     },
     {
       "pos": 21,
+      "name": "Joshua Billiter",
+      "points": 128
+    },
+    {
+      "pos": 22,
+      "name": "Tre Ellis",
+      "points": 123
+    },
+    {
+      "pos": 23,
+      "name": "Logan A Murray",
+      "points": 122
+    },
+    {
+      "pos": 24,
       "name": "Michael R Ramos",
       "points": 116
     },
     {
-      "pos": 22,
-      "name": "Logan A Murray",
-      "points": 108
-    },
-    {
-      "pos": 23,
-      "name": "Joshua Billiter",
-      "points": 107
-    },
-    {
-      "pos": 24,
-      "name": "Ricky Hart Jr",
-      "points": 104
-    },
-    {
       "pos": 25,
+      "name": "Ricky Hart Jr",
+      "points": 112
+    },
+    {
+      "pos": 26,
+      "name": "Jason Allegrini",
+      "points": 105
+    },
+    {
+      "pos": 27,
       "name": "Wes Fuller",
       "points": 102
     },
     {
-      "pos": 26,
-      "name": "Tre Ellis",
-      "points": 101
-    },
-    {
-      "pos": 27,
+      "pos": 28,
       "name": "David Leakey",
       "points": 99
     },
     {
-      "pos": 28,
+      "pos": 29,
+      "name": "Bill Harkins",
+      "points": 97
+    },
+    {
+      "pos": 30,
       "name": "Nathan Santos",
       "points": 91
     },
     {
-      "pos": 29,
+      "pos": 31,
+      "name": "Adam Tahan",
+      "points": 90
+    },
+    {
+      "pos": 31,
+      "name": "Nicole Kriesel",
+      "points": 90
+    },
+    {
+      "pos": 33,
+      "name": "Cordell McFarlin",
+      "points": 87
+    },
+    {
+      "pos": 34,
       "name": "Carter Phillips",
       "points": 84
     },
     {
-      "pos": 30,
+      "pos": 35,
       "name": "Reagan Fruge",
       "points": 83
     },
     {
-      "pos": 31,
-      "name": "Jason Allegrini",
-      "points": 82
-    },
-    {
-      "pos": 32,
-      "name": "Bill Harkins",
-      "points": 80
-    },
-    {
-      "pos": 33,
-      "name": "Nicole Kriesel",
-      "points": 79
-    },
-    {
-      "pos": 33,
+      "pos": 36,
       "name": "Curtis Yancey",
       "points": 79
-    },
-    {
-      "pos": 35,
-      "name": "Adam Tahan",
-      "points": 78
-    },
-    {
-      "pos": 36,
-      "name": "Cordell McFarlin",
-      "points": 67
     },
     {
       "pos": 37,
@@ -343,70 +343,75 @@ const weeklyData = {
     },
     {
       "pos": 38,
-      "name": "Ryan Perrone",
-      "points": 38
+      "name": "Matthew Bailey",
+      "points": 58
     },
     {
       "pos": 39,
+      "name": "Ryan Perrone",
+      "points": 57
+    },
+    {
+      "pos": 40,
+      "name": "Sean Britt",
+      "points": 49
+    },
+    {
+      "pos": 41,
       "name": "Terry Kondas",
       "points": 36
     },
     {
-      "pos": 40,
-      "name": "Matthew Bailey",
-      "points": 28
+      "pos": 42,
+      "name": "Brandon Jackson",
+      "points": 31
     },
     {
-      "pos": 40,
+      "pos": 43,
       "name": "Bret Guzik",
       "points": 28
     },
     {
-      "pos": 42,
+      "pos": 44,
       "name": "Paul Wilson",
       "points": 22
     },
     {
-      "pos": 43,
+      "pos": 45,
       "name": "Dionte Rader",
       "points": 21
     },
     {
-      "pos": 44,
+      "pos": 46,
       "name": "Jason Greenwell",
       "points": 18
     },
     {
-      "pos": 45,
-      "name": "Brandon Jackson",
+      "pos": 47,
+      "name": "Peter Murphy",
       "points": 15
     },
     {
-      "pos": 46,
+      "pos": 48,
       "name": "Mark Galloway",
       "points": 10
     },
     {
-      "pos": 47,
-      "name": "Sean Britt",
-      "points": 9
-    },
-    {
-      "pos": 48,
+      "pos": 49,
       "name": "Dylan Nicastro",
       "points": 6
     },
     {
-      "pos": 49,
+      "pos": 50,
       "name": "Lucas Wilson",
       "points": 5
     },
     {
-      "pos": 50,
+      "pos": 51,
       "name": "Markalan Bivens",
       "points": 2
     }
   ],
-  "latestBroadcastVideoId": "oF84lT2ODkw",
-  "spotlightDriver": "Johnathon Platt"
+  "latestBroadcastVideoId": "CRt7swOVYaw",
+  "spotlightDriver": "Ryan Perrone"
 };
