@@ -1,8 +1,11 @@
 const weeklyData = {
   "winnerName": "Benjamin Lacy",
   "winnerNumber": "7",
-  "winnerImage": "assets/WINNER IMAGES/Bandit_Season_16_Winner_Photo_Benjamin_Lacy_Bristol.png",
-  "actionShots": [],
+  "winnerImage": "assets/WINNER IMAGES/Benjamin_Lacy_Michigan.png",
+  "actionShots": [
+    "assets/race images/Michigan_Group_1.png",
+    "assets/race images/Michigan_Group_2.png"
+  ],
   "trackName": "Michigan International Speedway",
   "trackLogo": "",
   "raceDate": "Aug 12, 2026",

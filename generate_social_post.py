@@ -240,19 +240,30 @@ def get_driver_number(winner_name, roster_data_path):
         print(f"Error loading roster: {e}")
     return ""
 
-def find_custom_winner_image(winner_name, base_dir):
+def find_custom_winner_image(winner_name, track_name, base_dir):
     winner_images_dir = os.path.join(base_dir, "assets", "WINNER IMAGES")
     if not os.path.exists(winner_images_dir):
         return ""
         
-    # First priority: check for explicit name if the winner name matches
+    track_norm = track_name.lower()
+    for word in ["speedway", "raceway", "international", "motor", "superspeedway", "tri-oval", "trioval", "oval"]:
+        track_norm = track_norm.replace(word, "")
+    track_norm = track_norm.replace(" ", "").strip()
+
+    # First priority: match both winner name and track name keywords
+    norm_winner = winner_name.lower().replace(" ", "").replace("3", "").replace("2", "")
+    for f in os.listdir(winner_images_dir):
+        norm_f = f.lower().replace("_", "").replace("-", "").replace(" ", "")
+        if norm_winner in norm_f and track_norm in norm_f:
+            return f"assets/WINNER IMAGES/{f}"
+
+    # Second priority: check for explicit name if the winner name matches
     if "dylan" in winner_name.lower():
         for f in os.listdir(winner_images_dir):
             if "dylan_winner_dylan" in f.lower():
                 return f"assets/WINNER IMAGES/{f}"
             
-    # Second priority: match winner name parts
-    norm_winner = winner_name.lower().replace(" ", "").replace("3", "").replace("2", "")
+    # Third priority: match winner name parts
     for f in os.listdir(winner_images_dir):
         norm_f = f.lower().replace("_", "").replace("-", "")
         if norm_winner in norm_f:
@@ -261,10 +272,6 @@ def find_custom_winner_image(winner_name, base_dir):
     return ""
 
 def find_track_action_shots(track_name, base_dir):
-    action_shots_dir = os.path.join(base_dir, "assets", "WINNER IMAGES", "action shots")
-    if not os.path.exists(action_shots_dir):
-        return []
-    
     # Extract track keywords (e.g. "Atlanta" or "Daytona")
     track_norm = track_name.lower()
     match = re.search(r'\((.*?)\)', track_norm)
@@ -272,15 +279,24 @@ def find_track_action_shots(track_name, base_dir):
         track_norm = match.group(1).strip()
     else:
         # Clean track name
-        track_norm = track_norm.replace("speedway", "").replace("oval", "").replace("superspeedway", "").strip()
+        for word in ["speedway", "raceway", "international", "motor", "superspeedway", "tri-oval", "trioval", "oval"]:
+            track_norm = track_norm.replace(word, "")
+        track_norm = track_norm.replace(" ", "").strip()
     
-    # We will search for files that contain this track name
+    # Search in both assets/race images and assets/WINNER IMAGES/action shots
+    dirs_to_check = [
+        ("assets/race images", os.path.join(base_dir, "assets", "race images")),
+        ("assets/WINNER IMAGES/action shots", os.path.join(base_dir, "assets", "WINNER IMAGES", "action shots"))
+    ]
+    
     matched_files = []
-    for f in os.listdir(action_shots_dir):
-        if track_norm in f.lower():
-            # Standardize paths to use forward slashes for web consistency
-            matched_files.append(f"assets/WINNER IMAGES/action shots/{f}")
-    return sorted(matched_files)
+    for rel_path, abs_path in dirs_to_check:
+        if os.path.exists(abs_path):
+            for f in os.listdir(abs_path):
+                if track_norm in f.lower():
+                    # Standardize paths to use forward slashes for web consistency
+                    matched_files.append(f"{rel_path}/{f}")
+    return sorted(list(set(matched_files)))
 
 
 def find_driver_team(driver_name, teams_data):
@@ -527,7 +543,7 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
                     selected_spotlight = "Kevin Foster"
 
             # Construct weekly data dict
-            winner_image = find_custom_winner_image(winner_name, BASE_DIR)
+            winner_image = find_custom_winner_image(winner_name, track_name, BASE_DIR)
             action_shots = find_track_action_shots(track_name, BASE_DIR)
             latest_video_id = get_latest_youtube_video_id("UC8D9f0DOxaf8hdyxIuk2NeQ")
             weekly_data = {
