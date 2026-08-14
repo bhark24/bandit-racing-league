@@ -689,6 +689,8 @@ def main():
         story_lead = f"Adams Ascends at Nashville! **{winner_name}** drove a patient and calculated race, slicing through the pack from 18th on the grid to lead a race-high 44 laps and capture the victory for 937 Racing! Connor Gibson finished 2nd, while Dylan McDonald completed the podium in 3rd. Jon Osborne was the hard charger of the night, climbing from 28th to 4th!"
     elif "pocono" in track_name.lower():
         story_lead = f"GFR Racing Sweeps Pocono! **{winner_name}** led 21 laps and drove a masterful race to secure the victory at the Tricky Triangle! GFR teammate Nick Nickerson finished a close 2nd to seal a spectacular 1-2 sweep for the team, while Eddie Hagigh claimed 3rd. Pole-sitter Adam Tahan dominated early, leading 37 laps to finish 4th."
+    elif "michigan" in track_name.lower():
+        story_lead = f"Closest Finish in BRL History! **{winner_name}** and GFR teammate Nick Nickerson hooked up in the draft to separate from the field, leading to a breathtaking final-lap dash. Lacy edged Nickerson by just **0.0002 seconds (0.2 milliseconds)**—less than 3/4 of an inch—in the closest finish in league history! Dylan McDonald finished a strong 3rd for Legacy Racing."
     else:
         story_lead = f"What a race! **{winner_name}** executed a perfect game plan, outrunning the field to secure P1 and the largest loot payout of the night at **{track_name}**!"
     
