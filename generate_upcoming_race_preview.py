@@ -58,43 +58,43 @@ def copy_to_clipboard(text):
 
 def main():
     print("=" * 60)
-    print("        BRL RICHMOND RACE PROMOTION POST GENERATOR")
+    print("        BRL GATEWAY RACE PROMOTION POST GENERATOR")
     print("=" * 60)
     
-    post_text = """🏁 **BANDIT RACING LEAGUE - RICHMOND PREVIEW** 🏁
+    post_text = """🏁 **BANDIT RACING LEAGUE - GATEWAY PREVIEW** 🏁
 📺 Live Broadcast: SimTrax Broadcasting
-🛠️ Sponsor: Richmond Short Track Showdown
+🛠️ Sponsor: Gateway Short Track Showdown
 
-The battle heats up on the short track! This Wednesday, August 5th, the Bandit Racing League returns to action for Turn 7 at Richmond Raceway! 🏆
+The battle heats up on the short track! This Wednesday, August 19th, the Bandit Racing League returns to action for Turn 9 at Gateway (World Wide Technology Raceway)! 🏆
 
-We are headed to the challenging 0.75-mile D-shaped short track for 160 laps of close-quarters racing under the lights in the Craftsman Trucks—and the championship chase is tighter than ever.
+We are headed to the challenging 1.25-mile oval for 160 laps of close-quarters racing under the lights in the Craftsman Trucks—and the championship chase is entering its final stages.
 
 🔥 **CHAMPIONSHIP STANDINGS SHUFFLE!** 🔥
-After the high-speed draft battles at Pocono, the driver standings have been completely shaken up:
-🥇 Benjamin I Lacy — 229 pts
-🥈 Scott Sanderson — 228 pts
-🥉 Kevin Foster — 216 pts
-4. Dylan McDonald — 211 pts
-5. Johnathon Platt — 200 pts
+Following the historic, closest-ever 0.2ms finish at Michigan, the standings have tightened up:
+🥇 Benjamin I Lacy — 334 pts
+🥈 Scott Sanderson — 313 pts
+🥉 Kevin Foster — 285 pts
+4. Joshua L Adams — 273 pts
+5. Dylan McDonald — 271 pts
 
-Only one point separates Benjamin Lacy and Scott Sanderson at the top, while Pocono winner Kevin Foster is charging hard in 3rd place!
+With Benjamin Lacy holding a 21-point lead over Scott Sanderson at the top, the fight for the crown is entering a critical phase!
 
-Richmond is a technical driver's track where restarts are chaotic, track position is king, and tyre wear will be severe. With only 1 Fast Repair and Stage breaks on the horizon, one single mistake can derail a driver's championship hopes!
+Gateway is a unique driver's track where turns 1-2 and turns 3-4 feature completely different banking and radii, requiring a compromised setup and precise driving. With only 1 Fast Repair and Stage breaks on the horizon, one single mistake can derail a driver's championship hopes!
 
 🔮 **VIEWER FANTASY CHALLENGE - FREE TO PLAY!** 🔮
 Don't forget to head over to the fantasy league to place your picks for this week's race! Pick your team of 4 drivers before the green flag drops.
 👉 Submit your picks here: https://banditracingleague.net/fantasy.html
 
 🗓️ **RACE DETAILS** 🗓️
-📍 Track: Richmond Raceway
+📍 Track: Gateway Motorsports Park
 🏁 Distance: 160 Laps (Craftsman Trucks)
-📅 Date: Wednesday, August 5th
+📅 Date: Wednesday, August 19th
 ⏰ Time: 9:00 PM EST
 📺 Broadcast: Live on SimTrax Broadcasting
 
-Who is your pick to conquer the Richmond short track? Let us know in the comments! 👇
+Who is your pick to conquer Gateway? Let us know in the comments! 👇
 
-#BanditRacingLeague #iRacing #Esports #SimRacing #NASCAR #CraftsmanTrucks #RichmondRaceway #ChampionshipChase"""
+#BanditRacingLeague #iRacing #Esports #SimRacing #NASCAR #CraftsmanTrucks #Gateway #ChampionshipChase"""
 
     print("\n" + "-" * 50)
     print("GENERATED SOCIAL POST:")
