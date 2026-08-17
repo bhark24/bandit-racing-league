@@ -1228,16 +1228,16 @@
         <h2 class="italic-heavy text-center" style="font-size: 2.2rem; color: #fff; text-transform: uppercase; margin-bottom: 50px;">App Setup Instructions</h2>
         <div class="timeline">
             <div class="timeline-item">
-                <h4>1. Verify & Download</h4>
-                <p>Unlock the portal above using your iRacing Customer ID and download the installer (`Geezer_Dashboard_Setup.exe`).</p>
+                <h4>1. Verify & Install Once</h4>
+                <p>Enter your iRacing Customer ID above to unlock and download `Geezer_Dashboard_Setup.exe`. Run the setup to create your desktop icon and auto-launch the dashboard.</p>
             </div>
             <div class="timeline-item">
-                <h4>2. Install & Auto-Start</h4>
-                <p>Run the setup. The app extracts the files, configures the desktop shortcut icon, and launches the dashboard automatically.</p>
+                <h4>2. Seamless Auto-Updates</h4>
+                <p>You never need to manually download updates again! Every time you open the Geezer Dashboard from your desktop, it automatically checks the league servers and silently self-updates to the latest version in the background.</p>
             </div>
             <div class="timeline-item">
-                <h4>3. Sync & Race</h4>
-                <p>Start your iRacing session. The dashboard automatically syncs and starts displaying live telemetry and audio warnings.</p>
+                <h4>3. Sync, Race & Spotter Relay</h4>
+                <p>Launch iRacing and jump in the car. The dashboard immediately renders your local HUD at `http://127.0.0.1:8765/` and automatically beams live real-time telemetry to your team spotters on the <a href="spotter.html" style="color: var(--neon-green); text-decoration: underline;">Live Spotter Portal</a> and official league broadcast!</p>
             </div>
         </div>
     </section>
@@ -1251,9 +1251,9 @@
     <!-- Verification Logic -->
     <script>
         let authorizedIds = [];
-        let updateVersion = "1.2";
+        let updateVersion = "1.3";
         let updateLink = "assets/Geezer_Dashboard_Setup.exe";
-        let updateMessage = "Fixes the AI cars missing from the Relative window, resolves Best Lap issues, and adds the brand new VR Overlay Manager with Pop-out Modules!";
+        let updateMessage = "Update (Version 1.3): Adds Live Cloud Telemetry Streaming for the online Spotter Dashboard and automatic background self-updating!";
 
         // Fetch authorized IDs and metadata on load
         async function loadAuthData() {

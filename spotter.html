@@ -575,11 +575,16 @@
         <!-- Portal card when driver is not loaded -->
         <div id="portal-setup" class="portal-card">
             <h3 class="italic-heavy" style="font-size: 1.8rem; color: #fff; text-transform: uppercase; margin-bottom: 5px;">Spotter Connection</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">Enter the iRacing Customer ID of the driver you are spotting for to receive live telemetry.</p>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Enter the iRacing Customer ID of the driver you are spotting for to receive live telemetry.</p>
             
-            <input type="text" id="driver-input" class="verify-input" style="width:100%; box-sizing:border-box; margin-bottom:20px; font-family:'Outfit', sans-serif; font-style:italic;" placeholder="e.g. 375692">
+            <input type="text" id="driver-input" class="verify-input" style="width:100%; box-sizing:border-box; margin-bottom:15px; font-family:'Outfit', sans-serif; font-style:italic;" placeholder="e.g. 898549">
             <button class="btn-verify" onclick="connectDriverPortal()" style="margin-bottom:10px;">Connect Dashboard</button>
-            <button class="btn-secondary" onclick="activateDemoMode()" style="width: 100%; border:1px solid #ff9800; color:#ff9800;">Launch Visual Demo</button>
+            <button class="btn-secondary" onclick="activateDemoMode()" style="width: 100%; border:1px solid #ff9800; color:#ff9800; margin-bottom: 20px;">Launch Visual Demo</button>
+
+            <div style="padding: 12px 15px; background: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.2); border-radius: 8px; text-align: left; font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">
+                <strong style="color: var(--neon-green); display: block; margin-bottom: 4px;">💡 Spotter Quick Guide:</strong>
+                Your driver must have the <a href="geezer-app.html" style="color: var(--neon-green); text-decoration: underline;">Geezer Dashboard App</a> running on their PC and be loaded into their iRacing session for live telemetry to stream to your screen.
+            </div>
         </div>
 
         <!-- Dashboard layout when driver is loaded -->
