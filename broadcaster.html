@@ -365,7 +365,25 @@
             }
         }
 
-        let driverDatabase = []; // Array of { id, name } loaded from file
+        const KNOWN_DRIVERS = {
+            "315521": { name: "BILL HARKINS", number: "12" },
+            "153878": { name: "KEVIN FOSTER", number: "8" },
+            "194401": { name: "BOB BERRY", number: "75" },
+            "355269": { name: "DAVIS CARROLL", number: "50" },
+            "48469":  { name: "NICK NICKERSON", number: "2" },
+            "302586": { name: "LOGAN MURRAY", number: "4" },
+            "18905":  { name: "SCOTT SANDERSON", number: "93" },
+            "375692": { name: "JOSH ADAMS", number: "22" },
+            "317726": { name: "TERRY KONDUS", number: "32" },
+            "365210": { name: "WES FULLER", number: "35" },
+            "91227":  { name: "EDDIE HAGIGH", number: "97" },
+            "997718": { name: "CARTER PHILLIPS", number: "30" },
+            "496221": { name: "GARRET BOBO", number: "29" },
+            "1196125": { name: "VICTOR WEAVER", number: "18" },
+            "898549": { name: "CORDELL MCFARLIN", number: "10" }
+        };
+
+        let driverDatabase = []; // Array of { id, name, number } loaded from file
 
         function unlockBroadcasterDashboard() {
             document.getElementById('auth-gate').style.display = 'none';
@@ -386,22 +404,27 @@
                 const lines = text.split('\n');
                 driverDatabase = [];
                 
-                // Fetch driver details (names) from standard teams_data if possible
-                // Fallback names are generated dynamically
                 lines.forEach(line => {
                     line = line.trim();
                     if (!line || line.startsWith('#') || line.startsWith('!')) return;
                     
+                    const known = KNOWN_DRIVERS[line];
                     driverDatabase.push({
                         id: line,
-                        name: `Driver #${line}`, // Default fallback
+                        name: known ? known.name : `Driver #${line}`,
+                        number: known ? known.number : null,
                         status: 'offline',
                         wsConnection: null
                     });
                 });
                 
-                // Attempt to resolve driver names using BRL's drivers database
-                await resolveDriverNames();
+                // Attempt to resolve any cached custom names from past live packets
+                driverDatabase.forEach(driver => {
+                    const cachedName = localStorage.getItem(`driver_name_${driver.id}`);
+                    if (cachedName && !KNOWN_DRIVERS[driver.id]) {
+                        driver.name = cachedName;
+                    }
+                });
                 
                 // Render list & scan
                 renderDriverList();
@@ -410,42 +433,14 @@
             } catch (e) {
                 console.error("Hub init failed:", e);
                 // Fallback local list in case of network issue
-                driverDatabase = [
-                    { id: "375692", name: "League Driver 375692", status: 'offline' }
-                ];
+                driverDatabase = Object.keys(KNOWN_DRIVERS).map(id => ({
+                    id: id,
+                    name: KNOWN_DRIVERS[id].name,
+                    number: KNOWN_DRIVERS[id].number,
+                    status: 'offline',
+                    wsConnection: null
+                }));
                 renderDriverList();
-            }
-        }
-
-        // Resolve customer IDs to actual driver names using teams_data if available
-        async function resolveDriverNames() {
-            try {
-                // First load cached names from localStorage
-                driverDatabase.forEach(driver => {
-                    const cachedName = localStorage.getItem(`driver_name_${driver.id}`);
-                    if (cachedName) {
-                        driver.name = cachedName;
-                    }
-                });
-
-                // BRL page has teamsData defined in teams_data.js.
-                // We check if it is loaded. Since we are in the same folder, let's load it dynamically!
-                const script = document.createElement('script');
-                script.src = 'teams_data.js';
-                document.head.appendChild(script);
-                
-                await new Promise((resolve) => {
-                    script.onload = () => {
-                        if (typeof teamsData !== 'undefined' && teamsData.driverLocations) {
-                            // Map driver names if possible in the future, currently relying on localStorage
-                            // and live packets.
-                        }
-                        resolve();
-                    };
-                    script.onerror = () => resolve(); // Ignore on error
-                });
-            } catch (e) {
-                console.warn("Could not map driver names dynamically:", e);
             }
         }
 
@@ -459,10 +454,14 @@
                 card.id = `card-${driver.id}`;
                 card.setAttribute('onclick', `selectDriverStream('${driver.id}', '${driver.name}')`);
                 
+                const numBadge = driver.number 
+                    ? `<span style="background: var(--neon-green); color: #000; font-weight: 900; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; margin-right: 6px;">#${driver.number}</span>`
+                    : '';
+
                 card.innerHTML = `
                     <div class="driver-card-info">
-                        <span class="driver-card-name">${driver.name}</span>
-                        <span class="driver-card-id">Customer ID: ${driver.id}</span>
+                        <span class="driver-card-name">${numBadge}${driver.name}</span>
+                        <span class="driver-card-id">iRacing ID: ${driver.id}</span>
                     </div>
                     <span class="status-pill pill-offline" id="pill-${driver.id}">
                         <span class="pill-dot"></span>
