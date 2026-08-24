@@ -94,8 +94,6 @@ These drivers mastered the tricky 1.25-mile Gateway oval with zero incident poin
 
 🛡️ **DYLAN MCDONALD (#9)** — P15 | 0 Incidents (100 Laps - Running)
 
-🛡️ **CARTER PHILLIPS (#30)** — P26 | 0 Incidents
-
 --- 
 
 ## 🏆 Stayed Out of Trouble & Avoided Penalties (Clean Finishers)
