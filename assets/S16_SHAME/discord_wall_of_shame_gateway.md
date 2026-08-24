@@ -52,8 +52,8 @@ This report breaks down the incident logs, race control reviews, and caution tri
 
 ## 🤦 Talking-To of the Week
 
-👨‍⚖️ **ADAM TAHAN (#0 / #23) & MATT BAILEY (#54)**
-Adam Tahan gets the primary talking-to this week for a compounding list of issues: driving through 7 pit stalls, multiple aggressive contacts, passing under yellow, and doing frontstretch burnouts immediately after an explicit radio instruction not to interfere (2nd week in a row). Matt Bailey also receives a talking-to regarding corner entry awareness and rear-ending competitors under green. Clean it up and respect official directives.
+👨‍⚖️ **ADAM TAHAN (#0 / #23)**
+Adam Tahan gets the talking-to of the week for a compounding list of issues: driving through 7 pit stalls, multiple aggressive contacts, passing under yellow, and doing frontstretch burnouts immediately after an explicit radio instruction not to interfere (2nd week in a row). Clean it up and respect official race control directives.
 
 --- 
 
