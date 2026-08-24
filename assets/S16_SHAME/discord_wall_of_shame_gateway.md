@@ -8,7 +8,8 @@ This report breaks down the incident logs, race control reviews, and caution tri
 
 ## 🚨 Watch Out For (High Concern / Safety Hazard & Penalties)
 
-🔴 **DYLAN NICASTRO (Car #23) — Multiple Incident Triggers, Pit Infraction & Post-Race Conduct**
+🔴 **ADAM TAHAN (Car #0 / #23) — Multiple Incident Triggers, Pit Infraction & Post-Race Conduct**
+*(Note: Runs official Car #0; entered in iRacing as #23 due to pace car #0 reservation)*
 • **Lap 46–47**: Passed the leader on the left under caution to improperly lead a lap.
 • **Lap 81**: Tapped Sean Britt (#5) on the frontstretch, nearly wrecking him and delivering a 4x.
   ↳ *Ruling: 23 at Fault*
@@ -51,8 +52,8 @@ This report breaks down the incident logs, race control reviews, and caution tri
 
 ## 🤦 Talking-To of the Week
 
-👨‍⚖️ **DYLAN NICASTRO (#23) & MATT BAILEY (#54)**
-Dylan Nicastro gets the primary talking-to this week for a compounding list of issues: driving through 7 pit stalls, multiple aggressive contacts, passing under yellow, and doing frontstretch burnouts immediately after an explicit radio instruction not to interfere (2nd week in a row). Matt Bailey also receives a talking-to regarding corner entry awareness and rear-ending competitors under green. Clean it up and respect official directives.
+👨‍⚖️ **ADAM TAHAN (#0 / #23) & MATT BAILEY (#54)**
+Adam Tahan gets the primary talking-to this week for a compounding list of issues: driving through 7 pit stalls, multiple aggressive contacts, passing under yellow, and doing frontstretch burnouts immediately after an explicit radio instruction not to interfere (2nd week in a row). Matt Bailey also receives a talking-to regarding corner entry awareness and rear-ending competitors under green. Clean it up and respect official directives.
 
 --- 
 
