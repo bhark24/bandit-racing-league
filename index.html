@@ -218,6 +218,18 @@
                 <h2><span class="live-dot" style="background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green);"></span> LATEST NEWS & ANALYSIS</h2>
             </div>
             <div class="card-body" style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- Darlington Race Recap (Latest News) -->
+                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); box-shadow: 0 0 15px rgba(57, 255, 20, 0.08);">
+                    <div style="color: var(--neon-green); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; text-shadow: 0 0 8px rgba(57, 255, 20, 0.25);">Latest Race Report</div>
+                    <a href="/article_darlington_recap.html" style="text-decoration: none;">
+                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Nickerson Tames the Lady in Black: Masterclass Performance at Darlington</h3>
+                    </a>
+                    <p style="color: #ccc; margin-bottom: 15px;">Nick Nickerson drove a precision masterclass at Darlington Raceway, surviving 130 grueling laps under the lights in "Filming the Wild 130" presented by Clear Low Communications. Benjamin Lacy finished 2nd to complete a GFR 1-2 sweep. Newest driver Korey Denson made his debut in the #36 car for Legacy Racing! Read the full report.</p>
+                    
+                    <img src="assets/WINNER IMAGES/Nick_Nickerson_Darlington.png" alt="Darlington Winner Nick Nickerson" style="width: 100%; max-width: 100%; border-radius: 6px; margin-top: 15px; margin-bottom: 15px; border: 1.5px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);">
+                    
+                    <a class="btn-primary" href="/article_darlington_recap.html" style="padding: 8px 16px; font-size: 0.9rem;">Read Full Story</a>
+                </div>
                 <!-- Gateway Race Preview -->
                 <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); box-shadow: 0 0 15px rgba(57, 255, 20, 0.08);">
                     <div style="color: var(--neon-green); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; text-shadow: 0 0 8px rgba(57, 255, 20, 0.25);">Race Preview</div>
@@ -471,7 +483,7 @@
                 "ETHANSIKORSKI": 100493, "FOSTER,KEVIN": 39648, "FRUGE,REAGAN": 117826, "GREENWELL,JASON": 60453,
                 "GROSS,NOLAN": 41381, "GUZIK,BRET": 39652, "HARKINS,BILL": 39625, "HARTJR,RICKY": 20741,
                 "JACKSONKNAAK": 63408, "JONATHONPLATT": 39205, "JONOSBORNE": 68867, "JOSHADAMS": 30420,
-                "JOSHBILLITER": 45729, "KEVINFOSTER": 39648, "KRIESEL,NICOLE": 64312, "LEAKEY,DAVID": 60455,
+                "JOSHBILLITER": 45729, "KOREYDENSON": 1041513, "DENSON,KOREY": 1041513, "KEVINFOSTER": 39648, "KRIESEL,NICOLE": 64312, "LEAKEY,DAVID": 60455,
                 "LOGANMURRAY": 118435, "MARKALANBIVENS": 56258, "MATTBAILEY": 137917, "MATTCROCKETT": 47625,
                 "MICHAELRAMOS": 59641, "NATHANSANTOS": 121220, "NICKNICKERSON": 17336, "NOLANGROSS": 41381,
                 "PAULWILSON": 42276, "PETERMURPHY": 71230, "RADER,DIONTE": 136821, "REAGANFRUGE": 117826,
@@ -481,7 +493,7 @@
 
             // Custom driver number image mapping
             const NUMBER_IMAGES = {
-                "BENJAMINLACY": "Benjamin Lacy.png", "BILLHARKINS": "Bill Harkins.png", "BRANDONGEERS": "Brandon Geers.png",
+                "ADAMTAHAN": "Adam Tahan.png", "BENJAMINLACY": "Benjamin Lacy.png", "BILLHARKINS": "Bill Harkins.png", "BRANDONGEERS": "Brandon Geers.png",
                 "CURTISYANCEY": "Curtis Yancey.png", "CORDELLMCFARLIN": "Cordell McFarlin.png", "DAVIDLEAKEY": "David Leakey.png",
                 "DAVIDWESTOVERJR": "David Westover.pmg.png", "DAVIDWESTOVER": "David Westover.pmg.png", "DIANTERODER": "Dionte_number.png",
                 "DIONTERADER": "Dionte_number.png", "EDDIEHAGIGH": "Eddie Hagigh.png", "ETHANSIKORSKI": "Ethan Sikorski.png",
@@ -886,6 +898,8 @@
                         recapText = `Adams Ascends at Nashville! **${wCleanName}** drove a patient and calculated race, slicing through the pack from 18th on the grid to lead a race-high 44 laps and capture the victory for 937 Racing! Connor Gibson finished 2nd, while Dylan McDonald completed the podium in 3rd.`;
                     } else if (wTrack.toLowerCase().includes("pocono")) {
                         recapText = `GFR Racing Sweeping Pocono! **${wCleanName}** led 21 laps and drove a masterful race to secure the victory at the Tricky Triangle! GFR teammate Nick Nickerson finished a close 2nd to seal a spectacular 1-2 sweep for the team, while Eddie Hagigh claimed 3rd.`;
+                    } else if (wTrack.toLowerCase().includes("darlington")) {
+                        recapText = `Nickerson Tames the Lady in Black! **${wCleanName}** drove a masterclass in the GFR Racing Chevrolet #2, conquering Darlington Raceway for 130 laps under the lights in "Filming the Wild 130"! Benjamin Lacy finished 2nd for a GFR 1-2 sweep, while Dylan McDonald completed the podium in 3rd.`;
                     } else if (wTrack.toLowerCase().includes("michigan")) {
                         recapText = `Lacy Wins in a Photo Finish at Michigan! **${wCleanName}** and GFR teammate Nick Nickerson drafted together to distance themselves from the field, resulting in an incredibly close finish of just 0.2 milliseconds (0.0002s) at Michigan International Speedway! Dylan McDonald finished 3rd for Legacy Racing.`;
                     } else {

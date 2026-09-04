@@ -1,0 +1,26 @@
+Lap 6, car 0 reviewed and determined to be at fault
+Incident charged to 0
+
+Lap 31, car 31 involved in the caution wreck
+EOL 31
+
+Lap 31, car 31 ran into 13 while under yellow
+Penalty: EOL to start the next race
+
+Lap 31, car 08 and 2 contact reviewed and determined to be a racing deal
+Racing deal
+
+Lap 42, car 4 incident reviewed
+EOL 4
+
+Lap 50, car 9 incident reviewed
+EOL 9
+
+Lap 65, car 53 incident reviewed
+EOL 53
+
+Lap 91, car 31 made contact with 13 coming off Turn 4. No caution was thrown.
+This was noted as 31's second incident of the night.
+
+Lap 93, car 08 incident reviewed
+EOL 08

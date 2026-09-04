@@ -252,8 +252,7 @@ def load_picks(config, race_lock_dt):
             print(f"Loaded {len(sheet_picks)} fan picks from CSV.")
         except Exception as e:
             print(f"Error fetching CSV from Google Sheets: {e}")
-            if not db_picks:
-                sys.exit(1)
+            print("[*] Continuing with Supabase fantasy picks...")
     else:
         test_csv = os.path.join(BASE_DIR, "test_picks.csv")
         print(f"Google Sheet CSV URL is empty. Checking local test file: {test_csv}")
