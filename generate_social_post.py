@@ -691,6 +691,8 @@ def main():
         story_lead = f"GFR Racing Sweeps Pocono! **{winner_name}** led 21 laps and drove a masterful race to secure the victory at the Tricky Triangle! GFR teammate Nick Nickerson finished a close 2nd to seal a spectacular 1-2 sweep for the team, while Eddie Hagigh claimed 3rd. Pole-sitter Adam Tahan dominated early, leading 37 laps to finish 4th."
     elif "michigan" in track_name.lower():
         story_lead = f"Closest Finish in BRL History! **{winner_name}** and GFR teammate Nick Nickerson hooked up in the draft to separate from the field, leading to a breathtaking final-lap dash. Lacy edged Nickerson by just **0.0002 seconds (0.2 milliseconds)**—less than 3/4 of an inch—in the closest finish in league history! Dylan McDonald finished a strong 3rd for Legacy Racing."
+    elif "darlington" in track_name.lower():
+        story_lead = f"Nickerson Tames the Lady in Black! **{winner_name}** drove a masterclass in the GFR Racing Chevrolet #2, surviving 130 grueling laps under the lights in \"Filming the Wild 130\" presented by Clear Low Communications to take the checkered flag at **{track_name}**! Benjamin Lacy finished 2nd for a GFR 1-2 sweep, while Dylan McDonald completed the podium in 3rd. Newest driver Korey Denson made his debut in the #36 car for Legacy Racing!"
     else:
         story_lead = f"What a race! **{winner_name}** executed a perfect game plan, outrunning the field to secure P1 and the largest loot payout of the night at **{track_name}**!"
     

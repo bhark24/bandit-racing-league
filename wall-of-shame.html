@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall of Shame Hub — Bandit Racing League</title>
+    <meta name="description" content="Bandit Racing League (BRL) Official Race Stewards' Wall of Shame Hub. Race incident recaps, interactive telemetry scrubbers, track maps, and driver penalty leaderboards.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Unified Command Center & Web Hub Additions */
+        .unified-command-center {
+            background: rgba(16, 18, 28, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .race-select-picker {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border-glow);
+        }
+
+        .race-select-picker label {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--color-info);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .race-select-dropdown {
+            background: #0d0e15;
+            color: #fff;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-glow);
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Live Telemetry Banner Card */
+        .live-telemetry-banner {
+            background: linear-gradient(135deg, rgba(20, 24, 40, 0.95), rgba(10, 12, 22, 0.95));
+            border: 2px solid var(--color-info);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 0 24px var(--color-info-glow);
+            transition: all 0.3s ease;
+        }
+
+        .live-telemetry-banner.danger {
+            border-color: var(--color-penalty);
+            box-shadow: 0 0 24px var(--color-penalty-glow);
+        }
+
+        .live-telemetry-banner.warning {
+            border-color: var(--color-warning);
+            box-shadow: 0 0 24px var(--color-warning-glow);
+        }
+
+        .telemetry-banner-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .telemetry-lap-badge {
+            font-family: var(--font-mono);
+            font-weight: 900;
+            font-size: 1rem;
+            color: var(--color-info);
+            background: rgba(0, 229, 255, 0.15);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .telemetry-banner-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .telemetry-banner-summary {
+            color: #d1d5db;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .telemetry-banner-footer {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="carbon-overlay"></div>
+
+    <div class="app-container">
+        <!-- Main Navigation Header -->
+        <header class="main-header">
+            <div class="brand-container">
+                <a href="index.html"><img src="assets/logo.svg" alt="BRL Wall of Shame" class="brand-logo"></a>
+            </div>
+
+            <div class="header-actions">
+                <div class="race-select-picker">
+                    <label><i class="fa-solid fa-flag-checkered"></i> SELECT RACE:</label>
+                    <select id="raceWeekSelect" class="race-select-dropdown">
+                        <option value="gateway">🏁 Week 12: Gateway (Stages @ 42 & 84)</option>
+                        <option value="darlington">🏁 Week 13: Darlington (Stages @ 36 & 72)</option>
+                    </select>
+                </div>
+                <button id="audioToggleBtn" class="action-btn audio-btn">
+                    <i class="fa-solid fa-volume-high"></i>
+                    <span>Radio FX: <strong id="audioStatusText">ON</strong></span>
+                </button>
+                <button id="exportDiscordBtn" class="action-btn discord-btn">
+                    <i class="fa-brands fa-discord"></i>
+                    <span>Copy Discord Report</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero Race Overview Banner -->
+        <section class="hero-section">
+            <div class="hero-card track-info-card">
+                <div class="card-badge"><i class="fa-solid fa-trophy"></i> BRL STEWARDS HUB</div>
+                <h1 class="track-name" id="trackNameDisplay">Gateway Motorsports Park</h1>
+                <p class="track-subtext" id="trackSubtextDisplay">World Wide Technology Raceway — 140 Laps (Stages @ 42 &amp; 84)</p>
+
+                <div class="stats-mini-grid">
+                    <div class="mini-stat">
+                        <span class="stat-num" id="totalIncidentsNum">22</span>
+                        <span class="stat-label">Reviewed Incidents</span>
+                    </div>
+                    <div class="mini-stat danger">
+                        <span class="stat-num" id="penaltiesNum">5</span>
+                        <span class="stat-label">Penalties / EOLs</span>
+                    </div>
+                    <div class="mini-stat warning">
+                        <span class="stat-num" id="warningsNum">6</span>
+                        <span class="stat-label">Official Warnings</span>
+                    </div>
+                    <div class="mini-stat info">
+                        <span class="stat-num" id="racingDealsNum">7</span>
+                        <span class="stat-label">Racing Deals</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MVP Wall of Shame Card -->
+            <div class="hero-card mvp-card" id="mvpSpotlight">
+                <div class="mvp-badge-header">
+                    <i class="fa-solid fa-trophy"></i>
+                    <span>WEEKLY WALL OF SHAME MVP</span>
+                </div>
+                <div class="mvp-driver-row">
+                    <div class="driver-number-plate mvp-plate" id="mvpCarPlate">#01</div>
+                    <div class="mvp-driver-details">
+                        <h2 id="mvpDriverName">Car #01 (Adam Tahan)</h2>
+                        <p class="mvp-summary-tag" id="mvpReason"><i class="fa-solid fa-triangle-exclamation"></i> 5 Major Incidents &amp; Post-Race Misconduct</p>
+                    </div>
+                </div>
+                <ul class="mvp-highlights-list" id="mvpHighlights">
+                    <li><i class="fa-solid fa-gas-pump"></i> Drove through <strong>7 Pit Stalls</strong> (Confirmed Drive Through)</li>
+                    <li><i class="fa-solid fa-fire"></i> Front stretch burnouts 5s after explicit radio ban (2nd week!)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Driver Infraction Leaderboard -->
+        <section class="section-container">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-ranking-star"></i> Driver Infraction Leaderboard</h2>
+                <span class="section-subtitle">Ranked by total incident involvement and severity index</span>
+            </div>
+            <div class="driver-leaderboard-grid" id="driverLeaderboard">
+                <!-- Injected dynamically -->
+            </div>
+        </section>
+
+        <!-- UNIFIED TELEMETRY & TRACK COMMAND CENTER -->
+        <section class="unified-command-center">
+            <div class="scrubber-header">
+                <div class="scrubber-title">
+                    <h2><i class="fa-solid fa-tower-broadcast"></i> Race Telemetry &amp; Track Command Center</h2>
+                    <span id="currentLapDisplay">Lap 10 / 140 (Stage 1)</span>
+                </div>
+                <div class="scrubber-controls">
+                    <button id="prevIncidentBtn" class="ctrl-btn"><i class="fa-solid fa-backward-step"></i> Prev Incident</button>
+                    <button id="playSimulationBtn" class="ctrl-btn play-btn"><i class="fa-solid fa-play"></i> Play Sim</button>
+                    <button id="nextIncidentBtn" class="ctrl-btn">Next Incident <i class="fa-solid fa-forward-step"></i></button>
+                </div>
+            </div>
+
+            <!-- Lap Scrubber Slider -->
+            <div class="timeline-scrubber-wrapper">
+                <input type="range" id="lapRangeSlider" min="1" max="140" value="10" step="1">
+                <div class="stage-markers" id="stageMarkersContainer">
+                    <!-- Stage markers dynamically rendered -->
+                </div>
+            </div>
+
+            <!-- DYNAMIC LIVE TELEMETRY CARD -->
+            <div class="live-telemetry-banner" id="liveTelemetryBanner">
+                <div class="telemetry-banner-top">
+                    <span class="telemetry-lap-badge" id="telemetryBadge">LAP 10 — TURN 2</span>
+                    <span class="category-tag penalty" id="telemetryCategory">PENALTY</span>
+                </div>
+                <h3 class="telemetry-banner-title" id="telemetryTitle">Steering Wheel Disconnect Mid-Corner</h3>
+                <p class="telemetry-banner-summary" id="telemetrySummary">Car 50's steering wheel disconnected in the middle of Turn 2.</p>
+                <div class="telemetry-banner-footer">
+                    <span><i class="fa-solid fa-gavel"></i> Ruling: <strong id="telemetryRuling" style="color:var(--color-penalty);">Drive Through Penalty (#50)</strong></span>
+                    <span><i class="fa-solid fa-headset"></i> Radio: <em id="telemetryAudio">[RADIO 50] "My wheel just disconnected!"</em></span>
+                </div>
+            </div>
+
+            <!-- SVG TRACK MAP CONTAINER -->
+            <div class="track-map-wrapper" style="margin-top:20px;">
+                <svg id="trackSvgMap" viewBox="0 0 800 420" width="100%" height="100%">
+                    <defs>
+                        <filter id="nodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="4" result="blur"/>
+                            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                        </filter>
+                    </defs>
+
+                    <g id="trackShapeGroup"></g>
+                    <g id="trackPinsGroup"></g>
+                    <!-- Animated Car Marker -->
+                    <circle id="carMarkerDot" cx="400" cy="330" r="9" fill="#00e5ff" stroke="#ffffff" stroke-width="3" filter="url(#nodeGlow)"/>
+                </svg>
+
+                <div class="map-legend">
+                    <span class="legend-item penalty"><i class="fa-solid fa-circle"></i> Penalty / EOL</span>
+                    <span class="legend-item warning"><i class="fa-solid fa-circle"></i> Warning / Infraction</span>
+                    <span class="legend-item racing-deal"><i class="fa-solid fa-circle"></i> Racing Deal</span>
+                    <span class="legend-item netcode"><i class="fa-solid fa-circle"></i> Hardware / Netcode</span>
+                    <span class="legend-item mvp"><i class="fa-solid fa-circle"></i> Wall of Shame MVP</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Filter Bar -->
+        <section class="section-container">
+            <div class="filter-search-bar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Search driver (#01, #62, #13), corner, penalty, or keyword...">
+                </div>
+
+                <div class="filter-chips" id="filterChips">
+                    <button class="chip active" data-filter="all">All Incidents</button>
+                    <button class="chip danger" data-filter="penalty">Penalties</button>
+                    <button class="chip warning" data-filter="warning">Warnings &amp; Comms</button>
+                    <button class="chip info" data-filter="racing_deal">Racing Deals</button>
+                    <button class="chip special" data-filter="infraction">Infractions</button>
+                    <button class="chip netcode" data-filter="netcode">Netcode</button>
+                    <button class="chip mvp-chip" data-filter="mvp">Wall of Shame MVP</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Incident Feed -->
+        <section class="section-container">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-list-check"></i> Complete Stewards' Incident Feed</h2>
+                <span class="section-subtitle" id="incidentCountSubtitle">Showing all incidents</span>
+            </div>
+
+            <div class="incident-grid" id="incidentGrid">
+                <!-- Injected by JS -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <p>BRL Race Stewards' Official Wall of Shame Hub &bull; Bandit Racing League Season 14</p>
+            <p class="sub-footer">Built for sim racers who love clean racing and spicy stewards' reports.</p>
+        </footer>
+    </div>
+
+    <!-- Incident Modal -->
+    <div class="modal-overlay" id="incidentModal">
+        <div class="modal-card">
+            <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+            <div class="modal-header">
+                <span class="badge" id="modalCategoryBadge">PENALTY</span>
+                <span class="modal-lap" id="modalLap">Lap 129</span>
+            </div>
+            <h2 class="modal-title" id="modalTitle">Incident Title</h2>
+            <div class="modal-involved-cars" id="modalInvolvedCars"></div>
+            
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h4><i class="fa-solid fa-circle-info"></i> Incident Description</h4>
+                    <p id="modalDescription">Description text</p>
+                </div>
+
+                <div class="modal-section">
+                    <h4><i class="fa-solid fa-gavel"></i> Stewards' Ruling &amp; Penalty</h4>
+                    <p class="ruling-text" id="modalRuling">Ruling text</p>
+                </div>
+
+                <div class="modal-section audio-box">
+                    <h4><i class="fa-solid fa-headset"></i> Race Scanner / Audio Telemetry</h4>
+                    <div class="scanner-transcript" id="modalAudioTranscript">Transcript</div>
+                    <button id="playAudioSampleBtn" class="play-audio-btn">
+                        <i class="fa-solid fa-play"></i> Play Synthesized Scanner Comms
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Discord Export Modal -->
+    <div class="modal-overlay" id="discordModal">
+        <div class="modal-card discord-modal-card">
+            <button class="modal-close-btn" id="discordCloseBtn">&times;</button>
+            <h2><i class="fa-brands fa-discord"></i> Discord Wall of Shame Report</h2>
+            <p>Copy and paste this markdown report straight into your Discord league channel!</p>
+            <textarea id="discordMarkdownText" readonly></textarea>
+            <div class="modal-footer-actions">
+                <button id="copyMarkdownConfirmBtn" class="action-btn discord-btn">
+                    <i class="fa-solid fa-copy"></i> Copy to Clipboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="wall_of_shame_data.js"></script>
+    <script src="wall_of_shame_app.js"></script>
+</body>
+</html>

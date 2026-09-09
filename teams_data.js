@@ -10415,6 +10415,10 @@ const teamsData = {
     {
       "date": "Aug 19, 2026",
       "driver": "Connor Gibson"
+    },
+    {
+      "date": "Sep 2, 2026",
+      "driver": "Jackson Knaak"
     }
   ]
 };
