@@ -1095,19 +1095,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Ford",
           "name": "Roundy F-150 #12",
-          "condition": 63
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Ford",
           "name": "Roundy F-150 #4",
-          "condition": 41
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Ford",
           "name": "Roundy F-150 #15",
-          "condition": 80
+          "condition": 100
         },
         {
           "id": "truck-4",
@@ -2107,19 +2107,19 @@ const teamsData = {
           "id": "truck-1",
           "make": "Toyota",
           "name": "937 Tundra #18",
-          "condition": 81
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Toyota",
           "name": "937 Tundra #22",
-          "condition": 55
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Toyota",
           "name": "937 Tundra #47",
-          "condition": 79
+          "condition": 100
         },
         {
           "id": "truck-4",
@@ -3670,7 +3670,7 @@ const teamsData = {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #31",
-          "condition": 46
+          "condition": 100
         },
         {
           "id": "truck-3",
@@ -3688,7 +3688,7 @@ const teamsData = {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "ZeroFoxtrot Silverado #11",
-          "condition": 26
+          "condition": 100
         },
         {
           "id": "truck-6",
@@ -4413,7 +4413,7 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #97",
-          "condition": 76
+          "condition": 100
         },
         {
           "id": "truck-2",
@@ -4425,7 +4425,7 @@ const teamsData = {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "Carter Phillips Silverado #30",
-          "condition": 96
+          "condition": 100
         },
         {
           "id": "truck-4",
@@ -5814,37 +5814,37 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "GFR Silverado #8",
-          "condition": 37
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "GFR Silverado #2",
-          "condition": 94
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "GFR Silverado #1",
-          "condition": 56
+          "condition": 100
         },
         {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "GFR Silverado #7",
-          "condition": 75
+          "condition": 100
         },
         {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "GFR Silverado #13",
-          "condition": 8
+          "condition": 100
         },
         {
           "id": "truck-6",
           "make": "Chevrolet",
           "name": "GFR Silverado #93",
-          "condition": 93
+          "condition": 100
         }
       ],
       "balance": 2701451,
@@ -7390,7 +7390,7 @@ const teamsData = {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "POP Silverado #29",
-          "condition": 14
+          "condition": 100
         },
         {
           "id": "truck-4",
@@ -7402,7 +7402,7 @@ const teamsData = {
           "id": "truck-5",
           "make": "Chevrolet",
           "name": "POP Silverado #53",
-          "condition": 81
+          "condition": 100
         }
       ],
       "balance": 1626321,
@@ -8166,7 +8166,7 @@ const teamsData = {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "ESR Silverado #00",
-          "condition": 63
+          "condition": 100
         },
         {
           "id": "truck-3",
@@ -8653,7 +8653,7 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Middle Aged Gunz Silverado #76",
-          "condition": 57
+          "condition": 100
         },
         {
           "id": "truck-2",
@@ -8665,7 +8665,7 @@ const teamsData = {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "Middle Aged Gunz Silverado #0",
-          "condition": 66
+          "condition": 100
         },
         {
           "id": "truck-4",
@@ -9728,25 +9728,25 @@ const teamsData = {
           "id": "truck-1",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #99",
-          "condition": 65
+          "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #9",
-          "condition": 26
+          "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #6",
-          "condition": 28
+          "condition": 100
         },
         {
           "id": "truck-4",
           "make": "Chevrolet",
           "name": "Legacy Racing Silverado #50",
-          "condition": 87
+          "condition": 100
         }
       ],
       "balance": 1789320,

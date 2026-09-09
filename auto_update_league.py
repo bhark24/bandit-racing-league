@@ -146,6 +146,9 @@ def main():
             print("[!] Team updates failed. Stopping pipeline.")
             sys.exit(1)
             
+        # A2. Auto-restore all fleet chassis to 100% condition
+        run_command(["python", "restore_all_chassis.py"])
+            
         # B. Update Fantasy Scoring
         if not run_command(["python", "update_fantasy.py", "--schedule_id", sched_id]):
             print("[!] Fantasy updates failed. Stopping pipeline.")
