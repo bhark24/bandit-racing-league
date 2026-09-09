@@ -1,4 +1,5 @@
 import os
+import sys
 import ctypes
 import webbrowser
 from ctypes import wintypes
@@ -57,81 +58,82 @@ def copy_to_clipboard(text):
         user32.CloseClipboard()
 
 def main():
-    print("=" * 60)
-    print("        BRL GATEWAY RACE PROMOTION POST GENERATOR")
-    print("=" * 60)
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8')
+
+    print("=" * 65)
+    print("      BRL TONIGHT'S KANSAS SPEEDWAY RACE PREVIEW GENERATOR")
+    print("=" * 65)
     
-    post_text = """🏁 **BANDIT RACING LEAGUE - GATEWAY PREVIEW** 🏁
-📺 Live Broadcast: SimTrax Broadcasting
-🛠️ Sponsor: Gateway Short Track Showdown
+    post_text = """🏁 **BANDIT RACING LEAGUE — TONIGHT AT KANSAS SPEEDWAY!** 🏁
+📺 **Live Broadcast:** SimTrax Broadcasting | ⏰ **9:00 PM EST**
+📍 **Track:** Kansas Speedway (1.5-Mile D-Shaped Tri-Oval)
+🏁 **Event:** Kansas Speedway Tri-Oval Showdown (Craftsman Trucks)
 
-The battle heats up on the short track! This Wednesday, August 19th, the Bandit Racing League returns to action for Turn 9 at Gateway (World Wide Technology Raceway)! 🏆
+The high-speed drafting action moves to Kansas Speedway TONIGHT, Wednesday, September 9th! 🏆
 
-We are headed to the challenging 1.25-mile oval for 160 laps of close-quarters racing under the lights in the Craftsman Trucks—and the championship chase is entering its final stages.
+Fresh off an intense Darlington duel where Nick Nickerson tamed the "Lady in Black", the Bandit Racing League heads to the sweeping 1.5-mile tri-oval of Kansas Speedway. With multiple racing grooves, heavy tire degradation, and 3-wide draft battles exiting Turn 4, tonight is set to be an absolute thriller!
 
-🔥 **CHAMPIONSHIP STANDINGS SHUFFLE!** 🔥
-Following the historic, closest-ever 0.2ms finish at Michigan, the standings have tightened up:
-🥇 Benjamin I Lacy — 334 pts
-🥈 Scott Sanderson — 313 pts
-🥉 Kevin Foster — 285 pts
-4. Joshua L Adams — 273 pts
-5. Dylan McDonald — 271 pts
+🔥 **DRIVER SPOTLIGHT: WES FULLER (#35)** 🔥
+Title Town Racing owner/driver **Wes Fuller** hits his home track in Kansas City sporting his brand new #35 Ram Craftsman Truck paint scheme! Will the hometown hero conquer Kansas tonight?
 
-With Benjamin Lacy holding a 21-point lead over Scott Sanderson at the top, the fight for the crown is entering a critical phase!
+🏆 **CHAMPIONSHIP HUNT & TEAM ECONOMY BATTLE** 🏆
+• GFR Racing leads the Team Championship, but 937 Racing and ZeroFoxtrot are charging hard!
+• With only 1 Fast Repair per truck and Stage Checkered Flags on the line, execution and strategy are everything.
 
-Gateway is a unique driver's track where turns 1-2 and turns 3-4 feature completely different banking and radii, requiring a compromised setup and precise driving. With only 1 Fast Repair and Stage breaks on the horizon, one single mistake can derail a driver's championship hopes!
+🔮 **VIEWER FANTASY LEAGUE — FREE TO PLAY!** 🔮
+Lock in your 4-driver fantasy team before 9:00 PM EST! Race along live with the stream and climb the leaderboards:
+👉 **Submit Picks:** https://banditracingleague.net/fantasy.html
 
-🔮 **VIEWER FANTASY CHALLENGE - FREE TO PLAY!** 🔮
-Don't forget to head over to the fantasy league to place your picks for this week's race! Pick your team of 4 drivers before the green flag drops.
-👉 Submit your picks here: https://banditracingleague.net/fantasy.html
+📊 **INTERACTIVE TELEMETRY & WALL OF SHAME HUB:**
+Catch up on past race incidents, SVG track maps, and stewards reports:
+👉 **Wall of Shame Hub:** https://banditracingleague.net/wall-of-shame.html
 
-🗓️ **RACE DETAILS** 🗓️
-📍 Track: Gateway Motorsports Park
-🏁 Distance: 160 Laps (Craftsman Trucks)
-📅 Date: Wednesday, August 19th
-⏰ Time: 9:00 PM EST
-📺 Broadcast: Live on SimTrax Broadcasting
+🗓️ **RACE NIGHT SCHEDULE** 🗓️
+⏰ **Practice/Qualifying:** 8:30 PM EST
+🏁 **Green Flag:** 9:00 PM EST
+📺 **Watch Live on SimTrax:** https://banditracingleague.net/simtrax.html
 
-Who is your pick to conquer Gateway? Let us know in the comments! 👇
+Who takes the checkered flag tonight at Kansas? Drop your picks in the comments! 👇
 
-#BanditRacingLeague #iRacing #Esports #SimRacing #NASCAR #CraftsmanTrucks #Gateway #ChampionshipChase"""
+#BanditRacingLeague #iRacing #KansasSpeedway #SimRacing #NASCAR #CraftsmanTrucks #SimTrax #Esports #SimRacerHub"""
 
-    print("\n" + "-" * 50)
-    print("GENERATED SOCIAL POST:")
-    print("-" * 50)
-    try:
-        print(post_text)
-    except UnicodeEncodeError:
-        print(post_text.encode('ascii', errors='replace').decode('ascii'))
-    print("-" * 50)
+    print("\n" + "-" * 55)
+    print("GENERATED FACEBOOK PROMO POST:")
+    print("-" * 55)
+    print(post_text)
+    print("-" * 55)
     
-    # Save text file on Desktop and in Assets folder
+    # Save text file on Desktop
     desktop = os.path.join(os.path.expanduser("~"), "Desktop")
-    out_file_desktop = os.path.join(desktop, "brl_upcoming_facebook_post.txt")
+    out_file_desktop = os.path.join(desktop, "brl_kansas_facebook_post.txt")
     with open(out_file_desktop, "w", encoding="utf-8") as f:
         f.write(post_text)
-    print(f"\n[+] SUCCESS: Saved text file to Desktop: brl_upcoming_facebook_post.txt")
-    
-    scratch_dir = r"C:\Users\Bill\.gemini\antigravity\scratch"
-    out_file_assets = os.path.join(scratch_dir, "bandit_racing_league", "assets", "brl_upcoming_facebook_post.txt")
-    os.makedirs(os.path.dirname(out_file_assets), exist_ok=True)
-    with open(out_file_assets, "w", encoding="utf-8") as f:
+    print(f"\n[+] SUCCESS: Saved post to Desktop: {out_file_desktop}")
+
+    # Save to local workspace files
+    cwd = os.getcwd()
+    out_file_local = os.path.join(cwd, "facebook_promo_post.txt")
+    with open(out_file_local, "w", encoding="utf-8") as f:
         f.write(post_text)
-    print(f"[+] SUCCESS: Saved text file to Assets: {out_file_assets}")
+    print(f"[+] SUCCESS: Saved post to workspace: {out_file_local}")
     
     # Copy to Clipboard
     try:
         copy_to_clipboard(post_text)
-        print("[+] SUCCESS: Promotional text copied to your clipboard!")
+        print("[+] SUCCESS: Preview post copied to your clipboard!")
     except Exception as e:
-        print(f"[!] Clipboard Error: {e}")
-        print("Please copy the text manually from the window above.")
-        
+        print(f"[!] Clipboard Note: {e}")
+
     # Open Facebook
     fb_url = "https://www.facebook.com/profile.php?id=61585435839542"
-    print(f"[+] Opening Facebook: {fb_url}")
-    webbrowser.open(fb_url)
-    print("=" * 60)
+    print(f"[+] Opening Facebook League Page: {fb_url}")
+    try:
+        webbrowser.open(fb_url)
+    except Exception as e:
+        print(f"[!] Could not open browser: {e}")
+
+    print("=" * 65)
 
 if __name__ == "__main__":
     main()
