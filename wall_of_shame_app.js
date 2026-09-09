@@ -133,15 +133,43 @@ document.addEventListener("DOMContentLoaded", () => {
     // LOAD RACE WEEK DATA
     // --------------------------------------------------------------------------
     function loadRaceWeek(raceKey) {
+        if (!raceKey) raceKey = "darlington";
+        raceKey = raceKey.toLowerCase().trim();
+
+        if (!BRL_RACES_DATA[raceKey]) {
+            console.warn(`Race key "${raceKey}" not found, defaulting to darlington.`);
+            raceKey = "darlington";
+        }
+
         currentRaceKey = raceKey;
         currentRaceData = BRL_RACES_DATA[raceKey];
+
+        // Sync Dropdown Selection Element
+        if (raceWeekSelect && raceWeekSelect.value !== raceKey) {
+            raceWeekSelect.value = raceKey;
+        }
+
+        // Sync Race Tab Cards Active Class
+        const raceTabCards = document.querySelectorAll(".race-tab-card");
+        raceTabCards.forEach(card => {
+            if (card.getAttribute("data-race") === raceKey) {
+                card.classList.add("active");
+            } else {
+                card.classList.remove("active");
+            }
+        });
+
+        // Sync URL Hash without reload
+        if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, "", `#${raceKey}`);
+        }
 
         // Header Meta
         trackNameDisplay.innerText = currentRaceData.title;
         trackSubtextDisplay.innerText = currentRaceData.subtext;
 
         // Calculate Stats
-        const incs = currentRaceData.incidents;
+        const incs = currentRaceData.incidents || [];
         totalIncidentsNum.innerText = incs.length;
         penaltiesNum.innerText = incs.filter(i => i.category === "penalty").length;
         warningsNum.innerText = incs.filter(i => i.category === "warning" || i.category === "infraction").length;
@@ -159,7 +187,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Scrubber Slider Range
         lapRangeSlider.max = currentRaceData.laps + 2;
-        lapRangeSlider.value = currentRaceData.incidents[0].lap || 1;
+        const initialLap = (incs && incs.length > 0) ? incs[0].lap : 1;
+        lapRangeSlider.value = initialLap;
 
         // Stage Markers
         stageMarkersContainer.innerHTML = "";
@@ -520,9 +549,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // EVENT LISTENERS
     // --------------------------------------------------------------------------
     function setupEventListeners() {
+        // Dropdown Race Selector
         raceWeekSelect.addEventListener("change", (e) => {
             loadRaceWeek(e.target.value);
             playSoundEffect('beep');
+        });
+
+        // Race Selector Tab Cards
+        const raceTabCards = document.querySelectorAll(".race-tab-card");
+        raceTabCards.forEach(card => {
+            card.addEventListener("click", () => {
+                const targetRace = card.getAttribute("data-race");
+                loadRaceWeek(targetRace);
+                playSoundEffect('beep');
+            });
+        });
+
+        // URL Hash Change Listener (#richmond, #michigan, #gateway, #darlington)
+        window.addEventListener("hashchange", () => {
+            const hash = window.location.hash.replace("#", "").toLowerCase().trim();
+            if (hash && BRL_RACES_DATA[hash]) {
+                loadRaceWeek(hash);
+            }
         });
 
         audioToggleBtn.addEventListener("click", () => {
@@ -594,7 +642,27 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Initialize Race Week from Selector
-    loadRaceWeek(raceWeekSelect.value || "darlington");
+    // Determine initial race key from URL hash, query param, or dropdown select
+    function getInitialRaceKey() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryRace = urlParams.get("race");
+        if (queryRace && BRL_RACES_DATA[queryRace.toLowerCase()]) {
+            return queryRace.toLowerCase();
+        }
+
+        const hash = window.location.hash.replace("#", "").toLowerCase().trim();
+        if (hash && BRL_RACES_DATA[hash]) {
+            return hash;
+        }
+
+        if (raceWeekSelect && raceWeekSelect.value && BRL_RACES_DATA[raceWeekSelect.value.toLowerCase()]) {
+            return raceWeekSelect.value.toLowerCase();
+        }
+
+        return "darlington";
+    }
+
+    // Initialize Race Week
+    loadRaceWeek(getInitialRaceKey());
     setupEventListeners();
 });
