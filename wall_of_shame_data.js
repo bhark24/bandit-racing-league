@@ -1,6 +1,220 @@
 // BRL Stewards' Official Wall of Shame — Multi-Race Database
 
 const BRL_RACES_DATA = {
+    richmond: {
+        id: "richmond",
+        title: "Richmond Raceway",
+        subtext: "America's Premier Short Track — 160 Laps",
+        laps: 160,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 50 },
+            { name: "Stage 2", lap: 100 },
+            { name: "Final Stage", lap: 160 }
+        ],
+        mvp: {
+            carNumber: "20",
+            driverName: "Car #20 (Adam Tahan)",
+            title: "Wall of Shame MVP",
+            reason: "Multiple High-Dives into Turn Entry, Contact on #13 & Chop Across #31 Nose",
+            totalIncidents: 3,
+            totalPenalties: "Multiple EOL Penalties"
+        },
+        drivers: [
+            { number: "20", name: "Driver #20 (Adam Tahan)", score: 95, level: "CRITICAL", badge: "MVP / Dive-Bomber", incidentsCount: 3, colors: ["#ff0055", "#111"] },
+            { number: "50", name: "Driver #50", score: 80, level: "HIGH", badge: "Drive-Through Incident", incidentsCount: 2, colors: ["#ff5500", "#111"] },
+            { number: "15", name: "Driver #15", score: 75, level: "HIGH", badge: "Rear-End Dump (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "75", name: "Driver #75", score: 70, level: "HIGH", badge: "Spin Dump (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "13", name: "Driver #13", score: 60, level: "MEDIUM", badge: "Caution Retaliation", incidentsCount: 2, colors: ["#e67e22", "#111"] },
+            { number: "18", name: "Driver #18", score: 30, level: "LOW", badge: "Steering Failure", incidentsCount: 1, colors: ["#3498db", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 80, stage: 1, involved: ["4", "93"], primaryCar: "4", category: "racing_deal",
+                title: "Mid-Pack Side Contact",
+                summary: "Car 4 and car 93 made side contact exiting Turn 4.",
+                ruling: "Racing Deal", location: "Turn 4 Exit",
+                trackCoords: { x: 220, y: 80 },
+                audioTranscript: "[STEWARDS] 'Side swipe exiting 4. Racing deal between 4 and 93.'"
+            },
+            {
+                id: 2, lap: 87, stage: 2, involved: ["50", "47"], primaryCar: "50", category: "penalty",
+                title: "Car 50 Drives Through 47",
+                summary: "Car 50 missed braking point and drove straight into the rear of car 47.",
+                ruling: "End of Line (EOL) Penalty (#50)", location: "Turn 1",
+                trackCoords: { x: 670, y: 160 },
+                audioTranscript: "[RACE CONTROL] 'Car 50 drove through 47. EOL penalty car 50.'"
+            },
+            {
+                id: 3, lap: 104, stage: 3, involved: ["18"], primaryCar: "18", category: "racing_deal",
+                title: "Steering Component Failure Wall Impact",
+                summary: "Car 18 hit outside wall after mechanical steering failure, causing mid-pack checkup.",
+                ruling: "Racing Deal (Mechanical Failure)", location: "Turn 2",
+                trackCoords: { x: 650, y: 270 },
+                audioTranscript: "[RADIO 18] 'Something in the steering just snapped! No control!'"
+            },
+            {
+                id: 4, lap: 110, stage: 3, involved: ["20", "13"], primaryCar: "20", category: "penalty",
+                title: "Deep Dive Entry Contact into Car 13",
+                summary: "Car 20 drove in extremely deep into Turn 1, punting car 13 sideways.",
+                ruling: "End of Line (EOL) Penalty (#20)", location: "Turn 1 Entry",
+                trackCoords: { x: 610, y: 320 },
+                audioTranscript: "[RADIO 13] '20 just drove in from 5 car lengths back and destroyed me!'"
+            },
+            {
+                id: 5, lap: 115, stage: 3, involved: ["13", "20"], primaryCar: "13", category: "warning",
+                title: "Caution Retaliation Side-Swipe",
+                summary: "Car 13 side-swiped car 20 under yellow in retaliation for earlier contact.",
+                ruling: "Official Warning / Unsportsmanlike Conduct", location: "Back Stretch",
+                trackCoords: { x: 400, y: 70 },
+                audioTranscript: "[RACE CONTROL] 'Car 13, cut out the caution retaliation or you'll be parked!'"
+            },
+            {
+                id: 6, lap: 130, stage: 3, involved: ["15", "00"], primaryCar: "15", category: "penalty",
+                title: "Rear-End Punt & Save of the Night",
+                summary: "Car 15 hit the rear of car 00, sending 00 sliding sideways across the track. Car 00 made a miraculous save.",
+                ruling: "End of Line (EOL) Penalty (#15)", location: "Turn 3",
+                trackCoords: { x: 130, y: 260 },
+                audioTranscript: "[RADIO 00] 'How did I just save that?! 15 dumped me!' -> EOL car 15."
+            },
+            {
+                id: 7, lap: 139, stage: 3, involved: ["50", "62", "9"], primaryCar: "50", category: "racing_deal",
+                title: "Check-Up Chain Reaction",
+                summary: "Cars 50 and 62 checked up suddenly; car 9 had zero reaction time and hit the stackup.",
+                ruling: "Racing Deal (Accordion Reaction)", location: "Turn 4",
+                trackCoords: { x: 160, y: 120 },
+                audioTranscript: "[STEWARDS] 'Multi-car stackup Turn 4. No single driver at fault.'"
+            },
+            {
+                id: 8, lap: 147, stage: 3, involved: ["00", "13"], primaryCar: "00", category: "racing_deal",
+                title: "Blinking Interference Spin",
+                summary: "Car 00 hit brakes as car 13 was blinking on connection. Car 13 had nowhere to go and spun.",
+                ruling: "Racing Deal (Netcode / Connection Blinking)", location: "Turn 1",
+                trackCoords: { x: 670, y: 200 },
+                audioTranscript: "[RADIO 00] '13 was completely invisible blinking on my screen!' -> Racing deal."
+            },
+            {
+                id: 9, lap: 153, stage: 3, involved: ["20", "31"], primaryCar: "20", category: "penalty",
+                title: "Chop Across Car 31 Nose",
+                summary: "Car 20 chopped down sharply across car 31's front bumper, turning himself around.",
+                ruling: "End of Line (EOL) Penalty (#20)", location: "Turn 2",
+                trackCoords: { x: 620, y: 280 },
+                audioTranscript: "[RADIO 31] 'He came straight down across my nose! Nothing I could do!'"
+            },
+            {
+                id: 10, lap: 158, stage: 3, involved: ["75", "29"], primaryCar: "75", category: "penalty",
+                title: "Late Dump on Car 29",
+                summary: "Car 75 dumped car 29 into a slide entering Turn 3.",
+                ruling: "End of Line (EOL) Penalty (#75)", location: "Turn 3",
+                trackCoords: { x: 220, y: 310 },
+                audioTranscript: "[RACE CONTROL] 'Car 75 contact on 29. EOL penalty car 75.'"
+            }
+        ]
+    },
+
+    michigan: {
+        id: "michigan",
+        title: "Michigan International Speedway",
+        subtext: "2.0-Mile D-Oval Superspeedway — 100 Laps",
+        laps: 100,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 30 },
+            { name: "Stage 2", lap: 60 },
+            { name: "Final Stage", lap: 100 }
+        ],
+        mvp: {
+            carNumber: "31",
+            driverName: "Car #31 (Connor Gibson)",
+            title: "Wall of Shame MVP",
+            reason: "Multiple Wrecks & Running into #13 under Caution (Next Race EOL Penalty Issued!)",
+            totalIncidents: 3,
+            totalPenalties: "EOL Penalty + Next Race Starting Penalty"
+        },
+        drivers: [
+            { number: "31", name: "Driver #31 (Connor Gibson)", score: 96, level: "CRITICAL", badge: "MVP / Caution Hitter", incidentsCount: 3, colors: ["#ff0055", "#111"] },
+            { number: "0",  name: "Driver #0",  score: 82, level: "HIGH", badge: "Early Wreck (At Fault)", incidentsCount: 1, colors: ["#ff5500", "#111"] },
+            { number: "08", name: "Driver #08", score: 70, level: "HIGH", badge: "Multiple Wrecks (EOL)", incidentsCount: 2, colors: ["#ffaa00", "#111"] },
+            { number: "4",  name: "Driver #4",  score: 60, level: "MEDIUM", badge: "Caution Trigger (EOL)", incidentsCount: 1, colors: ["#e67e22", "#111"] },
+            { number: "9",  name: "Driver #9",  score: 55, level: "MEDIUM", badge: "Spin (EOL)", incidentsCount: 1, colors: ["#e67e22", "#111"] },
+            { number: "53", name: "Driver #53", score: 50, level: "MEDIUM", badge: "Spin (EOL)", incidentsCount: 1, colors: ["#e67e22", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 6, stage: 1, involved: ["0"], primaryCar: "0", category: "penalty",
+                title: "Opening Segment Misjudge Wreck",
+                summary: "Car 0 reviewed and determined to be at fault for early race spin.",
+                ruling: "Incident Charged to Car 0", location: "Turn 1",
+                trackCoords: { x: 670, y: 160 },
+                audioTranscript: "[RACE CONTROL] 'Car 0 determined at fault for Lap 6 caution.'"
+            },
+            {
+                id: 2, lap: 31, stage: 2, involved: ["31"], primaryCar: "31", category: "penalty",
+                title: "Caution Wreck Trigger",
+                summary: "Car 31 involved in major multi-car caution crash.",
+                ruling: "End of Line (EOL) Penalty (#31)", location: "Turn 3 & 4",
+                trackCoords: { x: 120, y: 220 },
+                audioTranscript: "[RACE CONTROL] 'Caution out. EOL penalty issued to car 31.'"
+            },
+            {
+                id: 3, lap: 31, stage: 2, involved: ["31", "13"], primaryCar: "31", category: "penalty",
+                title: "Caution Flag Violation: Hit Car 13 Under Yellow!",
+                summary: "Car 31 ran directly into car 13 while under yellow caution flag conditions.",
+                ruling: "NEXT RACE EOL STARTING PENALTY (#31)", location: "Back Stretch / Caution",
+                trackCoords: { x: 400, y: 70 },
+                audioTranscript: "[RACE CONTROL] 'Car 31 ran into 13 under yellow! Severe penalty: EOL start at next race!'"
+            },
+            {
+                id: 4, lap: 31, stage: 2, involved: ["08", "2"], primaryCar: "08", category: "racing_deal",
+                title: "Mid-Pack Side Contact",
+                summary: "Contact between car 08 and car 2 reviewed and determined to be a racing deal.",
+                ruling: "Racing Deal", location: "Front Stretch",
+                trackCoords: { x: 450, y: 330 },
+                audioTranscript: "[STEWARDS] '08 and 2 contact: Racing deal.'"
+            },
+            {
+                id: 5, lap: 42, stage: 2, involved: ["4"], primaryCar: "4", category: "penalty",
+                title: "Turn 2 Spin Trigger",
+                summary: "Car 4 lost control and triggered caution exiting Turn 2.",
+                ruling: "End of Line (EOL) Penalty (#4)", location: "Turn 2",
+                trackCoords: { x: 620, y: 280 },
+                audioTranscript: "[RACE CONTROL] 'Car 4 spin. EOL penalty car 4.'"
+            },
+            {
+                id: 6, lap: 50, stage: 2, involved: ["9"], primaryCar: "9", category: "penalty",
+                title: "Drafting Loss of Control",
+                summary: "Car 9 lost air off rear spoiler in 3-wide draft and spun.",
+                ruling: "End of Line (EOL) Penalty (#9)", location: "Turn 3",
+                trackCoords: { x: 200, y: 310 },
+                audioTranscript: "[RADIO 9] 'Lost the rear end in the draft!' -> EOL car 9."
+            },
+            {
+                id: 7, lap: 65, stage: 3, involved: ["53"], primaryCar: "53", category: "penalty",
+                title: "High-Speed Wall Impact Spin",
+                summary: "Car 53 hit outside wall and bounced back into traffic.",
+                ruling: "End of Line (EOL) Penalty (#53)", location: "Turn 1",
+                trackCoords: { x: 670, y: 180 },
+                audioTranscript: "[RACE CONTROL] 'Car 53 wall impact. EOL penalty car 53.'"
+            },
+            {
+                id: 8, lap: 91, stage: 3, involved: ["31", "13"], primaryCar: "31", category: "infraction",
+                title: "Turn 4 Exit Contact (2nd Incident of Night)",
+                summary: "Car 31 made contact with car 13 coming off Turn 4 under green (31's 2nd incident of night).",
+                ruling: "Second Incident Noted (#31)", location: "Turn 4 Exit",
+                trackCoords: { x: 220, y: 70 },
+                audioTranscript: "[STEWARDS] 'Noted as car 31's 2nd incident of the night.'"
+            },
+            {
+                id: 9, lap: 93, stage: 3, involved: ["08"], primaryCar: "08", category: "penalty",
+                title: "Late Race Single Car Spin",
+                summary: "Car 08 spun on front stretch with 7 laps remaining.",
+                ruling: "End of Line (EOL) Penalty (#08)", location: "Front Stretch",
+                trackCoords: { x: 350, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Car 08 spin on front stretch. EOL penalty car 08.'"
+            }
+        ]
+    },
+
     gateway: {
         id: "gateway",
         title: "Gateway Motorsports Park",

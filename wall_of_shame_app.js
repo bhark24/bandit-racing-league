@@ -594,7 +594,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Initialize Race Week
-    loadRaceWeek("gateway");
+    // Initialize Race Week from Selector
+    loadRaceWeek(raceWeekSelect.value || "darlington");
     setupEventListeners();
 });
