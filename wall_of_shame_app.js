@@ -549,11 +549,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // EVENT LISTENERS
     // --------------------------------------------------------------------------
     function setupEventListeners() {
-        // Dropdown Race Selector
-        raceWeekSelect.addEventListener("change", (e) => {
-            loadRaceWeek(e.target.value);
-            playSoundEffect('beep');
-        });
+        // Dropdown Race Selector (if present)
+        if (raceWeekSelect) {
+            raceWeekSelect.addEventListener("change", (e) => {
+                loadRaceWeek(e.target.value);
+                playSoundEffect('beep');
+            });
+        }
 
         // Race Selector Tab Cards
         const raceTabCards = document.querySelectorAll(".race-tab-card");
