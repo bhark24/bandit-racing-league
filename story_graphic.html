@@ -151,11 +151,19 @@
       document.getElementById('story-subtitle').innerText = `${trackName.toUpperCase()} • ${raceDate.toUpperCase()}`;
       
       // Update story text
-      document.getElementById('dynamic-story').innerHTML = `
-        It takes pure speed, flawless execution, and immense focus to conquer the competition.<br><br>
-        At <span class="highlight">${trackName}</span>, <span class="highlight">${winnerName}</span> did exactly that, driving a masterful race to claim a spectacular victory in Season 16 of the Bandit Racing League!<br><br>
-        <span class="highlight" style="font-size: 28px; font-style: italic;">A dominant performance in Victory Lane!</span>
-      `;
+      if (trackName.toLowerCase().includes("kansas")) {
+        document.getElementById('dynamic-story').innerHTML = `
+          High-stakes fuel mileage strategy decided victory tonight under the lights at <span class="highlight">Kansas Speedway</span>!<br><br>
+          <span class="highlight">${winnerName}</span> (${winnerNumber}) conserved fuel impeccably to take the checkered flag as competitor trucks ran dry!<br><br>
+          <span class="highlight" style="color:#ff0055; font-size: 24px; font-style: italic;">Post-Race Notice: #9 Truck DQ'd for Intentional Wrecking (0 Pts, 3-Wk Probation, 3-Wk EOL)</span>
+        `;
+      } else {
+        document.getElementById('dynamic-story').innerHTML = `
+          It takes pure speed, flawless execution, and immense focus to conquer the competition.<br><br>
+          At <span class="highlight">${trackName}</span>, <span class="highlight">${winnerName}</span> did exactly that, driving a masterful race to claim a spectacular victory in Season 16 of the Bandit Racing League!<br><br>
+          <span class="highlight" style="font-size: 28px; font-style: italic;">A dominant performance in Victory Lane!</span>
+        `;
+      }
       
       // Update footer
       document.getElementById('footer-driver').innerText = winnerName.toUpperCase();
