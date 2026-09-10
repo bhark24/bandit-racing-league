@@ -2,8 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // Current Active State
-    let currentRaceKey = "gateway";
-    let currentRaceData = BRL_RACES_DATA.gateway;
+    let currentRaceKey = "kansas";
+    let currentRaceData = BRL_RACES_DATA.kansas;
     let currentFilter = "all";
     let searchQuery = "";
     let isAudioEnabled = true;
@@ -133,12 +133,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // LOAD RACE WEEK DATA
     // --------------------------------------------------------------------------
     function loadRaceWeek(raceKey) {
-        if (!raceKey) raceKey = "darlington";
+        if (!raceKey) raceKey = "kansas";
         raceKey = raceKey.toLowerCase().trim();
 
         if (!BRL_RACES_DATA[raceKey]) {
-            console.warn(`Race key "${raceKey}" not found, defaulting to darlington.`);
-            raceKey = "darlington";
+            console.warn(`Race key "${raceKey}" not found, defaulting to kansas.`);
+            raceKey = "kansas";
         }
 
         currentRaceKey = raceKey;
@@ -661,7 +661,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return raceWeekSelect.value.toLowerCase();
         }
 
-        return "darlington";
+        return "kansas";
     }
 
     // Initialize Race Week

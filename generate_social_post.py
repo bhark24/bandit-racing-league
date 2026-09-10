@@ -693,6 +693,8 @@ def main():
         story_lead = f"Closest Finish in BRL History! **{winner_name}** and GFR teammate Nick Nickerson hooked up in the draft to separate from the field, leading to a breathtaking final-lap dash. Lacy edged Nickerson by just **0.0002 seconds (0.2 milliseconds)**—less than 3/4 of an inch—in the closest finish in league history! Dylan McDonald finished a strong 3rd for Legacy Racing."
     elif "darlington" in track_name.lower():
         story_lead = f"Nickerson Tames the Lady in Black! **{winner_name}** drove a masterclass in the GFR Racing Chevrolet #2, surviving 130 grueling laps under the lights in \"Filming the Wild 130\" presented by Clear Low Communications to take the checkered flag at **{track_name}**! Benjamin Lacy finished 2nd for a GFR 1-2 sweep, while Dylan McDonald completed the podium in 3rd. Newest driver Korey Denson made his debut in the #36 car for Legacy Racing!"
+    elif "kansas" in track_name.lower():
+        story_lead = f"Fuel Mileage Strategy & Major Penalties at Kansas Speedway! Tonight's race came down to extreme fuel mileage management, with driver strategy deciding victory at **{track_name}**! Meanwhile, BRL Race Control issued major disciplinary penalties following an intentional wrecking incident: the **#9 truck has been disqualified**, forfeiting all event points, placed on **probation for 3 weeks**, and assigned a **3-week EOL starting penalty**."
     else:
         story_lead = f"What a race! **{winner_name}** executed a perfect game plan, outrunning the field to secure P1 and the largest loot payout of the night at **{track_name}**!"
     

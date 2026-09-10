@@ -219,9 +219,22 @@
                 <h2><span class="live-dot" style="background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green);"></span> LATEST NEWS & ANALYSIS</h2>
             </div>
             <div class="card-body" style="display: flex; flex-direction: column; gap: 20px;">
-                <!-- Darlington Race Recap (Latest News) -->
+                <!-- Kansas Race Recap (Latest News) -->
                 <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); box-shadow: 0 0 15px rgba(57, 255, 20, 0.08);">
                     <div style="color: var(--neon-green); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; text-shadow: 0 0 8px rgba(57, 255, 20, 0.25);">Latest Race Report</div>
+                    <a href="/article_kansas_recap.html" style="text-decoration: none;">
+                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Fuel Mileage Finesse at Kansas: Win Decided on Strategy as #9 Truck Disqualified for Intentional Wrecking</h3>
+                    </a>
+                    <p style="color: #ccc; margin-bottom: 15px;">Tonight's race at Kansas Speedway (Stages at Laps 33 &amp; 66) came down to extreme fuel mileage management, with driver strategy deciding victory. Following an intentional wrecking incident on Lap 73 where driver #9 admitted to intent, BRL Race Control issued major administrative penalties: the #9 truck has been disqualified, forfeits all event points, is placed on probation for 3 weeks, and will start EOL for 3 weeks. Read the full report.</p>
+                    
+                    <img src="assets/WINNER IMAGES/Michael_Rakes_Kansas.jpg" alt="Kansas Winner Michael Rakes" style="width: 100%; max-width: 100%; border-radius: 6px; margin-top: 15px; margin-bottom: 15px; border: 1.5px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);">
+                    
+                    <a class="btn-primary" href="/article_kansas_recap.html" style="padding: 8px 16px; font-size: 0.9rem;">Read Full Story</a>
+                </div>
+
+                <!-- Darlington Race Recap -->
+                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.9;">
+                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
                     <a href="/article_darlington_recap.html" style="text-decoration: none;">
                         <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Nickerson Tames the Lady in Black: Masterclass Performance at Darlington</h3>
                     </a>
@@ -901,8 +914,8 @@
                         recapText = `GFR Racing Sweeping Pocono! **${wCleanName}** led 21 laps and drove a masterful race to secure the victory at the Tricky Triangle! GFR teammate Nick Nickerson finished a close 2nd to seal a spectacular 1-2 sweep for the team, while Eddie Hagigh claimed 3rd.`;
                     } else if (wTrack.toLowerCase().includes("darlington")) {
                         recapText = `Nickerson Tames the Lady in Black! **${wCleanName}** drove a masterclass in the GFR Racing Chevrolet #2, conquering Darlington Raceway for 130 laps under the lights in "Filming the Wild 130"! Benjamin Lacy finished 2nd for a GFR 1-2 sweep, while Dylan McDonald completed the podium in 3rd.`;
-                    } else if (wTrack.toLowerCase().includes("michigan")) {
-                        recapText = `Lacy Wins in a Photo Finish at Michigan! **${wCleanName}** and GFR teammate Nick Nickerson drafted together to distance themselves from the field, resulting in an incredibly close finish of just 0.2 milliseconds (0.0002s) at Michigan International Speedway! Dylan McDonald finished 3rd for Legacy Racing.`;
+                    } else if (wTrack.toLowerCase().includes("kansas")) {
+                        recapText = `Fuel Mileage Masterclass at Kansas! **${wCleanName}** drove a brilliant fuel strategy race in the #47 Realtree truck to capture victory at Kansas Speedway as competitor trucks ran dry!`;
                     } else {
                         recapText = `Congratulations to **${wCleanName}** for executing a perfect race strategy, outrunning the field to take the checkered flag at **${wTrack}**!`;
                     }

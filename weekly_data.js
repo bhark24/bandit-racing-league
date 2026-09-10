@@ -1,7 +1,7 @@
 const weeklyData = {
   "winnerName": "Michael Rakes",
   "winnerNumber": "47",
-  "winnerImage": "",
+  "winnerImage": "assets/WINNER IMAGES/Michael_Rakes_Kansas.jpg",
   "actionShots": [],
   "trackName": "Kansas Speedway",
   "trackLogo": "",

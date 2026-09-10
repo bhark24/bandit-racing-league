@@ -571,5 +571,75 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RACE CONTROL] 'Car 9 just wrecked himself on pit road post-race. Park it, 9!'"
             }
         ]
+    },
+
+    kansas: {
+        id: "kansas",
+        title: "Kansas Speedway",
+        subtext: "1.5-Mile Tri-Oval — 100 Laps (Stages @ 33 & 66)",
+        laps: 100,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 33 },
+            { name: "Stage 2", lap: 66 },
+            { name: "Final Stage", lap: 100 }
+        ],
+        mvp: {
+            carNumber: "9",
+            driverName: "Car #9",
+            title: "Wall of Shame MVP (DISQUALIFIED)",
+            reason: "Admitted Intentional Wrecking into #91: Disqualified, Stripped of All Event Points, 3-Week Probation & 3-Week EOL Starts",
+            totalIncidents: 1,
+            totalPenalties: "DQ + 0 Pts + 3-Wk Probation + 3-Wk EOL Starts"
+        },
+        drivers: [
+            { number: "9", name: "Driver #9", score: 100, level: "CRITICAL", badge: "DISQUALIFIED / Intentional Wreck", incidentsCount: 1, colors: ["#ff0055", "#111"] },
+            { number: "12", name: "Driver #12", score: 75, level: "HIGH", badge: "Clip & Spin (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "35", name: "Driver #35", score: 50, level: "MEDIUM", badge: "Stage Finish Contact", incidentsCount: 1, colors: ["#ffcc00", "#111"] },
+            { number: "31", name: "Driver #31", score: 40, level: "MEDIUM", badge: "Contact Review Request", incidentsCount: 1, colors: ["#3498db", "#111"] },
+            { number: "47", name: "Driver #47 (Michael Rakes)", score: 10, level: "LOW", badge: "Fuel Master / Winner", incidentsCount: 0, colors: ["#00ff00", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 23, stage: 1, involved: ["12", "1"], primaryCar: "12", category: "penalty",
+                title: "Car 12 Clips Car 1 Spin Off Turn 4",
+                summary: "Car 12 slightly came down and clipped car 1, sending car 1 spinning.",
+                ruling: "End of Line (EOL) Penalty (#12)", location: "Turn 4 Exit",
+                trackCoords: { x: 220, y: 80 },
+                audioTranscript: "[RACE CONTROL] 'Car 12 clipped the 1 and sent him around off Turn 4. EOL penalty car 12.'"
+            },
+            {
+                id: 2, lap: 33, stage: 1, involved: [], primaryCar: "STAGE", category: "stage_finish",
+                title: "Stage 1 Official Finish",
+                summary: "Stage 1 yellow checkered flag at Lap 33.",
+                ruling: "Stage 1 Complete", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Stage 1 yellow at Lap 33. Standings locked for Stage 1.'"
+            },
+            {
+                id: 3, lap: 66, stage: 2, involved: ["35", "31"], primaryCar: "35", category: "infraction",
+                title: "Stage 2 Finish Turn 4 Contact (Requested Review)",
+                summary: "Coming to Stage 2 yellow, contact occurred between car 35 and car 31 off Turn 4. Requested to be reviewed by car 31.",
+                ruling: "Stewards Review Completed / Racing Incident Noted", location: "Turn 4 Exit",
+                trackCoords: { x: 210, y: 80 },
+                audioTranscript: "[RADIO 31] 'Check the tape on Turn 4 coming to the stage yellow with 35.' -> Stewards: Reviewed as hard stage racing."
+            },
+            {
+                id: 4, lap: 73, stage: 3, involved: ["9", "91"], primaryCar: "9", category: "mvp",
+                title: "INTENTIONAL WRECKING: Car #9 Comes Down into Car #91 (Admitted Intent)",
+                summary: "Car #9 came down directly into car #91. Race Control reviewed for intent. Upon quick discussion, the driver of #9 admitted it was intentional, and telemetry confirmed intentional wrecking.",
+                ruling: "DISQUALIFICATION (#9) — Stripped of All Event Points + 3-Week Probation + 3-Week EOL Starts", location: "Back Stretch / Turn 3",
+                trackCoords: { x: 400, y: 70 },
+                audioTranscript: "[RACE CONTROL] 'Car 9 came down into 91. After discussion, driver #9 admitted it was intentional. Intentional wreck confirmed after review. Car 9 is DISQUALIFIED, forfeits all event points, placed on 3-week probation, and starts EOL for the next 3 weeks!'"
+            },
+            {
+                id: 5, lap: 100, stage: 3, involved: ["47", "2", "7"], primaryCar: "47", category: "racing_deal",
+                title: "Fuel Mileage Strategy Thriller for the Win",
+                summary: "The race win came down to extreme fuel mileage management. Front-runners saved fuel impeccably to take the checkered flag as competitor cars ran dry.",
+                ruling: "Official Race Win Decided by Fuel Strategy", location: "Front Stretch / S/F Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RADIO 47] 'Sipping fuel through 3 and 4... we made it! Checkered flag!' -> Win decided on fuel mileage."
+            }
+        ]
     }
 };
