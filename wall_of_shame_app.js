@@ -653,12 +653,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const hash = window.location.hash.replace("#", "").toLowerCase().trim();
-        if (hash && BRL_RACES_DATA[hash]) {
+        if (hash && BRL_RACES_DATA[hash] && hash !== "darlington") {
             return hash;
-        }
-
-        if (raceWeekSelect && raceWeekSelect.value && BRL_RACES_DATA[raceWeekSelect.value.toLowerCase()]) {
-            return raceWeekSelect.value.toLowerCase();
         }
 
         return "kansas";
