@@ -1,7 +1,7 @@
 const weeklyData = {
   "winnerName": "Dylan McDonald",
   "winnerNumber": "9",
-  "winnerImage": "assets/truck images/Dylan_Texas.png",
+  "winnerImage": "assets/WINNER IMAGES/Dylan_Texas.png",
   "actionShots": [],
   "trackName": "Texas Motor Speedway",
   "trackLogo": "",
