@@ -641,5 +641,129 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RADIO 47] 'Sipping fuel through 3 and 4... we made it! Checkered flag!' -> Win decided on fuel mileage."
             }
         ]
+    },
+
+    texas: {
+        id: "texas",
+        title: "Texas Motor Speedway",
+        subtext: "1.5-Mile High-Banked Quad-Oval — The Lone Star State 120 (Stages @ 36 & 72)",
+        laps: 120,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 36 },
+            { name: "Stage 2", lap: 72 },
+            { name: "Final Stage", lap: 120 }
+        ],
+        mvp: {
+            carNumber: "63",
+            driverName: "Car #63",
+            title: "Wall of Shame MVP",
+            reason: "Lap 2 Early 3-Wide Chop Across #00 Nose (Drive-Thru Penalty)",
+            totalIncidents: 1,
+            totalPenalties: "Drive-Through Penalty"
+        },
+        drivers: [
+            { number: "63", name: "Driver #63", score: 92, level: "CRITICAL", badge: "MVP / Drive-Thru Chop", incidentsCount: 1, colors: ["#ff0055", "#111"] },
+            { number: "36", name: "Driver #36", score: 85, level: "HIGH", badge: "Post-Race Retaliation & Protest", incidentsCount: 2, colors: ["#ff5500", "#111"] },
+            { number: "6",  name: "Driver #6",  score: 75, level: "HIGH", badge: "Quad-Oval Check-Up (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "17", name: "Driver #17", score: 70, level: "HIGH", badge: "Turn Contact (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "15", name: "Driver #15", score: 65, level: "MEDIUM", badge: "Wheel Failure (EOL)", incidentsCount: 1, colors: ["#e67e22", "#111"] },
+            { number: "54", name: "Driver #54", score: 55, level: "MEDIUM", badge: "Wall Hit & Pit Contact", incidentsCount: 2, colors: ["#a020f0", "#111"] },
+            { number: "00", name: "Driver #00", score: 45, level: "MEDIUM", badge: "Wall Hit & 3-Wide Victim", incidentsCount: 2, colors: ["#3498db", "#111"] },
+            { number: "69", name: "Driver #69", score: 40, level: "LOW", badge: "Lack of Avoidance", incidentsCount: 1, colors: ["#e67e22", "#111"] },
+            { number: "31", name: "Driver #31", score: 35, level: "LOW", badge: "Corner Exit Incident", incidentsCount: 1, colors: ["#2ecc71", "#111"] },
+            { number: "24", name: "Driver #24", score: 30, level: "LOW", badge: "Check-Up & Post-Race Victim", incidentsCount: 2, colors: ["#1abc9c", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 2, stage: 1, involved: ["63", "00"], primaryCar: "63", category: "penalty",
+                title: "Lap 2 3-Wide Chop Across Car 00 Nose",
+                summary: "Car 63 attempted to leave room up top while in the middle 3-wide, but turned himself across the nose of car 00.",
+                ruling: "Drive-Through Penalty (#63)", location: "Turn 1 / 2",
+                trackCoords: { x: 670, y: 160 },
+                audioTranscript: "[RACE CONTROL] 'Car 63 turned across the nose of the 00 in the middle of 3-wide. Drive-Through penalty car 63!'"
+            },
+            {
+                id: 2, lap: 12, stage: 1, involved: ["54", "37", "69"], primaryCar: "69", category: "racing_deal",
+                title: "Wall Scraping Chain Reaction (No Caution)",
+                summary: "Car 54 scraped the wall, car 37 followed him into the fence and was hit by car 69 who did not lift or attempt to avoid.",
+                ruling: "Racing Incident (No Caution Called)", location: "Turn 4 Exit",
+                trackCoords: { x: 220, y: 80 },
+                audioTranscript: "[STEWARDS] 'Car 54 into wall, 37 followed, 69 made contact without lifting. Green flag stays out.'"
+            },
+            {
+                id: 3, lap: 23, stage: 1, involved: ["15"], primaryCar: "15", category: "penalty",
+                title: "Mechanical Wheel Failure Wall Impact",
+                summary: "Car 15 suffered a mechanical wheel hardware failure and lost control into the wall.",
+                ruling: "End of Line (EOL) Penalty (#15)", location: "Turn 3",
+                trackCoords: { x: 130, y: 260 },
+                audioTranscript: "[RADIO 15] 'Wheel failure! Lost total force feedback!' -> EOL car 15."
+            },
+            {
+                id: 4, lap: 36, stage: 1, involved: [], primaryCar: "STAGE", category: "stage_finish",
+                title: "Stage 1 Official Finish",
+                summary: "Stage 1 green-white checkered flag at Lap 36.",
+                ruling: "Stage 1 Complete", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Stage 1 complete at Lap 36! Standings locked.'"
+            },
+            {
+                id: 5, lap: 56, stage: 2, involved: ["12", "54"], primaryCar: "54", category: "racing_deal",
+                title: "Pit Entry Miscommunication Bumper Contact",
+                summary: "Car 12 was braking to pit; car 54 missed the 'pitting in' message and could not react in time, tagging 12.",
+                ruling: "Racing Deal (Pitting Miscommunication)", location: "Turn 4 / Pit Entry",
+                trackCoords: { x: 280, y: 290 },
+                audioTranscript: "[RADIO 54] 'Didn't see his pitting in call! He hit the brakes right in front of me!' -> Stewards: Racing deal."
+            },
+            {
+                id: 6, lap: 62, stage: 2, involved: ["00", "47", "35", "93", "24"], primaryCar: "00", category: "racing_deal",
+                title: "Multi-Car Tri-Oval Accordion Stackup",
+                summary: "Car 00 hit wall in front of 47; 35 forced 93 into grass to avoid and checked up, causing car 24 to tag 35. Multiple simultaneous collisions.",
+                ruling: "Racing Deal (Multi-Car Stackup / No Single Driver At Fault)", location: "Front Stretch / Tri-Oval",
+                trackCoords: { x: 450, y: 330 },
+                audioTranscript: "[STEWARDS] 'Multiple incidents occurred simultaneously off Turn 4. No single driver at fault.'"
+            },
+            {
+                id: 7, lap: 72, stage: 2, involved: [], primaryCar: "STAGE", category: "stage_finish",
+                title: "Stage 2 Official Finish",
+                summary: "Stage 2 green-white checkered flag at Lap 72.",
+                ruling: "Stage 2 Complete", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Stage 2 complete at Lap 72. Final segment coming up.'"
+            },
+            {
+                id: 8, lap: 79, stage: 3, involved: ["17", "50"], primaryCar: "17", category: "penalty",
+                title: "Turn 2 Mid-Corner Drifting Contact",
+                summary: "Car 50 and car 17 collided when car 17 drifted significantly more than 50 through the corner.",
+                ruling: "End of Line (EOL) Penalty (#17)", location: "Turn 2",
+                trackCoords: { x: 650, y: 250 },
+                audioTranscript: "[RACE CONTROL] 'Car 17 drifted up into the 50. EOL penalty car 17.'"
+            },
+            {
+                id: 9, lap: 84, stage: 3, involved: ["6", "24", "36"], primaryCar: "6", category: "penalty",
+                title: "Quad-Oval Restart Check-Up Stackup",
+                summary: "Car 6 checked up sharply on the quad-oval after the restart; car 24 had no time to react and slammed into 6. Car 36 filed formal protest.",
+                ruling: "End of Line (EOL) Penalty (#6) — Protest Filed by #36", location: "Quad-Oval / Tri-Oval",
+                trackCoords: { x: 380, y: 330 },
+                audioTranscript: "[RADIO 36] 'I'm officially protesting the lap 84 restart incident with the 6!' -> Race Control: EOL car 6."
+            },
+            {
+                id: 10, lap: 113, stage: 3, involved: ["31", "93"], primaryCar: "31", category: "racing_deal",
+                title: "Turn 2 Corner Exit Quarter-Panel Squeeze",
+                summary: "Car 31 exiting Turn 2; car 93 was barely on 31's right-rear quarter panel. 31 moved very little and contact occurred.",
+                ruling: "Racing Deal", location: "Turn 2 Exit",
+                trackCoords: { x: 580, y: 70 },
+                audioTranscript: "[STEWARDS] 'Tight racing off 2 between 31 and 93. Classified as racing deal.'"
+            },
+            {
+                id: 11, lap: 120, stage: 3, involved: ["36", "24"], primaryCar: "36", category: "warning",
+                title: "POST-RACE INCIDENT: Car 36 Drives Into Car 24",
+                summary: "After the checkered flag, car 36 intentionally drove into car 24 in retaliation for the Lap 84 restart wreck.",
+                ruling: "Official Post-Race Warning Issued to Car 36", location: "Cool-Down Lap / Pit Lane",
+                trackCoords: { x: 440, y: 290 },
+                audioTranscript: "[RACE CONTROL] 'Car 36, driving into the 24 post-race is unacceptable. Official warning issued to car 36!'"
+            }
+        ]
     }
 };
+
