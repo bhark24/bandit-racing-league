@@ -764,6 +764,130 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RACE CONTROL] 'Car 36, driving into the 24 post-race is unacceptable. Official warning issued to car 36!'"
             }
         ]
+    },
+
+    las_vegas: {
+        id: "las_vegas",
+        title: "Las Vegas Motor Speedway",
+        subtext: "Viva Las Vegas 110 — 110 Laps (Stages @ 33 & 66)",
+        laps: 110,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 33 },
+            { name: "Stage 2", lap: 66 },
+            { name: "Final Stage", lap: 110 }
+        ],
+        mvp: {
+            carNumber: "9 & 18",
+            driverName: "Car #9 (Dylan McDonald) & Car #18 (Victor Weaver)",
+            title: "Wall of Shame MVPs",
+            reason: "Confirmed Post-Yellow Intentional Wrecking: Both Drivers DQ'd! #9 Suspended 1 Wk, ROS Probation & 3-Wk EOL/Drive-Thru; #18 3-Wk Probation & EOL Start",
+            totalIncidents: 2,
+            totalPenalties: "DOUBLE DISQUALIFICATION + Suspension + Probation"
+        },
+        drivers: [
+            { number: "9",  name: "Driver #9 (Dylan McDonald)", score: 100, level: "CRITICAL", badge: "DISQUALIFIED / 1-Wk Suspension", incidentsCount: 2, colors: ["#ff0055", "#111"] },
+            { number: "18", name: "Driver #18 (Victor Weaver)", score: 98, level: "CRITICAL", badge: "DISQUALIFIED / 3-Wk Probation", incidentsCount: 2, colors: ["#ff0055", "#111"] },
+            { number: "36", name: "Driver #36 (Adam Tahan)", score: 75, level: "HIGH", badge: "Apron Chop / Turn Self (EOL)", incidentsCount: 2, colors: ["#ffaa00", "#111"] },
+            { number: "14", name: "Driver #14 (Jason Allegrini)", score: 70, level: "HIGH", badge: "Wall Squeeze (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "24", name: "Driver #24", score: 70, level: "HIGH", badge: "Side-Swipe Crash (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "62", name: "Driver #62 (Ty Corino)", score: 45, level: "MEDIUM", badge: "Restart Line Warning", incidentsCount: 1, colors: ["#e67e22", "#111"] },
+            { number: "22", name: "Driver #22 (Joshua Adams)", score: 30, level: "LOW", badge: "Stage Finish Contact", incidentsCount: 1, colors: ["#3498db", "#111"] },
+            { number: "91", name: "Driver #91", score: 20, level: "LOW", badge: "Cleared of Intent Wrecking", incidentsCount: 2, colors: ["#2ecc71", "#111"] },
+            { number: "28", name: "Driver #28", score: 20, level: "LOW", badge: "Cleared of Intent Wrecking", incidentsCount: 2, colors: ["#2ecc71", "#111"] },
+            { number: "99", name: "Driver #99", score: 10, level: "LOW", badge: "Yellow Penalty Cleared", incidentsCount: 1, colors: ["#00ff00", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 33, stage: 1, involved: [], primaryCar: "STAGE", category: "stage_finish",
+                title: "Stage 1 Official Finish",
+                summary: "Stage 1 yellow checkered flag at Lap 33.",
+                ruling: "Stage 1 Complete", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Stage 1 yellow checkered flag at Lap 33! Standings locked.'"
+            },
+            {
+                id: 2, lap: 66, stage: 2, involved: ["22", "01", "15"], primaryCar: "22", category: "racing_deal",
+                title: "Stage 2 Finish Turn 4 Stackup",
+                summary: "Incident between car 22, car 01, and car 15 off Turn 4 as yellow was being thrown.",
+                ruling: "Confirmed Racing Deal", location: "Turn 4 Exit",
+                trackCoords: { x: 220, y: 80 },
+                audioTranscript: "[STEWARDS] 'Incident off Turn 4 on Stage 2 finish reviewed. Confirmed racing deal.'"
+            },
+            {
+                id: 3, lap: 74, stage: 3, involved: ["91", "14"], primaryCar: "14", category: "penalty",
+                title: "Loose Recovery Squeeze into Wall",
+                summary: "Car 14 got loose in the corner and chased it up the track into car 91 on the outside, putting 91 in the wall.",
+                ruling: "End of Line (EOL) Penalty (#14)", location: "Turn 1 / 2",
+                trackCoords: { x: 670, y: 160 },
+                audioTranscript: "[RADIO 91] '14 got loose and drove me straight into the wall!' -> Race Control: EOL car 14."
+            },
+            {
+                id: 4, lap: 78, stage: 3, involved: ["62", "69", "31"], primaryCar: "62", category: "warning",
+                title: "Restart Line Weave & Chain Reaction Stackup",
+                summary: "Cars 62 and 69 met in the middle while getting up to speed. Car 31 had no time to react and hit car 62. Post-review found 62 failed to hold line on restart.",
+                ruling: "Racing Deal / Official Warning to Car 62", location: "Front Stretch / Restart Zone",
+                trackCoords: { x: 450, y: 330 },
+                audioTranscript: "[STEWARDS] 'Car 62 started chain of events by not holding line on restart. Official warning issued to 62.'"
+            },
+            {
+                id: 5, lap: 83, stage: 3, involved: ["36", "15", "9"], primaryCar: "36", category: "racing_deal",
+                title: "Check-Up Loose Slide",
+                summary: "Car 36 got loose while checking up for car 15; car 9 had no time to react.",
+                ruling: "Racing Deal", location: "Turn 3 & 4",
+                trackCoords: { x: 140, y: 220 },
+                audioTranscript: "[STEWARDS] '36 got loose checking up for 15. Racing deal between 36 and 9.'"
+            },
+            {
+                id: 6, lap: 85, stage: 3, involved: ["99"], primaryCar: "99", category: "rescinded",
+                title: "Yellow Flag Wreck Black Flag Rescinded",
+                summary: "Car 99 was wrecked under yellow conditions and required an immediate pit stop.",
+                ruling: "Black Flag Cleared / Rescinded (#99)", location: "Pit Road",
+                trackCoords: { x: 380, y: 290 },
+                audioTranscript: "[RACE CONTROL] 'Car 99 was wrecked under yellow. Black flag cleared for car 99.'"
+            },
+            {
+                id: 7, lap: 92, stage: 3, involved: ["12", "28", "91"], primaryCar: "12", category: "racing_deal",
+                title: "Mid-Pack Converge & Intent Wreck Audit",
+                summary: "Car 12 and 28 met in the middle. Stewards also audited 91 and 28 for potential intentional wrecking.",
+                ruling: "Racing Deal / NO INTENTIONAL WRECK FOUND", location: "Back Stretch",
+                trackCoords: { x: 400, y: 70 },
+                audioTranscript: "[RACE CONTROL] 'Reviewed 91 and 28 for intentional wrecking: NO INTENTIONAL WRECK FOUND. Racing deal.'"
+            },
+            {
+                id: 8, lap: 96, stage: 3, involved: ["21", "63", "9", "18"], primaryCar: "18", category: "penalty",
+                title: "Caution Trigger: Hook Contact Off Turn Exit",
+                summary: "Contact between 21 and 63 checked up traffic. Car 9 left room up top; car 18 came up on exit and hooked car 9.",
+                ruling: "End of Line (EOL) Penalty (#18)", location: "Turn 4 Exit",
+                trackCoords: { x: 210, y: 80 },
+                audioTranscript: "[RACE CONTROL] 'Car 18 hooked the 9 off Turn 4. Caution flag out. EOL penalty car 18.'"
+            },
+            {
+                id: 9, lap: 96, stage: 3, involved: ["9", "18"], primaryCar: "9", category: "mvp",
+                title: "DOUBLE DISQUALIFICATION: Post-Yellow Intentional Wrecking",
+                summary: "Under caution, car 9 intentionally wrecked himself and car 18 drove straight into him. Telemetry & bot confirmed dual intentional wrecking.",
+                ruling: "DOUBLE DISQUALIFICATION (#9 & #18) — #9: DQ + 1-Wk Suspension + ROS Probation + 3-Wk EOL & L1 Drive-Thru. #18: DQ + 3-Wk Probation + EOL Start.", location: "Back Stretch / Caution",
+                trackCoords: { x: 400, y: 70 },
+                audioTranscript: "[RACE CONTROL] 'After review, BOTH car 9 and car 18 confirmed for INTENTIONAL WRECKING! Car 9: DISQUALIFIED, 1-week suspension, probation rest of season, 3 weeks EOL + Lap 1 Drive-Through! Car 18: DISQUALIFIED, 3-week probation, EOL start next race!'"
+            },
+            {
+                id: 10, lap: 101, stage: 3, involved: ["36", "47"], primaryCar: "36", category: "penalty",
+                title: "Apron Force Attempt Self-Spin",
+                summary: "Car 36 attempted to force car 47 onto the apron and spun himself around.",
+                ruling: "End of Line (EOL) Penalty (#36)", location: "Front Stretch / Apron",
+                trackCoords: { x: 480, y: 330 },
+                audioTranscript: "[RADIO 47] '36 tried to squeeze me all the way onto the apron and spun himself out!' -> EOL car 36."
+            },
+            {
+                id: 11, lap: 108, stage: 3, involved: ["24", "47"], primaryCar: "24", category: "penalty",
+                title: "Late-Race Side Collision Wreck",
+                summary: "Car 24 came up the track into car 47, triggering a major crash with 2 laps remaining.",
+                ruling: "End of Line (EOL) Penalty (#24)", location: "Turn 3 & 4",
+                trackCoords: { x: 130, y: 260 },
+                audioTranscript: "[RADIO 47] '24 came straight up into my door!' -> Race Control: EOL car 24."
+            }
+        ]
     }
 };
+
 

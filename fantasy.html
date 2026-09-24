@@ -1058,7 +1058,7 @@
 
             // Find the next scheduled race date that locks in the future
             for (const race of schedule) {
-                // Lock time is 9:15 PM EDT (UTC-4) on race day
+                // Lock time is 9:15 PM Eastern Standard Time (EST) on race day
                 const raceLockDate = new Date(`${race.date}T21:15:00-04:00`);
                 if (raceLockDate > now) {
                     nextRace = race;

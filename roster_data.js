@@ -44,8 +44,8 @@ const rosterData = {
     "status": "part-time"
   },
   "12": {
-    "driver": "BILL HARKINS",
-    "status": "full-time"
+    "driver": "",
+    "status": "available"
   },
   "13": {
     "driver": "JONATHON PLATT",

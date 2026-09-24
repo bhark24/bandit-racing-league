@@ -1860,9 +1860,29 @@
             </div>
             <div style="flex: 1; width: 100%; display: flex; gap: 20px; min-height: 0;">
                 <div style="flex: 3; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); padding: 20px; position: relative; min-height: 0; overflow: hidden; display: flex; flex-direction: column;">
-                    <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: center;">
-                        <button id="btn-graph-pace" style="padding: 8px 20px; background: rgba(0, 229, 255, 0.2); border: 1px solid var(--neon-blue); color: #FFF; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">LAP PACE</button>
-                        <button id="btn-graph-fuel" style="padding: 8px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2); color: #AAA; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">FUEL USAGE</button>
+                    <div style="display: flex; gap: 8px; margin-bottom: 12px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                        <button id="btn-graph-pace" style="padding: 8px 16px; background: rgba(0, 229, 255, 0.2); border: 1px solid var(--neon-blue); color: #FFF; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">LAP PACE</button>
+                        <button id="btn-graph-tire" style="padding: 8px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2); color: #AAA; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">🛞 TIRE DEGRADATION</button>
+                        <button id="btn-graph-apex" style="padding: 8px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2); color: #AAA; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">🏎️ APEX SPEEDS</button>
+                        <button id="btn-graph-fuel" style="padding: 8px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2); color: #AAA; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">FUEL USAGE</button>
+                        <button id="btn-graph-traces" style="padding: 8px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2); color: #AAA; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">INPUT TRACES</button>
+                        <button id="btn-pace-zoom" style="padding: 8px 14px; background: rgba(0, 255, 102, 0.2); border: 1px solid var(--neon-green); color: var(--neon-green); font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s; margin-left: 8px;">🔍 PACE ZOOM: ON</button>
+                    </div>
+                    <!-- Trace Controls Sub-Bar -->
+                    <div id="trace-controls-bar" style="display: none; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 8px 14px; margin-bottom: 10px; font-size: 13px;">
+                        <div style="display: flex; gap: 15px; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="color: #AAA; font-weight: 700;">LAP:</span>
+                                <select id="select-trace-lap" style="background: #111; color: #FFF; border: 1px solid rgba(0,229,255,0.5); border-radius: 4px; padding: 4px 8px; font-family: 'Inter'; font-weight: 700; cursor: pointer;"></select>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="color: #AAA; font-weight: 700;">VS:</span>
+                                <select id="select-trace-compare" style="background: #111; color: #FFF; border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; padding: 4px 8px; font-family: 'Inter'; font-weight: 700; cursor: pointer;"></select>
+                            </div>
+                        </div>
+                        <div id="trace-live-readout" style="font-family: 'Inter'; font-weight: 700; font-size: 12px; color: #00E5FF;">
+                            Hover over trace to inspect data
+                        </div>
                     </div>
                     <canvas id="analytics-chart" style="width: 100%; flex: 1;"></canvas>
                 </div>
@@ -2413,5 +2433,6 @@
         <span id="val-lr-i">0</span><span id="val-lr-m">0</span><span id="val-lr-o">0</span>
         <span id="val-rr-i">0</span><span id="val-rr-m">0</span><span id="val-rr-o">0</span>
     </div>
+    <script src="app.js?v=5"></script>
 </body>
 </html>

@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Wall of Shame Hub — Bandit Racing League</title>
     <meta name="description" content="Bandit Racing League (BRL) Official Race Stewards' Wall of Shame Hub. Race incident recaps, interactive telemetry scrubbers, track maps, and driver penalty leaderboards.">
     <!-- Google Fonts -->
@@ -188,11 +191,19 @@
                     </div>
                     <i class="fa-solid fa-chevron-right tab-arrow"></i>
                 </button>
-                <button class="race-tab-card active" data-race="texas">
+                <button class="race-tab-card" data-race="texas">
                     <span class="week-pill">W15</span>
                     <div class="race-tab-info">
                         <span class="race-tab-title">Texas Motor Speedway</span>
                         <span class="race-tab-sub">120 Laps &bull; Lone Star State 120</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right tab-arrow"></i>
+                </button>
+                <button class="race-tab-card active" data-race="las_vegas">
+                    <span class="week-pill">W16</span>
+                    <div class="race-tab-info">
+                        <span class="race-tab-title">Las Vegas Motor Speedway</span>
+                        <span class="race-tab-sub">110 Laps &bull; Double DQ &amp; Intent Wrecks</span>
                     </div>
                     <i class="fa-solid fa-chevron-right tab-arrow"></i>
                 </button>
@@ -203,8 +214,8 @@
         <section class="hero-section">
             <div class="hero-card track-info-card">
                 <div class="card-badge"><i class="fa-solid fa-trophy"></i> BRL STEWARDS HUB</div>
-                <h1 class="track-name" id="trackNameDisplay">Kansas Speedway</h1>
-                <p class="track-subtext" id="trackSubtextDisplay">1.5-Mile Tri-Oval — 100 Laps (Stages @ 33 &amp; 66)</p>
+                <h1 class="track-name" id="trackNameDisplay">Las Vegas Motor Speedway</h1>
+                <p class="track-subtext" id="trackSubtextDisplay">1.5-Mile Tri-Oval — 110 Laps (Stages @ 33 &amp; 66)</p>
 
                 <div class="stats-mini-grid">
                     <div class="mini-stat">
@@ -407,7 +418,7 @@
     </div>
 
     <!-- JS Scripts -->
-    <script src="wall_of_shame_data.js?v=kansas_v2"></script>
-    <script src="wall_of_shame_app.js?v=kansas_v2"></script>
+    <script src="wall_of_shame_data.js?v=vegas_v1"></script>
+    <script src="wall_of_shame_app.js?v=vegas_v1"></script>
 </body>
 </html>

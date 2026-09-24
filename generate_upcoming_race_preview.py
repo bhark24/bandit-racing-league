@@ -62,27 +62,27 @@ def main():
         sys.stdout.reconfigure(encoding='utf-8')
 
     print("=" * 65)
-    print("      BRL TONIGHT'S KANSAS SPEEDWAY RACE PREVIEW GENERATOR")
+    print("      BRL VIVA LAS VEGAS 110 RACE PREVIEW GENERATOR")
     print("=" * 65)
     
-    post_text = """🏁 **BANDIT RACING LEAGUE — TONIGHT AT KANSAS SPEEDWAY!** 🏁
-📺 **Live Broadcast:** SimTrax Broadcasting | ⏰ **9:00 PM EST**
-📍 **Track:** Kansas Speedway (1.5-Mile D-Shaped Tri-Oval)
-🏁 **Event:** Kansas Speedway Tri-Oval Showdown (Craftsman Trucks)
+    post_text = """🏁 **BANDIT RACING LEAGUE — UPCOMING AT LAS VEGAS MOTOR SPEEDWAY!** 🏁
+📺 **Live Broadcast:** SimTrax Broadcasting | ⏰ **9:00 PM Eastern Standard Time (EST)**
+📍 **Track:** Las Vegas Motor Speedway (1.5-Mile Tri-Oval)
+🏁 **Event:** Viva Las Vegas 110 (Craftsman Trucks • 110 Laps)
 
-The high-speed drafting action moves to Kansas Speedway TONIGHT, Wednesday, September 9th! 🏆
+The high-stakes strategy duel moves to Las Vegas Motor Speedway on Wednesday, September 23rd! 🏆
 
-Fresh off an intense Darlington duel where Nick Nickerson tamed the "Lady in Black", the Bandit Racing League heads to the sweeping 1.5-mile tri-oval of Kansas Speedway. With multiple racing grooves, heavy tire degradation, and 3-wide draft battles exiting Turn 4, tonight is set to be an absolute thriller!
+Drivers face a massive tactical dilemma under warm daytime desert temperatures: a **70% Fuel Cap (12.6 gal max)**, **1 Fast Repair**, and a **strict 2-Tire Set Limit** for 110 laps (~55 laps per set). With 3 green-flag pit stops required and only 1 tire change allowed, pit strategy and tire conservation will decide who takes victory lane in the neon desert!
 
 🔥 **DRIVER SPOTLIGHT: WES FULLER (#35)** 🔥
-Title Town Racing owner/driver **Wes Fuller** hits his home track in Kansas City sporting his brand new #35 Ram Craftsman Truck paint scheme! Will the hometown hero conquer Kansas tonight?
+Title Town Racing owner/driver **Wes Fuller** wheels his crisp #35 Ram Craftsman Truck into the desert heat! Will Fuller beat the high rollers in Vegas?
 
-🏆 **CHAMPIONSHIP HUNT & TEAM ECONOMY BATTLE** 🏆
-• GFR Racing leads the Team Championship, but 937 Racing and ZeroFoxtrot are charging hard!
-• With only 1 Fast Repair per truck and Stage Checkered Flags on the line, execution and strategy are everything.
+🏆 **CHAMPIONSHIP HUNT & STRATEGY BATTLE** 🏆
+• Points leader Benjamin Lacy (#7) and Darlington winner Nick Nickerson (#2) lead the GFR Racing attack!
+• Scott Sanderson (#93) and 937 Racing are charging hard for the crown!
 
 🔮 **VIEWER FANTASY LEAGUE — FREE TO PLAY!** 🔮
-Lock in your 4-driver fantasy team before 9:00 PM EST! Race along live with the stream and climb the leaderboards:
+Lock in your 4-driver fantasy team before 9:15 PM Eastern Standard Time (EST)!
 👉 **Submit Picks:** https://banditracingleague.net/fantasy.html
 
 📊 **INTERACTIVE TELEMETRY & WALL OF SHAME HUB:**
@@ -90,13 +90,13 @@ Catch up on past race incidents, SVG track maps, and stewards reports:
 👉 **Wall of Shame Hub:** https://banditracingleague.net/wall-of-shame.html
 
 🗓️ **RACE NIGHT SCHEDULE** 🗓️
-⏰ **Practice/Qualifying:** 8:30 PM EST
-🏁 **Green Flag:** 9:00 PM EST
+⏰ **Practice/Qualifying:** 8:30 PM Eastern Standard Time (EST)
+🏁 **Green Flag:** 9:00 PM Eastern Standard Time (EST)
 📺 **Watch Live on SimTrax:** https://banditracingleague.net/simtrax.html
 
-Who takes the checkered flag tonight at Kansas? Drop your picks in the comments! 👇
+Who takes the checkered flag at Las Vegas Motor Speedway? Drop your picks in the comments! 👇
 
-#BanditRacingLeague #iRacing #KansasSpeedway #SimRacing #NASCAR #CraftsmanTrucks #SimTrax #Esports #SimRacerHub"""
+#BanditRacingLeague #iRacing #LasVegas #VivaLasVegas110 #SimRacing #NASCAR #CraftsmanTrucks #SimTrax #Esports #SimRacerHub"""
 
     print("\n" + "-" * 55)
     print("GENERATED FACEBOOK PROMO POST:")

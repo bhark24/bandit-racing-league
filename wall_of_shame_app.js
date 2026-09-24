@@ -2,8 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // Current Active State
-    let currentRaceKey = "texas";
-    let currentRaceData = BRL_RACES_DATA.texas;
+    let currentRaceKey = "las_vegas";
+    let currentRaceData = BRL_RACES_DATA.las_vegas;
     let currentFilter = "all";
     let searchQuery = "";
     let isAudioEnabled = true;
