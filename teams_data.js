@@ -1162,83 +1162,163 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Hauler Logistics: Cleveland, OH to Fort Worth, TX (1035 mi round trip)",
+          "amount": -10354,
           "category": "expense",
-          "amount": -10354
+          "description": "Hauler Logistics: Cleveland, OH to Fort Worth, TX (1035 mi round trip)"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Standard Race Prep: Roundy F-150 #12 (BILL HARKINS)",
+          "amount": -2000,
           "category": "expense",
-          "amount": -2000
+          "description": "Standard Race Prep: Roundy F-150 #12 (BILL HARKINS)"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (1088 mi)",
+          "amount": -242,
           "category": "expense",
-          "amount": -242
+          "description": "Flight & Lodging: BILL HARKINS from Ashtabula, OH (1088 mi)"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Sponsor Start Bonus: BILL HARKINS",
+          "amount": 15000,
           "category": "income",
-          "amount": 15000
+          "description": "Sponsor Start Bonus: BILL HARKINS"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Prize Money: BILL HARKINS (P16)",
+          "amount": 15000,
           "category": "income",
-          "amount": 15000
+          "description": "Prize Money: BILL HARKINS (P16)"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "LOGAN MURRAY DNS",
+          "amount": 0,
+          "category": "info",
+          "description": "LOGAN MURRAY DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: Roundy F-150 #15 (MATT CROCKETT)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -309,
+          "category": "expense",
+          "description": "Flight & Lodging: MATT CROCKETT from Salt Lake City, UT (966 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: MATT CROCKETT"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 12000,
+          "category": "income",
+          "description": "Prize Money: MATT CROCKETT (P24)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "DNF: MATT CROCKETT (Disconnected) - Truck Condition: 74%"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "TERRY KONDUS DNS"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "local": true,
+          "amount": 0,
+          "category": "info",
+          "description": "Released Driver: BILL HARKINS"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "local": true,
+          "amount": 0,
+          "category": "info",
+          "description": "Released Driver: TERRY KONDUS"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Hauler Logistics: Cleveland, OH to Las Vegas, NV (1816 mi round trip)",
+          "category": "expense",
+          "amount": -18161
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "REAGAN FRUGE DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
+          "description": "Standard Race Prep: Roundy F-150 #4 (LOGAN MURRAY)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: LOGAN MURRAY from West Plains, MO (1283 mi)",
+          "category": "expense",
+          "amount": -405
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Sponsor Start Bonus: LOGAN MURRAY",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: LOGAN MURRAY (P18)",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: Roundy F-150 #15 (MATT CROCKETT)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: MATT CROCKETT from Salt Lake City, UT (966 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: MATT CROCKETT from Salt Lake City, UT (353 mi)",
           "category": "expense",
-          "amount": -309
+          "amount": -350
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: MATT CROCKETT",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: MATT CROCKETT (P24)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: MATT CROCKETT (P15)",
           "category": "income",
-          "amount": 12000
+          "amount": 20000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "DNF: MATT CROCKETT (Disconnected) - Truck Condition: 74%",
-          "category": "info",
-          "amount": 0
-        },
-        {
-          "date": "Sep 16, 2026",
-          "description": "TERRY KONDUS DNS",
+          "date": "Sep 23, 2026",
+          "description": "VACANT DNS",
           "category": "info",
           "amount": 0
         }
       ],
-      "points": 834,
+      "points": 875,
       "trucks": [
         {
           "id": "truck-1",
           "make": "Ford",
-          "name": "Roundy F-150 #12",
+          "name": "Roundy F-150 #TBD",
           "condition": 100
         },
         {
@@ -1256,21 +1336,21 @@ const teamsData = {
         {
           "id": "truck-4",
           "make": "Ford",
-          "name": "Roundy F-150 #32",
+          "name": "Roundy F-150 #TBD",
           "condition": 100
         }
       ],
-      "balance": 2088244,
+      "balance": 2130328,
       "drivers": {
         "backup": [
-          "REAGAN FRUGE",
+          "VACANT",
           "VACANT"
         ],
         "primary": [
-          "BILL HARKINS",
+          "REAGAN FRUGE",
           "LOGAN MURRAY",
           "MATT CROCKETT",
-          "TERRY KONDUS"
+          "VACANT"
         ]
       },
       "homeBase": "Cleveland, OH",
@@ -2336,126 +2416,216 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Hauler Logistics: Dayton, OH to Fort Worth, TX (862 mi round trip)",
+          "amount": -8625,
           "category": "expense",
-          "amount": -8625
+          "description": "Hauler Logistics: Dayton, OH to Fort Worth, TX (862 mi round trip)"
         },
         {
           "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: 937 Tundra #18 (VICTOR WEAVER)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -349,
+          "category": "expense",
+          "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (862 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: VICTOR WEAVER"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 20000,
+          "category": "income",
+          "description": "Prize Money: VICTOR WEAVER (P11)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: 937 Tundra #22 (JOSH ADAMS)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -339,
+          "category": "expense",
+          "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (853 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: JOSH ADAMS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 25000,
+          "category": "income",
+          "description": "Prize Money: JOSH ADAMS (P10)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: 937 Tundra #47 (MICHAEL RAKES)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -427,
+          "category": "expense",
+          "description": "Flight & Lodging: MICHAEL RAKES from Roanoke, VA (1020 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: MICHAEL RAKES"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 25000,
+          "category": "income",
+          "description": "Prize Money: MICHAEL RAKES (P6)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "VACANT DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: 937 Tundra #17 (DI0NTE RADER)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -387,
+          "category": "expense",
+          "description": "Flight & Lodging: DI0NTE RADER from Miamisburg, OH (854 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: DI0NTE RADER"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 12000,
+          "category": "income",
+          "description": "Prize Money: DI0NTE RADER (P21)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "DNF: DI0NTE RADER (Disconnected) - Truck Condition: 51%"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 34021,
+          "category": "income",
+          "description": "Virtual Sponsorship Earned: FastTrack Designs (Upward Performance: 8.6 Avg Finish over 2 weeks)"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Hauler Logistics: Dayton, OH to Las Vegas, NV (1686 mi round trip)",
+          "category": "expense",
+          "amount": -16864
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: 937 Tundra #18 (VICTOR WEAVER)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (862 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: VICTOR WEAVER from Dayton, OH (1686 mi)",
           "category": "expense",
-          "amount": -349
+          "amount": -295
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: VICTOR WEAVER",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: VICTOR WEAVER (P11)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: VICTOR WEAVER (P28)",
           "category": "income",
-          "amount": 20000
+          "amount": 12000
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: 937 Tundra #22 (JOSH ADAMS)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (853 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: JOSH ADAMS from Springboro, OH (1684 mi)",
           "category": "expense",
-          "amount": -339
+          "amount": -292
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: JOSH ADAMS",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: JOSH ADAMS (P10)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: JOSH ADAMS (P20)",
           "category": "income",
-          "amount": 25000
+          "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: 937 Tundra #47 (MICHAEL RAKES)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: MICHAEL RAKES from Roanoke, VA (1020 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: MICHAEL RAKES from Roanoke, VA (1931 mi)",
           "category": "expense",
-          "amount": -427
+          "amount": -398
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: MICHAEL RAKES",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: MICHAEL RAKES (P6)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: MICHAEL RAKES (P8)",
           "category": "income",
           "amount": 25000
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Standard Race Prep: 937 Tundra #17 (DI0NTE RADER)",
-          "category": "expense",
-          "amount": -2000
-        },
-        {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: DI0NTE RADER from Miamisburg, OH (854 mi)",
-          "category": "expense",
-          "amount": -387
-        },
-        {
-          "date": "Sep 16, 2026",
-          "description": "Sponsor Start Bonus: DI0NTE RADER",
+          "date": "Sep 23, 2026",
+          "description": "Virtual Sponsorship Earned: Precision Shifters (Upward Performance: 11.3 Avg Finish over 2 weeks)",
           "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: DI0NTE RADER (P21)",
-          "category": "income",
-          "amount": 12000
-        },
-        {
-          "date": "Sep 16, 2026",
-          "description": "DNF: DI0NTE RADER (Disconnected) - Truck Condition: 51%",
-          "category": "info",
-          "amount": 0
-        },
-        {
-          "date": "Sep 16, 2026",
-          "description": "Virtual Sponsorship Earned: FastTrack Designs (Upward Performance: 8.6 Avg Finish over 2 weeks)",
-          "category": "income",
-          "amount": 34021
+          "amount": 13913
         }
       ],
-      "points": 1095,
+      "points": 1155,
       "trucks": [
         {
           "id": "truck-1",
@@ -2488,7 +2658,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2326541,
+      "balance": 2413605,
       "drivers": {
         "backup": [
           "DI0NTE RADER",
@@ -2506,7 +2676,8 @@ const teamsData = {
         "937 Racing",
         "Toyota Racing Development",
         "Craftsman Tools",
-        "FastTrack Designs"
+        "FastTrack Designs",
+        "Precision Shifters"
       ],
       "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305"
     },
@@ -2844,18 +3015,36 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "DNS: No team participation"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "DYLAN NICASTRO DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "DAVID WESTOVER JR DNS"
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "DNS: No team participation",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "DYLAN NICASTRO DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "DAVID WESTOVER JR DNS",
           "category": "info",
           "amount": 0
@@ -4128,54 +4317,114 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Hauler Logistics: Weeki Wachee, FL to Fort Worth, TX (926 mi round trip)",
+          "amount": -9260,
           "category": "expense",
-          "amount": -9260
+          "description": "Hauler Logistics: Weeki Wachee, FL to Fort Worth, TX (926 mi round trip)"
         },
         {
           "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: ZeroFoxtrot Silverado #31 (CONNOR GIBSON)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -666,
+          "category": "expense",
+          "description": "Flight & Lodging: CONNOR GIBSON from Halifax, NS (1965 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: CONNOR GIBSON"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Prize Money: CONNOR GIBSON (P18)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "MICHAEL RAMOS DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "BOB BERRY DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "VACANT DNS"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Hauler Logistics: Weeki Wachee, FL to Las Vegas, NV (1956 mi round trip)",
+          "category": "expense",
+          "amount": -19565
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Quarterly Hauler Maintenance (Race 28)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: ZeroFoxtrot Silverado #31 (CONNOR GIBSON)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: CONNOR GIBSON from Halifax, NS (1965 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: CONNOR GIBSON from Halifax, NS (2718 mi)",
           "category": "expense",
-          "amount": -666
+          "amount": -877
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: CONNOR GIBSON",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: CONNOR GIBSON (P18)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: CONNOR GIBSON (P7)",
           "category": "income",
-          "amount": 15000
+          "amount": 25000
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "MICHAEL RAMOS DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "BOB BERRY DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Virtual Sponsorship Earned: DraftMasters (Upward Performance: 12.0 Avg Finish over 2 weeks)",
+          "category": "income",
+          "amount": 30425
         }
       ],
-      "points": 1024,
+      "points": 1054,
       "trucks": [
         {
           "id": "truck-1",
@@ -4214,7 +4463,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 1941277,
+      "balance": 1987260,
       "drivers": {
         "backup": [
           "JON OSBORNE",
@@ -4233,7 +4482,8 @@ const teamsData = {
         "Chevrolet Accessories",
         "Craftsman Tools",
         "Octane Apparel",
-        "Checkered Flag Media"
+        "Checkered Flag Media",
+        "DraftMasters"
       ],
       "passcodeHash": "13b92326aee45b686501b518930032a92c937945b258b461840f4b2572ed9d68"
     },
@@ -4949,24 +5199,48 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "DNS: No team participation"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "EDDIE HAGIGH DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "JASON GREENWELL DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "CARTER PHILLIPS DNS"
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "DNS: No team participation",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "EDDIE HAGIGH DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "JASON GREENWELL DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "CARTER PHILLIPS DNS",
           "category": "info",
           "amount": 0
@@ -5023,7 +5297,7 @@ const teamsData = {
       "loan": 0,
       "logo": "assets/gfr.png",
       "name": "GFR Racing",
-      "wins": 7,
+      "wins": 8,
       "owner": "Kevin Foster",
       "ledger": [
         {
@@ -6482,144 +6756,282 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Hauler Logistics: Katy, TX to Fort Worth, TX (239 mi round trip)",
+          "amount": -2398,
           "category": "expense",
-          "amount": -2398
+          "description": "Hauler Logistics: Katy, TX to Fort Worth, TX (239 mi round trip)"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Quarterly Hauler Maintenance (Race 8)",
+          "amount": -2000,
           "category": "expense",
-          "amount": -2000
+          "description": "Quarterly Hauler Maintenance (Race 8)"
         },
         {
           "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: GFR Silverado #8 (KEVIN FOSTER)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -100,
+          "category": "expense",
+          "description": "Drive & Lodging: KEVIN FOSTER from Katy, TX (239 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: KEVIN FOSTER"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 20000,
+          "category": "income",
+          "description": "Prize Money: KEVIN FOSTER (P15)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: GFR Silverado #2 (NICK NICKERSON)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -425,
+          "category": "expense",
+          "description": "Flight & Lodging: NICK NICKERSON from Phoenix, AZ (854 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: NICK NICKERSON"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 35000,
+          "category": "income",
+          "description": "Prize Money: NICK NICKERSON (P4)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: GFR Silverado #1 (RICKY HART)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -565,
+          "category": "expense",
+          "description": "Flight & Lodging: RICKY HART from West Chester, PA (1291 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: RICKY HART"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Prize Money: RICKY HART (P20)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "DNF: RICKY HART (Disconnected) - Truck Condition: -11%"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: GFR Silverado #7 (BENJAMIN LACY)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -520,
+          "category": "expense",
+          "description": "Flight & Lodging: BENJAMIN LACY from Loma Linda, CA (1150 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: BENJAMIN LACY"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 55000,
+          "category": "income",
+          "description": "Prize Money: BENJAMIN LACY (P2)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: GFR Silverado #93 (SCOTT SANDERSON)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -100,
+          "category": "expense",
+          "description": "Drive & Lodging: SCOTT SANDERSON (Location N/A)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: SCOTT SANDERSON"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 45000,
+          "category": "income",
+          "description": "Prize Money: SCOTT SANDERSON (P3)"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Hauler Logistics: Katy, TX to Las Vegas, NV (1195 mi round trip)",
+          "category": "expense",
+          "amount": -11957
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: GFR Silverado #8 (KEVIN FOSTER)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Drive & Lodging: KEVIN FOSTER from Katy, TX (239 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: KEVIN FOSTER from Katy, TX (1195 mi)",
           "category": "expense",
-          "amount": -100
+          "amount": -474
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: KEVIN FOSTER",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: KEVIN FOSTER (P15)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: KEVIN FOSTER (P13)",
           "category": "income",
           "amount": 20000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Standard Race Prep: GFR Silverado #2 (NICK NICKERSON)",
-          "category": "expense",
-          "amount": -2000
+          "date": "Sep 23, 2026",
+          "description": "NICK NICKERSON DNS",
+          "category": "info",
+          "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: NICK NICKERSON from Phoenix, AZ (854 mi)",
-          "category": "expense",
-          "amount": -425
-        },
-        {
-          "date": "Sep 16, 2026",
-          "description": "Sponsor Start Bonus: NICK NICKERSON",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: NICK NICKERSON (P4)",
-          "category": "income",
-          "amount": 35000
-        },
-        {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: GFR Silverado #1 (RICKY HART)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: RICKY HART from West Chester, PA (1291 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: RICKY HART from West Chester, PA (2139 mi)",
           "category": "expense",
-          "amount": -565
+          "amount": -710
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: RICKY HART",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: RICKY HART (P20)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: RICKY HART (P5)",
           "category": "income",
-          "amount": 15000
+          "amount": 30000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "DNF: RICKY HART (Disconnected) - Truck Condition: -11%",
-          "category": "info",
-          "amount": 0
-        },
-        {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: GFR Silverado #7 (BENJAMIN LACY)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: BENJAMIN LACY from Loma Linda, CA (1150 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Drive & Lodging: BENJAMIN LACY from Loma Linda, CA (199 mi)",
           "category": "expense",
-          "amount": -520
+          "amount": -100
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: BENJAMIN LACY",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: BENJAMIN LACY (P2)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: BENJAMIN LACY (P4)",
           "category": "income",
-          "amount": 55000
+          "amount": 35000
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
+          "description": "Standard Race Prep: GFR Silverado #13 (JONATHON PLATT)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: JONATHON PLATT from Concord, NC (1919 mi)",
+          "category": "expense",
+          "amount": -631
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Sponsor Start Bonus: JONATHON PLATT",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: JONATHON PLATT (P25)",
+          "category": "income",
+          "amount": 12000
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "DNF: JONATHON PLATT (Disconnected) - Truck Condition: 3%",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: GFR Silverado #93 (SCOTT SANDERSON)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Drive & Lodging: SCOTT SANDERSON (Location N/A)",
           "category": "expense",
           "amount": -100
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: SCOTT SANDERSON",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: SCOTT SANDERSON (P3)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: SCOTT SANDERSON (P1)",
           "category": "income",
-          "amount": 45000
+          "amount": 75000
         }
       ],
-      "points": 1780,
+      "points": 1927,
       "trucks": [
         {
           "id": "truck-1",
@@ -6658,7 +7070,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 3097163,
+      "balance": 3320191,
       "drivers": {
         "backup": [
           "JONATHON PLATT",
@@ -6896,6 +7308,12 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "DNS: No team participation"
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "DNS: No team participation",
           "category": "info",
           "amount": 0
@@ -7269,61 +7687,80 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Hauler Logistics: Kansas City, KS to Fort Worth, TX (967 mi round trip)",
+          "amount": -9671,
           "category": "expense",
-          "amount": -9671
+          "description": "Hauler Logistics: Kansas City, KS to Fort Worth, TX (967 mi round trip)"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "VACANT DNS",
+          "amount": 0,
           "category": "info",
-          "amount": 0
+          "description": "VACANT DNS"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "VACANT DNS",
+          "amount": 0,
           "category": "info",
-          "amount": 0
+          "description": "VACANT DNS"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "VACANT DNS",
+          "amount": 0,
           "category": "info",
-          "amount": 0
+          "description": "VACANT DNS"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "VACANT DNS",
+          "amount": 0,
           "category": "info",
-          "amount": 0
+          "description": "VACANT DNS"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Standard Race Prep: Title Town Ram #35 (WES FULLER)",
+          "amount": -2000,
           "category": "expense",
-          "amount": -2000
+          "description": "Standard Race Prep: Title Town Ram #35 (WES FULLER)"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: WES FULLER from Kansas City, KS (442 mi)",
+          "amount": -383,
           "category": "expense",
-          "amount": -383
+          "description": "Flight & Lodging: WES FULLER from Kansas City, KS (442 mi)"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Sponsor Start Bonus: WES FULLER",
+          "amount": 15000,
           "category": "income",
-          "amount": 15000
+          "description": "Sponsor Start Bonus: WES FULLER"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Prize Money: WES FULLER (P22)",
+          "amount": 12000,
           "category": "income",
-          "amount": 12000
+          "description": "Prize Money: WES FULLER (P22)"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "DNF: WES FULLER (Disconnected) - Truck Condition: 64%",
+          "amount": 0,
+          "category": "info",
+          "description": "DNF: WES FULLER (Disconnected) - Truck Condition: 64%"
+        },
+        {
+          "date": "Sep 19, 2026",
+          "local": true,
+          "amount": -18000,
+          "category": "expense",
+          "description": "Repaired Fleet Truck: Title Town Ram #35 (+36%)"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "DNS: No team participation",
+          "category": "info",
+          "amount": 0
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "WES FULLER DNS",
           "category": "info",
           "amount": 0
         }
@@ -7355,7 +7792,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2099236,
+      "balance": 2081236,
       "drivers": {
         "backup": [
           "WES FULLER",
@@ -8353,36 +8790,72 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "DNS: No team participation"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "JACKSON DUKE DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "CORDELL MCFARLIN DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "GARRET BOBO DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "MARK GALLOWAY DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "RYAN PERRONE DNS"
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "DNS: No team participation",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "JACKSON DUKE DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "CORDELL MCFARLIN DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "GARRET BOBO DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "MARK GALLOWAY DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "RYAN PERRONE DNS",
           "category": "info",
           "amount": 0
@@ -9249,84 +9722,186 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Hauler Logistics: New York, New York to Fort Worth, TX (1386 mi round trip)",
+          "amount": -13865,
           "category": "expense",
-          "amount": -13865
+          "description": "Hauler Logistics: New York, New York to Fort Worth, TX (1386 mi round trip)"
         },
         {
           "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: ESR Silverado #00 (JACKSON KNAAK)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -428,
+          "category": "expense",
+          "description": "Flight & Lodging: JACKSON KNAAK from Concord, NC (967 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: JACKSON KNAAK"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 30000,
+          "category": "income",
+          "description": "Prize Money: JACKSON KNAAK (P5)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "VACANT DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "VACANT DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "VACANT DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: ESR Silverado #24 (ETHAN SIKORSKI)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -378,
+          "category": "expense",
+          "description": "Flight & Lodging: ETHAN SIKORSKI from Charlotte, NC (951 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: ETHAN SIKORSKI"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 25000,
+          "category": "income",
+          "description": "Prize Money: ETHAN SIKORSKI (P7)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 31911,
+          "category": "income",
+          "description": "Virtual Sponsorship Earned: Checkered Flag Media (Upward Performance: 12.0 Avg Finish over 2 weeks)"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Hauler Logistics: New York, New York to Las Vegas, NV (2218 mi round trip)",
+          "category": "expense",
+          "amount": -22183
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Quarterly Hauler Maintenance (Race 40)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: ESR Silverado #00 (JACKSON KNAAK)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: JACKSON KNAAK from Concord, NC (967 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: JACKSON KNAAK from Concord, NC (1919 mi)",
           "category": "expense",
-          "amount": -428
+          "amount": -618
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: JACKSON KNAAK",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: JACKSON KNAAK (P5)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: JACKSON KNAAK (P10)",
           "category": "income",
-          "amount": 30000
+          "amount": 25000
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: ESR Silverado #24 (ETHAN SIKORSKI)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: ETHAN SIKORSKI from Charlotte, NC (951 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: ETHAN SIKORSKI from Charlotte, NC (1907 mi)",
           "category": "expense",
-          "amount": -378
+          "amount": -618
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: ETHAN SIKORSKI",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: ETHAN SIKORSKI (P7)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: ETHAN SIKORSKI (P17)",
           "category": "income",
-          "amount": 25000
+          "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Virtual Sponsorship Earned: Checkered Flag Media (Upward Performance: 12.0 Avg Finish over 2 weeks)",
+          "date": "Sep 23, 2026",
+          "description": "Standard Race Prep: ESR Silverado #21 (NATHAN SANTOS)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: NATHAN SANTOS from Spartanburg, SC (1851 mi)",
+          "category": "expense",
+          "amount": -550
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Sponsor Start Bonus: NATHAN SANTOS",
           "category": "income",
-          "amount": 31911
+          "amount": 15000
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: NATHAN SANTOS (P14)",
+          "category": "income",
+          "amount": 20000
         }
       ],
-      "points": 645,
+      "points": 715,
       "trucks": [
         {
           "id": "truck-1",
@@ -9353,7 +9928,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2058300,
+      "balance": 2131331,
       "drivers": {
         "backup": [
           "ETHAN SIKORSKI",
@@ -9851,36 +10426,84 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
-          "description": "DNS: No team participation",
+          "amount": 0,
           "category": "info",
-          "amount": 0
+          "description": "DNS: No team participation"
         },
         {
           "date": "Sep 16, 2026",
-          "description": "ADAM TAHAN DNS",
+          "amount": 0,
           "category": "info",
-          "amount": 0
+          "description": "ADAM TAHAN DNS"
         },
         {
           "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "JOSHUA SUTHERLAND DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "MARK ALAN BIVENS DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "MASON PHLEGAR DNS"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Hauler Logistics: Bat Cave, NC to Las Vegas, NV (1824 mi round trip)",
+          "category": "expense",
+          "amount": -18245
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Standard Race Prep: Middle Aged Gunz Silverado #76 (ADAM TAHAN)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Drive & Lodging: ADAM TAHAN from Fontana, CA (203 mi)",
+          "category": "expense",
+          "amount": -100
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Sponsor Start Bonus: ADAM TAHAN",
+          "category": "income",
+          "amount": 15000
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: ADAM TAHAN (P2)",
+          "category": "income",
+          "amount": 55000
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "JOSHUA SUTHERLAND DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "MARK ALAN BIVENS DNS",
+          "date": "Sep 23, 2026",
+          "description": "VACANT DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "MASON PHLEGAR DNS",
+          "date": "Sep 23, 2026",
+          "description": "VACANT DNS",
           "category": "info",
           "amount": 0
         }
       ],
-      "points": 118,
+      "points": 153,
       "trucks": [
         {
           "id": "truck-1",
@@ -9907,7 +10530,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 1926375,
+      "balance": 1976030,
       "drivers": {
         "backup": [
           "MARK ALAN BIVENS",
@@ -11064,114 +11687,210 @@ const teamsData = {
         },
         {
           "date": "Sep 16, 2026",
-          "description": "Hauler Logistics: Coal Run Village, KY to Fort Worth, TX (886 mi round trip)",
+          "amount": -8866,
           "category": "expense",
-          "amount": -8866
+          "description": "Hauler Logistics: Coal Run Village, KY to Fort Worth, TX (886 mi round trip)"
         },
         {
           "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: Legacy Racing Silverado #9 (DYLAN MCDONALD)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -453,
+          "category": "expense",
+          "description": "Flight & Lodging: DYLAN MCDONALD from TBD (967 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: DYLAN MCDONALD"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 75000,
+          "category": "income",
+          "description": "Prize Money: DYLAN MCDONALD (P1)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: Legacy Racing Silverado #6 (NICOLE KRIESEL)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -448,
+          "category": "expense",
+          "description": "Flight & Lodging: NICOLE KRIESEL from Charlotte, NC (951 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: NICOLE KRIESEL"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Prize Money: NICOLE KRIESEL (P19)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: Legacy Racing Silverado #50 (DAVIS CARROLL)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -431,
+          "category": "expense",
+          "description": "Flight & Lodging: DAVIS CARROLL from TBD (967 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: DAVIS CARROLL"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 20000,
+          "category": "income",
+          "description": "Prize Money: DAVIS CARROLL (P13)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "VACANT DNS"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -2000,
+          "category": "expense",
+          "description": "Standard Race Prep: Legacy Racing Silverado #99 (JOSH BILLITER)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": -367,
+          "category": "expense",
+          "description": "Flight & Lodging: JOSH BILLITER from Coal Run Village, KY (885 mi)"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 15000,
+          "category": "income",
+          "description": "Sponsor Start Bonus: JOSH BILLITER"
+        },
+        {
+          "date": "Sep 16, 2026",
+          "amount": 25000,
+          "category": "income",
+          "description": "Prize Money: JOSH BILLITER (P9)"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Hauler Logistics: Coal Run Village, KY to Las Vegas, NV (1788 mi round trip)",
+          "category": "expense",
+          "amount": -17881
+        },
+        {
+          "date": "Sep 23, 2026",
+          "description": "Quarterly Hauler Maintenance (Race 16)",
+          "category": "expense",
+          "amount": -2000
+        },
+        {
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: Legacy Racing Silverado #9 (DYLAN MCDONALD)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: DYLAN MCDONALD from TBD (967 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: DYLAN MCDONALD from TBD (1919 mi)",
           "category": "expense",
-          "amount": -453
+          "amount": -638
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: DYLAN MCDONALD",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: DYLAN MCDONALD (P1)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: DYLAN MCDONALD (P27)",
           "category": "income",
-          "amount": 75000
+          "amount": 12000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Standard Race Prep: Legacy Racing Silverado #6 (NICOLE KRIESEL)",
-          "category": "expense",
-          "amount": -2000
+          "date": "Sep 23, 2026",
+          "description": "NICOLE KRIESEL DNS",
+          "category": "info",
+          "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: NICOLE KRIESEL from Charlotte, NC (951 mi)",
-          "category": "expense",
-          "amount": -448
-        },
-        {
-          "date": "Sep 16, 2026",
-          "description": "Sponsor Start Bonus: NICOLE KRIESEL",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: NICOLE KRIESEL (P19)",
-          "category": "income",
-          "amount": 15000
-        },
-        {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: Legacy Racing Silverado #50 (DAVIS CARROLL)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: DAVIS CARROLL from TBD (967 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: DAVIS CARROLL from TBD (1919 mi)",
           "category": "expense",
-          "amount": -431
+          "amount": -632
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: DAVIS CARROLL",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Prize Money: DAVIS CARROLL (P13)",
+          "date": "Sep 23, 2026",
+          "description": "Prize Money: DAVIS CARROLL (P11)",
           "category": "income",
           "amount": 20000
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "VACANT DNS",
           "category": "info",
           "amount": 0
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Standard Race Prep: Legacy Racing Silverado #99 (JOSH BILLITER)",
           "category": "expense",
           "amount": -2000
         },
         {
-          "date": "Sep 16, 2026",
-          "description": "Flight & Lodging: JOSH BILLITER from Coal Run Village, KY (885 mi)",
+          "date": "Sep 23, 2026",
+          "description": "Flight & Lodging: JOSH BILLITER from Coal Run Village, KY (1786 mi)",
           "category": "expense",
-          "amount": -367
+          "amount": -654
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Sponsor Start Bonus: JOSH BILLITER",
           "category": "income",
           "amount": 15000
         },
         {
-          "date": "Sep 16, 2026",
+          "date": "Sep 23, 2026",
           "description": "Prize Money: JOSH BILLITER (P9)",
           "category": "income",
           "amount": 25000
         }
       ],
-      "points": 998,
+      "points": 1062,
       "trucks": [
         {
           "id": "truck-1",
@@ -11198,7 +11917,7 @@ const teamsData = {
           "condition": 100
         }
       ],
-      "balance": 2073383,
+      "balance": 2147578,
       "drivers": {
         "backup": [
           "JOSH BILLITER",
@@ -11219,49 +11938,67 @@ const teamsData = {
     }
   ],
   "latestRace": {
-    "track": "Texas Motor Speedway",
-    "date": "Sep 16, 2026",
+    "track": "Las Vegas Motor Speedway",
+    "date": "Sep 23, 2026",
     "results": [
       {
-        "name": "DYLAN MCDONALD3",
+        "name": "SCOTT SANDERSON",
         "finish": 1,
-        "qualify": 23,
-        "incidents": 4,
+        "qualify": 8,
+        "incidents": 0,
         "status": "Running",
-        "led": 4,
+        "led": 20,
+        "isMock": false
+      },
+      {
+        "name": "ADAM TAHAN",
+        "finish": 2,
+        "qualify": 11,
+        "incidents": 6,
+        "status": "Running",
+        "led": 1,
+        "isMock": false
+      },
+      {
+        "name": "BRANDON JACKSON",
+        "finish": 3,
+        "qualify": 2,
+        "incidents": 10,
+        "status": "Running",
+        "led": 10,
         "isMock": false
       },
       {
         "name": "BENJAMIN LACY",
-        "finish": 2,
-        "qualify": 2,
-        "incidents": 0,
-        "status": "Running",
-        "led": 35,
-        "isMock": false
-      },
-      {
-        "name": "SCOTT SANDERSON",
-        "finish": 3,
-        "qualify": 4,
-        "incidents": 7,
-        "status": "Running",
-        "led": 4,
-        "isMock": false
-      },
-      {
-        "name": "NICK NICKERSON",
         "finish": 4,
-        "qualify": 3,
-        "incidents": 2,
+        "qualify": 4,
+        "incidents": 4,
         "status": "Running",
-        "led": 11,
+        "led": 7,
         "isMock": false
       },
       {
-        "name": "JACKSON KNAAK",
+        "name": "RICKY HART JR",
         "finish": 5,
-        "qualify": 7,
+        "qualify": 16,
+        "incidents": 4,
+        "status": "Running",
+        "led": 0,
+        "isMock": false
+      },
+      {
+        "name": "JOEY CRUZ",
+        "finish": 6,
+        "qualify": 5,
+        "incidents": 6,
+        "status": "Running",
+        "led": 32,
+        "isMock": false
+      },
+      {
+        "name": "CONNOR GIBSON",
+        "finish": 7,
+        "qualify": 10,
         "incidents": 10,
         "status": "Running",
         "led": 4,
@@ -11269,27 +12006,9 @@ const teamsData = {
       },
       {
         "name": "MICHAEL RAKES",
-        "finish": 6,
-        "qualify": 15,
-        "incidents": 9,
-        "status": "Running",
-        "led": 0,
-        "isMock": false
-      },
-      {
-        "name": "ETHAN SIKORSKI",
-        "finish": 7,
-        "qualify": 12,
-        "incidents": 16,
-        "status": "Running",
-        "led": 0,
-        "isMock": false
-      },
-      {
-        "name": "KOREY DENSON",
         "finish": 8,
-        "qualify": 16,
-        "incidents": 11,
+        "qualify": 13,
+        "incidents": 12,
         "status": "Running",
         "led": 0,
         "isMock": false
@@ -11297,153 +12016,171 @@ const teamsData = {
       {
         "name": "JOSHUA BILLITER",
         "finish": 9,
-        "qualify": 24,
-        "incidents": 7,
+        "qualify": 25,
+        "incidents": 8,
         "status": "Running",
         "led": 0,
         "isMock": false
       },
       {
-        "name": "JOSHUA ADAMS",
+        "name": "JACKSON KNAAK",
         "finish": 10,
-        "qualify": 1,
-        "incidents": 0,
+        "qualify": 24,
+        "incidents": 2,
         "status": "Running",
-        "led": 56,
-        "isMock": false
-      },
-      {
-        "name": "VICTOR WEAVER",
-        "finish": 11,
-        "qualify": 18,
-        "incidents": 0,
-        "status": "Running",
-        "led": 0,
-        "isMock": false
-      },
-      {
-        "name": "TRE ELLIS",
-        "finish": 12,
-        "qualify": 5,
-        "incidents": 4,
-        "status": "Running",
-        "led": 0,
+        "led": 8,
         "isMock": false
       },
       {
         "name": "DAVIS CARROLL",
-        "finish": 13,
-        "qualify": 9,
+        "finish": 11,
+        "qualify": 14,
         "incidents": 4,
         "status": "Running",
         "led": 0,
         "isMock": false
       },
       {
-        "name": "CHAD HARTLE",
-        "finish": 14,
-        "qualify": 17,
-        "incidents": 7,
+        "name": "KOREY DENSON",
+        "finish": 12,
+        "qualify": 22,
+        "incidents": 14,
         "status": "Running",
         "led": 0,
         "isMock": false
       },
       {
         "name": "KEVIN FOSTER",
-        "finish": 15,
-        "qualify": 25,
-        "incidents": 4,
-        "status": "Running",
-        "led": 0,
-        "isMock": false
-      },
-      {
-        "name": "BILL HARKINS",
-        "finish": 16,
-        "qualify": 13,
+        "finish": 13,
+        "qualify": 3,
         "incidents": 8,
         "status": "Running",
         "led": 0,
         "isMock": false
       },
       {
-        "name": "MATTHEW BAILEY9",
-        "finish": 17,
-        "qualify": 19,
+        "name": "NATHAN SANTOS2",
+        "finish": 14,
+        "qualify": 20,
         "incidents": 12,
         "status": "Running",
         "led": 0,
         "isMock": false
       },
       {
-        "name": "CONNOR GIBSON",
+        "name": "MATT CROCKETT",
+        "finish": 15,
+        "qualify": 7,
+        "incidents": 10,
+        "status": "Running",
+        "led": 0,
+        "isMock": false
+      },
+      {
+        "name": "COLLIN ANDERSON",
+        "finish": 16,
+        "qualify": 21,
+        "incidents": 8,
+        "status": "Running",
+        "led": 0,
+        "isMock": false
+      },
+      {
+        "name": "ETHAN SIKORSKI",
+        "finish": 17,
+        "qualify": 18,
+        "incidents": 8,
+        "status": "Running",
+        "led": 0,
+        "isMock": false
+      },
+      {
+        "name": "LOGAN MURRAY",
         "finish": 18,
-        "qualify": 6,
-        "incidents": 8,
+        "qualify": 27,
+        "incidents": 6,
         "status": "Running",
         "led": 0,
         "isMock": false
       },
       {
-        "name": "NICOLE KRIESEL",
+        "name": "TY CORINO",
         "finish": 19,
-        "qualify": 22,
-        "incidents": 15,
+        "qualify": 17,
+        "incidents": 13,
         "status": "Running",
         "led": 0,
         "isMock": false
       },
       {
-        "name": "RICKY HART JR",
+        "name": "JOSHUA ADAMS",
         "finish": 20,
-        "qualify": 14,
-        "incidents": 9,
-        "status": "Disconnected",
-        "led": 6,
+        "qualify": 1,
+        "incidents": 10,
+        "status": "Running",
+        "led": 20,
         "isMock": false
       },
       {
-        "name": "DIONTE RADER",
+        "name": "JASON ALLEGRINI",
         "finish": 21,
-        "qualify": 20,
-        "incidents": 11,
-        "status": "Disconnected",
+        "qualify": 23,
+        "incidents": 9,
+        "status": "Running",
         "led": 0,
         "isMock": false
       },
       {
-        "name": "WES FULLER",
-        "finish": 22,
-        "qualify": 10,
+        "name": "TRE ELLIS",
+        "finish": 23,
+        "qualify": 15,
         "incidents": 8,
-        "status": "Disconnected",
+        "status": "Running",
         "led": 0,
+        "isMock": false
+      },
+      {
+        "name": "BILL HARKINS",
+        "finish": 24,
+        "qualify": 9,
+        "incidents": 4,
+        "status": "Disconnected",
+        "led": 11,
+        "isMock": false
+      },
+      {
+        "name": "JOHNATHON PLATT",
+        "finish": 25,
+        "qualify": 12,
+        "incidents": 0,
+        "status": "Disconnected",
+        "led": 1,
         "isMock": false
       },
       {
         "name": "PETER MURPHY3",
-        "finish": 23,
-        "qualify": 11,
-        "incidents": 8,
-        "status": "Disconnected",
-        "led": 0,
-        "isMock": false
-      },
-      {
-        "name": "MATT CROCKETT",
-        "finish": 24,
-        "qualify": 8,
+        "finish": 26,
+        "qualify": 6,
         "incidents": 0,
         "status": "Disconnected",
         "led": 0,
         "isMock": false
       },
       {
-        "name": "COLLIN ANDERSON",
-        "finish": 25,
-        "qualify": 21,
-        "incidents": 10,
-        "status": "Disconnected",
+        "name": "DYLAN MCDONALD3",
+        "finish": 27,
+        "qualify": 26,
+        "incidents": 12,
+        "status": "DQ INTWR",
+        "led": 0,
+        "isMock": false
+      },
+      {
+        "name": "VICTOR WEAVER",
+        "finish": 28,
+        "qualify": 19,
+        "incidents": 12,
+        "status": "DQ INTWR",
         "led": 0,
         "isMock": false
       }
@@ -11872,6 +12609,10 @@ const teamsData = {
     {
       "date": "Sep 16, 2026",
       "driver": "Nicole Kriesel"
+    },
+    {
+      "date": "Sep 23, 2026",
+      "driver": "Collin Anderson"
     }
   ]
 };
