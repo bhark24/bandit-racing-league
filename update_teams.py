@@ -171,11 +171,14 @@ def save_teams_database(data, original_content):
         except Exception as e:
             print(f"[!] Error updating Supabase: {e}")
 
+import ssl
+
 def fetch_html(url):
     print(f"Fetching: {url}")
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     try:
-        with urllib.request.urlopen(req) as response:
+        ctx = ssl._create_unverified_context()
+        with urllib.request.urlopen(req, context=ctx) as response:
             return response.read().decode('utf-8', errors='ignore')
     except Exception as e:
         print(f"Error fetching URL: {e}")
