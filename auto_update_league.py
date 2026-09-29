@@ -162,6 +162,9 @@ def main():
             print("[!] Homepage standings and graphic generation failed.")
             sys.exit(1)
             
+        # D. Apply Cache Busting Versioning to HTML Files
+        run_command(["python", "apply_cache_busting.py"])
+
         print(f"[+] SUCCESS: Processed results for {track_name} ({race_date}) successfully!")
         new_race_processed = True
         
@@ -176,8 +179,8 @@ def main():
         git_dir = os.path.join(BASE_DIR, ".git")
         if os.path.exists(git_dir):
             print("\n[*] Git repository detected. Staging changes...")
-            subprocess.run(["git", "add", "teams_data.js", "weekly_data.js", "fantasy_data.js", "assets/weekly_social_update.png", "final_facebook_story_graphic.png"], cwd=BASE_DIR)
-            subprocess.run(["git", "commit", "-m", "Auto-update race results and standings"], cwd=BASE_DIR)
+            subprocess.run(["git", "add", "-u"], cwd=BASE_DIR)
+            subprocess.run(["git", "commit", "-m", "Auto-update race results, standings, and cache-busting headers"], cwd=BASE_DIR)
             print("[*] Commited updates locally. Pushing to GitHub remote...")
             push_res = subprocess.run(["git", "push"], cwd=BASE_DIR, capture_output=True, text=True)
             if push_res.returncode == 0:
