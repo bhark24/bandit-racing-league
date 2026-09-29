@@ -12167,11 +12167,11 @@ const teamsData = {
         "isMock": false
       },
       {
-        "name": "DYLAN MCDONALD3",
+        "name": "DYLAN MCDONALD",
         "finish": 27,
         "qualify": 26,
         "incidents": 12,
-        "status": "DQ INTWR",
+        "status": "FINISHED",
         "led": 0,
         "isMock": false
       },

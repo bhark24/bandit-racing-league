@@ -6,15 +6,15 @@ This report breaks down the incident logs, race control reviews, caution trigger
 
 ## 🚨 Critical Penalties & Safety Hazards (High Concern)
 
-### 🔴 DYLAN MCDONALD (Car #9) — DOUBLE DQ / INTENTIONAL WRECKING & SUSPENSION
-• **Lap 96**: Involved in Turn 4 caution stackup after Car #18 hooked the #9. Under caution, Car #9 **intentionally wrecked himself/Car #18**.
-  ↳ *Ruling*: **DISQUALIFIED from Las Vegas 110** (Forfeits all points).
-  ↳ *Administrative Penalty (Repeat Offender / On Probation)*: **1-Week Suspension**, **Probation for Rest of Season**, **3 Weeks of EOL Starts**, and **Drive-Through Penalty** to be served at the end of Lap 1 upon return.
-
-### 🔴 VICTOR WEAVER (Car #18) — DOUBLE DQ / INTENTIONAL WRECKING & EOL
+### 🔴 VICTOR WEAVER (Car #18) — DQ / INTENTIONAL WRECKING & SUSPENSION UPHELD
 • **Lap 96**: Hooked Car #9 off Turn 4 to trigger the initial caution flag. Under caution, Car #18 drove straight into Car #9 in a mutual intentional wrecking incident.
   ↳ *Ruling*: **DISQUALIFIED from Las Vegas 110** (Forfeits all points).
-  ↳ *Administrative Penalty*: **3-Week Probation** and **EOL (End of Line) Start** for the next race.
+  ↳ *Administrative Penalty (Upheld on Appeal)*: **1-Week Suspension**, **3-Week Probation**, and **EOL (End of Line) Start** for the next race.
+
+### 🟢 DYLAN MCDONALD (Car #9) — PENALTY REMOVED ON APPEAL / CLEARED
+• **Lap 96**: Initially reviewed for post-yellow contact. Upon official telemetry audit and video appeal, Stewards determined Car #9 was not at fault for intentional wrecking.
+  ↳ *Appeal Ruling*: **ALL PENALTIES RESCINDED & REMOVED**.
+  ↳ *Status*: **Full Points & Standings Restored**, **Suspension Cancelled**, **Cleared for All Upcoming Races**.
 
 ### 🔴 ADAM TAHAN (Car #36) — Multiple On-Track Incidents & Penalty
 • **Lap 83**: Got loose checking up for Car #15; Car #9 had no time to react. *(Ruling: Racing Deal)*
@@ -41,6 +41,8 @@ This report breaks down the incident logs, race control reviews, caution trigger
 
 ## 🟢 Safe / Cleared / Racing Deals & Innocent Victims
 
+• **DYLAN MCDONALD (#9)** — Lap 96: **PENALTY REMOVED ON APPEAL — CLEARED OF INTENTIONAL WRECKING**. Full points & eligibility restored.
+
 • **JOSHUA ADAMS (#22), ADAM TAHAN (#01), & MATT CROCKETT (#15)** — Lap 66: Turn 4 stackup coming to the Stage 2 yellow flag. *(Ruling: Confirmed Racing Deal)*
 
 • **CONNOR GIBSON (#31) & RICKY HART JR (#69)** — Lap 78: Victims of restart check-up chain reaction. *(Ruling: No Fault)*
@@ -61,8 +63,8 @@ This report breaks down the incident logs, race control reviews, caution trigger
 
 | Car | Driver | Status / Ruling | Penalty |
 | :---: | :--- | :--- | :--- |
-| **#9** | Dylan McDonald | **DISQUALIFIED** | 1-Wk Suspension + ROS Probation + 3-Wk EOL & L1 Drive-Thru |
-| **#18** | Victor Weaver | **DISQUALIFIED** | 3-Wk Probation + EOL Start Next Race |
+| **#18** | Victor Weaver | **DISQUALIFIED / UPHELD** | 1-Wk Suspension + 3-Wk Probation + EOL Start Next Race |
+| **#9** | Dylan McDonald | **CLEARED ON APPEAL** | Penalty Rescinded — Full Points & Eligibility Restored |
 | **#36** | Adam Tahan | EOL Penalty | EOL (Lap 101 Apron Chop) |
 | **#14** | Jason Allegrini | EOL Penalty | EOL (Lap 74 Wall Pinch) |
 | **#24** | Driver #24 | EOL Penalty | EOL (Lap 108 Collision) |

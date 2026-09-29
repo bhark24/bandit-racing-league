@@ -778,21 +778,21 @@ const BRL_RACES_DATA = {
             { name: "Final Stage", lap: 110 }
         ],
         mvp: {
-            carNumber: "9 & 18",
-            driverName: "Car #9 (Dylan McDonald) & Car #18 (Victor Weaver)",
-            title: "Wall of Shame MVPs",
-            reason: "Confirmed Post-Yellow Intentional Wrecking: Both Drivers DQ'd! #9 Suspended 1 Wk, ROS Probation & 3-Wk EOL/Drive-Thru; #18 3-Wk Probation & EOL Start",
-            totalIncidents: 2,
-            totalPenalties: "DOUBLE DISQUALIFICATION + Suspension + Probation"
+            carNumber: "18",
+            driverName: "Car #18 (Victor Weaver)",
+            title: "Wall of Shame MVP",
+            reason: "Decision to Suspend Upheld: Post-Yellow Intentional Wrecking! #18 Disqualified, Suspended 1-Wk, 3-Wk Probation & EOL Start. Dylan McDonald (#9) Penalty Rescinded on Appeal.",
+            totalIncidents: 1,
+            totalPenalties: "DISQUALIFICATION + 1-Wk Suspension + 3-Wk Probation"
         },
         drivers: [
-            { number: "9",  name: "Driver #9 (Dylan McDonald)", score: 100, level: "CRITICAL", badge: "DISQUALIFIED / 1-Wk Suspension", incidentsCount: 2, colors: ["#ff0055", "#111"] },
-            { number: "18", name: "Driver #18 (Victor Weaver)", score: 98, level: "CRITICAL", badge: "DISQUALIFIED / 3-Wk Probation", incidentsCount: 2, colors: ["#ff0055", "#111"] },
+            { number: "18", name: "Driver #18 (Victor Weaver)", score: 100, level: "CRITICAL", badge: "DISQUALIFIED / 1-Wk Suspension (Upheld)", incidentsCount: 2, colors: ["#ff0055", "#111"] },
             { number: "36", name: "Driver #36 (Adam Tahan)", score: 75, level: "HIGH", badge: "Apron Chop / Turn Self (EOL)", incidentsCount: 2, colors: ["#ffaa00", "#111"] },
             { number: "14", name: "Driver #14 (Jason Allegrini)", score: 70, level: "HIGH", badge: "Wall Squeeze (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
             { number: "24", name: "Driver #24", score: 70, level: "HIGH", badge: "Side-Swipe Crash (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
             { number: "62", name: "Driver #62 (Ty Corino)", score: 45, level: "MEDIUM", badge: "Restart Line Warning", incidentsCount: 1, colors: ["#e67e22", "#111"] },
             { number: "22", name: "Driver #22 (Joshua Adams)", score: 30, level: "LOW", badge: "Stage Finish Contact", incidentsCount: 1, colors: ["#3498db", "#111"] },
+            { number: "9",  name: "Driver #9 (Dylan McDonald)", score: 0, level: "CLEARED", badge: "Penalty Rescinded on Appeal", incidentsCount: 0, colors: ["#00ff00", "#111"] },
             { number: "91", name: "Driver #91", score: 20, level: "LOW", badge: "Cleared of Intent Wrecking", incidentsCount: 2, colors: ["#2ecc71", "#111"] },
             { number: "28", name: "Driver #28", score: 20, level: "LOW", badge: "Cleared of Intent Wrecking", incidentsCount: 2, colors: ["#2ecc71", "#111"] },
             { number: "99", name: "Driver #99", score: 10, level: "LOW", badge: "Yellow Penalty Cleared", incidentsCount: 1, colors: ["#00ff00", "#111"] }
@@ -863,12 +863,12 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RACE CONTROL] 'Car 18 hooked the 9 off Turn 4. Caution flag out. EOL penalty car 18.'"
             },
             {
-                id: 9, lap: 96, stage: 3, involved: ["9", "18"], primaryCar: "9", category: "mvp",
-                title: "DOUBLE DISQUALIFICATION: Post-Yellow Intentional Wrecking",
-                summary: "Under caution, car 9 intentionally wrecked himself and car 18 drove straight into him. Telemetry & bot confirmed dual intentional wrecking.",
-                ruling: "DOUBLE DISQUALIFICATION (#9 & #18) — #9: DQ + 1-Wk Suspension + ROS Probation + 3-Wk EOL & L1 Drive-Thru. #18: DQ + 3-Wk Probation + EOL Start.", location: "Back Stretch / Caution",
+                id: 9, lap: 96, stage: 3, involved: ["9", "18"], primaryCar: "18", category: "mvp",
+                title: "DISQUALIFICATION & SUSPENSION UPHELD: Post-Yellow Intentional Wrecking",
+                summary: "Under caution, car 18 drove straight into traffic after hooking car 9. Stewards upheld the 1-week suspension and disqualification for Car 18. Dylan McDonald (Car 9) penalty was rescinded on official appeal after telemetry review.",
+                ruling: "CAR #18 SUSPENSION UPHELD: Disqualified + 1-Wk Suspension + 3-Wk Probation + EOL Start. CAR #9 PENALTY RESCINDED ON APPEAL: Cleared of all penalties.", location: "Back Stretch / Caution",
                 trackCoords: { x: 400, y: 70 },
-                audioTranscript: "[RACE CONTROL] 'After review, BOTH car 9 and car 18 confirmed for INTENTIONAL WRECKING! Car 9: DISQUALIFIED, 1-week suspension, probation rest of season, 3 weeks EOL + Lap 1 Drive-Through! Car 18: DISQUALIFIED, 3-week probation, EOL start next race!'"
+                audioTranscript: "[RACE CONTROL] 'Official Appeal Ruling: Car 18 suspension is UPHELD for intentional wrecking! Car 9 (Dylan McDonald) penalty is RESCINDED on appeal — all penalties removed and cleared!'"
             },
             {
                 id: 10, lap: 101, stage: 3, involved: ["36", "47"], primaryCar: "36", category: "penalty",
