@@ -133,12 +133,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // LOAD RACE WEEK DATA
     // --------------------------------------------------------------------------
     function loadRaceWeek(raceKey) {
-        if (!raceKey) raceKey = "kansas";
+        if (!raceKey) raceKey = "watkins_glen";
         raceKey = raceKey.toLowerCase().trim();
 
         if (!BRL_RACES_DATA[raceKey]) {
-            console.warn(`Race key "${raceKey}" not found, defaulting to kansas.`);
-            raceKey = "kansas";
+            console.warn(`Race key "${raceKey}" not found, defaulting to watkins_glen.`);
+            raceKey = "watkins_glen";
         }
 
         currentRaceKey = raceKey;
@@ -179,6 +179,15 @@ document.addEventListener("DOMContentLoaded", () => {
         mvpCarPlate.innerText = `#${currentRaceData.mvp.carNumber}`;
         mvpDriverName.innerText = currentRaceData.mvp.driverName;
         mvpReason.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${currentRaceData.mvp.reason}`;
+
+        const mvpImageContainer = document.getElementById("mvpImageContainer");
+        if (mvpImageContainer) {
+            if (currentRaceData.mvp.image) {
+                mvpImageContainer.innerHTML = `<img src="${currentRaceData.mvp.image}" alt="MVP Truck" style="max-width: 100%; max-height: 240px; border-radius: 8px; border: 2px solid var(--color-penalty); box-shadow: 0 0 20px rgba(255, 0, 85, 0.4); margin-bottom: 12px; object-fit: contain;">`;
+            } else {
+                mvpImageContainer.innerHTML = "";
+            }
+        }
         
         mvpHighlights.innerHTML = `
             <li><i class="fa-solid fa-shield-cat"></i> ${currentRaceData.mvp.reason}</li>

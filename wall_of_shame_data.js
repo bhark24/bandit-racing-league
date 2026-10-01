@@ -887,6 +887,71 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RADIO 47] '24 came straight up into my door!' -> Race Control: EOL car 24."
             }
         ]
+    },
+    watkins_glen: {
+        id: "watkins_glen",
+        title: "Watkins Glen International",
+        subtext: "The Glen Road Course Showdown — 45 Laps",
+        laps: 45,
+        trackType: "road_course",
+        stages: [
+            { name: "Stage 1", lap: 15 },
+            { name: "Stage 2", lap: 30 },
+            { name: "Final Stage", lap: 45 }
+        ],
+        mvp: {
+            carNumber: "7",
+            driverName: "Car #7 (Connor Gibson)",
+            title: "Wall of Shame MVP — Great White North PC Meltdown 🇨🇦🖥️",
+            reason: "PC system crashed as the green flag dropped! Classic Canadian dial-up & freezing router meltdown at Lap 1. Crowned Wall of Shame MVP for total PC system failure before Turn 1!",
+            totalIncidents: "PC Crash / Hardware Melt",
+            totalPenalties: "DNS / Canadian Dial-Up Penalty",
+            image: "assets/truck images/truck_image_connor_gibson.png"
+        },
+        drivers: [
+            { number: "7", name: "Driver #7 (Connor Gibson)", score: 100, level: "CRITICAL", badge: "MVP / Canadian PC Meltdown 🍁🖥️", incidentsCount: 8, colors: ["#ff0055", "#111"], image: "assets/truck images/truck_image_connor_gibson.png" },
+            { number: "8", name: "Driver #8 (Matthew Bailey)", score: 95, level: "CRITICAL", badge: "19 Incidents / Destruction Derby", incidentsCount: 19, colors: ["#ff0055", "#111"] },
+            { number: "15", name: "Driver #15 (Nicole Kriesel)", score: 90, level: "CRITICAL", badge: "18 Incidents / Chicane Lawn Mowing", incidentsCount: 18, colors: ["#ff5500", "#111"] },
+            { number: "50", name: "Driver #50 (Chad Hartle)", score: 80, level: "HIGH", badge: "13 Incidents / Bus Stop Assault", incidentsCount: 13, colors: ["#ff5500", "#111"] },
+            { number: "99", name: "Driver #99 (Davis Carroll)", score: 80, level: "HIGH", badge: "13 Incidents / Off-Track Excursions", incidentsCount: 13, colors: ["#ffaa00", "#111"] },
+            { number: "20", name: "Driver #20 (Joshua Adams)", score: 75, level: "HIGH", badge: "12 Incidents / Apex Misses", incidentsCount: 12, colors: ["#ffaa00", "#111"] },
+            { number: "31", name: "Driver #31 (Joshua Billiter)", score: 70, level: "MEDIUM", badge: "11 Incidents / Barrier Kiss", incidentsCount: 11, colors: ["#e67e22", "#111"] },
+            { number: "62", name: "Driver #62 (Logan Murray)", score: 65, level: "MEDIUM", badge: "10 Incidents / Off-Track Limits", incidentsCount: 10, colors: ["#e67e22", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 1, stage: 1, involved: ["7"], primaryCar: "7", category: "mvp",
+                title: "GREAT WHITE NORTH RIG MELTDOWN: Connor Gibson (#7) PC Blue-Screens At Green Flag!",
+                summary: "As the green flag dropped at Watkins Glen, Connor Gibson's rig experienced an immediate, catastrophic PC crash. Stewards confirmed: 'Classic Canadian dial-up router freezing up in the snowbank.' Connor Gibson takes home the Wall of Shame MVP crown!",
+                ruling: "WALL OF SHAME MVP: System Failure / Canadian Rig Crash", location: "Front Stretch / Green Flag",
+                trackCoords: { x: 450, y: 330 },
+                audioTranscript: "[RADIO #7] 'Guys my PC just froze... absolute blue screen! It's freezing up here in Canada eh!' -> RACE CONTROL: 'Connor Gibson #7 Wall of Shame MVP!'"
+            },
+            {
+                id: 2, lap: 12, stage: 1, involved: ["8", "15"], primaryCar: "8", category: "penalty",
+                title: "Bus Stop Chicane Lawn Mowing & Heavy Contact",
+                summary: "Car 8 (Matthew Bailey - 19 Incidents) and Car 15 (Nicole Kriesel - 18 Incidents) engaged in a wild battle through the Bus Stop chicane, racking up 37 total incident points between off-track turf cuts and barrier slashes.",
+                ruling: "Incidents Recorded / High Incident Count Warning", location: "The Bus Stop Chicane",
+                trackCoords: { x: 150, y: 80 },
+                audioTranscript: "[STEWARDS] 'Car 8 and 15 mowing the lawn through the Bus Stop! 19 and 18 incident points logged.'"
+            },
+            {
+                id: 3, lap: 28, stage: 2, involved: ["50", "99"], primaryCar: "50", category: "warning",
+                title: "Carousel Corner Side Contact & Off-Track Excursions",
+                summary: "Car 50 (Chad Hartle - 13 Inc) and Car 99 (Davis Carroll - 13 Inc) traded paint through the Carousel, both drivers accumulating 13 incident points each on gravel traps.",
+                ruling: "Official Incident Warning (13 Incidents Each)", location: "The Carousel",
+                trackCoords: { x: 370, y: 110 },
+                audioTranscript: "[STEWARDS] 'Car 50 and 99 side contact in the Carousel. 13 incident points total for both trucks.'"
+            },
+            {
+                id: 4, lap: 41, stage: 3, involved: ["20", "31"], primaryCar: "20", category: "racing_deal",
+                title: "Late-Race Elevation Drop Barrier Contact",
+                summary: "Car 20 (Joshua Adams - 12 Inc) and Car 31 (Joshua Billiter - 11 Inc) checked up down the downhill sweeps, resulting in barrier contact.",
+                ruling: "Racing Deal / High Incident Audit", location: "The Chute & Downhill Sweeps",
+                trackCoords: { x: 280, y: 250 },
+                audioTranscript: "[STEWARDS] 'Car 20 and 31 side contact on downhill section. Racing deal, heavy incident tally.'"
+            }
+        ]
     }
 };
 
