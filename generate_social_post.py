@@ -250,12 +250,18 @@ def find_custom_winner_image(winner_name, track_name, base_dir):
         track_norm = track_norm.replace(word, "")
     track_norm = track_norm.replace(" ", "").strip()
 
-    # First priority: match both winner name and track name keywords
     norm_winner = winner_name.lower().replace(" ", "").replace("3", "").replace("2", "")
+    parts = winner_name.lower().split()
+    last_name = parts[-1] if parts else norm_winner
+    initial_last = f"{parts[0][0]}.{last_name}" if len(parts) > 1 else norm_winner
+    initial_last_no_dot = f"{parts[0][0]}{last_name}" if len(parts) > 1 else norm_winner
+
+    # First priority: match winner name/initials AND track name keywords
     for f in os.listdir(winner_images_dir):
         norm_f = f.lower().replace("_", "").replace("-", "").replace(" ", "")
-        if norm_winner in norm_f and track_norm in norm_f:
-            return f"assets/WINNER IMAGES/{f}"
+        if track_norm in norm_f:
+            if norm_winner in norm_f or initial_last in norm_f or initial_last_no_dot in norm_f or last_name in norm_f:
+                return f"assets/WINNER IMAGES/{f}"
 
     # Second priority: check for explicit name if the winner name matches
     if "dylan" in winner_name.lower():
@@ -266,7 +272,7 @@ def find_custom_winner_image(winner_name, track_name, base_dir):
     # Third priority: match winner name parts
     for f in os.listdir(winner_images_dir):
         norm_f = f.lower().replace("_", "").replace("-", "")
-        if norm_winner in norm_f:
+        if norm_winner in norm_f or last_name in norm_f:
             return f"assets/WINNER IMAGES/{f}"
             
     return ""

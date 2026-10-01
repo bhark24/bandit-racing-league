@@ -1,7 +1,7 @@
 const weeklyData = {
   "winnerName": "Nick Nickerson",
   "winnerNumber": "2",
-  "winnerImage": "assets/WINNER IMAGES/Nick_Nickerson_Darlington.png",
+  "winnerImage": "assets/WINNER IMAGES/N.Nickerson_WatkinsGlen.png",
   "actionShots": [
     "assets/race images/Ben2nd_WatkinsGlen.png",
     "assets/race images/Sanderson_WatkinsGlen.png"
@@ -440,6 +440,6 @@ const weeklyData = {
       "points": 2
     }
   ],
-  "latestBroadcastVideoId": "oF84lT2ODkw",
+  "latestBroadcastVideoId": "2hwpJ5RotRY",
   "spotlightDriver": "Dylan McDonald"
 };
