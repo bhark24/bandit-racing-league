@@ -952,7 +952,171 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[STEWARDS] 'Car 22 and 99 side contact on downhill section. Racing deal, heavy incident tally.'"
             }
         ]
+    },
+
+    phoenix: {
+        id: "phoenix",
+        title: "Phoenix Raceway",
+        subtext: "Desert Showdown — 135 Laps",
+        laps: 135,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 42 },
+            { name: "Stage 2", lap: 84 },
+            { name: "Final Stage", lap: 135 }
+        ],
+        mvp: {
+            carNumber: "36",
+            driverName: "Car #36 (Korey Denson)",
+            title: "Wall of Shame MVP — Intentional Wreck & Incident Spree 💥🏁",
+            reason: "Flagrant intentional wreck into Car #62 (Ty Corino), Lap 131 solo spin caution, and Lap 135 accordion crash into #31 & #63. Crowned Wall of Shame MVP for unsportsmanlike retaliation!",
+            totalIncidents: 3,
+            totalPenalties: "Confirmed Intentional Wrecking Penalty + EOL",
+            image: "assets/BCast Banners/phoenix_s16.png"
+        },
+        drivers: [
+            { number: "36", name: "Driver #36 (Korey Denson)", score: 100, level: "CRITICAL", badge: "MVP / Intentional Wreck into #62", incidentsCount: 3, colors: ["#ff0055", "#111"] },
+            { number: "54", name: "Driver #54 (Matthew Bailey)", score: 90, level: "CRITICAL", badge: "Drive-Through (Probation Violation)", incidentsCount: 1, colors: ["#ff0055", "#111"] },
+            { number: "69", name: "Driver #69 (Collin Anderson)", score: 80, level: "HIGH", badge: "EOL (Illegal Restart Lane Change)", incidentsCount: 1, colors: ["#ff5500", "#111"] },
+            { number: "99", name: "Driver #99 (Joshua Billiter)", score: 75, level: "HIGH", badge: "EOL (Wheelspin Solo Spin)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "01", name: "Driver #01 (Adam Tahan)", score: 75, level: "HIGH", badge: "EOL (Blinking Contact into #21)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "2", name: "Driver #2 (Nick Nickerson)", score: 70, level: "HIGH", badge: "EOL (Loose Slide into #36)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "31", name: "Driver #31 (Connor Gibson)", score: 70, level: "HIGH", badge: "EOL (Stage 2 Ender into #13)", incidentsCount: 2, colors: ["#e67e22", "#111"] },
+            { number: "93", name: "Driver #93 (Scott Sanderson)", score: 60, level: "MEDIUM", badge: "Official Warning (Post-Race Door Slam)", incidentsCount: 1, colors: ["#3498db", "#111"] },
+            { number: "5", name: "Driver #5 (Sean Britt)", score: 55, level: "MEDIUM", badge: "Chat Conduct Warning & Rage Quit", incidentsCount: 1, colors: ["#3498db", "#111"] },
+            { number: "18", name: "Driver #18 (Victor Weaver)", score: 40, level: "LOW", badge: "Penalty Served (EOL 1 of 3)", incidentsCount: 0, colors: ["#2ecc71", "#111"] },
+            { number: "63", name: "Driver #63 (Tre Ellis)", score: 30, LOW: "LOW", badge: "Cleared (Black Flag Rescinded)", incidentsCount: 0, colors: ["#2ecc71", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 1, stage: 1, involved: ["22", "6"], primaryCar: "22", category: "racing_deal",
+                title: "Lap 1 Opening Turn Pinch",
+                summary: "Contact between Car 22 (Joshua Adams) and Car 6 (Nicole Kriesel). Car 22 came down after an aggressive 3-wide move before the line while Car 6 did not descend as far as anticipated. Both cars running at the tail of the field; deemed early-race racing deal.",
+                ruling: "Racing Deal (Opening Lap Real Estate)", location: "Turn 1 Entry",
+                trackCoords: { x: 670, y: 160 },
+                audioTranscript: "[STEWARDS] 'Lap 1 contact at the tail of the pack between 22 and 6. 3-wide into 1. Racing deal.'"
+            },
+            {
+                id: 2, lap: 28, stage: 1, involved: ["5", "38"], primaryCar: "5", category: "warning",
+                title: "Mid-Track Contact & Chat Rage Quit",
+                summary: "Car 5 (Sean Britt) and Car 38 (Peter Murphy) made contact, meeting in the middle. Following contact, Car 5 dropped profanity in in-game text chat ('fuck you peter') before abruptly quitting the session.",
+                ruling: "Racing Deal (Contact) / Official Warning (Chat Conduct & Rage Quit)", location: "Turn 4 Exit",
+                trackCoords: { x: 220, y: 80 },
+                audioTranscript: "[CHAT LOG] Car 5: 'fuck you peter' -> Car 5 disconnected -> [STEWARDS] 'Official warning for chat conduct.'"
+            },
+            {
+                id: 3, lap: 33, stage: 1, involved: ["54", "36"], primaryCar: "54", category: "penalty",
+                title: "Car 54 Overdrives Turn 1 & Runs Over Car 36",
+                summary: "Car 54 (Matthew Bailey) completely ran over Car 36 (Korey Denson) into Turn 1. No caution flew, but Car 54 was 100% at fault. Because Car 54 is on probation/watch without improvement, stewards assessed an escalated Drive-Through.",
+                ruling: "Drive-Through Penalty (Probation Escalation)", location: "Turn 1",
+                trackCoords: { x: 670, y: 160 },
+                audioTranscript: "[RACE CONTROL] 'Car 54 ran the 36 over in Turn 1. Driver on probation with no improvement: Drive-Through Penalty car 54.'"
+            },
+            {
+                id: 4, lap: 42, stage: 1, involved: ["ALL"], primaryCar: "7", category: "stage_finish",
+                title: "Stage 1 Conclusion (Stage Yellow)",
+                summary: "Stage 1 concludes on Lap 42 under scheduled yellow flag conditions.",
+                ruling: "Official Stage Yellow", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Yellow flag, yellow flag! Stage 1 complete on Lap 42.'"
+            },
+            {
+                id: 5, lap: 48, stage: 2, involved: ["69", "8", "13", "38"], primaryCar: "69", category: "penalty",
+                title: "Illegal Restart Lane Change & Nose Chop",
+                summary: "Car 69 (Collin Anderson) made an illegal lane change before the start/finish line and chopped down across the nose of Car 8 (Kevin Foster). Resulted in heavy ARCA braking stack-up behind involving Car 13 and Car 38.",
+                ruling: "End of Line (EOL) Penalty (#69)", location: "Front Stretch / Turn 1",
+                trackCoords: { x: 500, y: 330 },
+                audioTranscript: "[STEWARDS] '69 changed lanes before the line and chopped the 8 nose. Stack-up behind. EOL penalty car 69.'"
+            },
+            {
+                id: 6, lap: 56, stage: 2, involved: ["63"], primaryCar: "63", category: "racing_deal",
+                title: "Black Flag Rescinded for Car 63",
+                summary: "Race Control cleared and rescinded the black flag penalty assessed to Car 63 (Tre Ellis).",
+                ruling: "Black Flag Cleared / Rescinded", location: "Pit Road",
+                trackCoords: { x: 400, y: 290 },
+                audioTranscript: "[RACE CONTROL] 'Clearing the black flag for Car 63 on lap 56. Good to go.'"
+            },
+            {
+                id: 7, lap: 62, stage: 2, involved: ["22", "93", "38"], primaryCar: "22", category: "racing_deal",
+                title: "Three-Wide Pinch Entering Corner",
+                summary: "Car 22 (Joshua Adams) made a move to get under Car 93 (Scott Sanderson). The door closed as Car 38 arrived on the outside, pinching the 22.",
+                ruling: "Racing Deal (Pinched)", location: "Turn 3 Entry",
+                trackCoords: { x: 130, y: 260 },
+                audioTranscript: "[STEWARDS] '22 tried to dive under 93, 38 filled the hole, 22 got pinched. Racing deal.'"
+            },
+            {
+                id: 8, lap: 66, stage: 2, involved: ["99", "2"], primaryCar: "99", category: "penalty",
+                title: "Claimed Wheelspin Solo Spin Caution",
+                summary: "Car 99 (Joshua Billiter) claimed the yellow flag after losing control on claimed wheelspin, leaving Car 2 (Nick Nickerson) with nowhere to go.",
+                ruling: "End of Line (EOL) Penalty (#99)", location: "Turn 2 Exit",
+                trackCoords: { x: 650, y: 270 },
+                audioTranscript: "[RACE CONTROL] 'Car 99 claiming the yellow on wheelspin. Car 2 had nowhere to go. EOL car 99.'"
+            },
+            {
+                id: 9, lap: 73, stage: 2, involved: ["2", "36"], primaryCar: "2", category: "penalty",
+                title: "Car 2 Slides Up Into Car 36",
+                summary: "Car 2 (Nick Nickerson) got loose in the corner and slid up the track into Car 36 (Korey Denson).",
+                ruling: "End of Line (EOL) Penalty (#2)", location: "Turn 4",
+                trackCoords: { x: 160, y: 120 },
+                audioTranscript: "[STEWARDS] 'Car 2 got loose and washed up into the 36. EOL penalty car 2.'"
+            },
+            {
+                id: 10, lap: 77, stage: 2, involved: ["01", "21"], primaryCar: "01", category: "penalty",
+                title: "Blinking Interference Turns Car 21",
+                summary: "Car 01 (Adam Tahan) started blinking heavily and completely disappeared from server telemetry, turning Car 21 (Nathan Santos) while invisible.",
+                ruling: "End of Line (EOL) Penalty (#01)", location: "Turn 1",
+                trackCoords: { x: 670, y: 180 },
+                audioTranscript: "[RADIO 21] '01 was blinking and completely vanished, then wrecked me!' -> RACE CONTROL: 'EOL car 01.'"
+            },
+            {
+                id: 11, lap: 83, stage: 2, involved: ["31", "13"], primaryCar: "31", category: "penalty",
+                title: "Stage 2 Ender: Car 31 Spins Car 13",
+                summary: "Coming to the Stage 2 green-checkered finish, Car 31 (Connor Gibson) slid up slightly into Car 13 (Johnathon Platt) and sent him around, ending the stage under yellow.",
+                ruling: "End of Line (EOL) Penalty (#31)", location: "Turn 3 & 4",
+                trackCoords: { x: 130, y: 260 },
+                audioTranscript: "[RACE CONTROL] 'Stage ender! Car 31 slid up into 13 and turned him. Stage 2 yellow is out, EOL penalty car 31.'"
+            },
+            {
+                id: 12, lap: 125, stage: 3, involved: ["31", "14"], primaryCar: "31", category: "racing_deal",
+                title: "Mid-Corner Real Estate Contest",
+                summary: "Car 31 (Connor Gibson) turned into the corner while Car 14 (Jason Allegrini) entered the middle; both went for the identical patch of track.",
+                ruling: "Racing Deal (Contested Space)", location: "Turn 1 Entry",
+                trackCoords: { x: 610, y: 320 },
+                audioTranscript: "[STEWARDS] '31 turned in, 14 entered middle, went for same spot. Racing deal.'"
+            },
+            {
+                id: 13, lap: 131, stage: 3, involved: ["36", "7"], primaryCar: "36", category: "penalty",
+                title: "Unforced Solo Spin Caution",
+                summary: "Car 36 (Korey Denson) got loose solo with no contact from Car 7 (Benjamin Lacy) and spun around, triggering a full-course yellow.",
+                ruling: "End of Line (EOL) Penalty (#36)", location: "Turn 2",
+                trackCoords: { x: 650, y: 270 },
+                audioTranscript: "[RACE CONTROL] 'Car 36 lost it solo off Turn 2. No contact from the 7. Yellow is out. EOL penalty car 36.'"
+            },
+            {
+                id: 14, lap: 135, stage: 3, involved: ["36", "31", "12", "63"], primaryCar: "36", category: "penalty",
+                title: "Rear-End Check-Up Pileup",
+                summary: "Car 31 touched Car 12 which checked him up. Car 36 tried to force a run and rammed the 31, sending #31 into Car 63 and around. Initially racing deal live; post-race review confirms 36 at fault.",
+                ruling: "At-Fault Incident (Should have been EOL car 36)", location: "Turn 3",
+                trackCoords: { x: 130, y: 260 },
+                audioTranscript: "[STEWARDS REVIEW] '31 checked up behind 12, 36 just rammed him into 63. Deemed at-fault incident on car 36.'"
+            },
+            {
+                id: 15, lap: 136, stage: 3, involved: ["36", "62"], primaryCar: "36", category: "mvp",
+                title: "RETALIATION & INTENTIONAL WRECK: Car 36 Wrecks Car 62",
+                summary: "Car 36 (Korey Denson) intentionally wrecked into Car 62 (Ty Corino). Direct retaliation and flagrant breach of league regulations. Confirmed Intentional Wrecking Penalty.",
+                ruling: "CONFIRMED INTENTIONAL WRECKING PENALTY (#36)", location: "Front Stretch",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Confirmed intentional wreck by Car 36 into the 62. Disciplinary action confirmed. Wall of Shame MVP.'"
+            },
+            {
+                id: 16, lap: 137, stage: 3, involved: ["93", "91"], primaryCar: "93", category: "warning",
+                title: "Post-Race Frustration Door Slam",
+                summary: "On the cool-down lap, Car 93 (Scott Sanderson) doored Car 91 (Brandon Jackson) showing frustration for an earlier incident. Car 91 barely caught it.",
+                ruling: "Official Warning Issued (#93)", location: "Cool-Down Lap / Backstretch",
+                trackCoords: { x: 400, y: 70 },
+                audioTranscript: "[RACE CONTROL] 'Car 93 doored 91 on the cool down lap. Official warning issued to car 93 for post-race contact.'"
+            }
+        ]
     }
+
 };
-
-
