@@ -179,6 +179,10 @@ const rosterData = {
     "driver": "ADAM CLARK",
     "status": "part-time"
   },
+  "69": {
+    "driver": "COLLIN ANDERSON",
+    "status": "full-time"
+  },
   "72": {
     "driver": "MASON PHLEGAR",
     "status": "part-time"

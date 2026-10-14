@@ -546,7 +546,7 @@
         <div class="fantasy-panel" id="team-details-panel" style="display:none; animation: fadeIn 0.4s ease;">
             <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:30px; border-bottom:1px solid #222; padding-bottom:20px; flex-wrap:wrap; gap:20px;">
                 <div style="display:flex; align-items:center; gap:25px; flex-wrap:wrap;">
-                    <img id="detail-team-logo" src="" alt="Team Logo" style="max-height: 80px; max-width: 160px; object-fit: contain;">
+                    <img id="detail-team-logo" src="" alt="Team Logo" style="max-height: 80px; max-width: 160px; object-fit: contain;" onerror="handleTeamLogoError(this, selectedTeamId)">
                     <div>
                         <div style="display:flex; align-items:center; gap:15px; margin-bottom:5px;">
                             <h2 id="detail-team-name" style="font-size: 2.2rem; color: #fff; margin:0; font-style: italic;">Team Name</h2>
@@ -788,9 +788,9 @@
     </footer>
 
     <!-- Load the JavaScript Mock Database first -->
-    <script src="supabase_config.js?v=1791428429"></script>
-    <script src="teams_data.js?v=1791428429"></script>
-    <script src="roster_data.js?v=1791428429"></script>
+    <script src="supabase_config.js?v=1791943500"></script>
+    <script src="teams_data.js?v=1791943500"></script>
+    <script src="roster_data.js?v=1791943500"></script>
     <script>
         let selectedTeamId = null;
 
@@ -911,7 +911,7 @@
 
                 // Format balance to currency
                 const formattedBalance = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(team.balance);
-                const isForSale = team.id === 'striped-maple-racing';
+                const isForSale = team.isForSale || false;
 
                 const homeBaseBadge = isForSale 
                     ? ''
@@ -924,7 +924,7 @@
 
                 card.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <img src="${team.logo}" alt="${team.name}" class="team-overview-logo" style="height: 45px; ${isForSale ? 'filter: grayscale(1) opacity(0.35);' : ''}">
+                        <img src="${team.logo}" alt="${team.name}" class="team-overview-logo" style="height: 45px; ${isForSale ? 'filter: grayscale(1) opacity(0.35);' : ''}" onerror="handleTeamLogoError(this, '${team.id}')">
                         ${homeBaseBadge}
                     </div>
                     <h3 style="${teamNameStyle}">${teamNameText}</h3>
@@ -1201,7 +1201,7 @@
             if (!team) return;
 
             // Update Panel Headers
-            const isForSale = team.id === 'striped-maple-racing';
+            const isForSale = team.isForSale || false;
             if (isForSale) {
                 document.getElementById('detail-team-name').innerHTML = `<span style="color: #00ff00; font-family: var(--font-heading); font-style: italic; font-weight: 900; text-transform: uppercase;">FRANCHISE AVAILABLE</span> <span style="font-size:0.8rem; background:var(--chase-yellow); color:#000; padding:2px 6px; border-radius:3px; font-weight:bold; margin-left:10px; vertical-align:middle; font-family:var(--font-heading); font-style:normal;">FOR SALE</span>`;
                 document.getElementById('detail-team-owner').innerHTML = `<span style="color:#888; font-style:italic;">None (Liquidated)</span>`;
@@ -1330,7 +1330,7 @@
                 tr.innerHTML = `
                     <td style="font-family:var(--font-heading); font-weight:700; font-size:1.1rem; padding:12px 15px;">${rankDisplay}</td>
                     <td style="display:flex; align-items:center; gap:15px; padding:12px 15px;">
-                        <img src="${team.logo}" alt="${team.name}" style="height:35px; max-width:80px; object-fit:contain;">
+                        <img src="${team.logo}" alt="${team.name}" style="height:35px; max-width:80px; object-fit:contain;" onerror="handleTeamLogoError(this, '${team.id}')">
                         <strong style="color:#fff; font-size:1.05rem; font-style: italic;">${team.name}</strong>
                     </td>
                     <td style="color:var(--text-muted); padding:12px 15px;">${team.owner}</td>
@@ -2414,6 +2414,13 @@
             const num = getDriverNumber(driverName);
             span.textContent = num ? `#${num}` : '';
             img.parentNode.replaceChild(span, img);
+        }
+
+        function handleTeamLogoError(img, teamId) {
+            img.onerror = null;
+            if (teamId === 'salt-city-performance' || (img.src && img.src.toLowerCase().includes('salt'))) {
+                img.src = 'assets/salt-city-performance.png';
+            }
         }
 
         // LocalStorage and database persistence state

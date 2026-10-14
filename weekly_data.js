@@ -58,8 +58,8 @@ const weeklyData = {
       "wins": 0
     },
     {
-      "name": "Striped Maple Racing",
-      "points": 57,
+      "name": "Salt City Performance",
+      "points": 0,
       "wins": 0
     },
     {

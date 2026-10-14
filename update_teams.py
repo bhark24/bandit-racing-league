@@ -654,7 +654,8 @@ def main():
             "athens, al": (34.8029, -86.9717),
             "new york, new york": (40.7128, -74.0060),
             "bat cave, nc": (35.4515, -82.2871),
-            "coal run village, ky": (37.4998, -82.5290)
+            "coal run village, ky": (37.4998, -82.5290),
+            "salt lake city, ut": (40.7608, -111.8911)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates
