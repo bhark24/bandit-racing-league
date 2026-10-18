@@ -1,7 +1,7 @@
 const weeklyData = {
   "winnerName": "Benjamin Lacy",
   "winnerNumber": "7",
-  "winnerImage": "assets/WINNER IMAGES/Bandit_Season_16_Winner_Photo_Benjamin_Lacy_Bristol.png",
+  "winnerImage": "assets/WINNER IMAGES/Benjamin_Lacy_Martinsville.png",
   "actionShots": [],
   "trackName": "Martinsville Speedway",
   "trackLogo": "",
