@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1792366368">
+    <link rel="stylesheet" href="styles.css?v=1792367012">
 </head>
 <body>
 
@@ -72,10 +72,225 @@
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-overlay"></div>
-        <div class="hero-content">
+        <div class="hero-content" style="width: 100%; max-width: 1200px;">
             <img src="assets/main-logo.png" alt="Bandit Racing League" style="max-width: 900px; width: 100%; margin-bottom: 10px; filter: drop-shadow(0 0 30px rgba(0, 255, 0, 0.15));" onerror="this.onerror=null; this.outerHTML='<h1 class=&quot;hero-title&quot;>NO RULES. <br><span class=&quot;accent&quot;>JUST SPEED.</span></h1>'">
-            <h2 class="hero-subtitle italic-heavy" style="text-transform: uppercase; letter-spacing: 2px; color: var(--chase-yellow); text-shadow: 0 0 15px rgba(255, 204, 0, 0.3);">WHERE CHAMPIONS ARE MADE</h2>
-            <img src="assets/Presenting-sponsor.png" alt="Presenting Sponsor" style="max-width: 800px; width: 100%; margin-top: 30px; margin-bottom: 120px; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));">
+            <h2 class="hero-subtitle italic-heavy" style="text-transform: uppercase; letter-spacing: 2px; color: var(--chase-yellow); text-shadow: 0 0 15px rgba(255, 204, 0, 0.3); margin-bottom: 25px;">WHERE CHAMPIONS ARE MADE</h2>
+
+            <!-- Latest News & Analysis Section (1st Item Above Presenting Sponsor Logo) -->
+            <div class="card neon-border" style="text-align: left; margin-bottom: 40px;">
+                <div class="card-header flex-header">
+                    <h2><span class="live-dot" style="background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green);"></span> LATEST NEWS &amp; ANALYSIS</h2>
+                </div>
+                <div class="card-body" style="display: flex; flex-direction: column; gap: 20px;">
+                    <!-- Featured Story: Season 16 Chase for the Championship Preview -->
+                    <div style="padding: 24px; background-color: rgba(255, 204, 0, 0.04); border-radius: 8px; border-left: 5px solid var(--chase-yellow); box-shadow: 0 0 25px rgba(255, 204, 0, 0.15);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+                            <span style="color: var(--chase-yellow); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 900; text-shadow: 0 0 10px rgba(255, 204, 0, 0.4);"><span class="live-dot" style="background: var(--chase-yellow); display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; box-shadow: 0 0 10px var(--chase-yellow);"></span> OFFICIAL SEASON 16 CHASE DRIVERS PREVIEW</span>
+                            <span style="background: rgba(255, 204, 0, 0.2); color: #fff; border: 1.5px solid var(--chase-yellow); padding: 4px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 900; letter-spacing: 1px;">🏆 10 DRIVERS • 5 RACES • 0 ELIMINATIONS</span>
+                        </div>
+
+                        <a href="/article_chase_preview.html" style="text-decoration: none;">
+                            <h3 style="font-size: 1.9rem; color: var(--text-light); margin-bottom: 15px; line-height: 1.2; font-style: italic; font-weight: 900; text-transform: uppercase; transition: color 0.2s;" onmouseover="this.style.color='var(--chase-yellow)'" onmouseout="this.style.color='var(--text-light)'">
+                                Old Guard vs. New Blood: The Season 16 Chase for the Championship Preview! 🏁🔥
+                            </h3>
+                        </a>
+
+                        <div style="font-size: 1.05rem; color: #ddd; line-height: 1.8; margin-bottom: 20px;">
+                            <p style="margin-bottom: 15px;">
+                                <strong>16 Races Down. 10 Contenders Locked In. 5 Races for Immortality.</strong> Following <strong>Benjamin Lacy's (#7)</strong> regular-season finale triumph at Martinsville Speedway, the official 10-driver Season 16 Chase Grid is set! A deep dive into the <strong>Bandit Racing League SimRacerHub archives</strong> reveals that <strong>all 16 regular-season races were won by drivers inside this Top 10 field</strong>—and the grid is split right down the middle between <strong>5 Playoff Veterans &amp; Past Champions</strong> and <strong>5 First-Time Main-Series Chase Contenders</strong>!
+                            </p>
+                            <p style="margin-bottom: 15px;">
+                                Across the next five weeks—<strong>Talladega (Oct 21), Kansas (Oct 28), Road America (Nov 4), Phoenix (Nov 11), and Homestead-Miami (Nov 18)</strong>—all 10 qualifiers will battle with no eliminations to crown the Season 16 Craftsman Truck Series Champion.
+                            </p>
+
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+                                <a class="btn-primary" href="/article_chase_preview.html" style="padding: 10px 22px; font-size: 0.95rem; background: var(--chase-yellow); border-color: var(--chase-yellow); color: #000; font-weight: 900;">Read Full 10-Driver Scouting Preview &rarr;</a>
+                                <a class="btn-primary" href="/standings.html" style="padding: 10px 20px; font-size: 0.95rem;">View Chase Standings &rarr;</a>
+                                <a class="btn-secondary" href="/fantasy.html" style="padding: 10px 20px; font-size: 0.95rem;">Make Fantasy Picks &rarr;</a>
+                            </div>
+                        </div>
+
+                        <!-- Official Season 16 Chase Grid Summary Card -->
+                        <div style="background: rgba(10, 10, 10, 0.85); padding: 20px; border-radius: 8px; border: 1px solid rgba(255, 204, 0, 0.3); margin-bottom: 20px;">
+                            <h4 style="color: var(--chase-yellow); font-family: var(--font-heading); font-size: 1.3rem; margin-top: 0; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">
+                                🏆 OFFICIAL SEASON 16 CHASE SEEDING &amp; POINTS RESET
+                            </h4>
+
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                                <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 6px; border-left: 3px solid var(--chase-yellow);">
+                                    <div style="color: var(--chase-yellow); font-weight: bold; margin-bottom: 8px; font-size: 0.95rem;">🏆 THE OLD GUARD (5 PLAYOFF VETERANS)</div>
+                                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; color: #bbb; line-height: 1.75;">
+                                        <li><strong>#1 Seed: Benjamin I. Lacy (#7 | GFR)</strong> — 2,100 pts (Leader) | S13 Champ, 7x Playoff Vet</li>
+                                        <li><strong>#4 Seed: Kevin Foster (#8 | GFR)</strong> — 2,060 pts (-40) | 2x BRL Champ, 196+ Career Starts</li>
+                                        <li><strong>#5 Seed: Nick Nickerson (#2 | GFR)</strong> — 2,055 pts (-45) | 4x BRL Champ, 53 Career Wins</li>
+                                        <li><strong>#6 Seed: Jackson Knaak (#00 | ESR)</strong> — 2,050 pts (-50) | 4x Playoff Vet (Seeking 1st Title)</li>
+                                        <li><strong>#9 Seed: Connor Gibson (#31 | ZeroFoxtrot)</strong> — 2,035 pts (-65) | 5x Playoff Vet (Seeking 1st Title)</li>
+                                    </ul>
+                                </div>
+
+                                <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 6px; border-left: 3px solid #00e5ff;">
+                                    <div style="color: #00e5ff; font-weight: bold; margin-bottom: 8px; font-size: 0.95rem;">🌟 THE NEW BLOOD (5 FIRST-TIME CONTENDERS)</div>
+                                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; color: #bbb; line-height: 1.75;">
+                                        <li><strong>#2 Seed: Scott Sanderson (#93 | GFR)</strong> — 2,075 pts (-25) | 1 Win, 11 Top 5s in Debut Season</li>
+                                        <li><strong>#3 Seed: Joshua L. Adams (#22 | 937)</strong> — 2,065 pts (-35) | 2 Wins, League-High 5 Poles</li>
+                                        <li><strong>#7 Seed: Dylan McDonald (#9 | Legacy)</strong> — 2,045 pts (-55) | 3 Wins (Daytona, Texas, Phoenix)</li>
+                                        <li><strong>#8 Seed: Michael Rakes (#47 | 937)</strong> — 2,040 pts (-60) | Kansas Winner, 10 Top 10s</li>
+                                        <li><strong>#10 Seed: Johnathon Platt (#13 | GFR)</strong> — 2,030 pts (-70) | Atlanta Winner, 2019 SLM Champ</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fantasy League Reminder Banner -->
+                        <div style="background: linear-gradient(135deg, rgba(0,255,0,0.15), rgba(0,0,0,0.8)); border: 2px solid var(--neon-green); padding: 16px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+                            <div>
+                                <h4 style="color: var(--neon-green); margin: 0 0 5px 0; font-size: 1.2rem; font-family: var(--font-heading); text-transform: uppercase;">
+                                    🏆 CHASE OPENER AT TALLADEGA — LOCK IN YOUR FANTASY PICKS!
+                                </h4>
+                                <p style="margin: 0; color: #ddd; font-size: 0.95rem;">
+                                    Submit your driver lineup before the green flag drops at 9:00 PM EST to compete in the BRL Weekly Viewer Fantasy League!
+                                </p>
+                            </div>
+                            <a class="btn-primary" href="/fantasy.html" style="white-space: nowrap; font-weight: bold; padding: 10px 20px;">Make Fantasy Picks &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Expandable Archive of Previous Regular Season Race Reports -->
+                    <details style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(57, 255, 20, 0.25); border-radius: 8px; padding: 14px 18px;">
+                        <summary style="cursor: pointer; font-family: var(--font-heading); font-size: 1.05rem; font-weight: 800; color: var(--neon-green); text-transform: uppercase; letter-spacing: 1px; outline: none;">
+                            📰 View Previous Season 16 Race Reports Archive (10 Articles)
+                        </summary>
+                        <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
+                            <!-- Las Vegas 110 Race Report -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); box-shadow: 0 0 15px rgba(57, 255, 20, 0.08);">
+                                <div style="color: var(--neon-green); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; text-shadow: 0 0 8px rgba(57, 255, 20, 0.25);">Latest Race Report</div>
+                                <a href="/article_vegas_recap.html" style="text-decoration: none;">
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Viva Las Vegas 110: High-Stakes Strategy Duel &amp; Stewards Appeal Ruling in Sin City</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">The <strong>Viva Las Vegas 110</strong> delivered relentless 1.5-mile intermediate racing with intense fuel saving and tire preservation strategy games. Following post-race stewards appeals, Victor Weaver (#18) suspension was <strong>UPHELD</strong>, while Dylan McDonald (#9) penalty was <strong>RESCINDED and CLEARED</strong> on official telemetry review. Read the full race recap and view the updated Wall of Shame.</p>
+                                
+                                <img src="assets/BCast Banners/LasVegas.jpg" alt="Viva Las Vegas 110 Race Report" style="width: 100%; max-width: 100%; border-radius: 6px; margin-top: 15px; margin-bottom: 15px; border: 1.5px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);">
+                                
+                                <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                                    <a class="btn-primary" href="/article_vegas_recap.html" style="padding: 8px 16px; font-size: 0.9rem;">Read Full Story</a>
+                                    <a class="btn-primary" href="/wall-of-shame.html" style="padding: 8px 16px; font-size: 0.9rem; background-color: #ff0055; border-color: #ff0055;">Wall of Shame Hub &rarr;</a>
+                                </div>
+                            </div>
+
+                            <!-- Texas Race Recap -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.9;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                                <a href="/article_texas_recap.html" style="text-decoration: none;">
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Dylan McDonald Charges from 23rd to Victory in "The Lone Star State 120" at Texas Motor Speedway!</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">Dylan McDonald (#9 truck / GFR Racing) stormed from 23rd on the starting grid to claim a thrilling victory at Texas Motor Speedway! Benjamin Lacy finished 2nd and Scott Sanderson took 3rd, while Rebekah Weaver won the Weekly Viewer Fantasy challenge with 138 points. Check out the complete race breakdown, stewards penalties, and interactive Wall of Shame telemetry.</p>
+                                
+                                <img src="assets/WINNER IMAGES/Dylan_Texas.png" alt="Texas Winner Dylan McDonald" style="width: 100%; max-width: 100%; border-radius: 6px; margin-top: 15px; margin-bottom: 15px; border: 1.5px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);">
+                                
+                                <a class="btn-primary" href="/article_texas_recap.html" style="padding: 8px 16px; font-size: 0.9rem;">Read Full Story</a>
+                            </div>
+
+                            <!-- Kansas Race Recap -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.9;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                                <a href="/article_kansas_recap.html" style="text-decoration: none;">
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Fuel Mileage Finesse at Kansas: Win Decided on Strategy as #9 Truck Disqualified for Intentional Wrecking</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">Tonight's race at Kansas Speedway (Stages at Laps 33 &amp; 66) came down to extreme fuel mileage management, with driver strategy deciding victory. Following an intentional wrecking incident on Lap 73 where driver #9 admitted to intent, BRL Race Control issued major administrative penalties: the #9 truck has been disqualified, forfeits all event points, is placed on probation for 3 weeks, and will start EOL for 3 weeks. Read the full report.</p>
+                                
+                                <img src="assets/WINNER IMAGES/Michael_Rakes_Kansas.jpg" alt="Kansas Winner Michael Rakes" style="width: 100%; max-width: 100%; border-radius: 6px; margin-top: 15px; margin-bottom: 15px; border: 1.5px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);">
+                                
+                                <a class="btn-primary" href="/article_kansas_recap.html" style="padding: 8px 16px; font-size: 0.9rem;">Read Full Story</a>
+                            </div>
+
+                            <!-- Darlington Race Recap -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.9;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                                <a href="/article_darlington_recap.html" style="text-decoration: none;">
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Nickerson Tames the Lady in Black: Masterclass Performance at Darlington</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">Nick Nickerson drove a precision masterclass at Darlington Raceway, surviving 130 grueling laps under the lights in "Filming the Wild 130" presented by Clear Low Communications. Benjamin Lacy finished 2nd to complete a GFR 1-2 sweep. Newest driver Korey Denson made his debut in the #36 car for Legacy Racing! Read the full report.</p>
+                                
+                                <img src="assets/WINNER IMAGES/Nick_Nickerson_Darlington.png" alt="Darlington Winner Nick Nickerson" style="width: 100%; max-width: 100%; border-radius: 6px; margin-top: 15px; margin-bottom: 15px; border: 1.5px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);">
+                                
+                                <a class="btn-primary" href="/article_darlington_recap.html" style="padding: 8px 16px; font-size: 0.9rem;">Read Full Story</a>
+                            </div>
+
+                            <!-- Michigan Race Recap -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green);">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                                <a href='/article_michigan_recap.html' style='text-decoration: none;'>
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Lacy Leads the Charge at Michigan: Historic Photo Finish for GFR Racing</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">Benjamin Lacy executed a perfect drafting game plan at Michigan International Speedway, holding off GFR teammate Nick Nickerson by a historic 0.2-millisecond margin. Dylan McDonald finished 3rd for Legacy Racing. Read the full report.</p>
+                                <a class='btn-primary' href='/article_michigan_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
+                            </div>
+
+                            <!-- Pocono Race Recap -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.9;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                                <a href='/article_pocono_recap.html' style='text-decoration: none;'>
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Foster Flies at Pocono: GFR Racing Secures Dominant 1-2 Sweep</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">Kevin Foster drove a masterclass at the Tricky Triangle, leading 21 laps to capture the victory at Pocono Raceway. GFR Racing teammate Nick Nickerson finished a close 2nd to seal a GFR 1-2 sweep, while Eddie Hagigh completed the podium in 3rd. Read the full report.</p>
+                                <a class='btn-primary' href='/article_pocono_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
+                            </div>
+
+                            <!-- Nashville Race Recap -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.75;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                                <a href='/article_nashville_recap.html' style='text-decoration: none;'>
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Adams Ascends at Nashville: Flawless Run Earns 937 Racing its Second Win</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">Joshua Adams drove a patient and calculated race, climbing from 18th on the grid to lead a race-high 44 laps and take the checkered flag at Nashville Superspeedway. Connor Gibson finished 2nd, while Dylan McDonald completed the podium in 3rd. Read the full report.</p>
+                                <a class='btn-primary' href='/article_nashville_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
+                            </div>
+
+                            <!-- Bristol Race Recap -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.6;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                                <a href='/article_bristol_recap.html' style='text-decoration: none;'>
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Lacy Conquers Bristol: Perfect Strategy Secures GFR Racing's Victory</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">Benjamin Lacy executed a flawless race strategy, surviving a caution-heavy night to take the checkered flag at Bristol Motor Speedway. Bob Berry finished a strong 2nd, while Wes Fuller completed the podium in 3rd. Read the full report.</p>
+                                <a class='btn-primary' href='/article_bristol_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
+                            </div>
+
+                            <!-- Charlotte Race Recap -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.45;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                                <a href='/article_charlotte_recap.html' style='text-decoration: none;'>
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Adams Ascends at Charlotte: Dominant Run Earns 937 Racing its First Win</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">Josh Adams drove a flawless race in the #22 TRD Tundra to take victory at Charlotte Motor Speedway, leading a race-high 54 laps. GFR Racing's Johnathon Platt fought from 14th to finish 2nd, while Benjamin Lacy completed the podium in 3rd. Read the full report.</p>
+                                <a class='btn-primary' href='/article_charlotte_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
+                            </div>
+
+                            <!-- Atlanta Race Recap -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.3;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                                <a href='/article_atlanta_recap.html' style='text-decoration: none;'>
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Redemption in the Peach State: Johnathon Platt Conquers Atlanta</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">After a heart-breaking season opener, Johnathon Platt bounced back in week two at EchoPark Speedway (Atlanta) to claim a dominant victory. Connor Gibson put on a masterclass, charging from 19th to finish 2nd. Read the full report and view race action shots.</p>
+                                <a class='btn-primary' href='/article_atlanta_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
+                            </div>
+
+                            <!-- Daytona Race Recap -->
+                            <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.2;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
+                                <a href='/article_daytona_controversy.html' style='text-decoration: none;'>
+                                    <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Controversy at Daytona: Britt Stripped of Win, McDonald Declared Winner</h3>
+                                </a>
+                                <p style="color: #ccc; margin-bottom: 15px;">A wild finish at the Season 16 opener saw Sean Britt cross the line first after a last-lap collision with Jonathon Platt, only for league officials to strip the victory and award it to Dylan McDonald. Read the full details.</p>
+                                <a class='btn-primary' href='/article_daytona_controversy.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <img src="assets/Presenting-sponsor.png" alt="Presenting Sponsor" style="max-width: 800px; width: 100%; margin-top: 10px; margin-bottom: 120px; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));">
 
         </div>
     </header>
@@ -215,213 +430,6 @@
         </div>
     </section>
 
-    <!-- Latest News Section -->
-    <section class="container" style="margin-bottom: 60px;">
-        <div class="card neon-border">
-            <div class="card-header flex-header">
-                <h2><span class="live-dot" style="background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green);"></span> LATEST NEWS & ANALYSIS</h2>
-            </div>
-            <div class="card-body" style="display: flex; flex-direction: column; gap: 20px;">
-                <!-- Featured Story: Season 16 Chase for the Championship Preview -->
-                <div style="padding: 24px; background-color: rgba(255, 204, 0, 0.04); border-radius: 8px; border-left: 5px solid var(--chase-yellow); box-shadow: 0 0 25px rgba(255, 204, 0, 0.15); margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
-                        <span style="color: var(--chase-yellow); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 900; text-shadow: 0 0 10px rgba(255, 204, 0, 0.4);"><span class="live-dot" style="background: var(--chase-yellow); display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; box-shadow: 0 0 10px var(--chase-yellow);"></span> OFFICIAL SEASON 16 CHASE DRIVERS PREVIEW</span>
-                        <span style="background: rgba(255, 204, 0, 0.2); color: #fff; border: 1.5px solid var(--chase-yellow); padding: 4px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 900; letter-spacing: 1px;">🏆 10 DRIVERS • 5 RACES • 0 ELIMINATIONS</span>
-                    </div>
-
-                    <a href="/article_chase_preview.html" style="text-decoration: none;">
-                        <h3 style="font-size: 1.9rem; color: var(--text-light); margin-bottom: 15px; line-height: 1.2; font-style: italic; font-weight: 900; text-transform: uppercase; transition: color 0.2s;" onmouseover="this.style.color='var(--chase-yellow)'" onmouseout="this.style.color='var(--text-light)'">
-                            Old Guard vs. New Blood: The Season 16 Chase for the Championship Preview! 🏁🔥
-                        </h3>
-                    </a>
-
-                    <div style="font-size: 1.05rem; color: #ddd; line-height: 1.8; margin-bottom: 20px;">
-                        <p style="margin-bottom: 15px;">
-                            <strong>16 Races Down. 10 Contenders Locked In. 5 Races for Immortality.</strong> Following <strong>Benjamin Lacy's (#7)</strong> regular-season finale triumph at Martinsville Speedway, the official 10-driver Season 16 Chase Grid is set! A deep dive into the <strong>Bandit Racing League SimRacerHub archives</strong> reveals that <strong>all 16 regular-season races were won by drivers inside this Top 10 field</strong>—and the grid is split right down the middle between <strong>5 Playoff Veterans &amp; Past Champions</strong> and <strong>5 First-Time Main-Series Chase Contenders</strong>!
-                        </p>
-                        <p style="margin-bottom: 15px;">
-                            Across the next five weeks—<strong>Talladega (Oct 21), Kansas (Oct 28), Road America (Nov 4), Phoenix (Nov 11), and Homestead-Miami (Nov 18)</strong>—all 10 qualifiers will battle with no eliminations to crown the Season 16 Craftsman Truck Series Champion.
-                        </p>
-
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
-                            <a class="btn-primary" href="/article_chase_preview.html" style="padding: 10px 22px; font-size: 0.95rem; background: var(--chase-yellow); border-color: var(--chase-yellow); color: #000; font-weight: 900;">Read Full 10-Driver Scouting Preview &rarr;</a>
-                            <a class="btn-primary" href="/standings.html" style="padding: 10px 20px; font-size: 0.95rem;">View Chase Standings &rarr;</a>
-                            <a class="btn-secondary" href="/fantasy.html" style="padding: 10px 20px; font-size: 0.95rem;">Make Fantasy Picks &rarr;</a>
-                        </div>
-                    </div>
-
-                    <!-- Official Season 16 Chase Grid Summary Card -->
-                    <div style="background: rgba(10, 10, 10, 0.85); padding: 20px; border-radius: 8px; border: 1px solid rgba(255, 204, 0, 0.3); margin-bottom: 20px;">
-                        <h4 style="color: var(--chase-yellow); font-family: var(--font-heading); font-size: 1.3rem; margin-top: 0; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">
-                            🏆 OFFICIAL SEASON 16 CHASE SEEDING &amp; POINTS RESET
-                        </h4>
-
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
-                            <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 6px; border-left: 3px solid var(--chase-yellow);">
-                                <div style="color: var(--chase-yellow); font-weight: bold; margin-bottom: 8px; font-size: 0.95rem;">🏆 THE OLD GUARD (5 PLAYOFF VETERANS)</div>
-                                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; color: #bbb; line-height: 1.75;">
-                                    <li><strong>#1 Seed: Benjamin I. Lacy (#7 | GFR)</strong> — 2,100 pts (Leader) | S13 Champ, 7x Playoff Vet</li>
-                                    <li><strong>#4 Seed: Kevin Foster (#8 | GFR)</strong> — 2,060 pts (-40) | 2x BRL Champ, 196+ Career Starts</li>
-                                    <li><strong>#5 Seed: Nick Nickerson (#2 | GFR)</strong> — 2,055 pts (-45) | 4x BRL Champ, 53 Career Wins</li>
-                                    <li><strong>#6 Seed: Jackson Knaak (#00 | ESR)</strong> — 2,050 pts (-50) | 4x Playoff Vet (Seeking 1st Title)</li>
-                                    <li><strong>#9 Seed: Connor Gibson (#31 | ZeroFoxtrot)</strong> — 2,035 pts (-65) | 5x Playoff Vet (Seeking 1st Title)</li>
-                                </ul>
-                            </div>
-
-                            <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 6px; border-left: 3px solid #00e5ff;">
-                                <div style="color: #00e5ff; font-weight: bold; margin-bottom: 8px; font-size: 0.95rem;">🌟 THE NEW BLOOD (5 FIRST-TIME CONTENDERS)</div>
-                                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; color: #bbb; line-height: 1.75;">
-                                    <li><strong>#2 Seed: Scott Sanderson (#93 | GFR)</strong> — 2,075 pts (-25) | 1 Win, 11 Top 5s in Debut Season</li>
-                                    <li><strong>#3 Seed: Joshua L. Adams (#22 | 937)</strong> — 2,065 pts (-35) | 2 Wins, League-High 5 Poles</li>
-                                    <li><strong>#7 Seed: Dylan McDonald (#9 | Legacy)</strong> — 2,045 pts (-55) | 3 Wins (Daytona, Texas, Phoenix)</li>
-                                    <li><strong>#8 Seed: Michael Rakes (#47 | 937)</strong> — 2,040 pts (-60) | Kansas Winner, 10 Top 10s</li>
-                                    <li><strong>#10 Seed: Johnathon Platt (#13 | GFR)</strong> — 2,030 pts (-70) | Atlanta Winner, 2019 SLM Champ</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Fantasy League Reminder Banner -->
-                    <div style="background: linear-gradient(135deg, rgba(0,255,0,0.15), rgba(0,0,0,0.8)); border: 2px solid var(--neon-green); padding: 16px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
-                        <div>
-                            <h4 style="color: var(--neon-green); margin: 0 0 5px 0; font-size: 1.2rem; font-family: var(--font-heading); text-transform: uppercase;">
-                                🏆 CHASE OPENER AT TALLADEGA — LOCK IN YOUR FANTASY PICKS!
-                            </h4>
-                            <p style="margin: 0; color: #ddd; font-size: 0.95rem;">
-                                Submit your driver lineup before the green flag drops at 9:00 PM EST to compete in the BRL Weekly Viewer Fantasy League!
-                            </p>
-                        </div>
-                        <a class="btn-primary" href="/fantasy.html" style="white-space: nowrap; font-weight: bold; padding: 10px 20px;">Make Fantasy Picks &rarr;</a>
-                    </div>
-                </div>
-                <!-- Las Vegas 110 Race Report (Latest News) -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); box-shadow: 0 0 15px rgba(57, 255, 20, 0.08);">
-                    <div style="color: var(--neon-green); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; text-shadow: 0 0 8px rgba(57, 255, 20, 0.25);">Latest Race Report</div>
-                    <a href="/article_vegas_recap.html" style="text-decoration: none;">
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Viva Las Vegas 110: High-Stakes Strategy Duel &amp; Stewards Appeal Ruling in Sin City</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">The <strong>Viva Las Vegas 110</strong> delivered relentless 1.5-mile intermediate racing with intense fuel saving and tire preservation strategy games. Following post-race stewards appeals, Victor Weaver (#18) suspension was <strong>UPHELD</strong>, while Dylan McDonald (#9) penalty was <strong>RESCINDED and CLEARED</strong> on official telemetry review. Read the full race recap and view the updated Wall of Shame.</p>
-                    
-                    <img src="assets/BCast Banners/LasVegas.jpg" alt="Viva Las Vegas 110 Race Report" style="width: 100%; max-width: 100%; border-radius: 6px; margin-top: 15px; margin-bottom: 15px; border: 1.5px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);">
-                    
-                    <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a class="btn-primary" href="/article_vegas_recap.html" style="padding: 8px 16px; font-size: 0.9rem;">Read Full Story</a>
-                        <a class="btn-primary" href="/wall-of-shame.html" style="padding: 8px 16px; font-size: 0.9rem; background-color: #ff0055; border-color: #ff0055;">Wall of Shame Hub &rarr;</a>
-                    </div>
-                </div>
-
-                <!-- Texas Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.9;">
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
-                    <a href="/article_texas_recap.html" style="text-decoration: none;">
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Dylan McDonald Charges from 23rd to Victory in "The Lone Star State 120" at Texas Motor Speedway!</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">Dylan McDonald (#9 truck / GFR Racing) stormed from 23rd on the starting grid to claim a thrilling victory at Texas Motor Speedway! Benjamin Lacy finished 2nd and Scott Sanderson took 3rd, while Rebekah Weaver won the Weekly Viewer Fantasy challenge with 138 points. Check out the complete race breakdown, stewards penalties, and interactive Wall of Shame telemetry.</p>
-                    
-                    <img src="assets/WINNER IMAGES/Dylan_Texas.png" alt="Texas Winner Dylan McDonald" style="width: 100%; max-width: 100%; border-radius: 6px; margin-top: 15px; margin-bottom: 15px; border: 1.5px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);">
-                    
-                    <a class="btn-primary" href="/article_texas_recap.html" style="padding: 8px 16px; font-size: 0.9rem;">Read Full Story</a>
-                </div>
-
-                <!-- Kansas Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.9;">
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
-                    <a href="/article_kansas_recap.html" style="text-decoration: none;">
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Fuel Mileage Finesse at Kansas: Win Decided on Strategy as #9 Truck Disqualified for Intentional Wrecking</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">Tonight's race at Kansas Speedway (Stages at Laps 33 &amp; 66) came down to extreme fuel mileage management, with driver strategy deciding victory. Following an intentional wrecking incident on Lap 73 where driver #9 admitted to intent, BRL Race Control issued major administrative penalties: the #9 truck has been disqualified, forfeits all event points, is placed on probation for 3 weeks, and will start EOL for 3 weeks. Read the full report.</p>
-                    
-                    <img src="assets/WINNER IMAGES/Michael_Rakes_Kansas.jpg" alt="Kansas Winner Michael Rakes" style="width: 100%; max-width: 100%; border-radius: 6px; margin-top: 15px; margin-bottom: 15px; border: 1.5px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);">
-                    
-                    <a class="btn-primary" href="/article_kansas_recap.html" style="padding: 8px 16px; font-size: 0.9rem;">Read Full Story</a>
-                </div>
-
-                <!-- Darlington Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.9;">
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
-                    <a href="/article_darlington_recap.html" style="text-decoration: none;">
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Nickerson Tames the Lady in Black: Masterclass Performance at Darlington</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">Nick Nickerson drove a precision masterclass at Darlington Raceway, surviving 130 grueling laps under the lights in "Filming the Wild 130" presented by Clear Low Communications. Benjamin Lacy finished 2nd to complete a GFR 1-2 sweep. Newest driver Korey Denson made his debut in the #36 car for Legacy Racing! Read the full report.</p>
-                    
-                    <img src="assets/WINNER IMAGES/Nick_Nickerson_Darlington.png" alt="Darlington Winner Nick Nickerson" style="width: 100%; max-width: 100%; border-radius: 6px; margin-top: 15px; margin-bottom: 15px; border: 1.5px solid rgba(57, 255, 20, 0.3); box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);">
-                    
-                    <a class="btn-primary" href="/article_darlington_recap.html" style="padding: 8px 16px; font-size: 0.9rem;">Read Full Story</a>
-                </div>
-
-                <!-- Michigan Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green);">
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
-                    <a href='/article_michigan_recap.html' style='text-decoration: none;'>
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Lacy Leads the Charge at Michigan: Historic Photo Finish for GFR Racing</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">Benjamin Lacy executed a perfect drafting game plan at Michigan International Speedway, holding off GFR teammate Nick Nickerson by a historic 0.2-millisecond margin. Dylan McDonald finished 3rd for Legacy Racing. Read the full report.</p>
-                    <a class='btn-primary' href='/article_michigan_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
-                </div>
-
-                <!-- Pocono Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.9;">
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
-                    <a href='/article_pocono_recap.html' style='text-decoration: none;'>
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Foster Flies at Pocono: GFR Racing Secures Dominant 1-2 Sweep</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">Kevin Foster drove a masterclass at the Tricky Triangle, leading 21 laps to capture the victory at Pocono Raceway. GFR Racing teammate Nick Nickerson finished a close 2nd to seal a GFR 1-2 sweep, while Eddie Hagigh completed the podium in 3rd. Read the full report.</p>
-                    <a class='btn-primary' href='/article_pocono_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
-                </div>
-
-                <!-- Nashville Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.75;">
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
-                    <a href='/article_nashville_recap.html' style='text-decoration: none;'>
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Adams Ascends at Nashville: Flawless Run Earns 937 Racing its Second Win</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">Joshua Adams drove a patient and calculated race, climbing from 18th on the grid to lead a race-high 44 laps and take the checkered flag at Nashville Superspeedway. Connor Gibson finished 2nd, while Dylan McDonald completed the podium in 3rd. Read the full report.</p>
-                    <a class='btn-primary' href='/article_nashville_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
-                </div>
-
-                <!-- Bristol Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.6;">
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
-                    <a href='/article_bristol_recap.html' style='text-decoration: none;'>
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Lacy Conquers Bristol: Perfect Strategy Secures GFR Racing's Victory</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">Benjamin Lacy executed a flawless race strategy, surviving a caution-heavy night to take the checkered flag at Bristol Motor Speedway. Bob Berry finished a strong 2nd, while Wes Fuller completed the podium in 3rd. Read the full report.</p>
-                    <a class='btn-primary' href='/article_bristol_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
-                </div>
-
-                <!-- Charlotte Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.45;">
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
-                    <a href='/article_charlotte_recap.html' style='text-decoration: none;'>
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Adams Ascends at Charlotte: Dominant Run Earns 937 Racing its First Win</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">Josh Adams drove a flawless race in the #22 TRD Tundra to take victory at Charlotte Motor Speedway, leading a race-high 54 laps. GFR Racing's Johnathon Platt fought from 14th to finish 2nd, while Benjamin Lacy completed the podium in 3rd. Read the full report.</p>
-                    <a class='btn-primary' href='/article_charlotte_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
-                </div>
-
-                <!-- Atlanta Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.3;">
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
-                    <a href='/article_atlanta_recap.html' style='text-decoration: none;'>
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Redemption in the Peach State: Johnathon Platt Conquers Atlanta</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">After a heart-breaking season opener, Johnathon Platt bounced back in week two at EchoPark Speedway (Atlanta) to claim a dominant victory. Connor Gibson put on a masterclass, charging from 19th to finish 2nd. Read the full report and view race action shots.</p>
-                    <a class='btn-primary' href='/article_atlanta_recap.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
-                </div>
-
-                <!-- Daytona Race Recap -->
-                <div style="padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 8px; border-left: 4px solid var(--neon-green); opacity: 0.2;">
-                    <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Race Report</div>
-                    <a href='/article_daytona_controversy.html' style='text-decoration: none;'>
-                        <h3 style="font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; transition: color 0.2s ease;" onmouseover="this.style.color='var(--neon-green)'" onmouseout="this.style.color='var(--text-light)'">Controversy at Daytona: Britt Stripped of Win, McDonald Declared Winner</h3>
-                    </a>
-                    <p style="color: #ccc; margin-bottom: 15px;">A wild finish at the Season 16 opener saw Sean Britt cross the line first after a last-lap collision with Jonathon Platt, only for league officials to strip the victory and award it to Dylan McDonald. Read the full details.</p>
-                    <a class='btn-primary' href='/article_daytona_controversy.html' style='padding: 8px 16px; font-size: 0.9rem;'>Read Full Story</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer>
         <div class="container footer-content" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
             <div style="text-align: center;">
@@ -531,10 +539,10 @@
     </script>
     
     <!-- Roster and Teams Database script files -->
-    <script src="supabase_config.js?v=1792366368"></script>
-    <script src="weekly_data.js?v=1792366368"></script>
-    <script src="teams_data.js?v=1792366368"></script>
-    <script src="roster_data.js?v=1792366368"></script>
+    <script src="supabase_config.js?v=1792367012"></script>
+    <script src="weekly_data.js?v=1792367012"></script>
+    <script src="teams_data.js?v=1792367012"></script>
+    <script src="roster_data.js?v=1792367012"></script>
     <script>
         // Dynamic Weekly Driver Spotlight Selector logic
         (function() {
