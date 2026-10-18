@@ -1,7 +1,7 @@
 const weeklyData = {
   "winnerName": "Benjamin Lacy",
   "winnerNumber": "7",
-  "winnerImage": "assets/WINNER IMAGES/Benjamin_Lacy_Martinsville.png",
+  "winnerImage": "assets/WINNER IMAGES/benjamin_lacy_Martinsville.png",
   "actionShots": [],
   "trackName": "Martinsville Speedway",
   "trackLogo": "",
