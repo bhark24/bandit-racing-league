@@ -100,7 +100,7 @@ const rosterData = {
     "status": "full-time"
   },
   "28": {
-    "driver": "Jesse VAUGHAN",
+    "driver": "JOEY CRUZ",
     "status": "part-time"
   },
   "29": {
@@ -204,7 +204,7 @@ const rosterData = {
     "status": "full-time"
   },
   "82": {
-    "driver": "RICKY GONZALES",
+    "driver": "PAUL WILSON",
     "status": "part-time"
   },
   "83": {

@@ -1117,6 +1117,220 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RACE CONTROL] 'Car 93 doored 91 on the cool down lap. Official warning issued to car 93 for post-race contact.'"
             }
         ]
+    },
+
+    martinsville: {
+        id: "martinsville",
+        title: "Martinsville Speedway",
+        subtext: "The Paperclip Chaos Showdown — 190 Laps (Stages @ 57 & 114)",
+        laps: 190,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 57 },
+            { name: "Stage 2", lap: 114 },
+            { name: "Final Stage", lap: 190 }
+        ],
+        mvp: {
+            carNumber: "69",
+            driverName: "Car #69 (Collin Anderson) & Full Field",
+            title: "Wall of Shame MVP — Paperclip Brake-Check & 3x EOL Spree 🛑💥",
+            reason: "Assessed 3 separate EOL penalties (Laps 44, 64, 97), slammed on brakes on the active racing surface after an EOL call (collecting #6 Nicole Kriesel), brake-checked #54 under caution on Lap 76, and ARCA-braked on Lap 186! Plus a League-Wide Caution Warning issued to the entire field!",
+            totalIncidents: 6,
+            totalPenalties: "3x EOL Penalties + Final Session Removal Warning (Brake-Checking)",
+            image: "assets/tracks/Track Logos/Martinsville.jpg"
+        },
+        drivers: [
+            { number: "69", name: "Driver #69 (Collin Anderson)", score: 100, level: "CRITICAL", badge: "MVP / 3x EOL + Brake-Checking", incidentsCount: 6, colors: ["#ff0055", "#111"] },
+            { number: "36", name: "Driver #36 (Korey Denson)", score: 92, level: "CRITICAL", badge: "Drive-Thru (15-Lap Rule) + VC Warning", incidentsCount: 3, colors: ["#ff0055", "#111"] },
+            { number: "12", name: "Driver #12 (Bill Harkins)", score: 85, level: "HIGH", badge: "2x EOL Penalties (L110 & L186)", incidentsCount: 5, colors: ["#ff5500", "#111"] },
+            { number: "31", name: "Driver #31 (Connor Gibson)", score: 75, level: "HIGH", badge: "EOL (Stage 1 Ender on #15)", incidentsCount: 2, colors: ["#ffaa00", "#111"] },
+            { number: "9",  name: "Driver #9 (Dylan McDonald)", score: 72, level: "HIGH", badge: "EOL (Lap 68 Dive on #12)", incidentsCount: 2, colors: ["#ffaa00", "#111"] },
+            { number: "7",  name: "Driver #7 (Benjamin Lacy)", score: 70, level: "HIGH", badge: "Post-Race Admin EOL (#15 Checkup)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "15", name: "Driver #15 (Matt Crockett)", score: 70, level: "HIGH", badge: "EOL (Lap 133 Punt on #24)", incidentsCount: 3, colors: ["#ffaa00", "#111"] },
+            { number: "62", name: "Driver #62 (Ty Corino)", score: 68, level: "HIGH", badge: "EOL (Lap 117 Hot Entry on #50)", incidentsCount: 1, colors: ["#e67e22", "#111"] },
+            { number: "54", name: "Driver #54 (Matthew Bailey)", score: 65, level: "MEDIUM", badge: "EOL (Lap 169 Curb Self-Spin)", incidentsCount: 3, colors: ["#e67e22", "#111"] },
+            { number: "4",  name: "Driver #4 (Logan Murray)", score: 62, level: "MEDIUM", badge: "EOL (Lap 181 Restart Spin)", incidentsCount: 2, colors: ["#e67e22", "#111"] },
+            { number: "1",  name: "Driver #1 (Ricky Hart Jr)", score: 50, level: "MEDIUM", badge: "Lap 186 ARCA Brakes Note", incidentsCount: 1, colors: ["#3498db", "#111"] },
+            { number: "18", name: "Driver #18 (Victor Weaver)", score: 35, level: "LOW", badge: "Served EOL 2 of 3", incidentsCount: 1, colors: ["#2ecc71", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 1, stage: 1, involved: ["18", "36"], primaryCar: "18", category: "racing_deal",
+                title: "Pre-Race Probation & EOL Penalties Served (#18 & #36)",
+                summary: "Cars #18 (Victor Weaver) and #36 (Korey Denson) dropped to the rear at the start to serve scheduled EOL penalties. This marked Car #18's 2nd EOL of 3 and Car #36's 1st EOL of 3.",
+                ruling: "Probation EOL Penalties Served (#18: 2 of 3 | #36: 1 of 3)", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Cars 18 and 36 serving pre-race EOL penalties at the tail of the field. 18 on 2 of 3, 36 on 1 of 3.'"
+            },
+            {
+                id: 2, lap: 2, stage: 1, involved: ["12", "82", "63"], primaryCar: "12", category: "racing_deal",
+                title: "Lap 2 Curb Check-Up & Accordion Spin",
+                summary: "Car #12 (Bill Harkins) checked up to avoid hitting Car #82 (Paul Wilson) and clipped the inside curbing. Car #63 (Tre Ellis) had zero time to react behind and turned Car #12.",
+                ruling: "Racing Deal (No Reaction Time)", location: "Turn 2",
+                trackCoords: { x: 650, y: 260 },
+                audioTranscript: "[STEWARDS] '12 checked up for 82 and hit the curb, 63 had nowhere to go. Racing deal.'"
+            },
+            {
+                id: 3, lap: 11, stage: 1, involved: ["36"], primaryCar: "36", category: "penalty",
+                title: "Turn 4 Unforced Self-Spin (15-Lap Rule Drive-Through)",
+                summary: "Car #36 (Korey Denson) self-spun coming out of Turn 4 on Lap 11. Under the league's opening 15-lap caution rule, an automatic Drive-Through penalty was assessed.",
+                ruling: "Drive-Through Penalty (#36 — 15-Lap Rule)", location: "Turn 4 Exit",
+                trackCoords: { x: 220, y: 80 },
+                audioTranscript: "[RACE CONTROL] 'Car 36 solo spin off Turn 4 inside the first 15 laps. Drive-Through penalty on the 36.'"
+            },
+            {
+                id: 4, lap: 21, stage: 1, involved: ["18", "12"], primaryCar: "12", category: "racing_deal",
+                title: "Bottom-Groove Heavy Braking Check-Up",
+                summary: "Car #18 (Victor Weaver) struggled to hold the bottom groove and got on the brakes harder than Car #12 (Bill Harkins) anticipated. Car #12 ran out of talent trying to check up with no time to react and turned the #18.",
+                ruling: "Racing Deal (Unexpected Braking Check-Up)", location: "Turn 1 & 2",
+                trackCoords: { x: 670, y: 180 },
+                audioTranscript: "[STEWARDS] '18 hit the binders hard trying to hold the bottom, 12 had no time to react. Racing deal.'"
+            },
+            {
+                id: 5, lap: 33, stage: 1, involved: ["22", "9"], primaryCar: "22", category: "racing_deal",
+                title: "Late Bumper Tag Turns Car 9",
+                summary: "Car #22 (Joshua L. Adams) got to the bumper of Car #9 (Dylan McDonald) late entering the corner and turned him around.",
+                ruling: "Racing Deal", location: "Turn 3",
+                trackCoords: { x: 140, y: 240 },
+                audioTranscript: "[STEWARDS] '22 got to the rear of the 9 late into the corner. Deemed a racing deal.'"
+            },
+            {
+                id: 6, lap: 39, stage: 1, involved: ["ALL"], primaryCar: "ALL", category: "racing_deal",
+                title: "Turn 1 Outside Lane Restart Accordion Pileup",
+                summary: "On the restart, the outside lane checked up entering Turn 1 and the accordion effect cascaded rapidly through the pack.",
+                ruling: "Racing Deal (Multi-Car Restart Stackup)", location: "Turn 1 Entry",
+                trackCoords: { x: 610, y: 320 },
+                audioTranscript: "[RACE CONTROL] 'Huge accordion stackup on the outside line into Turn 1! Racing deal.'"
+            },
+            {
+                id: 7, lap: 44, stage: 1, involved: ["69", "4"], primaryCar: "69", category: "penalty",
+                title: "Inside Lane Dive Into Occupied Space (Admin Review Confirmed)",
+                summary: "Car #69 (Collin Anderson) tried to force his way to the bottom groove when Car #4 (Logan Murray) was already occupying the lane. Car #69 requested a review; Admins audited the replay and confirmed the EOL on #69 was 100% the correct call.",
+                ruling: "End of Line (EOL) Penalty (#69 — Upheld on Admin Review)", location: "Turn 3",
+                trackCoords: { x: 130, y: 260 },
+                audioTranscript: "[ADMIN REVIEW] 'Car 69 requested review on Lap 44. Car 4 was clearly there on the bottom. EOL on 69 confirmed.'"
+            },
+            {
+                id: 8, lap: 57, stage: 1, involved: ["31", "15"], primaryCar: "31", category: "penalty",
+                title: "Stage 1 Ender: Late Dive Into Closing Gap",
+                summary: "Coming to the end of Stage 1, Car #31 (Connor Gibson) made a late move into a rapidly closing gap and collided with Car #15 (Matt Crockett), ending Stage 1 early under caution.",
+                ruling: "End of Line (EOL) Penalty (#31 — Stage 1 Ended Early)", location: "Turn 3 & 4",
+                trackCoords: { x: 150, y: 150 },
+                audioTranscript: "[RACE CONTROL] '31 tried to force a closing gap on the 15. Stage 1 ends under yellow. EOL penalty car 31.'"
+            },
+            {
+                id: 9, lap: 64, stage: 2, involved: ["69", "31", "6"], primaryCar: "69", category: "mvp",
+                title: "Right-Hook on #31 & Stopping Dead on Active Track in Front of #6!",
+                summary: "Car #69 (Collin Anderson) came down a hair and right-hooked Car #31 (Connor Gibson) to draw an EOL penalty. Immediately after being issued the EOL, Car #69 slammed on the brakes and stopped dead on the active racing surface, leaving Car #6 (Nicole Kriesel) with nowhere to go! Race Control Directive: NEVER stop dead on an active track when given a penalty — blend to the apron/bottom and maintain a safe slow pace.",
+                ruling: "End of Line (EOL) Penalty (#69) + Severe Track Safety Directive", location: "Back Stretch / Turn 3",
+                trackCoords: { x: 400, y: 70 },
+                audioTranscript: "[RACE CONTROL] 'EOL on 69 for right-hooking 31! And 69 just slammed on his brakes dead on the track in front of the 6! Never stop on an active track!'"
+            },
+            {
+                id: 10, lap: 68, stage: 2, involved: ["9", "12"], primaryCar: "9", category: "penalty",
+                title: "Hot Turn 3 Entry Contact on Car 12",
+                summary: "Car #9 (Dylan McDonald) drove into Turn 3 way too hot and plowed into Car #12 (Bill Harkins).",
+                ruling: "End of Line (EOL) Penalty (#9)", location: "Turn 3 Entry",
+                trackCoords: { x: 200, y: 70 },
+                audioTranscript: "[RACE CONTROL] 'Car 9 went into Turn 3 hot and hit the 12. EOL penalty car 9.'"
+            },
+            {
+                id: 11, lap: 76, stage: 2, involved: ["36", "28", "69", "54"], primaryCar: "69", category: "warning",
+                title: "Late Block Check-Up & Caution Flag Brake-Check by Car #69 on #54!",
+                summary: "Car #36 (Korey Denson) got into the back of Car #28 (Joey Cruz) after #28 made a late defensive move to cover him off and immediately started braking (deemed Racing Deal). Under the ensuing caution flag, Car #69 (Collin Anderson) appeared to intentionally brake-check Car #54 (Matthew Bailey)!",
+                ruling: "Racing Deal (#36/#28) | FINAL WARNING (#69): Next Pace-Lap Brake-Check = Parked / Removed from Session", location: "Front Stretch / Caution",
+                trackCoords: { x: 450, y: 330 },
+                audioTranscript: "[RACE CONTROL] '36 and 28 is a racing deal on a late block. Car 69: do NOT brake-check the 54 under yellow! One more stunt like that and you are removed from the session!'"
+            },
+            {
+                id: 12, lap: 84, stage: 2, involved: ["7", "15"], primaryCar: "7", category: "penalty",
+                title: "Outside Line Check-Up Punt (Post-Race Admin Review: Should Be EOL #7)",
+                summary: "A check-up on the outside lane resulted in Car #15 (Matt Crockett) getting hit and spun by Car #7 (Benjamin Lacy). Originally called a racing deal live, post-race Admin audit confirmed this should have been an EOL penalty on Car #7.",
+                ruling: "Post-Race Admin Audit: Confirmed At-Fault EOL on Car #7 (Called Racing Deal Live)", location: "Turn 1",
+                trackCoords: { x: 670, y: 160 },
+                audioTranscript: "[ADMIN AUDIT] 'Reviewed Lap 84 outside check-up between 7 and 15 post-race. Admins confirmed this should have been an EOL penalty on Car 7.'"
+            },
+            {
+                id: 13, lap: 97, stage: 2, involved: ["69", "28", "36", "31"], primaryCar: "69", category: "warning",
+                title: "Car #69 3rd EOL (Dumps #28) + Car #36 Voice Chat Conduct Warning!",
+                summary: "Car #69 (Collin Anderson) ran into Car #28 (Joey Cruz), shoved him up the banking, and then hooked his left-rear to spin him out (69's 3rd EOL of the night!). Under caution, Car #36 (Korey Denson) snapped on voice chat at Car #31 (Connor Gibson), saying 'we don't like questions here' and 'why don't you learn how to drive before you open your mouth.'",
+                ruling: "EOL Penalty (#69) + Official Verbal Warning (#36 — Next VC Violation = Voice Chat Mute)", location: "Turn 2",
+                trackCoords: { x: 620, y: 280 },
+                audioTranscript: "[RADIO #36] 'Why don't you learn how to drive before you open your mouth!' -> [RACE CONTROL] 'EOL on 69! And 36, consider this your verbal warning—repeat that conduct and your voice chat is gone!'"
+            },
+            {
+                id: 14, lap: 110, stage: 2, involved: ["12", "50"], primaryCar: "12", category: "penalty",
+                title: "Turn 3 Drift-Up Contact Into Car 50",
+                summary: "Car #12 (Bill Harkins) drifted up the track into Car #50 (Davis Carroll), making heavy contact entering Turn 3 while contesting the same real estate.",
+                ruling: "End of Line (EOL) Penalty (#12)", location: "Turn 3 Entry",
+                trackCoords: { x: 180, y: 80 },
+                audioTranscript: "[RACE CONTROL] 'Car 12 drifted up into the 50 entering Turn 3. EOL penalty car 12.'"
+            },
+            {
+                id: 15, lap: 114, stage: 2, involved: ["ALL"], primaryCar: "STAGE", category: "stage_finish",
+                title: "Stage 2 Official Finish",
+                summary: "Stage 2 concludes at Lap 114.",
+                ruling: "Stage 2 Complete", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Stage 2 complete at Lap 114! Standings locked for Stage 2.'"
+            },
+            {
+                id: 16, lap: 117, stage: 3, involved: ["62", "50"], primaryCar: "62", category: "penalty",
+                title: "Overdriven Turn 1 Entry Into Car 50",
+                summary: "Car #62 (Ty Corino) sailed into Turn 1 way too hot after the restart and clobbered Car #50 (Davis Carroll).",
+                ruling: "End of Line (EOL) Penalty (#62)", location: "Turn 1",
+                trackCoords: { x: 670, y: 150 },
+                audioTranscript: "[RACE CONTROL] 'Car 62 went into Turn 1 hot and hit the 50. EOL penalty car 62.'"
+            },
+            {
+                id: 17, lap: 124, stage: 3, involved: ["8", "63"], primaryCar: "8", category: "racing_deal",
+                title: "Corner Exit Converge Between #8 & #63",
+                summary: "Car #8 (Kevin Foster) and Car #63 (Tre Ellis) made contact on corner exit; Car #8 was coming down slightly while Car #63 was tracking out of the corner, meeting in the middle.",
+                ruling: "Racing Deal (Met in the Middle)", location: "Turn 2 Exit",
+                trackCoords: { x: 560, y: 70 },
+                audioTranscript: "[STEWARDS] '8 coming down slightly, 63 exiting corner, met in the middle. Racing deal.'"
+            },
+            {
+                id: 18, lap: 133, stage: 3, involved: ["15", "24"], primaryCar: "15", category: "penalty",
+                title: "Rear-End Punt Sends Both #15 & #24 Into Wall",
+                summary: "Car #15 (Matt Crockett) drove squarely into the back of Car #24 (Ethan Sikorski), sending both trucks crashing hard into the outside wall.",
+                ruling: "End of Line (EOL) Penalty (#15)", location: "Turn 3 & 4",
+                trackCoords: { x: 120, y: 220 },
+                audioTranscript: "[RACE CONTROL] 'Car 15 got into the back of 24 and sent them both into the fence. EOL penalty car 15.'"
+            },
+            {
+                id: 19, lap: 139, stage: 3, involved: ["28", "54"], primaryCar: "28", category: "racing_deal",
+                title: "Lapped Traffic Miscommunication Contact",
+                summary: "Car #28 (Joey Cruz) and Car #54 (Matthew Bailey) made contact; Car #54 was trying to yield room to let leaders by while Car #28 thought he was already clear.",
+                ruling: "Racing Deal (Clearance Miscommunication)", location: "Turn 4",
+                trackCoords: { x: 200, y: 310 },
+                audioTranscript: "[STEWARDS] '54 trying to let guys by, 28 thought he was clear. Racing deal.'"
+            },
+            {
+                id: 20, lap: 169, stage: 3, involved: ["54"], primaryCar: "54", category: "penalty",
+                title: "Inside Curb Self-Spin While Yielding",
+                summary: "While trying to stay out of the leaders' way on the bottom, Car #54 (Matthew Bailey) clipped the inside curb and self-spun to bring out the caution.",
+                ruling: "End of Line (EOL) Penalty (#54)", location: "Turn 1 & 2 Curb",
+                trackCoords: { x: 640, y: 230 },
+                audioTranscript: "[RACE CONTROL] 'Car 54 spun on the inside curb trying to stay out of the way. Caution is out. EOL car 54.'"
+            },
+            {
+                id: 21, lap: 181, stage: 3, involved: ["4"], primaryCar: "4", category: "penalty",
+                title: "Late-Race Restart Tire-Spin Caution",
+                summary: "On the Lap 181 restart, Car #4 (Logan Murray) lit up the rear tires on the throttle and spun out in front of the pack.",
+                ruling: "End of Line (EOL) Penalty (#4)", location: "Front Stretch / Restart Zone",
+                trackCoords: { x: 430, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Car 4 spun the tires on the restart and looped it! EOL penalty car 4.'"
+            },
+            {
+                id: 22, lap: 186, stage: 3, involved: ["12", "47", "1", "69"], primaryCar: "12", category: "penalty",
+                title: "Wall Pinch on #47 & Double ARCA Brake by #1 & #69!",
+                summary: "With 4 laps to go, Car #12 (Bill Harkins) pinched Car #47 (Michael Rakes) hard into the outside wall (12's 2nd EOL of the race). Behind the wreck, both Car #1 (Ricky Hart Jr) and Car #69 (Collin Anderson) failed to slow down and ARCA-braked straight into the scene! Race Control Note: Everyone who participated in this race holds responsibility for the excessive caution count and must clean up their racecraft.",
+                ruling: "EOL Penalty (#12) + ARCA Brake Infraction (#1 & #69) + Full-Field Racecraft Warning", location: "Turn 3 & 4 Wall",
+                trackCoords: { x: 140, y: 120 },
+                audioTranscript: "[RACE CONTROL] '12 pinched 47 into the wall—EOL 12! And massive ARCA brakes by the 1 and 69! Everyone in this field needs to clean up their racecraft before next week!'"
+            }
+        ]
     }
 
 };
