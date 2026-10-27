@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Season 17 Hub &amp; Official Vehicle Poll | Bandit Racing League</title>
+    <meta name="description" content="Bandit Racing League Season 17 Planning Hub. Cast your official vote on all iRacing Fixed-Setup NASCAR car and truck platforms and explore the complete BRL historical vehicle database.">
+    <meta property="og:title" content="Bandit Racing League — Season 17 Vehicle Poll &amp; History">
+    <meta property="og:description" content="Vote for the Season 17 car or truck platform! Explore every iRacing Fixed-Setup NASCAR platform and how many times each has been run in Bandit Racing League history.">
+    <meta property="og:image" content="https://banditracingleague.net/assets/main-logo.png">
+    <meta property="og:url" content="https://banditracingleague.net/season17.html">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#00ff00">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=1793115895">
+    <style>
+        .s17-stats-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 36px;
+        }
+        .s17-stat-box {
+            background: linear-gradient(145deg, rgba(20, 24, 34, 0.95), rgba(10, 12, 18, 0.98));
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+        .s17-stat-num {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: var(--neon-green);
+            line-height: 1.1;
+            text-shadow: 0 0 15px rgba(57, 255, 20, 0.35);
+        }
+        .s17-stat-label {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aaa;
+            font-weight: 700;
+            margin-top: 6px;
+            display: block;
+        }
+
+        .poll-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .poll-option-card {
+            background: linear-gradient(145deg, rgba(22, 25, 34, 0.95), rgba(12, 14, 20, 0.98));
+            border: 2px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.22s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .poll-option-card:hover {
+            border-color: rgba(57, 255, 20, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(57, 255, 20, 0.15);
+        }
+        .poll-option-card.selected {
+            border-color: var(--neon-green);
+            background: linear-gradient(145deg, rgba(57, 255, 20, 0.12), rgba(14, 22, 18, 0.98));
+            box-shadow: 0 0 28px rgba(57, 255, 20, 0.3);
+        }
+
+        .poll-radio-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        .poll-option-card.selected .poll-radio-circle {
+            border-color: var(--neon-green);
+            background: var(--neon-green);
+            box-shadow: 0 0 12px var(--neon-green);
+        }
+        .poll-option-card.selected .poll-radio-circle::after {
+            content: "✓";
+            color: #000;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        .history-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .history-pill {
+            font-size: 0.76rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .pill-races {
+            background: rgba(57, 255, 20, 0.15);
+            color: var(--neon-green);
+            border: 1px solid rgba(57, 255, 20, 0.35);
+        }
+        .pill-never {
+            background: rgba(255, 204, 0, 0.16);
+            color: var(--chase-yellow);
+            border: 1px solid rgba(255, 204, 0, 0.4);
+        }
+        .pill-seasons {
+            background: rgba(0, 212, 255, 0.14);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.35);
+        }
+        .pill-starts {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ddd;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .vote-bar-wrap {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .vote-bar-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        .vote-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-green), #00d4ff);
+            border-radius: 6px;
+            transition: width 0.4s ease;
+        }
+
+        .voter-input-bar {
+            display: grid;
+            grid-template-columns: 1.5fr 0.8fr 1.5fr auto;
+            gap: 14px;
+            background: rgba(0, 0, 0, 0.45);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(57, 255, 20, 0.35);
+            margin-top: 24px;
+            align-items: end;
+        }
+        .voter-field label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--neon-green);
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+        .voter-field input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: #101218;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+        }
+        .voter-field input:focus {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 12px rgba(57, 255, 20, 0.25);
+        }
+
+        @media (max-width: 900px) {
+            .s17-stats-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .voter-input-bar {
+                grid-template-columns: 1fr;
+            }
+            .poll-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-mobile-header">
+                <a href="/index.html" class="nav-brand-mobile">BANDIT RACING LEAGUE</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="/apply.html" class="btn-secondary">Apply to League</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/standings.html">Standings</a></li>
+                <li><a href="/schedule.html">Schedule</a></li>
+                <li><a href="/results.html">Results</a></li>
+                <li><a href="/drivers.html">Drivers</a></li>
+                <li><a href="/teams.html">Teams</a></li>
+                <li><a href="/wall-of-shame.html">Wall of Shame</a></li>
+                <li><a href="/season17.html" class="active" style="color: var(--chase-yellow); font-weight: 900;">Season 17</a></li>
+                <li><a href="/merch.html">Merch</a></li>
+                <li><a href="/rulebook.html">Rulebook</a></li>
+                <li><a data-tooltip="Fantasy League" href="/fantasy.html"><img src="assets/fantasy-icon.png" alt="Fantasy League" style="height: 42px; width: 42px; border-radius: 50%; border: 1.5px solid var(--neon-green); vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.4)); object-fit: cover;"><span class="nav-icon-label">Fantasy League</span></a></li>
+                <li><a data-tooltip="Geezer App" href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"><span class="nav-icon-label">Geezer App</span></a></li>
+                <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><span class="nav-icon-label">SimTrax Broadcasting</span></a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="https://discord.gg/HSvP4UG2st" target="_blank" class="btn-primary">Join Discord</a>
+                <div class="qr-container">
+                    <img src="assets/discord-qr.png" alt="QR Code" style="height: 42px; border-radius: 4px; border: 2px solid var(--neon-green); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <div class="qr-popup">
+                        <img src="assets/discord-qr.png" style="width: 100%; border-radius: 4px;">
+                        <p style="margin-top: 10px; font-weight: bold; font-family: var(--font-heading); color: var(--neon-green); text-transform: uppercase;">Scan to Join!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="hero" style="min-height: 42vh; padding-top: 70px; padding-bottom: 40px; display: flex; align-items: center; justify-content: center; text-align: center;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content" style="position: relative; z-index: 2; max-width: 1050px; padding: 0 20px;">
+            <span style="display: inline-block; background: rgba(255, 204, 0, 0.18); color: var(--chase-yellow); border: 1.5px solid var(--chase-yellow); padding: 6px 18px; border-radius: 30px; font-family: var(--font-heading); font-weight: 900; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;">🏁 BANDIT RACING LEAGUE &bull; SEASON 17 PLANNING HUB</span>
+            <h1 class="hero-title" style="font-size: 3.4rem; text-transform: uppercase; font-style: italic; margin-bottom: 12px;">SEASON 17 <span class="accent" style="color: var(--neon-green);">VEHICLE POLL</span> &amp; HISTORY</h1>
+            <p style="color: #ccc; font-size: 1.1rem; max-width: 820px; margin: 0 auto; line-height: 1.6;">
+                Every iRacing NASCAR &amp; Oval Stock Car platform with official <strong>Fixed Setups</strong> is on the ballot for Season 17. Review how many times each car or truck has been raced across Bandit Racing League history (`2018–2026`) and cast your official driver vote below!
+            </p>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 30px; margin-bottom: 80px; position: relative; z-index: 5;">
+
+        <!-- Top League Historical Stats Strip -->
+        <div class="s17-stats-strip">
+            <div class="s17-stat-box">
+                <span class="s17-stat-num">243</span>
+                <span class="s17-stat-label">Completed BRL Races Audited</span>
+            </div>
+            <div class="s17-stat-box">
+                <span class="s17-stat-num" style="color: var(--chase-yellow);">15</span>
+                <span class="s17-stat-label">SimRacerHub Seasons (S2–S16)</span>
+            </div>
+            <div class="s17-stat-box">
+                <span class="s17-stat-num">5,944</span>
+                <span class="s17-stat-label">All-Time BRL Driver Starts</span>
+            </div>
+            <div class="s17-stat-box">
+                <span class="s17-stat-num" style="color: #00d4ff;" id="totalPollVotesHero">0</span>
+                <span class="s17-stat-label">Season 17 Votes Cast</span>
+            </div>
+        </div>
+
+        <!-- SECTION 1: INTERACTIVE SEASON 17 OFFICIAL VEHICLE POLL -->
+        <div class="card neon-border" style="padding: 28px; margin-bottom: 45px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid rgba(57, 255, 20, 0.25); padding-bottom: 16px;">
+                <div>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.85rem; color: #fff; text-transform: uppercase; font-style: italic; margin: 0;">
+                        🗳️ Official Season 17 Fixed-Setup Platform Poll
+                    </h2>
+                    <p style="color: #aaa; font-size: 0.95rem; margin-top: 6px;">
+                        Click any iRacing Fixed-Setup NASCAR platform card below to select your choice, then enter your Driver Name &amp; Car # at the bottom of the ballot to submit your official vote.
+                    </p>
+                </div>
+                <span id="pollSyncBadge" style="background: rgba(57, 255, 20, 0.15); color: var(--neon-green); border: 1px solid var(--neon-green); padding: 6px 14px; border-radius: 20px; font-family: var(--font-heading); font-size: 0.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
+                    🟢 Live Cloud Poll Active
+                </span>
+            </div>
+
+            <!-- Poll Option Cards Container -->
+            <div class="poll-grid" id="pollOptionsGrid">
+                <!-- Populated dynamically by JS -->
+            </div>
+
+            <!-- Voter Submission Bar -->
+            <div class="voter-input-bar">
+                <div class="voter-field">
+                    <label for="voterDriverName">Your Driver Name *</label>
+                    <input type="text" id="voterDriverName" placeholder="e.g. Matt Crockett">
+                </div>
+                <div class="voter-field">
+                    <label for="voterCarNum">Car # *</label>
+                    <input type="text" id="voterCarNum" placeholder="e.g. #15">
+                </div>
+                <div class="voter-field">
+                    <label for="voterSelectedDisplay">Selected Season 17 Platform</label>
+                    <input type="text" id="voterSelectedDisplay" readonly placeholder="Click a platform card above..." style="color: var(--chase-yellow); font-weight: bold; cursor: default;">
+                </div>
+                <div>
+                    <button id="submitVoteBtn" class="btn-primary" style="width: 100%; padding: 13px 26px; font-family: var(--font-heading); font-size: 1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: none;">
+                        Cast Official Vote &rarr;
+                    </button>
+                </div>
+            </div>
+            <div id="voteFeedbackMsg" style="margin-top: 12px; font-weight: bold; font-size: 0.95rem; display: none;"></div>
+
+            <!-- Live Voter Roll Call -->
+            <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--chase-yellow); text-transform: uppercase; letter-spacing: 1px; margin: 0;">
+                        📋 Verified Driver Votes Cast (<span id="voterRollCount">0</span>)
+                    </h3>
+                    <span style="font-size: 0.8rem; color: #888;">Submitting again with the same Driver Name updates your vote</span>
+                </div>
+                <div id="voterRollList" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    <span style="color: #777; font-style: italic; font-size: 0.9rem;">No votes recorded yet — be the first driver to cast your Season 17 vote!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: COMPLETE BRL HISTORICAL PLATFORM & MANUFACTURER USAGE TABLE -->
+        <div class="card neon-border" style="padding: 28px; margin-bottom: 45px;">
+            <div style="border-bottom: 1px solid rgba(255, 204, 0, 0.25); padding-bottom: 16px; margin-bottom: 20px;">
+                <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: var(--chase-yellow); text-transform: uppercase; font-style: italic; margin: 0;">
+                    📊 Bandit Racing League Historical Platform Census (2018–2026)
+                </h2>
+                <p style="color: #aaa; font-size: 0.95rem; margin-top: 6px;">
+                    Official SimRacerHub data (`league_id=1810`) showing every iRacing Fixed-Setup NASCAR platform, how many seasons and races it has been run in Bandit Racing League history, total driver starts, and manufacturer breakdown.
+                </p>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--neon-green); color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; text-align: left;">
+                            <th style="padding: 12px 10px;">Rank</th>
+                            <th style="padding: 12px 10px;">iRacing Fixed-Setup NASCAR Platform</th>
+                            <th style="padding: 12px 10px;">iRacing Fixed Class</th>
+                            <th style="padding: 12px 10px; text-align: center;">BRL Seasons Run</th>
+                            <th style="padding: 12px 10px; text-align: center;">BRL Races Run</th>
+                            <th style="padding: 12px 10px; text-align: center;">Driver Starts</th>
+                            <th style="padding: 12px 10px;">BRL Seasons &amp; Manufacturer Breakdown</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: #e5e7eb;">
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(57, 255, 20, 0.05);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: var(--neon-green);">#1</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">NASCAR Xfinity Series (Current &amp; Legacy)</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(0, 212, 255, 0.15); color: #00d4ff; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class B Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.05rem;">6 Seasons</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.15rem; color: var(--neon-green);">77 Races</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold;">2,060</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Seasons:</strong> S2 (14), S8 (20), S10 (22), S12 Rotation (8), S13 Rotation (8), Roundytug (5)<br>
+                                <strong>Models:</strong> Ford Mustang (895 starts + 94 Legacy) &bull; Chevy Camaro (775 starts + 104 Legacy) &bull; Toyota Supra (178 starts + 14 Legacy Camry)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: var(--chase-yellow);">#2</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">NASCAR Craftsman Truck Series</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(255, 204, 0, 0.15); color: var(--chase-yellow); padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class C Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.05rem;">4 Seasons</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.15rem; color: var(--chase-yellow);">56 Races <span style="font-size:0.75rem; color:#999;">(60 w/ S16)</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold;">1,650</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Seasons:</strong> S7 (9), S9 (23), S12 Rotation (7), S16 Current (17 completed / 21 scheduled)<br>
+                                <strong>Models:</strong> Chevy Silverado (869 starts) &bull; Ford F-150 (555 starts) &bull; Toyota Tundra TRD Pro / Gander (186 starts) &bull; RAM Truck (40 starts)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255, 255, 255, 0.02);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: #ccc;">#3</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">NASCAR Cup Series — Gen 6 (Legacy 2013–2021)</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Fixed Setups Included</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.05rem;">4 Seasons</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.15rem; color: #fff;">35 Races</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold;">867</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Seasons:</strong> S11 Full Season (22), S12 Rotation (7), Super Tugs (4), Roundytug (2)<br>
+                                <strong>Models:</strong> Gen 6 Ford Mustang (425 starts) &bull; Gen 6 Chevy Camaro ZL1 (404 starts) &bull; Gen 6 Toyota Camry (38 starts)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: #ccc;">#4</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">NASCAR Cup Series — Next Gen (Gen 7)</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class A Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.05rem;">4 Seasons</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.15rem; color: #fff;">30 Races</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold;">725</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Seasons:</strong> S14 Full Season (18), S13 Rotation (9), Roundytug (2), Super Tugs (1)<br>
+                                <strong>Models:</strong> Next Gen Chevy Camaro ZL1 (365 starts) &bull; Next Gen Ford Mustang (328 starts) &bull; Next Gen Toyota Camry (32 starts)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255, 255, 255, 0.02);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: #ccc;">#5</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">NASCAR / CARS Tour Late Model Stock Car</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(249, 115, 22, 0.2); color: #fb923c; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class D Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.05rem;">1 Season</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.15rem; color: #fff;">18 Races</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold;">300</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Season:</strong> S15 — Perfect Shine Auto Spa Late Model Series (18 short-track races)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: #ccc;">#6</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">Asphalt Super Late Model</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(255, 204, 0, 0.15); color: var(--chase-yellow); padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class C Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.05rem;">2 Seasons</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.15rem; color: #fff;">14 Races</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold;">147</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Seasons:</strong> S6 Bandit Super Late Model Series (11 races) &amp; Super Tugs (3 races)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255, 255, 255, 0.02);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: #ccc;">#7</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">NASCAR 1987 Legends (Cup '87s)</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(255, 204, 0, 0.15); color: var(--chase-yellow); padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class C Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.05rem;">1 Season</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.15rem; color: #fff;">6 Races</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold;">125</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Season:</strong> S13 3-Car Rotation (6 races)<br>
+                                <strong>Models:</strong> '87 Chevy Monte Carlo (68) &bull; '87 Buick LeSabre (25) &bull; '87 Ford Thunderbird (23) &bull; '87 Pontiac Grand Prix (9)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: #ccc;">T8</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">NASCAR Whelen Tour Modified / SK Modified</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(255, 204, 0, 0.15); color: var(--chase-yellow); padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class C / D Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.05rem;">1 (Fun Run)</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.15rem; color: #fff;">1 Race</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold;">3</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Season:</strong> Roundytug Racing Series (1 multi-class event in SK Modified; 0 full points seasons)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255, 255, 255, 0.02);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: #ccc;">T8</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">NASCAR Street Stock / Mini Stock</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(239, 68, 68, 0.2); color: #f87171; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Rookie / Class C Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.05rem;">1 (Fun Run)</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.15rem; color: #fff;">1 Race</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold;">1</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Season:</strong> Roundytug Racing Series (1 appearance in Street Stock Panther C1; 0 full points seasons)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: #ccc;">T8</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">Legends Ford '34 Coupe</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(239, 68, 68, 0.2); color: #f87171; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Rookie / Class D Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.05rem;">1 (Fun Run)</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; font-size: 1.15rem; color: #fff;">1 Race</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold;">1</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Season:</strong> Super Tugs &amp; Mini Tugs (1 appearance; 0 full points seasons)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255, 204, 0, 0.05);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: var(--chase-yellow);">NEW</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">ARCA Menards Series / NASCAR Gen 4 Cup</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(249, 115, 22, 0.2); color: #fb923c; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class D / C Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; color: var(--chase-yellow);">0 Seasons</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; color: var(--chase-yellow);">0 Races</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold; color: #888;">0</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>Never Run in BRL!</strong> Includes iRacing's ARCA Menards Series Fixed (Chevy/Ford/Toyota) &amp; Gen 4 Cup Fixed (750+ HP Monte Carlo / Ford Taurus).
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECTION 3: SEASON-BY-SEASON BRL VEHICLE TIMELINE -->
+        <div class="card neon-border" style="padding: 28px;">
+            <div style="border-bottom: 1px solid rgba(57, 255, 20, 0.25); padding-bottom: 16px; margin-bottom: 20px;">
+                <h2 style="font-family: var(--font-heading); font-size: 1.65rem; color: #fff; text-transform: uppercase; font-style: italic; margin: 0;">
+                    🕰️ Bandit Racing League Season-by-Season Vehicle Timeline
+                </h2>
+                <p style="color: #aaa; font-size: 0.92rem; margin-top: 6px;">
+                    Chronological archive of every recorded Bandit Racing League season on SimRacerHub (`2018–2026`).
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;">
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid #00d4ff; border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: #00d4ff; font-weight: bold;">OCT 2018 &bull; 14 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 2 — BRL Xfinity Series</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">Legacy NASCAR Xfinity Camaro (2014), Mustang (2016) &amp; Camry (2015)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: #f59e0b; font-weight: bold;">SEP 2019 &bull; 11 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 6 — Super Late Model Series</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">Asphalt Super Late Model (Short Tracks 1 Mile or Less)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--chase-yellow); border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: var(--chase-yellow); font-weight: bold;">JAN 2020 &bull; 9 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 7 — Nero Graphix Truck Series</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">NASCAR Gander Outdoors Truck Series (Silverado &amp; Tundra)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid #00d4ff; border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: #00d4ff; font-weight: bold;">NOV 2020 &bull; 20 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 8 — Geezer Authentics Xfinity</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">NASCAR Xfinity Series (Mustang, Camaro &amp; Supra)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--chase-yellow); border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: var(--chase-yellow); font-weight: bold;">MAY 2021 &bull; 23 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 9 — Geezer Authentics Trucks</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">NASCAR Camping World Trucks (Silverado, F-150 &amp; Tundra)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid #00d4ff; border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: #00d4ff; font-weight: bold;">MAR 2022 &bull; 22 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 10 — Geezer Authentics Xfinity</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">NASCAR Xfinity Series (Mustang, Camaro &amp; Supra)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid #a855f7; border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: #c084fc; font-weight: bold;">JAN 2023 &bull; 22 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 11 — Gen 6 Cup Series</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">NASCAR Gen 6 Cup Cars (Mustang, Camaro ZL1 &amp; Camry)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--neon-green); border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: var(--neon-green); font-weight: bold;">JUL 2023 &bull; 22 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 12 — 3-Car Weekly Rotation</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">Rotated Xfinity (8) + Gen 6 Cup (7) + Craftsman Trucks (7)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--neon-green); border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: var(--neon-green); font-weight: bold;">SEP 2024 &bull; 23 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 13 — 3-Car Weekly Rotation</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">Rotated 1987 Legends (6) + Xfinity (8) + Next Gen Cup (9)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid #3b82f6; border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: #60a5fa; font-weight: bold;">MAR 2025 &bull; 18 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 14 — Next Gen Cup Series</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">NASCAR Cup Series Next Gen (Camaro ZL1, Mustang &amp; Camry)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid #fb923c; border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: #fb923c; font-weight: bold;">DEC 2025 &bull; 18 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 15 — Perfect Shine Late Models</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">CARS Tour zMAX Late Model Stock Cars (18 Short-Track Races)</p>
+                </div>
+                <div style="background: rgba(57, 255, 20, 0.06); border: 1.5px solid var(--neon-green); border-left: 4px solid var(--neon-green); border-radius: 8px; padding: 14px;">
+                    <span style="font-size: 0.75rem; color: var(--neon-green); font-weight: bold;">JUN 2026–PRESENT &bull; 17 OF 21 RACES</span>
+                    <h4 style="color: #fff; margin: 4px 0; font-family: var(--font-heading);">Season 16 — Clear Low Trucks (Current)</h4>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 0;">NASCAR Craftsman Truck Series (Silverado, F-150, Tundra &amp; RAM)</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="supabase_config.js?v=1793115895"></script>
+    <script>
+        // Official iRacing Fixed-Setup NASCAR Platform Options with Audited BRL History
+        const SEASON_17_OPTIONS = [
+            {
+                id: "xfinity",
+                name: "NASCAR Xfinity Series",
+                sub: "Chevrolet Camaro, Ford Mustang, Toyota Supra",
+                iracingClass: "Class B Fixed (NASCAR Xfinity Series Fixed)",
+                brlRaces: 77,
+                brlSeasons: 6,
+                brlStarts: 2060,
+                historySummary: "Most-run platform in BRL history! Ran full seasons in S2 (14), S8 (20), & S10 (22), plus S12 & S13 3-Car Rotations (8 each) and Roundytug (5)."
+            },
+            {
+                id: "trucks",
+                name: "NASCAR Craftsman Truck Series",
+                sub: "Chevrolet Silverado, Ford F-150, Toyota Tundra TRD Pro, RAM",
+                iracingClass: "Class C Fixed (NASCAR Craftsman Truck Fixed)",
+                brlRaces: 56,
+                brlSeasons: 4,
+                brlStarts: 1650,
+                historySummary: "Current Season 16 vehicle! Ran in S7 (9), S9 (23), S12 Rotation (7), and S16 (17 races completed / 21 scheduled)."
+            },
+            {
+                id: "next_gen_cup",
+                name: "NASCAR Cup Series — Next Gen (Gen 7)",
+                sub: "Chevrolet Camaro ZL1, Ford Mustang Dark Horse, Toyota Camry XSE",
+                iracingClass: "Class A Fixed (NASCAR Cup Series Fixed)",
+                brlRaces: 30,
+                brlSeasons: 4,
+                brlStarts: 725,
+                historySummary: "Ran a full season in Season 14 (18 races), 9 races in Season 13's 3-Car Rotation, plus 3 races in Roundytug / Super Tugs."
+            },
+            {
+                id: "gen6_cup",
+                name: "NASCAR Cup Series — Gen 6 (Legacy)",
+                sub: "2013–2021 Chevrolet Camaro ZL1, Ford Mustang, Toyota Camry",
+                iracingClass: "Legacy Cup Fixed Setups (All Oval & Road Tracks)",
+                brlRaces: 35,
+                brlSeasons: 4,
+                brlStarts: 867,
+                historySummary: "3rd most-raced platform in BRL! Ran full season in Season 11 (22 races), 7 races in Season 12 Rotation, and 6 Fun-Run races."
+            },
+            {
+                id: "late_model_stock",
+                name: "CARS Tour Late Model Stock Car (LMSC)",
+                sub: "NASCAR / zMAX CARS Tour Late Model Stock",
+                iracingClass: "Class D Fixed (CARS Tour Late Model Stock Fixed)",
+                brlRaces: 18,
+                brlSeasons: 1,
+                brlStarts: 300,
+                historySummary: "Featured for the entire 18-race Season 15 Perfect Shine Auto Spa Late Model Series short-track campaign."
+            },
+            {
+                id: "super_late_model",
+                name: "Asphalt Super Late Model (SLM)",
+                sub: "Short-Track High-Horsepower Super Late Model",
+                iracingClass: "Class C Fixed (Super Late Model Fixed)",
+                brlRaces: 14,
+                brlSeasons: 2,
+                brlStarts: 147,
+                historySummary: "Ran 11 races in Season 6 (Bandit Super Late Model Series) plus 3 races in the Super Tugs & Mini Tugs series."
+            },
+            {
+                id: "legends_1987",
+                name: "NASCAR 1987 Legends (Cup '87s)",
+                sub: "'87 Chevy Monte Carlo, Ford Thunderbird, Buick LeSabre, Pontiac Grand Prix",
+                iracingClass: "Class C Fixed (NASCAR Legends Series Fixed)",
+                brlRaces: 6,
+                brlSeasons: 1,
+                brlStarts: 125,
+                historySummary: "Ran 6 races as part of Season 13's 3-Car Rotation (68 starts in Monte Carlo, 25 in Buick, 23 in T-Bird, 9 in Pontiac)."
+            },
+            {
+                id: "arca_gen4",
+                name: "ARCA Menards Series / NASCAR Gen 4 Cup",
+                sub: "ARCA Chevy/Ford/Toyota & 750+ HP 2003 Gen 4 Monte Carlo / Ford Taurus",
+                iracingClass: "Class D ARCA Fixed & Class C Gen 4 Cup Fixed",
+                brlRaces: 0,
+                brlSeasons: 0,
+                brlStarts: 0,
+                historySummary: "NEVER RUN IN BRL! Brand-new candidate platform with official iRacing Fixed Setups for every oval and road course."
+            },
+            {
+                id: "whelen_sk_modified",
+                name: "NASCAR Whelen Tour / SK Modified",
+                sub: "Open-Wheel Asphalt Tour Modified & SK Modified",
+                iracingClass: "Class C Tour Modified Fixed & Class D SK Modified Fixed",
+                brlRaces: 1,
+                brlSeasons: 1,
+                brlStarts: 3,
+                historySummary: "Only 1 multi-class Fun-Run appearance (Roundytug Series in SK Modified). Never run in a full BRL points season!"
+            },
+            {
+                id: "street_mini_stock",
+                name: "NASCAR Street Stock / Mini Stock",
+                sub: "Street Stock (Panther C1, Casino M2, Eagle T3) & Mini Stock",
+                iracingClass: "Rookie & Class C Street Stock Fixed / Mini Stock Fixed",
+                brlRaces: 1,
+                brlSeasons: 1,
+                brlStarts: 1,
+                historySummary: "Only 1 Fun-Run appearance (Roundytug Series in Panther C1). Never run in a full BRL points season!"
+            },
+            {
+                id: "legends_34_coupe",
+                name: "Legends Ford '34 Coupe",
+                sub: "1934 Ford Coupe Motorcycle-Engined Short-Track Legend",
+                iracingClass: "Rookie & Class D Advanced Legends Cup Fixed",
+                brlRaces: 1,
+                brlSeasons: 1,
+                brlStarts: 1,
+                historySummary: "Only 1 Fun-Run appearance (Super Tugs & Mini Tugs). Never run in a full BRL points season!"
+            },
+            {
+                id: "three_car_rotation",
+                name: "3-Car Weekly Rotation Format (S12 / S13 Style)",
+                sub: "Rotate the Top 3 Voted Fixed-Setup NASCAR Platforms Every 3 Weeks",
+                iracingClass: "Multi-Platform Fixed Setup Rotation",
+                brlRaces: 45,
+                brlSeasons: 2,
+                brlStarts: 998,
+                historySummary: "Used in two full BRL seasons: Season 12 (Xfinity + Gen 6 + Trucks, 22 races) and Season 13 ('87s + Xfinity + Next Gen, 23 races)."
+            }
+        ];
+
+        let selectedOptionId = null;
+        let activeVotes = []; // Array of { driverName, carNum, optionId, optionName, votedAt }
+
+        function loadLocalVotesFallback() {
+            try {
+                const raw = localStorage.getItem("brl_season17_votes");
+                if (raw) return JSON.parse(raw);
+            } catch (e) {}
+            return [];
+        }
+
+        function saveLocalVotesFallback(votes) {
+            try {
+                localStorage.setItem("brl_season17_votes", JSON.stringify(votes));
+            } catch (e) {}
+        }
+
+        async function fetchVotesFromSupabase() {
+            if (typeof SUPABASE_URL === "undefined" || !SUPABASE_URL) {
+                activeVotes = loadLocalVotesFallback();
+                renderPollUI();
+                return;
+            }
+            try {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                    method: "GET",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+                if (res.ok) {
+                    const rows = await res.json();
+                    if (rows && rows.length > 0 && rows[0].data && Array.isArray(rows[0].data.season17PollVotes)) {
+                        activeVotes = rows[0].data.season17PollVotes;
+                        saveLocalVotesFallback(activeVotes);
+                    } else {
+                        activeVotes = loadLocalVotesFallback();
+                    }
+                } else {
+                    activeVotes = loadLocalVotesFallback();
+                }
+            } catch (e) {
+                console.warn("Using local fallback for Season 17 poll:", e);
+                activeVotes = loadLocalVotesFallback();
+            }
+            renderPollUI();
+        }
+
+        function renderPollUI() {
+            const grid = document.getElementById("pollOptionsGrid");
+            const totalVotes = activeVotes.length;
+            document.getElementById("totalPollVotesHero").textContent = totalVotes;
+            document.getElementById("voterRollCount").textContent = totalVotes;
+
+            // Tally votes by optionId
+            const counts = {};
+            SEASON_17_OPTIONS.forEach(o => counts[o.id] = 0);
+            activeVotes.forEach(v => {
+                if (counts[v.optionId] !== undefined) counts[v.optionId]++;
+            });
+
+            grid.innerHTML = SEASON_17_OPTIONS.map(opt => {
+                const isSelected = selectedOptionId === opt.id;
+                const vCount = counts[opt.id] || 0;
+                const pct = totalVotes > 0 ? Math.round((vCount / totalVotes) * 100) : 0;
+
+                const raceBadge = opt.brlRaces > 0
+                    ? `<span class="history-pill pill-races">🏁 ${opt.brlRaces} BRL ${opt.brlRaces === 1 ? 'Race' : 'Races'}</span>`
+                    : `<span class="history-pill pill-never">✨ 0 BRL Races (Never Run!)</span>`;
+
+                const seasonBadge = `<span class="history-pill pill-seasons">📅 ${opt.brlSeasons} ${opt.brlSeasons === 1 ? 'Season' : 'Seasons'}</span>`;
+                const startsBadge = `<span class="history-pill pill-starts">🏎️ ${opt.brlStarts.toLocaleString()} Starts</span>`;
+
+                return `
+                    <div class="poll-option-card ${isSelected ? 'selected' : ''}" onclick="selectPollOption('${opt.id}')">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
+                                <div>
+                                    <span style="font-size: 0.72rem; font-weight: 800; color: #00d4ff; text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px;">${opt.iracingClass}</span>
+                                    <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff; margin: 0; line-height: 1.2;">${opt.name}</h3>
+                                </div>
+                                <div class="poll-radio-circle"></div>
+                            </div>
+                            <p style="color: #aaa; font-size: 0.83rem; margin: 6px 0 10px 0;">${opt.sub}</p>
+                            <div class="history-pill-row">
+                                ${raceBadge}
+                                ${seasonBadge}
+                                ${startsBadge}
+                            </div>
+                            <p style="color: #ccc; font-size: 0.84rem; line-height: 1.45; margin: 0;">${opt.historySummary}</p>
+                        </div>
+
+                        <div class="vote-bar-wrap">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: bold;">
+                                <span style="color: ${vCount > 0 ? 'var(--neon-green)' : '#888'};">${vCount} ${vCount === 1 ? 'Vote' : 'Votes'}</span>
+                                <span style="color: #ccc;">${pct}%</span>
+                            </div>
+                            <div class="vote-bar-track">
+                                <div class="vote-bar-fill" style="width: ${pct}%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            // Render Voter Roll Call
+            const rollList = document.getElementById("voterRollList");
+            if (activeVotes.length === 0) {
+                rollList.innerHTML = `<span style="color: #777; font-style: italic; font-size: 0.9rem;">No votes recorded yet — be the first driver to cast your Season 17 vote!</span>`;
+            } else {
+                rollList.innerHTML = activeVotes.slice().reverse().map(v => `
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(57, 255, 20, 0.3); border-radius: 8px; padding: 8px 14px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px;">
+                        <span style="background: #111; color: var(--neon-green); font-family: var(--font-heading); font-weight: 900; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(57,255,20,0.4);">${v.carNum}</span>
+                        <strong style="color: #fff;">${v.driverName}</strong>
+                        <span style="color: #888;">&rarr;</span>
+                        <span style="color: var(--chase-yellow); font-weight: bold;">${v.optionName}</span>
+                    </div>
+                `).join("");
+            }
+        }
+
+        window.selectPollOption = function(optId) {
+            selectedOptionId = optId;
+            const found = SEASON_17_OPTIONS.find(o => o.id === optId);
+            const displayInput = document.getElementById("voterSelectedDisplay");
+            if (found && displayInput) {
+                displayInput.value = found.name;
+            }
+            renderPollUI();
+        };
+
+        async function submitSeason17Vote() {
+            const nameInput = document.getElementById("voterDriverName");
+            const carInput = document.getElementById("voterCarNum");
+            const feedback = document.getElementById("voteFeedbackMsg");
+            const btn = document.getElementById("submitVoteBtn");
+
+            const driverName = (nameInput.value || "").trim();
+            let carNum = (carInput.value || "").trim();
+
+            if (!selectedOptionId) {
+                feedback.style.display = "block";
+                feedback.style.color = "#ff4d4d";
+                feedback.textContent = "⚠️ Please click one of the Season 17 platform cards above to select your vote first!";
+                return;
+            }
+            if (!driverName) {
+                feedback.style.display = "block";
+                feedback.style.color = "#ff4d4d";
+                feedback.textContent = "⚠️ Please enter your Driver Name so your official league vote can be verified.";
+                nameInput.focus();
+                return;
+            }
+            if (!carNum) {
+                carNum = "#--";
+            } else if (!carNum.startsWith("#")) {
+                carNum = "#" + carNum;
+            }
+
+            const optObj = SEASON_17_OPTIONS.find(o => o.id === selectedOptionId);
+            const newVote = {
+                driverName: driverName,
+                carNum: carNum,
+                optionId: selectedOptionId,
+                optionName: optObj ? optObj.name : selectedOptionId,
+                votedAt: new Date().toISOString()
+            };
+
+            btn.disabled = true;
+            btn.textContent = "Saving Vote...";
+
+            // Update or insert by driverName
+            const existingIdx = activeVotes.findIndex(v => v.driverName.toLowerCase() === driverName.toLowerCase());
+            if (existingIdx > -1) {
+                activeVotes[existingIdx] = newVote;
+            } else {
+                activeVotes.push(newVote);
+            }
+            saveLocalVotesFallback(activeVotes);
+            renderPollUI();
+
+            // Persist to Supabase row id=2 while preserving fantasy picks
+            try {
+                let rowData = { picks: [], season17PollVotes: activeVotes };
+                const getRes = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                    method: "GET",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+                if (getRes.ok) {
+                    const rows = await getRes.json();
+                    if (rows && rows.length > 0 && rows[0].data) {
+                        rowData = rows[0].data;
+                        const remoteVotes = Array.isArray(rowData.season17PollVotes) ? rowData.season17PollVotes : [];
+                        const rIdx = remoteVotes.findIndex(v => v.driverName.toLowerCase() === driverName.toLowerCase());
+                        if (rIdx > -1) {
+                            remoteVotes[rIdx] = newVote;
+                        } else {
+                            remoteVotes.push(newVote);
+                        }
+                        rowData.season17PollVotes = remoteVotes;
+                        activeVotes = remoteVotes;
+                        saveLocalVotesFallback(activeVotes);
+                    }
+                }
+
+                await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                    method: "PATCH",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`,
+                        "Content-Type": "application/json",
+                        "Prefer": "return=minimal"
+                    },
+                    body: JSON.stringify({
+                        data: rowData,
+                        updated_at: new Date().toISOString()
+                    })
+                });
+
+                renderPollUI();
+                feedback.style.display = "block";
+                feedback.style.color = "var(--neon-green)";
+                feedback.textContent = `✅ Official Vote Recorded for ${driverName} (${carNum}) -> ${newVote.optionName}!`;
+            } catch (e) {
+                console.error("Error saving vote to Supabase:", e);
+                feedback.style.display = "block";
+                feedback.style.color = "var(--chase-yellow)";
+                feedback.textContent = `✅ Vote saved locally for ${driverName} (${carNum}) -> ${newVote.optionName}!`;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = "Cast Official Vote &rarr;";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleBtn = document.querySelector(".nav-toggle");
+            const navContainer = document.querySelector(".nav-container");
+            if (toggleBtn && navContainer) {
+                toggleBtn.addEventListener("click", function() {
+                    navContainer.classList.toggle("nav-open");
+                });
+            }
+
+            document.getElementById("submitVoteBtn").addEventListener("click", submitSeason17Vote);
+            renderPollUI();
+            fetchVotesFromSupabase();
+        });
+    </script>
+</body>
+</html>
