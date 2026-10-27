@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793118540">
+    <link rel="stylesheet" href="styles.css?v=1793118891">
 
     <style>
         .crew-hero {
@@ -270,21 +270,21 @@
                 <span style="font-size: 1.6rem;">🟢</span>
                 <div>
                     <div style="font-family: var(--font-heading); font-weight: 900; color: var(--neon-green); text-transform: uppercase; font-size: 0.92rem;">Volunteer Crew Role</div>
-                    <p style="color: #aaa; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.4;">Community-driven positions with official BRL Admin/Crew tags, league recognition, and priority driver/series perks.</p>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.4;">Community-driven positions (League Admin &amp; Social Media) with official BRL Crew status and league recognition.</p>
                 </div>
             </div>
             <div class="legend-card">
                 <span style="font-size: 1.6rem;">🟡</span>
                 <div>
-                    <div style="font-family: var(--font-heading); font-weight: 900; color: var(--chase-yellow); text-transform: uppercase; font-size: 0.92rem;">Paid / Per-Race Stipend Eligible</div>
-                    <p style="color: #aaa; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.4;">Select operational roles eligible for per-race stipends, league entry credits, or seasonal bonuses based on commitment.</p>
+                    <div style="font-family: var(--font-heading); font-weight: 900; color: var(--chase-yellow); text-transform: uppercase; font-size: 0.92rem;">Paid Officiating Position</div>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.4;">Compensated Live Race Control position based on a verifiable officiating resume and established league references.</p>
                 </div>
             </div>
             <div class="legend-card">
                 <span style="font-size: 1.6rem;">🔵</span>
                 <div>
-                    <div style="font-family: var(--font-heading); font-weight: 900; color: #00d4ff; text-transform: uppercase; font-size: 0.92rem;">Flexible / Per-Project Media</div>
-                    <p style="color: #aaa; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.4;">Creative &amp; social media roles open to both volunteer contributors and per-project/commission arrangements.</p>
+                    <div style="font-family: var(--font-heading); font-weight: 900; color: #00d4ff; text-transform: uppercase; font-size: 0.92rem;">Commission-Based Marketing</div>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.4;">Negotiated per locked-in sponsorship; paid within 10 calendar days once all sponsorship funds are received and verified.</p>
                 </div>
             </div>
         </div>
@@ -292,11 +292,11 @@
         <!-- Filter Buttons -->
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
             <div class="filter-row" id="roleFilterRow" style="margin-bottom: 0;">
-                <button class="filter-btn active" onclick="filterOpenings('all', this)">All Openings (3)</button>
-                <button class="filter-btn" onclick="filterOpenings('race-control', this)">🏁 Race Control &amp; Stewarding</button>
-                <button class="filter-btn" onclick="filterOpenings('media', this)">🎨 Social Media &amp; Graphics</button>
+                <button class="filter-btn active" onclick="filterOpenings('all', this)">All Openings (4)</button>
+                <button class="filter-btn" onclick="filterOpenings('race-control', this)">🏁 Race Control &amp; Admin</button>
+                <button class="filter-btn" onclick="filterOpenings('media', this)">📱 Social Media &amp; Marketing</button>
                 <button class="filter-btn" onclick="filterOpenings('volunteer', this)">🟢 Volunteer Crew</button>
-                <button class="filter-btn" onclick="filterOpenings('stipend', this)">🟡 Paid / Stipend Eligible</button>
+                <button class="filter-btn" onclick="filterOpenings('stipend', this)">💰 Paid / Commission</button>
             </div>
             <a href="#applyCrewFormCard" class="btn-primary" style="padding: 10px 20px; font-size: 0.88rem;">Step Up for a Role &darr;</a>
         </div>
@@ -437,6 +437,48 @@
                 </div>
             </div>
 
+            <!-- Position #4: Marketing & Sponsorship Coordinator -->
+            <div class="opening-card" data-category="media stipend" style="max-width: 920px; margin: 0 auto; width: 100%;">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                        <span class="comp-badge comp-flexible">💰 Commission-Based Compensation (Per Secured Sponsorship)</span>
+                        <span class="status-pill" style="border-color: rgba(255, 204, 0, 0.5); color: var(--chase-yellow);">🤝 Partnerships &amp; League Growth</span>
+                    </div>
+                    <span style="font-size: 0.78rem; font-weight: 800; color: #00d4ff; text-transform: uppercase; letter-spacing: 1px;">Position #4 &bull; Marketing &amp; Sponsorships</span>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.65rem; color: #fff; margin: 6px 0 10px 0;">Marketing &amp; Sponsorship Coordinator</h3>
+                    <p style="color: #ccc; font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">
+                        The Bandit Racing League is seeking a driven, results-oriented <strong>Marketing &amp; Sponsorship Coordinator</strong> to connect the league with title sponsors, race-entitlement partners, and brand supporters. This is a <strong>performance-based, commission-compensated position</strong> where compensation is negotiated per sponsorship package and paid directly upon the successful completion and funding of each sponsorship agreement.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 16px;">
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255, 204, 0, 0.35); padding: 16px 18px; border-radius: 10px;">
+                            <strong style="font-family: var(--font-heading); font-size: 0.85rem; color: var(--chase-yellow); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 8px;">💰 Compensation &amp; Payout Terms</strong>
+                            <ul class="duty-list" style="margin: 0;">
+                                <li><strong>Negotiated Per-Sponsorship Commission:</strong> Compensation is agreed upon on a per-sponsorship basis depending on the size and scope of the partnership (single-race entitlement, multi-race package, or full-season title sponsorship).</li>
+                                <li><strong>Definition of a "Locked-In" Sponsorship:</strong> A sponsorship is considered officially locked in once the sponsorship agreement is finalized <strong>and all sponsorship funds have been received and verified in full</strong> by the Bandit Racing League.</li>
+                                <li><strong>10-Day Payout Guarantee:</strong> Once a sponsorship contract is financially fulfilled and all funds have cleared verification, your agreed-upon commission will be issued <strong>within 10 calendar days</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(0, 212, 255, 0.3); padding: 16px 18px; border-radius: 10px;">
+                            <strong style="font-family: var(--font-heading); font-size: 0.85rem; color: #00d4ff; text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 8px;">🤝 Key Responsibilities</strong>
+                            <ul class="duty-list" style="margin: 0;">
+                                <li><strong>Sponsor Outreach &amp; Acquisition:</strong> Identify, pitch, and secure businesses, sim-racing brands, or community partners interested in sponsoring Bandit Racing League broadcasts, weekly races, or seasonal championships.</li>
+                                <li><strong>Partnership Proposals:</strong> Present league viewership, website traffic, social reach, and broadcast branding opportunities to prospective sponsors.</li>
+                                <li><strong>Sponsor Fulfillment Coordination:</strong> Work with league leadership and the broadcaster to ensure all promised sponsor logos, reads, and website placements are delivered professionally.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <span style="font-size: 0.85rem; color: #aaa;">⏰ <strong>Payout Window:</strong> Issued within 10 days of verified sponsorship funding</span>
+                    <button class="btn-primary" style="padding: 12px 24px; font-size: 0.9rem; border: none; cursor: pointer;" onclick="selectRoleAndScroll('Marketing & Sponsorship Coordinator', 'Commission-Based (Per Locked-In Sponsorship)')">
+                        Apply for Marketing Role &rarr;
+                    </button>
+                </div>
+            </div>
+
         </div>
 
         <!-- Interactive "Step Up / Apply for a Role" Form -->
@@ -473,21 +515,22 @@
                         <option value="Live Race Control Director / Official">Live Race Control Director / Official</option>
                         <option value="Social Media & Content Coordinator">Social Media &amp; Content Coordinator</option>
                         <option value="League Administrator / Operations Admin">League Administrator / Operations Admin</option>
+                        <option value="Marketing & Sponsorship Coordinator">Marketing &amp; Sponsorship Coordinator</option>
                     </select>
                 </div>
                 <div>
                     <label class="crew-label" for="crewCompType">Compensation / Role Preference *</label>
                     <select id="crewCompType" class="crew-select">
                         <option value="Paid Position (With Verifiable Resume & References)">💰 Paid Position (With Verifiable Resume &amp; References)</option>
+                        <option value="Commission-Based (Per Locked-In Sponsorship)">🤝 Commission-Based (Per Locked-In Sponsorship)</option>
                         <option value="Volunteer Crew (Happy to help the league)">🟢 Volunteer Crew (Happy to help the league)</option>
-                        <option value="Open to Either Volunteer or Paid">Open to Either Volunteer or Paid</option>
                     </select>
                 </div>
             </div>
 
             <div style="margin-bottom: 20px;">
                 <label class="crew-label" for="crewExperience">Resume, League References &amp; Experience *</label>
-                <textarea id="crewExperience" class="crew-textarea" rows="4" placeholder="For paid positions (such as Live Race Control), please list the leagues/series you have officiated and provide verifiable reference contacts (League Owners, Broadcasters, or Discord handles). For volunteer roles, share your interests or links to past content..."></textarea>
+                <textarea id="crewExperience" class="crew-textarea" rows="4" placeholder="For Live Race Control, please list the leagues/series you have officiated and provide verifiable reference contacts. For Marketing, share your sponsorship/outreach background. For Volunteer roles, tell us how you'd like to help..."></textarea>
             </div>
 
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
@@ -511,7 +554,7 @@
         </div>
     </footer>
 
-    <script src="db_config.js?v=1793118540"></script>
+    <script src="db_config.js?v=1793118891"></script>
     <script>
         function filterOpenings(category, btnEl) {
             const buttons = document.querySelectorAll("#roleFilterRow .filter-btn");
