@@ -239,6 +239,8 @@ def main():
         banner_heading = f"Upcoming Broadcast: {next_race['track']} ({next_race['date']} @ 9:00 PM EST)"
         sub_caption = f"Latest Completed Broadcast Replay: <strong>{vid_title}</strong> &bull; <a href='https://www.youtube.com/watch?v={vid_id}' target='_blank' style='color: var(--neon-green); font-weight: bold;'>Watch Full Broadcast on YouTube &rarr;</a><br><span style='font-size: 0.85rem; color: #999;'>(Synced daily with <a href='https://www.youtube.com/@simtraxbroadcasting/streams' target='_blank' style='color: #aaa;'>@simtraxbroadcasting</a> — upcoming {next_race['short']} stream link &amp; banner auto-update as soon as posted)</span>"
 
+    changed = False
+
     # 1. Update weekly_data.js
     if os.path.exists(WEEKLY_DATA_PATH):
         with open(WEEKLY_DATA_PATH, "r", encoding="utf-8") as f:
@@ -246,6 +248,12 @@ def main():
         m = re.search(r"const\s+weeklyData\s*=\s*(\{.*\});", w_content, re.S)
         if m:
             w_data = json.loads(m.group(1))
+            if (
+                w_data.get("latestBroadcastVideoId") != vid_id
+                or w_data.get("latestBroadcastIsUpcoming") != is_upcoming_featured
+                or w_data.get("latestBroadcastBanner") != banner_rel_path
+            ):
+                changed = True
             w_data["latestBroadcastVideoId"] = vid_id
             w_data["latestBroadcastTitle"] = vid_title
             w_data["latestBroadcastIsUpcoming"] = is_upcoming_featured
@@ -286,9 +294,27 @@ def main():
             s_html_new
         )
 
-        with open(SIMTRAX_HTML_PATH, "w", encoding="utf-8") as f:
-            f.write(s_html_new)
-        print(f"[+] Updated {SIMTRAX_HTML_PATH} with video {vid_id} ({vid_title})")
+        if s_html_new != s_html:
+            changed = True
+            with open(SIMTRAX_HTML_PATH, "w", encoding="utf-8") as f:
+                f.write(s_html_new)
+            print(f"[+] Updated {SIMTRAX_HTML_PATH} with video {vid_id} ({vid_title})")
+
+    # 3. If changed, apply cache-busting and auto-push to GitHub so live site updates
+    if changed and os.path.exists(os.path.join(BASE_DIR, ".git")):
+        import subprocess
+        print("[*] Broadcast update detected! Running cache-busting and pushing to GitHub...")
+        subprocess.run(["python", "apply_cache_busting.py"], cwd=BASE_DIR)
+        subprocess.run(["git", "add", "simtrax.html", "weekly_data.js", banner_rel_path], cwd=BASE_DIR)
+        subprocess.run(["git", "add", "-u"], cwd=BASE_DIR)
+        subprocess.run(["git", "commit", "-m", f"Auto-sync SimTrax broadcast: {vid_title} ({vid_id})"], cwd=BASE_DIR)
+        push_res = subprocess.run(["git", "push", "origin", "main"], cwd=BASE_DIR, capture_output=True, text=True)
+        if push_res.returncode == 0:
+            print("[+] Successfully pushed SimTrax broadcast update to GitHub Pages!")
+        else:
+            print(f"[!] Git push warning:\n{push_res.stderr}")
+    else:
+        print("[*] SimTrax broadcast already up-to-date on website.")
 
 
 if __name__ == "__main__":
