@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793118289">
+    <link rel="stylesheet" href="styles.css?v=1793118540">
 
     <style>
         .crew-hero {
@@ -292,7 +292,7 @@
         <!-- Filter Buttons -->
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
             <div class="filter-row" id="roleFilterRow" style="margin-bottom: 0;">
-                <button class="filter-btn active" onclick="filterOpenings('all', this)">All Openings (2)</button>
+                <button class="filter-btn active" onclick="filterOpenings('all', this)">All Openings (3)</button>
                 <button class="filter-btn" onclick="filterOpenings('race-control', this)">🏁 Race Control &amp; Stewarding</button>
                 <button class="filter-btn" onclick="filterOpenings('media', this)">🎨 Social Media &amp; Graphics</button>
                 <button class="filter-btn" onclick="filterOpenings('volunteer', this)">🟢 Volunteer Crew</button>
@@ -393,6 +393,50 @@
                 </div>
             </div>
 
+            <!-- Position #3: League Administrator / Operations Admin -->
+            <div class="opening-card" data-category="race-control volunteer" style="max-width: 920px; margin: 0 auto; width: 100%;">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                        <span class="comp-badge comp-volunteer">🟢 Volunteer Crew Position</span>
+                        <span class="status-pill" style="border-color: rgba(57, 255, 20, 0.45); color: var(--neon-green);">⚙️ League Operations &amp; Driver Relations</span>
+                    </div>
+                    <span style="font-size: 0.78rem; font-weight: 800; color: #00d4ff; text-transform: uppercase; letter-spacing: 1px;">Position #3 &bull; League Administration &amp; Stewarding</span>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.65rem; color: #fff; margin: 6px 0 10px 0;">League Administrator / Operations Admin</h3>
+                    <p style="color: #ccc; font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">
+                        The Bandit Racing League is seeking dependable, level-headed <strong>League Administrators</strong> to help manage day-to-day league operations, assist drivers, and keep weekly sessions and post-race procedures running smoothly. This is a <strong>volunteer crew position</strong> suited for trusted league members who care about fair competition, clear communication, and strong community standards.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 16px;">
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(57, 255, 20, 0.25); padding: 16px 18px; border-radius: 10px;">
+                            <strong style="font-family: var(--font-heading); font-size: 0.85rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 8px;">⚙️ Key Responsibilities</strong>
+                            <ul class="duty-list" style="margin: 0;">
+                                <li><strong>Driver Onboarding &amp; Roster Support:</strong> Help welcome new applicants in Discord, verify car numbers/registrations, and answer questions about league rules and race-night procedures.</li>
+                                <li><strong>Session &amp; Schedule Setup Support:</strong> Assist with weekly practice/race session checks, weather/setup verification, and pre-race drivers' meeting announcements.</li>
+                                <li><strong>Post-Race Review &amp; Steward Panel:</strong> Participate in post-race incident reviews, evaluate replay clips objectively against the Bandit Racing League Rulebook, and vote on penalty/Wall of Shame determinations (automatically recusing yourself from any incident involving your own car or team).</li>
+                                <li><strong>Discord &amp; Community Moderation:</strong> Help keep Discord channels organized, constructive, and respectful throughout the week.</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(0, 212, 255, 0.3); padding: 16px 18px; border-radius: 10px;">
+                            <strong style="font-family: var(--font-heading); font-size: 0.85rem; color: #00d4ff; text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 8px;">✨ What We're Looking For</strong>
+                            <ul class="duty-list" style="margin: 0;">
+                                <li><strong>Fairness &amp; Objectivity:</strong> Able to separate on-track competition from admin duties and make impartial decisions by the book.</li>
+                                <li><strong>Strong Knowledge of the BRL Rulebook:</strong> Familiar with Bandit Racing League rules, point structures, and racing etiquette.</li>
+                                <li><strong>Active &amp; Approachable:</strong> Regularly active on Discord and available around race nights to support the grid.</li>
+                                <li><strong>Team-First Mindset:</strong> Willing to collaborate with fellow admins and league leadership to continually improve the league.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <span style="font-size: 0.85rem; color: #aaa;">⏰ <strong>Schedule:</strong> Weekly League Operations &amp; Post-Race Review (Active Drivers Welcome)</span>
+                    <button class="btn-primary" style="padding: 12px 24px; font-size: 0.9rem; border: none; cursor: pointer;" onclick="selectRoleAndScroll('League Administrator / Operations Admin', 'Volunteer Crew (Happy to help the league)')">
+                        Step Up for Volunteer Role &rarr;
+                    </button>
+                </div>
+            </div>
+
         </div>
 
         <!-- Interactive "Step Up / Apply for a Role" Form -->
@@ -428,6 +472,7 @@
                     <select id="crewRoleSelect" class="crew-select">
                         <option value="Live Race Control Director / Official">Live Race Control Director / Official</option>
                         <option value="Social Media & Content Coordinator">Social Media &amp; Content Coordinator</option>
+                        <option value="League Administrator / Operations Admin">League Administrator / Operations Admin</option>
                     </select>
                 </div>
                 <div>
@@ -466,7 +511,7 @@
         </div>
     </footer>
 
-    <script src="db_config.js?v=1793118289"></script>
+    <script src="db_config.js?v=1793118540"></script>
     <script>
         function filterOpenings(category, btnEl) {
             const buttons = document.querySelectorAll("#roleFilterRow .filter-btn");
