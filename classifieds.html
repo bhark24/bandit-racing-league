@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classifieds | Bandit Racing League</title>
+    <!-- SEO & Page Previews -->
+    <meta name="description" content="Bandit Racing League Sim-Racing & PC Classifieds. Buy and sell wheelbases, pedals, cockpits, monitors, VR headsets, and PC hardware within the league community.">
+    <meta name="keywords" content="Bandit Racing League, Sim Racing Classifieds, Used Sim Gear, iRacing Hardware For Sale, PC Parts Classifieds">
+
+    <!-- Open Graph / Discord Previews -->
+    <meta property="og:title" content="Bandit Racing League - Sim & PC Classifieds">
+    <meta property="og:description" content="Buy and sell PC and Sim-Racing hardware with fellow Bandit Racing League drivers. 60-day active listings, Admin-verified.">
+    <meta property="og:image" content="https://banditracingleague.net/assets/main-logo.png">
+    <meta property="og:url" content="https://banditracingleague.net/classifieds.html">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#39ff14">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=1793119539">
+
+    <style>
+        .classifieds-hero {
+            position: relative;
+            min-height: 36vh;
+            padding: 85px 20px 55px 20px;
+            background: radial-gradient(circle at 50% 25%, rgba(57, 255, 20, 0.16), rgba(10, 12, 16, 0.96) 72%),
+                        linear-gradient(135deg, #0b0d12 0%, #131822 100%);
+            border-bottom: 3px solid var(--neon-green);
+            text-align: center;
+            overflow: hidden;
+        }
+        .classifieds-badge-top {
+            display: inline-block;
+            background: rgba(57, 255, 20, 0.12);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 14px;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.25);
+        }
+        .rules-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .rule-box {
+            background: rgba(20, 22, 28, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-family: var(--font-heading);
+            font-size: 0.84rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-btn:hover {
+            border-color: var(--neon-green);
+            color: #fff;
+        }
+        .filter-btn.active {
+            background: var(--neon-green);
+            color: #000;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.35);
+        }
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+            margin-bottom: 45px;
+        }
+        .listing-card {
+            background: linear-gradient(145deg, rgba(24, 27, 34, 0.96), rgba(14, 16, 22, 0.98));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        .listing-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(57, 255, 20, 0.55);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55), 0 0 20px rgba(57, 255, 20, 0.15);
+        }
+        .listing-card.is-sold {
+            opacity: 0.72;
+            border-color: rgba(255, 77, 77, 0.4);
+        }
+        .listing-img-wrap {
+            width: 100%;
+            height: 215px;
+            background: #0c0e13;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .listing-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .listing-img-wrap img:hover {
+            transform: scale(1.04);
+        }
+        .price-tag-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.88);
+            color: var(--neon-green);
+            border: 1.5px solid var(--neon-green);
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 900;
+            padding: 4px 14px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        }
+        .days-left-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.82);
+            color: var(--chase-yellow);
+            border: 1px solid rgba(255, 204, 0, 0.55);
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+        .sold-overlay-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ff1744;
+            color: #fff;
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 12px rgba(255, 23, 68, 0.6);
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .cls-input, .cls-select, .cls-textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: #101218;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        .cls-input:focus, .cls-select:focus, .cls-textarea:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+        }
+        .cls-label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--neon-green);
+            margin-bottom: 6px;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+        }
+        .small-action-btn {
+            background: rgba(255, 255, 255, 0.06);
+            color: #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 11px;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .small-action-btn:hover {
+            border-color: var(--chase-yellow);
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .listings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-mobile-header">
+                <a href="/index.html" class="nav-brand-mobile">BANDIT RACING LEAGUE</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="/apply.html" class="btn-secondary">Apply to League</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/standings.html">Standings</a></li>
+                <li><a href="/schedule.html">Schedule</a></li>
+                <li><a href="/results.html">Results</a></li>
+                <li><a href="/drivers.html">Drivers</a></li>
+                <li><a href="/teams.html">Teams</a></li>
+                <li><a href="/wall-of-shame.html">Wall of Shame</a></li>
+                <li><a href="/season17.html" style="color: var(--chase-yellow); font-weight: 900;">Season 17</a></li>
+                <li><a href="/crew-openings.html">Crew Openings</a></li>
+                <li><a href="/classifieds.html" class="active">Classifieds</a></li>
+                <li><a href="/merch.html">Merch</a></li>
+                <li><a href="/rulebook.html">Rulebook</a></li>
+                <li><a data-tooltip="Fantasy League" href="/fantasy.html"><img src="assets/fantasy-icon.png" alt="Fantasy League" style="height: 42px; width: 42px; border-radius: 50%; border: 1.5px solid var(--neon-green); vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.4)); object-fit: cover;"><span class="nav-icon-label">Fantasy League</span></a></li>
+                <li><a data-tooltip="Geezer App" href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"><span class="nav-icon-label">Geezer App</span></a></li>
+                <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><span class="nav-icon-label">SimTrax Broadcasting</span></a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="https://discord.gg/HSvP4UG2st" target="_blank" class="btn-primary">Join Discord</a>
+                <div class="qr-container">
+                    <img src="assets/discord-qr.png" alt="QR Code" style="height: 42px; border-radius: 4px; border: 2px solid var(--neon-green); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <div class="qr-popup">
+                        <img src="assets/discord-qr.png" style="width: 100%; border-radius: 4px;">
+                        <p style="margin-top: 10px; font-weight: bold; font-family: var(--font-heading); color: var(--neon-green); text-transform: uppercase;">Scan to Join!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <header class="classifieds-hero">
+        <div class="container" style="position: relative; z-index: 2;">
+            <span class="classifieds-badge-top">🛞 Sim-Racing &amp; PC Hardware Exchange</span>
+            <h1 class="hero-title" style="font-size: 3.6rem; margin-bottom: 10px;">
+                LEAGUE <span class="accent">CLASSIFIEDS</span>
+            </h1>
+            <p style="max-width: 800px; margin: 0 auto; color: #ccc; font-size: 1.06rem; line-height: 1.6;">
+                Buy, sell, and upgrade your rig with fellow Bandit Racing League drivers. Restricted strictly to <strong>PC &amp; Sim-Racing Hardware</strong>. All listings require <strong>Admin Approval</strong> and remain active for a maximum of <strong>60 days</strong>.
+            </p>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 35px; margin-bottom: 80px;">
+
+        <!-- Classifieds Rules Strip -->
+        <div class="rules-strip">
+            <div class="rule-box">
+                <span style="font-size: 1.55rem;">🖥️</span>
+                <div>
+                    <div style="font-family: var(--font-heading); font-weight: 900; color: var(--neon-green); text-transform: uppercase; font-size: 0.92rem;">PC &amp; Sim Gear Only</div>
+                    <p style="color: #aaa; font-size: 0.83rem; margin: 4px 0 0 0; line-height: 1.4;">Only sim-racing equipment (wheels, pedals, rigs, shifters, button boxes) and PC hardware/monitors/VR are permitted.</p>
+                </div>
+            </div>
+            <div class="rule-box">
+                <span style="font-size: 1.55rem;">⏳</span>
+                <div>
+                    <div style="font-family: var(--font-heading); font-weight: 900; color: var(--chase-yellow); text-transform: uppercase; font-size: 0.92rem;">60-Day Maximum Listing</div>
+                    <p style="color: #aaa; font-size: 0.83rem; margin: 4px 0 0 0; line-height: 1.4;">Items can only be listed for <strong>60 days</strong>. Any listing exceeding 60 days automatically expires and the owner must repost it for sale.</p>
+                </div>
+            </div>
+            <div class="rule-box">
+                <span style="font-size: 1.55rem;">🛡️</span>
+                <div>
+                    <div style="font-family: var(--font-heading); font-weight: 900; color: #00d4ff; text-transform: uppercase; font-size: 0.92rem;">Admin Approval Required</div>
+                    <p style="color: #aaa; font-size: 0.83rem; margin: 4px 0 0 0; line-height: 1.4;">All submitted items are reviewed by a League Admin before being published live to the website.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter & Action Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 24px;">
+            <div class="filter-row" id="clsFilterRow">
+                <button class="filter-btn active" onclick="filterClassifieds('all', this)">All Active (<span id="countAllActive">0</span>)</button>
+                <button class="filter-btn" onclick="filterClassifieds('controls', this)">🛞 Wheels &amp; Pedals</button>
+                <button class="filter-btn" onclick="filterClassifieds('rigs', this)">🪑 Cockpits &amp; Shifters</button>
+                <button class="filter-btn" onclick="filterClassifieds('pc', this)">🖥️ PCs, GPUs &amp; Parts</button>
+                <button class="filter-btn" onclick="filterClassifieds('displays', this)">🥽 Monitors &amp; VR</button>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button class="filter-btn" style="border-color: rgba(255, 204, 0, 0.5); color: var(--chase-yellow);" onclick="toggleAdminPanel()">
+                    🔒 Admin Queue (<span id="pendingCountBadge">0</span>)
+                </button>
+                <a href="#postListingFormCard" class="btn-primary" style="padding: 10px 20px; font-size: 0.88rem;">+ Post Item for Sale &darr;</a>
+            </div>
+        </div>
+
+        <!-- Admin Approval & Moderation Panel (Collapsed by default, unlocked with PIN 7223) -->
+        <div id="adminModerationCard" class="card" style="display: none; padding: 24px; margin-bottom: 35px; border: 2px solid var(--chase-yellow); background: rgba(20, 22, 28, 0.96);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid rgba(255, 204, 0, 0.25); padding-bottom: 14px; margin-bottom: 18px;">
+                <div>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--chase-yellow); text-transform: uppercase; font-style: italic; margin: 0;">
+                        🛡️ Classifieds Admin Approval Queue
+                    </h3>
+                    <p style="color: #aaa; font-size: 0.88rem; margin: 4px 0 0 0;">
+                        Approve pending PC &amp; Sim-Racing listings to publish them live (starts their 60-day listing window), or reject non-qualifying items.
+                    </p>
+                </div>
+                <div id="adminLockControls" style="display: flex; gap: 10px; align-items: center;">
+                    <input type="password" id="adminPinInput" class="cls-input" style="width: 150px; padding: 8px 12px;" placeholder="Admin PIN" onkeydown="if(event.key==='Enter') unlockAdminQueue()">
+                    <button class="btn-primary" style="padding: 9px 18px; font-size: 0.85rem; border: none; cursor: pointer;" onclick="unlockAdminQueue()">Unlock</button>
+                </div>
+            </div>
+            <div id="adminAuthStatus" style="color: #ff4d4d; font-size: 0.88rem; font-weight: bold; margin-bottom: 10px; display: none;"></div>
+            <div id="adminQueueContent" style="display: none;">
+                <!-- Populated dynamically when unlocked -->
+            </div>
+        </div>
+
+        <!-- Active Classified Listings Grid -->
+        <div class="listings-grid" id="classifiedsGrid">
+            <!-- Populated dynamically by JS -->
+        </div>
+
+        <!-- Post an Item for Sale Form -->
+        <div class="card neon-border" id="postListingFormCard" style="padding: 32px; max-width: 940px; margin: 0 auto 40px auto;">
+            <div style="border-bottom: 1px solid rgba(57, 255, 20, 0.25); padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.9rem; color: #fff; text-transform: uppercase; font-style: italic; margin: 0;">
+                        🏷️ Post a PC or Sim-Racing Item for Sale
+                    </h2>
+                    <p style="color: #aaa; font-size: 0.94rem; margin-top: 6px;">
+                        Submit your PC or Sim-Racing item below. Once approved by a League Admin, your listing will be live for <strong>60 days</strong>.
+                    </p>
+                </div>
+                <span style="background: rgba(255, 204, 0, 0.14); color: var(--chase-yellow); border: 1px solid rgba(255, 204, 0, 0.45); padding: 6px 14px; border-radius: 20px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 900; text-transform: uppercase;">
+                    ⏳ 60-Day Auto-Expiration
+                </span>
+            </div>
+
+            <div class="form-grid">
+                <div>
+                    <label class="cls-label" for="itemTitle">Item Title (PC or Sim Gear Only) *</label>
+                    <input type="text" id="itemTitle" class="cls-input" placeholder="e.g. Fanatec CSL DD 8Nm + McLaren GT3 Wheel">
+                </div>
+                <div>
+                    <label class="cls-label" for="itemCategory">Hardware Category *</label>
+                    <select id="itemCategory" class="cls-select">
+                        <option value="controls">🛞 Wheelbases, Wheels &amp; Pedals</option>
+                        <option value="rigs">🪑 Cockpits, Seats, Shifters &amp; Button Boxes</option>
+                        <option value="pc">🖥️ Gaming PCs, GPUs, CPUs &amp; Components</option>
+                        <option value="displays">🥽 Monitors, Triple Stands &amp; VR Headsets</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="cls-label" for="itemPrice">Asking Price (USD) *</label>
+                    <input type="text" id="itemPrice" class="cls-input" placeholder="e.g. $350 OBO or $120 Shipped">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div>
+                    <label class="cls-label" for="itemCondition">Item Condition *</label>
+                    <select id="itemCondition" class="cls-select">
+                        <option value="Like New">Like New</option>
+                        <option value="New / Open Box">New / Open Box</option>
+                        <option value="Good Working Condition">Good Working Condition</option>
+                        <option value="Fair / Normal Wear">Fair / Normal Wear</option>
+                        <option value="For Parts / Not Working">For Parts / Not Working</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="cls-label" for="itemShipping">Location / Shipping Terms *</label>
+                    <input type="text" id="itemShipping" class="cls-input" placeholder="e.g. Willing to Ship (Buyer Pays) or Pickup in OH">
+                </div>
+                <div>
+                    <label class="cls-label" for="sellerPin">4-Digit Seller PIN (To Mark Sold/Delete) *</label>
+                    <input type="password" id="sellerPin" class="cls-input" maxlength="8" placeholder="e.g. 1234">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div>
+                    <label class="cls-label" for="sellerName">Seller Name / iRacing Name *</label>
+                    <input type="text" id="sellerName" class="cls-input" placeholder="e.g. John Doe (#24)">
+                </div>
+                <div>
+                    <label class="cls-label" for="sellerContact">Contact Info (Discord Handle / Email) *</label>
+                    <input type="text" id="sellerContact" class="cls-input" placeholder="e.g. Discord: @johndoe24">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div>
+                    <label class="cls-label" for="itemPhotoFile">Upload Item Photo (From PC/Phone)</label>
+                    <input type="file" id="itemPhotoFile" accept="image/*" class="cls-input" style="padding: 9px 12px;">
+                </div>
+                <div>
+                    <label class="cls-label" for="itemPhotoUrl">OR Paste Direct Image URL (Optional)</label>
+                    <input type="url" id="itemPhotoUrl" class="cls-input" placeholder="https://...">
+                </div>
+            </div>
+
+            <div id="photoPreviewWrap" style="display: none; margin-bottom: 18px; align-items: center; gap: 14px; background: rgba(0,0,0,0.35); padding: 12px; border-radius: 10px; border: 1px solid rgba(57,255,20,0.3);">
+                <img id="photoPreviewImg" src="" alt="Preview" style="height: 80px; width: 110px; object-fit: cover; border-radius: 6px; border: 1px solid #444;">
+                <div>
+                    <strong style="color: var(--neon-green); font-size: 0.85rem; display: block;">📸 Photo Ready to Attach</strong>
+                    <button type="button" class="small-action-btn" style="margin-top: 6px;" onclick="clearSelectedPhoto()">Remove Photo</button>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label class="cls-label" for="itemDescription">Item Description, Specs &amp; Included Accessories *</label>
+                <textarea id="itemDescription" class="cls-textarea" rows="4" placeholder="Describe the item's condition, age, included cables/mounts, and payment methods accepted (PayPal Goods & Services, Venmo, Cash on pickup, etc.)..."></textarea>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <span style="color: #888; font-size: 0.83rem; max-width: 560px;">
+                    ⚠️ <strong>Note:</strong> Only PC &amp; Sim-Racing items are allowed. Listings automatically expire <strong>60 days</strong> after approval; if unsold after 60 days, you will need to repost the item.
+                </span>
+                <button id="submitListingBtn" class="btn-primary" style="padding: 14px 32px; font-family: var(--font-heading); font-size: 1.05rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: none;">
+                    Submit for Admin Approval &rarr;
+                </button>
+            </div>
+
+            <div id="listingFeedbackBanner" style="display: none; margin-top: 20px; padding: 16px 20px; border-radius: 10px; background: rgba(57, 255, 20, 0.12); border: 1px solid var(--neon-green); font-weight: bold; font-size: 0.96rem;"></div>
+        </div>
+
+        <!-- Standard League Disclaimer -->
+        <div style="max-width: 940px; margin: 0 auto; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 18px 22px; text-align: center; color: #888; font-size: 0.84rem; line-height: 1.55;">
+            <strong style="color: #bbb; text-transform: uppercase; letter-spacing: 0.5px;">⚖️ Bandit Racing League Classifieds Disclaimer:</strong>
+            All classified transactions are strictly between the buyer and seller. The Bandit Racing League provides this listing board as a community service for PC and Sim-Racing enthusiasts and does not guarantee, endorse, or assume any responsibility for payments, shipping, warranties, or item condition. Buyers and sellers are strongly encouraged to use protected payment methods (such as PayPal Goods &amp; Services) when shipping items.
+        </div>
+
+    </main>
+
+    <!-- Lightbox Image Modal -->
+    <div id="imageLightboxModal" onclick="this.style.display='none'" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; padding: 20px; cursor: zoom-out;">
+        <img id="lightboxImgEl" src="" alt="Enlarged Listing Photo" style="max-width: 92vw; max-height: 88vh; border-radius: 10px; border: 2px solid var(--neon-green); box-shadow: 0 0 35px rgba(0,0,0,0.8);">
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="db_config.js?v=1793119539"></script>
+    <script>
+        const SIXTY_DAYS_MS = 60 * 24 * 60 * 60 * 1000;
+        // SHA-256 hash for Admin PIN 7223
+        const ADMIN_PIN_HASH = "0f0c8d4b9faaa5b1f2f50e63a5d30555ad44062990678b573b3871d2375cf9d6";
+
+        let allListings = [];
+        let activeCategoryFilter = "all";
+        let isAdminUnlocked = sessionStorage.getItem("brl_classifieds_admin") === "true";
+        let compressedPhotoDataUrl = "";
+
+        const CATEGORY_LABELS = {
+            controls: "🛞 Wheels & Pedals",
+            rigs: "🪑 Cockpits & Shifters",
+            pc: "🖥️ PCs, GPUs & Parts",
+            displays: "🥽 Monitors & VR"
+        };
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+        }
+
+        function loadLocalClassifieds() {
+            try {
+                const raw = localStorage.getItem("brl_classified_listings");
+                if (raw) return JSON.parse(raw);
+            } catch (e) {}
+            return [];
+        }
+
+        function saveLocalClassifieds(list) {
+            try {
+                localStorage.setItem("brl_classified_listings", JSON.stringify(list));
+            } catch (e) {}
+        }
+
+        function getListingTimestamp(item) {
+            const ts = Date.parse(item.approvedAt || item.createdAt || "");
+            return isNaN(ts) ? Date.now() : ts;
+        }
+
+        function getDaysRemaining(item) {
+            const elapsed = Date.now() - getListingTimestamp(item);
+            const remainingMs = SIXTY_DAYS_MS - elapsed;
+            return Math.ceil(remainingMs / (24 * 60 * 60 * 1000));
+        }
+
+        function isExpired60Days(item) {
+            return (Date.now() - getListingTimestamp(item)) > SIXTY_DAYS_MS;
+        }
+
+        async function fetchClassifiedsFromSupabase() {
+            if (typeof SUPABASE_URL === "undefined" || !SUPABASE_URL) {
+                allListings = loadLocalClassifieds();
+                renderClassifiedsBoard();
+                return;
+            }
+            try {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                    method: "GET",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+                if (res.ok) {
+                    const rows = await res.json();
+                    if (rows && rows.length > 0 && rows[0].data && Array.isArray(rows[0].data.classifiedListings)) {
+                        allListings = rows[0].data.classifiedListings;
+                        saveLocalClassifieds(allListings);
+                    } else {
+                        allListings = loadLocalClassifieds();
+                    }
+                } else {
+                    allListings = loadLocalClassifieds();
+                }
+            } catch (e) {
+                console.warn("Using local fallback for classifieds:", e);
+                allListings = loadLocalClassifieds();
+            }
+            renderClassifiedsBoard();
+        }
+
+        async function syncClassifiedsToSupabase(updatedList) {
+            allListings = updatedList;
+            saveLocalClassifieds(allListings);
+            renderClassifiedsBoard();
+
+            if (typeof SUPABASE_URL === "undefined" || !SUPABASE_URL) return;
+            try {
+                let rowData = { picks: [], season17PollVotes: [], crewApplications: [], classifiedListings: allListings };
+                const getRes = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                    method: "GET",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+                if (getRes.ok) {
+                    const rows = await getRes.json();
+                    if (rows && rows.length > 0 && rows[0].data) {
+                        rowData = rows[0].data;
+                        rowData.classifiedListings = allListings;
+                    }
+                }
+
+                await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                    method: "PATCH",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`,
+                        "Content-Type": "application/json",
+                        "Prefer": "return=minimal"
+                    },
+                    body: JSON.stringify({
+                        data: rowData,
+                        updated_at: new Date().toISOString()
+                    })
+                });
+            } catch (e) {
+                console.error("Failed to sync classifieds to Supabase:", e);
+            }
+        }
+
+        function escapeHtml(str) {
+            return String(str || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        function renderClassifiedsBoard() {
+            const grid = document.getElementById("classifiedsGrid");
+            const pendingItems = allListings.filter(item => item.status === "pending");
+            const activeValidItems = allListings.filter(item => item.status === "approved" && !isExpired60Days(item));
+            const expiredItems = allListings.filter(item => item.status === "approved" && isExpired60Days(item));
+
+            document.getElementById("pendingCountBadge").textContent = pendingItems.length;
+            document.getElementById("countAllActive").textContent = activeValidItems.length;
+
+            // Filter by category
+            const visibleItems = activeCategoryFilter === "all"
+                ? activeValidItems
+                : activeValidItems.filter(i => i.category === activeCategoryFilter);
+
+            if (visibleItems.length === 0) {
+                grid.innerHTML = `
+                    <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 50px 25px; background: rgba(20, 22, 28, 0.85); border: 1px dashed rgba(255,255,255,0.2);">
+                        <div style="font-size: 3rem; margin-bottom: 12px;">🛞</div>
+                        <h3 style="font-family: var(--font-heading); font-size: 1.5rem; color: #fff; text-transform: uppercase; margin: 0 0 8px 0;">No Active Classified Listings in This Category</h3>
+                        <p style="color: #999; max-width: 520px; margin: 0 auto 20px auto; font-size: 0.95rem;">
+                            Have extra sim-racing gear or PC hardware collecting dust? List it below! All approved listings stay live for 60 days.
+                        </p>
+                        <a href="#postListingFormCard" class="btn-primary" style="padding: 11px 24px; font-size: 0.9rem;">+ Post the First Item</a>
+                    </div>
+                `;
+            } else {
+                grid.innerHTML = visibleItems.slice().reverse().map(item => {
+                    const daysLeft = Math.max(1, getDaysRemaining(item));
+                    const catLabel = CATEGORY_LABELS[item.category] || "🖥️ PC / Sim Gear";
+                    const isSold = Boolean(item.sold);
+                    const postedDate = new Date(getListingTimestamp(item)).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+                    const imgBlock = item.photo
+                        ? `<img src="${escapeHtml(item.photo)}" alt="${escapeHtml(item.title)}" onclick="openLightbox('${escapeHtml(item.photo)}')">`
+                        : `<div style="text-align: center; color: #555;"><div style="font-size: 3rem;">🛞</div><div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">No Photo Provided</div></div>`;
+
+                    return `
+                        <div class="listing-card ${isSold ? 'is-sold' : ''}">
+                            <div>
+                                <div class="listing-img-wrap">
+                                    ${imgBlock}
+                                    ${isSold ? `<span class="sold-overlay-badge">SOLD</span>` : ""}
+                                    <span class="days-left-badge" title="Listings automatically expire after 60 days">⏳ ${daysLeft} ${daysLeft === 1 ? 'Day' : 'Days'} Left (of 60)</span>
+                                    <span class="price-tag-badge">${isSold ? 'SOLD' : escapeHtml(item.price)}</span>
+                                </div>
+                                <div style="padding: 20px 22px 14px 22px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                        <span style="font-size: 0.74rem; font-weight: 800; color: #00d4ff; text-transform: uppercase; letter-spacing: 0.8px;">${catLabel}</span>
+                                        <span style="background: rgba(255,255,255,0.07); color: #ddd; padding: 3px 9px; border-radius: 5px; font-size: 0.73rem; font-weight: 700;">${escapeHtml(item.condition)}</span>
+                                    </div>
+                                    <h3 style="font-family: var(--font-heading); font-size: 1.35rem; color: #fff; margin: 0 0 10px 0; line-height: 1.25;">${escapeHtml(item.title)}</h3>
+                                    <p style="color: #ccc; font-size: 0.88rem; line-height: 1.5; margin: 0 0 14px 0; white-space: pre-line;">${escapeHtml(item.description)}</p>
+                                </div>
+                            </div>
+
+                            <div style="padding: 14px 22px 18px 22px; background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.07);">
+                                <div style="font-size: 0.82rem; color: #bbb; margin-bottom: 4px;">
+                                    👤 <strong>Seller:</strong> ${escapeHtml(item.sellerName)} &bull; <span style="color: #888;">Listed ${postedDate}</span>
+                                </div>
+                                <div style="font-size: 0.82rem; color: #bbb; margin-bottom: 4px;">
+                                    📦 <strong>Delivery:</strong> ${escapeHtml(item.shipping)}
+                                </div>
+                                <div style="font-size: 0.84rem; color: var(--neon-green); font-weight: bold; margin-bottom: 12px;">
+                                    💬 Contact: ${escapeHtml(item.sellerContact)}
+                                </div>
+                                <div style="display: flex; justify-content: flex-end; gap: 8px;">
+                                    ${!isSold ? `<button class="small-action-btn" onclick="markListingSold('${item.id}')">✅ Mark SOLD</button>` : ""}
+                                    <button class="small-action-btn" style="color: #ff6b6b; border-color: rgba(255,107,107,0.3);" onclick="removeListing('${item.id}')">🗑️ Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join("");
+            }
+
+            if (isAdminUnlocked) {
+                renderAdminQueue(pendingItems, expiredItems);
+            }
+        }
+
+        function renderAdminQueue(pendingItems, expiredItems) {
+            const lockControls = document.getElementById("adminLockControls");
+            const queueContent = document.getElementById("adminQueueContent");
+            if (lockControls) {
+                lockControls.innerHTML = `<span style="color: var(--neon-green); font-weight: bold; font-size: 0.85rem;">🔓 Admin Unlocked</span>`;
+            }
+            queueContent.style.display = "block";
+
+            let html = "";
+            if (pendingItems.length === 0) {
+                html += `<div style="padding: 16px; background: rgba(255,255,255,0.03); border-radius: 8px; color: #aaa; font-size: 0.9rem;">No listings currently awaiting Admin approval.</div>`;
+            } else {
+                html += `<div style="display: grid; gap: 14px;">` + pendingItems.map(item => `
+                    <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(255, 204, 0, 0.4); border-radius: 10px; padding: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                        <div style="display: flex; gap: 14px; align-items: center; max-width: 650px;">
+                            ${item.photo ? `<img src="${escapeHtml(item.photo)}" style="width: 80px; height: 65px; object-fit: cover; border-radius: 6px; border: 1px solid #444;">` : ""}
+                            <div>
+                                <span style="font-size: 0.72rem; color: var(--chase-yellow); font-weight: bold; text-transform: uppercase;">Pending Approval &bull; ${escapeHtml(CATEGORY_LABELS[item.category] || item.category)}</span>
+                                <h4 style="margin: 2px 0 4px 0; color: #fff; font-size: 1.1rem;">${escapeHtml(item.title)} — <span style="color: var(--neon-green);">${escapeHtml(item.price)}</span></h4>
+                                <p style="margin: 0 0 4px 0; color: #ccc; font-size: 0.84rem;">${escapeHtml(item.description)}</p>
+                                <span style="font-size: 0.78rem; color: #999;">Seller: <strong>${escapeHtml(item.sellerName)}</strong> (${escapeHtml(item.sellerContact)}) &bull; ${escapeHtml(item.shipping)}</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn-primary" style="padding: 9px 16px; font-size: 0.82rem; border: none; cursor: pointer;" onclick="approvePendingListing('${item.id}')">✅ Approve (Start 60 Days)</button>
+                            <button class="small-action-btn" style="color: #ff4d4d; border-color: #ff4d4d; padding: 9px 14px;" onclick="rejectPendingListing('${item.id}')">❌ Reject</button>
+                        </div>
+                    </div>
+                `).join("") + `</div>`;
+            }
+
+            if (expiredItems.length > 0) {
+                html += `
+                    <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #aaa; font-size: 0.85rem;">⏰ <strong>${expiredItems.length}</strong> listing(s) have passed the 60-day limit and are automatically hidden from the public board.</span>
+                        <button class="small-action-btn" onclick="purgeExpiredListings()">🧹 Purge Expired (>60 Days)</button>
+                    </div>
+                `;
+            }
+
+            queueContent.innerHTML = html;
+        }
+
+        function toggleAdminPanel() {
+            const card = document.getElementById("adminModerationCard");
+            card.style.display = card.style.display === "none" ? "block" : "none";
+            if (isAdminUnlocked) {
+                renderClassifiedsBoard();
+            }
+        }
+
+        async function unlockAdminQueue() {
+            const pinInput = document.getElementById("adminPinInput");
+            const statusEl = document.getElementById("adminAuthStatus");
+            const val = (pinInput.value || "").trim();
+            if (!val) return;
+
+            const hashed = await sha256(val);
+            if (hashed === ADMIN_PIN_HASH) {
+                isAdminUnlocked = true;
+                sessionStorage.setItem("brl_classifieds_admin", "true");
+                statusEl.style.display = "none";
+                renderClassifiedsBoard();
+            } else {
+                statusEl.style.display = "block";
+                statusEl.textContent = "❌ Incorrect Admin PIN.";
+            }
+        }
+
+        async function approvePendingListing(itemId) {
+            if (!isAdminUnlocked) return;
+            const updated = allListings.map(item => {
+                if (item.id === itemId) {
+                    return {
+                        ...item,
+                        status: "approved",
+                        approvedAt: new Date().toISOString()
+                    };
+                }
+                return item;
+            });
+            await syncClassifiedsToSupabase(updated);
+        }
+
+        async function rejectPendingListing(itemId) {
+            if (!isAdminUnlocked) return;
+            if (!confirm("Reject and delete this pending classified listing?")) return;
+            const updated = allListings.filter(item => item.id !== itemId);
+            await syncClassifiedsToSupabase(updated);
+        }
+
+        async function purgeExpiredListings() {
+            if (!isAdminUnlocked) return;
+            const updated = allListings.filter(item => !(item.status === "approved" && isExpired60Days(item)));
+            await syncClassifiedsToSupabase(updated);
+        }
+
+        async function verifySellerOrAdminPin(item, actionLabel) {
+            if (isAdminUnlocked) return true;
+            const entered = prompt(`Enter your 4-Digit Seller PIN (or League Admin PIN) to ${actionLabel}:`);
+            if (entered === null) return false;
+            const clean = entered.trim();
+            const enteredHash = await sha256(clean);
+            if (enteredHash === ADMIN_PIN_HASH || enteredHash === item.pinHash) {
+                return true;
+            }
+            alert("Incorrect PIN! Only the Seller or a League Admin can modify this listing.");
+            return false;
+        }
+
+        async function markListingSold(itemId) {
+            const target = allListings.find(i => i.id === itemId);
+            if (!target) return;
+            const ok = await verifySellerOrAdminPin(target, "mark this item as SOLD");
+            if (!ok) return;
+
+            const updated = allListings.map(i => i.id === itemId ? { ...i, sold: true } : i);
+            await syncClassifiedsToSupabase(updated);
+        }
+
+        async function removeListing(itemId) {
+            const target = allListings.find(i => i.id === itemId);
+            if (!target) return;
+            const ok = await verifySellerOrAdminPin(target, "remove this listing");
+            if (!ok) return;
+
+            const updated = allListings.filter(i => i.id !== itemId);
+            await syncClassifiedsToSupabase(updated);
+        }
+
+        function filterClassifieds(cat, btnEl) {
+            activeCategoryFilter = cat;
+            document.querySelectorAll("#clsFilterRow .filter-btn").forEach(b => b.classList.remove("active"));
+            if (btnEl) btnEl.classList.add("active");
+            renderClassifiedsBoard();
+        }
+
+        function openLightbox(src) {
+            const modal = document.getElementById("imageLightboxModal");
+            const img = document.getElementById("lightboxImgEl");
+            img.src = src;
+            modal.style.display = "flex";
+        }
+
+        function clearSelectedPhoto() {
+            compressedPhotoDataUrl = "";
+            document.getElementById("itemPhotoFile").value = "";
+            document.getElementById("photoPreviewWrap").style.display = "none";
+        }
+
+        // Compress uploaded photo on client side so it stores cleanly in JSON
+        document.getElementById("itemPhotoFile").addEventListener("change", function(e) {
+            const file = e.target.files && e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = new Image();
+                img.onload = function() {
+                    const maxW = 850;
+                    const maxH = 650;
+                    let w = img.width;
+                    let h = img.height;
+                    if (w > maxW) {
+                        h = Math.round((h * maxW) / w);
+                        w = maxW;
+                    }
+                    if (h > maxH) {
+                        w = Math.round((w * maxH) / h);
+                        h = maxH;
+                    }
+                    const canvas = document.createElement("canvas");
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, w, h);
+                    compressedPhotoDataUrl = canvas.toDataURL("image/jpeg", 0.76);
+                    document.getElementById("photoPreviewImg").src = compressedPhotoDataUrl;
+                    document.getElementById("photoPreviewWrap").style.display = "flex";
+                };
+                img.src = ev.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        async function submitClassifiedListing() {
+            const title = (document.getElementById("itemTitle").value || "").trim();
+            const category = document.getElementById("itemCategory").value;
+            let price = (document.getElementById("itemPrice").value || "").trim();
+            const condition = document.getElementById("itemCondition").value;
+            const shipping = (document.getElementById("itemShipping").value || "").trim();
+            const sellerPin = (document.getElementById("sellerPin").value || "").trim();
+            const sellerName = (document.getElementById("sellerName").value || "").trim();
+            const sellerContact = (document.getElementById("sellerContact").value || "").trim();
+            const photoUrlInput = (document.getElementById("itemPhotoUrl").value || "").trim();
+            const description = (document.getElementById("itemDescription").value || "").trim();
+            const banner = document.getElementById("listingFeedbackBanner");
+            const btn = document.getElementById("submitListingBtn");
+
+            if (!title || !price || !shipping || !sellerPin || !sellerName || !sellerContact || !description) {
+                banner.style.display = "block";
+                banner.style.color = "#ff4d4d";
+                banner.style.borderColor = "#ff4d4d";
+                banner.textContent = "⚠️ Please fill out all required fields (Title, Price, Shipping, 4-Digit Seller PIN, Seller Name, Contact Info, and Description).";
+                return;
+            }
+
+            if (!price.startsWith("$") && /^\d/.test(price)) {
+                price = "$" + price;
+            }
+
+            btn.disabled = true;
+            btn.textContent = "Submitting for Approval...";
+
+            const pinHash = await sha256(sellerPin);
+            const finalPhoto = compressedPhotoDataUrl || photoUrlInput || "";
+
+            const newItem = {
+                id: "cls_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7),
+                title: title,
+                category: category,
+                price: price,
+                condition: condition,
+                shipping: shipping,
+                sellerName: sellerName,
+                sellerContact: sellerContact,
+                photo: finalPhoto,
+                description: description,
+                pinHash: pinHash,
+                status: "pending",
+                sold: false,
+                createdAt: new Date().toISOString(),
+                approvedAt: null
+            };
+
+            const updated = [...allListings, newItem];
+            await syncClassifiedsToSupabase(updated);
+
+            banner.style.display = "block";
+            banner.style.color = "var(--neon-green)";
+            banner.style.borderColor = "var(--neon-green)";
+            banner.innerHTML = `✅ Submitted! <strong>${escapeHtml(title)}</strong> is now in the <strong>Admin Approval Queue</strong>. Once approved by a League Admin, it will publish live on the Classifieds page for <strong>60 days</strong>.`;
+
+            document.getElementById("itemTitle").value = "";
+            document.getElementById("itemPrice").value = "";
+            document.getElementById("itemShipping").value = "";
+            document.getElementById("sellerPin").value = "";
+            document.getElementById("itemPhotoUrl").value = "";
+            document.getElementById("itemDescription").value = "";
+            clearSelectedPhoto();
+
+            btn.disabled = false;
+            btn.innerHTML = "Submit for Admin Approval &rarr;";
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleBtn = document.querySelector(".nav-toggle");
+            const navContainer = document.querySelector(".nav-container");
+            if (toggleBtn && navContainer) {
+                toggleBtn.addEventListener("click", function() {
+                    navContainer.classList.toggle("nav-open");
+                });
+            }
+
+            document.getElementById("submitListingBtn").addEventListener("click", submitClassifiedListing);
+            fetchClassifiedsFromSupabase();
+        });
+    </script>
+</body>
+</html>
