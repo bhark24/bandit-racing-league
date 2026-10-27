@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crew Openings | Bandit Racing League</title>
+    <!-- SEO & Page Previews -->
+    <meta name="description" content="Explore open crew positions at the Bandit Racing League! Join Race Control, the Incident Review Steward Panel, or our Social Media & Graphic Design team.">
+    <meta name="keywords" content="Bandit Racing League, Crew Openings, iRacing Race Control, iRacing Steward, Sim Racing Graphics, League Positions">
+
+    <!-- Open Graph / Discord Previews -->
+    <meta property="og:title" content="Bandit Racing League - Crew Openings">
+    <meta property="og:description" content="Step up and join the Bandit Racing League Operations & Media Crew. Volunteer and stipend-eligible positions available!">
+    <meta property="og:image" content="https://banditracingleague.net/assets/main-logo.png">
+    <meta property="og:url" content="https://banditracingleague.net/crew-openings.html">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#39ff14">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=1793117177">
+
+    <style>
+        .crew-hero {
+            position: relative;
+            min-height: 36vh;
+            padding: 85px 20px 55px 20px;
+            background: radial-gradient(circle at 50% 25%, rgba(57, 255, 20, 0.16), rgba(10, 12, 16, 0.96) 72%),
+                        linear-gradient(135deg, #0b0d12 0%, #131822 100%);
+            border-bottom: 3px solid var(--neon-green);
+            text-align: center;
+            overflow: hidden;
+        }
+        .crew-badge-top {
+            display: inline-block;
+            background: rgba(57, 255, 20, 0.12);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 14px;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.25);
+        }
+        .legend-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .legend-card {
+            background: rgba(20, 22, 28, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-btn:hover {
+            border-color: var(--neon-green);
+            color: #fff;
+        }
+        .filter-btn.active {
+            background: var(--neon-green);
+            color: #000;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.35);
+        }
+        .openings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 24px;
+            margin-bottom: 45px;
+        }
+        .opening-card {
+            background: linear-gradient(145deg, rgba(24, 27, 34, 0.96), rgba(14, 16, 22, 0.98));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .opening-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(57, 255, 20, 0.55);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55), 0 0 20px rgba(57, 255, 20, 0.15);
+        }
+        .comp-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 5px 12px;
+            border-radius: 6px;
+        }
+        .comp-volunteer {
+            background: rgba(57, 255, 20, 0.14);
+            color: var(--neon-green);
+            border: 1px solid rgba(57, 255, 20, 0.45);
+        }
+        .comp-stipend {
+            background: rgba(255, 204, 0, 0.15);
+            color: var(--chase-yellow);
+            border: 1px solid rgba(255, 204, 0, 0.5);
+        }
+        .comp-flexible {
+            background: rgba(0, 212, 255, 0.14);
+            color: #00d4ff;
+            border: 1px solid rgba(0, 212, 255, 0.45);
+        }
+        .status-pill {
+            display: inline-block;
+            font-family: var(--font-heading);
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.07);
+            color: #ddd;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .duty-list {
+            margin: 14px 0;
+            padding-left: 18px;
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+        .duty-list li {
+            margin-bottom: 6px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .crew-input, .crew-select, .crew-textarea {
+            width: 100%;
+            padding: 13px 15px;
+            background: #101218;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.96rem;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+        }
+        .crew-input:focus, .crew-select:focus, .crew-textarea:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+        }
+        .crew-label {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--neon-green);
+            margin-bottom: 6px;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+        }
+        @media (max-width: 768px) {
+            .openings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-mobile-header">
+                <a href="/index.html" class="nav-brand-mobile">BANDIT RACING LEAGUE</a>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="/apply.html" class="btn-secondary">Apply to League</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/standings.html">Standings</a></li>
+                <li><a href="/schedule.html">Schedule</a></li>
+                <li><a href="/results.html">Results</a></li>
+                <li><a href="/drivers.html">Drivers</a></li>
+                <li><a href="/teams.html">Teams</a></li>
+                <li><a href="/wall-of-shame.html">Wall of Shame</a></li>
+                <li><a href="/season17.html" style="color: var(--chase-yellow); font-weight: 900;">Season 17</a></li>
+                <li><a href="/crew-openings.html" class="active">Crew Openings</a></li>
+                <li><a href="/merch.html">Merch</a></li>
+                <li><a href="/rulebook.html">Rulebook</a></li>
+                <li><a data-tooltip="Fantasy League" href="/fantasy.html"><img src="assets/fantasy-icon.png" alt="Fantasy League" style="height: 42px; width: 42px; border-radius: 50%; border: 1.5px solid var(--neon-green); vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.4)); object-fit: cover;"><span class="nav-icon-label">Fantasy League</span></a></li>
+                <li><a data-tooltip="Geezer App" href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"><span class="nav-icon-label">Geezer App</span></a></li>
+                <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><span class="nav-icon-label">SimTrax Broadcasting</span></a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 15px;">
+                <a href="https://discord.gg/HSvP4UG2st" target="_blank" class="btn-primary">Join Discord</a>
+                <div class="qr-container">
+                    <img src="assets/discord-qr.png" alt="QR Code" style="height: 42px; border-radius: 4px; border: 2px solid var(--neon-green); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <div class="qr-popup">
+                        <img src="assets/discord-qr.png" style="width: 100%; border-radius: 4px;">
+                        <p style="margin-top: 10px; font-weight: bold; font-family: var(--font-heading); color: var(--neon-green); text-transform: uppercase;">Scan to Join!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <header class="crew-hero">
+        <div class="container" style="position: relative; z-index: 2;">
+            <span class="crew-badge-top">🛠️ League Operations &amp; Media Team</span>
+            <h1 class="hero-title" style="font-size: 3.6rem; margin-bottom: 10px;">
+                CREW <span class="accent">OPENINGS</span>
+            </h1>
+            <p style="max-width: 780px; margin: 0 auto; color: #ccc; font-size: 1.08rem; line-height: 1.6;">
+                It takes a dedicated pit crew behind the scenes to put on the premier short-track &amp; oval series in iRacing. Explore our open <strong>Volunteer Crew</strong> and <strong>Stipend / Per-Race Bonus</strong> roles below and step up to help shape the Bandit Racing League.
+            </p>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 35px; margin-bottom: 80px;">
+
+        <!-- Compensation / Role Status Legend -->
+        <div class="legend-bar">
+            <div class="legend-card">
+                <span style="font-size: 1.6rem;">🟢</span>
+                <div>
+                    <div style="font-family: var(--font-heading); font-weight: 900; color: var(--neon-green); text-transform: uppercase; font-size: 0.92rem;">Volunteer Crew Role</div>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.4;">Community-driven positions with official BRL Admin/Crew tags, league recognition, and priority driver/series perks.</p>
+                </div>
+            </div>
+            <div class="legend-card">
+                <span style="font-size: 1.6rem;">🟡</span>
+                <div>
+                    <div style="font-family: var(--font-heading); font-weight: 900; color: var(--chase-yellow); text-transform: uppercase; font-size: 0.92rem;">Paid / Per-Race Stipend Eligible</div>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.4;">Select operational roles eligible for per-race stipends, league entry credits, or seasonal bonuses based on commitment.</p>
+                </div>
+            </div>
+            <div class="legend-card">
+                <span style="font-size: 1.6rem;">🔵</span>
+                <div>
+                    <div style="font-family: var(--font-heading); font-weight: 900; color: #00d4ff; text-transform: uppercase; font-size: 0.92rem;">Flexible / Per-Project Media</div>
+                    <p style="color: #aaa; font-size: 0.84rem; margin: 4px 0 0 0; line-height: 1.4;">Creative &amp; social media roles open to both volunteer contributors and per-project/commission arrangements.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+            <div class="filter-row" id="roleFilterRow" style="margin-bottom: 0;">
+                <button class="filter-btn active" onclick="filterOpenings('all', this)">All Openings (4)</button>
+                <button class="filter-btn" onclick="filterOpenings('race-control', this)">🏁 Race Control &amp; Stewarding</button>
+                <button class="filter-btn" onclick="filterOpenings('media', this)">🎨 Social Media &amp; Graphics</button>
+                <button class="filter-btn" onclick="filterOpenings('volunteer', this)">🟢 Volunteer Crew</button>
+                <button class="filter-btn" onclick="filterOpenings('stipend', this)">🟡 Paid / Stipend Eligible</button>
+            </div>
+            <a href="#applyCrewFormCard" class="btn-primary" style="padding: 10px 20px; font-size: 0.88rem;">Step Up for a Role &darr;</a>
+        </div>
+
+        <!-- Open Positions Grid -->
+        <div class="openings-grid" id="openingsGrid">
+
+            <!-- Role 1: Live Race Control / Race Director -->
+            <div class="opening-card" data-category="race-control stipend volunteer">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+                        <span class="comp-badge comp-stipend">🟡 Per-Race Stipend or Volunteer</span>
+                        <span class="status-pill" style="border-color: rgba(255, 77, 77, 0.5); color: #ff6b6b;">🔥 High Priority Opening</span>
+                    </div>
+                    <span style="font-size: 0.75rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1px;">Race Control &amp; Live Officiating</span>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.45rem; color: #fff; margin: 4px 0 8px 0;">Live Race Control / Race Admin</h3>
+                    <p style="color: #bbb; font-size: 0.9rem; line-height: 1.5; margin-bottom: 12px;">
+                        Serve in the tower during official Sunday night Bandit Racing League events to keep cautions crisp, restarts accurate, and race flow smooth from green to checkered.
+                    </p>
+
+                    <div style="background: rgba(0,0,0,0.35); border-left: 3px solid var(--chase-yellow); padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.84rem; color: #ddd;">
+                        <strong>⏰ Time Commitment:</strong> Sunday Nights (approx. 8:45 PM – 10:15 PM EST during race sessions)
+                    </div>
+
+                    <strong style="font-family: var(--font-heading); font-size: 0.8rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 0.8px;">What You'll Do:</strong>
+                    <ul class="duty-list">
+                        <li>Monitor live race sessions from Race Control and manage caution periods, lucky dogs, and wave-arounds.</li>
+                        <li>Issue or clear in-sim black flags when warranted under the official BRL Rulebook.</li>
+                        <li>Coordinate live with drivers on Discord and with the SimTrax broadcast booth.</li>
+                        <li>Log key lap numbers of on-track incidents for post-race steward review.</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                    <span style="font-size: 0.8rem; color: #999;">Non-driving tower role on race night</span>
+                    <button class="btn-primary" style="padding: 10px 18px; font-size: 0.85rem; border: none; cursor: pointer;" onclick="selectRoleAndScroll('Live Race Control / Race Admin')">
+                        Step Up for Role &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Role 2: Post-Race Steward / Incident Review Panelist -->
+            <div class="opening-card" data-category="race-control volunteer">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+                        <span class="comp-badge comp-volunteer">🟢 Volunteer Crew</span>
+                        <span class="status-pill">⚡ Multiple Spots Open</span>
+                    </div>
+                    <span style="font-size: 0.75rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1px;">Officiating &amp; Wall of Shame Review</span>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.45rem; color: #fff; margin: 4px 0 8px 0;">Post-Race Incident Review Steward</h3>
+                    <p style="color: #bbb; font-size: 0.9rem; line-height: 1.5; margin-bottom: 12px;">
+                        Join the impartial Steward Panel that reviews weekly race incidents, votes on penalty determinations, and powers the official BRL Wall of Shame reports.
+                    </p>
+
+                    <div style="background: rgba(0,0,0,0.35); border-left: 3px solid var(--neon-green); padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.84rem; color: #ddd;">
+                        <strong>⏰ Time Commitment:</strong> Flexible async schedule (Sunday post-race through Tuesday evening)
+                    </div>
+
+                    <strong style="font-family: var(--font-heading); font-size: 0.8rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 0.8px;">What You'll Do:</strong>
+                    <ul class="duty-list">
+                        <li>Review replay files or incident clips from the weekly race and evaluate driver responsibility.</li>
+                        <li>Cast objective, rulebook-backed votes on warnings, point deductions, or EOL penalties.</li>
+                        <li>Recuse yourself automatically from any incident in which your own car or team is involved.</li>
+                        <li>Help ensure consistent, transparent officiating across the entire grid.</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                    <span style="font-size: 0.8rem; color: #999;">Active drivers &amp; non-drivers welcome</span>
+                    <button class="btn-primary" style="padding: 10px 18px; font-size: 0.85rem; border: none; cursor: pointer;" onclick="selectRoleAndScroll('Post-Race Incident Review Steward')">
+                        Step Up for Role &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Role 3: Social Media & Highlights Content Creator -->
+            <div class="opening-card" data-category="media volunteer stipend">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+                        <span class="comp-badge comp-flexible">🔵 Volunteer or Per-Project Bonus</span>
+                        <span class="status-pill">📹 Content &amp; Clips</span>
+                    </div>
+                    <span style="font-size: 0.75rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1px;">Media, Growth &amp; Highlights</span>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.45rem; color: #fff; margin: 4px 0 8px 0;">Social Media &amp; Highlights Creator</h3>
+                    <p style="color: #bbb; font-size: 0.9rem; line-height: 1.5; margin-bottom: 12px;">
+                        Showcase the action of the Bandit Racing League! Turn photo finishes, big saves, and wild Wall of Shame moments into shareable clips and weekly social posts.
+                    </p>
+
+                    <div style="background: rgba(0,0,0,0.35); border-left: 3px solid #00d4ff; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.84rem; color: #ddd;">
+                        <strong>⏰ Time Commitment:</strong> Flexible weekly (2–3 short clips or posts per week)
+                    </div>
+
+                    <strong style="font-family: var(--font-heading); font-size: 0.8rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 0.8px;">What You'll Do:</strong>
+                    <ul class="duty-list">
+                        <li>Clip exciting finishes, battles, and incidents from SimTrax YouTube broadcasts or iRacing replays.</li>
+                        <li>Post short-form highlights and race-day countdowns to TikTok, YouTube Shorts, Instagram Reels, X, or Facebook.</li>
+                        <li>Spotlight driver storylines, championship battles, and upcoming Season 17 news.</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                    <span style="font-size: 0.8rem; color: #999;">Great for clip editors &amp; creators</span>
+                    <button class="btn-primary" style="padding: 10px 18px; font-size: 0.85rem; border: none; cursor: pointer;" onclick="selectRoleAndScroll('Social Media & Highlights Creator')">
+                        Step Up for Role &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Role 4: Graphic Designer & Promo Artist -->
+            <div class="opening-card" data-category="media volunteer stipend">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+                        <span class="comp-badge comp-flexible">🔵 Volunteer or Per-Project Bonus</span>
+                        <span class="status-pill">🎨 Visual Design</span>
+                    </div>
+                    <span style="font-size: 0.75rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 1px;">Media, Flyers &amp; Branding</span>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.45rem; color: #fff; margin: 4px 0 8px 0;">Graphic Designer &amp; Promo Artist</h3>
+                    <p style="color: #bbb; font-size: 0.9rem; line-height: 1.5; margin-bottom: 12px;">
+                        Help craft the visual identity of the Bandit Racing League—from weekly event posters and Victory Lane graphics to custom renders and Season 17 artwork.
+                    </p>
+
+                    <div style="background: rgba(0,0,0,0.35); border-left: 3px solid #00d4ff; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.84rem; color: #ddd;">
+                        <strong>⏰ Time Commitment:</strong> Flexible per-event or per-project basis
+                    </div>
+
+                    <strong style="font-family: var(--font-heading); font-size: 0.8rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 0.8px;">What You'll Do:</strong>
+                    <ul class="duty-list">
+                        <li>Create weekly race preview flyers, podium/winner cards, and playoff bracket graphics.</li>
+                        <li>Design promotional banners for the website, Discord announcements, and special events.</li>
+                        <li>Optional: Assist drivers with custom paint schemes or iRacing car renders.</li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                    <span style="font-size: 0.8rem; color: #999;">Photoshop, Canva, or 3D Render skills</span>
+                    <button class="btn-primary" style="padding: 10px 18px; font-size: 0.85rem; border: none; cursor: pointer;" onclick="selectRoleAndScroll('Graphic Designer & Promo Artist')">
+                        Step Up for Role &rarr;
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Interactive "Step Up / Apply for a Role" Form -->
+        <div class="card neon-border" id="applyCrewFormCard" style="padding: 32px; max-width: 920px; margin: 0 auto;">
+            <div style="border-bottom: 1px solid rgba(57, 255, 20, 0.25); padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.9rem; color: #fff; text-transform: uppercase; font-style: italic; margin: 0;">
+                        🙋‍♂️ Step Up / Apply for a Crew Role
+                    </h2>
+                    <p style="color: #aaa; font-size: 0.95rem; margin-top: 6px;">
+                        Interested in helping out? Submit your info below and the Bandit Racing League leadership team will reach out to you on Discord.
+                    </p>
+                </div>
+                <span style="background: rgba(57, 255, 20, 0.12); color: var(--neon-green); border: 1px solid rgba(57, 255, 20, 0.4); padding: 6px 14px; border-radius: 20px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 900; text-transform: uppercase;">
+                    Direct to League Admins
+                </span>
+            </div>
+
+            <div class="form-grid">
+                <div>
+                    <label class="crew-label" for="crewName">Your Name / iRacing Name *</label>
+                    <input type="text" id="crewName" class="crew-input" placeholder="e.g. John Doe">
+                </div>
+                <div>
+                    <label class="crew-label" for="crewDiscord">Discord Username *</label>
+                    <input type="text" id="crewDiscord" class="crew-input" placeholder="e.g. @johndoe24">
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div>
+                    <label class="crew-label" for="crewRoleSelect">Role Applying For *</label>
+                    <select id="crewRoleSelect" class="crew-select">
+                        <option value="Live Race Control / Race Admin">Live Race Control / Race Admin</option>
+                        <option value="Post-Race Incident Review Steward">Post-Race Incident Review Steward</option>
+                        <option value="Social Media & Highlights Creator">Social Media &amp; Highlights Creator</option>
+                        <option value="Graphic Designer & Promo Artist">Graphic Designer &amp; Promo Artist</option>
+                        <option value="Multiple Roles / General League Help">Multiple Roles / General League Help</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="crew-label" for="crewCompType">Compensation / Role Preference *</label>
+                    <select id="crewCompType" class="crew-select">
+                        <option value="Open to Either Volunteer or Stipend">Open to Either Volunteer or Stipend</option>
+                        <option value="Volunteer Crew (Happy to help the league)">🟢 Volunteer Crew (Happy to help the league)</option>
+                        <option value="Paid / Per-Race Stipend Only">🟡 Paid / Per-Race Stipend Only</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label class="crew-label" for="crewExperience">Availability, Experience &amp; Notes (Optional)</label>
+                <textarea id="crewExperience" class="crew-textarea" rows="4" placeholder="Tell us about your Sunday night availability, past league admin/steward experience, or links to graphics/clips you've made..."></textarea>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <span style="color: #888; font-size: 0.85rem;">
+                    💡 You can also message League Leadership directly in our <a href="https://discord.gg/HSvP4UG2st" target="_blank" style="color: var(--neon-green); text-decoration: underline;">Official Discord Server</a>.
+                </span>
+                <button id="submitCrewBtn" class="btn-primary" style="padding: 14px 34px; font-family: var(--font-heading); font-size: 1.05rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: none;">
+                    Submit Crew Interest &rarr;
+                </button>
+            </div>
+
+            <!-- Feedback Banner -->
+            <div id="crewFeedbackBanner" style="display: none; margin-top: 20px; padding: 16px 20px; border-radius: 10px; background: rgba(57, 255, 20, 0.12); border: 1px solid var(--neon-green); font-weight: bold; font-size: 0.96rem;"></div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="db_config.js?v=1793117177"></script>
+    <script>
+        function filterOpenings(category, btnEl) {
+            const buttons = document.querySelectorAll("#roleFilterRow .filter-btn");
+            buttons.forEach(b => b.classList.remove("active"));
+            if (btnEl) btnEl.classList.add("active");
+
+            const cards = document.querySelectorAll("#openingsGrid .opening-card");
+            cards.forEach(card => {
+                if (category === "all") {
+                    card.style.display = "flex";
+                } else {
+                    const cats = (card.getAttribute("data-category") || "").split(" ");
+                    card.style.display = cats.includes(category) ? "flex" : "none";
+                }
+            });
+        }
+
+        function selectRoleAndScroll(roleName) {
+            const selectEl = document.getElementById("crewRoleSelect");
+            if (selectEl) {
+                selectEl.value = roleName;
+            }
+            const formCard = document.getElementById("applyCrewFormCard");
+            if (formCard) {
+                formCard.scrollIntoView({ behavior: "smooth", block: "start" });
+                setTimeout(() => {
+                    const nameInput = document.getElementById("crewName");
+                    if (nameInput) nameInput.focus();
+                }, 450);
+            }
+        }
+
+        async function submitCrewApplication() {
+            const nameInput = document.getElementById("crewName");
+            const discordInput = document.getElementById("crewDiscord");
+            const roleSelect = document.getElementById("crewRoleSelect");
+            const compSelect = document.getElementById("crewCompType");
+            const expInput = document.getElementById("crewExperience");
+            const btn = document.getElementById("submitCrewBtn");
+            const banner = document.getElementById("crewFeedbackBanner");
+
+            const applicantName = (nameInput.value || "").trim();
+            const discordHandle = (discordInput.value || "").trim();
+            const selectedRole = roleSelect.value;
+            const compPref = compSelect.value;
+            const notes = (expInput.value || "").trim();
+
+            if (!applicantName) {
+                banner.style.display = "block";
+                banner.style.color = "#ff4d4d";
+                banner.style.borderColor = "#ff4d4d";
+                banner.textContent = "⚠️ Please enter your Name or iRacing Name.";
+                nameInput.focus();
+                return;
+            }
+            if (!discordHandle) {
+                banner.style.display = "block";
+                banner.style.color = "#ff4d4d";
+                banner.style.borderColor = "#ff4d4d";
+                banner.textContent = "⚠️ Please enter your Discord Username so League Leadership can contact you.";
+                discordInput.focus();
+                return;
+            }
+
+            const newEntry = {
+                name: applicantName,
+                discord: discordHandle,
+                role: selectedRole,
+                preference: compPref,
+                notes: notes,
+                submittedAt: new Date().toISOString()
+            };
+
+            btn.disabled = true;
+            btn.textContent = "Submitting...";
+
+            // Save locally first
+            try {
+                const localRaw = localStorage.getItem("brl_crew_applications");
+                const localArr = localRaw ? JSON.parse(localRaw) : [];
+                localArr.push(newEntry);
+                localStorage.setItem("brl_crew_applications", JSON.stringify(localArr));
+            } catch (e) {}
+
+            // Save to Supabase row id=2 while preserving picks and season17PollVotes
+            try {
+                if (typeof SUPABASE_URL !== "undefined" && SUPABASE_URL) {
+                    let rowData = { picks: [], season17PollVotes: [], crewApplications: [newEntry] };
+                    const getRes = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                        method: "GET",
+                        headers: {
+                            "apikey": SUPABASE_KEY,
+                            "Authorization": `Bearer ${SUPABASE_KEY}`
+                        }
+                    });
+                    if (getRes.ok) {
+                        const rows = await getRes.json();
+                        if (rows && rows.length > 0 && rows[0].data) {
+                            rowData = rows[0].data;
+                            const apps = Array.isArray(rowData.crewApplications) ? rowData.crewApplications : [];
+                            apps.push(newEntry);
+                            rowData.crewApplications = apps;
+                        }
+                    }
+
+                    await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                        method: "PATCH",
+                        headers: {
+                            "apikey": SUPABASE_KEY,
+                            "Authorization": `Bearer ${SUPABASE_KEY}`,
+                            "Content-Type": "application/json",
+                            "Prefer": "return=minimal"
+                        },
+                        body: JSON.stringify({
+                            data: rowData,
+                            updated_at: new Date().toISOString()
+                        })
+                    });
+                }
+            } catch (e) {
+                console.warn("Saved crew application locally:", e);
+            }
+
+            banner.style.display = "block";
+            banner.style.color = "var(--neon-green)";
+            banner.style.borderColor = "var(--neon-green)";
+            banner.innerHTML = `✅ Thank you, <strong>${applicantName}</strong>! Your interest in <strong>${selectedRole}</strong> (${compPref}) has been logged for League Leadership. Feel free to ping an Admin in <a href="https://discord.gg/HSvP4UG2st" target="_blank" style="color: var(--chase-yellow); text-decoration: underline;">Discord</a> as well!`;
+
+            nameInput.value = "";
+            discordInput.value = "";
+            expInput.value = "";
+            btn.disabled = false;
+            btn.innerHTML = "Submit Crew Interest &rarr;";
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleBtn = document.querySelector(".nav-toggle");
+            const navContainer = document.querySelector(".nav-container");
+            if (toggleBtn && navContainer) {
+                toggleBtn.addEventListener("click", function() {
+                    navContainer.classList.toggle("nav-open");
+                });
+            }
+
+            document.getElementById("submitCrewBtn").addEventListener("click", submitCrewApplication);
+        });
+    </script>
+</body>
+</html>
