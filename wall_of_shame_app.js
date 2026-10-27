@@ -251,15 +251,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Render SVG Track Shapes (Gateway Oval vs Darlington Egg-Shape)
+    // Render SVG Track Shapes (Counter-Clockwise Travel: S/F -> Turn 1 & 2 -> Backstretch -> Turn 3 & 4 -> S/F)
     function renderTrackShape() {
-        let pathD = "M 230 70 L 570 70 A 130 130 0 0 1 570 330 L 230 330 A 130 130 0 0 1 230 70 Z";
+        let pathD = "M 400 330 L 570 330 A 130 130 0 0 0 570 70 L 230 70 A 130 130 0 0 0 230 330 L 400 330 Z";
         let turn12Label = "TURN 1 & 2";
         let turn34Label = "TURN 3 & 4";
 
         if (currentRaceData.trackType === "darlington_egg") {
-            // Darlington Narrow Turn 1/2 (Right side) & Wide Turn 3/4 (Left side)
-            pathD = "M 220 80 L 590 120 A 90 90 0 0 1 590 280 L 220 320 A 120 120 0 0 1 220 80 Z";
+            // Darlington Counter-Clockwise: S/F -> Narrow Turn 1/2 (Right) -> Backstretch -> Wide Turn 3/4 (Left)
+            pathD = "M 400 300 L 590 280 A 90 90 0 0 0 590 120 L 220 80 A 120 120 0 0 0 220 320 L 400 300 Z";
             turn12Label = "TURN 1 & 2 (NARROW)";
             turn34Label = "TURN 3 & 4 (SWEEPING)";
         }
@@ -271,11 +271,11 @@ document.addEventListener("DOMContentLoaded", () => {
             <path d="M 270 290 L 530 290" fill="none" stroke="#ff9500" stroke-width="4" stroke-dasharray="6 4"/>
             <line x1="400" y1="305" x2="400" y2="355" stroke="#ffffff" stroke-width="5"/>
             <line x1="400" y1="305" x2="400" y2="355" stroke="#ff3b30" stroke-width="5" stroke-dasharray="6 6"/>
-            <text x="710" y="205" fill="#8e8ea0" font-weight="800" font-size="12" text-anchor="middle">${turn12Label}</text>
-            <text x="90" y="205" fill="#8e8ea0" font-weight="800" font-size="12" text-anchor="middle">${turn34Label}</text>
-            <text x="400" y="38" fill="#8e8ea0" font-weight="800" font-size="13" text-anchor="middle">BACK STRETCH</text>
-            <text x="400" y="385" fill="#8e8ea0" font-weight="800" font-size="13" text-anchor="middle">FRONT STRETCH / S/F</text>
-            <text x="400" y="280" fill="#ff9500" font-weight="700" font-size="11" text-anchor="middle">PIT ROAD</text>
+            <text x="710" y="205" fill="#8e8ea0" font-weight="800" font-size="12" text-anchor="middle">${turn12Label} &#8593;</text>
+            <text x="90" y="205" fill="#8e8ea0" font-weight="800" font-size="12" text-anchor="middle">&#8595; ${turn34Label}</text>
+            <text x="400" y="38" fill="#8e8ea0" font-weight="800" font-size="13" text-anchor="middle">&#8592; BACK STRETCH &#8592;</text>
+            <text x="400" y="385" fill="#8e8ea0" font-weight="800" font-size="13" text-anchor="middle">&#8594; FRONT STRETCH / S/F &#8594;</text>
+            <text x="400" y="280" fill="#ff9500" font-weight="700" font-size="11" text-anchor="middle">PIT ROAD &#8594;</text>
         `;
     }
 
