@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1792638036">
+    <link rel="stylesheet" href="styles.css?v=1793067609">
     <style>
         .construction-banner {
             background: rgba(255, 204, 0, 0.05);
@@ -585,6 +585,15 @@
                 </div>
             </div>
 
+            <!-- Suspended Operations Banner -->
+            <div id="team-suspended-alert-banner" style="display:none; background: rgba(255, 23, 68, 0.08); border: 2px solid #ff1744; border-radius: var(--border-radius); padding: 20px; margin-bottom: 25px; align-items: center; gap: 20px; box-shadow: 0 0 25px rgba(255, 23, 68, 0.15); flex-wrap: wrap;">
+                <div style="font-size: 2.2rem; color: #ff1744; line-height: 1;">🚫</div>
+                <div style="flex-grow: 1; min-width: 250px;">
+                    <h3 style="margin: 0 0 6px 0; color: #ff1744; font-family: var(--font-heading); text-transform: uppercase; font-size: 1.35rem; letter-spacing: 1px; font-style: italic;">SUSPENDED OPERATIONS</h3>
+                    <p style="margin: 0; color: #ddd; font-size: 0.95rem; line-height: 1.5;">This franchise has officially suspended racing operations. All weekly race operations, driver signings, and fleet garage transactions are currently frozen.</p>
+                </div>
+            </div>
+
             <!-- Tab Buttons -->
             <div class="team-tabs">
                 <button class="team-tab-btn active" onclick="switchTeamTab('roster-tab')">DRIVERS AND THE GARAGE</button>
@@ -788,9 +797,9 @@
     </footer>
 
     <!-- Load the JavaScript Mock Database first -->
-    <script src="supabase_config.js?v=1792638036"></script>
-    <script src="teams_data.js?v=1792638036"></script>
-    <script src="roster_data.js?v=1792638036"></script>
+    <script src="supabase_config.js?v=1793067609"></script>
+    <script src="teams_data.js?v=1793067609"></script>
+    <script src="roster_data.js?v=1793067609"></script>
     <script>
         let selectedTeamId = null;
 
@@ -912,19 +921,24 @@
                 // Format balance to currency
                 const formattedBalance = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(team.balance);
                 const isForSale = team.isForSale || false;
+                const isSuspended = team.isSuspended || false;
 
                 const homeBaseBadge = isForSale 
                     ? ''
+                    : isSuspended
+                    ? `<span style="font-size:0.65rem; background:#ff1744; color:#fff; padding:4px 8px; border-radius:4px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px;">SUSPENDED</span>`
                     : `<span style="font-size:0.75rem; background:rgba(255,255,255,0.05); padding:4px 8px; border-radius:4px; color:var(--text-muted); font-weight:700; text-transform:uppercase;">${team.homeBase}</span>`;
 
                 const teamNameStyle = isForSale
                     ? 'color: #00ff00; font-family: var(--font-heading); font-size: 1.3rem; margin: 5px 0; font-style: italic; font-weight: 900; text-transform: uppercase;'
+                    : isSuspended
+                    ? 'color: #888; font-family: var(--font-heading); font-size: 1.3rem; margin: 5px 0; font-style: italic;'
                     : 'color: #fff; font-family: var(--font-heading); font-size: 1.3rem; margin: 5px 0; font-style: italic;';
                 const teamNameText = isForSale ? 'FRANCHISE AVAILABLE' : team.name;
 
                 card.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <img src="${team.logo}" alt="${team.name}" class="team-overview-logo" style="height: 45px; ${isForSale ? 'filter: grayscale(1) opacity(0.35);' : ''}" onerror="handleTeamLogoError(this, '${team.id}')">
+                        <img src="${team.logo}" alt="${team.name}" class="team-overview-logo" style="height: 45px; ${(isForSale || isSuspended) ? 'filter: grayscale(1) opacity(0.35);' : ''}" onerror="handleTeamLogoError(this, '${team.id}')">
                         ${homeBaseBadge}
                     </div>
                     <h3 style="${teamNameStyle}">${teamNameText}</h3>
@@ -936,13 +950,18 @@
                             <img src="assets/bandit_realty_sign.png" alt="Bandit Realty Sign" style="height: 48px; width: auto; object-fit: contain; margin-bottom: 4px; filter: drop-shadow(0 0 4px rgba(255,204,0,0.25)); z-index: 2;">
                             <div style="font-size: 0.65rem; color: #fff; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; z-index: 2;">Listed by Bandit Realty</div>
                         </div>
+                    ` : isSuspended ? `
+                        <div style="background: rgba(255, 23, 68, 0.08); border: 2px dashed #ff1744; border-radius: 6px; padding: 12px; margin: 10px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255,23,68,0.12);">
+                            <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.15rem; color: #ff1744; text-shadow: 0 0 8px rgba(255,23,68,0.4); text-transform: uppercase; line-height: 1.1; font-style: italic; text-align: center; margin-bottom: 4px; letter-spacing: 0.5px;">SUSPENDED OPERATIONS</div>
+                            <div style="font-size: 0.65rem; color: #bbb; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Franchise Inactive</div>
+                        </div>
                     ` : ''}
 
                     ${isForSale ? '' : `<p style="font-size:0.85rem; color:var(--text-muted); margin:0;">Owner: ${team.owner}</p>`}
-                    <div class="team-overview-balance" style="${isForSale ? 'color: var(--chase-yellow); font-size: 1.35rem; margin-top: 5px;' : ''}">${isForSale ? 'ACQUISITION VAL: $1,937,028' : formattedBalance}</div>
+                    <div class="team-overview-balance" style="${isForSale ? 'color: var(--chase-yellow); font-size: 1.35rem; margin-top: 5px;' : isSuspended ? 'color: #777; text-shadow: none;' : ''}">${isForSale ? 'ACQUISITION VAL: $1,937,028' : formattedBalance}</div>
                     <div style="font-size:0.8rem; color:var(--text-muted); border-top:1px solid #1c1c1c; padding-top:10px; margin-top:auto; display:flex; justify-content:space-between;">
                         <span>RACE CHASSIS:</span>
-                        <strong style="${isForSale ? 'color: #ff1744;' : 'color:var(--neon-green);'}">${isForSale ? 'LIQUIDATED' : calculateFleetCondition(team) + '% Avg'}</strong>
+                        <strong style="${(isForSale || isSuspended) ? 'color: #ff1744;' : 'color:var(--neon-green);'}">${isForSale ? 'LIQUIDATED' : isSuspended ? 'SUSPENDED' : calculateFleetCondition(team) + '% Avg'}</strong>
                     </div>
                 `;
                 container.appendChild(card);
@@ -1202,10 +1221,17 @@
 
             // Update Panel Headers
             const isForSale = team.isForSale || false;
+            const isSuspended = team.isSuspended || false;
             if (isForSale) {
                 document.getElementById('detail-team-name').innerHTML = `<span style="color: #00ff00; font-family: var(--font-heading); font-style: italic; font-weight: 900; text-transform: uppercase;">FRANCHISE AVAILABLE</span> <span style="font-size:0.8rem; background:var(--chase-yellow); color:#000; padding:2px 6px; border-radius:3px; font-weight:bold; margin-left:10px; vertical-align:middle; font-family:var(--font-heading); font-style:normal;">FOR SALE</span>`;
                 document.getElementById('detail-team-owner').innerHTML = `<span style="color:#888; font-style:italic;">None (Liquidated)</span>`;
                 document.getElementById('detail-team-balance-large').textContent = 'ACQUISITION VALUE: $1,937,028';
+                document.getElementById('detail-team-logo').style.filter = 'grayscale(1) opacity(0.4)';
+            } else if (isSuspended) {
+                document.getElementById('detail-team-name').innerHTML = `<span style="color: #888; font-family: var(--font-heading); font-style: italic;">${team.name}</span> <span style="font-size:0.8rem; background:#ff1744; color:#fff; padding:2px 8px; border-radius:3px; font-weight:bold; margin-left:10px; vertical-align:middle; font-family:var(--font-heading); font-style:normal;">SUSPENDED OPERATIONS</span>`;
+                document.getElementById('detail-team-owner').innerHTML = `<span style="color:#aaa;">${team.owner}</span> <span style="color:#ff1744; margin-left:6px; font-weight:bold; font-size:0.85rem;">(INACTIVE)</span>`;
+                const formattedBalance = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(team.balance);
+                document.getElementById('detail-team-balance-large').textContent = `${formattedBalance} (FROZEN)`;
                 document.getElementById('detail-team-logo').style.filter = 'grayscale(1) opacity(0.4)';
             } else {
                 document.getElementById('detail-team-name').textContent = team.name;
@@ -1224,6 +1250,16 @@
                     realtyBanner.style.display = 'flex';
                 } else {
                     realtyBanner.style.display = 'none';
+                }
+            }
+
+            // Toggle Suspended Operations Banner
+            const suspendedBanner = document.getElementById('team-suspended-alert-banner');
+            if (suspendedBanner) {
+                if (isSuspended) {
+                    suspendedBanner.style.display = 'flex';
+                } else {
+                    suspendedBanner.style.display = 'none';
                 }
             }
 
@@ -1326,16 +1362,18 @@
                 const suffix = (index + 1) === 1 ? 'st' : (index + 1) === 2 ? 'nd' : (index + 1) === 3 ? 'rd' : 'th';
                 const rankColor = index === 0 ? 'var(--neon-green)' : index === 1 ? '#eee' : 'var(--text-muted)';
                 const rankDisplay = `<span style="color:${rankColor}; font-weight:700;">${index + 1}${suffix}</span>`;
+                const isSuspended = team.isSuspended || false;
+                const statusBadge = isSuspended ? `<span style="font-size:0.65rem; background:#ff1744; color:#fff; padding:2px 6px; border-radius:3px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px; margin-left:8px;">SUSPENDED OPERATIONS</span>` : '';
                 
                 tr.innerHTML = `
                     <td style="font-family:var(--font-heading); font-weight:700; font-size:1.1rem; padding:12px 15px;">${rankDisplay}</td>
                     <td style="display:flex; align-items:center; gap:15px; padding:12px 15px;">
-                        <img src="${team.logo}" alt="${team.name}" style="height:35px; max-width:80px; object-fit:contain;" onerror="handleTeamLogoError(this, '${team.id}')">
-                        <strong style="color:#fff; font-size:1.05rem; font-style: italic;">${team.name}</strong>
+                        <img src="${team.logo}" alt="${team.name}" style="height:35px; max-width:80px; object-fit:contain; ${isSuspended ? 'filter: grayscale(1) opacity(0.4);' : ''}" onerror="handleTeamLogoError(this, '${team.id}')">
+                        <strong style="color:${isSuspended ? '#777' : '#fff'}; font-size:1.05rem; font-style: italic;">${team.name}</strong>${statusBadge}
                     </td>
                     <td style="color:var(--text-muted); padding:12px 15px;">${team.owner}</td>
-                    <td style="text-align:center; font-weight:bold; color:#fff; padding:12px 15px;">${team.wins}</td>
-                    <td style="text-align:right; font-family:var(--font-heading); font-size:1.2rem; font-weight:900; color:var(--neon-green); text-shadow:0 0 5px var(--neon-green-glow); padding:12px 15px;">${team.points}</td>
+                    <td style="text-align:center; font-weight:bold; color:${isSuspended ? '#777' : '#fff'}; padding:12px 15px;">${team.wins}</td>
+                    <td style="text-align:right; font-family:var(--font-heading); font-size:1.2rem; font-weight:900; color:${isSuspended ? '#777' : 'var(--neon-green)'}; ${isSuspended ? '' : 'text-shadow:0 0 5px var(--neon-green-glow);'} padding:12px 15px;">${team.points}</td>
                 `;
                 body.appendChild(tr);
             });
@@ -1387,10 +1425,12 @@
                         </div>
                     `;
                 } else {
-                    const isLocked = (team.loan || 0) > 0;
+                    const isSuspended = team.isSuspended || false;
+                    const isLocked = (team.loan || 0) > 0 || isSuspended;
+                    const lockLabel = isSuspended ? '🔒 Sign Locked (Suspended)' : '🔒 Sign Locked (Active Loan)';
                     const signBtnHTML = isLocked ? `
-                        <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: Active Emergency Loan">
-                            🔒 Sign Locked (Active Loan)
+                        <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked">
+                            ${lockLabel}
                         </button>
                     ` : `
                         <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="openSignDriverModal('${team.id}', 'primary', ${i})">
@@ -1445,10 +1485,12 @@
                         </div>
                     `;
                 } else {
-                    const isLocked = (team.loan || 0) > 0;
+                    const isSuspended = team.isSuspended || false;
+                    const isLocked = (team.loan || 0) > 0 || isSuspended;
+                    const lockLabel = isSuspended ? '🔒 Sign Locked (Suspended)' : '🔒 Sign Locked (Active Loan)';
                     const signBtnHTML = isLocked ? `
-                        <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: Active Emergency Loan">
-                            🔒 Sign Locked (Active Loan)
+                        <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked">
+                            ${lockLabel}
                         </button>
                     ` : `
                         <button class="btn-primary" style="margin-top: 5px; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: pointer; border-radius: var(--border-radius);" onclick="openSignDriverModal('${team.id}', 'backup', ${i})">
@@ -1589,11 +1631,12 @@
             const repairAllCont = document.getElementById('repair-all-container');
             if (repairAllCont) {
                 if (damagedTrucksCount > 0) {
-                    const isLocked = (team.loan || 0) > 0;
+                    const isLocked = (team.loan || 0) > 0 || team.isSuspended;
+                    const lockReason = team.isSuspended ? 'Suspended Operations' : 'Active Loan';
                     if (isLocked) {
                         repairAllCont.innerHTML = `
-                            <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: Active Emergency Loan">
-                                🔒 Repair Selected Locked (Active Loan)
+                            <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: ${lockReason}">
+                                🔒 Repair Selected Locked (${lockReason})
                             </button>
                         `;
                     } else {
@@ -1648,11 +1691,12 @@
                 let repairBtnHTML = '';
                 if (truck.condition < 100) {
                     const cost = (100 - truck.condition) * 500;
-                    const isLocked = (team.loan || 0) > 0;
+                    const isLocked = (team.loan || 0) > 0 || team.isSuspended;
+                    const lockReason = team.isSuspended ? 'Suspended Operations' : 'Active Loan';
                     if (isLocked) {
                         repairBtnHTML = `
-                            <button class="btn-primary" style="margin-top: 10px; padding: 6px 12px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: Active Emergency Loan">
-                                🔒 Repair Locked (Active Loan)
+                            <button class="btn-primary" style="margin-top: 10px; padding: 6px 12px; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; cursor: not-allowed; border-radius: var(--border-radius); opacity: 0.5; background: #333; border-color: #444;" disabled title="Action Locked: ${lockReason}">
+                                🔒 Repair Locked (${lockReason})
                             </button>
                         `;
                     } else {
@@ -1719,6 +1763,11 @@
             const truck = team.trucks.find(tr => tr.id === truckId);
             if (!truck) return;
             
+            if (team.isSuspended) {
+                alert("Action Locked: This franchise has suspended racing operations.");
+                return;
+            }
+
             if (team.loan > 0) {
                 alert(`Action Locked: This team has an active emergency loan ($${new Intl.NumberFormat('en-US').format(team.loan)}). Manual chassis repairs are locked until the loan is fully repaid.`);
                 return;
@@ -1829,6 +1878,11 @@
             const team = teamsData.teams.find(t => t.id === teamId);
             if (!team) return;
             
+            if (team.isSuspended) {
+                alert("Action Locked: This franchise has suspended racing operations.");
+                return;
+            }
+
             if (team.loan > 0) {
                 alert(`Action Locked: This team has an active emergency loan ($${new Intl.NumberFormat('en-US').format(team.loan)}). Manual chassis repairs are locked until the loan is fully repaid.`);
                 return;
@@ -2589,6 +2643,8 @@
                                 savedTeam.homeBase = serverTeam.homeBase;
                                 savedTeam.logo = serverTeam.logo;
                                 savedTeam.passcodeHash = serverTeam.passcodeHash;
+                                savedTeam.isSuspended = serverTeam.isSuspended;
+                                savedTeam.isForSale = serverTeam.isForSale;
                                 return savedTeam;
                             }
                             return serverTeam;

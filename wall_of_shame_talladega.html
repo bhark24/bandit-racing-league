@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall of Shame - Talladega Superspeedway | Bandit Racing League</title>
+    <style>
+        :root {
+            --bg-color: #0f1117;
+            --card-bg: #1a1d26;
+            --card-border: #2a2e3d;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-red: #ef4444;
+            --accent-red-bg: rgba(239, 68, 68, 0.15);
+            --accent-yellow: #f59e0b;
+            --accent-yellow-bg: rgba(245, 158, 11, 0.15);
+            --accent-green: #10b981;
+            --accent-green-bg: rgba(16, 185, 129, 0.15);
+            --accent-blue: #3b82f6;
+            --accent-blue-bg: rgba(59, 130, 246, 0.15);
+            --accent-purple: #a855f7;
+            --accent-purple-bg: rgba(168, 85, 247, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding: 24px;
+            background: linear-gradient(180deg, #1e2330 0%, #141720 100%);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        header .subtitle {
+            font-size: 1.15rem;
+            color: var(--accent-yellow);
+            font-weight: 600;
+        }
+
+        header .meta-info {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 6px;
+        }
+
+        .stage-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .stage-badge {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .stage-badge strong {
+            color: var(--text-main);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin: 28px 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--card-border);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #3b4259;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .driver-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.825rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-danger {
+            background-color: var(--accent-red-bg);
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
+        }
+
+        .badge-warning {
+            background-color: var(--accent-yellow-bg);
+            color: var(--accent-yellow);
+            border: 1px solid var(--accent-yellow);
+        }
+
+        .badge-info {
+            background-color: var(--accent-blue-bg);
+            color: var(--accent-blue);
+            border: 1px solid var(--accent-blue);
+        }
+
+        .badge-purple {
+            background-color: var(--accent-purple-bg);
+            color: var(--accent-purple);
+            border: 1px solid var(--accent-purple);
+        }
+
+        .badge-success {
+            background-color: var(--accent-green-bg);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .incident-list {
+            list-style: none;
+        }
+
+        .incident-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .incident-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        .ruling-tag {
+            display: block;
+            margin-top: 6px;
+            font-weight: 600;
+            color: #60a5fa;
+        }
+
+        .penalty-details {
+            background-color: rgba(0, 0, 0, 0.25);
+            padding: 10px 14px;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent-yellow);
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        .penalty-details.danger {
+            border-left-color: var(--accent-red);
+        }
+
+        .penalty-details.success {
+            border-left-color: var(--accent-green);
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        th {
+            background-color: #141720;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 12px; }
+            header h1 { font-size: 1.5rem; }
+            .card-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bandit Racing League — Wall of Shame</h1>
+            <div class="subtitle">Talladega Superspeedway | Chase Opener Draft Showdown</div>
+            <div class="meta-info">Season 16 • Official Race Control &amp; Incident Review Log</div>
+            <div class="stage-badges">
+                <span class="stage-badge">Distance: <strong>73 Laps</strong></span>
+                <span class="stage-badge">Stage 1: <strong>Lap 21</strong></span>
+                <span class="stage-badge">Stage 2: <strong>Lap 42</strong></span>
+                <span class="stage-badge">Format: <strong>Full Field Official Review</strong></span>
+            </div>
+        </header>
+
+        <!-- STEWARDS POLICY NOTE -->
+        <h2 class="section-title">📢 Stewards' Race Communications Policy Note</h2>
+
+        <div class="card" style="border-color: var(--accent-blue);">
+            <div class="card-header">
+                <span class="driver-name">RACE CONTROL DIRECTIVE — TRUCK DAMAGE CHATS</span>
+                <span class="badge badge-info">Policy Evaluation</span>
+            </div>
+            <div class="penalty-details" style="margin-top: 0; border-left-color: var(--accent-blue);">
+                <strong>Official Stewards' Note:</strong> Race Control has noted to potentially disallow voice or text chats discussing how damaged a truck is during future races.
+            </div>
+        </div>
+
+        <!-- WALL OF SHAME MVP -->
+        <h2 class="section-title">🚨 Weekly Wall of Shame MVP — Multi-EOL Offender</h2>
+
+        <div class="card" style="border-color: var(--accent-red);">
+            <div class="card-header">
+                <span class="driver-name">TY CORINO (#62)</span>
+                <span class="badge badge-danger">Wall of Shame MVP • 2x EOL Penalties</span>
+            </div>
+            <ul class="incident-list">
+                <li><strong>Lap 13 (Netcode Contact):</strong> Came up the track and, with the help of a tiny bit of netcode, made contact with Car #12 (Bill Harkins) <em>(No Yellow)</em>.</li>
+                <li><strong>Lap 37 (1st EOL Penalty):</strong> Seemed like he was having an issue, turned down into Car #15 (Matt Crockett), and turned him around.</li>
+                <li><strong>Lap 58 (2nd EOL Penalty):</strong> Made contact with Car #7 (Benjamin Lacy) after #7 went to the middle lane and Car #62 turned down, seemingly thinking the #7 was all the way on the bottom. <em>(Secondary incident: Car #13 Johnathon Platt went to fit a tight gap in the middle with a run and that hole closed up right as he got there).</em></li>
+            </ul>
+            <div class="ruling-tag">↳ Ruling: 2x End of Line (EOL) Penalties (Lap 37 &amp; Lap 58) + Lap 13 Netcode Contact</div>
+        </div>
+
+        <!-- AT-FAULT EOL PENALTIES -->
+        <h2 class="section-title">⚠️ At-Fault Incidents &amp; EOL Penalties</h2>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="driver-name">MATTHEW BAILEY (#54)</span>
+                <span class="badge badge-warning">EOL Penalty + 2 No-Yellow Contacts</span>
+            </div>
+            <ul class="incident-list">
+                <li><strong>Lap 5 (No Yellow):</strong> Gave a push to Car #6 (Nicole Kriesel) and sent her up the track a little bit; a hole opened up and he went for it, #6 tried to close the door and contact occurred.</li>
+                <li><strong>Lap 17 (No Yellow):</strong> Contact in the draft between Car #75 (Bob Berry) and Car #54.</li>
+                <li><strong>Lap 54 (EOL Penalty):</strong> Came up the track and clipped Car #9 (Dylan McDonald). Car #9 saved it, but an iRacing caution flag still came out.</li>
+            </ul>
+            <div class="ruling-tag">↳ Ruling: End of Line (EOL) Penalty (Lap 54 Contact on #9)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="driver-name">BOB BERRY (#75)</span>
+                <span class="badge badge-warning">EOL Penalty + Possible ARCA Braking</span>
+            </div>
+            <ul class="incident-list">
+                <li><strong>Lap 17 (No Yellow):</strong> Contact in the draft between Car #75 and Car #54 (Matthew Bailey).</li>
+                <li><strong>Lap 64 (EOL Penalty):</strong> Contact between Car #75 and Car #9 (Dylan McDonald); #9 got to the outside of #75, and #75 looked like he tried to move up in front of the #9 to stay ahead when #9 had just barely gotten there.</li>
+            </ul>
+            <div class="ruling-tag">↳ Ruling: End of Line (EOL) Penalty (Lap 64 Late Block on #9) + Possible ARCA Braking Note</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="driver-name">ETHAN SIKORSKI (#24)</span>
+                <span class="badge badge-warning">EOL Penalty</span>
+            </div>
+            <ul class="incident-list">
+                <li><strong>Lap 21 (Stage 1 Finish):</strong> Contact between Car #24 and Car #2 (Nick Nickerson) entering the tri-oval coming to the Stage 1 finish.</li>
+            </ul>
+            <div class="ruling-tag">↳ Ruling: End of Line (EOL) Penalty (Lap 21 Tri-Oval Contact)</div>
+        </div>
+
+        <!-- TRACK STATUS & SERVED PENALTIES -->
+        <h2 class="section-title">🔄 Pre-Race Probation &amp; EOL Penalty Status</h2>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="driver-name">VICTOR WEAVER (#18)</span>
+                <span class="badge badge-success">Final EOL Served (3 of 3)</span>
+            </div>
+            <ul class="incident-list">
+                <li><strong>Probation Status:</strong> Successfully served his <strong>final scheduled EOL penalty (3 of 3)</strong> at Talladega.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="driver-name">KOREY DENSON (#36)</span>
+                <span class="badge badge-purple">DNS — 2 EOLs Remaining</span>
+            </div>
+            <ul class="incident-list">
+                <li><strong>Probation Status:</strong> Did not show (DNS) tonight at Talladega, so he <strong>still has 2 EOL penalties remaining to serve</strong> in upcoming races.</li>
+            </ul>
+        </div>
+
+        <!-- ARCA BRAKING NOTES -->
+        <h2 class="section-title">🛑 Caution Avoidance &amp; ARCA Braking Notes</h2>
+
+        <div class="card">
+            <div class="card-header">
+                <span class="driver-name">LAP 30 &amp; LAP 64 CAUTION SCENES</span>
+                <span class="badge badge-info">ARCA Braking Reports</span>
+            </div>
+            <ul class="incident-list">
+                <li><strong>Lap 30 Outside Check-Up:</strong> According to Car #31 (Connor Gibson), there was alleged <strong>ARCA braking</strong> behind the pack after the initial outside-line check-up crash.</li>
+                <li><strong>Lap 64 Wreck:</strong> Stewards logged <strong>possible ARCA braking</strong> behind the Lap 64 incident involving Car #75 and Car #9.</li>
+            </ul>
+        </div>
+
+        <!-- RACING DEALS, NO-YELLOWS & INNOCENT VICTIMS -->
+        <h2 class="section-title">🟢 No-Yellows, Racing Deals &amp; Innocent Victims</h2>
+
+        <div class="card">
+            <ul class="incident-list">
+                <li><strong>Matthew Bailey (#54) &amp; Nicole Kriesel (#6)</strong> — <em>Lap 5:</em> Car #54 gave a push to Car #6 and sent her up the track a little bit; a hole opened and he went for it, #6 tried to close the door and contact occurred. <span>(Ruling: No Yellow)</span></li>
+                <li><strong>Ty Corino (#62) &amp; Bill Harkins (#12)</strong> — <em>Lap 13:</em> Car #62 came up the track and with a tiny bit of netcode hit Car #12. <span>(Ruling: No Yellow / Netcode)</span></li>
+                <li><strong>Bob Berry (#75) &amp; Matthew Bailey (#54)</strong> — <em>Lap 17:</em> Side-by-side contact between Cars #75 and #54. <span>(Ruling: No Yellow)</span></li>
+                <li><strong>Connor Gibson (#31) &amp; Top-Lane Check-Up</strong> — <em>Lap 30:</em> Check-up on the top slowed the outside line; Car #31 didn't see trucks slowing until it was too late. <span>(Ruling: Racing Deal)</span></li>
+                <li><strong>Connor Gibson (#31) &amp; Curtis Yancey (#51)</strong> — <em>Lap 42:</em> Contact between #31 and #51 coming to the Stage 2 yellow flag. <span>(Ruling: Stage Yellow / Racing Deal)</span></li>
+                <li><strong>Jason Allegrini (#14) &amp; Curtis Yancey (#51)</strong> — <em>Lap 48:</em> Car #14 started swerving in the draft and clipped Car #51. <span>(Ruling: No Yellow)</span></li>
+                <li><strong>Johnathon Platt (#13)</strong> — <em>Lap 58 (Secondary Incident):</em> Looked like Car #13 went to fit a tight gap in the middle with a run and that hole closed up right as he got there. <span>(Ruling: Secondary Racing Deal)</span></li>
+                <li><strong>Bill Harkins (#12) &amp; Johnathon Platt (#13)</strong> — <em>Lap 68:</em> Inside lane checked up and Car #12 hit the back of Car #13, who didn't have time to react to the check-up. <span>(Ruling: Racing Incident)</span></li>
+                <li><strong>Innocent Victims:</strong> Nick Nickerson (#2 - Lap 21), Benjamin Lacy (#7 - Lap 58), Dylan McDonald (#9 - Laps 54 &amp; 64), Bill Harkins (#12 - Lap 13), Johnathon Platt (#13 - Laps 58 &amp; 68), Matt Crockett (#15 - Lap 37), Curtis Yancey (#51 - Laps 42 &amp; 48).</li>
+            </ul>
+        </div>
+
+        <!-- SUMMARY TABLE -->
+        <h2 class="section-title">📊 Official Penalty Summary Table</h2>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Car #</th>
+                        <th>Driver</th>
+                        <th>Ruling / Status</th>
+                        <th>Incident Summary &amp; Penalty Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>#62</strong></td>
+                        <td>Ty Corino</td>
+                        <td><span class="badge badge-danger">2x EOL (MVP)</span></td>
+                        <td>L37 Turn-Down into #15 (EOL #1) + L58 Turn-Down into #7 in Middle Lane (EOL #2) + L13 Netcode w/ #12</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#54</strong></td>
+                        <td>Matthew Bailey</td>
+                        <td><span class="badge badge-warning">EOL Penalty</span></td>
+                        <td>L54 Wash-Up Clip on #9 (Saved, iRacing Yellow) + L5 (#6) &amp; L17 (#75) No-Yellow Contacts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#75</strong></td>
+                        <td>Bob Berry</td>
+                        <td><span class="badge badge-warning">EOL + ARCA Note</span></td>
+                        <td>L64 Late Block on Outside Run by #9 (EOL) + Possible ARCA Braking + L17 (#54) No-Yellow</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#24</strong></td>
+                        <td>Ethan Sikorski</td>
+                        <td><span class="badge badge-warning">EOL Penalty</span></td>
+                        <td>L21 Contact with #2 Entering Tri-Oval at Stage 1 Finish</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#36</strong></td>
+                        <td>Korey Denson</td>
+                        <td><span class="badge badge-purple">DNS (2 EOL Left)</span></td>
+                        <td>Did Not Show Tonight — Still Has 2 Scheduled EOL Penalties Remaining to Serve</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#18</strong></td>
+                        <td>Victor Weaver</td>
+                        <td><span class="badge badge-success">Served (3 of 3)</span></td>
+                        <td>Successfully Served Final Pre-Race Scheduled EOL Penalty</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#31</strong></td>
+                        <td>Connor Gibson</td>
+                        <td><span class="badge badge-info">Racing Deals</span></td>
+                        <td>L30 Top-Lane Check-Up (Reported Post-Crash ARCA Braking) + L42 Stage 2 Finish Contact w/ #51</td>
+                    </tr>
+                    <tr>
+                        <td><strong>#12 / #13</strong></td>
+                        <td>Harkins / Platt</td>
+                        <td><span class="badge badge-info">Racing Incident</span></td>
+                        <td>L68 Inside-Lane Check-Up Stackup (No Time to React) + L58 Secondary Closing Gap (#13)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ALL</strong></td>
+                        <td>Race Control</td>
+                        <td><span class="badge badge-info">Comms Policy Note</span></td>
+                        <td>Noted to Potentially Disallow Chats Discussing How Damaged a Truck Is During the Race</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

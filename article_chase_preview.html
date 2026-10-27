@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1792638036">
+    <link rel="stylesheet" href="styles.css?v=1793067609">
     <style>
         .article-header {
             margin-top: 60px;
@@ -411,15 +411,15 @@
 
             <!-- 5-Race Chase Schedule -->
             <div class="chase-schedule-grid">
-                <div class="chase-race-box">
-                    <div class="race-num">Chase Race 1 • R17</div>
+                <div class="chase-race-box" style="opacity: 0.85; border-top-color: #888;">
+                    <div class="race-num" style="color: #aaa;">✅ Chase Race 1 • R17</div>
                     <div class="track-title">Talladega</div>
-                    <div class="race-details">Oct 21 • 70 Laps (Day)<br>Superspeedway Wildcard</div>
+                    <div class="race-details">Oct 21 • 73 Laps (Complete)<br><strong style="color: var(--neon-green);">Winner: #15 M. Crockett</strong></div>
                 </div>
-                <div class="chase-race-box">
-                    <div class="race-num">Chase Race 2 • R18</div>
+                <div class="chase-race-box" style="border-color: var(--chase-yellow); border-top-color: var(--chase-yellow); box-shadow: 0 0 20px rgba(255, 204, 0, 0.28); background: rgba(255, 204, 0, 0.08);">
+                    <div class="race-num" style="color: var(--chase-yellow);">🔥 UP NEXT: Round 2 • R18</div>
                     <div class="track-title">Kansas</div>
-                    <div class="race-details">Oct 28 • 110 Laps (Night)<br>1.5-Mile High-Line Speed</div>
+                    <div class="race-details">Oct 28 • 110 Laps (Night)<br><strong style="color: var(--chase-yellow);">1.5-Mile High-Line Speed</strong></div>
                 </div>
                 <div class="chase-race-box">
                     <div class="race-num">Chase Race 3 • R19</div>
@@ -438,138 +438,167 @@
                 </div>
             </div>
 
-            <h2>📊 Official Season 16 Chase Grid &amp; Points Reset</h2>
+            <!-- Round 2 Kansas Speedway Preview Banner -->
+            <div style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.12), rgba(255, 204, 0, 0.08)); border: 1.5px solid var(--chase-yellow); border-left: 6px solid var(--chase-yellow); border-radius: 10px; padding: 24px; margin: 30px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+                    <span style="color: var(--chase-yellow); font-family: var(--font-heading); font-weight: 900; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1.5px;">🔥 CHASE ROUND 2 SPOTLIGHT • KANSAS SPEEDWAY (WEDNESDAY, OCT 28)</span>
+                    <a href="/article_talladega_recap.html" style="color: var(--neon-green); font-size: 0.88rem; font-weight: bold; text-decoration: none;">Read Round 1 Talladega Recap &rarr;</a>
+                </div>
+                <h3 style="color: #fff; font-family: var(--font-heading); font-size: 1.55rem; margin: 0 0 12px 0; text-transform: uppercase; font-style: italic;">
+                    What Happened in Round 1 &amp; What’s at Stake at Kansas Speedway
+                </h3>
+                <p style="font-size: 1rem; color: #ddd; margin-bottom: 12px;">
+                    Talladega blew the Season 16 title fight wide open! While Roundy Motorsports owner/driver <strong>Matt Crockett (#15)</strong> played ultimate spoiler by winning his 1st career BRL race by 0.010 seconds over Chase contender <strong>Jackson Knaak (#00)</strong>, late-race superspeedway carnage compressed the top of the Chase standings. <strong>Scott Sanderson (#93)</strong> finished 9th while #1 seed <strong>Benjamin Lacy (#7)</strong> was collected in a Lap 58 crash (finishing 14th)—slicing Lacy’s points lead from <strong>25 points down to just 3 points (2,119 to 2,116)</strong>! Meanwhile, <strong>Dylan McDonald (#9)</strong> bagged 18 stage points and finished 6th to score a race-high <strong>53 points</strong> and vault three spots into 4th overall (<strong>2,095 pts, -24</strong>).
+                </p>
+                <p style="font-size: 1rem; color: #ddd; margin-bottom: 0;">
+                    Now the 10-driver grid heads to <strong>Kansas Speedway (110 Laps)</strong>—where earlier in Race 11 (Sep 9), #8 Chase contender <strong>Michael Rakes (#47)</strong> stretched his fuel tank to win over <strong>Kevin Foster (#8, P2)</strong>, while <strong>Benjamin Lacy (#7, P5)</strong> led a race-high 40 laps, <strong>Nick Nickerson (#2, P6)</strong> led 13 laps, <strong>Connor Gibson (#31)</strong> took 7th, and <strong>Joshua Adams (#22, P8)</strong> led 14 laps. For <strong>Scott Sanderson (#93, P26 in Kansas 1)</strong> and <strong>Dylan McDonald (#9, P25 in Kansas 1)</strong>, Wednesday night is the ultimate high-line test to prove they can contend for the title on 1.5-mile intermediate asphalt!
+                </p>
+            </div>
+
+            <h2>📊 Official Season 16 Chase Standings (Entering Round 2 at Kansas)</h2>
             <div class="seed-table-wrapper">
                 <table class="seed-table">
                     <thead>
                         <tr>
-                            <th>Seed</th>
+                            <th>Pos (Seed)</th>
                             <th>Driver</th>
                             <th>Truck #</th>
                             <th>Franchise Team</th>
                             <th>Playoff Experience</th>
-                            <th>Reg. Season Pts</th>
-                            <th>Chase Reset Pts</th>
+                            <th>Reset Pts</th>
+                            <th>Talladega (R17)</th>
+                            <th>Live Chase Pts</th>
                             <th>Gap to #1</th>
-                            <th>Gap to Next</th>
+                            <th>Kansas 1 (R11)</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span class="seed-badge">#1</span></td>
+                            <td><span class="seed-badge">1st (#1)</span></td>
                             <td><strong>Benjamin I. Lacy</strong></td>
                             <td><strong>#7</strong></td>
                             <td>GFR Racing</td>
                             <td><span class="vet-pill">🏆 Past Champ • 7x Vet</span></td>
-                            <td>755</td>
-                            <td><strong style="color: var(--chase-yellow);">2,100</strong></td>
+                            <td>2,100</td>
+                            <td>P14 (+32 pts)</td>
+                            <td><strong style="color: var(--neon-green);">2,119</strong></td>
                             <td><strong style="color: var(--neon-green);">Leader</strong></td>
-                            <td>—</td>
+                            <td>P5 (Led 40)</td>
                         </tr>
                         <tr>
-                            <td><span class="seed-badge">#2</span></td>
+                            <td><span class="seed-badge">2nd (#2)</span></td>
                             <td><strong>Scott Sanderson</strong></td>
                             <td><strong>#93</strong></td>
                             <td>GFR Racing</td>
                             <td><span class="newblood-pill">🌟 1st-Time Chase</span></td>
-                            <td>660</td>
-                            <td><strong style="color: var(--chase-yellow);">2,075</strong></td>
-                            <td>-25</td>
-                            <td>-25</td>
+                            <td>2,075</td>
+                            <td>P9 (+41 pts)</td>
+                            <td><strong style="color: var(--chase-yellow);">2,116</strong></td>
+                            <td>-3</td>
+                            <td>P26</td>
                         </tr>
                         <tr>
-                            <td><span class="seed-badge">#3</span></td>
+                            <td><span class="seed-badge">3rd (#3)</span></td>
                             <td><strong>Joshua L. Adams</strong></td>
                             <td><strong>#22</strong></td>
                             <td>937 Racing</td>
                             <td><span class="newblood-pill">🌟 1st-Time Chase</span></td>
-                            <td>573</td>
-                            <td><strong style="color: var(--chase-yellow);">2,065</strong></td>
-                            <td>-35</td>
-                            <td>-10</td>
+                            <td>2,065</td>
+                            <td>P17 (+37 pts, Led 21)</td>
+                            <td><strong style="color: var(--chase-yellow);">2,102</strong></td>
+                            <td>-17</td>
+                            <td>P8 (Led 14)</td>
                         </tr>
                         <tr>
-                            <td><span class="seed-badge">#4</span></td>
-                            <td><strong>Kevin Foster</strong></td>
-                            <td><strong>#8</strong></td>
-                            <td>GFR Racing</td>
-                            <td><span class="vet-pill">🏆 2x BRL Champ • 7x+ Vet</span></td>
-                            <td>550</td>
-                            <td><strong style="color: var(--chase-yellow);">2,060</strong></td>
-                            <td>-40</td>
-                            <td>-5</td>
-                        </tr>
-                        <tr>
-                            <td><span class="seed-badge">#5</span></td>
-                            <td><strong>Nick Nickerson</strong></td>
-                            <td><strong>#2</strong></td>
-                            <td>GFR Racing</td>
-                            <td><span class="vet-pill">👑 4x Champ • 7x Vet</span></td>
-                            <td>546</td>
-                            <td><strong style="color: var(--chase-yellow);">2,055</strong></td>
-                            <td>-45</td>
-                            <td>-5</td>
-                        </tr>
-                        <tr>
-                            <td><span class="seed-badge">#6</span></td>
-                            <td><strong>Jackson Knaak</strong></td>
-                            <td><strong>#00</strong></td>
-                            <td>ESR</td>
-                            <td><span class="vet-pill">🔥 4x Playoff Vet • 0 Titles</span></td>
-                            <td>520</td>
-                            <td><strong style="color: var(--chase-yellow);">2,050</strong></td>
-                            <td>-50</td>
-                            <td>-5</td>
-                        </tr>
-                        <tr>
-                            <td><span class="seed-badge">#7</span></td>
+                            <td><span class="seed-badge">4th (#7)</span></td>
                             <td><strong>Dylan McDonald</strong></td>
                             <td><strong>#9</strong></td>
                             <td>Legacy Racing</td>
                             <td><span class="newblood-pill">🌟 1st-Time Chase</span></td>
-                            <td>499</td>
-                            <td><strong style="color: var(--chase-yellow);">2,045</strong></td>
-                            <td>-55</td>
-                            <td>-5</td>
+                            <td>2,045</td>
+                            <td>P6 (+53 pts, Led 14)</td>
+                            <td><strong style="color: var(--chase-yellow);">2,095</strong></td>
+                            <td>-24</td>
+                            <td>P25</td>
                         </tr>
                         <tr>
-                            <td><span class="seed-badge">#8</span></td>
+                            <td><span class="seed-badge">5th (#5)</span></td>
+                            <td><strong>Nick Nickerson</strong></td>
+                            <td><strong>#2</strong></td>
+                            <td>GFR Racing</td>
+                            <td><span class="vet-pill">👑 4x Champ • 7x Vet</span></td>
+                            <td>2,055</td>
+                            <td>P7 (+34 pts, Led 3)</td>
+                            <td><strong style="color: var(--chase-yellow);">2,086</strong></td>
+                            <td>-33</td>
+                            <td>P6 (Led 13)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="seed-badge">6th (#4)</span></td>
+                            <td><strong>Kevin Foster</strong></td>
+                            <td><strong>#8</strong></td>
+                            <td>GFR Racing</td>
+                            <td><span class="vet-pill">🏆 2x BRL Champ • 7x+ Vet</span></td>
+                            <td>2,060</td>
+                            <td>P23 (+20 pts)</td>
+                            <td><strong style="color: var(--chase-yellow);">2,085*</strong></td>
+                            <td>-34</td>
+                            <td><strong>P2 (Runner-Up)</strong></td>
+                        </tr>
+                        <tr>
+                            <td><span class="seed-badge">7th (#6)</span></td>
+                            <td><strong>Jackson Knaak</strong></td>
+                            <td><strong>#00</strong></td>
+                            <td>ESR</td>
+                            <td><span class="vet-pill">🔥 4x Playoff Vet • 0 Titles</span></td>
+                            <td>2,050</td>
+                            <td><strong>P2 (+47 pts)</strong></td>
+                            <td><strong style="color: var(--chase-yellow);">2,085</strong></td>
+                            <td>-34</td>
+                            <td>P16 (Led 5)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="seed-badge">8th (#8)</span></td>
                             <td><strong>Michael Rakes</strong></td>
                             <td><strong>#47</strong></td>
                             <td>937 Racing</td>
                             <td><span class="newblood-pill">🌟 1st-Time Chase</span></td>
-                            <td>493</td>
-                            <td><strong style="color: var(--chase-yellow);">2,040</strong></td>
-                            <td>-60</td>
-                            <td>-5</td>
+                            <td>2,040</td>
+                            <td>P19 (+33 pts)</td>
+                            <td><strong style="color: var(--chase-yellow);">2,081</strong></td>
+                            <td>-38</td>
+                            <td><strong style="color: var(--neon-green);">🏆 P1 (Winner!)</strong></td>
                         </tr>
                         <tr>
-                            <td><span class="seed-badge">#9</span></td>
+                            <td><span class="seed-badge">9th (#10)</span></td>
+                            <td><strong>Johnathon Platt</strong></td>
+                            <td><strong>#13</strong></td>
+                            <td>GFR Racing</td>
+                            <td><span class="newblood-pill">🌟 1st-Time Main Chase**</span></td>
+                            <td>2,030</td>
+                            <td>P8 (+48 pts, Led 11)</td>
+                            <td><strong style="color: var(--chase-yellow);">2,075</strong></td>
+                            <td>-44</td>
+                            <td>DNS</td>
+                        </tr>
+                        <tr>
+                            <td><span class="seed-badge">10th (#9)</span></td>
                             <td><strong>Connor Gibson</strong></td>
                             <td><strong>#31</strong></td>
                             <td>ZeroFoxtrot</td>
                             <td><span class="vet-pill">🔥 5x Playoff Vet • 0 Titles</span></td>
-                            <td>466</td>
-                            <td><strong style="color: var(--chase-yellow);">2,035</strong></td>
+                            <td>2,035</td>
+                            <td>P22 (+32 pts, Stg 2 Win)</td>
+                            <td><strong style="color: var(--chase-yellow);">2,054</strong></td>
                             <td>-65</td>
-                            <td>-5</td>
-                        </tr>
-                        <tr>
-                            <td><span class="seed-badge">#10</span></td>
-                            <td><strong>Johnathon Platt</strong></td>
-                            <td><strong>#13</strong></td>
-                            <td>GFR Racing</td>
-                            <td><span class="newblood-pill">🌟 1st-Time Main Chase*</span></td>
-                            <td>390</td>
-                            <td><strong style="color: var(--chase-yellow);">2,030</strong></td>
-                            <td>-70</td>
-                            <td>-5</td>
+                            <td>P7</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p style="font-size: 0.9rem; color: #999; margin-top: -25px; margin-bottom: 35px;">
-                <em>*Note: Johnathon Platt won the 2019 BRL Super Late Model title and finished P2 in Season 15 Late Models, making Season 16 his first full Main-Series Chase qualification.</em>
+            <p style="font-size: 0.9rem; color: #aaa; margin-top: -25px; margin-bottom: 35px; line-height: 1.6;">
+                <strong style="color: var(--chase-yellow);">* Tiebreaker Note:</strong> Kevin Foster (#8) holds the 6th-place tiebreaker over Jackson Knaak (#00) via Season 16 race wins (1 win vs. 0 wins).<br>
+                <em>** Note: Johnathon Platt won the 2019 BRL Super Late Model title and finished P2 in Season 15 Late Models, making Season 16 his first full Main-Series Chase qualification.</em>
             </p>
 
             <h2>⚔️ The Franchise &amp; Generational War: By The Numbers</h2>
@@ -1166,10 +1195,10 @@
             <!-- Final Call to Action -->
             <div style="background: linear-gradient(135deg, rgba(57, 255, 20, 0.14), rgba(0, 0, 0, 0.9)); border: 2px solid var(--neon-green); padding: 28px; border-radius: 10px; text-align: center; margin-top: 40px;">
                 <h3 style="color: var(--neon-green); font-family: var(--font-heading); font-size: 1.8rem; text-transform: uppercase; font-style: italic; margin-top: 0; margin-bottom: 10px;">
-                    🏁 THE CHASE BEGINS WEDNESDAY AT TALLADEGA!
+                    🏁 CHASE ROUND 2 CONTINUES WEDNESDAY AT KANSAS SPEEDWAY!
                 </h3>
                 <p style="color: #ddd; max-width: 760px; margin: 0 auto 20px auto; font-size: 1.05rem;">
-                    Will <strong>Benjamin Lacy (#7)</strong> defend the top seed, will 4-time champ <strong>Nick Nickerson (#2)</strong> mount a legendary charge from 5th, or will a first-time Chase contender like <strong>Scott Sanderson (#93)</strong>, <strong>Joshua Adams (#22)</strong>, or <strong>Dylan McDonald (#9)</strong> shock the Old Guard? Lock in your weekly fantasy picks before the green flag drops!
+                    With just 3 points separating <strong>Benjamin Lacy (#7)</strong> and <strong>Scott Sanderson (#93)</strong>—and defending Race 11 Kansas winner <strong>Michael Rakes (#47)</strong> and runner-up <strong>Kevin Foster (#8)</strong> lurking right behind—who will seize control of the Season 16 Chase in the Heartland? Lock in your weekly fantasy picks before the green flag drops!
                 </p>
                 <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
                     <a href="/index.html" class="btn-secondary">&larr; Back to Homepage</a>

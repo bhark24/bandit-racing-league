@@ -125,8 +125,8 @@ def main():
             
         track_name, race_date = parse_race_details(race_html)
         
-        # If results are not posted, skip this race
-        if not race_date:
+        # If results are not posted or this is a Chase reset entry, skip
+        if not race_date or "Chase for the Championship" in (track_name or ""):
             continue
             
         # Check if we already have this race in our database
@@ -149,9 +149,6 @@ def main():
             print("[!] Team updates failed. Stopping pipeline.")
             sys.exit(1)
             
-        # A2. Auto-restore all fleet chassis to 100% condition
-        run_command(["python", "restore_all_chassis.py"])
-            
         # B. Update Fantasy Scoring
         if not run_command(["python", "update_fantasy.py", "--schedule_id", sched_id]):
             print("[!] Fantasy updates failed. Stopping pipeline.")
@@ -172,6 +169,10 @@ def main():
         # We can break here to avoid run-away script execution.
         break
         
+    # Always sync SimTrax YouTube Broadcast & Upcoming Stream banner
+    print("\n[*] Syncing SimTrax YouTube Broadcast & Upcoming Stream banner...")
+    run_command(["python", "update_simtrax_broadcast.py"])
+
     if not new_race_processed:
         print("\n[*] Website is fully up-to-date! No new race results found on SimRacerHub.")
     else:

@@ -355,17 +355,17 @@ def scrape_driver_standings_playwright(browser, season_id="29722"):
                 
                 let points = 0;
                 if (ptsIdx !== -1 && ptsIdx < cells.length) {
-                    points = parseInt(cells[ptsIdx].textContent.trim()) || 0;
+                    points = parseInt(cells[ptsIdx].textContent.trim().replace(/,/g, '')) || 0;
                 }
                 
                 let pos = rows.length + 1;
                 if (posIdx !== -1 && posIdx < cells.length) {
-                    pos = parseInt(cells[posIdx].textContent.trim()) || pos;
+                    pos = parseInt(cells[posIdx].textContent.trim().replace(/,/g, '')) || pos;
                 }
                 
                 let wins = 0;
                 if (winsIdx !== -1 && winsIdx < cells.length) {
-                    wins = parseInt(cells[winsIdx].textContent.trim()) || 0;
+                    wins = parseInt(cells[winsIdx].textContent.trim().replace(/,/g, '')) || 0;
                 }
                 
                 rows.push({ pos, name, points, wins });
@@ -420,37 +420,17 @@ def save_teams_database_file(data):
         print(f"[!] Error saving teams_data.js: {e}")
 
 def correct_driver_standings(driver_standings):
-    # SimRacerHub points have been corrected on the server, so we use scraped points directly.
-    # We still sort them and calculate tie positions and clean driver names for the UI.
-    corrected_standings = []
-    for entry in driver_standings:
+    # SimRacerHub points and positions (including Chase seeding and tiebreakers) are authoritative.
+    final_standings = []
+    for idx, entry in enumerate(driver_standings):
         name = entry.get("name", "")
         scraped_pts = entry.get("points", 0)
-        wins = entry.get("wins", 0)
-        corrected_standings.append({
-            "name": name,
-            "points": scraped_pts,
-            "wins": wins
-        })
-            
-    corrected_standings.sort(key=lambda x: x["points"], reverse=True)
-    
-    final_standings = []
-    for idx, entry in enumerate(corrected_standings):
-        if idx == 0:
-            pos = 1
-        else:
-            if entry["points"] == corrected_standings[idx - 1]["points"]:
-                pos = final_standings[-1]["pos"]
-            else:
-                pos = idx + 1
-        
+        pos = entry.get("pos", idx + 1)
         final_standings.append({
             "pos": pos,
-            "name": clean_driver_name(entry["name"]),
-            "points": entry["points"]
+            "name": clean_driver_name(name),
+            "points": scraped_pts
         })
-        
     return final_standings
 
 

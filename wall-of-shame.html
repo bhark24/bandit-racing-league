@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="wall_of_shame_styles.css?v=1792638036">
+    <link rel="stylesheet" href="wall_of_shame_styles.css?v=1793067609">
     <style>
         /* Unified Command Center & Web Hub Additions */
         .unified-command-center {
@@ -223,11 +223,19 @@
                     </div>
                     <i class="fa-solid fa-chevron-right tab-arrow"></i>
                 </button>
-                <button class="race-tab-card active" data-race="martinsville">
+                <button class="race-tab-card" data-race="martinsville">
                     <span class="week-pill">W19</span>
                     <div class="race-tab-info">
                         <span class="race-tab-title">Martinsville Speedway</span>
                         <span class="race-tab-sub">190 Laps &bull; 3x EOL &amp; Brake-Check (#69 MVP)</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right tab-arrow"></i>
+                </button>
+                <button class="race-tab-card active" data-race="talladega">
+                    <span class="week-pill">W20</span>
+                    <div class="race-tab-info">
+                        <span class="race-tab-title">Talladega Superspeedway</span>
+                        <span class="race-tab-sub">73 Laps &bull; 2x Turn-Down EOL (#62 MVP)</span>
                     </div>
                     <i class="fa-solid fa-chevron-right tab-arrow"></i>
                 </button>
@@ -238,24 +246,24 @@
         <section class="hero-section">
             <div class="hero-card track-info-card">
                 <div class="card-badge"><i class="fa-solid fa-trophy"></i> BRL STEWARDS HUB</div>
-                <h1 class="track-name" id="trackNameDisplay">Martinsville Speedway</h1>
-                <p class="track-subtext" id="trackSubtextDisplay">The Paperclip Chaos Showdown — 190 Laps (Stages @ 57 &amp; 114)</p>
+                <h1 class="track-name" id="trackNameDisplay">Talladega Superspeedway</h1>
+                <p class="track-subtext" id="trackSubtextDisplay">Chase Opener Superspeedway Draft Battle — 73 Laps (Stages @ 21 &amp; 42)</p>
 
                 <div class="stats-mini-grid">
                     <div class="mini-stat">
-                        <span class="stat-num" id="totalIncidentsNum">22</span>
+                        <span class="stat-num" id="totalIncidentsNum">13</span>
                         <span class="stat-label">Reviewed Incidents</span>
                     </div>
                     <div class="mini-stat danger">
-                        <span class="stat-num" id="penaltiesNum">11</span>
+                        <span class="stat-num" id="penaltiesNum">5</span>
                         <span class="stat-label">Penalties / DQ</span>
                     </div>
                     <div class="mini-stat warning">
-                        <span class="stat-num" id="warningsNum">2</span>
+                        <span class="stat-num" id="warningsNum">0</span>
                         <span class="stat-label">Official Warnings</span>
                     </div>
                     <div class="mini-stat info">
-                        <span class="stat-num" id="racingDealsNum">7</span>
+                        <span class="stat-num" id="racingDealsNum">6</span>
                         <span class="stat-label">Racing Deals</span>
                     </div>
                 </div>
@@ -268,16 +276,16 @@
                     <span>WEEKLY WALL OF SHAME MVP</span>
                 </div>
                 <div class="mvp-driver-row">
-                    <div class="driver-number-plate mvp-plate" id="mvpCarPlate">#69</div>
+                    <div class="driver-number-plate mvp-plate" id="mvpCarPlate">#62</div>
                     <div class="mvp-driver-details">
-                        <h2 id="mvpDriverName">Car #69 (Collin Anderson) &amp; Full Field</h2>
-                        <p class="mvp-summary-tag" id="mvpReason"><i class="fa-solid fa-triangle-exclamation"></i> Assessed 3 separate EOL penalties (Laps 44, 64, 97), slammed on brakes on the active racing surface after an EOL call (collecting #6 Nicole Kriesel), brake-checked #54 under caution on Lap 76, and ARCA-braked on Lap 186! Plus a League-Wide Caution Warning issued to the entire field!</p>
+                        <h2 id="mvpDriverName">Car #62 (Ty Corino)</h2>
+                        <p class="mvp-summary-tag" id="mvpReason"><i class="fa-solid fa-triangle-exclamation"></i> Involved in 3 separate incidents at Talladega: drifted up with netcode into #12 (Bill Harkins) on Lap 13, turned down into race winner #15 (Matt Crockett) on Lap 37 for his 1st EOL, and turned down into #7 (Benjamin Lacy) in the middle lane on Lap 58 (thinking #7 was on the bottom) for his 2nd EOL of the night, triggering the stackup that collected #13 (Johnathon Platt)!</p>
                     </div>
                 </div>
                 <div id="mvpImageContainer" style="text-align: center; margin: 15px 0;"></div>
                 <ul class="mvp-highlights-list" id="mvpHighlights">
-                    <li><i class="fa-solid fa-shield-cat"></i> 3x EOL Penalties + Stopping Dead on Active Track + Brake-Checking Under Caution + Lap 186 ARCA Brake!</li>
-                    <li><i class="fa-solid fa-gavel"></i> Total Penalties Issued: <strong>3x EOL Penalties + Final Session Removal Warning (Brake-Checking)</strong></li>
+                    <li><i class="fa-solid fa-shield-cat"></i> 2x EOL Penalties (Lap 37 on #15 &amp; Lap 58 on #7) + Lap 13 Netcode Contact on #12!</li>
+                    <li><i class="fa-solid fa-gavel"></i> Total Penalties Issued: <strong>2x End of Line (EOL) Penalties (Lap 37 &amp; Lap 58)</strong></li>
                 </ul>
             </div>
         </section>
@@ -443,7 +451,7 @@
     </div>
 
     <!-- JS Scripts -->
-    <script src="wall_of_shame_data.js?v=1792638036"></script>
-    <script src="wall_of_shame_app.js?v=1792638036"></script>
+    <script src="wall_of_shame_data.js?v=1793067609"></script>
+    <script src="wall_of_shame_app.js?v=1793067609"></script>
 </body>
 </html>

@@ -571,6 +571,10 @@ def main():
     # Process each team
     for team in teams_db["teams"]:
         team_id = team["id"]
+        if team.get("isSuspended") or team.get("isForSale"):
+            print(f"\nSkipping Team: {team['name']} (Suspended / Inactive)")
+            weekly_team_points[team_id] = 0
+            continue
         print(f"\nProcessing Team: {team['name']}")
         
         primaries = team["drivers"]["primary"]

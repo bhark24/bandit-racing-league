@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1792638036">
+    <link rel="stylesheet" href="styles.css?v=1793067609">
     <style>
         .simtrax-grid {
             display: grid;
@@ -99,11 +99,14 @@
     <!-- Main Content: Broadcast Assets Gallery -->
     <main class="container" style="margin-top: 40px; margin-bottom: 80px; position: relative; z-index: 5;">
         
-        <!-- Upcoming Race Broadcast Banner -->
+        <!-- Upcoming Race Broadcast Banner (Auto-Synced Daily from SimTrax YouTube) -->
         <div style="display: flex; justify-content: center; margin-bottom: 40px;">
             <div class="card neon-border" style="width: 100%; max-width: 900px; padding: 20px; text-align: center;">
-                <h2 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 15px; font-size: 1.5rem; letter-spacing: 2px;">Upcoming Race Broadcast &bull; Watkins Glen International</h2>
-                <img src="assets/BCast Banners/Watkins_Glen.png" alt="Upcoming Race Broadcast - Watkins Glen International" style="width: 100%; border-radius: 8px; box-shadow: 0 0 25px rgba(57, 255, 20, 0.25); border: 1.5px solid rgba(57, 255, 20, 0.3);">
+                <h2 id="simtrax-upcoming-heading" style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 10px; font-size: 1.45rem; letter-spacing: 1.5px;">Upcoming Broadcast: Kansas Speedway (Oct 28, 2026 @ 9:00 PM EST)</h2>
+                <p id="simtrax-upcoming-sub" style="color: #ccc; font-size: 0.95rem; margin-bottom: 15px; line-height: 1.5;">Latest Completed Broadcast Replay: <strong>The Rolling Thunder 185</strong> &bull; <a href='https://www.youtube.com/watch?v=GLV4EJgyLIs' target='_blank' style='color: var(--neon-green); font-weight: bold;'>Watch Full Broadcast on YouTube &rarr;</a><br><span style='font-size: 0.85rem; color: #999;'>(Synced daily with <a href='https://www.youtube.com/@simtraxbroadcasting/streams' target='_blank' style='color: #aaa;'>@simtraxbroadcasting</a> — upcoming Kansas stream link &amp; banner auto-update as soon as posted)</span></p>
+                <a id="simtrax-upcoming-link" href="https://www.youtube.com/watch?v=GLV4EJgyLIs" target="_blank" style="display: block;">
+                    <img id="simtrax-upcoming-img" src="assets/BCast Banners/yt_GLV4EJgyLIs.jpg" alt="The Rolling Thunder 185" style="width: 100%; border-radius: 8px; box-shadow: 0 0 25px rgba(57, 255, 20, 0.25); border: 1.5px solid rgba(57, 255, 20, 0.3);">
+                </a>
             </div>
         </div>
 
@@ -169,7 +172,7 @@
                 <!-- <iframe src="https://www.youtube.com/embed/live_stream?channel=UC8D9f0DOxaf8hdyxIuk2NeQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe> -->
 
                 <!-- STATE 2: PREVIOUS RACE VOD -->
-                <iframe id="broadcast-iframe" src="https://www.youtube.com/embed/2hwpJ5RotRY?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+                <iframe id="broadcast-iframe" src="https://www.youtube.com/embed/GLV4EJgyLIs?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
             </div>
         </div>
 
@@ -192,7 +195,7 @@
             <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
         </div>
     </footer>
-    <script src="weekly_data.js?v=1792638036"></script>
+    <script src="weekly_data.js?v=1793067609"></script>
     <script>
         // Toggle mobile navigation menu
         document.addEventListener('DOMContentLoaded', function() {
@@ -205,37 +208,10 @@
                 });
             }
 
-            // Automatically Update Broadcast Embed (YouTube RSS Integration)
+            // Automatically Update Broadcast Embed from Daily Synced weeklyData
             const iframe = document.getElementById("broadcast-iframe");
-            if (iframe) {
-                const channelId = "UC8D9f0DOxaf8hdyxIuk2NeQ";
-                
-                // A. Use weeklyData video ID if available
-                if (typeof weeklyData !== 'undefined' && weeklyData.latestBroadcastVideoId) {
-                    iframe.src = `https://www.youtube.com/embed/${weeklyData.latestBroadcastVideoId}?rel=0`;
-                }
-
-                // B. Attempt dynamic real-time retrieval from YouTube RSS feed (e.g. for live stream or new uploads)
-                const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
-                fetch(apiUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data && data.status === 'ok' && data.items && data.items.length > 0) {
-                            const latestVideo = data.items[0];
-                            const videoUrl = latestVideo.link;
-                            const match = videoUrl.match(/[?&]v=([^&#]+)/);
-                            if (match && match[1]) {
-                                const latestVideoId = match[1];
-                                iframe.src = `https://www.youtube.com/embed/${latestVideoId}?rel=0`;
-                                console.log("Dynamically updated broadcast to latest YouTube video:", latestVideoId);
-                            }
-                        }
-                    })
-                    .catch(err => {
-                        console.warn("Could not fetch latest YouTube video dynamically, using weeklyData fallback:", err);
-                    });
+            if (iframe && typeof weeklyData !== 'undefined' && weeklyData.latestBroadcastVideoId) {
+                iframe.src = `https://www.youtube.com/embed/${weeklyData.latestBroadcastVideoId}?rel=0`;
             }
         });
     </script>

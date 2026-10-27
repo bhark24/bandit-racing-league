@@ -1,50 +1,53 @@
 const weeklyData = {
   "winnerName": "Matt Crockett",
   "winnerNumber": "15",
-  "winnerImage": "",
-  "actionShots": [],
+  "winnerImage": "assets/WINNER IMAGES/Crockett_dega_1.png",
+  "actionShots": [
+    "assets/race images/crockett_at_the_line.png",
+    "assets/truck images/truck_image_matt_crockett.png"
+  ],
   "trackName": "Talladega Superspeedway",
-  "trackLogo": "",
+  "trackLogo": "assets/tracks/Track Logos/Dega.png",
   "raceDate": "Oct 21, 2026",
   "teamStandings": [
     {
       "name": "GFR Racing",
-      "points": 2576,
+      "points": 2421,
       "wins": 10
     },
     {
       "name": "937 Racing",
-      "points": 1416,
-      "wins": 4
+      "points": 1253,
+      "wins": 3
     },
     {
       "name": "Legacy Racing",
-      "points": 1372,
-      "wins": 4
+      "points": 1204,
+      "wins": 3
     },
     {
       "name": "ZeroFoxtrot",
-      "points": 1178,
+      "points": 1007,
       "wins": 0
     },
     {
       "name": "Roundy Motorsports",
-      "points": 1113,
+      "points": 957,
       "wins": 1
     },
     {
       "name": "ESR",
-      "points": 956,
+      "points": 821,
       "wins": 0
     },
     {
       "name": "POP Motorsports",
-      "points": 635,
+      "points": 533,
       "wins": 0
     },
     {
       "name": "Carter Phillips Racing",
-      "points": 401,
+      "points": 314,
       "wins": 0
     },
     {
@@ -54,7 +57,7 @@ const weeklyData = {
     },
     {
       "name": "Title Town Racing",
-      "points": 158,
+      "points": 127,
       "wins": 0
     },
     {
@@ -64,7 +67,7 @@ const weeklyData = {
     },
     {
       "name": "Wrist's Up Racing",
-      "points": 8,
+      "points": 6,
       "wins": 0
     }
   ],
@@ -169,52 +172,52 @@ const weeklyData = {
     {
       "pos": 1,
       "name": "Benjamin I Lacy",
-      "points": 774
+      "points": 2119
     },
     {
       "pos": 2,
       "name": "Scott Sanderson",
-      "points": 701
+      "points": 2116
     },
     {
       "pos": 3,
       "name": "Joshua L Adams",
-      "points": 610
+      "points": 2102
     },
     {
       "pos": 4,
-      "name": "Nick Nickerson",
-      "points": 577
+      "name": "Dylan McDonald",
+      "points": 2095
     },
     {
       "pos": 5,
-      "name": "Kevin Foster",
-      "points": 575
+      "name": "Nick Nickerson",
+      "points": 2086
     },
     {
       "pos": 6,
-      "name": "Jackson Knaak",
-      "points": 555
+      "name": "Kevin Foster",
+      "points": 2085
     },
     {
       "pos": 7,
-      "name": "Dylan McDonald",
-      "points": 549
+      "name": "Jackson Knaak",
+      "points": 2085
     },
     {
       "pos": 8,
       "name": "Michael Rakes",
-      "points": 534
+      "points": 2081
     },
     {
       "pos": 9,
-      "name": "Connor Gibson",
-      "points": 485
+      "name": "Johnathon Platt",
+      "points": 2075
     },
     {
       "pos": 10,
-      "name": "Johnathon Platt",
-      "points": 435
+      "name": "Connor Gibson",
+      "points": 2054
     },
     {
       "pos": 11,
@@ -347,7 +350,7 @@ const weeklyData = {
       "points": 116
     },
     {
-      "pos": 36,
+      "pos": 37,
       "name": "Korey Denson",
       "points": 116
     },
@@ -437,6 +440,9 @@ const weeklyData = {
       "points": 2
     }
   ],
-  "latestBroadcastVideoId": "oF84lT2ODkw",
-  "spotlightDriver": "Peter Murphy"
+  "latestBroadcastVideoId": "GLV4EJgyLIs",
+  "spotlightDriver": "Peter Murphy",
+  "latestBroadcastTitle": "The Rolling Thunder 185",
+  "latestBroadcastIsUpcoming": false,
+  "latestBroadcastBanner": "assets/BCast Banners/yt_GLV4EJgyLIs.jpg"
 };

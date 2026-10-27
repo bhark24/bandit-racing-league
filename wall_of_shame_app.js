@@ -2,8 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // Current Active State
-    let currentRaceKey = "martinsville";
-    let currentRaceData = BRL_RACES_DATA.martinsville;
+    let currentRaceKey = "talladega";
+    let currentRaceData = BRL_RACES_DATA.talladega;
     let currentFilter = "all";
     let searchQuery = "";
     let isAudioEnabled = true;
@@ -666,7 +666,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return hash;
         }
 
-        return "martinsville";
+        return "talladega";
     }
 
     // Initialize Race Week

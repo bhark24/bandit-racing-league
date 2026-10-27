@@ -1331,6 +1331,148 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RACE CONTROL] '12 pinched 47 into the wall—EOL 12! And massive ARCA brakes by the 1 and 69! Everyone in this field needs to clean up their racecraft before next week!'"
             }
         ]
+    },
+
+    talladega: {
+        id: "talladega",
+        title: "Talladega Superspeedway",
+        subtext: "Chase Opener Superspeedway Draft Battle — 73 Laps (Stages @ 21 & 42)",
+        laps: 73,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 21 },
+            { name: "Stage 2", lap: 42 },
+            { name: "Final Stage", lap: 73 }
+        ],
+        mvp: {
+            carNumber: "62",
+            driverName: "Car #62 (Ty Corino)",
+            title: "Wall of Shame MVP — Double Turn-Down EOL Spree at Dega 💥🏁",
+            reason: "Involved in 3 separate incidents at Talladega: drifted up with netcode into #12 (Bill Harkins) on Lap 13, turned down into race winner #15 (Matt Crockett) on Lap 37 for his 1st EOL, and turned down into #7 (Benjamin Lacy) in the middle lane on Lap 58 (thinking #7 was on the bottom) for his 2nd EOL of the night, triggering the stackup that collected #13 (Johnathon Platt)!",
+            totalIncidents: 3,
+            totalPenalties: "2x End of Line (EOL) Penalties (Lap 37 & Lap 58)",
+            image: "assets/tracks/Track Logos/Talladega.jpg"
+        },
+        drivers: [
+            { number: "62", name: "Driver #62 (Ty Corino)", score: 100, level: "CRITICAL", badge: "MVP / 2x EOL Penalties (L37 & L58)", incidentsCount: 3, colors: ["#ff0055", "#111"] },
+            { number: "54", name: "Driver #54 (Matthew Bailey)", score: 88, level: "HIGH", badge: "EOL (Lap 54 Clip on #9) + 3 Incidents", incidentsCount: 3, colors: ["#ff5500", "#111"] },
+            { number: "75", name: "Driver #75 (Bob Berry)", score: 82, level: "HIGH", badge: "EOL (Lap 64 Late Block on #9) + ARCA Note", incidentsCount: 2, colors: ["#ff5500", "#111"] },
+            { number: "24", name: "Driver #24 (Ethan Sikorski)", score: 74, level: "HIGH", badge: "EOL (Lap 21 Tri-Oval Contact w/ #2)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "36", name: "Driver #36 (Korey Denson)", score: 65, level: "MEDIUM", badge: "DNS — 2 EOL Penalties Remaining", incidentsCount: 1, colors: ["#e67e22", "#111"] },
+            { number: "31", name: "Driver #31 (Connor Gibson)", score: 55, level: "MEDIUM", badge: "2x Racing Deals (L30 Checkup & L42 Stage)", incidentsCount: 2, colors: ["#3498db", "#111"] },
+            { number: "12", name: "Driver #12 (Bill Harkins)", score: 50, level: "MEDIUM", badge: "L13 Netcode Victim & L68 Checkup Deal", incidentsCount: 2, colors: ["#3498db", "#111"] },
+            { number: "13", name: "Driver #13 (Johnathon Platt)", score: 48, level: "MEDIUM", badge: "L58 Closing Gap & L68 Checkup Victim", incidentsCount: 2, colors: ["#3498db", "#111"] },
+            { number: "51", name: "Driver #51 (Curtis Yancey)", score: 45, level: "LOW", badge: "L42 Stage Contact & L48 Swerve Victim", incidentsCount: 2, colors: ["#2ecc71", "#111"] },
+            { number: "14", name: "Driver #14 (Jason Allegrini)", score: 42, level: "LOW", badge: "L48 Draft Swerve Contact w/ #51 (No Yellow)", incidentsCount: 1, colors: ["#2ecc71", "#111"] },
+            { number: "6",  name: "Driver #6 (Nicole Kriesel)", score: 38, level: "LOW", badge: "L5 Bump-Draft Door Close w/ #54 (No Yellow)", incidentsCount: 1, colors: ["#2ecc71", "#111"] },
+            { number: "18", name: "Driver #18 (Victor Weaver)", score: 25, level: "LOW", badge: "Served Final EOL (3 of 3 Complete)", incidentsCount: 1, colors: ["#2ecc71", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 1, stage: 1, involved: ["18", "36"], primaryCar: "18", category: "racing_deal",
+                title: "Pre-Race Probation & EOL Status (#18 Final EOL Served | #36 DNS)",
+                summary: "Car #18 (Victor Weaver) dropped to the tail of the field to serve his 3rd and final scheduled EOL penalty. Car #36 (Korey Denson) did not show tonight, meaning his penalty carries over and he still has 2 EOL penalties remaining to serve.",
+                ruling: "Car #18 Final EOL Served (3 of 3) | Car #36 DNS (Still Has 2 EOLs to Serve)", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Car 18 serving his final pre-race EOL at the rear. Car 36 is a no-show tonight so he still has 2 EOLs left to serve.'"
+            },
+            {
+                id: 2, lap: 5, stage: 1, involved: ["54", "6"], primaryCar: "54", category: "racing_deal",
+                title: "Bump-Draft Push & Closing Hole Contact (No Yellow)",
+                summary: "Car #54 (Matthew Bailey) gave a heavy push to Car #6 (Nicole Kriesel) that sent her up the track slightly. A hole opened up on the inside and #54 went for it; #6 tried to close the door and contact occurred, but the pack kept rolling green.",
+                ruling: "No Yellow / Racing Deal", location: "Back Stretch",
+                trackCoords: { x: 350, y: 70 },
+                audioTranscript: "[STEWARDS] '54 pushed the 6 up a bit and went for the hole, 6 tried to close the door. Keep digging, stay green.'"
+            },
+            {
+                id: 3, lap: 13, stage: 1, involved: ["62", "12"], primaryCar: "62", category: "netcode",
+                title: "Wash-Up & Netcode Tap on Car #12 (No Yellow)",
+                summary: "Car #62 (Ty Corino) washed up the banking and, assisted by a tiny bit of iRacing netcode, made contact with Car #12 (Bill Harkins). Both trucks continued without a caution.",
+                ruling: "No Yellow / Netcode Contact", location: "Turn 2",
+                trackCoords: { x: 640, y: 250 },
+                audioTranscript: "[STEWARDS] '62 came up the track with a tiny bit of netcode into the 12. No yellow.'"
+            },
+            {
+                id: 4, lap: 17, stage: 1, involved: ["75", "54"], primaryCar: "75", category: "racing_deal",
+                title: "Pack Draft Rub Between #75 & #54 (No Yellow)",
+                summary: "Cars #75 (Bob Berry) and #54 (Matthew Bailey) made side-by-side contact in the tight superspeedway draft without triggering a yellow.",
+                ruling: "No Yellow / Racing Deal", location: "Turn 3",
+                trackCoords: { x: 150, y: 230 },
+                audioTranscript: "[STEWARDS] 'Contact between 75 and 54 in the pack, everybody saves it. No yellow.'"
+            },
+            {
+                id: 5, lap: 21, stage: 1, involved: ["24", "2"], primaryCar: "24", category: "penalty",
+                title: "Stage 1 Tri-Oval Contact Between #24 & #2",
+                summary: "Coming to the end of Stage 1 at Lap 21, Car #24 (Ethan Sikorski) and Car #2 (Nick Nickerson) made contact entering the tri-oval.",
+                ruling: "End of Line (EOL) Penalty (#24)", location: "Tri-Oval / Stage 1 Finish",
+                trackCoords: { x: 380, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Contact between 24 and 2 entering the tri-oval at the Stage 1 line! EOL penalty on Car 24.'"
+            },
+            {
+                id: 6, lap: 30, stage: 2, involved: ["31"], primaryCar: "31", category: "racing_deal",
+                title: "Top-Lane Accordion Check-Up & Post-Crash ARCA Brake Claim",
+                summary: "A sudden check-up on the top groove slowed the outside line rapidly; Car #31 (Connor Gibson) didn't see the trucks slowing ahead until it was too late. According to Car #31, there was also alleged ARCA braking behind after the initial crash.",
+                ruling: "Racing Deal (Outside Line Check-Up) + Post-Crash ARCA Brake Note", location: "Turn 1 & 2 Outside Lane",
+                trackCoords: { x: 660, y: 170 },
+                audioTranscript: "[RADIO #31] 'Top line checked up out of nowhere and guys were ARCA braking behind!' -> [STEWARDS] '31 didn't see them slowing until too late. Racing deal.'"
+            },
+            {
+                id: 7, lap: 37, stage: 2, involved: ["62", "15"], primaryCar: "62", category: "penalty",
+                title: "Car #62 Turns Down Into #15 (1st EOL of Race)",
+                summary: "Car #62 (Ty Corino) appeared to be having a handling or control issue and turned down into the right side of Car #15 (Matt Crockett), turning the #15 around in traffic.",
+                ruling: "End of Line (EOL) Penalty (#62 — 1st EOL)", location: "Back Stretch",
+                trackCoords: { x: 420, y: 70 },
+                audioTranscript: "[RACE CONTROL] '62 turned down into the 15 and spun him out! EOL penalty on Car 62.'"
+            },
+            {
+                id: 8, lap: 42, stage: 2, involved: ["31", "51"], primaryCar: "31", category: "stage_finish",
+                title: "Stage 2 Finish Contact Between #31 & #51",
+                summary: "Charging toward the Lap 42 Stage 2 yellow flag, contact occurred between Car #31 (Connor Gibson) and Car #51 (Curtis Yancey) as the stage caution flew.",
+                ruling: "Stage 2 Yellow / Racing Deal", location: "Tri-Oval / Stage 2 Finish",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Contact between 31 and 51 coming to the line! Stage 2 yellow is out at Lap 42.'"
+            },
+            {
+                id: 9, lap: 48, stage: 3, involved: ["14", "51"], primaryCar: "14", category: "racing_deal",
+                title: "Car #14 Draft Swerve Clips Car #51 (No Yellow)",
+                summary: "Car #14 (Jason Allegrini) started swerving in the draft and clipped Car #51 (Curtis Yancey), though the field stayed green.",
+                ruling: "No Yellow / Racing Deal", location: "Back Stretch",
+                trackCoords: { x: 480, y: 70 },
+                audioTranscript: "[STEWARDS] '14 started swerving a bit and clipped the 51. No yellow, keep racing.'"
+            },
+            {
+                id: 10, lap: 54, stage: 3, involved: ["54", "9"], primaryCar: "54", category: "penalty",
+                title: "Car #54 Wash-Up Clips #9 & Triggers iRacing Caution",
+                summary: "Car #54 (Matthew Bailey) came up the track and clipped Car #9 (Dylan McDonald). Even though Car #9 pulled off a huge save, iRacing's caution system still threw the yellow flag.",
+                ruling: "End of Line (EOL) Penalty (#54)", location: "Turn 3 & 4",
+                trackCoords: { x: 140, y: 180 },
+                audioTranscript: "[RACE CONTROL] '54 came up and clipped the 9. 9 saved it, but iRacing threw the yellow anyway. EOL penalty on Car 54.'"
+            },
+            {
+                id: 11, lap: 58, stage: 3, involved: ["62", "7", "13"], primaryCar: "62", category: "mvp",
+                title: "MVP 2nd EOL: Car #62 Turns Down Into #7 + #13 Closing-Hole Secondary Wreck",
+                summary: "Car #7 (Benjamin Lacy) moved to the middle lane, and Car #62 (Ty Corino) turned down into him seemingly thinking the #7 was all the way on the bottom (62's 2nd EOL of the race!). In the secondary incident right behind, Car #13 (Johnathon Platt) tried to shoot a tight middle gap with a big run just as the hole closed up.",
+                ruling: "End of Line (EOL) Penalty (#62 — 2nd EOL of Race) | Secondary #13 Incident: Closing Gap Racing Deal", location: "Turn 1 & 2",
+                trackCoords: { x: 670, y: 200 },
+                audioTranscript: "[RACE CONTROL] '62 turned down into the 7 in the middle lane thinking he was on the bottom—2nd EOL on Car 62! And 13 got caught in a closing gap in the secondary wreck.'"
+            },
+            {
+                id: 12, lap: 64, stage: 3, involved: ["75", "9"], primaryCar: "75", category: "penalty",
+                title: "Late Block on Outside Run Turns #75 & #9 + Possible ARCA Braking",
+                summary: "Car #9 (Dylan McDonald) got a run to the outside of Car #75 (Bob Berry), and #75 tried to move up in front of the #9 to stay ahead just as #9 had barely established position on his outside. Stewards also noted possible ARCA braking behind the wreck.",
+                ruling: "End of Line (EOL) Penalty (#75) + Possible ARCA Braking Note", location: "Back Stretch / Turn 3 Entry",
+                trackCoords: { x: 240, y: 70 },
+                audioTranscript: "[RACE CONTROL] '9 had just barely gotten to the outside of 75 when 75 moved up to block. EOL penalty on Car 75, and checking possible ARCA braking behind.'"
+            },
+            {
+                id: 13, lap: 68, stage: 3, involved: ["12", "13"], primaryCar: "12", category: "racing_deal",
+                title: "Late-Race Inside Lane Check-Up Accordion (#12 & #13)",
+                summary: "With 2 laps to go in regulation, the inside lane checked up hard; Car #12 (Bill Harkins) hit the back of Car #13 (Johnathon Platt), who had zero time to react to the stackup ahead. Post-Race Stewards' Policy Note: Race Control is evaluating a rule to prohibit driver chats discussing how damaged a truck is during the race.",
+                ruling: "Racing Incident (Inside Lane Check-Up) + Stewards' Comms Policy Note (Truck Damage Chats)", location: "Front Stretch / Tri-Oval",
+                trackCoords: { x: 310, y: 330 },
+                audioTranscript: "[STEWARDS] 'Inside lane checked up and 12 got into the back of 13 with no time to react—racing incident. Also noting: do not use race chat to announce how damaged your truck is.'"
+            }
+        ]
     }
 
 };
