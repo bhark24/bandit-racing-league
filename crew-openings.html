@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793117766">
+    <link rel="stylesheet" href="styles.css?v=1793118289">
 
     <style>
         .crew-hero {
@@ -292,7 +292,7 @@
         <!-- Filter Buttons -->
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
             <div class="filter-row" id="roleFilterRow" style="margin-bottom: 0;">
-                <button class="filter-btn active" onclick="filterOpenings('all', this)">All Openings (4)</button>
+                <button class="filter-btn active" onclick="filterOpenings('all', this)">All Openings (2)</button>
                 <button class="filter-btn" onclick="filterOpenings('race-control', this)">🏁 Race Control &amp; Stewarding</button>
                 <button class="filter-btn" onclick="filterOpenings('media', this)">🎨 Social Media &amp; Graphics</button>
                 <button class="filter-btn" onclick="filterOpenings('volunteer', this)">🟢 Volunteer Crew</button>
@@ -302,7 +302,7 @@
         </div>
 
         <!-- Open Positions Grid -->
-        <div class="openings-grid" id="openingsGrid">
+        <div class="openings-grid" id="openingsGrid" style="grid-template-columns: 1fr;">
 
             <!-- Position #1: Live Race Control Director / Official -->
             <div class="opening-card" data-category="race-control stipend" style="max-width: 920px; margin: 0 auto; width: 100%;">
@@ -343,8 +343,52 @@
 
                 <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
                     <span style="font-size: 0.85rem; color: #aaa;">⏰ <strong>Schedule:</strong> Weekly League Race Nights (Dedicated Non-Driving Official)</span>
-                    <button class="btn-primary" style="padding: 12px 24px; font-size: 0.9rem; border: none; cursor: pointer;" onclick="selectRoleAndScroll('Live Race Control Director / Official')">
+                    <button class="btn-primary" style="padding: 12px 24px; font-size: 0.9rem; border: none; cursor: pointer;" onclick="selectRoleAndScroll('Live Race Control Director / Official', 'Paid Position (With Verifiable Resume & References)')">
                         Apply With Resume &amp; References &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Position #2: Social Media & Content Coordinator -->
+            <div class="opening-card" data-category="media volunteer" style="max-width: 920px; margin: 0 auto; width: 100%;">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                        <span class="comp-badge comp-volunteer">🟢 Volunteer Crew Position</span>
+                        <span class="status-pill" style="border-color: rgba(0, 212, 255, 0.45); color: #00d4ff;">📱 League Growth &amp; Promotion</span>
+                    </div>
+                    <span style="font-size: 0.78rem; font-weight: 800; color: #00d4ff; text-transform: uppercase; letter-spacing: 1px;">Position #2 &bull; Social Media &amp; Content</span>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.65rem; color: #fff; margin: 6px 0 10px 0;">Social Media &amp; Content Coordinator</h3>
+                    <p style="color: #ccc; font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">
+                        The Bandit Racing League is looking for an enthusiastic, creative <strong>Social Media &amp; Content Coordinator</strong> to help showcase our racing action, drivers, and weekly storylines across social platforms. This is a <strong>volunteer crew position</strong> ideal for an active league member or sim-racing fan who enjoys creating content, building hype around race night, and helping grow the Bandit Racing League community.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 16px;">
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(57, 255, 20, 0.25); padding: 16px 18px; border-radius: 10px;">
+                            <strong style="font-family: var(--font-heading); font-size: 0.85rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 8px;">📱 Key Responsibilities</strong>
+                            <ul class="duty-list" style="margin: 0;">
+                                <li><strong>Weekly Race Promotion:</strong> Post upcoming race previews, schedule reminders, and broadcast links leading up to race night.</li>
+                                <li><strong>Race Results &amp; Standings Recaps:</strong> Share official podium winners, Victory Lane graphics, championship standings updates, and Wall of Shame highlights after each event.</li>
+                                <li><strong>Short-Form Clips &amp; Highlights:</strong> Pull exciting finishes, battles, saves, and big moments from broadcasts or iRacing replays to share on TikTok, YouTube Shorts, Reels, Facebook, or X.</li>
+                                <li><strong>Community Engagement:</strong> Spotlight driver milestones, paint schemes, and upcoming season announcements (like Season 17) to keep current drivers engaged and attract clean new racers.</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(0, 212, 255, 0.3); padding: 16px 18px; border-radius: 10px;">
+                            <strong style="font-family: var(--font-heading); font-size: 0.85rem; color: #00d4ff; text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 8px;">✨ What We're Looking For</strong>
+                            <ul class="duty-list" style="margin: 0;">
+                                <li><strong>Social Media &amp; Content Savvy:</strong> Familiarity with posting on platforms like Facebook, X (Twitter), Instagram, TikTok, or YouTube Shorts.</li>
+                                <li><strong>Basic Graphic or Video Clipping Skills:</strong> Comfortable using tools like Canva, Photoshop, or basic video clipping software (or sharing existing graphics/articles generated on the BRL website).</li>
+                                <li><strong>Consistent Weekly Presence:</strong> Able to dedicate a little time each week before and after race night to keep our social pages active and current.</li>
+                                <li><strong>Team Player:</strong> Positive ambassador for the Bandit Racing League brand in the wider iRacing community.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <span style="font-size: 0.85rem; color: #aaa;">⏰ <strong>Schedule:</strong> Flexible Weekly (Active Drivers &amp; Community Members Welcome)</span>
+                    <button class="btn-primary" style="padding: 12px 24px; font-size: 0.9rem; border: none; cursor: pointer;" onclick="selectRoleAndScroll('Social Media & Content Coordinator', 'Volunteer Crew (Happy to help the league)')">
+                        Step Up for Volunteer Role &rarr;
                     </button>
                 </div>
             </div>
@@ -383,6 +427,7 @@
                     <label class="crew-label" for="crewRoleSelect">Role Applying For *</label>
                     <select id="crewRoleSelect" class="crew-select">
                         <option value="Live Race Control Director / Official">Live Race Control Director / Official</option>
+                        <option value="Social Media & Content Coordinator">Social Media &amp; Content Coordinator</option>
                     </select>
                 </div>
                 <div>
@@ -397,7 +442,7 @@
 
             <div style="margin-bottom: 20px;">
                 <label class="crew-label" for="crewExperience">Resume, League References &amp; Experience *</label>
-                <textarea id="crewExperience" class="crew-textarea" rows="4" placeholder="For paid positions (such as Live Race Control), please list the leagues/series you have officiated and provide verifiable reference contacts (League Owners, Broadcasters, or Discord handles)..."></textarea>
+                <textarea id="crewExperience" class="crew-textarea" rows="4" placeholder="For paid positions (such as Live Race Control), please list the leagues/series you have officiated and provide verifiable reference contacts (League Owners, Broadcasters, or Discord handles). For volunteer roles, share your interests or links to past content..."></textarea>
             </div>
 
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
@@ -421,7 +466,7 @@
         </div>
     </footer>
 
-    <script src="db_config.js?v=1793117766"></script>
+    <script src="db_config.js?v=1793118289"></script>
     <script>
         function filterOpenings(category, btnEl) {
             const buttons = document.querySelectorAll("#roleFilterRow .filter-btn");
@@ -439,10 +484,14 @@
             });
         }
 
-        function selectRoleAndScroll(roleName) {
+        function selectRoleAndScroll(roleName, compPreference) {
             const selectEl = document.getElementById("crewRoleSelect");
             if (selectEl) {
                 selectEl.value = roleName;
+            }
+            const compEl = document.getElementById("crewCompType");
+            if (compEl && compPreference) {
+                compEl.value = compPreference;
             }
             const formCard = document.getElementById("applyCrewFormCard");
             if (formCard) {
