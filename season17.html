@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793115895">
+    <link rel="stylesheet" href="styles.css?v=1793116492">
     <style>
         .s17-stats-strip {
             display: grid;
@@ -292,52 +292,31 @@
                         🗳️ Official Season 17 Fixed-Setup Platform Poll
                     </h2>
                     <p style="color: #aaa; font-size: 0.95rem; margin-top: 6px;">
-                        Click any iRacing Fixed-Setup NASCAR platform card below to select your choice, then enter your Driver Name &amp; Car # at the bottom of the ballot to submit your official vote.
+                        Select any iRacing Fixed-Setup NASCAR platform below and click <strong>Submit Official Vote</strong>. Limited to <strong>one vote per IP address</strong>.
                     </p>
                 </div>
                 <span id="pollSyncBadge" style="background: rgba(57, 255, 20, 0.15); color: var(--neon-green); border: 1px solid var(--neon-green); padding: 6px 14px; border-radius: 20px; font-family: var(--font-heading); font-size: 0.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
-                    🟢 Live Cloud Poll Active
+                    🟢 1 Vote Per IP Address
                 </span>
             </div>
+
+            <!-- Status / Confirmation Banner -->
+            <div id="voteFeedbackMsg" style="margin-top: 18px; padding: 14px 18px; border-radius: 10px; background: rgba(57, 255, 20, 0.1); border: 1px solid var(--neon-green); font-weight: bold; font-size: 0.98rem; display: none;"></div>
 
             <!-- Poll Option Cards Container -->
             <div class="poll-grid" id="pollOptionsGrid">
                 <!-- Populated dynamically by JS -->
             </div>
 
-            <!-- Voter Submission Bar -->
-            <div class="voter-input-bar">
-                <div class="voter-field">
-                    <label for="voterDriverName">Your Driver Name *</label>
-                    <input type="text" id="voterDriverName" placeholder="e.g. Matt Crockett">
-                </div>
-                <div class="voter-field">
-                    <label for="voterCarNum">Car # *</label>
-                    <input type="text" id="voterCarNum" placeholder="e.g. #15">
-                </div>
-                <div class="voter-field">
-                    <label for="voterSelectedDisplay">Selected Season 17 Platform</label>
-                    <input type="text" id="voterSelectedDisplay" readonly placeholder="Click a platform card above..." style="color: var(--chase-yellow); font-weight: bold; cursor: default;">
-                </div>
+            <!-- Simple One-Time Submit Bar -->
+            <div id="submitVoteBar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: rgba(0, 0, 0, 0.45); padding: 18px 22px; border-radius: 12px; border: 1px solid rgba(57, 255, 20, 0.35); margin-top: 24px;">
                 <div>
-                    <button id="submitVoteBtn" class="btn-primary" style="width: 100%; padding: 13px 26px; font-family: var(--font-heading); font-size: 1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: none;">
-                        Cast Official Vote &rarr;
-                    </button>
+                    <span style="display: block; font-family: var(--font-heading); font-size: 0.78rem; text-transform: uppercase; color: var(--neon-green); letter-spacing: 1px;">Selected Platform</span>
+                    <span id="voterSelectedDisplay" style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--chase-yellow); font-weight: 900;">Click a platform card above to select...</span>
                 </div>
-            </div>
-            <div id="voteFeedbackMsg" style="margin-top: 12px; font-weight: bold; font-size: 0.95rem; display: none;"></div>
-
-            <!-- Live Voter Roll Call -->
-            <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--chase-yellow); text-transform: uppercase; letter-spacing: 1px; margin: 0;">
-                        📋 Verified Driver Votes Cast (<span id="voterRollCount">0</span>)
-                    </h3>
-                    <span style="font-size: 0.8rem; color: #888;">Submitting again with the same Driver Name updates your vote</span>
-                </div>
-                <div id="voterRollList" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    <span style="color: #777; font-style: italic; font-size: 0.9rem;">No votes recorded yet — be the first driver to cast your Season 17 vote!</span>
-                </div>
+                <button id="submitVoteBtn" class="btn-primary" style="padding: 14px 32px; font-family: var(--font-heading); font-size: 1.05rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border: none;">
+                    Submit Official Vote &rarr;
+                </button>
             </div>
         </div>
 
@@ -580,7 +559,7 @@
         </div>
     </footer>
 
-    <script src="supabase_config.js?v=1793115895"></script>
+    <script src="supabase_config.js?v=1793116492"></script>
     <script>
         // Official iRacing Fixed-Setup NASCAR Platform Options with Audited BRL History
         const SEASON_17_OPTIONS = [
@@ -707,7 +686,48 @@
         ];
 
         let selectedOptionId = null;
-        let activeVotes = []; // Array of { driverName, carNum, optionId, optionName, votedAt }
+        let activeVotes = []; // Array of { ip, optionId, optionName, votedAt }
+        let voterIp = null;
+        let hasVoted = false;
+        let votedOptionId = null;
+
+        function getFallbackVoterId() {
+            try {
+                let id = localStorage.getItem("brl_s17_voter_id");
+                if (!id) {
+                    id = "client_" + Math.random().toString(36).substring(2, 12) + "_" + Date.now();
+                    localStorage.setItem("brl_s17_voter_id", id);
+                }
+                return id;
+            } catch (e) {
+                return "client_anon";
+            }
+        }
+
+        async function resolveVoterIp() {
+            try {
+                const res = await fetch("https://api.ipify.org?format=json");
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.ip) {
+                        voterIp = data.ip;
+                        return voterIp;
+                    }
+                }
+            } catch (e) {}
+            try {
+                const res2 = await fetch("https://api64.ipify.org?format=json");
+                if (res2.ok) {
+                    const data2 = await res2.json();
+                    if (data2 && data2.ip) {
+                        voterIp = data2.ip;
+                        return voterIp;
+                    }
+                }
+            } catch (e) {}
+            voterIp = getFallbackVoterId();
+            return voterIp;
+        }
 
         function loadLocalVotesFallback() {
             try {
@@ -723,9 +743,37 @@
             } catch (e) {}
         }
 
+        function checkIfAlreadyVoted() {
+            // Check localStorage lock first
+            try {
+                const localVotedOpt = localStorage.getItem("brl_s17_voted_option");
+                if (localVotedOpt) {
+                    hasVoted = true;
+                    votedOptionId = localVotedOpt;
+                    selectedOptionId = localVotedOpt;
+                }
+            } catch (e) {}
+
+            // Check if current IP exists in activeVotes
+            if (voterIp && Array.isArray(activeVotes)) {
+                const match = activeVotes.find(v => v.ip && v.ip === voterIp);
+                if (match) {
+                    hasVoted = true;
+                    votedOptionId = match.optionId;
+                    selectedOptionId = match.optionId;
+                    try {
+                        localStorage.setItem("brl_s17_voted_option", match.optionId);
+                    } catch (e) {}
+                }
+            }
+        }
+
         async function fetchVotesFromSupabase() {
+            await resolveVoterIp();
+
             if (typeof SUPABASE_URL === "undefined" || !SUPABASE_URL) {
                 activeVotes = loadLocalVotesFallback();
+                checkIfAlreadyVoted();
                 renderPollUI();
                 return;
             }
@@ -752,6 +800,7 @@
                 console.warn("Using local fallback for Season 17 poll:", e);
                 activeVotes = loadLocalVotesFallback();
             }
+            checkIfAlreadyVoted();
             renderPollUI();
         }
 
@@ -759,7 +808,37 @@
             const grid = document.getElementById("pollOptionsGrid");
             const totalVotes = activeVotes.length;
             document.getElementById("totalPollVotesHero").textContent = totalVotes;
-            document.getElementById("voterRollCount").textContent = totalVotes;
+
+            const feedback = document.getElementById("voteFeedbackMsg");
+            const btn = document.getElementById("submitVoteBtn");
+            const displaySpan = document.getElementById("voterSelectedDisplay");
+
+            if (hasVoted && votedOptionId) {
+                const votedObj = SEASON_17_OPTIONS.find(o => o.id === votedOptionId);
+                const votedName = votedObj ? votedObj.name : votedOptionId;
+                if (displaySpan) {
+                    displaySpan.textContent = `✓ ${votedName} (Vote Locked)`;
+                    displaySpan.style.color = "var(--neon-green)";
+                }
+                if (btn) {
+                    btn.disabled = true;
+                    btn.textContent = "✓ Vote Recorded";
+                    btn.style.opacity = "0.6";
+                    btn.style.cursor = "not-allowed";
+                }
+                if (feedback) {
+                    feedback.style.display = "block";
+                    feedback.style.color = "var(--neon-green)";
+                    feedback.style.borderColor = "var(--neon-green)";
+                    feedback.textContent = `✅ Your vote for ${votedName} has been recorded! (1 vote per IP address)`;
+                }
+            } else if (selectedOptionId) {
+                const selObj = SEASON_17_OPTIONS.find(o => o.id === selectedOptionId);
+                if (selObj && displaySpan) {
+                    displaySpan.textContent = selObj.name;
+                    displaySpan.style.color = "var(--chase-yellow)";
+                }
+            }
 
             // Tally votes by optionId
             const counts = {};
@@ -770,6 +849,7 @@
 
             grid.innerHTML = SEASON_17_OPTIONS.map(opt => {
                 const isSelected = selectedOptionId === opt.id;
+                const isVotedCard = hasVoted && votedOptionId === opt.id;
                 const vCount = counts[opt.id] || 0;
                 const pct = totalVotes > 0 ? Math.round((vCount / totalVotes) * 100) : 0;
 
@@ -780,15 +860,20 @@
                 const seasonBadge = `<span class="history-pill pill-seasons">📅 ${opt.brlSeasons} ${opt.brlSeasons === 1 ? 'Season' : 'Seasons'}</span>`;
                 const startsBadge = `<span class="history-pill pill-starts">🏎️ ${opt.brlStarts.toLocaleString()} Starts</span>`;
 
+                const cursorStyle = hasVoted ? "cursor: default;" : "cursor: pointer;";
+                const yourVoteTag = isVotedCard
+                    ? `<span style="background: var(--neon-green); color: #000; font-family: var(--font-heading); font-size: 0.7rem; font-weight: 900; padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">✓ Your Vote</span>`
+                    : `<div class="poll-radio-circle"></div>`;
+
                 return `
-                    <div class="poll-option-card ${isSelected ? 'selected' : ''}" onclick="selectPollOption('${opt.id}')">
+                    <div class="poll-option-card ${isSelected ? 'selected' : ''}" style="${cursorStyle}" onclick="selectPollOption('${opt.id}')">
                         <div>
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
                                 <div>
                                     <span style="font-size: 0.72rem; font-weight: 800; color: #00d4ff; text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px;">${opt.iracingClass}</span>
                                     <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: #fff; margin: 0; line-height: 1.2;">${opt.name}</h3>
                                 </div>
-                                <div class="poll-radio-circle"></div>
+                                ${yourVoteTag}
                             </div>
                             <p style="color: #aaa; font-size: 0.83rem; margin: 6px 0 10px 0;">${opt.sub}</p>
                             <div class="history-pill-row">
@@ -811,84 +896,49 @@
                     </div>
                 `;
             }).join("");
-
-            // Render Voter Roll Call
-            const rollList = document.getElementById("voterRollList");
-            if (activeVotes.length === 0) {
-                rollList.innerHTML = `<span style="color: #777; font-style: italic; font-size: 0.9rem;">No votes recorded yet — be the first driver to cast your Season 17 vote!</span>`;
-            } else {
-                rollList.innerHTML = activeVotes.slice().reverse().map(v => `
-                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(57, 255, 20, 0.3); border-radius: 8px; padding: 8px 14px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px;">
-                        <span style="background: #111; color: var(--neon-green); font-family: var(--font-heading); font-weight: 900; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(57,255,20,0.4);">${v.carNum}</span>
-                        <strong style="color: #fff;">${v.driverName}</strong>
-                        <span style="color: #888;">&rarr;</span>
-                        <span style="color: var(--chase-yellow); font-weight: bold;">${v.optionName}</span>
-                    </div>
-                `).join("");
-            }
         }
 
         window.selectPollOption = function(optId) {
+            if (hasVoted) return;
             selectedOptionId = optId;
-            const found = SEASON_17_OPTIONS.find(o => o.id === optId);
-            const displayInput = document.getElementById("voterSelectedDisplay");
-            if (found && displayInput) {
-                displayInput.value = found.name;
-            }
             renderPollUI();
         };
 
         async function submitSeason17Vote() {
-            const nameInput = document.getElementById("voterDriverName");
-            const carInput = document.getElementById("voterCarNum");
             const feedback = document.getElementById("voteFeedbackMsg");
             const btn = document.getElementById("submitVoteBtn");
 
-            const driverName = (nameInput.value || "").trim();
-            let carNum = (carInput.value || "").trim();
+            if (hasVoted) {
+                feedback.style.display = "block";
+                feedback.style.color = "var(--chase-yellow)";
+                feedback.textContent = "🔒 A vote has already been submitted from this IP address.";
+                return;
+            }
 
             if (!selectedOptionId) {
                 feedback.style.display = "block";
                 feedback.style.color = "#ff4d4d";
+                feedback.style.borderColor = "#ff4d4d";
                 feedback.textContent = "⚠️ Please click one of the Season 17 platform cards above to select your vote first!";
                 return;
             }
-            if (!driverName) {
-                feedback.style.display = "block";
-                feedback.style.color = "#ff4d4d";
-                feedback.textContent = "⚠️ Please enter your Driver Name so your official league vote can be verified.";
-                nameInput.focus();
-                return;
-            }
-            if (!carNum) {
-                carNum = "#--";
-            } else if (!carNum.startsWith("#")) {
-                carNum = "#" + carNum;
+
+            btn.disabled = true;
+            btn.textContent = "Submitting Vote...";
+
+            if (!voterIp) {
+                await resolveVoterIp();
             }
 
+            // Double check if IP already voted in latest remote list
             const optObj = SEASON_17_OPTIONS.find(o => o.id === selectedOptionId);
             const newVote = {
-                driverName: driverName,
-                carNum: carNum,
+                ip: voterIp,
                 optionId: selectedOptionId,
                 optionName: optObj ? optObj.name : selectedOptionId,
                 votedAt: new Date().toISOString()
             };
 
-            btn.disabled = true;
-            btn.textContent = "Saving Vote...";
-
-            // Update or insert by driverName
-            const existingIdx = activeVotes.findIndex(v => v.driverName.toLowerCase() === driverName.toLowerCase());
-            if (existingIdx > -1) {
-                activeVotes[existingIdx] = newVote;
-            } else {
-                activeVotes.push(newVote);
-            }
-            saveLocalVotesFallback(activeVotes);
-            renderPollUI();
-
-            // Persist to Supabase row id=2 while preserving fantasy picks
             try {
                 let rowData = { picks: [], season17PollVotes: activeVotes };
                 const getRes = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
@@ -903,16 +953,27 @@
                     if (rows && rows.length > 0 && rows[0].data) {
                         rowData = rows[0].data;
                         const remoteVotes = Array.isArray(rowData.season17PollVotes) ? rowData.season17PollVotes : [];
-                        const rIdx = remoteVotes.findIndex(v => v.driverName.toLowerCase() === driverName.toLowerCase());
-                        if (rIdx > -1) {
-                            remoteVotes[rIdx] = newVote;
-                        } else {
-                            remoteVotes.push(newVote);
+                        const existingIpVote = remoteVotes.find(v => v.ip && v.ip === voterIp);
+                        if (existingIpVote) {
+                            activeVotes = remoteVotes;
+                            hasVoted = true;
+                            votedOptionId = existingIpVote.optionId;
+                            selectedOptionId = existingIpVote.optionId;
+                            try { localStorage.setItem("brl_s17_voted_option", votedOptionId); } catch (e) {}
+                            saveLocalVotesFallback(activeVotes);
+                            renderPollUI();
+                            return;
                         }
+                        remoteVotes.push(newVote);
                         rowData.season17PollVotes = remoteVotes;
                         activeVotes = remoteVotes;
-                        saveLocalVotesFallback(activeVotes);
+                    } else {
+                        activeVotes.push(newVote);
+                        rowData.season17PollVotes = activeVotes;
                     }
+                } else {
+                    activeVotes.push(newVote);
+                    rowData.season17PollVotes = activeVotes;
                 }
 
                 await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
@@ -929,18 +990,19 @@
                     })
                 });
 
+                hasVoted = true;
+                votedOptionId = selectedOptionId;
+                try { localStorage.setItem("brl_s17_voted_option", votedOptionId); } catch (e) {}
+                saveLocalVotesFallback(activeVotes);
                 renderPollUI();
-                feedback.style.display = "block";
-                feedback.style.color = "var(--neon-green)";
-                feedback.textContent = `✅ Official Vote Recorded for ${driverName} (${carNum}) -> ${newVote.optionName}!`;
             } catch (e) {
                 console.error("Error saving vote to Supabase:", e);
-                feedback.style.display = "block";
-                feedback.style.color = "var(--chase-yellow)";
-                feedback.textContent = `✅ Vote saved locally for ${driverName} (${carNum}) -> ${newVote.optionName}!`;
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = "Cast Official Vote &rarr;";
+                activeVotes.push(newVote);
+                hasVoted = true;
+                votedOptionId = selectedOptionId;
+                try { localStorage.setItem("brl_s17_voted_option", votedOptionId); } catch (err) {}
+                saveLocalVotesFallback(activeVotes);
+                renderPollUI();
             }
         }
 
