@@ -1766,3 +1766,39 @@ footer {
     }
 }
 
+/* Crew Openings (Blinking Brilliant Red) & Classifieds (#00ff00) Nav Selectors */
+@keyframes blink-brilliant-red {
+    0%, 100% {
+        color: #ff0022;
+        text-shadow: 0 0 12px rgba(255, 0, 34, 0.95), 0 0 24px rgba(255, 0, 0, 0.75);
+        opacity: 1;
+    }
+    50% {
+        color: #ff4d4d;
+        text-shadow: 0 0 4px rgba(255, 0, 34, 0.3);
+        opacity: 0.3;
+    }
+}
+
+.nav-links a[href="/crew-openings.html"] {
+    color: #ff0022 !important;
+    font-weight: 900 !important;
+    animation: blink-brilliant-red 1.15s infinite ease-in-out;
+}
+
+.nav-links a[href="/crew-openings.html"]::after {
+    background-color: #ff0022 !important;
+    box-shadow: 0 0 10px rgba(255, 0, 34, 0.9);
+}
+
+.nav-links a[href="/classifieds.html"] {
+    color: #00ff00 !important;
+    font-weight: 900 !important;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.45);
+}
+
+.nav-links a[href="/classifieds.html"]::after {
+    background-color: #00ff00 !important;
+}
+
+
