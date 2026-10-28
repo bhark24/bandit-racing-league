@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793188991">
+    <link rel="stylesheet" href="styles.css?v=1793190031">
     <style>
         .pool-tier-badge {
             display: inline-block;
@@ -716,9 +716,9 @@
     </footer>
 
     <!-- Roster Data and Standings Data -->
-    <script src="supabase_config.js?v=1793188991"></script>
-    <script src="roster_data.js?v=1793188991"></script>
-    <script src="fantasy_data.js?v=1793188991"></script>
+    <script src="supabase_config.js?v=1793190031"></script>
+    <script src="roster_data.js?v=1793190031"></script>
+    <script src="fantasy_data.js?v=1793190031"></script>
     
     <!-- Page Logic -->
     <script>
@@ -811,10 +811,31 @@
                     await initializeFantasyDatabaseRow();
                 }
 
-                renderActiveSubmissions();
+                // Auto-pick for Bhark24 each week if not yet submitted for the current open race
+                const hasBhark24 = activeWeeklyPicks.some(p => p.name && p.name.trim().toLowerCase() === 'bhark24');
+                if (!hasBhark24 && !window.isFantasyLocked) {
+                    const autoPlan = getBhark24AutoPickPlan();
+                    await savePickToSupabase('Bhark24', autoPlan.picks, autoPlan.tiebreaker, '');
+                } else {
+                    renderActiveSubmissions();
+                }
             } catch (e) {
                 console.error("Failed to load picks from Supabase:", e);
             }
+        }
+
+        function getBhark24AutoPickPlan() {
+            const headerEl = document.getElementById('submissions-header');
+            const trackText = (headerEl ? headerEl.textContent : '').toLowerCase();
+            if (trackText.includes('ohio') || trackText.includes('road')) {
+                return { picks: ['NICK NICKERSON', 'SCOTT SANDERSON', 'BENJAMIN LACY', 'Jackson Knaak'], tiebreaker: 8 };
+            } else if (trackText.includes('phoenix')) {
+                return { picks: ['DYLAN MCDONALD', 'NICK NICKERSON', 'SCOTT SANDERSON', 'BENJAMIN LACY'], tiebreaker: 22 };
+            } else if (trackText.includes('homestead')) {
+                return { picks: ['BENJAMIN LACY', 'SCOTT SANDERSON', 'NICK NICKERSON', 'DYLAN MCDONALD'], tiebreaker: 18 };
+            }
+            // Default / Kansas 1.5-mile intermediate
+            return { picks: ['BENJAMIN LACY', 'NICK NICKERSON', 'SCOTT SANDERSON', 'JOSH ADAMS'], tiebreaker: 18 };
         }
 
         async function initializeFantasyDatabaseRow() {

@@ -550,22 +550,46 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
     if weekly_winners:
         print(f"Weekly Winner: {', '.join(weekly_winners)} with {best_score} points!")
 
-    # Preserve future picks in Supabase instead of wiping everything!
+    # Preserve future picks in Supabase instead of wiping everything, and auto-seed Bhark24 for the next race!
     url, key = get_supabase_config()
     if url and key:
-        print(f"[*] Preserving {len(future_picks)} future picks in Supabase...")
+        print(f"[*] Preserving {len(future_picks)} future picks in Supabase and seeding Bhark24 auto-pick...")
         try:
+            from auto_pick_bhark24 import get_upcoming_track, get_auto_pick_for_track
+            if not any(p.get("name", "").strip().lower() == "bhark24" for p in future_picks):
+                next_track = get_upcoming_track()
+                plan = get_auto_pick_for_track(next_track)
+                future_picks.append({
+                    "name": "Bhark24",
+                    "picks": plan["picks"],
+                    "tiebreaker": plan["tiebreaker"],
+                    "email": "",
+                    "submitted_at": datetime.now().isoformat() + "Z"
+                })
+                print(f"[+] Auto-seeded Bhark24 picks for next race ({next_track}): {plan['picks']}")
+        except Exception as e:
+            print(f"[!] Warning auto-seeding Bhark24: {e}")
+
+        try:
+            get_headers = {'apikey': key, 'Authorization': f'Bearer {key}'}
+            req_url = f"{url}/rest/v1/league_data?id=eq.2"
+            existing_row_data = {}
+            try:
+                with urllib.request.urlopen(urllib.request.Request(req_url, headers=get_headers)) as r_get:
+                    r_json = json.loads(r_get.read().decode('utf-8'))
+                    if r_json and len(r_json) > 0 and r_json[0].get("data"):
+                        existing_row_data = r_json[0]["data"]
+            except Exception:
+                pass
+            existing_row_data["picks"] = future_picks
             headers = {
                 'apikey': key,
                 'Authorization': f'Bearer {key}',
                 'Content-Type': 'application/json',
                 'Prefer': 'return=minimal'
             }
-            req_url = f"{url}/rest/v1/league_data?id=eq.2"
             payload = {
-                "data": {
-                    "picks": future_picks
-                },
+                "data": existing_row_data,
                 "updated_at": datetime.now().isoformat()
             }
             req_data = json.dumps(payload).encode('utf-8')
@@ -620,6 +644,22 @@ def main():
     
     # Load fan picks from Supabase/CSV, filtering out future picks
     picks, future_picks = load_picks(config, race_lock_dt)
+
+    # Ensure Bhark24 always has an active scored entry even if not manually submitted
+    if not any(row[1].strip().lower() == "bhark24" for row in picks if len(row) >= 2):
+        try:
+            from auto_pick_bhark24 import get_auto_pick_for_track
+            plan = get_auto_pick_for_track(track_name)
+            p_list = plan["picks"]
+            picks.append([
+                race_lock_dt.isoformat(),
+                "Bhark24",
+                p_list[0], p_list[1], p_list[2], p_list[3],
+                str(plan["tiebreaker"])
+            ])
+            print(f"[+] Injected Bhark24 auto-pick for {track_name}: {p_list}")
+        except Exception as e:
+            print(f"[!] Warning injecting Bhark24 auto-pick: {e}")
     
     # Calculate scores for picks
     fan_results = score_picks(picks, driver_scores, caution_laps, config)
