@@ -1,9 +1,17 @@
 import os
+import sys
 import re
 import ssl
 import json
 import urllib.request
 from datetime import datetime
+
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SIMTRAX_HTML_PATH = os.path.join(BASE_DIR, "simtrax.html")
@@ -191,7 +199,8 @@ def main():
     streams = fetch_simtrax_streams()
     for idx, s in enumerate(streams[:8]):
         status = "UPCOMING" if s["isUpcoming"] else ("LIVE" if s["isLive"] else "VOD")
-        print(f"  [{idx+1}] [{status}] {s['videoId']} | {s['title']} ({s['publishedText']})")
+        pub_text = s['publishedText'].replace('\u202f', ' ').replace('\xa0', ' ')
+        print(f"  [{idx+1}] [{status}] {s['videoId']} | {s['title']} ({pub_text})")
 
     upcoming_streams = [s for s in streams if s["isUpcoming"] or s["isLive"]]
     vod_streams = [s for s in streams if not s["isUpcoming"] and not s["isLive"]]
@@ -232,7 +241,7 @@ def main():
             banner_heading = f"🔴 LIVE NOW &bull; {vid_title}"
             sub_caption = f"Watch the live SimTrax Broadcasting stream below or <a href='https://www.youtube.com/watch?v={vid_id}' target='_blank' style='color: var(--neon-green); font-weight: bold;'>open on YouTube &rarr;</a>"
         else:
-            sched_note = featured_stream.get("publishedText", f"{next_race['date']} @ 9:00 PM EST")
+            sched_note = featured_stream.get("publishedText", f"{next_race['date']} @ 9:00 PM EST").replace('\u202f', ' ').replace('\xa0', ' ')
             banner_heading = f"Upcoming Race Broadcast &bull; {vid_title}"
             sub_caption = f"Scheduled Live Stream ({sched_note}) &bull; <a href='https://www.youtube.com/watch?v={vid_id}' target='_blank' style='color: var(--neon-green); font-weight: bold;'>Click Here to Set Reminder / Watch on YouTube &rarr;</a>"
     else:

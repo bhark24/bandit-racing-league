@@ -440,9 +440,9 @@ const weeklyData = {
       "points": 2
     }
   ],
-  "latestBroadcastVideoId": "GLV4EJgyLIs",
+  "latestBroadcastVideoId": "Mvniqkv6ycU",
   "spotlightDriver": "Peter Murphy",
-  "latestBroadcastTitle": "The Rolling Thunder 185",
-  "latestBroadcastIsUpcoming": false,
-  "latestBroadcastBanner": "assets/BCast Banners/yt_GLV4EJgyLIs.jpg"
+  "latestBroadcastTitle": "The Wendy Jo Memorial 110",
+  "latestBroadcastIsUpcoming": true,
+  "latestBroadcastBanner": "assets/BCast Banners/yt_Mvniqkv6ycU.jpg"
 };
