@@ -1034,5 +1034,19 @@ def main():
     # Save the updated database
     save_teams_database(teams_db, original_content)
 
+    # Automatically push post-race alert to all BRL Mobile App users
+    try:
+        import send_brl_notification
+        winner_name = results_list[0]["name"] if results_list else "Winner"
+        send_brl_notification.push_brl_notification(
+            f"🏁 {track_name} Results & Outlaw Telegraph Live!",
+            f"{winner_name} takes P1 at {track_name}! Franchise balances, chassis conditions & The Outlaw Telegraph are now updated.",
+            target_url="/teams.html",
+            category="team_alert",
+            driver=winner_name
+        )
+    except Exception as e:
+        print(f"Warning: could not send auto push notification: {e}")
+
 if __name__ == "__main__":
     main()

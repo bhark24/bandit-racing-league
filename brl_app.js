@@ -374,7 +374,7 @@
     }
 
     // 7. Automatic Wednesday Night "Race Going Live" Check (8:45 PM - 10:30 PM ET)
-    function checkWednesdayRaceLiveWindow() {
+    async function checkWednesdayRaceLiveWindow() {
         try {
             const now = new Date();
             const etParts = new Intl.DateTimeFormat('en-US', {
@@ -399,18 +399,55 @@
 
             if (totalMins >= 20 * 60 + 45 && totalMins <= 22 * 60 + 30) {
                 const alreadyFired = localStorage.getItem(STORAGE_KEYS.LAST_AUTO_LIVE_DATE);
-                if (alreadyFired !== dateStr && prefRaceLive()) {
+                if (alreadyFired !== dateStr) {
                     localStorage.setItem(STORAGE_KEYS.LAST_AUTO_LIVE_DATE, dateStr);
                     const liveNotif = {
                         id: Date.now(),
                         category: 'race_live',
                         title: `🔴 LIVE NOW: BRL at ${scheduledRace.track}!`,
                         body: `${scheduledRace.round} is going LIVE! Tap to watch the SimTrax broadcast.`,
-                        url: '/simtrax.html'
+                        url: '/simtrax.html',
+                        dateLabel: 'Live Broadcast'
                     };
-                    showInAppToast(liveNotif);
-                    if (isAlertsEnabled()) {
-                        triggerNativeNotification(liveNotif.title, liveNotif.body, liveNotif.url, 'brl-race-live-' + dateStr);
+
+                    // Also auto-publish to Supabase once per race date so all phones receive it in the cloud feed
+                    try {
+                        const getResp = await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                            headers: {
+                                'apikey': BRL_SUPABASE_KEY,
+                                'Authorization': `Bearer ${BRL_SUPABASE_KEY}`
+                            }
+                        });
+                        if (getResp.ok) {
+                            const rows = await getResp.json();
+                            const rowData = (rows && rows[0] && rows[0].data) ? rows[0].data : {};
+                            if (rowData.lastAutoLiveRaceDate !== dateStr) {
+                                rowData.lastAutoLiveRaceDate = dateStr;
+                                const list = Array.isArray(rowData.appNotifications) ? rowData.appNotifications : [];
+                                list.unshift(liveNotif);
+                                rowData.appNotifications = list.slice(0, 25);
+                                await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                                    method: 'PATCH',
+                                    headers: {
+                                        'apikey': BRL_SUPABASE_KEY,
+                                        'Authorization': `Bearer ${BRL_SUPABASE_KEY}`,
+                                        'Content-Type': 'application/json',
+                                        'Prefer': 'return=minimal'
+                                    },
+                                    body: JSON.stringify({
+                                        data: rowData,
+                                        updated_at: new Date().toISOString()
+                                    })
+                                });
+                            }
+                        }
+                    } catch (err) {}
+
+                    if (prefRaceLive()) {
+                        showInAppToast(liveNotif);
+                        if (isAlertsEnabled()) {
+                            triggerNativeNotification(liveNotif.title, liveNotif.body, liveNotif.url, 'brl-race-live-' + dateStr);
+                        }
                     }
                 }
             }

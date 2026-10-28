@@ -79,8 +79,20 @@ def main():
     args = parser.parse_args()
 
     if args.live:
-        title = args.title or "🔴 LIVE NOW: Bandit Racing League on SimTrax!"
-        body = args.body or "Tonight's Bandit Racing League race is going LIVE! Tap now to watch the SimTrax broadcast."
+        today_str = datetime.now().strftime("%Y-%m-%d")
+        schedule_map = {
+            "2026-10-28": ("Kansas Speedway", "Chase Round 2 — Heart of America 120"),
+            "2026-11-04": ("Mid-Ohio Sports Car Course", "Chase Round 3 — Road Course Showdown"),
+            "2026-11-11": ("Martinsville Speedway", "Chase Round 4 — Paperclip Elimination"),
+            "2026-11-18": ("Homestead-Miami Speedway", "Season 16 Championship Finale")
+        }
+        track_info = schedule_map.get(today_str)
+        if track_info and not args.title:
+            title = f"🔴 LIVE NOW: BRL at {track_info[0]}!"
+            body = f"{track_info[1]} is going LIVE on SimTrax! Tap now to watch the broadcast."
+        else:
+            title = args.title or "🔴 LIVE NOW: Bandit Racing League on SimTrax!"
+            body = args.body or "Tonight's Bandit Racing League race is going LIVE! Tap now to watch the SimTrax broadcast."
         target_url = args.url if args.url != "/index.html" else "/simtrax.html"
         push_brl_notification(title, body, target_url, category="race_live", driver=args.driver, team=args.team)
     elif args.driver:

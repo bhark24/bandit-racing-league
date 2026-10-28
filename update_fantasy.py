@@ -599,6 +599,19 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
         except Exception as e:
             print(f"[!] Error updating Supabase picks: {e}")
 
+    # Automatically push Fantasy results alert to all BRL Mobile App users
+    try:
+        import send_brl_notification
+        win_str = ", ".join(weekly_winners) if weekly_winners else "Weekly Winner"
+        send_brl_notification.push_brl_notification(
+            f"🎰 Fantasy Standings Updated ({track_name})!",
+            f"{win_str} wins the week at {track_name} with {best_score} pts! Tap to view the updated Fantasy Leaderboard.",
+            target_url="/fantasy.html",
+            category="website_update"
+        )
+    except Exception as e:
+        print(f"[!] Warning sending Fantasy auto-notification: {e}")
+
 def main():
     parser = argparse.ArgumentParser(description="Calculate fantasy league scores from SimRacerHub and Google Sheets.")
     parser.add_argument("--schedule_id", type=str, help="SimRacerHub schedule ID to fetch. E.g. 342696")
