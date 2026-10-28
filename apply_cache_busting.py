@@ -9,7 +9,21 @@ META_TAGS = f'''    <meta http-equiv="Cache-Control" content="no-cache, no-store
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">'''
 
+PWA_HEAD_TAGS = '''    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">'''
+
+SKIP_PWA_FILES = {
+    'social_graphic.html',
+    'story_graphic.html',
+    'scrape_league.html',
+    'simhub.html',
+    'srh_gateway_363216.html',
+    'bandit-roster.html',
+    'geezer-app-preview.html'
+}
+
 def process_html_file(filepath):
+    filename = os.path.basename(filepath)
     with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
         content = f.read()
 
@@ -20,6 +34,18 @@ def process_html_file(filepath):
         head_match = re.search(r'(<head[^>]*>)', content, re.IGNORECASE)
         if head_match:
             content = content[:head_match.end()] + '\n' + META_TAGS + content[head_match.end():]
+
+    # 1b. Ensure PWA manifest & apple-touch-icon and brl_app.js exist on public pages
+    if filename not in SKIP_PWA_FILES:
+        if 'rel="manifest"' not in content:
+            head_close = re.search(r'(</head>)', content, re.IGNORECASE)
+            if head_close:
+                content = content[:head_close.start()] + PWA_HEAD_TAGS + '\n' + content[head_close.start():]
+        if 'brl_app.js' not in content:
+            body_close = re.search(r'(</body>)', content, re.IGNORECASE)
+            if body_close:
+                script_tag = f'    <script src="brl_app.js?v={TIMESTAMP}"></script>\n'
+                content = content[:body_close.start()] + script_tag + content[body_close.start():]
 
     # 2. Add/update cache-busting version parameter to local CSS files
     def replace_css(match):

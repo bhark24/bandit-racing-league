@@ -1,0 +1,56 @@
+{
+  "name": "Bandit Racing League — Official App",
+  "short_name": "BRL Outlaw",
+  "description": "Official Bandit Racing League mobile app with real-time alerts for Website Updates, Standings, Fantasy League, Franchise Teams, and Live SimTrax Race Broadcasts.",
+  "start_url": "/index.html?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0c10",
+  "theme_color": "#39ff14",
+  "categories": ["sports", "entertainment", "games"],
+  "icons": [
+    {
+      "src": "/assets/app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Live SimTrax Broadcast",
+      "short_name": "Live Race",
+      "description": "Watch the live Wednesday night BRL broadcast on SimTrax",
+      "url": "/simtrax.html?source=pwa",
+      "icons": [{ "src": "/assets/app-icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Standings & Chase",
+      "short_name": "Standings",
+      "description": "View current Season 16 Chase & Overall Standings",
+      "url": "/standings.html?source=pwa",
+      "icons": [{ "src": "/assets/app-icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Fantasy & Odds",
+      "short_name": "Fantasy",
+      "description": "Make weekly Fantasy picks and view Championship Odds",
+      "url": "/fantasy.html?source=pwa",
+      "icons": [{ "src": "/assets/app-icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Franchise Teams",
+      "short_name": "Teams",
+      "description": "Check Franchise budgets, fleets, and The Outlaw Telegraph",
+      "url": "/teams.html?source=pwa",
+      "icons": [{ "src": "/assets/app-icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
