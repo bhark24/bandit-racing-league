@@ -132,14 +132,21 @@
         return DEFAULT_TEAMS;
     }
 
-    // 1. Ensure PWA head tags exist on every page
+    // 1. Ensure PWA head tags exist on every page & unlock screen rotation
     function injectPwaHeadTags() {
-        if (!document.querySelector('link[rel="manifest"]')) {
-            const manifestLink = document.createElement('link');
+        try {
+            if (window.screen && window.screen.orientation && typeof window.screen.orientation.unlock === 'function') {
+                window.screen.orientation.unlock();
+            }
+        } catch (e) {}
+
+        let manifestLink = document.querySelector('link[rel="manifest"]');
+        if (!manifestLink) {
+            manifestLink = document.createElement('link');
             manifestLink.rel = 'manifest';
-            manifestLink.href = '/manifest.json';
             document.head.appendChild(manifestLink);
         }
+        manifestLink.href = '/manifest.json?v=3';
         if (!document.querySelector('link[rel="apple-touch-icon"]')) {
             const appleIcon = document.createElement('link');
             appleIcon.rel = 'apple-touch-icon';

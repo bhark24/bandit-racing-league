@@ -1,5 +1,5 @@
 // Bandit Racing League — Official Service Worker (PWA & Live Alerts)
-const CACHE_NAME = 'brl-pwa-cache-v2';
+const CACHE_NAME = 'brl-pwa-cache-v3';
 const SUPABASE_URL = "https://iydgkfvfukaimhxyhdzq.supabase.co";
 const SUPABASE_KEY = "sb_publishable_Zu-OJndOV2JZB0_C9_REnQ_oVCKo4u8";
 
