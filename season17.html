@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793154835">
+    <link rel="stylesheet" href="styles.css?v=1793155349">
     <style>
         .s17-stats-strip {
             display: grid;
@@ -570,7 +570,7 @@
         </div>
     </footer>
 
-    <script src="supabase_config.js?v=1793154835"></script>
+    <script src="supabase_config.js?v=1793155349"></script>
     <script>
         // Official iRacing Fixed-Setup NASCAR Platform Options with Audited BRL History
         const SEASON_17_OPTIONS = [
@@ -645,7 +645,7 @@
                 historySummary: "Ran 6 races as part of Season 13's 3-Car Rotation (68 starts in Monte Carlo, 25 in Buick, 23 in T-Bird, 9 in Pontiac)."
             },
             {
-                id: "arca_gen4",
+                id: "arca",
                 name: "ARCA Menards Series",
                 sub: "ARCA Menards Chevrolet SS, Ford Mustang, Toyota Camry & Legacy Impala (650 HP Ilmor)",
                 iracingClass: "Class D Fixed (ARCA Menards Series Fixed)",
@@ -750,9 +750,15 @@
             return voterIp;
         }
 
+        // Clear legacy v1 vote keys so all previous voters can re-vote after the ARCA / Gen 4 split
+        try {
+            localStorage.removeItem("brl_s17_voted_option");
+            localStorage.removeItem("brl_season17_votes");
+        } catch (e) {}
+
         function loadLocalVotesFallback() {
             try {
-                const raw = localStorage.getItem("brl_season17_votes");
+                const raw = localStorage.getItem("brl_season17_votes_v2");
                 if (raw) return JSON.parse(raw);
             } catch (e) {}
             return [];
@@ -760,22 +766,15 @@
 
         function saveLocalVotesFallback(votes) {
             try {
-                localStorage.setItem("brl_season17_votes", JSON.stringify(votes));
+                localStorage.setItem("brl_season17_votes_v2", JSON.stringify(votes));
             } catch (e) {}
         }
 
         function checkIfAlreadyVoted() {
-            // Check localStorage lock first
-            try {
-                const localVotedOpt = localStorage.getItem("brl_s17_voted_option");
-                if (localVotedOpt) {
-                    hasVoted = true;
-                    votedOptionId = localVotedOpt;
-                    selectedOptionId = localVotedOpt;
-                }
-            } catch (e) {}
+            hasVoted = false;
+            votedOptionId = null;
 
-            // Check if current IP exists in activeVotes
+            // Check if current IP exists in activeVotes from Supabase
             if (voterIp && Array.isArray(activeVotes)) {
                 const match = activeVotes.find(v => v.ip && v.ip === voterIp);
                 if (match) {
@@ -783,10 +782,23 @@
                     votedOptionId = match.optionId;
                     selectedOptionId = match.optionId;
                     try {
-                        localStorage.setItem("brl_s17_voted_option", match.optionId);
+                        localStorage.setItem("brl_s17_voted_option_v2", match.optionId);
                     } catch (e) {}
+                    return;
                 }
             }
+
+            // Fallback to localStorage lock only if activeVotes matched or offline
+            try {
+                const localVotedOpt = localStorage.getItem("brl_s17_voted_option_v2");
+                if (localVotedOpt && activeVotes.some(v => v.optionId === localVotedOpt)) {
+                    hasVoted = true;
+                    votedOptionId = localVotedOpt;
+                    selectedOptionId = localVotedOpt;
+                } else if (localVotedOpt && activeVotes.length === 0) {
+                    localStorage.removeItem("brl_s17_voted_option_v2");
+                }
+            } catch (e) {}
         }
 
         async function fetchVotesFromSupabase() {
@@ -980,7 +992,7 @@
                             hasVoted = true;
                             votedOptionId = existingIpVote.optionId;
                             selectedOptionId = existingIpVote.optionId;
-                            try { localStorage.setItem("brl_s17_voted_option", votedOptionId); } catch (e) {}
+                            try { localStorage.setItem("brl_s17_voted_option_v2", votedOptionId); } catch (e) {}
                             saveLocalVotesFallback(activeVotes);
                             renderPollUI();
                             return;
@@ -1013,7 +1025,7 @@
 
                 hasVoted = true;
                 votedOptionId = selectedOptionId;
-                try { localStorage.setItem("brl_s17_voted_option", votedOptionId); } catch (e) {}
+                try { localStorage.setItem("brl_s17_voted_option_v2", votedOptionId); } catch (e) {}
                 saveLocalVotesFallback(activeVotes);
                 renderPollUI();
             } catch (e) {
@@ -1021,7 +1033,7 @@
                 activeVotes.push(newVote);
                 hasVoted = true;
                 votedOptionId = selectedOptionId;
-                try { localStorage.setItem("brl_s17_voted_option", votedOptionId); } catch (err) {}
+                try { localStorage.setItem("brl_s17_voted_option_v2", votedOptionId); } catch (err) {}
                 saveLocalVotesFallback(activeVotes);
                 renderPollUI();
             }
