@@ -71,6 +71,14 @@ def process_html_file(filepath):
 
     content = re.sub(r'(src=)(["\'])([^"\']+\.js(?:\?[^"\']*)?)\2', replace_js, content, flags=re.IGNORECASE)
 
+    # 4. Add/update cache-busting version parameter to manifest.json
+    content = re.sub(
+        r'(href=)(["\'])([^"\']*manifest\.json(?:\?[^"\']*)?)\2',
+        lambda m: f'{m.group(1)}{m.group(2)}{m.group(3).split("?")[0]}?v={TIMESTAMP}{m.group(2)}',
+        content,
+        flags=re.IGNORECASE
+    )
+
     if content != original_content:
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(content)
