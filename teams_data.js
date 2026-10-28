@@ -1640,9 +1640,9 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "Repaired Fleet: Roundy F-150 #TBD (+97%), Roundy F-150 #4 (+265%), Roundy F-150 #15 (+358%)",
+          "amount": -360000,
           "category": "expense",
-          "amount": -360000
+          "description": "Repaired Fleet: Roundy F-150 #TBD (+97%), Roundy F-150 #4 (+265%), Roundy F-150 #15 (+358%)"
         }
       ],
       "points": 957,
@@ -1692,8 +1692,8 @@ const teamsData = {
         "Veloce Simulators",
         "Precision Shifters"
       ],
-      "passcodeHash": "e7faa8b075ab5b412691a8b097ebfee4bb5fd87c448bfffc35ed519a449702ce",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "e7faa8b075ab5b412691a8b097ebfee4bb5fd87c448bfffc35ed519a449702ce"
     },
     {
       "id": "937-racing",
@@ -3305,9 +3305,15 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "Repaired Fleet: 937 Tundra #18 (+84%), 937 Tundra #22 (+147%), 937 Tundra #47 (+102%)",
+          "amount": -166500,
           "category": "expense",
-          "amount": -166500
+          "description": "Repaired Fleet: 937 Tundra #18 (+84%), 937 Tundra #22 (+147%), 937 Tundra #47 (+102%)"
+        },
+        {
+          "date": "Oct 28, 2026",
+          "description": "ROSTER DEPARTURE: DONALD KIGHT (#66) departed 937 Racing to become Team Owner & Driver of ChainedGraboid Racing Team.",
+          "category": "info",
+          "amount": 0
         }
       ],
       "points": 1253,
@@ -3359,7 +3365,7 @@ const teamsData = {
           "VICTOR WEAVER",
           "JOSH ADAMS",
           "MICHAEL RAKES",
-          "DONALD KNIGHT"
+          "VACANT"
         ]
       },
       "homeBase": "Dayton, OH",
@@ -3373,16 +3379,16 @@ const teamsData = {
         "Checkered Flag Media",
         "Octane Apparel"
       ],
-      "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "5932cb6e58ef979208d6b91fcfe0d47c278d78451e733978d35f8b14db88c305"
     },
     {
       "id": "wrists-up-racing",
       "loan": 0,
-      "logo": "assets/wrists-up-racing-logo.png",
-      "name": "Wrist's Up Racing",
+      "logo": "assets/chainedgraboid-logo.png",
+      "name": "ChainedGraboid Racing Team",
       "wins": 0,
-      "owner": "Dylan Nicastro",
+      "owner": "Donald Kight",
       "ledger": [
         {
           "date": "2026-05-24",
@@ -3818,7 +3824,13 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "SUSPENDED OPERATIONS: Wrist's Up Racing has officially suspended racing operations.",
+          "amount": 0,
+          "category": "info",
+          "description": "SUSPENDED OPERATIONS: Wrist's Up Racing has officially suspended racing operations."
+        },
+        {
+          "date": "Oct 28, 2026",
+          "description": "FRANCHISE ACQUISITION & RELOCATION: Donald Kight (#66) purchased the assets of Wrist's Up Racing, rebranding the franchise to ChainedGraboid Racing Team and relocating headquarters to Ocala, FL. Signed driver Hunter Senior (#20, Richmond, VA).",
           "category": "info",
           "amount": 0
         }
@@ -3828,49 +3840,50 @@ const teamsData = {
         {
           "id": "truck-1",
           "make": "Chevrolet",
-          "name": "Wrist's Up Silverado #23",
+          "name": "ChainedGraboid Silverado #66",
           "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
-          "name": "Wrist's Up Silverado #88",
+          "name": "ChainedGraboid Silverado #20",
           "condition": 100
         },
         {
           "id": "truck-3",
           "make": "Chevrolet",
-          "name": "Wrist's Up Silverado #24",
+          "name": "ChainedGraboid Silverado #24",
           "condition": 100
         },
         {
           "id": "truck-4",
           "make": "Chevrolet",
-          "name": "Wrist's Up Silverado #25",
+          "name": "ChainedGraboid Silverado #25",
           "condition": 100
         }
       ],
       "balance": 1894392,
       "drivers": {
-        "backup": [
-          "DYLAN NICASTRO",
-          "DAVID WESTOVER JR"
-        ],
         "primary": [
+          "DONALD KIGHT",
+          "HUNTER SENIOR",
           "VACANT",
-          "VACANT",
+          "VACANT"
+        ],
+        "backup": [
           "VACANT",
           "VACANT"
         ]
       },
-      "homeBase": "Cleveland, OH",
+      "homeBase": "Ocala, FL",
       "sponsors": [
+        "ChainedGraboid Racing Team",
         "Chevrolet Accessories",
         "Craftsman Tools"
       ],
-      "passcodeHash": "858a794b9a1df6e2fa1e6258cafa1f3df7f31ff877c887107e245163fa52fbdc",
-      "isSuspended": true,
-      "isForSale": false
+      "isForSale": false,
+      "isSuspended": false,
+      "passcodeHash": "858a794b9a1df6e2fa1e6258cafa1f3df7f31ff877c887107e245163fa52fbdc"
     },
     {
       "id": "zerofoxtrot",
@@ -5440,9 +5453,9 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "Repaired Fleet: ZeroFoxtrot Silverado #31 (+442%), ZeroFoxtrot Silverado #75 (+49%), ZeroFoxtrot Silverado #11 (+74%), ZeroFoxtrot Silverado #51 (+105%)",
+          "amount": -335000,
           "category": "expense",
-          "amount": -335000
+          "description": "Repaired Fleet: ZeroFoxtrot Silverado #31 (+442%), ZeroFoxtrot Silverado #75 (+49%), ZeroFoxtrot Silverado #11 (+74%), ZeroFoxtrot Silverado #51 (+105%)"
         }
       ],
       "points": 1007,
@@ -5506,8 +5519,8 @@ const teamsData = {
         "Checkered Flag Media",
         "DraftMasters"
       ],
-      "passcodeHash": "13b92326aee45b686501b518930032a92c937945b258b461840f4b2572ed9d68",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "13b92326aee45b686501b518930032a92c937945b258b461840f4b2572ed9d68"
     },
     {
       "id": "carter-phillips-racing",
@@ -6365,9 +6378,9 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "Repaired Fleet: Carter Phillips Silverado #97 (+24%), Carter Phillips Silverado #30 (+4%)",
+          "amount": -14000,
           "category": "expense",
-          "amount": -14000
+          "description": "Repaired Fleet: Carter Phillips Silverado #97 (+24%), Carter Phillips Silverado #30 (+4%)"
         }
       ],
       "points": 314,
@@ -6414,8 +6427,8 @@ const teamsData = {
       "sponsors": [
         "Carter Phillips Racing"
       ],
-      "passcodeHash": "ec2d220d50cb8f49dd8aa4981ca2322b010b778ab71573d91983bca49e8cc91c",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "ec2d220d50cb8f49dd8aa4981ca2322b010b778ab71573d91983bca49e8cc91c"
     },
     {
       "id": "gfr-racing",
@@ -8745,9 +8758,9 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "Repaired Fleet: GFR Silverado #8 (+335%), GFR Silverado #2 (+180%), GFR Silverado #1 (+267%), GFR Silverado #7 (+239%), GFR Silverado #13 (+258%), GFR Silverado #93 (+145%)",
+          "amount": -712000,
           "category": "expense",
-          "amount": -712000
+          "description": "Repaired Fleet: GFR Silverado #8 (+335%), GFR Silverado #2 (+180%), GFR Silverado #1 (+267%), GFR Silverado #7 (+239%), GFR Silverado #13 (+258%), GFR Silverado #93 (+145%)"
         }
       ],
       "points": 2421,
@@ -8811,8 +8824,8 @@ const teamsData = {
         "Veloce Simulators",
         "RPM Graphics"
       ],
-      "passcodeHash": "d52640dd8dcaf61ea13dc1484e97ea8078e2a06bdf0f81d747e84fe7ccd6d785",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "d52640dd8dcaf61ea13dc1484e97ea8078e2a06bdf0f81d747e84fe7ccd6d785"
     },
     {
       "id": "salt-city-performance",
@@ -8926,9 +8939,9 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "Repaired Fleet: Salt City Silverado #36 (+42%), Salt City Silverado #69 (+189%)",
+          "amount": -115500,
           "category": "expense",
-          "amount": -115500
+          "description": "Repaired Fleet: Salt City Silverado #36 (+42%), Salt City Silverado #69 (+189%)"
         }
       ],
       "points": 39,
@@ -8977,8 +8990,8 @@ const teamsData = {
         "Chevrolet Accessories",
         "Craftsman Tools"
       ],
-      "passcodeHash": "7c67342e1dc9889faf6c446e6f499f60b0dbbcba8d86c795ba1a038eaaaea388",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "7c67342e1dc9889faf6c446e6f499f60b0dbbcba8d86c795ba1a038eaaaea388"
     },
     {
       "id": "title-town-racing",
@@ -9491,8 +9504,8 @@ const teamsData = {
         "Craftsman Tools",
         "Octane Apparel"
       ],
-      "passcodeHash": "7c80456012d9a93fbfd574ba3b0204b364d3e52c7370b8921f7fa69fd70bddfa",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "7c80456012d9a93fbfd574ba3b0204b364d3e52c7370b8921f7fa69fd70bddfa"
     },
     {
       "id": "pop-motorsports",
@@ -10686,9 +10699,9 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "Repaired Fleet: POP Silverado #29 (+86%), POP Silverado #53 (+19%)",
+          "amount": -52500,
           "category": "expense",
-          "amount": -52500
+          "description": "Repaired Fleet: POP Silverado #29 (+86%), POP Silverado #53 (+19%)"
         }
       ],
       "points": 533,
@@ -10742,8 +10755,8 @@ const teamsData = {
         "POP Motorsports",
         "Craftsman Tools"
       ],
-      "passcodeHash": "c1bec9a68374fee3d995ef5268a2d04922bc1aa96df6668c6e06df8e46109ff5",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "c1bec9a68374fee3d995ef5268a2d04922bc1aa96df6668c6e06df8e46109ff5"
     },
     {
       "id": "esr",
@@ -12051,9 +12064,9 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "Repaired Fleet: ESR Silverado #24 (+255%), ESR Silverado #00 (+207%), ESR Silverado #21 (+215%)",
+          "amount": -338500,
           "category": "expense",
-          "amount": -338500
+          "description": "Repaired Fleet: ESR Silverado #24 (+255%), ESR Silverado #00 (+207%), ESR Silverado #21 (+215%)"
         }
       ],
       "points": 821,
@@ -12101,8 +12114,8 @@ const teamsData = {
         "Craftsman Tools",
         "Checkered Flag Media"
       ],
-      "passcodeHash": "8350242b2df439d296a664c7c59b117507d0b3c537fa293304c84d84eb85cc43",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "8350242b2df439d296a664c7c59b117507d0b3c537fa293304c84d84eb85cc43"
     },
     {
       "id": "middle-aged-gunz-motorsports",
@@ -12804,9 +12817,9 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "Repaired Fleet: Middle Aged Gunz Silverado #76 (+113%), Middle Aged Gunz Silverado #0 (+34%)",
+          "amount": -73500,
           "category": "expense",
-          "amount": -73500
+          "description": "Repaired Fleet: Middle Aged Gunz Silverado #76 (+113%), Middle Aged Gunz Silverado #0 (+34%)"
         }
       ],
       "points": 183,
@@ -12857,8 +12870,8 @@ const teamsData = {
         "Apex Fuel",
         "Checkered Flag Media"
       ],
-      "passcodeHash": "40c5f212269a2123d069b22a00062dfc9b83b3d4f1efb496d63e9f456c6ff396",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "40c5f212269a2123d069b22a00062dfc9b83b3d4f1efb496d63e9f456c6ff396"
     },
     {
       "id": "legacy-racing",
@@ -14625,9 +14638,9 @@ const teamsData = {
         },
         {
           "date": "Oct 26, 2026",
-          "description": "Repaired Fleet: Legacy Racing Silverado #99 (+229%), Legacy Racing Silverado #9 (+312%), Legacy Racing Silverado #6 (+369%), Legacy Racing Silverado #50 (+320%)",
+          "amount": -615000,
           "category": "expense",
-          "amount": -615000
+          "description": "Repaired Fleet: Legacy Racing Silverado #99 (+229%), Legacy Racing Silverado #9 (+312%), Legacy Racing Silverado #6 (+369%), Legacy Racing Silverado #50 (+320%)"
         }
       ],
       "points": 1204,
@@ -14674,8 +14687,8 @@ const teamsData = {
       "sponsors": [
         "Legacy Racing"
       ],
-      "passcodeHash": "3154c9cc4526142b6c75f88dc9137ab19ca25643a9e8879fdcd921cb2f1ff8cf",
-      "isSuspended": false
+      "isSuspended": false,
+      "passcodeHash": "3154c9cc4526142b6c75f88dc9137ab19ca25643a9e8879fdcd921cb2f1ff8cf"
     }
   ],
   "tracks": {
@@ -15205,6 +15218,11 @@ const teamsData = {
       "lon": -80.5795,
       "city": "TBD"
     },
+    "DONALD KNIGHT": {
+      "lat": 29.1872,
+      "lon": -82.1401,
+      "city": "Ocala, FL"
+    },
     "JACKSON KNAAK": {
       "lat": 35.4088,
       "lon": -80.5795,
@@ -15315,10 +15333,15 @@ const teamsData = {
       "lon": -85.8903,
       "city": "Seymour, IN"
     },
-    "DONALD KNIGHT": {
-      "lat": 39.7589,
-      "lon": -84.1916,
-      "city": "Dayton, OH"
+    "DONALD KIGHT": {
+      "lat": 29.1872,
+      "lon": -82.1401,
+      "city": "Ocala, FL"
+    },
+    "HUNTER SENIOR": {
+      "lat": 37.5407,
+      "lon": -77.436,
+      "city": "Richmond, VA"
     }
   },
   "spotlightHistory": [

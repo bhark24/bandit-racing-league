@@ -260,7 +260,8 @@ def normalize_name(name):
         "dionte": "di0nte",
         "roder": "rader",
         "conor": "connor",
-        "kondas": "kondus"
+        "kondas": "kondus",
+        "knight": "kight"
     }
     
     words = name.split()
@@ -300,6 +301,8 @@ def calculate_flight_cost(distance, date_str, origin_city=""):
         "miamisburg, oh": 340, # DAY
         "xenia, oh": 340,  # DAY
         "salt lake city, ut": 350,
+        "ocala, fl": 220,  # MCO major
+        "richmond, va": 260, # RIC major
     }
     
     city_key = origin_city.strip().lower() if origin_city else ""
@@ -659,7 +662,8 @@ def main():
             "new york, new york": (40.7128, -74.0060),
             "bat cave, nc": (35.4515, -82.2871),
             "coal run village, ky": (37.4998, -82.5290),
-            "salt lake city, ut": (40.7608, -111.8911)
+            "salt lake city, ut": (40.7608, -111.8911),
+            "ocala, fl": (29.1872, -82.1401)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates
@@ -883,8 +887,8 @@ def main():
         if "sponsors" not in team:
             if team["id"] == "roundy-motorsports":
                 team["sponsors"] = ["Roundy Motorsports", "Ford Performance", "Craftsman Tools"]
-            elif team["id"] == "wrists-up-racing":
-                team["sponsors"] = ["Wrist's Up Racing", "Chevrolet Accessories", "Craftsman Tools"]
+            elif team["id"] in ("wrists-up-racing", "chainedgraboid-racing"):
+                team["sponsors"] = ["ChainedGraboid Racing Team", "Chevrolet Accessories", "Craftsman Tools"]
             else:
                 team["sponsors"] = ["937 Racing", "Toyota Racing Development", "Craftsman Tools"]
 

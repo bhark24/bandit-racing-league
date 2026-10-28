@@ -75,6 +75,10 @@ const rosterData = {
     "driver": "",
     "status": "available"
   },
+  "20": {
+    "driver": "HUNTER SENIOR",
+    "status": "full-time"
+  },
   "21": {
     "driver": "NATHAN SANTOS",
     "status": "part-time"
@@ -184,7 +188,7 @@ const rosterData = {
     "status": "part-time"
   },
   "66": {
-    "driver": "DONALD KNIGHT",
+    "driver": "DONALD KIGHT",
     "status": "full-time"
   },
   "72": {
