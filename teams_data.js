@@ -3341,6 +3341,12 @@ const teamsData = {
           "make": "Toyota",
           "name": "937 Tundra #54",
           "condition": 100
+        },
+        {
+          "id": "truck-6",
+          "make": "Toyota",
+          "name": "937 Tundra #66",
+          "condition": 100
         }
       ],
       "balance": 2432443,
@@ -3353,7 +3359,7 @@ const teamsData = {
           "VICTOR WEAVER",
           "JOSH ADAMS",
           "MICHAEL RAKES",
-          "VACANT"
+          "DONALD KNIGHT"
         ]
       },
       "homeBase": "Dayton, OH",
@@ -15308,6 +15314,11 @@ const teamsData = {
       "lat": 38.9592,
       "lon": -85.8903,
       "city": "Seymour, IN"
+    },
+    "DONALD KNIGHT": {
+      "lat": 39.7589,
+      "lon": -84.1916,
+      "city": "Dayton, OH"
     }
   },
   "spotlightHistory": [
