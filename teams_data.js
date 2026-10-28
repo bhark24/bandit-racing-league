@@ -3311,9 +3311,9 @@ const teamsData = {
         },
         {
           "date": "Oct 28, 2026",
-          "description": "ROSTER DEPARTURE: DONALD KIGHT (#66) departed 937 Racing to become Team Owner & Driver of ChainedGraboid Racing Team.",
+          "amount": 0,
           "category": "info",
-          "amount": 0
+          "description": "ROSTER DEPARTURE: DONALD KIGHT (#66) departed 937 Racing to become Team Owner & Driver of ChainedGraboid Racing Team."
         }
       ],
       "points": 1253,
@@ -3830,9 +3830,9 @@ const teamsData = {
         },
         {
           "date": "Oct 28, 2026",
-          "description": "FRANCHISE ACQUISITION & RELOCATION: Donald Kight (#66) purchased the assets of Wrist's Up Racing, rebranding the franchise to ChainedGraboid Racing Team and relocating headquarters to Ocala, FL. Signed driver Hunter Senior (#20, Richmond, VA).",
+          "amount": 0,
           "category": "info",
-          "amount": 0
+          "description": "FRANCHISE ACQUISITION & RELOCATION: Donald Kight (#66) purchased the assets of Wrist's Up Racing, rebranding the franchise to ChainedGraboid Racing Team and relocating headquarters to Ocala, FL. Signed driver Hunter Senior (#20, Richmond, VA)."
         }
       ],
       "points": 6,
@@ -3864,13 +3864,13 @@ const teamsData = {
       ],
       "balance": 1894392,
       "drivers": {
-        "primary": [
-          "DONALD KIGHT",
-          "HUNTER SENIOR",
+        "backup": [
           "VACANT",
           "VACANT"
         ],
-        "backup": [
+        "primary": [
+          "DONALD KIGHT",
+          "HUNTER SENIOR",
           "VACANT",
           "VACANT"
         ]
@@ -12820,6 +12820,12 @@ const teamsData = {
           "amount": -73500,
           "category": "expense",
           "description": "Repaired Fleet: Middle Aged Gunz Silverado #76 (+113%), Middle Aged Gunz Silverado #0 (+34%)"
+        },
+        {
+          "date": "Oct 28, 2026",
+          "amount": 0,
+          "category": "info",
+          "description": "SUSPENDED OPERATIONS: Middle Aged Gunz Motorsports has officially suspended racing operations."
         }
       ],
       "points": 183,
@@ -12870,7 +12876,7 @@ const teamsData = {
         "Apex Fuel",
         "Checkered Flag Media"
       ],
-      "isSuspended": false,
+      "isSuspended": true,
       "passcodeHash": "40c5f212269a2123d069b22a00062dfc9b83b3d4f1efb496d63e9f456c6ff396"
     },
     {
@@ -15158,6 +15164,11 @@ const teamsData = {
       "lon": -84.2866,
       "city": "Miamisburg, OH"
     },
+    "DONALD KIGHT": {
+      "lat": 29.1872,
+      "lon": -82.1401,
+      "city": "Ocala, FL"
+    },
     "EDDIE HAGIGH": {
       "lat": 39.0696,
       "lon": -76.5452,
@@ -15222,6 +15233,11 @@ const teamsData = {
       "lat": 29.1872,
       "lon": -82.1401,
       "city": "Ocala, FL"
+    },
+    "HUNTER SENIOR": {
+      "lat": 37.5407,
+      "lon": -77.436,
+      "city": "Richmond, VA"
     },
     "JACKSON KNAAK": {
       "lat": 35.4088,
@@ -15332,16 +15348,6 @@ const teamsData = {
       "lat": 38.9592,
       "lon": -85.8903,
       "city": "Seymour, IN"
-    },
-    "DONALD KIGHT": {
-      "lat": 29.1872,
-      "lon": -82.1401,
-      "city": "Ocala, FL"
-    },
-    "HUNTER SENIOR": {
-      "lat": 37.5407,
-      "lon": -77.436,
-      "city": "Richmond, VA"
     }
   },
   "spotlightHistory": [
