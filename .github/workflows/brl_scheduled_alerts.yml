@@ -1,0 +1,23 @@
+name: BRL Scheduled App Alerts (Tuesday Practice, Wednesday Pit Gate & Live Race)
+
+on:
+  schedule:
+    # Runs every 15 minutes during Tuesday & Wednesday evening ET windows (covers both EDT and EST)
+    - cron: '*/15 23 * * 2,3'
+    - cron: '*/15 0,1,2 * * 3,4'
+  workflow_dispatch:
+
+jobs:
+  send-scheduled-alerts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check schedule and broadcast due BRL App alerts
+        run: python send_brl_notification.py --auto-cron

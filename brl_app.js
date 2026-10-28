@@ -10,6 +10,7 @@
     const STORAGE_KEYS = {
         ALERTS_ENABLED: 'brl_app_alerts_enabled_v1',
         PREF_SITE_UPDATES: 'brl_app_pref_site_v1',
+        PREF_PRACTICE_GATE: 'brl_app_pref_practice_gate_v1',
         PREF_RACE_LIVE: 'brl_app_pref_race_v1',
         PREF_DRIVER_ALERTS: 'brl_app_pref_driver_enabled_v1',
         PREF_DRIVER_TARGET: 'brl_app_pref_driver_target_v1',
@@ -17,6 +18,8 @@
         PREF_TEAM_TARGET: 'brl_app_pref_team_target_v1',
         LAST_NOTIF_ID: 'brl_app_last_notif_id_v1',
         LAST_READ_ID: 'brl_app_last_read_id_v1',
+        LAST_AUTO_TUE_PRACTICE: 'brl_app_auto_tue_practice_v1',
+        LAST_AUTO_WED_PIT_GATE: 'brl_app_auto_wed_pit_gate_v1',
         LAST_AUTO_LIVE_DATE: 'brl_app_auto_live_date_v1'
     };
 
@@ -51,15 +54,14 @@
         ["carter-phillips-racing", "Carter Phillips Racing"],
         ["salt-city-performance", "Salt City Performance"],
         ["title-town-racing", "Title Town Racing"],
-        ["pop-motorsports", "POP Motorsports"],
-        ["middle-aged-gunz-motorsports", "Middle Aged Gunz Motorsports"]
+        ["pop-motorsports", "POP Motorsports"]
     ];
 
     const UPCOMING_RACES = [
-        { date: '2026-10-28', track: 'Kansas Speedway', round: 'Chase Round 2 — Heart of America 120' },
-        { date: '2026-11-04', track: 'Mid-Ohio Sports Car Course', round: 'Chase Round 3 — Road Course Showdown' },
-        { date: '2026-11-11', track: 'Martinsville Speedway', round: 'Chase Round 4 — Paperclip Elimination' },
-        { date: '2026-11-18', track: 'Homestead-Miami Speedway', round: 'Season 16 Championship Finale' }
+        { tuesdayDate: '2026-10-27', date: '2026-10-28', track: 'Kansas Speedway', round: 'Chase Round 2 — Heart of America 120' },
+        { tuesdayDate: '2026-11-03', date: '2026-11-04', track: 'Mid-Ohio Sports Car Course', round: 'Chase Round 3 — Road Course Showdown' },
+        { tuesdayDate: '2026-11-10', date: '2026-11-11', track: 'Martinsville Speedway', round: 'Chase Round 4 — Paperclip Elimination' },
+        { tuesdayDate: '2026-11-17', date: '2026-11-18', track: 'Homestead-Miami Speedway', round: 'Season 16 Championship Finale' }
     ];
 
     let deferredInstallPrompt = null;
@@ -86,7 +88,7 @@
     function getActiveTeamsList() {
         if (typeof teamsData !== 'undefined' && teamsData && Array.isArray(teamsData.teams)) {
             const list = teamsData.teams
-                .filter(t => !t.isForSale)
+                .filter(t => !t.isForSale && !t.isSuspended)
                 .map(t => [t.id, t.name]);
             if (list.length > 0) return list;
         }
@@ -125,11 +127,19 @@
         }
     }
 
-    // 2. Register Service Worker
+    // 2. Register Service Worker & Periodic Background Sync
     async function registerServiceWorker() {
         if ('serviceWorker' in navigator) {
             try {
                 swRegistration = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+                swRegistration.update().catch(() => {});
+                if (swRegistration.periodicSync) {
+                    try {
+                        await swRegistration.periodicSync.register('brl-check-alerts', {
+                            minInterval: 15 * 60 * 1000
+                        });
+                    } catch (e) {}
+                }
             } catch (err) {
                 console.warn('BRL Service Worker registration note:', err);
             }
@@ -144,6 +154,10 @@
     }
     function prefSiteUpdates() {
         const val = localStorage.getItem(STORAGE_KEYS.PREF_SITE_UPDATES);
+        return val === null ? true : val === 'true';
+    }
+    function prefPracticeGate() {
+        const val = localStorage.getItem(STORAGE_KEYS.PREF_PRACTICE_GATE);
         return val === null ? true : val === 'true';
     }
     function prefRaceLive() {
@@ -196,6 +210,10 @@
         }
         if (prefTeamEnabled() && userTeamTarget !== 'ALL' && textUpper.includes(userTeamTarget)) {
             return true;
+        }
+
+        if (notif.category === 'practice_open' || notif.category === 'pit_gate_open') {
+            return prefPracticeGate();
         }
 
         if (notif.category === 'race_live') {
@@ -253,6 +271,8 @@
         if (existing) existing.remove();
 
         const isLive = notif.category === 'race_live';
+        const isPractice = notif.category === 'practice_open';
+        const isPitGate = notif.category === 'pit_gate_open';
         const isDriver = notif.category === 'driver_alert' || !!notif.driver;
         const isTeam = notif.category === 'team_alert' || !!notif.team;
 
@@ -266,6 +286,16 @@
             badgeBg = '#ff1744';
             badgeColor = '#fff';
             badgeLabel = '🔴 RACE GOING LIVE';
+        } else if (isPractice) {
+            borderCol = '#39ff14';
+            badgeBg = 'rgba(57,255,20,0.25)';
+            badgeColor = '#39ff14';
+            badgeLabel = '🟢 TUESDAY PRACTICE OPEN';
+        } else if (isPitGate) {
+            borderCol = '#ffcc00';
+            badgeBg = 'rgba(255,204,0,0.25)';
+            badgeColor = '#ffcc00';
+            badgeLabel = '🏁 WEDNESDAY PIT GATE OPEN';
         } else if (isDriver) {
             borderCol = '#00d4ff';
             badgeBg = 'rgba(0,212,255,0.2)';
@@ -329,7 +359,8 @@
                 headers: {
                     'apikey': BRL_SUPABASE_KEY,
                     'Authorization': `Bearer ${BRL_SUPABASE_KEY}`
-                }
+                },
+                cache: 'no-store'
             });
             if (!resp.ok) return;
             const rows = await resp.json();
@@ -347,6 +378,14 @@
 
             const latest = cachedNotifications[0];
             const lastSeenId = parseInt(localStorage.getItem(STORAGE_KEYS.LAST_NOTIF_ID) || '0', 10);
+
+            // Sync with Service Worker so background checks know what was already shown
+            if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.controller.postMessage({
+                    type: 'SYNC_LAST_SEEN_ID',
+                    id: latest.id
+                });
+            }
 
             if (!lastSeenId) {
                 localStorage.setItem(STORAGE_KEYS.LAST_NOTIF_ID, String(latest.id));
@@ -373,8 +412,51 @@
         }
     }
 
-    // 7. Automatic Wednesday Night "Race Going Live" Check (8:45 PM - 10:30 PM ET)
-    async function checkWednesdayRaceLiveWindow() {
+    // Helper to publish a scheduled alert to Supabase once (deduplicated via autoFiredKeys)
+    async function autoPublishScheduledAlert(dedupKey, notifObj) {
+        try {
+            const getResp = await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                headers: {
+                    'apikey': BRL_SUPABASE_KEY,
+                    'Authorization': `Bearer ${BRL_SUPABASE_KEY}`
+                },
+                cache: 'no-store'
+            });
+            if (!getResp.ok) return;
+            const rows = await getResp.json();
+            const rowData = (rows && rows[0] && rows[0].data) ? rows[0].data : {};
+            const autoKeys = (rowData.autoFiredKeys && typeof rowData.autoFiredKeys === 'object')
+                ? rowData.autoFiredKeys
+                : {};
+
+            if (!autoKeys[dedupKey]) {
+                autoKeys[dedupKey] = new Date().toISOString();
+                rowData.autoFiredKeys = autoKeys;
+                const list = Array.isArray(rowData.appNotifications) ? rowData.appNotifications : [];
+                list.unshift(notifObj);
+                rowData.appNotifications = list.slice(0, 25);
+                await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                    method: 'PATCH',
+                    headers: {
+                        'apikey': BRL_SUPABASE_KEY,
+                        'Authorization': `Bearer ${BRL_SUPABASE_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({
+                        data: rowData,
+                        updated_at: new Date().toISOString()
+                    })
+                });
+            }
+        } catch (err) {}
+    }
+
+    // 7. Automatic Scheduled Alerts:
+    //    - Tuesday Night Practice Open (Tuesday 7:00 PM - 10:30 PM ET)
+    //    - Wednesday Night Pit Gate & Practice Open (Wednesday 7:00 PM - 8:44 PM ET)
+    //    - Wednesday Night Race Broadcast Live (Wednesday 8:45 PM - 10:30 PM ET)
+    async function checkScheduledRaceWindows() {
         try {
             const now = new Date();
             const etParts = new Intl.DateTimeFormat('en-US', {
@@ -394,55 +476,71 @@
             const minute = parseInt(map.minute, 10);
             const totalMins = hour * 60 + minute;
 
-            const scheduledRace = UPCOMING_RACES.find(r => r.date === dateStr);
-            if (!scheduledRace) return;
-
-            if (totalMins >= 20 * 60 + 45 && totalMins <= 22 * 60 + 30) {
-                const alreadyFired = localStorage.getItem(STORAGE_KEYS.LAST_AUTO_LIVE_DATE);
+            // WINDOW A: Tuesday Night Practice Session Open (7:00 PM - 10:30 PM ET)
+            const tuesdayRace = UPCOMING_RACES.find(r => r.tuesdayDate === dateStr);
+            if (tuesdayRace && totalMins >= 19 * 60 && totalMins <= 22 * 60 + 30) {
+                const alreadyFired = localStorage.getItem(STORAGE_KEYS.LAST_AUTO_TUE_PRACTICE);
                 if (alreadyFired !== dateStr) {
+                    localStorage.setItem(STORAGE_KEYS.LAST_AUTO_TUE_PRACTICE, dateStr);
+                    const pracNotif = {
+                        id: Date.now(),
+                        category: 'practice_open',
+                        title: `🟢 TUESDAY PRACTICE OPEN: ${tuesdayRace.track}!`,
+                        body: `The official Tuesday Night practice session for tomorrow's ${tuesdayRace.round} at ${tuesdayRace.track} is now OPEN!`,
+                        url: '/schedule.html',
+                        dateLabel: 'Tuesday Practice'
+                    };
+                    await autoPublishScheduledAlert(`tue_practice_${dateStr}`, pracNotif);
+                    if (prefPracticeGate()) {
+                        showInAppToast(pracNotif);
+                        if (isAlertsEnabled()) {
+                            triggerNativeNotification(pracNotif.title, pracNotif.body, pracNotif.url, 'brl-tue-prac-' + dateStr);
+                        }
+                    }
+                }
+            }
+
+            // Check if today is a scheduled Wednesday Race Day
+            const wednesdayRace = UPCOMING_RACES.find(r => r.date === dateStr);
+            if (!wednesdayRace) return;
+
+            // WINDOW B: Wednesday Night Pit Gate & Practice Open (7:00 PM - 8:44 PM ET)
+            if (totalMins >= 19 * 60 && totalMins <= 20 * 60 + 44) {
+                const alreadyFiredGate = localStorage.getItem(STORAGE_KEYS.LAST_AUTO_WED_PIT_GATE);
+                if (alreadyFiredGate !== dateStr) {
+                    localStorage.setItem(STORAGE_KEYS.LAST_AUTO_WED_PIT_GATE, dateStr);
+                    const gateNotif = {
+                        id: Date.now(),
+                        category: 'pit_gate_open',
+                        title: `🏁 PIT GATE OPEN: Wednesday Race Session at ${wednesdayRace.track}!`,
+                        body: `The pit gate for tonight's ${wednesdayRace.round} at ${wednesdayRace.track} is officially OPEN and practice has begun!`,
+                        url: '/index.html',
+                        dateLabel: 'Pit Gate Open'
+                    };
+                    await autoPublishScheduledAlert(`wed_pit_gate_${dateStr}`, gateNotif);
+                    if (prefPracticeGate()) {
+                        showInAppToast(gateNotif);
+                        if (isAlertsEnabled()) {
+                            triggerNativeNotification(gateNotif.title, gateNotif.body, gateNotif.url, 'brl-wed-gate-' + dateStr);
+                        }
+                    }
+                }
+            }
+
+            // WINDOW C: Wednesday Night Race Going Live (8:45 PM - 10:30 PM ET)
+            if (totalMins >= 20 * 60 + 45 && totalMins <= 22 * 60 + 30) {
+                const alreadyFiredLive = localStorage.getItem(STORAGE_KEYS.LAST_AUTO_LIVE_DATE);
+                if (alreadyFiredLive !== dateStr) {
                     localStorage.setItem(STORAGE_KEYS.LAST_AUTO_LIVE_DATE, dateStr);
                     const liveNotif = {
                         id: Date.now(),
                         category: 'race_live',
-                        title: `🔴 LIVE NOW: BRL at ${scheduledRace.track}!`,
-                        body: `${scheduledRace.round} is going LIVE! Tap to watch the SimTrax broadcast.`,
+                        title: `🔴 LIVE NOW: BRL at ${wednesdayRace.track}!`,
+                        body: `${wednesdayRace.round} is going LIVE! Tap to watch the SimTrax broadcast.`,
                         url: '/simtrax.html',
                         dateLabel: 'Live Broadcast'
                     };
-
-                    // Also auto-publish to Supabase once per race date so all phones receive it in the cloud feed
-                    try {
-                        const getResp = await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
-                            headers: {
-                                'apikey': BRL_SUPABASE_KEY,
-                                'Authorization': `Bearer ${BRL_SUPABASE_KEY}`
-                            }
-                        });
-                        if (getResp.ok) {
-                            const rows = await getResp.json();
-                            const rowData = (rows && rows[0] && rows[0].data) ? rows[0].data : {};
-                            if (rowData.lastAutoLiveRaceDate !== dateStr) {
-                                rowData.lastAutoLiveRaceDate = dateStr;
-                                const list = Array.isArray(rowData.appNotifications) ? rowData.appNotifications : [];
-                                list.unshift(liveNotif);
-                                rowData.appNotifications = list.slice(0, 25);
-                                await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
-                                    method: 'PATCH',
-                                    headers: {
-                                        'apikey': BRL_SUPABASE_KEY,
-                                        'Authorization': `Bearer ${BRL_SUPABASE_KEY}`,
-                                        'Content-Type': 'application/json',
-                                        'Prefer': 'return=minimal'
-                                    },
-                                    body: JSON.stringify({
-                                        data: rowData,
-                                        updated_at: new Date().toISOString()
-                                    })
-                                });
-                            }
-                        }
-                    } catch (err) {}
-
+                    await autoPublishScheduledAlert(`wed_live_${dateStr}`, liveNotif);
                     if (prefRaceLive()) {
                         showInAppToast(liveNotif);
                         if (isAlertsEnabled()) {
@@ -657,7 +755,7 @@
                     </div>
                 </div>
 
-                <!-- STEP 2: PUSH NOTIFICATION CONTROLS (INCLUDING INDIVIDUAL DRIVER & TEAM TOGGLES) -->
+                <!-- STEP 2: PUSH NOTIFICATION CONTROLS (INCLUDING PRACTICE, PIT GATE, DRIVER & TEAM TOGGLES) -->
                 <div class="brl-app-section" style="border-color: rgba(255,204,0,0.35);">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                         <span style="font-family:'Outfit',sans-serif; font-size:0.8rem; font-weight:900; color:#ffcc00; text-transform:uppercase; letter-spacing:1px;">
@@ -666,7 +764,7 @@
                         <span id="brl-notif-status-pill" style="font-size:0.7rem; padding:2px 8px; border-radius:12px; font-weight:700;"></span>
                     </div>
                     <p style="color:#ccc; font-size:0.84rem; line-height:1.45; margin:0 0 12px 0;">
-                        Choose which alerts you want sent to your phone—including <strong>Individual Driver</strong> and <strong>Franchise Team</strong> notifications!
+                        Choose which automatic alerts you want sent to your phone—including <strong>Tuesday Practice</strong>, <strong>Wednesday Pit Gate</strong>, <strong>Live Broadcasts</strong>, and your followed <strong>Driver or Team</strong>!
                     </p>
 
                     <button id="brl-toggle-alerts-btn" class="brl-app-btn brl-app-btn-green" style="margin-bottom:12px;">
@@ -680,13 +778,19 @@
                             <span><strong>🔄 Website Update Alerts</strong> (Standings, Fantasy &amp; Recaps)</span>
                         </label>
 
-                        <!-- Toggle 2: Race Going Live -->
+                        <!-- Toggle 2: Tuesday Practice & Wednesday Pit Gate Open -->
+                        <label style="display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#eee; cursor:pointer;">
+                            <input type="checkbox" id="brl-chk-practice-gate" style="accent-color:#39ff14; width:17px; height:17px;">
+                            <span><strong>🟢 Practice &amp; Pit Gate Alerts</strong> (Tue Practice &amp; Wed Pit Gate Open)</span>
+                        </label>
+
+                        <!-- Toggle 3: Race Going Live -->
                         <label style="display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#eee; cursor:pointer;">
                             <input type="checkbox" id="brl-chk-race-live" style="accent-color:#ff1744; width:17px; height:17px;">
                             <span><strong>🔴 "Race Going Live" Alerts</strong> (Wednesday Night SimTrax Broadcasts)</span>
                         </label>
 
-                        <!-- Toggle 3: Individual Driver Notifications -->
+                        <!-- Toggle 4: Individual Driver Notifications -->
                         <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:8px;">
                             <label style="display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#eee; cursor:pointer;">
                                 <input type="checkbox" id="brl-chk-driver-alerts" style="accent-color:#00d4ff; width:17px; height:17px;">
@@ -700,7 +804,7 @@
                             </div>
                         </div>
 
-                        <!-- Toggle 4: Individual Franchise Team Notifications -->
+                        <!-- Toggle 5: Individual Franchise Team Notifications -->
                         <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:8px;">
                             <label style="display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#eee; cursor:pointer;">
                                 <input type="checkbox" id="brl-chk-team-alerts" style="accent-color:#ffcc00; width:17px; height:17px;">
@@ -741,6 +845,16 @@
                     </summary>
                     <div style="margin-top:12px; display:flex; flex-direction:column; gap:9px;">
                         <input type="password" id="brl-admin-push-pass" placeholder="Commissioner Passcode" style="padding:9px 12px; border-radius:6px; border:1px solid #333; background:#090b10; color:#fff; font-size:0.85rem;">
+
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <button type="button" id="brl-admin-tue-prac-btn" class="brl-app-btn" style="background:rgba(57,255,20,0.18); border:1px solid #39ff14; color:#39ff14; font-size:0.74rem; padding:9px;">
+                                🟢 Tue Practice Open
+                            </button>
+                            <button type="button" id="brl-admin-wed-gate-btn" class="brl-app-btn" style="background:rgba(255,204,0,0.18); border:1px solid #ffcc00; color:#ffcc00; font-size:0.74rem; padding:9px;">
+                                🏁 Wed Pit Gate Open
+                            </button>
+                        </div>
+
                         <button type="button" id="brl-admin-go-live-btn" class="brl-app-btn" style="background:#ff1744; color:#fff; font-size:0.8rem; padding:10px;">
                             🔴 Broadcast "Race Going Live NOW!" Alert
                         </button>
@@ -766,7 +880,7 @@
                         <input type="text" id="brl-admin-custom-body" placeholder="Alert Message Body..." style="padding:9px 12px; border-radius:6px; border:1px solid #333; background:#090b10; color:#fff; font-size:0.85rem;">
                         <input type="text" id="brl-admin-custom-url" placeholder="Target Page (e.g. /drivers.html or /teams.html)" value="/index.html" style="padding:9px 12px; border-radius:6px; border:1px solid #333; background:#090b10; color:#fff; font-size:0.85rem;">
                         <button type="button" id="brl-admin-send-custom-btn" class="brl-app-btn brl-app-btn-green" style="font-size:0.8rem; padding:10px;">
-                            📢 Push Alert to App Users
+                            📢 Push Custom Alert to App Users
                         </button>
                         <div id="brl-admin-push-msg" style="font-size:0.8rem; text-align:center; display:none;"></div>
                     </div>
@@ -782,6 +896,7 @@
         document.getElementById('brl-test-alert-btn').onclick = handleTestAlert;
 
         const chkSite = document.getElementById('brl-chk-site-updates');
+        const chkPracGate = document.getElementById('brl-chk-practice-gate');
         const chkRace = document.getElementById('brl-chk-race-live');
         const chkDriver = document.getElementById('brl-chk-driver-alerts');
         const selDriver = document.getElementById('brl-select-driver-target');
@@ -789,6 +904,7 @@
         const selTeam = document.getElementById('brl-select-team-target');
 
         chkSite.checked = prefSiteUpdates();
+        chkPracGate.checked = prefPracticeGate();
         chkRace.checked = prefRaceLive();
         chkDriver.checked = prefDriverEnabled();
         selDriver.value = prefDriverTarget();
@@ -799,6 +915,7 @@
         document.getElementById('brl-team-select-wrap').style.opacity = chkTeam.checked ? '1' : '0.45';
 
         chkSite.onchange = () => localStorage.setItem(STORAGE_KEYS.PREF_SITE_UPDATES, String(chkSite.checked));
+        chkPracGate.onchange = () => localStorage.setItem(STORAGE_KEYS.PREF_PRACTICE_GATE, String(chkPracGate.checked));
         chkRace.onchange = () => localStorage.setItem(STORAGE_KEYS.PREF_RACE_LIVE, String(chkRace.checked));
         chkDriver.onchange = () => {
             localStorage.setItem(STORAGE_KEYS.PREF_DRIVER_ALERTS, String(chkDriver.checked));
@@ -835,8 +952,10 @@
             }
         };
 
-        document.getElementById('brl-admin-go-live-btn').onclick = () => sendCommissionerPush(true);
-        document.getElementById('brl-admin-send-custom-btn').onclick = () => sendCommissionerPush(false);
+        document.getElementById('brl-admin-tue-prac-btn').onclick = () => sendCommissionerPush('tuesday_practice');
+        document.getElementById('brl-admin-wed-gate-btn').onclick = () => sendCommissionerPush('wednesday_pit_gate');
+        document.getElementById('brl-admin-go-live-btn').onclick = () => sendCommissionerPush('race_live');
+        document.getElementById('brl-admin-send-custom-btn').onclick = () => sendCommissionerPush('custom');
 
         refreshAlertUIState();
     }
@@ -963,7 +1082,7 @@
             }
             await triggerNativeNotification(
                 '🏁 Bandit Racing League Alerts Active!',
-                'You will now be notified for Website Updates, Live Races, and your followed Drivers & Teams!',
+                'You will now be notified for Website Updates, Practice/Pit Gate, Live Races, and your followed Drivers & Teams!',
                 '/index.html',
                 'brl-welcome-notif'
             );
@@ -985,7 +1104,7 @@
         const tm = prefTeamTarget();
         const subInfo = (drv !== 'ALL' || tm !== 'ALL')
             ? `Following: ${drv !== 'ALL' ? drv : 'All Drivers'} | ${tm !== 'ALL' ? tm : 'All Teams'}.`
-            : 'Following League-Wide Updates, Drivers & Teams.';
+            : 'Following League-Wide Updates, Practice/Pit Gate, Live Races, Drivers & Teams.';
 
         const testObj = {
             id: Date.now(),
@@ -1018,6 +1137,8 @@
 
         container.innerHTML = cachedNotifications.slice(0, 10).map(n => {
             const isLive = n.category === 'race_live';
+            const isPractice = n.category === 'practice_open';
+            const isPitGate = n.category === 'pit_gate_open';
             const isDriver = n.category === 'driver_alert' || !!n.driver;
             const isTeam = n.category === 'team_alert' || !!n.team;
 
@@ -1026,6 +1147,12 @@
             if (isLive) {
                 badgeCol = '#ff1744';
                 badgeText = '🔴 RACE LIVE';
+            } else if (isPractice) {
+                badgeCol = '#39ff14';
+                badgeText = '🟢 TUESDAY PRACTICE OPEN';
+            } else if (isPitGate) {
+                badgeCol = '#ffcc00';
+                badgeText = '🏁 WEDNESDAY PIT GATE OPEN';
             } else if (isDriver) {
                 badgeCol = '#00d4ff';
                 badgeText = `🏎️ DRIVER${n.driver ? ' • ' + n.driver : ''}`;
@@ -1047,8 +1174,8 @@
         }).join('');
     }
 
-    // 9. Commissioner Push Broadcast (Supports League-Wide, Driver-Specific, or Team-Specific Alerts)
-    async function sendCommissionerPush(isQuickLive) {
+    // 9. Commissioner Push Broadcast (Supports Quick Presets, Driver-Specific, or Team-Specific Alerts)
+    async function sendCommissionerPush(mode) {
         const pass = (document.getElementById('brl-admin-push-pass').value || '').trim();
         const msgEl = document.getElementById('brl-admin-push-msg');
         msgEl.style.display = 'block';
@@ -1063,7 +1190,17 @@
         const targetTeam = (document.getElementById('brl-admin-target-team').value || '').trim();
 
         let title, body, url, category;
-        if (isQuickLive) {
+        if (mode === 'tuesday_practice') {
+            title = '🟢 TUESDAY PRACTICE OPEN: Bandit Racing League!';
+            body = 'The official Tuesday Night practice session for tomorrow night\'s Bandit Racing League race is now OPEN!';
+            url = '/schedule.html';
+            category = 'practice_open';
+        } else if (mode === 'wednesday_pit_gate') {
+            title = '🏁 PIT GATE OPEN: Wednesday Night Race Session!';
+            body = 'The pit gate for tonight\'s Wednesday Night race is officially OPEN and practice has begun!';
+            url = '/index.html';
+            category = 'pit_gate_open';
+        } else if (mode === 'race_live') {
             title = '🔴 LIVE NOW: Bandit Racing League Race Broadcast!';
             body = 'The cars are on track! Tap now to watch the live SimTrax broadcast on banditracingleague.net.';
             url = '/simtrax.html';
@@ -1106,8 +1243,8 @@
                 url,
                 dateLabel: nowStr
             };
-            if (!isQuickLive && targetDriver) newAlert.driver = targetDriver;
-            if (!isQuickLive && targetTeam) newAlert.team = targetTeam;
+            if (mode === 'custom' && targetDriver) newAlert.driver = targetDriver;
+            if (mode === 'custom' && targetTeam) newAlert.team = targetTeam;
 
             list.unshift(newAlert);
             rowData.appNotifications = list.slice(0, 25);
@@ -1147,16 +1284,18 @@
         registerServiceWorker();
         buildAppWidgetUI();
         fetchAndProcessNotifications(true);
-        checkWednesdayRaceLiveWindow();
+        checkScheduledRaceWindows();
 
         setInterval(() => {
             fetchAndProcessNotifications(false);
-            checkWednesdayRaceLiveWindow();
+            checkScheduledRaceWindows();
         }, 30000);
 
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'visible') {
+                if (swRegistration) swRegistration.update().catch(() => {});
                 fetchAndProcessNotifications(false);
+                checkScheduledRaceWindows();
             }
         });
     }
