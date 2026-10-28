@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Teko:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793200661">
+    <link rel="stylesheet" href="styles.css?v=1793202148">
     <style>
         .card {
             padding: 0;
@@ -181,12 +181,52 @@
     </nav>
 
     <!-- Header -->
-    <header class="schedule-header container text-center" style="margin-top: 140px; margin-bottom: 40px;">
+    <header class="schedule-header container text-center" style="margin-top: 140px; margin-bottom: 30px;">
         <div class="header-content">
             <h1 class="italic-heavy accent title-massive">DRIVER ROSTER</h1>
-            <h2 class="italic-heavy text-light">SEASON 16</h2>
+            <h2 class="italic-heavy text-light">SEASON 16 &bull; OFFICIAL ROSTER &amp; HEAD-TO-HEAD TALE OF THE TAPE</h2>
         </div>
     </header>
+
+    <!-- Head-to-Head Driver Comparison Tool (#6) -->
+    <section class="container" id="h2h-comparison-section" style="margin-bottom: 45px;">
+        <div style="background: linear-gradient(145deg, rgba(16, 20, 28, 0.96), rgba(8, 10, 15, 0.99)); border: 2px solid rgba(57, 255, 20, 0.45); border-radius: 14px; padding: 24px; box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(57, 255, 20, 0.12); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--neon-green), var(--chase-yellow), #00d4ff);"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 14px;">
+                <div>
+                    <span style="display: inline-block; background: rgba(57, 255, 20, 0.14); color: var(--neon-green); border: 1px solid rgba(57, 255, 20, 0.45); padding: 3px 10px; border-radius: 20px; font-family: var(--font-heading); font-size: 0.72rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px;">
+                        ⚔️ INTERACTIVE TALE OF THE TAPE &bull; SEASON 16 LIVE STATS
+                    </span>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: #fff; text-transform: uppercase; font-style: italic; margin: 0; letter-spacing: 1px;">
+                        HEAD-TO-HEAD <span style="color: var(--neon-green);">DRIVER COMPARISON</span>
+                    </h2>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                    <span style="font-size: 0.72rem; color: #999; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px;">Featured Rivals:</span>
+                    <button type="button" onclick="setH2HMatchup(50037, 14450)" style="background: rgba(255,204,0,0.14); color: #ffcc00; border: 1px solid rgba(255,204,0,0.45); border-radius: 6px; padding: 5px 10px; font-family: var(--font-heading); font-size: 0.72rem; font-weight: 900; cursor: pointer; text-transform: uppercase;">🏆 #7 Lacy vs #93 Sanderson</button>
+                    <button type="button" onclick="setH2HMatchup(56288, 30420)" style="background: rgba(57,255,20,0.12); color: var(--neon-green); border: 1px solid rgba(57,255,20,0.4); border-radius: 6px; padding: 5px 10px; font-family: var(--font-heading); font-size: 0.72rem; font-weight: 900; cursor: pointer; text-transform: uppercase;">🔥 #9 McDonald vs #22 Adams</button>
+                    <button type="button" onclick="setH2HMatchup(47625, 128122)" style="background: rgba(0,212,255,0.12); color: #00d4ff; border: 1px solid rgba(0,212,255,0.4); border-radius: 6px; padding: 5px 10px; font-family: var(--font-heading); font-size: 0.72rem; font-weight: 900; cursor: pointer; text-transform: uppercase;">🏁 #15 Crockett vs #47 Rakes</button>
+                </div>
+            </div>
+
+            <!-- Selector Row -->
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; margin-bottom: 20px;">
+                <div>
+                    <label for="h2h-driver-a" style="display: block; font-family: var(--font-heading); font-size: 0.75rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: 900;">🟢 Driver A (Left Corner)</label>
+                    <select id="h2h-driver-a" onchange="renderH2HComparison()" style="width: 100%; background: #0b0e14; color: #fff; border: 1.5px solid var(--neon-green); border-radius: 8px; padding: 10px 12px; font-family: var(--font-heading); font-size: 0.92rem; font-weight: 700; cursor: pointer;"></select>
+                </div>
+                <div style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 900; font-style: italic; color: var(--chase-yellow); padding-top: 18px; text-align: center;">VS</div>
+                <div>
+                    <label for="h2h-driver-b" style="display: block; font-family: var(--font-heading); font-size: 0.75rem; color: #00d4ff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: 900; text-align: right;">🔵 Driver B (Right Corner)</label>
+                    <select id="h2h-driver-b" onchange="renderH2HComparison()" style="width: 100%; background: #0b0e14; color: #fff; border: 1.5px solid #00d4ff; border-radius: 8px; padding: 10px 12px; font-family: var(--font-heading); font-size: 0.92rem; font-weight: 700; cursor: pointer;"></select>
+                </div>
+            </div>
+
+            <!-- Dynamic Comparison Output -->
+            <div id="h2h-comparison-body"></div>
+        </div>
+    </section>
 
     <!-- Grid -->
     <section class="container" style="margin-bottom: 80px;">
@@ -195,9 +235,10 @@
         </div>
     </section>
 
-    <script src="supabase_config.js?v=1793200661"></script>
-    <script src="teams_data.js?v=1793200661"></script>
-    <script src="roster_data.js?v=1793200661"></script>
+    <script src="supabase_config.js?v=1793202148"></script>
+    <script src="teams_data.js?v=1793202148"></script>
+    <script src="roster_data.js?v=1793202148"></script>
+    <script src="season16_stats_data.js?v=1793202148"></script>
     <script>
         const grid = document.getElementById('driver-grid');
 
@@ -495,17 +536,22 @@
                     }
                 }
                 
-                // Get Stats Link configuration
+                // Get Stats Link & H2H Compare configuration
                 let statsButtonHtml = '';
                 if (hasDriver) {
                     const norm = normalizeName(data.driver);
                     const srhId = SRH_IDS[norm];
+                    const safeDriverStr = data.driver.replace(/'/g, "\\'");
+                    const compareBtn = srhId
+                        ? `<button type="button" onclick="selectDriverForH2H(${srhId}, '${safeDriverStr}')" style="background: rgba(255,204,0,0.12); color: var(--chase-yellow); font-size: 0.72rem; border: 1px solid rgba(255,204,0,0.5); padding: 4px 9px; border-radius: 4px; text-transform: uppercase; font-family: var(--font-heading); font-weight: 900; cursor: pointer; transition: all 0.2s ease;">⚔️ Compare</button>`
+                        : '';
                     if (srhId) {
                         statsButtonHtml = `
-                            <div style="margin-top: 12px;">
+                            <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                                 <a href="https://simracerhub.com/driver_stats.php?driver_id=${srhId}&season_id=29722" target="_blank" style="display:inline-block; color: var(--neon-green); font-size: 0.75rem; text-decoration: none; border: 1px solid var(--neon-green); padding: 4px 10px; border-radius: 4px; text-transform: uppercase; font-family: var(--font-heading); font-weight: bold; transition: all 0.3s ease;">
                                     View Stats &rarr;
                                 </a>
+                                ${compareBtn}
                             </div>
                         `;
                     } else {
@@ -545,6 +591,172 @@
                 `;
                 grid.appendChild(card);
             });
+        }
+
+        // --- Head-to-Head Driver Comparison Tool (#6) ---
+        let h2hNextSlot = 'A';
+
+        function initH2HComparison() {
+            const selectA = document.getElementById('h2h-driver-a');
+            const selectB = document.getElementById('h2h-driver-b');
+            if (!selectA || !selectB || typeof season16StatsData === 'undefined' || !season16StatsData.drivers) return;
+
+            const activeDrivers = season16StatsData.drivers.filter(d => d.starts > 0 || d.carNumber);
+            const optionsHtml = activeDrivers.map(d => {
+                const carBadge = d.carNumber ? `#${d.carNumber} ` : '';
+                const chaseTag = d.isChase ? ' 🏆' : '';
+                return `<option value="${d.driverId}">P${d.rank} • ${carBadge}${d.name} (${d.points} pts, ${d.wins}W)${chaseTag}</option>`;
+            }).join('');
+
+            selectA.innerHTML = optionsHtml;
+            selectB.innerHTML = optionsHtml;
+
+            selectA.value = '50037'; // #7 Benjamin I Lacy
+            selectB.value = '14450'; // #93 Scott Sanderson
+            renderH2HComparison();
+        }
+
+        function setH2HMatchup(idA, idB) {
+            const selectA = document.getElementById('h2h-driver-a');
+            const selectB = document.getElementById('h2h-driver-b');
+            if (!selectA || !selectB) return;
+            selectA.value = String(idA);
+            selectB.value = String(idB);
+            renderH2HComparison();
+        }
+
+        function selectDriverForH2H(driverId) {
+            const selectA = document.getElementById('h2h-driver-a');
+            const selectB = document.getElementById('h2h-driver-b');
+            if (!selectA || !selectB) return;
+            if (h2hNextSlot === 'A') {
+                selectA.value = String(driverId);
+                h2hNextSlot = 'B';
+            } else {
+                selectB.value = String(driverId);
+                h2hNextSlot = 'A';
+            }
+            renderH2HComparison();
+            const sec = document.getElementById('h2h-comparison-section');
+            if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function renderH2HComparison() {
+            const body = document.getElementById('h2h-comparison-body');
+            const selectA = document.getElementById('h2h-driver-a');
+            const selectB = document.getElementById('h2h-driver-b');
+            if (!body || !selectA || !selectB || typeof season16StatsData === 'undefined') return;
+
+            const idA = parseInt(selectA.value, 10);
+            const idB = parseInt(selectB.value, 10);
+            const dA = season16StatsData.drivers.find(d => d.driverId === idA) || season16StatsData.drivers[0];
+            const dB = season16StatsData.drivers.find(d => d.driverId === idB) || season16StatsData.drivers[1];
+            if (!dA || !dB) return;
+
+            const metrics = [
+                { label: 'Championship Rank', valA: dA.rank, valB: dB.rank, fmtA: `#${dA.rank}`, fmtB: `#${dB.rank}`, lowerBetter: true },
+                { label: 'Total Points', valA: dA.points, valB: dB.points, fmtA: dA.points.toLocaleString(), fmtB: dB.points.toLocaleString(), lowerBetter: false },
+                { label: 'Race Wins', valA: dA.wins, valB: dB.wins, fmtA: dA.wins, fmtB: dB.wins, lowerBetter: false },
+                { label: 'Stage Wins', valA: dA.stageWins, valB: dB.stageWins, fmtA: dA.stageWins, fmtB: dB.stageWins, lowerBetter: false },
+                { label: 'Pole Awards', valA: dA.poles, valB: dB.poles, fmtA: dA.poles, fmtB: dB.poles, lowerBetter: false },
+                { label: 'Top 5 Finishes', valA: dA.top5, valB: dB.top5, fmtA: dA.top5, fmtB: dB.top5, lowerBetter: false },
+                { label: 'Top 10 Finishes', valA: dA.top10, valB: dB.top10, fmtA: dA.top10, fmtB: dB.top10, lowerBetter: false },
+                { label: 'Laps Led', valA: dA.lapsLed, valB: dB.lapsLed, fmtA: dA.lapsLed.toLocaleString(), fmtB: dB.lapsLed.toLocaleString(), lowerBetter: false },
+                { label: 'Average Start', valA: dA.avgStart || 99, valB: dB.avgStart || 99, fmtA: dA.avgStart ? `P${dA.avgStart.toFixed(1)}` : 'N/A', fmtB: dB.avgStart ? `P${dB.avgStart.toFixed(1)}` : 'N/A', lowerBetter: true },
+                { label: 'Average Finish', valA: dA.avgFinish || 99, valB: dB.avgFinish || 99, fmtA: dA.avgFinish ? `P${dA.avgFinish.toFixed(1)}` : 'N/A', fmtB: dB.avgFinish ? `P${dB.avgFinish.toFixed(1)}` : 'N/A', lowerBetter: true },
+                { label: 'Incidents / Start', valA: dA.incPerStart, valB: dB.incPerStart, fmtA: `${dA.incPerStart.toFixed(2)}x`, fmtB: `${dB.incPerStart.toFixed(2)}x`, lowerBetter: true },
+                { label: 'Driver Rating', valA: dA.avgRating, valB: dB.avgRating, fmtA: dA.avgRating.toFixed(1), fmtB: dB.avgRating.toFixed(1), lowerBetter: false }
+            ];
+
+            let winsA = 0;
+            let winsB = 0;
+
+            const rowsHtml = metrics.map(m => {
+                let aBetter = false;
+                let bBetter = false;
+                if (m.valA !== m.valB) {
+                    if (m.lowerBetter) {
+                        aBetter = m.valA < m.valB;
+                        bBetter = m.valB < m.valA;
+                    } else {
+                        aBetter = m.valA > m.valB;
+                        bBetter = m.valB > m.valA;
+                    }
+                }
+                if (aBetter) winsA++;
+                if (bBetter) winsB++;
+
+                let pctA = 50;
+                const sum = (Number(m.valA) || 0) + (Number(m.valB) || 0);
+                if (sum > 0) {
+                    if (m.lowerBetter) {
+                        // Invert ratio so better (lower) value gets wider bar
+                        pctA = Math.round(((Number(m.valB) || 1) / sum) * 100);
+                    } else {
+                        pctA = Math.round(((Number(m.valA) || 0) / sum) * 100);
+                    }
+                }
+                pctA = Math.max(12, Math.min(88, pctA));
+                const pctB = 100 - pctA;
+
+                return `
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; font-family: var(--font-heading); font-size: 0.85rem; margin-bottom: 4px;">
+                            <div style="text-align: left; font-weight: 900; color: ${aBetter ? 'var(--neon-green)' : '#ccc'};">
+                                ${m.fmtA} ${aBetter ? '✓' : ''}
+                            </div>
+                            <div style="text-align: center; font-size: 0.72rem; color: #999; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; padding: 0 10px;">
+                                ${m.label}
+                            </div>
+                            <div style="text-align: right; font-weight: 900; color: ${bBetter ? '#00d4ff' : '#ccc'};">
+                                ${bBetter ? '✓ ' : ''}${m.fmtB}
+                            </div>
+                        </div>
+                        <div style="display: flex; height: 7px; border-radius: 4px; overflow: hidden; background: rgba(255,255,255,0.08); gap: 2px;">
+                            <div style="width: ${pctA}%; background: ${aBetter ? 'var(--neon-green)' : 'rgba(57,255,20,0.3)'}; transition: width 0.3s ease;"></div>
+                            <div style="width: ${pctB}%; background: ${bBetter ? '#00d4ff' : 'rgba(0,212,255,0.3)'}; transition: width 0.3s ease;"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            body.innerHTML = `
+                <!-- Fighter Cards Header -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;">
+                    <div style="background: rgba(57, 255, 20, 0.06); border: 1px solid rgba(57, 255, 20, 0.35); border-radius: 10px; padding: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                        <div>
+                            <div style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; text-transform: uppercase;">
+                                <span style="color: var(--neon-green);">#${dA.carNumber || '--'}</span> ${dA.name}
+                            </div>
+                            <div style="font-size: 0.74rem; color: #aaa; font-weight: 700; text-transform: uppercase; margin-top: 2px;">
+                                ${dA.team} &bull; ${dA.starts} Starts
+                            </div>
+                        </div>
+                        <div style="background: rgba(57,255,20,0.18); color: var(--neon-green); border: 1px solid var(--neon-green); padding: 4px 10px; border-radius: 6px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 900;">
+                            ${winsA} CAT. LEADS
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(0, 212, 255, 0.06); border: 1px solid rgba(0, 212, 255, 0.35); border-radius: 10px; padding: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                        <div style="background: rgba(0,212,255,0.18); color: #00d4ff; border: 1px solid #00d4ff; padding: 4px 10px; border-radius: 6px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 900;">
+                            ${winsB} CAT. LEADS
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; text-transform: uppercase;">
+                                <span style="color: #00d4ff;">#${dB.carNumber || '--'}</span> ${dB.name}
+                            </div>
+                            <div style="font-size: 0.74rem; color: #aaa; font-weight: 700; text-transform: uppercase; margin-top: 2px;">
+                                ${dB.team} &bull; ${dB.starts} Starts
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Bars -->
+                <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px;">
+                    ${rowsHtml}
+                </div>
+            `;
         }
 
         async function loadTeamsDataFromSupabase() {
@@ -595,6 +807,7 @@
 
         // Toggle mobile navigation menu and run initial load
         document.addEventListener('DOMContentLoaded', async function() {
+            initH2HComparison();
             await loadTeamsDataFromSupabase();
 
             // Run dynamically
@@ -623,6 +836,6 @@
             <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
         </div>
     </footer>
-    <script src="brl_app.js?v=1793200661"></script>
+    <script src="brl_app.js?v=1793202148"></script>
 </body>
 </html>

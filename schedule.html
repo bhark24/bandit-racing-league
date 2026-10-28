@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793200661">
+    <link rel="stylesheet" href="styles.css?v=1793202148">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
@@ -72,10 +72,41 @@
     </nav>
 
     <!-- Schedule Section -->
-    <section class="container" style="margin-top: 40px; margin-bottom: 60px;">
+    <section class="container" style="margin-top: 40px; margin-bottom: 40px;">
         <div style="text-align: center;">
             <h2 style="font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 2px; color: #ffffff; margin-bottom: 15px;">Season 16 Schedule</h2>
             <img src="assets/season16-promo.jpg" alt="Season 16 Schedule" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(153, 255, 51, 0.4);" onerror="this.onerror=null; this.outerHTML='<div style=\'padding: 20px; border: 2px dashed #99ff33; color: #fff;\'>Save your promo image to assets/season16-promo.jpg to display it here!</div>'">
+        </div>
+    </section>
+
+    <!-- Interactive Track Records, Past Winners & Scouting Guide (#7) -->
+    <section class="container" id="track-scouting-hub" style="margin-bottom: 70px;">
+        <div style="background: linear-gradient(145deg, rgba(16, 20, 28, 0.96), rgba(8, 10, 15, 0.99)); border: 2px solid rgba(57, 255, 20, 0.4); border-radius: 14px; padding: 26px; box-shadow: 0 10px 35px rgba(0,0,0,0.65); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--neon-green), var(--chase-yellow), var(--neon-green));"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 22px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px;">
+                <div>
+                    <span style="display: inline-block; background: rgba(255, 204, 0, 0.16); color: var(--chase-yellow); border: 1px solid rgba(255, 204, 0, 0.5); padding: 4px 12px; border-radius: 20px; font-family: var(--font-heading); font-size: 0.74rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px;">
+                        🏁 SEASON 16 TRACK ARCHIVE &amp; SCOUTING GUIDE
+                    </span>
+                    <h2 style="font-family: var(--font-heading); font-size: 1.9rem; color: #fff; text-transform: uppercase; font-style: italic; margin: 0; letter-spacing: 1px;">
+                        INTERACTIVE <span style="color: var(--neon-green);">TROPHY ROOM</span> &amp; TRACK SPECS
+                    </h2>
+                    <p style="color: #aaa; font-size: 0.9rem; margin: 6px 0 0 0;">
+                        Explore official lap counts, stage breaks, fuel/tire rules, pole winners, stage winners, laps led leaders, and Chase scouting notes for all 21 Season 16 events.
+                    </p>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;" id="schedule-filter-tabs">
+                    <button type="button" onclick="setScheduleFilter('all')" id="sched-tab-all" style="background: var(--neon-green); color: #000; border: 1px solid var(--neon-green); border-radius: 8px; padding: 8px 14px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 900; text-transform: uppercase; cursor: pointer;">All 21 Races</button>
+                    <button type="button" onclick="setScheduleFilter('chase')" id="sched-tab-chase" style="background: rgba(255,204,0,0.14); color: var(--chase-yellow); border: 1px solid rgba(255,204,0,0.5); border-radius: 8px; padding: 8px 14px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 900; text-transform: uppercase; cursor: pointer;">🏆 5-Race Chase</button>
+                    <button type="button" onclick="setScheduleFilter('upcoming')" id="sched-tab-upcoming" style="background: rgba(0,212,255,0.12); color: #00d4ff; border: 1px solid rgba(0,212,255,0.45); border-radius: 8px; padding: 8px 14px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 900; text-transform: uppercase; cursor: pointer;">🔥 Upcoming (4)</button>
+                    <button type="button" onclick="setScheduleFilter('completed')" id="sched-tab-completed" style="background: rgba(255,255,255,0.06); color: #ddd; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 8px 14px; font-family: var(--font-heading); font-size: 0.78rem; font-weight: 900; text-transform: uppercase; cursor: pointer;">✅ Completed (17)</button>
+                </div>
+            </div>
+
+            <div id="schedule-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px;"></div>
         </div>
     </section>
 
@@ -89,9 +120,169 @@
         </div>
     </footer>
 
+    <script src="season16_stats_data.js?v=1793202148"></script>
     <script>
-        // Toggle mobile navigation menu
+        let currentScheduleFilter = 'all';
+
+        function setScheduleFilter(filter) {
+            currentScheduleFilter = filter;
+            const tabs = {
+                all: document.getElementById('sched-tab-all'),
+                chase: document.getElementById('sched-tab-chase'),
+                upcoming: document.getElementById('sched-tab-upcoming'),
+                completed: document.getElementById('sched-tab-completed')
+            };
+            Object.entries(tabs).forEach(([k, btn]) => {
+                if (!btn) return;
+                if (k === filter) {
+                    btn.style.background = 'var(--neon-green)';
+                    btn.style.color = '#000';
+                    btn.style.borderColor = 'var(--neon-green)';
+                } else {
+                    btn.style.background = 'rgba(255,255,255,0.06)';
+                    btn.style.color = k === 'chase' ? 'var(--chase-yellow)' : (k === 'upcoming' ? '#00d4ff' : '#ddd');
+                    btn.style.borderColor = 'rgba(255,255,255,0.2)';
+                }
+            });
+            renderScheduleCards();
+        }
+
+        function toggleRaceTop5(raceNum) {
+            const el = document.getElementById('race-top5-' + raceNum);
+            if (!el) return;
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function renderScheduleCards() {
+            const grid = document.getElementById('schedule-cards-grid');
+            if (!grid || typeof season16StatsData === 'undefined' || !season16StatsData.schedule) return;
+
+            const filtered = season16StatsData.schedule.filter(r => {
+                if (currentScheduleFilter === 'chase') return r.isChase;
+                if (currentScheduleFilter === 'upcoming') return !r.isCompleted;
+                if (currentScheduleFilter === 'completed') return r.isCompleted;
+                return true;
+            });
+
+            grid.innerHTML = filtered.map(r => {
+                const borderColor = r.isChase
+                    ? (r.isCompleted ? 'rgba(255, 204, 0, 0.55)' : '#00d4ff')
+                    : 'rgba(255, 255, 255, 0.14)';
+                const topAccent = r.isChase
+                    ? (r.isCompleted ? 'var(--chase-yellow)' : '#00d4ff')
+                    : 'var(--neon-green)';
+
+                const statusBadge = r.isCompleted
+                    ? `<span style="background: rgba(57,255,20,0.15); color: var(--neon-green); border: 1px solid rgba(57,255,20,0.45); padding: 3px 9px; border-radius: 12px; font-family: var(--font-heading); font-size: 0.68rem; font-weight: 900; text-transform: uppercase;">✅ Official</span>`
+                    : `<span style="background: rgba(0,212,255,0.16); color: #00d4ff; border: 1px solid #00d4ff; padding: 3px 9px; border-radius: 12px; font-family: var(--font-heading); font-size: 0.68rem; font-weight: 900; text-transform: uppercase;">🔥 Upcoming</span>`;
+
+                const chaseBadge = r.isChase
+                    ? `<span style="background: rgba(255,204,0,0.2); color: var(--chase-yellow); border: 1px solid var(--chase-yellow); padding: 3px 9px; border-radius: 12px; font-family: var(--font-heading); font-size: 0.68rem; font-weight: 900; text-transform: uppercase;">🏆 Chase R${r.raceNum - 16}</span>`
+                    : '';
+
+                let bodyContent = '';
+                if (r.isCompleted) {
+                    const top5Rows = (r.top5 || []).map(t => `
+                        <div style="display: flex; justify-content: space-between; font-size: 0.76rem; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: #ccc;">
+                            <span><strong style="color: ${t.pos === 1 ? 'var(--chase-yellow)' : '#fff'};">P${t.pos}</strong> ${t.driver}</span>
+                            <span style="color: #888;">Start P${t.start} &bull; ${t.lapsLed} LL &bull; ${t.inc}x</span>
+                        </div>
+                    `).join('');
+
+                    bodyContent = `
+                        <div style="background: rgba(57,255,20,0.07); border: 1px solid rgba(57,255,20,0.3); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px;">
+                            <div style="font-size: 0.68rem; color: #aaa; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px;">🏆 Race Winner</div>
+                            <div style="font-family: var(--font-heading); font-size: 1.08rem; font-weight: 900; color: var(--neon-green); margin-top: 2px;">${r.winner}</div>
+                            <div style="font-size: 0.74rem; color: #bbb; margin-top: 3px;">🥈 ${r.secondPlace} &bull; 🥉 ${r.thirdPlace}</div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.75rem; margin-bottom: 10px;">
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 7px 9px;">
+                                <span style="display: block; color: #888; font-size: 0.65rem; text-transform: uppercase; font-weight: 800;">⚡ Pole Award</span>
+                                <strong style="color: #fff;">${r.poleWinner || 'N/A'}</strong>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 7px 9px;">
+                                <span style="display: block; color: #888; font-size: 0.65rem; text-transform: uppercase; font-weight: 800;">🔥 Most Laps Led</span>
+                                <strong style="color: var(--chase-yellow);">${r.mostLapsLed || 'N/A'}</strong>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 7px 9px;">
+                                <span style="display: block; color: #888; font-size: 0.65rem; text-transform: uppercase; font-weight: 800;">🟢 Stage 1 Winner</span>
+                                <strong style="color: #ddd;">${r.stage1Winner || 'N/A'}</strong>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 7px 9px;">
+                                <span style="display: block; color: #888; font-size: 0.65rem; text-transform: uppercase; font-weight: 800;">🟢 Stage 2 Winner</span>
+                                <strong style="color: #ddd;">${r.stage2Winner || 'N/A'}</strong>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                            <button type="button" onclick="toggleRaceTop5(${r.raceNum})" style="background: rgba(255,255,255,0.06); color: #ddd; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 5px 10px; font-family: var(--font-heading); font-size: 0.72rem; font-weight: 800; text-transform: uppercase; cursor: pointer;">
+                                📊 Top 5 &amp; Starters (${r.totalStarters})
+                            </button>
+                            <a href="https://simracerhub.com/season_race.php?schedule_id=${r.scheduleId}" target="_blank" style="color: var(--neon-green); font-family: var(--font-heading); font-size: 0.74rem; font-weight: 900; text-decoration: none; text-transform: uppercase;">
+                                Full Box Score &rarr;
+                            </a>
+                        </div>
+                        <div id="race-top5-${r.raceNum}" style="display: none; margin-top: 10px; background: rgba(0,0,0,0.5); border-radius: 6px; padding: 8px 10px;">
+                            ${top5Rows}
+                        </div>
+                    `;
+                } else {
+                    bodyContent = `
+                        <div style="background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.35); border-radius: 8px; padding: 12px; margin-bottom: 10px;">
+                            <div style="font-size: 0.68rem; color: #00d4ff; text-transform: uppercase; font-weight: 900; letter-spacing: 0.8px; margin-bottom: 4px;">🔎 Track Scouting Report</div>
+                            <div style="font-size: 0.82rem; color: #ddd; line-height: 1.5;">
+                                ${r.scoutingNotes || 'Championship Chase showdown event. Pit gates open at 8:00 PM EST, Qualifying at 8:50 PM EST, SimTrax broadcast live at 9:00 PM EST.'}
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; color: #aaa;">
+                            <span>🕗 Pit Gate: <strong>8:00 PM EST</strong></span>
+                            <span>📺 Live: <strong>9:00 PM EST</strong></span>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div style="background: rgba(18, 22, 30, 0.95); border: 1.5px solid ${borderColor}; border-top: 4px solid ${topAccent}; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 20px rgba(0,0,0,0.4);">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 8px;">
+                                <span style="font-family: var(--font-heading); font-size: 0.76rem; font-weight: 900; color: #aaa; text-transform: uppercase; letter-spacing: 1px;">
+                                    RACE ${r.raceNum} &bull; ${r.dateFormatted}
+                                </span>
+                                <div style="display: flex; gap: 6px; align-items: center;">
+                                    ${chaseBadge}
+                                    ${statusBadge}
+                                </div>
+                            </div>
+
+                            <h3 style="font-family: var(--font-heading); font-size: 1.22rem; color: #fff; text-transform: uppercase; margin: 0 0 3px 0; line-height: 1.2;">
+                                ${r.trackName}
+                            </h3>
+                            <div style="font-size: 0.78rem; color: var(--chase-yellow); font-weight: 700; margin-bottom: 10px;">
+                                ${r.eventName}
+                            </div>
+
+                            <!-- Track Specs Strip -->
+                            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;">
+                                <span style="background: rgba(255,255,255,0.06); color: #ccc; padding: 3px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 700;">📏 ${r.lengthMiles} Mi (${r.turns} Turns)</span>
+                                <span style="background: rgba(255,255,255,0.06); color: #ccc; padding: 3px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 700;">🏁 ${r.scheduledLaps} Laps (${r.distanceMiles} Mi)</span>
+                                <span style="background: rgba(255,255,255,0.06); color: #ccc; padding: 3px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 700;">🛑 Stages: ${r.stageBreaks}</span>
+                                <span style="background: rgba(255,255,255,0.06); color: #ccc; padding: 3px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 700;">⛽ ${r.fuelCap} &bull; 🛞 ${r.tireSets}</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            ${bodyContent}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Toggle mobile navigation menu & initialize schedule cards
         document.addEventListener('DOMContentLoaded', function() {
+            renderScheduleCards();
+
             const toggleBtn = document.querySelector('.nav-toggle');
             const navContainer = document.querySelector('.nav-container');
             
@@ -102,6 +293,6 @@
             }
         });
     </script>
-    <script src="brl_app.js?v=1793200661"></script>
+    <script src="brl_app.js?v=1793202148"></script>
 </body>
 </html>
