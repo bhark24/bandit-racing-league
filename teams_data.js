@@ -3333,7 +3333,7 @@ const teamsData = {
         {
           "id": "truck-4",
           "make": "Toyota",
-          "name": "937 Tundra #17",
+          "name": "937 Tundra #33",
           "condition": 100
         },
         {
@@ -8930,13 +8930,13 @@ const teamsData = {
         {
           "id": "truck-1",
           "make": "Chevrolet",
-          "name": "Salt City Silverado #36",
+          "name": "Salt City Silverado #17",
           "condition": 100
         },
         {
           "id": "truck-2",
           "make": "Chevrolet",
-          "name": "Salt City Silverado #69",
+          "name": "Salt City Silverado #36",
           "condition": 100
         },
         {

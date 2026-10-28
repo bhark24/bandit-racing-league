@@ -64,8 +64,8 @@ const rosterData = {
     "status": "part-time"
   },
   "17": {
-    "driver": "DI0NTE RADER",
-    "status": "part-time"
+    "driver": "KOREY DENSON",
+    "status": "full-time"
   },
   "18": {
     "driver": "VICTOR WEAVER",
@@ -119,12 +119,16 @@ const rosterData = {
     "driver": "TERRY KONDUS",
     "status": "full-time"
   },
+  "33": {
+    "driver": "DI0NTE RADER",
+    "status": "part-time"
+  },
   "35": {
     "driver": "WES FULLER",
     "status": "part-time"
   },
   "36": {
-    "driver": "KOREY DENSON",
+    "driver": "COLLIN ANDERSON",
     "status": "full-time"
   },
   "37": {
@@ -178,10 +182,6 @@ const rosterData = {
   "64": {
     "driver": "ADAM CLARK",
     "status": "part-time"
-  },
-  "69": {
-    "driver": "COLLIN ANDERSON",
-    "status": "full-time"
   },
   "72": {
     "driver": "MASON PHLEGAR",
