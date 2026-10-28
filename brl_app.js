@@ -868,14 +868,27 @@
                 document.getElementById('brl-install-app-btn').style.display = 'none';
             }
         } else {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             if (guide) {
                 guide.style.display = 'block';
-                guide.innerHTML = `
-                    <strong style="color:#39ff14; display:block; margin-bottom:4px;">📲 How to Add BRL App to Your Home Screen:</strong>
-                    • <strong>Android (Chrome):</strong> Tap the <strong>⋮ Menu</strong> (top-right) &rarr; tap <strong>"Install App"</strong> or <strong>"Add to Home Screen"</strong>.<br>
-                    • <strong>iPhone / iPad (Safari):</strong> Tap the <strong>Share</strong> icon <span style="background:rgba(255,255,255,0.15); padding:1px 6px; border-radius:4px;">⎋</span> at the bottom &rarr; tap <strong>"Add to Home Screen"</strong>.<br>
-                    • <strong>Desktop (Chrome / Edge):</strong> Click the <strong>Install App</strong> icon in the right side of your address bar!
-                `;
+                guide.style.background = 'rgba(57, 255, 20, 0.14)';
+                guide.style.border = '2px solid #39ff14';
+                if (isIOS) {
+                    guide.innerHTML = `
+                        <strong style="color:#39ff14; font-size:0.95rem; display:block; margin-bottom:6px;">📲 PUT THE BRL ICON ON YOUR IPHONE HOME SCREEN:</strong>
+                        1. Make sure you opened <strong>banditracingleague.net</strong> in <strong>Safari</strong>.<br>
+                        2. Tap the <strong>Share button</strong> <span style="background:rgba(255,255,255,0.2); padding:2px 7px; border-radius:4px;">⎋</span> at the bottom of the screen.<br>
+                        3. Scroll down and tap <strong>"Add to Home Screen"</strong> &rarr; tap <strong>"Add"</strong> in the top-right corner!
+                    `;
+                } else {
+                    guide.innerHTML = `
+                        <strong style="color:#39ff14; font-size:0.95rem; display:block; margin-bottom:6px;">📲 PUT THE BRL ICON ON YOUR ANDROID HOME SCREEN:</strong>
+                        1. Tap the <strong>3 dots menu (⋮)</strong> in the <strong>top-right corner</strong> of your screen.<br>
+                        2. If you are inside a chat app, tap <strong>"Open in Chrome"</strong> first.<br>
+                        3. In Chrome, tap the <strong>3 dots (⋮)</strong> at top-right &rarr; tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong>!
+                    `;
+                }
+                guide.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
     }
