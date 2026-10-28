@@ -453,8 +453,8 @@
     }
 
     // 7. Automatic Scheduled Alerts:
-    //    - Tuesday Night Practice Open (Tuesday 7:00 PM - 10:30 PM ET)
-    //    - Wednesday Night Pit Gate & Practice Open (Wednesday 7:00 PM - 8:59 PM ET)
+    //    - Tuesday Night Practice Open (Tuesday 8:00 PM - 10:30 PM ET)
+    //    - Wednesday Night Pit Gate & Practice Open (Wednesday 8:00 PM - 8:59 PM ET)
     //    - Wednesday Night Race Broadcast Live (Wednesday 9:00 PM - 10:30 PM ET)
     async function checkScheduledRaceWindows() {
         try {
@@ -476,9 +476,9 @@
             const minute = parseInt(map.minute, 10);
             const totalMins = hour * 60 + minute;
 
-            // WINDOW A: Tuesday Night Practice Session Open (7:00 PM - 10:30 PM ET)
+            // WINDOW A: Tuesday Night Practice Session Open (8:00 PM - 10:30 PM ET)
             const tuesdayRace = UPCOMING_RACES.find(r => r.tuesdayDate === dateStr);
-            if (tuesdayRace && totalMins >= 19 * 60 && totalMins <= 22 * 60 + 30) {
+            if (tuesdayRace && totalMins >= 20 * 60 && totalMins <= 22 * 60 + 30) {
                 const alreadyFired = localStorage.getItem(STORAGE_KEYS.LAST_AUTO_TUE_PRACTICE);
                 if (alreadyFired !== dateStr) {
                     localStorage.setItem(STORAGE_KEYS.LAST_AUTO_TUE_PRACTICE, dateStr);
@@ -486,7 +486,7 @@
                         id: Date.now(),
                         category: 'practice_open',
                         title: `🟢 TUESDAY PRACTICE OPEN: ${tuesdayRace.track}!`,
-                        body: `The official Tuesday Night practice session for tomorrow's ${tuesdayRace.round} at ${tuesdayRace.track} is now OPEN!`,
+                        body: `The pit gate for official Tuesday Night practice for tomorrow's ${tuesdayRace.round} at ${tuesdayRace.track} is now OPEN!`,
                         url: '/schedule.html',
                         dateLabel: 'Tuesday Practice'
                     };
@@ -504,8 +504,8 @@
             const wednesdayRace = UPCOMING_RACES.find(r => r.date === dateStr);
             if (!wednesdayRace) return;
 
-            // WINDOW B: Wednesday Night Pit Gate & Practice Open (7:00 PM - 8:59 PM ET)
-            if (totalMins >= 19 * 60 && totalMins <= 20 * 60 + 59) {
+            // WINDOW B: Wednesday Night Pit Gate & Practice Open (8:00 PM - 8:59 PM ET)
+            if (totalMins >= 20 * 60 && totalMins <= 20 * 60 + 59) {
                 const alreadyFiredGate = localStorage.getItem(STORAGE_KEYS.LAST_AUTO_WED_PIT_GATE);
                 if (alreadyFiredGate !== dateStr) {
                     localStorage.setItem(STORAGE_KEYS.LAST_AUTO_WED_PIT_GATE, dateStr);

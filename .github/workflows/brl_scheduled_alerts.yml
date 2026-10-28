@@ -2,9 +2,8 @@ name: BRL Scheduled App Alerts (Tuesday Practice, Wednesday Pit Gate & Live Race
 
 on:
   schedule:
-    # Runs every 15 minutes during Tuesday & Wednesday evening ET windows (covers both EDT and EST)
-    - cron: '*/15 23 * * 2,3'
-    - cron: '*/15 0,1,2 * * 3,4'
+    # Runs every 15 minutes during Tuesday & Wednesday 8:00 PM - 10:30 PM ET windows (covers both EDT and EST)
+    - cron: '*/15 0,1,2,3 * * 3,4'
   workflow_dispatch:
 
 jobs:

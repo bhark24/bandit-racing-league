@@ -129,18 +129,18 @@ def main():
     total_mins = et_now.hour * 60 + et_now.minute
 
     if args.auto_cron:
-        # 1. Check Tuesday Night Practice Open (Tuesday 7:00 PM - 10:30 PM ET)
-        if today_str in TUESDAY_PRACTICES and (19 * 60 <= total_mins <= 22 * 60 + 30):
+        # 1. Check Tuesday Night Practice Open (Tuesday 8:00 PM - 10:30 PM ET)
+        if today_str in TUESDAY_PRACTICES and (20 * 60 <= total_mins <= 22 * 60 + 30):
             track, rnd = TUESDAY_PRACTICES[today_str]
             push_brl_notification(
                 title=f"🟢 TUESDAY PRACTICE OPEN: {track}!",
-                body=f"The official Tuesday Night practice session for tomorrow's {rnd} at {track} is now OPEN!",
+                body=f"The pit gate for official Tuesday Night practice for tomorrow's {rnd} at {track} is now OPEN!",
                 target_url="/schedule.html",
                 category="practice_open",
                 dedup_key=f"tue_practice_{today_str}"
             )
-        # 2. Check Wednesday Night Pit Gate & Practice Open (Wednesday 7:00 PM - 8:59 PM ET)
-        if today_str in WEDNESDAY_RACES and (19 * 60 <= total_mins <= 20 * 60 + 59):
+        # 2. Check Wednesday Night Pit Gate & Practice Open (Wednesday 8:00 PM - 8:59 PM ET)
+        if today_str in WEDNESDAY_RACES and (20 * 60 <= total_mins <= 20 * 60 + 59):
             track, rnd = WEDNESDAY_RACES[today_str]
             push_brl_notification(
                 title=f"🏁 PIT GATE OPEN: Wednesday Race Session at {track}!",
