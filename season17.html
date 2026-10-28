@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793146784">
+    <link rel="stylesheet" href="styles.css?v=1793154835">
     <style>
         .s17-stats-strip {
             display: grid;
@@ -462,13 +462,24 @@
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255, 204, 0, 0.05);">
                             <td style="padding: 14px 10px; font-weight: 900; color: var(--chase-yellow);">NEW</td>
-                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">ARCA Menards Series / NASCAR Gen 4 Cup</td>
-                            <td style="padding: 14px 10px;"><span style="background: rgba(249, 115, 22, 0.2); color: #fb923c; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class D / C Fixed</span></td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">ARCA Menards Series</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(249, 115, 22, 0.2); color: #fb923c; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class D Fixed</span></td>
                             <td style="padding: 14px 10px; text-align: center; font-weight: 900; color: var(--chase-yellow);">0 Seasons</td>
                             <td style="padding: 14px 10px; text-align: center; font-weight: 900; color: var(--chase-yellow);">0 Races</td>
                             <td style="padding: 14px 10px; text-align: center; font-weight: bold; color: #888;">0</td>
                             <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
-                                <strong>Never Run in BRL!</strong> Includes iRacing's ARCA Menards Series Fixed (Chevy/Ford/Toyota) &amp; Gen 4 Cup Fixed (750+ HP Monte Carlo / Ford Taurus).
+                                <strong>0 Recorded SimRacerHub Seasons (S2–S16)!</strong> Dedicated Class D ARCA Menards Series platform (650 HP Ilmor 396 Engine — Chevrolet SS, Ford Mustang, Toyota Camry &amp; Legacy ARCA Impala).
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255, 204, 0, 0.05);">
+                            <td style="padding: 14px 10px; font-weight: 900; color: var(--chase-yellow);">NEW</td>
+                            <td style="padding: 14px 10px; font-weight: 900; color: #fff;">NASCAR Gen 4 Grand National</td>
+                            <td style="padding: 14px 10px;"><span style="background: rgba(255, 204, 0, 0.15); color: var(--chase-yellow); padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.78rem;">Class C Fixed</span></td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; color: var(--chase-yellow);">0 Seasons</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: 900; color: var(--chase-yellow);">0 Races</td>
+                            <td style="padding: 14px 10px; text-align: center; font-weight: bold; color: #888;">0</td>
+                            <td style="padding: 14px 10px; font-size: 0.84rem; color: #ccc; line-height: 1.45;">
+                                <strong>0 Recorded SimRacerHub Seasons (S2–S16)!</strong> Separate Class C NASCAR Gen 4 Grand National car (High-Horsepower Gen 4 Chevrolet Monte Carlo SS Grand National / Gen 4 Fixed).
                             </td>
                         </tr>
                     </tbody>
@@ -559,7 +570,7 @@
         </div>
     </footer>
 
-    <script src="supabase_config.js?v=1793146784"></script>
+    <script src="supabase_config.js?v=1793154835"></script>
     <script>
         // Official iRacing Fixed-Setup NASCAR Platform Options with Audited BRL History
         const SEASON_17_OPTIONS = [
@@ -635,13 +646,23 @@
             },
             {
                 id: "arca_gen4",
-                name: "ARCA Menards Series / NASCAR Gen 4 Cup",
-                sub: "ARCA Chevy/Ford/Toyota & 750+ HP 2003 Gen 4 Monte Carlo / Ford Taurus",
-                iracingClass: "Class D ARCA Fixed & Class C Gen 4 Cup Fixed",
+                name: "ARCA Menards Series",
+                sub: "ARCA Menards Chevrolet SS, Ford Mustang, Toyota Camry & Legacy Impala (650 HP Ilmor)",
+                iracingClass: "Class D Fixed (ARCA Menards Series Fixed)",
                 brlRaces: 0,
                 brlSeasons: 0,
                 brlStarts: 0,
-                historySummary: "NEVER RUN IN BRL! Brand-new candidate platform with official iRacing Fixed Setups for every oval and road course."
+                historySummary: "Dedicated Class D ARCA Menards Series car! Separate from the Gen 4 car, featuring a 650 HP Ilmor 396 engine and official iRacing Fixed Setups."
+            },
+            {
+                id: "gen4_grand_national",
+                name: "NASCAR Gen 4 Grand National",
+                sub: "Gen 4 Grand National Chevrolet Monte Carlo SS (High-HP Gen 4 Chassis)",
+                iracingClass: "Class C Fixed (NASCAR Gen 4 Series Fixed)",
+                brlRaces: 0,
+                brlSeasons: 0,
+                brlStarts: 0,
+                historySummary: "Dedicated Class C Gen 4 Grand National car! High-horsepower, low-downforce Gen 4 Grand National stock car with official iRacing Fixed Setups."
             },
             {
                 id: "whelen_sk_modified",
