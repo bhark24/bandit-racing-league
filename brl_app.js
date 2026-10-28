@@ -11,10 +11,49 @@
         ALERTS_ENABLED: 'brl_app_alerts_enabled_v1',
         PREF_SITE_UPDATES: 'brl_app_pref_site_v1',
         PREF_RACE_LIVE: 'brl_app_pref_race_v1',
+        PREF_DRIVER_ALERTS: 'brl_app_pref_driver_enabled_v1',
+        PREF_DRIVER_TARGET: 'brl_app_pref_driver_target_v1',
+        PREF_TEAM_ALERTS: 'brl_app_pref_team_enabled_v1',
+        PREF_TEAM_TARGET: 'brl_app_pref_team_target_v1',
         LAST_NOTIF_ID: 'brl_app_last_notif_id_v1',
         LAST_READ_ID: 'brl_app_last_read_id_v1',
         LAST_AUTO_LIVE_DATE: 'brl_app_auto_live_date_v1'
     };
+
+    const DEFAULT_DRIVERS = [
+        ["ADAM CLARK", "64"], ["ADAM TAHAN", "01"], ["BENJAMIN LACY", "7"], ["BILL HARKINS", "12"],
+        ["BOB BERRY", "75"], ["BRANDON GEERS", "73"], ["BRANDON JACKSON", "91"], ["BRET GUZIK", "04"],
+        ["CARTER PHILLIPS", "30"], ["CHAD HARTLE", "37"], ["CODY WELCH", "85"], ["COLLIN ANDERSON", "36"],
+        ["CONNOR GIBSON", "31"], ["CORDELL MCFARLIN", "10"], ["CURTIS YANCEY", "51"], ["DALTON KILROE", "41"],
+        ["DAVID LEAKEY", "84"], ["DAVID WESTOVER JR", "88"], ["DAVIS CARROLL", "50"], ["DI0NTE RADER", "33"],
+        ["DONALD KIGHT", "66"], ["DYLAN MCDONALD", "9"], ["DYLAN NICASTRO", "23"], ["EDDIE HAGIGH", "97"],
+        ["ETHAN SIKORSKI", "24"], ["GARRET BOBO", "29"], ["HUNTER SENIOR", "20"], ["JACKSON DUKE", "08"],
+        ["JACKSON KNAAK", "00"], ["JACKSON MUMMERT", "52"], ["JASON ALLEGRINI", "14"], ["JASON GREENWELL", "83"],
+        ["JOEY CRUZ", "28"], ["JON OSBORNE", "11"], ["JONATHON PLATT", "13"], ["JOSH ADAMS", "22"],
+        ["JOSH BILLITER", "99"], ["JOSHUA SUTHERLAND", "16"], ["JUSTIN ZIEMIECKI", "03"], ["KEVIN FOSTER", "8"],
+        ["KOREY DENSON", "17"], ["LOGAN MURRAY", "4"], ["LUCAS WILSON", "96"], ["MARK ALAN BIVENS", "76"],
+        ["MARK GALLOWAY", "3"], ["MASON PHLEGAR", "72"], ["MATT BAILEY", "54"], ["MATT CROCKETT", "15"],
+        ["MICHAEL RAKES", "47"], ["MICHAEL RAMOS", "27"], ["NATHAN SANTOS", "21"], ["NICK NICKERSON", "2"],
+        ["NICOLE KRIESEL", "6"], ["NOLAN GROSS", "02"], ["PAUL WILSON", "82"], ["PETER MURPHY", "38"],
+        ["REAGAN FRUGE", "25"], ["RICKY HART", "1"], ["RYAN PERRONE", "53"], ["SCOTT SANDERSON", "93"],
+        ["SEAN BRITT", "5"], ["TERRY KONDUS", "32"], ["TRE ELLIS", "63"], ["TY CORINO", "62"],
+        ["TYSON KOPF", "77"], ["VICTOR WEAVER", "18"], ["WES FULLER", "35"]
+    ];
+
+    const DEFAULT_TEAMS = [
+        ["roundy-motorsports", "Roundy Motorsports"],
+        ["937-racing", "937 Racing"],
+        ["wrists-up-racing", "ChainedGraboid Racing Team"],
+        ["gfr-racing", "GFR Racing"],
+        ["legacy-racing", "Legacy Racing"],
+        ["zerofoxtrot", "ZeroFoxtrot"],
+        ["esr", "ESR"],
+        ["carter-phillips-racing", "Carter Phillips Racing"],
+        ["salt-city-performance", "Salt City Performance"],
+        ["title-town-racing", "Title Town Racing"],
+        ["pop-motorsports", "POP Motorsports"],
+        ["middle-aged-gunz-motorsports", "Middle Aged Gunz Motorsports"]
+    ];
 
     const UPCOMING_RACES = [
         { date: '2026-10-28', track: 'Kansas Speedway', round: 'Chase Round 2 — Heart of America 120' },
@@ -27,6 +66,32 @@
     let swRegistration = null;
     let cachedNotifications = [];
     let isDrawerOpen = false;
+
+    function getActiveDriversList() {
+        if (typeof rosterData !== 'undefined' && rosterData) {
+            const map = new Map();
+            for (const [num, info] of Object.entries(rosterData)) {
+                if (info && info.driver && info.driver.trim() && info.driver.trim().toLowerCase() !== 'available') {
+                    const name = info.driver.trim().toUpperCase();
+                    if (!map.has(name)) map.set(name, num);
+                }
+            }
+            if (map.size > 0) {
+                return Array.from(map.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+            }
+        }
+        return DEFAULT_DRIVERS;
+    }
+
+    function getActiveTeamsList() {
+        if (typeof teamsData !== 'undefined' && teamsData && Array.isArray(teamsData.teams)) {
+            const list = teamsData.teams
+                .filter(t => !t.isForSale)
+                .map(t => [t.id, t.name]);
+            if (list.length > 0) return list;
+        }
+        return DEFAULT_TEAMS;
+    }
 
     // 1. Ensure PWA head tags exist on every page
     function injectPwaHeadTags() {
@@ -85,6 +150,59 @@
         const val = localStorage.getItem(STORAGE_KEYS.PREF_RACE_LIVE);
         return val === null ? true : val === 'true';
     }
+    function prefDriverEnabled() {
+        const val = localStorage.getItem(STORAGE_KEYS.PREF_DRIVER_ALERTS);
+        return val === null ? true : val === 'true';
+    }
+    function prefDriverTarget() {
+        return localStorage.getItem(STORAGE_KEYS.PREF_DRIVER_TARGET) || 'ALL';
+    }
+    function prefTeamEnabled() {
+        const val = localStorage.getItem(STORAGE_KEYS.PREF_TEAM_ALERTS);
+        return val === null ? true : val === 'true';
+    }
+    function prefTeamTarget() {
+        return localStorage.getItem(STORAGE_KEYS.PREF_TEAM_TARGET) || 'ALL';
+    }
+
+    // Determine whether an incoming notification should alert this user based on their toggles
+    function shouldNotifyUserForAlert(notif) {
+        if (!notif) return false;
+        const textUpper = ((notif.title || '') + ' ' + (notif.body || '')).toUpperCase();
+
+        // Check if this is a Driver-targeted alert or mentions the user's selected driver
+        const notifDriver = (notif.driver || '').trim().toUpperCase();
+        const userDriverTarget = prefDriverTarget().toUpperCase();
+
+        if (notif.category === 'driver_alert' || notifDriver) {
+            if (!prefDriverEnabled()) return false;
+            if (userDriverTarget === 'ALL') return true;
+            return notifDriver === userDriverTarget || textUpper.includes(userDriverTarget);
+        }
+
+        // Check if this is a Team-targeted alert or mentions the user's selected team
+        const notifTeam = (notif.team || '').trim().toUpperCase();
+        const userTeamTarget = prefTeamTarget().toUpperCase();
+
+        if (notif.category === 'team_alert' || notifTeam) {
+            if (!prefTeamEnabled()) return false;
+            if (userTeamTarget === 'ALL') return true;
+            return notifTeam === userTeamTarget || textUpper.includes(userTeamTarget);
+        }
+
+        // Also check if a general update happens to mention the user's specifically followed driver or team!
+        if (prefDriverEnabled() && userDriverTarget !== 'ALL' && textUpper.includes(userDriverTarget)) {
+            return true;
+        }
+        if (prefTeamEnabled() && userTeamTarget !== 'ALL' && textUpper.includes(userTeamTarget)) {
+            return true;
+        }
+
+        if (notif.category === 'race_live') {
+            return prefRaceLive();
+        }
+        return prefSiteUpdates();
+    }
 
     // 4. Trigger Native OS Notification via Service Worker or Notification API
     async function triggerNativeNotification(title, body, url, tag) {
@@ -135,10 +253,30 @@
         if (existing) existing.remove();
 
         const isLive = notif.category === 'race_live';
-        const borderCol = isLive ? '#ff1744' : '#39ff14';
-        const badgeBg = isLive ? '#ff1744' : 'rgba(57,255,20,0.2)';
-        const badgeColor = isLive ? '#fff' : '#39ff14';
-        const badgeLabel = isLive ? '🔴 RACE GOING LIVE' : '🔄 WEBSITE UPDATED';
+        const isDriver = notif.category === 'driver_alert' || !!notif.driver;
+        const isTeam = notif.category === 'team_alert' || !!notif.team;
+
+        let borderCol = '#39ff14';
+        let badgeBg = 'rgba(57,255,20,0.2)';
+        let badgeColor = '#39ff14';
+        let badgeLabel = '🔄 WEBSITE UPDATED';
+
+        if (isLive) {
+            borderCol = '#ff1744';
+            badgeBg = '#ff1744';
+            badgeColor = '#fff';
+            badgeLabel = '🔴 RACE GOING LIVE';
+        } else if (isDriver) {
+            borderCol = '#00d4ff';
+            badgeBg = 'rgba(0,212,255,0.2)';
+            badgeColor = '#00d4ff';
+            badgeLabel = `🏎️ DRIVER ALERT${notif.driver ? ' • ' + notif.driver : ''}`;
+        } else if (isTeam) {
+            borderCol = '#ffcc00';
+            badgeBg = 'rgba(255,204,0,0.2)';
+            badgeColor = '#ffcc00';
+            badgeLabel = `🏁 TEAM ALERT${notif.team ? ' • ' + notif.team : ''}`;
+        }
 
         const toast = document.createElement('div');
         toast.id = 'brl-live-toast';
@@ -154,7 +292,7 @@
             border-radius: 12px;
             padding: 14px 16px;
             z-index: 99999;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.85), 0 0 25px ${isLive ? 'rgba(255,23,68,0.35)' : 'rgba(57,255,20,0.25)'};
+            box-shadow: 0 12px 35px rgba(0,0,0,0.85), 0 0 25px rgba(57,255,20,0.22);
             color: #fff;
             font-family: 'Roboto', sans-serif;
             display: flex;
@@ -211,7 +349,6 @@
             const lastSeenId = parseInt(localStorage.getItem(STORAGE_KEYS.LAST_NOTIF_ID) || '0', 10);
 
             if (!lastSeenId) {
-                // First time visitor: seed with latest ID so we don't spam old history, but update badge
                 localStorage.setItem(STORAGE_KEYS.LAST_NOTIF_ID, String(latest.id));
                 return;
             }
@@ -219,10 +356,7 @@
             if (latest.id > lastSeenId) {
                 localStorage.setItem(STORAGE_KEYS.LAST_NOTIF_ID, String(latest.id));
 
-                const isLive = latest.category === 'race_live';
-                const shouldAlert = isLive ? prefRaceLive() : prefSiteUpdates();
-
-                if (shouldAlert) {
+                if (shouldNotifyUserForAlert(latest)) {
                     showInAppToast(latest);
                     if (isAlertsEnabled()) {
                         await triggerNativeNotification(
@@ -243,7 +377,6 @@
     function checkWednesdayRaceLiveWindow() {
         try {
             const now = new Date();
-            // Convert current time to America/New_York (ET)
             const etParts = new Intl.DateTimeFormat('en-US', {
                 timeZone: 'America/New_York',
                 year: 'numeric',
@@ -264,7 +397,6 @@
             const scheduledRace = UPCOMING_RACES.find(r => r.date === dateStr);
             if (!scheduledRace) return;
 
-            // Between 8:45 PM ET (1245 mins) and 10:30 PM ET (1350 mins)
             if (totalMins >= 20 * 60 + 45 && totalMins <= 22 * 60 + 30) {
                 const alreadyFired = localStorage.getItem(STORAGE_KEYS.LAST_AUTO_LIVE_DATE);
                 if (alreadyFired !== dateStr && prefRaceLive()) {
@@ -352,8 +484,8 @@
                 border: 2px solid #39ff14;
                 border-radius: 16px;
                 width: 100%;
-                max-width: 520px;
-                max-height: 90vh;
+                max-width: 540px;
+                max-height: 92vh;
                 overflow-y: auto;
                 padding: 24px;
                 color: #fff;
@@ -402,6 +534,17 @@
                 border-color: #39ff14;
                 color: #39ff14;
             }
+            .brl-app-select {
+                width: 100%;
+                padding: 8px 10px;
+                border-radius: 6px;
+                border: 1px solid rgba(255,255,255,0.22);
+                background: #0b0e15;
+                color: #fff;
+                font-size: 0.82rem;
+                font-family: 'Roboto', sans-serif;
+                margin-top: 6px;
+            }
         `;
         document.head.appendChild(style);
 
@@ -416,6 +559,17 @@
         `;
         fab.onclick = openAppDrawer;
         document.body.appendChild(fab);
+
+        // Build Driver & Team option lists
+        const driversList = getActiveDriversList();
+        const driverOptionsHtml = driversList
+            .map(([name, num]) => `<option value="${name}">#${num} — ${name}</option>`)
+            .join('');
+
+        const teamsList = getActiveTeamsList();
+        const teamOptionsHtml = teamsList
+            .map(([id, name]) => `<option value="${name}">${name}</option>`)
+            .join('');
 
         // Modal Backdrop & Drawer
         const backdrop = document.createElement('div');
@@ -466,7 +620,7 @@
                     </div>
                 </div>
 
-                <!-- STEP 2: PUSH NOTIFICATION CONTROLS -->
+                <!-- STEP 2: PUSH NOTIFICATION CONTROLS (INCLUDING INDIVIDUAL DRIVER & TEAM TOGGLES) -->
                 <div class="brl-app-section" style="border-color: rgba(255,204,0,0.35);">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                         <span style="font-family:'Outfit',sans-serif; font-size:0.8rem; font-weight:900; color:#ffcc00; text-transform:uppercase; letter-spacing:1px;">
@@ -474,23 +628,54 @@
                         </span>
                         <span id="brl-notif-status-pill" style="font-size:0.7rem; padding:2px 8px; border-radius:12px; font-weight:700;"></span>
                     </div>
-                    <p style="color:#ccc; font-size:0.85rem; line-height:1.45; margin:0 0 12px 0;">
-                        Get notified automatically whenever <strong>website updates</strong> are posted or when a <strong>Wednesday Night Race goes LIVE</strong> on SimTrax!
+                    <p style="color:#ccc; font-size:0.84rem; line-height:1.45; margin:0 0 12px 0;">
+                        Choose which alerts you want sent to your phone—including <strong>Individual Driver</strong> and <strong>Franchise Team</strong> notifications!
                     </p>
 
                     <button id="brl-toggle-alerts-btn" class="brl-app-btn brl-app-btn-green" style="margin-bottom:12px;">
                         🔔 Enable Lock-Screen Alerts
                     </button>
 
-                    <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px; padding:10px 12px; background:rgba(0,0,0,0.4); border-radius:8px;">
-                        <label style="display:flex; align-items:center; gap:10px; font-size:0.86rem; color:#eee; cursor:pointer;">
+                    <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:12px; padding:12px; background:rgba(0,0,0,0.45); border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
+                        <!-- Toggle 1: Website Updates -->
+                        <label style="display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#eee; cursor:pointer;">
                             <input type="checkbox" id="brl-chk-site-updates" style="accent-color:#39ff14; width:17px; height:17px;">
-                            <span><strong>🔄 Website Update Alerts</strong> (Standings, Fantasy, Teams &amp; Recaps)</span>
+                            <span><strong>🔄 Website Update Alerts</strong> (Standings, Fantasy &amp; Recaps)</span>
                         </label>
-                        <label style="display:flex; align-items:center; gap:10px; font-size:0.86rem; color:#eee; cursor:pointer;">
+
+                        <!-- Toggle 2: Race Going Live -->
+                        <label style="display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#eee; cursor:pointer;">
                             <input type="checkbox" id="brl-chk-race-live" style="accent-color:#ff1744; width:17px; height:17px;">
                             <span><strong>🔴 "Race Going Live" Alerts</strong> (Wednesday Night SimTrax Broadcasts)</span>
                         </label>
+
+                        <!-- Toggle 3: Individual Driver Notifications -->
+                        <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:8px;">
+                            <label style="display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#eee; cursor:pointer;">
+                                <input type="checkbox" id="brl-chk-driver-alerts" style="accent-color:#00d4ff; width:17px; height:17px;">
+                                <span><strong style="color:#00d4ff;">🏎️ Individual Driver Notifications</strong> (Roster, Stats &amp; Race Alerts)</span>
+                            </label>
+                            <div id="brl-driver-select-wrap" style="padding-left:27px;">
+                                <select id="brl-select-driver-target" class="brl-app-select">
+                                    <option value="ALL">🌟 All Drivers (Notify for Any Driver Update)</option>
+                                    ${driverOptionsHtml}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Toggle 4: Individual Franchise Team Notifications -->
+                        <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:8px;">
+                            <label style="display:flex; align-items:center; gap:10px; font-size:0.85rem; color:#eee; cursor:pointer;">
+                                <input type="checkbox" id="brl-chk-team-alerts" style="accent-color:#ffcc00; width:17px; height:17px;">
+                                <span><strong style="color:#ffcc00;">🏁 Franchise Team Notifications</strong> (Garage, Economy &amp; Team News)</span>
+                            </label>
+                            <div id="brl-team-select-wrap" style="padding-left:27px;">
+                                <select id="brl-select-team-target" class="brl-app-select">
+                                    <option value="ALL">🏆 All Franchise Teams (Notify for Any Team Update)</option>
+                                    ${teamOptionsHtml}
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <button id="brl-test-alert-btn" class="brl-app-btn brl-app-btn-outline" style="font-size:0.8rem; padding:9px 12px;">
@@ -515,20 +700,36 @@
                 <!-- STEP 4: COMMISSIONER PUSH BROADCAST CONSOLE -->
                 <details style="background:rgba(255,23,68,0.06); border:1px solid rgba(255,23,68,0.3); border-radius:10px; padding:12px;">
                     <summary style="font-family:'Outfit',sans-serif; font-size:0.8rem; font-weight:900; color:#ff4d6d; text-transform:uppercase; letter-spacing:1px; cursor:pointer;">
-                        🔒 Commissioner Push Console (Send Alert to All App Users)
+                        🔒 Commissioner Push Console (Send League, Driver or Team Alert)
                     </summary>
-                    <div style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">
+                    <div style="margin-top:12px; display:flex; flex-direction:column; gap:9px;">
                         <input type="password" id="brl-admin-push-pass" placeholder="Commissioner Passcode" style="padding:9px 12px; border-radius:6px; border:1px solid #333; background:#090b10; color:#fff; font-size:0.85rem;">
-                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                            <button type="button" id="brl-admin-go-live-btn" class="brl-app-btn" style="background:#ff1744; color:#fff; font-size:0.8rem; padding:10px;">
-                                🔴 Broadcast "Race Going Live NOW!" Alert
-                            </button>
+                        <button type="button" id="brl-admin-go-live-btn" class="brl-app-btn" style="background:#ff1744; color:#fff; font-size:0.8rem; padding:10px;">
+                            🔴 Broadcast "Race Going Live NOW!" Alert
+                        </button>
+
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px;">
+                            <div>
+                                <span style="font-size:0.72rem; color:#00d4ff; font-weight:bold; text-transform:uppercase;">Target Driver (Optional)</span>
+                                <select id="brl-admin-target-driver" class="brl-app-select" style="margin-top:3px;">
+                                    <option value="">— Any / None —</option>
+                                    ${driverOptionsHtml}
+                                </select>
+                            </div>
+                            <div>
+                                <span style="font-size:0.72rem; color:#ffcc00; font-weight:bold; text-transform:uppercase;">Target Team (Optional)</span>
+                                <select id="brl-admin-target-team" class="brl-app-select" style="margin-top:3px;">
+                                    <option value="">— Any / None —</option>
+                                    ${teamOptionsHtml}
+                                </select>
+                            </div>
                         </div>
-                        <input type="text" id="brl-admin-custom-title" placeholder="Custom Alert Title (e.g. Standings Updated!)" style="padding:9px 12px; border-radius:6px; border:1px solid #333; background:#090b10; color:#fff; font-size:0.85rem;">
+
+                        <input type="text" id="brl-admin-custom-title" placeholder="Alert Title (e.g. #12 Bill Harkins P10 Charge!)" style="padding:9px 12px; border-radius:6px; border:1px solid #333; background:#090b10; color:#fff; font-size:0.85rem;">
                         <input type="text" id="brl-admin-custom-body" placeholder="Alert Message Body..." style="padding:9px 12px; border-radius:6px; border:1px solid #333; background:#090b10; color:#fff; font-size:0.85rem;">
-                        <input type="text" id="brl-admin-custom-url" placeholder="Target Page (e.g. /standings.html or /simtrax.html)" value="/index.html" style="padding:9px 12px; border-radius:6px; border:1px solid #333; background:#090b10; color:#fff; font-size:0.85rem;">
+                        <input type="text" id="brl-admin-custom-url" placeholder="Target Page (e.g. /drivers.html or /teams.html)" value="/index.html" style="padding:9px 12px; border-radius:6px; border:1px solid #333; background:#090b10; color:#fff; font-size:0.85rem;">
                         <button type="button" id="brl-admin-send-custom-btn" class="brl-app-btn brl-app-btn-green" style="font-size:0.8rem; padding:10px;">
-                            📢 Push Custom Alert to All App Users
+                            📢 Push Alert to App Users
                         </button>
                         <div id="brl-admin-push-msg" style="font-size:0.8rem; text-align:center; display:none;"></div>
                     </div>
@@ -545,10 +746,57 @@
 
         const chkSite = document.getElementById('brl-chk-site-updates');
         const chkRace = document.getElementById('brl-chk-race-live');
+        const chkDriver = document.getElementById('brl-chk-driver-alerts');
+        const selDriver = document.getElementById('brl-select-driver-target');
+        const chkTeam = document.getElementById('brl-chk-team-alerts');
+        const selTeam = document.getElementById('brl-select-team-target');
+
         chkSite.checked = prefSiteUpdates();
         chkRace.checked = prefRaceLive();
+        chkDriver.checked = prefDriverEnabled();
+        selDriver.value = prefDriverTarget();
+        chkTeam.checked = prefTeamEnabled();
+        selTeam.value = prefTeamTarget();
+
+        document.getElementById('brl-driver-select-wrap').style.opacity = chkDriver.checked ? '1' : '0.45';
+        document.getElementById('brl-team-select-wrap').style.opacity = chkTeam.checked ? '1' : '0.45';
+
         chkSite.onchange = () => localStorage.setItem(STORAGE_KEYS.PREF_SITE_UPDATES, String(chkSite.checked));
         chkRace.onchange = () => localStorage.setItem(STORAGE_KEYS.PREF_RACE_LIVE, String(chkRace.checked));
+        chkDriver.onchange = () => {
+            localStorage.setItem(STORAGE_KEYS.PREF_DRIVER_ALERTS, String(chkDriver.checked));
+            document.getElementById('brl-driver-select-wrap').style.opacity = chkDriver.checked ? '1' : '0.45';
+        };
+        selDriver.onchange = () => localStorage.setItem(STORAGE_KEYS.PREF_DRIVER_TARGET, selDriver.value);
+
+        chkTeam.onchange = () => {
+            localStorage.setItem(STORAGE_KEYS.PREF_TEAM_ALERTS, String(chkTeam.checked));
+            document.getElementById('brl-team-select-wrap').style.opacity = chkTeam.checked ? '1' : '0.45';
+        };
+        selTeam.onchange = () => localStorage.setItem(STORAGE_KEYS.PREF_TEAM_TARGET, selTeam.value);
+
+        // Auto-fill target URL when Commissioner picks a driver or team
+        const adminDrv = document.getElementById('brl-admin-target-driver');
+        const adminTeam = document.getElementById('brl-admin-target-team');
+        const adminUrl = document.getElementById('brl-admin-custom-url');
+        const adminTitle = document.getElementById('brl-admin-custom-title');
+
+        adminDrv.onchange = () => {
+            if (adminDrv.value) {
+                adminUrl.value = '/drivers.html';
+                if (!adminTitle.value.trim()) {
+                    adminTitle.value = `🏎️ Driver Alert: ${adminDrv.value}`;
+                }
+            }
+        };
+        adminTeam.onchange = () => {
+            if (adminTeam.value) {
+                adminUrl.value = '/teams.html';
+                if (!adminTitle.value.trim()) {
+                    adminTitle.value = `🏁 Team Alert: ${adminTeam.value}`;
+                }
+            }
+        };
 
         document.getElementById('brl-admin-go-live-btn').onclick = () => sendCommissionerPush(true);
         document.getElementById('brl-admin-send-custom-btn').onclick = () => sendCommissionerPush(false);
@@ -568,7 +816,6 @@
         renderNotificationList();
     }
 
-    // Expose globally so navbar/page buttons can open the BRL App Modal
     window.openBrlAppModal = openAppDrawer;
 
     function closeAppDrawer() {
@@ -581,7 +828,7 @@
         const badge = document.getElementById('brl-app-fab-badge');
         if (!badge) return;
         const lastRead = parseInt(localStorage.getItem(STORAGE_KEYS.LAST_READ_ID) || '0', 10);
-        const unread = cachedNotifications.filter(n => (n.id || 0) > lastRead).length;
+        const unread = cachedNotifications.filter(n => (n.id || 0) > lastRead && shouldNotifyUserForAlert(n)).length;
         if (unread > 0) {
             badge.style.display = 'inline-flex';
             badge.textContent = unread > 9 ? '9+' : String(unread);
@@ -658,12 +905,6 @@
         const perm = await Notification.requestPermission();
         if (perm === 'granted') {
             localStorage.setItem(STORAGE_KEYS.ALERTS_ENABLED, 'true');
-            if (localStorage.getItem(STORAGE_KEYS.PREF_SITE_UPDATES) === null) {
-                localStorage.setItem(STORAGE_KEYS.PREF_SITE_UPDATES, 'true');
-            }
-            if (localStorage.getItem(STORAGE_KEYS.PREF_RACE_LIVE) === null) {
-                localStorage.setItem(STORAGE_KEYS.PREF_RACE_LIVE, 'true');
-            }
             refreshAlertUIState();
             if (fb) {
                 fb.style.display = 'block';
@@ -672,7 +913,7 @@
             }
             await triggerNativeNotification(
                 '🏁 Bandit Racing League Alerts Active!',
-                'You will now be notified when website updates drop and when races go LIVE on SimTrax!',
+                'You will now be notified for Website Updates, Live Races, and your followed Drivers & Teams!',
                 '/index.html',
                 'brl-welcome-notif'
             );
@@ -690,11 +931,19 @@
         if ('Notification' in window && Notification.permission !== 'granted') {
             await handleToggleAlerts();
         }
+        const drv = prefDriverTarget();
+        const tm = prefTeamTarget();
+        const subInfo = (drv !== 'ALL' || tm !== 'ALL')
+            ? `Following: ${drv !== 'ALL' ? drv : 'All Drivers'} | ${tm !== 'ALL' ? tm : 'All Teams'}.`
+            : 'Following League-Wide Updates, Drivers & Teams.';
+
         const testObj = {
             id: Date.now(),
-            category: 'race_live',
-            title: '🔴 TEST ALERT: Bandit Racing League Live!',
-            body: 'Your BRL App notifications are working! Tap to open the SimTrax Broadcast hub.',
+            category: drv !== 'ALL' ? 'driver_alert' : (tm !== 'ALL' ? 'team_alert' : 'race_live'),
+            driver: drv !== 'ALL' ? drv : undefined,
+            team: tm !== 'ALL' ? tm : undefined,
+            title: '🔴 TEST ALERT: Bandit Racing League App!',
+            body: `Your BRL App notifications are active! ${subInfo}`,
             url: '/simtrax.html'
         };
         showInAppToast(testObj);
@@ -717,10 +966,24 @@
             return;
         }
 
-        container.innerHTML = cachedNotifications.slice(0, 8).map(n => {
+        container.innerHTML = cachedNotifications.slice(0, 10).map(n => {
             const isLive = n.category === 'race_live';
-            const badgeCol = isLive ? '#ff1744' : '#39ff14';
-            const badgeText = isLive ? '🔴 RACE LIVE' : '🔄 SITE UPDATE';
+            const isDriver = n.category === 'driver_alert' || !!n.driver;
+            const isTeam = n.category === 'team_alert' || !!n.team;
+
+            let badgeCol = '#39ff14';
+            let badgeText = '🔄 SITE UPDATE';
+            if (isLive) {
+                badgeCol = '#ff1744';
+                badgeText = '🔴 RACE LIVE';
+            } else if (isDriver) {
+                badgeCol = '#00d4ff';
+                badgeText = `🏎️ DRIVER${n.driver ? ' • ' + n.driver : ''}`;
+            } else if (isTeam) {
+                badgeCol = '#ffcc00';
+                badgeText = `🏁 TEAM${n.team ? ' • ' + n.team : ''}`;
+            }
+
             return `
                 <a href="${n.url || '/index.html'}" style="text-decoration:none; background:rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.1); border-left:3px solid ${badgeCol}; border-radius:8px; padding:10px 12px; display:block; transition:background 0.2s;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
@@ -734,7 +997,7 @@
         }).join('');
     }
 
-    // 9. Commissioner Push Broadcast (Saves to Supabase league_data?id=eq.2 so all connected phones receive it)
+    // 9. Commissioner Push Broadcast (Supports League-Wide, Driver-Specific, or Team-Specific Alerts)
     async function sendCommissionerPush(isQuickLive) {
         const pass = (document.getElementById('brl-admin-push-pass').value || '').trim();
         const msgEl = document.getElementById('brl-admin-push-msg');
@@ -746,6 +1009,9 @@
             return;
         }
 
+        const targetDriver = (document.getElementById('brl-admin-target-driver').value || '').trim();
+        const targetTeam = (document.getElementById('brl-admin-target-team').value || '').trim();
+
         let title, body, url, category;
         if (isQuickLive) {
             title = '🔴 LIVE NOW: Bandit Racing League Race Broadcast!';
@@ -756,7 +1022,7 @@
             title = (document.getElementById('brl-admin-custom-title').value || '').trim();
             body = (document.getElementById('brl-admin-custom-body').value || '').trim();
             url = (document.getElementById('brl-admin-custom-url').value || '/index.html').trim();
-            category = 'website_update';
+            category = targetDriver ? 'driver_alert' : (targetTeam ? 'team_alert' : 'website_update');
             if (!title || !body) {
                 msgEl.style.color = '#ffcc00';
                 msgEl.textContent = 'Please enter both a title and message body.';
@@ -765,7 +1031,7 @@
         }
 
         msgEl.style.color = '#39ff14';
-        msgEl.textContent = '⏳ Broadcasting push alert to all BRL App users...';
+        msgEl.textContent = '⏳ Broadcasting push alert to BRL App users...';
 
         try {
             const getResp = await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
@@ -790,6 +1056,8 @@
                 url,
                 dateLabel: nowStr
             };
+            if (!isQuickLive && targetDriver) newAlert.driver = targetDriver;
+            if (!isQuickLive && targetTeam) newAlert.team = targetTeam;
 
             list.unshift(newAlert);
             rowData.appNotifications = list.slice(0, 25);
@@ -809,7 +1077,7 @@
             });
 
             msgEl.style.color = '#39ff14';
-            msgEl.textContent = '✅ Alert broadcasted live to all BRL App users!';
+            msgEl.textContent = '✅ Alert broadcasted live to BRL App users!';
             await fetchAndProcessNotifications(false);
         } catch (err) {
             msgEl.style.color = '#ff4d6d';
@@ -817,7 +1085,6 @@
         }
     }
 
-    // Listen for Android/Desktop install prompt
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredInstallPrompt = e;
@@ -825,7 +1092,6 @@
         if (btn) btn.style.display = 'flex';
     });
 
-    // Initialize on DOM ready
     function initBrlApp() {
         injectPwaHeadTags();
         registerServiceWorker();
@@ -833,7 +1099,6 @@
         fetchAndProcessNotifications(true);
         checkWednesdayRaceLiveWindow();
 
-        // Poll Supabase every 30s for new website updates or live race broadcasts
         setInterval(() => {
             fetchAndProcessNotifications(false);
             checkWednesdayRaceLiveWindow();
