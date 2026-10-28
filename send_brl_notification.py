@@ -10,14 +10,14 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 WEDNESDAY_RACES = {
     "2026-10-28": ("Kansas Speedway", "Chase Round 2 — Wendy Jo Memorial 110"),
-    "2026-11-04": ("Road America", "Chase Round 3 — 4-Mile Road Course Showdown"),
+    "2026-11-04": ("Mid-Ohio Sports Car Course", "Chase Round 3 — Road Course Showdown"),
     "2026-11-11": ("Phoenix Raceway", "Chase Round 4 — Desert Dogleg Elimination"),
     "2026-11-18": ("Homestead-Miami Speedway", "Season 16 Championship Finale")
 }
 
 TUESDAY_PRACTICES = {
     "2026-10-27": ("Kansas Speedway", "Chase Round 2 — Wendy Jo Memorial 110"),
-    "2026-11-03": ("Road America", "Chase Round 3 — 4-Mile Road Course Showdown"),
+    "2026-11-03": ("Mid-Ohio Sports Car Course", "Chase Round 3 — Road Course Showdown"),
     "2026-11-10": ("Phoenix Raceway", "Chase Round 4 — Desert Dogleg Elimination"),
     "2026-11-17": ("Homestead-Miami Speedway", "Season 16 Championship Finale")
 }

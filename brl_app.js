@@ -60,7 +60,7 @@
 
     const UPCOMING_RACES = [
         { tuesdayDate: '2026-10-27', date: '2026-10-28', track: 'Kansas Speedway', round: 'Chase Round 2 — Wendy Jo Memorial 110' },
-        { tuesdayDate: '2026-11-03', date: '2026-11-04', track: 'Road America', round: 'Chase Round 3 — 4-Mile Road Course Showdown' },
+        { tuesdayDate: '2026-11-03', date: '2026-11-04', track: 'Mid-Ohio Sports Car Course', round: 'Chase Round 3 — Road Course Showdown' },
         { tuesdayDate: '2026-11-10', date: '2026-11-11', track: 'Phoenix Raceway', round: 'Chase Round 4 — Desert Dogleg Elimination' },
         { tuesdayDate: '2026-11-17', date: '2026-11-18', track: 'Homestead-Miami Speedway', round: 'Season 16 Championship Finale' }
     ];
@@ -682,8 +682,9 @@
         let nextRace = null;
         let targetDate = null;
         for (const r of UPCOMING_RACES) {
-            // 9:00 PM ET
-            const dt = new Date(`${r.date}T21:00:00-04:00`);
+            // 9:00 PM US/Eastern (EDT -04:00 through Oct 28; EST -05:00 in November)
+            const tzOffset = r.date >= '2026-11-01' ? '-05:00' : '-04:00';
+            const dt = new Date(`${r.date}T21:00:00${tzOffset}`);
             if (dt.getTime() + 2 * 3600 * 1000 > now.getTime()) {
                 nextRace = r;
                 targetDate = dt;
