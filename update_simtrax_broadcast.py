@@ -37,7 +37,7 @@ SEASON_16_SCHEDULE = [
     {"track": "Phoenix Raceway", "short": "Phoenix", "date": "Oct 7, 2026", "banner": "assets/BCast Banners/phoenix_s16.png"},
     {"track": "Martinsville Speedway", "short": "Martinsville", "date": "Oct 14, 2026", "banner": "assets/BCast Banners/yt_uaOxeFHIrTw.jpg"},
     {"track": "Talladega Superspeedway", "short": "Talladega", "date": "Oct 21, 2026", "banner": "assets/BCast Banners/Degas16.png"},
-    {"track": "Kansas Speedway", "short": "Kansas", "date": "Oct 28, 2026", "banner": "assets/BCast Banners/yt_YtSABel3wLM.jpg"},
+    {"track": "Kansas Speedway", "short": "Kansas", "date": "Oct 28, 2026", "banner": "assets/BCast Banners/yt_Mvniqkv6ycU.jpg"},
     {"track": "Road America", "short": "Road America", "date": "Nov 4, 2026", "banner": "assets/BCast Banners/Watkins_Glen.png"},
     {"track": "Phoenix Raceway", "short": "Phoenix", "date": "Nov 11, 2026", "banner": "assets/BCast Banners/phoenix_s16.png"},
     {"track": "Homestead-Miami Speedway", "short": "Homestead", "date": "Nov 18, 2026", "banner": "assets/BCast Banners/Degas16.png"}
@@ -241,9 +241,9 @@ def main():
             banner_heading = f"🔴 LIVE NOW &bull; {vid_title}"
             sub_caption = f"Watch the live SimTrax Broadcasting stream below or <a href='https://www.youtube.com/watch?v={vid_id}' target='_blank' style='color: var(--neon-green); font-weight: bold;'>open on YouTube &rarr;</a>"
         else:
-            sched_note = featured_stream.get("publishedText", f"{next_race['date']} @ 9:00 PM EST").replace('\u202f', ' ').replace('\xa0', ' ')
-            banner_heading = f"Upcoming Race Broadcast &bull; {vid_title}"
-            sub_caption = f"Scheduled Live Stream ({sched_note}) &bull; <a href='https://www.youtube.com/watch?v={vid_id}' target='_blank' style='color: var(--neon-green); font-weight: bold;'>Click Here to Set Reminder / Watch on YouTube &rarr;</a>"
+            sched_note = f"Wednesday, {next_race['date']} @ 9:00 PM EST &bull; {next_race['track']}"
+            banner_heading = f"🔴 Tonight's Live Broadcast &bull; {vid_title}"
+            sub_caption = f"Scheduled Live Stream ({sched_note}) &bull; <a href='https://www.youtube.com/watch?v={vid_id}' target='_blank' style='color: var(--neon-green); font-weight: bold;'>Click Here to Set Reminder / Watch Live on YouTube &rarr;</a>"
     else:
         banner_heading = f"Upcoming Broadcast: {next_race['track']} ({next_race['date']} @ 9:00 PM EST)"
         sub_caption = f"Latest Completed Broadcast Replay: <strong>{vid_title}</strong> &bull; <a href='https://www.youtube.com/watch?v={vid_id}' target='_blank' style='color: var(--neon-green); font-weight: bold;'>Watch Full Broadcast on YouTube &rarr;</a><br><span style='font-size: 0.85rem; color: #999;'>(Synced daily with <a href='https://www.youtube.com/@simtraxbroadcasting/streams' target='_blank' style='color: #aaa;'>@simtraxbroadcasting</a> — upcoming {next_race['short']} stream link &amp; banner auto-update as soon as posted)</span>"
