@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793156681">
+    <link rel="stylesheet" href="styles.css?v=1793186744">
     <style>
         .pool-tier-badge {
             display: inline-block;
@@ -259,6 +259,7 @@
         <!-- Tab Navigation -->
         <div class="fantasy-tabs">
             <button class="fantasy-tab-btn active" onclick="switchTab('picks-tab')">Submit Roster</button>
+            <button class="fantasy-tab-btn" onclick="switchTab('odds-tab')" style="border-color: rgba(255, 204, 0, 0.45); color: var(--chase-yellow);">🎰 Chase &amp; Race Odds</button>
             <button class="fantasy-tab-btn" onclick="switchTab('leaderboard-tab')">Standings</button>
             <button class="fantasy-tab-btn" onclick="switchTab('rules-tab')">How To Play</button>
         </div>
@@ -269,6 +270,13 @@
                 <p>Welcome to the official <strong>Bandit Racing League Fantasy Challenge</strong>! Draft your roster of 4 drivers in order of your confidence for the win (e.g., Pick 1 is your top favorite to win, Pick 2 is your next choice, etc.). Your weekly score is the sum of the points scored by all 4 of your selected drivers. Submissions close when the green flag drops on race night.</p>
                 <div style="margin-top: 15px; font-weight: 700; color: var(--neon-green); text-transform: uppercase; font-family: var(--font-heading);" id="lock-countdown">
                     Selections open for the next race!
+                </div>
+                <div style="margin-top: 15px; padding: 12px 16px; background: linear-gradient(135deg, rgba(255,204,0,0.12) 0%, rgba(0,255,0,0.06) 100%); border: 1px solid rgba(255,204,0,0.4); border-left: 4px solid var(--chase-yellow); border-radius: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <div>
+                        <strong style="color: var(--chase-yellow); font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.5px;">🎰 Need Help Picking Your 4 Drivers Tonight?</strong>
+                        <div style="color: #ddd; font-size: 0.88rem; margin-top: 2px;">Check the official <strong>SimTrax Championship &amp; Kansas Race Odds Board</strong> (100,000 Monte Carlo simulations, updated for Mid-Ohio in Round 3!).</div>
+                    </div>
+                    <button type="button" onclick="switchTab('odds-tab')" class="btn-secondary" style="border-color: var(--chase-yellow); color: var(--chase-yellow); padding: 8px 16px; font-size: 0.85rem; white-space: nowrap; cursor: pointer;">View Live Odds Board &rarr;</button>
                 </div>
             </div>
 
@@ -494,6 +502,195 @@
             </div>
         </div>
 
+        <!-- TAB 4: CHASE & RACE ODDS SPORTSBOOK -->
+        <div id="odds-tab" class="fantasy-tab-content">
+            <div class="fantasy-panel" style="border: 1px solid rgba(255, 204, 0, 0.35); border-left: 5px solid var(--chase-yellow);">
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px;">
+                    <span style="background: var(--neon-green); color: #000; font-family: var(--font-heading); font-weight: 900; font-size: 0.72rem; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.8px;">🎰 SIMTRAX OFFICIAL SPORTSBOOK</span>
+                    <span style="background: var(--chase-yellow); color: #000; font-family: var(--font-heading); font-weight: 900; font-size: 0.72rem; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.8px;">100,000 MONTE CARLO SIMULATIONS</span>
+                    <span style="background: #ff1744; color: #fff; font-family: var(--font-heading); font-weight: 900; font-size: 0.72rem; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.8px;">🚨 SCHEDULE UPDATE: R19 MOVED FROM ROAD AMERICA TO MID-OHIO!</span>
+                </div>
+                <h2 style="color: #fff; font-family: var(--font-heading); font-size: 2rem; font-style: italic; text-transform: uppercase; margin: 0 0 6px 0;">Season 16 Championship &amp; Kansas Race Odds Board</h2>
+                <p style="color: var(--text-muted); font-size: 0.92rem; margin: 0 0 18px 0;">Live Championship Moneyline, Implied Win %, Top-3 Podium %, Tonight's Kansas Race Win Odds &amp; 4-Race Track Projections across <strong>R18 Kansas (1.5-Mi)</strong> &bull; <strong>R19 Mid-Ohio (Road Course)</strong> &bull; <strong>R20 Phoenix (1-Mi)</strong> &bull; <strong>R21 Homestead Finale (1.5-Mi)</strong>.</p>
+
+                <!-- 6 Quick Stat Callout Boxes -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 12px; margin-bottom: 24px;">
+                    <div style="background: #080a0e; border: 1px solid #252b38; border-top: 3px solid var(--chase-yellow); border-radius: 6px; padding: 10px 12px;">
+                        <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Title Favorite</div>
+                        <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 900; color: var(--chase-yellow); margin-top: 3px;">#7 Lacy (+135)</div>
+                    </div>
+                    <div style="background: #080a0e; border: 1px solid #252b38; border-top: 3px solid #00e5ff; border-radius: 6px; padding: 10px 12px;">
+                        <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Co-Favorite (-3 Pts)</div>
+                        <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 900; color: #00e5ff; margin-top: 3px;">#93 Sanderson (+250)</div>
+                    </div>
+                    <div style="background: #080a0e; border: 1px solid #252b38; border-top: 3px solid var(--neon-green); border-radius: 6px; padding: 10px 12px;">
+                        <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Biggest Riser</div>
+                        <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 900; color: var(--neon-green); margin-top: 3px;">#9 McDonald (+475)</div>
+                    </div>
+                    <div style="background: #080a0e; border: 1px solid #252b38; border-top: 3px solid var(--chase-yellow); border-radius: 6px; padding: 10px 12px;">
+                        <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Mid-Ohio Value Boost</div>
+                        <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 900; color: var(--chase-yellow); margin-top: 3px;">#2 Nickerson (+750)</div>
+                    </div>
+                    <div style="background: #080a0e; border: 1px solid #252b38; border-top: 3px solid var(--neon-green); border-radius: 6px; padding: 10px 12px;">
+                        <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Tonight KS Win Fav</div>
+                        <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 900; color: var(--neon-green); margin-top: 3px;">#7 Lacy (+275)</div>
+                    </div>
+                    <div style="background: #080a0e; border: 1px solid #252b38; border-top: 3px solid #fff; border-radius: 6px; padding: 10px 12px;">
+                        <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Proj. Winning Score</div>
+                        <div style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 900; color: #fff; margin-top: 3px;">2,286 Pts</div>
+                    </div>
+                </div>
+
+                <!-- Odds Table -->
+                <div class="fantasy-table-wrapper" style="overflow-x: auto; margin-bottom: 28px;">
+                    <table class="fantasy-table" style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--chase-yellow);">
+                                <th style="width: 55px;">Rank</th>
+                                <th style="min-width: 170px;">Contender (# / Team)</th>
+                                <th>Live Pts (Gap)</th>
+                                <th>Pre-Chase Line</th>
+                                <th>Live Title Odds</th>
+                                <th>Win % (Top-3%)</th>
+                                <th>Tonight KS Odds</th>
+                                <th>4-Race Exp Pts (KAN / MID-OH / PHX / HMS)</th>
+                                <th style="min-width: 260px;">Sportsbook &amp; Mid-Ohio Schedule Change Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span style="background: var(--chase-yellow); color: #000; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">1ST</span></td>
+                                <td><strong style="color: #fff;">Benjamin I. Lacy</strong><br><span style="color: var(--text-muted); font-size: 0.78rem;">#7 | GFR Racing (4W)</span></td>
+                                <td><strong style="color: var(--neon-green);">2,119</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">Leader</span></td>
+                                <td>-185<br><span style="color: #ff4d6d; font-size: 0.75rem;">▼ Tightened</span></td>
+                                <td><strong style="color: var(--chase-yellow); font-size: 1.1rem;">+135</strong></td>
+                                <td><strong>42.8%</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">T3: 80.3%</span></td>
+                                <td><strong style="color: var(--neon-green);">+275</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">(Fav)</span></td>
+                                <td><strong>46 / 44 / 45 / 46</strong><br><span style="color: var(--neon-green); font-size: 0.75rem;">Proj Final: 2,286 pts</span></td>
+                                <td style="color: #ccc; line-height: 1.45;">Talladega crash trimmed his lead to 3 pts, and R19 moving from Road America (S11 P3) to <strong>Mid-Ohio (where Lacy went Q23 &rarr; P20 in S12!)</strong> nudges his line to +135. Still #1 on 1.5-milers (led 40 laps in Kansas 1).</td>
+                            </tr>
+                            <tr>
+                                <td><span style="background: #00e5ff; color: #000; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">2ND</span></td>
+                                <td><strong style="color: #fff;">Scott Sanderson</strong><br><span style="color: var(--text-muted); font-size: 0.78rem;">#93 | GFR Racing (1W)</span></td>
+                                <td><strong>2,116</strong><br><span style="color: var(--chase-yellow); font-size: 0.75rem;">-3 pts</span></td>
+                                <td>+575<br><span style="color: var(--neon-green); font-size: 0.75rem;">▲ Surging</span></td>
+                                <td><strong style="color: #00e5ff; font-size: 1.1rem;">+250</strong></td>
+                                <td><strong>26.1%</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">T3: 69.1%</span></td>
+                                <td><strong style="color: #00e5ff;">+450</strong></td>
+                                <td><strong>42 / 46 / 43 / 42</strong><br><span style="color: #00e5ff; font-size: 0.75rem;">Proj Final: 2,278 pts</span></td>
+                                <td style="color: #ccc; line-height: 1.45;">Cut 22 pts off Lacy's lead at Talladega! Cleanest driver in BRL (5.2x/race), won Las Vegas (0x), P3 at Texas, P3 at Watkins Glen (54 pts), and P5 at Phoenix.</td>
+                            </tr>
+                            <tr>
+                                <td><span style="background: #00e5ff; color: #000; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">3RD</span></td>
+                                <td><strong style="color: #fff;">Dylan McDonald</strong><br><span style="color: var(--text-muted); font-size: 0.78rem;">#9 | Legacy Racing (3W)</span></td>
+                                <td><strong>2,095</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">-24 pts (4th)</span></td>
+                                <td>+1800<br><span style="color: var(--neon-green); font-size: 0.75rem;">▲▲ Biggest Mover</span></td>
+                                <td><strong style="color: var(--neon-green); font-size: 1.1rem;">+475</strong></td>
+                                <td><strong>16.7%</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">T3: 57.7%</span></td>
+                                <td><strong style="color: var(--chase-yellow);">+500</strong></td>
+                                <td><strong>49 / 42 / 50 / 49</strong><br><span style="color: var(--neon-green); font-size: 0.75rem;">Proj Final: 2,269 pts</span></td>
+                                <td style="color: #ccc; line-height: 1.45;">Scored a race-high 50 net pts at Talladega to jump from #7 to 4th (-24). Won Texas from 23rd, dominated Phoenix for a 64-pt win (R20 track!), and finished P5 at Watkins Glen.</td>
+                            </tr>
+                            <tr>
+                                <td><span style="background: var(--chase-yellow); color: #000; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">4TH</span></td>
+                                <td><strong style="color: #fff;">Nick Nickerson</strong><br><span style="color: var(--text-muted); font-size: 0.78rem;">#2 | GFR Racing (3W)</span></td>
+                                <td><strong>2,086</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">-33 pts (5th)</span></td>
+                                <td>+1050<br><span style="color: var(--neon-green); font-size: 0.75rem;">▲ Mid-Ohio Boost!</span></td>
+                                <td><strong style="color: var(--chase-yellow); font-size: 1.1rem;">+750</strong></td>
+                                <td><strong>7.7%</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">T3: 39.7%</span></td>
+                                <td><strong style="color: var(--neon-green);">+325</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">(2x KS W)</span></td>
+                                <td><strong>45 / 54 / 46 / 43</strong><br><span style="color: var(--chase-yellow); font-size: 0.75rem;">Proj Final: 2,258 pts</span></td>
+                                <td style="color: #ccc; line-height: 1.45;"><strong>BIGGEST WINNER OF THE MID-OHIO CHANGE:</strong> In BRL's only prior visit to Mid-Ohio (S12), Nickerson <strong>won the Pole, led 39 of 40 laps, and logged 0x incidents to WIN</strong>! Also a 2x Kansas winner (341 laps led).</td>
+                            </tr>
+                            <tr>
+                                <td><span style="background: #00e5ff; color: #000; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">5TH</span></td>
+                                <td><strong style="color: #fff;">Joshua L. Adams</strong><br><span style="color: var(--text-muted); font-size: 0.78rem;">#22 | 937 Racing (2W)</span></td>
+                                <td><strong>2,102</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">-17 pts (3rd)</span></td>
+                                <td>+1500<br><span style="color: var(--neon-green); font-size: 0.75rem;">▲ Up</span></td>
+                                <td><strong style="color: #fff; font-size: 1.05rem;">+1100</strong></td>
+                                <td><strong>3.7%</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">T3: 24.4%</span></td>
+                                <td><strong style="color: var(--chase-yellow);">+550</strong></td>
+                                <td><strong>42 / 32 / 40 / 42</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">Proj Final: 2,250 pts</span></td>
+                                <td style="color: #ccc; line-height: 1.45;">Sits 3rd (-17 pts) with 6 poles and 134 intermediate laps led (won Charlotte; won Stage 1 at Kansas 1). Needs a big points cushion tonight before heading to technical Mid-Ohio in Round 3.</td>
+                            </tr>
+                            <tr>
+                                <td><span style="background: rgba(255,255,255,0.15); color: #fff; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">6TH</span></td>
+                                <td><strong style="color: #fff;">Jackson Knaak</strong><br><span style="color: var(--text-muted); font-size: 0.78rem;">#00 | ESR (0W)</span></td>
+                                <td><strong>2,085</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">-34 pts (7th)</span></td>
+                                <td>+2800<br><span style="color: var(--neon-green); font-size: 0.75rem;">▲ Mid-Ohio Boost</span></td>
+                                <td><strong style="color: #fff; font-size: 1.05rem;">+2200</strong></td>
+                                <td><strong>2.1%</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">T3: 17.4%</span></td>
+                                <td><strong>+1000</strong></td>
+                                <td><strong>42 / 46 / 43 / 39</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">Proj Final: 2,244 pts</span></td>
+                                <td style="color: #ccc; line-height: 1.45;">Another winner of the switch to Mid-Ohio: Knaak finished <strong>P7 at Mid-Ohio in S12 (vs P15 at S11 Road America)</strong>, took P4 at S16 Watkins Glen (46 pts), P4 at Phoenix, and won S16 Kansas 1 Pole!</td>
+                            </tr>
+                            <tr>
+                                <td><span style="background: rgba(255,255,255,0.15); color: #fff; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">7TH</span></td>
+                                <td><strong style="color: #fff;">Michael Rakes</strong><br><span style="color: var(--text-muted); font-size: 0.78rem;">#47 | 937 Racing (1W)</span></td>
+                                <td><strong>2,081</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">-38 pts (8th)</span></td>
+                                <td>+4000<br><span style="color: var(--neon-green); font-size: 0.75rem;">▲ Up</span></td>
+                                <td><strong style="color: #fff; font-size: 1.05rem;">+3500</strong></td>
+                                <td><strong>0.5%</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">T3: 6.2%</span></td>
+                                <td><strong style="color: var(--chase-yellow);">+750</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">(KS1 Win)</span></td>
+                                <td><strong>41 / 38 / 38 / 40</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">Proj Final: 2,229 pts</span></td>
+                                <td style="color: #ccc; line-height: 1.45;">Defending Kansas 1 winner (Q18 &rarr; P1, 0x) and the ONLY driver in BRL with Top-10 finishes in all five 1.5-mile races (6.0 avg finish), plus P6 at Phoenix (39 pts).</td>
+                            </tr>
+                            <tr>
+                                <td><span style="background: rgba(255,255,255,0.15); color: #fff; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">8TH</span></td>
+                                <td><strong style="color: #fff;">Kevin Foster</strong><br><span style="color: var(--text-muted); font-size: 0.78rem;">#8 | GFR Racing (1W)</span></td>
+                                <td><strong>2,085*</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">-34 pts (6th*)</span></td>
+                                <td>+2500<br><span style="color: #ff4d6d; font-size: 0.75rem;">▼ Drifted</span></td>
+                                <td><strong style="color: #fff; font-size: 1.05rem;">+4000</strong></td>
+                                <td><strong>0.2%</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">T3: 3.4%</span></td>
+                                <td><strong style="color: var(--chase-yellow);">+650</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">(KS1 P2)</span></td>
+                                <td><strong>39 / 40 / 31 / 36</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">Proj Final: 2,223 pts</span></td>
+                                <td style="color: #ccc; line-height: 1.45;">Scored a race-high 53 pts in S16 Kansas 1 (P2, 0x) and won S12 Kansas (0x), plus finished <strong>P10 (4x) at S12 Mid-Ohio</strong> and P7 at S16 Watkins Glen. Making Start #198 tonight!</td>
+                            </tr>
+                            <tr>
+                                <td><span style="background: rgba(255,255,255,0.15); color: #fff; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">9TH</span></td>
+                                <td><strong style="color: #fff;">Johnathon Platt</strong><br><span style="color: var(--text-muted); font-size: 0.78rem;">#13 | GFR Racing (1W)</span></td>
+                                <td><strong>2,075</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">-44 pts (9th)</span></td>
+                                <td>+6500<br><span style="color: var(--neon-green); font-size: 0.75rem;">▲ Up</span></td>
+                                <td><strong style="color: #fff; font-size: 1.05rem;">+6000</strong></td>
+                                <td><strong>0.1%</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">T3: 1.5%</span></td>
+                                <td><strong>+1400</strong></td>
+                                <td><strong>42 / 32 / 31 / 42</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">Proj Final: 2,214 pts</span></td>
+                                <td style="color: #ccc; line-height: 1.45;">Gained 26 pts on Lacy at Talladega (P8, Stage 2 Win, 45 pts) and won 1.54-mile Atlanta earlier this year. Needs big intermediate runs at Kansas and Homestead.</td>
+                            </tr>
+                            <tr>
+                                <td><span style="background: rgba(255,255,255,0.15); color: #fff; font-weight: 900; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">10TH</span></td>
+                                <td><strong style="color: #fff;">Connor Gibson</strong><br><span style="color: var(--text-muted); font-size: 0.78rem;">#31 | ZeroFoxtrot (0W)</span></td>
+                                <td><strong>2,054</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">-65 pts (10th)</span></td>
+                                <td>+5000<br><span style="color: #ff4d6d; font-size: 0.75rem;">▼ Drifted</span></td>
+                                <td><strong style="color: #fff; font-size: 1.05rem;">+8000</strong></td>
+                                <td><strong>0.1%</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">T3: 0.8%</span></td>
+                                <td><strong>+1100</strong></td>
+                                <td><strong>40 / 35 / 35 / 39</strong><br><span style="color: var(--text-muted); font-size: 0.75rem;">Proj Final: 2,195 pts</span></td>
+                                <td style="color: #ccc; line-height: 1.45;">Fantasy sleeper at both Kansas and Mid-Ohio: posted a 5.72 AvgPos in Kansas 1 (3rd best in field), and finished <strong>5th with 0x incidents in BRL's S12 Mid-Ohio race (Q9 &rarr; P5)!</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 3 Handicapping Breakdown Cards -->
+                <h3 style="color: var(--chase-yellow); font-family: var(--font-heading); font-style: italic; text-transform: uppercase; margin: 0 0 14px 0; font-size: 1.2rem;">🎯 Fantasy &amp; Championship Handicapping Breakdown</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+                    <div style="background: #10141d; border: 1px solid #232a38; border-left: 4px solid #ff1744; border-radius: 6px; padding: 14px 16px;">
+                        <h4 style="color: #fff; font-family: var(--font-heading); text-transform: uppercase; margin: 0 0 6px 0; font-size: 1rem;">1. The Mid-Ohio Curveball (Nov 4)</h4>
+                        <p style="color: #ccc; font-size: 0.86rem; line-height: 1.5; margin: 0;">Moving Round 3 from Road America to <strong>Mid-Ohio Sports Car Course</strong> shakes up the title math! In BRL's only prior Mid-Ohio race (S12), <strong>#2 Nick Nickerson</strong> won from the pole and led 39 of 40 laps with 0x incidents—while <strong>#7 Benjamin Lacy finished 20th (Q23, 9x)</strong>! Meanwhile, <strong>#31 Gibson (P5, 0x)</strong>, <strong>#00 Knaak (P7)</strong>, and <strong>#8 Foster (P10)</strong> all ran Top-10.</p>
+                    </div>
+                    <div style="background: #10141d; border: 1px solid #232a38; border-left: 4px solid var(--neon-green); border-radius: 6px; padding: 14px 16px;">
+                        <h4 style="color: #fff; font-family: var(--font-heading); text-transform: uppercase; margin: 0 0 6px 0; font-size: 1rem;">2. Tonight at Kansas &amp; R21 Homestead</h4>
+                        <p style="color: #ccc; font-size: 0.86rem; line-height: 1.5; margin: 0;">Because Mid-Ohio is treacherous, tonight's 1.5-mile showdown at Kansas is huge for oval specialists. <strong>#7 Lacy</strong> (155 intermediate laps led), <strong>#22 Adams</strong> (134 led, Charlotte win), <strong>#93 Sanderson</strong> (Vegas 0x win, Texas P3), <strong>#9 McDonald</strong> (Texas win from P23), and <strong>#47 Rakes</strong> (5-for-5 Top 10s, Kansas 1 win) are prime Fantasy picks tonight.</p>
+                    </div>
+                    <div style="background: #10141d; border: 1px solid #232a38; border-left: 4px solid var(--chase-yellow); border-radius: 6px; padding: 14px 16px;">
+                        <h4 style="color: #fff; font-family: var(--font-heading); text-transform: uppercase; margin: 0 0 6px 0; font-size: 1rem;">3. R20 Phoenix Penultimate Showdown</h4>
+                        <p style="color: #ccc; font-size: 0.86rem; line-height: 1.5; margin: 0;">Just three weeks ago in Race 15 at Phoenix, <strong>#9 Dylan McDonald</strong> swept the night for a massive <strong>64-point haul (P1)</strong> ahead of <strong>#2 Nickerson (P2, 46 pts)</strong>, <strong>#00 Knaak (P4, 44 pts)</strong>, and <strong>#93 Sanderson (P5, 43 pts)</strong>. If McDonald or Nickerson exits Mid-Ohio within 15 points of the lead, Round 4 at Phoenix will be electric!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- SUCCESS SUBMIT OVERLAY -->
@@ -515,9 +712,9 @@
     </footer>
 
     <!-- Roster Data and Standings Data -->
-    <script src="supabase_config.js?v=1793156681"></script>
-    <script src="roster_data.js?v=1793156681"></script>
-    <script src="fantasy_data.js?v=1793156681"></script>
+    <script src="supabase_config.js?v=1793186744"></script>
+    <script src="roster_data.js?v=1793186744"></script>
+    <script src="fantasy_data.js?v=1793186744"></script>
     
     <!-- Page Logic -->
     <script>
@@ -1067,7 +1264,7 @@
                 { track: "Martinsville", date: "2026-10-14" },
                 { track: "Talladega", date: "2026-10-21" },
                 { track: "Kansas", date: "2026-10-28" },
-                { track: "Road America", date: "2026-11-04" },
+                { track: "Mid-Ohio", date: "2026-11-04" },
                 { track: "Phoenix", date: "2026-11-11" },
                 { track: "Homestead Miami", date: "2026-11-18" }
             ];
