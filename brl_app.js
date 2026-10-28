@@ -454,8 +454,8 @@
 
     // 7. Automatic Scheduled Alerts:
     //    - Tuesday Night Practice Open (Tuesday 7:00 PM - 10:30 PM ET)
-    //    - Wednesday Night Pit Gate & Practice Open (Wednesday 7:00 PM - 8:44 PM ET)
-    //    - Wednesday Night Race Broadcast Live (Wednesday 8:45 PM - 10:30 PM ET)
+    //    - Wednesday Night Pit Gate & Practice Open (Wednesday 7:00 PM - 8:59 PM ET)
+    //    - Wednesday Night Race Broadcast Live (Wednesday 9:00 PM - 10:30 PM ET)
     async function checkScheduledRaceWindows() {
         try {
             const now = new Date();
@@ -504,8 +504,8 @@
             const wednesdayRace = UPCOMING_RACES.find(r => r.date === dateStr);
             if (!wednesdayRace) return;
 
-            // WINDOW B: Wednesday Night Pit Gate & Practice Open (7:00 PM - 8:44 PM ET)
-            if (totalMins >= 19 * 60 && totalMins <= 20 * 60 + 44) {
+            // WINDOW B: Wednesday Night Pit Gate & Practice Open (7:00 PM - 8:59 PM ET)
+            if (totalMins >= 19 * 60 && totalMins <= 20 * 60 + 59) {
                 const alreadyFiredGate = localStorage.getItem(STORAGE_KEYS.LAST_AUTO_WED_PIT_GATE);
                 if (alreadyFiredGate !== dateStr) {
                     localStorage.setItem(STORAGE_KEYS.LAST_AUTO_WED_PIT_GATE, dateStr);
@@ -527,8 +527,8 @@
                 }
             }
 
-            // WINDOW C: Wednesday Night Race Going Live (8:45 PM - 10:30 PM ET)
-            if (totalMins >= 20 * 60 + 45 && totalMins <= 22 * 60 + 30) {
+            // WINDOW C: Wednesday Night Race Going Live (9:00 PM - 10:30 PM ET)
+            if (totalMins >= 21 * 60 && totalMins <= 22 * 60 + 30) {
                 const alreadyFiredLive = localStorage.getItem(STORAGE_KEYS.LAST_AUTO_LIVE_DATE);
                 if (alreadyFiredLive !== dateStr) {
                     localStorage.setItem(STORAGE_KEYS.LAST_AUTO_LIVE_DATE, dateStr);

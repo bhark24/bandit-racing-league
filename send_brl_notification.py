@@ -139,8 +139,8 @@ def main():
                 category="practice_open",
                 dedup_key=f"tue_practice_{today_str}"
             )
-        # 2. Check Wednesday Night Pit Gate & Practice Open (Wednesday 7:00 PM - 8:44 PM ET)
-        if today_str in WEDNESDAY_RACES and (19 * 60 <= total_mins <= 20 * 60 + 44):
+        # 2. Check Wednesday Night Pit Gate & Practice Open (Wednesday 7:00 PM - 8:59 PM ET)
+        if today_str in WEDNESDAY_RACES and (19 * 60 <= total_mins <= 20 * 60 + 59):
             track, rnd = WEDNESDAY_RACES[today_str]
             push_brl_notification(
                 title=f"🏁 PIT GATE OPEN: Wednesday Race Session at {track}!",
@@ -149,8 +149,8 @@ def main():
                 category="pit_gate_open",
                 dedup_key=f"wed_pit_gate_{today_str}"
             )
-        # 3. Check Wednesday Night Race Broadcast Live (Wednesday 8:45 PM - 10:30 PM ET)
-        if today_str in WEDNESDAY_RACES and (20 * 60 + 45 <= total_mins <= 22 * 60 + 30):
+        # 3. Check Wednesday Night Race Broadcast Live (Wednesday 9:00 PM - 10:30 PM ET)
+        if today_str in WEDNESDAY_RACES and (21 * 60 <= total_mins <= 22 * 60 + 30):
             track, rnd = WEDNESDAY_RACES[today_str]
             push_brl_notification(
                 title=f"🔴 LIVE NOW: BRL at {track}!",
