@@ -4,6 +4,7 @@ import shutil
 import ctypes
 import webbrowser
 from ctypes import wintypes
+from PIL import Image, ImageDraw, ImageFont
 
 def copy_to_clipboard(text):
     CF_UNICODETEXT = 13
@@ -58,6 +59,55 @@ def copy_to_clipboard(text):
     finally:
         user32.CloseClipboard()
 
+
+def build_combined_facebook_graphic(banner_path, cstrong_path, out_path):
+    """
+    Creates a Facebook promo graphic where Wes Fuller's 'The Wendy Jo Memorial 110'
+    race banner is the full-size centerpiece (1280x720) at the top, and a compact
+    secondary footer strip (1280x110) below it displays the much smaller ChristieStrong
+    logo alongside the Salt City Racing Team number change note.
+    """
+    banner = Image.open(banner_path).convert("RGBA")
+    bw, bh = banner.size  # 1280 x 720
+    footer_h = 108
+    total_h = bh + footer_h
+
+    canvas = Image.new("RGBA", (bw, total_h), (10, 12, 16, 255))
+    canvas.paste(banner, (0, 0))
+
+    draw = ImageDraw.Draw(canvas)
+    # Subtle divider line & dark pink-accented footer bar
+    draw.rectangle([0, bh, bw, total_h], fill=(14, 10, 18, 255))
+    draw.line([(0, bh), (bw, bh)], fill=(255, 105, 180, 180), width=3)
+
+    # Load and resize ChristieStrong logo so it is much smaller than the race banner
+    cstrong = Image.open(cstrong_path).convert("RGBA")
+    target_logo_h = 84
+    target_logo_w = int(cstrong.width * (target_logo_h / cstrong.height))
+    cstrong_small = cstrong.resize((target_logo_w, target_logo_h), Image.Resampling.LANCZOS)
+
+    logo_x = 34
+    logo_y = bh + (footer_h - target_logo_h) // 2
+    canvas.paste(cstrong_small, (logo_x, logo_y), cstrong_small)
+
+    # Load fonts
+    try:
+        font_title = ImageFont.truetype("C:/Windows/Fonts/arialbd.ttf", 18)
+        font_sub = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 16)
+    except Exception:
+        font_title = ImageFont.load_default()
+        font_sub = ImageFont.load_default()
+
+    text_x = logo_x + target_logo_w + 22
+    line1 = "SALT CITY RACING TEAM NUMBER CHANGE • #17 KOREY DENSON & #36 COLLIN ANDERSON"
+    line2 = "Running in honor of Korey's good friend bravely fighting the battle • #ChristieStrong"
+
+    draw.text((text_x, bh + 28), line1, fill=(255, 115, 190, 255), font=font_title)
+    draw.text((text_x, bh + 56), line2, fill=(230, 230, 235, 255), font=font_sub)
+
+    canvas.convert("RGB").save(out_path, quality=95)
+
+
 def main():
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding='utf-8')
@@ -67,6 +117,7 @@ def main():
     print("=" * 70)
     
     post_text = """🏁 **TONIGHT IN THE BANDIT RACING LEAGUE: THE WENDY JO MEMORIAL 110 AT KANSAS SPEEDWAY!** 🏁
+🩵 **Sponsored by Wes Fuller (#35) in Loving Memory of Wendy Jo Jackson (1975–2020)** 🩵
 ✨ **Presented by JoKa Creations 3D Printing & Clear Low Communications** ✨
 📺 **Watch Live on SimTrax YouTube:** https://www.youtube.com/watch?v=Mvniqkv6ycU
 🌐 **SimTrax Broadcast Hub:** https://banditracingleague.net/simtrax.html
@@ -74,7 +125,7 @@ def main():
 
 The **Season 16 Chase for the Championship** storms into **Round 2 of 5** tonight under the lights at **Kansas Speedway** for **The Wendy Jo Memorial 110**! 🏆🔥
 
-Honoring the memory of **Wendy Jo Jackson (1975–2020)** and proudly presented by **JoKa Creations 3D Printing** alongside official Season 16 presenting sponsor **Clear Low Communications**, 110 high-speed laps (165 miles) await on Kansas Speedway's progressive-banked (17–20°) 1.5-mile tri-oval!
+Proudly sponsored by **Wes Fuller (#35 | Title Town Racing)** in loving memory of **Wendy Jo Jackson (1975–2020)** and presented by **JoKa Creations 3D Printing** alongside official Season 16 presenting sponsor **Clear Low Communications**, 110 high-speed laps (165 miles) await on Kansas Speedway's progressive-banked (17–20°) 1.5-mile tri-oval!
 
 ⚙️ **TONIGHT'S RACE SPECS & STRATEGY CHALLENGE:**
 • **Distance:** 110 Laps (165.0 Miles) | **Stage Breaks:** Laps 33 & 66
@@ -96,6 +147,9 @@ Honoring the memory of **Wendy Jo Jackson (1975–2020)** and proudly presented 
 
 🔥 **PLUS:** Fresh off his historic **1st career BRL win in his 162nd start** (by 0.0105 seconds at Talladega!), **#15 Matt Crockett (Roundy Motorsports)** rolls into Kansas where he scored his previous career-best finish (P2)!
 
+🎗️ **TEAM NOTE — SALT CITY RACING TEAM NUMBER CHANGE (#CHRISTIESTRONG):**
+**Salt City Performance** has performed a special team number change—with team owner/driver **Korey Denson** moving to the **#17** truck (and teammate **Collin Anderson** moving to **#36**)—in honor of Korey's good friend who has been bravely fighting the battle!
+
 🔮 **VIEWER FANTASY LEAGUE — LOCK IN YOUR PICKS BEFORE 9:10 PM EST!** 🔮
 Pick your 4-driver lineup before the green flag drops—100% FREE to play!
 👉 **Submit Fantasy Picks:** https://banditracingleague.net/fantasy.html
@@ -109,7 +163,7 @@ Pick your 4-driver lineup before the green flag drops—100% FREE to play!
 
 Who takes the checkered flag in **The Wendy Jo Memorial 110** at Kansas tonight? Drop your predictions in the comments! 👇
 
-#BanditRacingLeague #WendyJoMemorial110 #JoKaCreations #ClearLowCommunications #SimTraxBroadcasting #KansasSpeedway #iRacing #CraftsmanTrucks #SimRacing #NASCAR #SimRacerHub"""
+#BanditRacingLeague #WendyJoMemorial110 #WesFuller #JoKaCreations #ClearLowCommunications #ChristieStrong #SimTraxBroadcasting #KansasSpeedway #iRacing #CraftsmanTrucks #SimRacing"""
 
     print("\n" + "-" * 65)
     print("GENERATED FACEBOOK PROMO POST:")
@@ -126,12 +180,17 @@ Who takes the checkered flag in **The Wendy Jo Memorial 110** at Kansas tonight?
         f.write(post_text)
     print(f"\n[+] SUCCESS: Saved post to Desktop: {out_file_desktop}")
 
-    # Copy broadcast banner image to Desktop for easy Facebook upload
+    # Build combined promo graphic where Wendy Jo Memorial 110 banner is full size (1280x720)
+    # and ChristieStrong logo is a much smaller footer badge (84px tall) below it
     banner_src = os.path.join(base_dir, "assets", "BCast Banners", "yt_Mvniqkv6ycU.jpg")
-    banner_dest = os.path.join(desktop, "BRL_Wendy_Jo_Memorial_110_Kansas_Promo.jpg")
-    if os.path.exists(banner_src):
-        shutil.copy(banner_src, banner_dest)
-        print(f"[+] SUCCESS: Saved broadcast banner to Desktop: {banner_dest}")
+    cstrong_src = os.path.join(base_dir, "assets", "christiestrong-logo.png")
+    combined_repo_path = os.path.join(base_dir, "assets", "BCast Banners", "kansas_wendy_jo_facebook_promo.jpg")
+    combined_desktop_path = os.path.join(desktop, "BRL_Wendy_Jo_Memorial_110_Kansas_Promo.jpg")
+
+    if os.path.exists(banner_src) and os.path.exists(cstrong_src):
+        build_combined_facebook_graphic(banner_src, cstrong_src, combined_repo_path)
+        shutil.copy(combined_repo_path, combined_desktop_path)
+        print(f"[+] SUCCESS: Saved combined promo graphic to Desktop: {combined_desktop_path}")
 
     # Save to local workspace files
     out_file_local = os.path.join(base_dir, "facebook_promo_post.txt")
