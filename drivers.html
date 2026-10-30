@@ -27,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Teko:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793373265">
+    <link rel="stylesheet" href="styles.css?v=1793374178">
     <style>
         .card {
             padding: 0;
@@ -134,7 +134,7 @@
             flex-direction: column;
         }
     </style>
-    <link rel="manifest" href="manifest.json?v=1793373265">
+    <link rel="manifest" href="manifest.json?v=1793374178">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 <body>
@@ -235,10 +235,10 @@
         </div>
     </section>
 
-    <script src="supabase_config.js?v=1793373265"></script>
-    <script src="teams_data.js?v=1793373265"></script>
-    <script src="roster_data.js?v=1793373265"></script>
-    <script src="season16_stats_data.js?v=1793373265"></script>
+    <script src="supabase_config.js?v=1793374178"></script>
+    <script src="teams_data.js?v=1793374178"></script>
+    <script src="roster_data.js?v=1793374178"></script>
+    <script src="season16_stats_data.js?v=1793374178"></script>
     <script>
         const grid = document.getElementById('driver-grid');
 
@@ -386,6 +386,8 @@
             "DAVIDWESTOVERJR": "David Westover.pmg.png",
             "DAVIDWESTOVER": "David Westover.pmg.png",
             "DAVISCARROLL": "Davis Carroll.png",
+            "DIANTERODER": "Dionte_number.png",
+            "DIONTERADER": "Dionte_number.png",
             "EDDIEHAGIGH": "Eddie Hagigh.png",
             "ETHANSIKORSKI": "Ethan Sikorski.png",
             "JACKSONDUKE": "Jackson_Duke.png",
@@ -565,16 +567,20 @@
                     }
                 }
                 
+                const numLabel = num === 'PENDING'
+                    ? '<span class="car-number" style="font-size: 1.55rem; letter-spacing: 1px;">PENDING</span>'
+                    : `<span class=\\'car-number\\'>#${num}</span>`;
+                
                 card.innerHTML = `
                     <div class="card-visual-banner">
                         ${hasDriver ? `
                             <img src="${getTruckImgPath(data.driver)}" class="truck-banner-img" onerror="this.remove(); document.getElementById('num-badge-${num}').classList.add('centered');">
                             <div id="num-badge-${num}" class="floating-number-badge">
-                                <img src="${getDriverImgPath(data.driver)}" class="custom-number-img ${num === '84' ? 'invert-white' : ''}" onerror="this.onerror=null; this.outerHTML='<span class=\\'car-number\\'>#${num}</span>'">
+                                ${num === 'PENDING' ? '<span class="car-number" style="font-size: 1.55rem; letter-spacing: 1px;">PENDING</span>' : `<img src="${getDriverImgPath(data.driver)}" class="custom-number-img ${num === '84' ? 'invert-white' : ''}" onerror="this.onerror=null; this.outerHTML='${numLabel}'">`}
                             </div>
                         ` : `
                             <div id="num-badge-${num}" class="floating-number-badge centered">
-                                <span class="car-number">#${num}</span>
+                                <span class="car-number">${num === 'PENDING' ? 'PENDING' : '#' + num}</span>
                             </div>
                         `}
                     </div>
@@ -836,6 +842,6 @@
             <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
         </div>
     </footer>
-    <script src="brl_app.js?v=1793373265"></script>
+    <script src="brl_app.js?v=1793374178"></script>
 </body>
 </html>

@@ -3549,7 +3549,7 @@ const teamsData = {
                 {
                     "id": "truck-4",
                     "make": "Toyota",
-                    "name": "937 Tundra #33",
+                    "name": "937 Tundra #17",
                     "condition": 100
                 },
                 {
@@ -9446,7 +9446,7 @@ const teamsData = {
                     "date": "Oct 28, 2026",
                     "amount": -2000,
                     "category": "expense",
-                    "description": "Standard Race Prep: Salt City Silverado #17 (KOREY DENSON)"
+                    "description": "Standard Race Prep: Salt City Silverado #PENDING (KOREY DENSON)"
                 },
                 {
                     "date": "Oct 28, 2026",
@@ -9516,7 +9516,7 @@ const teamsData = {
                 },
                 {
                     "date": "Oct 30, 2026",
-                    "description": "Repaired Fleet: Salt City Silverado #17 (+19%), Salt City Silverado #36 (+51%)",
+                    "description": "Repaired Fleet: Salt City Silverado #PENDING (+19%), Salt City Silverado #36 (+51%)",
                     "category": "expense",
                     "amount": -35000
                 }
@@ -9526,7 +9526,7 @@ const teamsData = {
                 {
                     "id": "truck-1",
                     "make": "Chevrolet",
-                    "name": "Salt City Silverado #17",
+                    "name": "Salt City Silverado #PENDING",
                     "condition": 100
                 },
                 {
