@@ -1,12 +1,14 @@
 services:
   - type: web
-    name: brl-relay-geezer
+    name: bandit-racing-league
     env: python
     plan: free
     buildCommand: pip install -r relay-server/requirements.txt
     startCommand: python relay-server/server.py
+    buildFilter:
+      paths:
+        - relay-server/**
     envVars:
       - key: PORT
         value: 10000
-      - key: PYTHON_VERSION
-        value: 3.11.9
+

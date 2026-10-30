@@ -70,6 +70,7 @@ async def health_check(request):
     )
 
 app = web.Application()
+app.router.add_get('/', health_check)
 app.router.add_get('/ws/{driver_id}', ws_handler)
 app.router.add_get('/health', health_check)
 
