@@ -289,8 +289,8 @@ def main():
 
         # Replace the Upcoming Race Broadcast Banner block in simtrax.html
         s_html_new = re.sub(
-            r"[ \t]*<!-- Upcoming Race Broadcast Banner.*?</div>\s*</div>",
-            new_banner_block,
+            r"[ \t]*<!-- Upcoming Race Broadcast Banner.*?(?=\s*<!-- Top Row: Presenting Sponsor -->)",
+            new_banner_block + "\n\n",
             s_html,
             count=1,
             flags=re.S
