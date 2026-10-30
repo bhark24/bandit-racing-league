@@ -261,7 +261,8 @@ def normalize_name(name):
         "roder": "rader",
         "conor": "connor",
         "kondas": "kondus",
-        "knight": "kight"
+        "knight": "kight",
+        "matt": "matthew"
     }
     
     words = name.split()
@@ -663,7 +664,8 @@ def main():
             "bat cave, nc": (35.4515, -82.2871),
             "coal run village, ky": (37.4998, -82.5290),
             "salt lake city, ut": (40.7608, -111.8911),
-            "ocala, fl": (29.1872, -82.1401)
+            "ocala, fl": (29.1872, -82.1401),
+            "kansas city, ks": (39.1156, -94.8311)
         }
         home_base_norm = team["homeBase"].strip().lower()
         coords = home_base_coords.get(home_base_norm, (35.4088, -80.5795)) # default to Concord coordinates
