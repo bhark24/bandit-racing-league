@@ -49,7 +49,7 @@ const rosterData = {
   },
   "13": {
     "driver": "JONATHON PLATT",
-    "status": "part-time"
+    "status": "past-champion"
   },
   "14": {
     "driver": "JASON ALLEGRINI",

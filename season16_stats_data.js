@@ -246,7 +246,7 @@ const season16StatsData = {
       "name": "Johnathon Platt",
       "rosterName": "JONATHON PLATT",
       "carNumber": "13",
-      "status": "part-time",
+      "status": "past-champion",
       "team": "Independent / Free Agent",
       "points": 2093,
       "racePoints": 1999,
