@@ -38,7 +38,7 @@ SEASON_16_SCHEDULE = [
     {"track": "Martinsville Speedway", "short": "Martinsville", "date": "Oct 14, 2026", "banner": "assets/BCast Banners/yt_uaOxeFHIrTw.jpg"},
     {"track": "Talladega Superspeedway", "short": "Talladega", "date": "Oct 21, 2026", "banner": "assets/BCast Banners/Degas16.png"},
     {"track": "Kansas Speedway", "short": "Kansas", "date": "Oct 28, 2026", "banner": "assets/BCast Banners/yt_Mvniqkv6ycU.jpg"},
-    {"track": "Road America", "short": "Road America", "date": "Nov 4, 2026", "banner": "assets/BCast Banners/Watkins_Glen.png"},
+    {"track": "Mid-Ohio Sports Car Course", "short": "Mid-Ohio", "date": "Nov 4, 2026", "banner": "assets/BCast Banners/Watkins_Glen.png"},
     {"track": "Phoenix Raceway", "short": "Phoenix", "date": "Nov 11, 2026", "banner": "assets/BCast Banners/phoenix_s16.png"},
     {"track": "Homestead-Miami Speedway", "short": "Homestead", "date": "Nov 18, 2026", "banner": "assets/BCast Banners/Degas16.png"}
 ]
