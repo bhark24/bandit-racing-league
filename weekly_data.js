@@ -1,7 +1,7 @@
 const weeklyData = {
   "winnerName": "Nick Nickerson",
   "winnerNumber": "2",
-  "winnerImage": "assets/WINNER IMAGES/N.Nickerson_WatkinsGlen.png",
+  "winnerImage": "assets/truck images/truck_image_nick_nickerson.png?v=20261031b",
   "actionShots": [],
   "trackName": "Kansas Speedway",
   "trackLogo": "",

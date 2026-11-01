@@ -98,6 +98,14 @@ def process_html_file(filepath):
         flags=re.IGNORECASE
     )
 
+    # 6. Add/update cache-busting version parameter to static truck image tags
+    content = re.sub(
+        r'(src=)(["\'])(assets/truck(?:%20|\s)images/[^"\']+?\.png(?:\?[^"\']*)?)\2',
+        lambda m: f'{m.group(1)}{m.group(2)}{m.group(3).split("?")[0]}?v={TIMESTAMP}{m.group(2)}',
+        content,
+        flags=re.IGNORECASE
+    )
+
     if content != original_content:
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(content)
