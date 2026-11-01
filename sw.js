@@ -1,5 +1,17 @@
 // Bandit Racing League — Official Service Worker (PWA & Live Alerts)
-const CACHE_NAME = 'brl-pwa-cache-v3';
+const CACHE_NAME = 'brl-pwa-cache-v4';
+const ICON_URL = '/assets/app-icon-192.png?v=20261031';
+const PRECACHE_ASSETS = [
+    '/manifest.json?v=20261031',
+    '/favicon.ico?v=20261031',
+    '/assets/favicon-16x16.png?v=20261031',
+    '/assets/favicon-32x32.png?v=20261031',
+    '/assets/apple-touch-icon.png?v=20261031',
+    '/assets/app-icon-192.png?v=20261031',
+    '/assets/app-icon-512.png?v=20261031',
+    '/assets/app-icon-maskable-192.png?v=20261031',
+    '/assets/app-icon-maskable-512.png?v=20261031'
+];
 const SUPABASE_URL = "https://iydgkfvfukaimhxyhdzq.supabase.co";
 const SUPABASE_KEY = "sb_publishable_Zu-OJndOV2JZB0_C9_REnQ_oVCKo4u8";
 
@@ -7,6 +19,19 @@ let swLastSeenNotifId = 0;
 
 self.addEventListener('install', (event) => {
     self.skipWaiting();
+    event.waitUntil(
+        caches.open(CACHE_NAME).then((cache) =>
+            Promise.allSettled(
+                PRECACHE_ASSETS.map((url) =>
+                    fetch(url, { cache: 'reload' }).then((resp) => {
+                        if (resp && resp.status === 200) {
+                            return cache.put(url, resp);
+                        }
+                    })
+                )
+            )
+        ).catch(() => {})
+    );
 });
 
 self.addEventListener('activate', (event) => {
@@ -68,8 +93,8 @@ async function checkSupabaseAlertsInBackground() {
             swLastSeenNotifId = latest.id;
             await self.registration.showNotification(latest.title || '🏁 Bandit Racing League Alert', {
                 body: latest.body || 'Tap to view the latest Bandit Racing League update.',
-                icon: '/assets/app-icon-192.png',
-                badge: '/assets/app-icon-192.png',
+                icon: ICON_URL,
+                badge: ICON_URL,
                 vibrate: [200, 100, 200, 100, 300],
                 tag: 'brl-notif-' + latest.id,
                 renotify: true,
@@ -116,8 +141,8 @@ self.addEventListener('push', (event) => {
     event.waitUntil(
         self.registration.showNotification(payload.title, {
             body: payload.body,
-            icon: '/assets/app-icon-192.png',
-            badge: '/assets/app-icon-192.png',
+            icon: ICON_URL,
+            badge: ICON_URL,
             vibrate: [200, 100, 200, 100, 300],
             tag: payload.tag || 'brl-live-alert',
             renotify: true,
@@ -142,8 +167,8 @@ self.addEventListener('message', (event) => {
         event.waitUntil(
             self.registration.showNotification(title || '🏁 Bandit Racing League', {
                 body: body || 'Tap to view the latest Bandit Racing League update.',
-                icon: '/assets/app-icon-192.png',
-                badge: '/assets/app-icon-192.png',
+                icon: ICON_URL,
+                badge: ICON_URL,
                 vibrate: [200, 100, 200, 100, 300],
                 tag: tag || ('brl-notif-' + Date.now()),
                 renotify: true,

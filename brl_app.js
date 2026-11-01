@@ -140,19 +140,46 @@
             }
         } catch (e) {}
 
+        const ICON_VER = '20261031';
+
         let manifestLink = document.querySelector('link[rel="manifest"]');
         if (!manifestLink) {
             manifestLink = document.createElement('link');
             manifestLink.rel = 'manifest';
             document.head.appendChild(manifestLink);
         }
-        manifestLink.href = '/manifest.json?v=3';
-        if (!document.querySelector('link[rel="apple-touch-icon"]')) {
-            const appleIcon = document.createElement('link');
+        if (!manifestLink.href || manifestLink.href.includes('?v=3') || !manifestLink.href.includes('?v=')) {
+            manifestLink.href = '/manifest.json?v=' + ICON_VER;
+        }
+
+        let appleIcon = document.querySelector('link[rel="apple-touch-icon"]');
+        if (!appleIcon) {
+            appleIcon = document.createElement('link');
             appleIcon.rel = 'apple-touch-icon';
-            appleIcon.href = '/assets/apple-touch-icon.png';
+            appleIcon.sizes = '180x180';
             document.head.appendChild(appleIcon);
         }
+        if (!appleIcon.getAttribute('href') || !appleIcon.getAttribute('href').includes('?v=')) {
+            appleIcon.href = '/assets/apple-touch-icon.png?v=' + ICON_VER;
+        }
+
+        if (!document.querySelector('link[rel="icon"][sizes="32x32"]')) {
+            const fav32 = document.createElement('link');
+            fav32.rel = 'icon';
+            fav32.type = 'image/png';
+            fav32.sizes = '32x32';
+            fav32.href = '/assets/favicon-32x32.png?v=' + ICON_VER;
+            document.head.appendChild(fav32);
+        }
+        if (!document.querySelector('link[rel="icon"][sizes="16x16"]')) {
+            const fav16 = document.createElement('link');
+            fav16.rel = 'icon';
+            fav16.type = 'image/png';
+            fav16.sizes = '16x16';
+            fav16.href = '/assets/favicon-16x16.png?v=' + ICON_VER;
+            document.head.appendChild(fav16);
+        }
+
         if (!document.querySelector('meta[name="apple-mobile-web-app-capable"]')) {
             const m1 = document.createElement('meta');
             m1.name = 'apple-mobile-web-app-capable';
@@ -163,19 +190,21 @@
             m2.name = 'apple-mobile-web-app-status-bar-style';
             m2.content = 'black-translucent';
             document.head.appendChild(m2);
-
-            const m3 = document.createElement('meta');
-            m3.name = 'apple-mobile-web-app-title';
-            m3.content = 'BRL App';
-            document.head.appendChild(m3);
         }
+        let mTitle = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+        if (!mTitle) {
+            mTitle = document.createElement('meta');
+            mTitle.name = 'apple-mobile-web-app-title';
+            document.head.appendChild(mTitle);
+        }
+        mTitle.content = 'Bandit Racing League';
     }
 
     // 2. Register Service Worker & Periodic Background Sync
     async function registerServiceWorker() {
         if ('serviceWorker' in navigator) {
             try {
-                swRegistration = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+                swRegistration = await navigator.serviceWorker.register('/sw.js?v=20261031', { scope: '/' });
                 swRegistration.update().catch(() => {});
                 if (swRegistration.periodicSync) {
                     try {
@@ -289,8 +318,8 @@
             } else {
                 const n = new Notification(title, {
                     body,
-                    icon: '/assets/app-icon-192.png',
-                    badge: '/assets/app-icon-192.png',
+                    icon: '/assets/app-icon-192.png?v=20261031',
+                    badge: '/assets/app-icon-192.png?v=20261031',
                     tag: tag || ('brl-' + Date.now())
                 });
                 n.onclick = function () {
@@ -428,13 +457,13 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     username: 'BRL Outlaw App Alerts',
-                    avatar_url: 'https://banditracingleague.net/assets/app-icon-192.png',
+                    avatar_url: 'https://banditracingleague.net/assets/app-icon-192.png?v=20261031',
                     embeds: [{
                         title: notif.title,
                         description: `${notif.body}\n\n🔗 **[Open in BRL App / Website](${fullUrl})**`,
                         url: fullUrl,
                         color: colorMap[notif.category] || 0x39FF14,
-                        thumbnail: { url: 'https://banditracingleague.net/assets/app-icon-192.png' },
+                        thumbnail: { url: 'https://banditracingleague.net/assets/app-icon-192.png?v=20261031' },
                         footer: { text: `Bandit Racing League Mobile App • ${notif.dateLabel || ''}` }
                     }]
                 })
@@ -1004,7 +1033,7 @@
             <div id="brl-app-drawer">
                 <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(57,255,20,0.25); padding-bottom:12px; margin-bottom:14px;">
                     <div style="display:flex; align-items:center; gap:12px;">
-                        <img src="/assets/app-icon-192.png" alt="BRL App" style="width:44px; height:44px; border-radius:10px; border:1px solid #39ff14;">
+                        <img src="/assets/app-icon-192.png?v=20261031" alt="BRL App" style="width:44px; height:44px; border-radius:10px; border:1px solid #39ff14;">
                         <div>
                             <h3 style="margin:0; font-family:'Outfit',sans-serif; font-size:1.3rem; font-style:italic; text-transform:uppercase; color:#fff;">
                                 BANDIT <span style="color:#39ff14;">MOBILE APP</span> &amp; ALERTS

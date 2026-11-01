@@ -9,8 +9,15 @@ META_TAGS = f'''    <meta http-equiv="Cache-Control" content="no-cache, no-store
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">'''
 
-PWA_HEAD_TAGS = '''    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">'''
+PWA_HEAD_TAGS = f'''    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v={TIMESTAMP}">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v={TIMESTAMP}">
+    <link rel="shortcut icon" href="favicon.ico?v={TIMESTAMP}">
+    <link rel="manifest" href="manifest.json?v={TIMESTAMP}">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v={TIMESTAMP}">'''
+
+FAVICON_TAGS = f'''    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v={TIMESTAMP}">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v={TIMESTAMP}">
+    <link rel="shortcut icon" href="favicon.ico?v={TIMESTAMP}">'''
 
 SKIP_PWA_FILES = {
     'social_graphic.html',
@@ -35,12 +42,16 @@ def process_html_file(filepath):
         if head_match:
             content = content[:head_match.end()] + '\n' + META_TAGS + content[head_match.end():]
 
-    # 1b. Ensure PWA manifest & apple-touch-icon and brl_app.js exist on public pages
+    # 1b. Ensure PWA manifest, favicons, apple-touch-icon, and brl_app.js exist on public pages
     if filename not in SKIP_PWA_FILES:
         if 'rel="manifest"' not in content:
             head_close = re.search(r'(</head>)', content, re.IGNORECASE)
             if head_close:
                 content = content[:head_close.start()] + PWA_HEAD_TAGS + '\n' + content[head_close.start():]
+        elif 'favicon-32x32.png' not in content:
+            manifest_match = re.search(r'([ \t]*<link[^>]+rel=["\']manifest["\'][^>]*>)', content, re.IGNORECASE)
+            if manifest_match:
+                content = content[:manifest_match.start()] + FAVICON_TAGS + '\n' + content[manifest_match.start():]
         if 'brl_app.js' not in content:
             body_close = re.search(r'(</body>)', content, re.IGNORECASE)
             if body_close:
@@ -74,6 +85,14 @@ def process_html_file(filepath):
     # 4. Add/update cache-busting version parameter to manifest.json
     content = re.sub(
         r'(href=)(["\'])([^"\']*manifest\.json(?:\?[^"\']*)?)\2',
+        lambda m: f'{m.group(1)}{m.group(2)}{m.group(3).split("?")[0]}?v={TIMESTAMP}{m.group(2)}',
+        content,
+        flags=re.IGNORECASE
+    )
+
+    # 5. Add/update cache-busting version parameter to app icons and favicons
+    content = re.sub(
+        r'((?:href|src)=)(["\'])([^"\']*(?:apple-touch-icon|app-icon-192|app-icon-512|app-icon-maskable-192|app-icon-maskable-512|favicon-32x32|favicon-16x16|favicon\.ico)(?:\.png)?(?:\?[^"\']*)?)\2',
         lambda m: f'{m.group(1)}{m.group(2)}{m.group(3).split("?")[0]}?v={TIMESTAMP}{m.group(2)}',
         content,
         flags=re.IGNORECASE

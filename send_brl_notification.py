@@ -71,12 +71,12 @@ def post_to_discord_webhook(webhook_url, notif):
             "description": f"{notif.get('body', '')}\n\n🔗 **[Open in BRL App / Website]({full_url})**",
             "url": full_url,
             "color": embed_color,
-            "thumbnail": {"url": "https://banditracingleague.net/assets/app-icon-192.png"},
+            "thumbnail": {"url": "https://banditracingleague.net/assets/app-icon-192.png?v=20261031"},
             "footer": {"text": f"Bandit Racing League Mobile App • {notif.get('dateLabel', '')}"}
         }
         payload = json.dumps({
             "username": "BRL Outlaw App Alerts",
-            "avatar_url": "https://banditracingleague.net/assets/app-icon-192.png",
+            "avatar_url": "https://banditracingleague.net/assets/app-icon-192.png?v=20261031",
             "embeds": [embed]
         }).encode("utf-8")
 
