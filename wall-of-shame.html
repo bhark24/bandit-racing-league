@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="wall_of_shame_styles.css?v=1793660775">
+    <link rel="stylesheet" href="wall_of_shame_styles.css?v=1793677375">
     <style>
         /* Unified Command Center & Web Hub Additions */
         .unified-command-center {
@@ -120,11 +120,11 @@
             padding-top: 10px;
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793660775">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793660775">
-    <link rel="shortcut icon" href="favicon.ico?v=1793660775">
-    <link rel="manifest" href="manifest.json?v=1793660775">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793660775">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793677375">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793677375">
+    <link rel="shortcut icon" href="favicon.ico?v=1793677375">
+    <link rel="manifest" href="manifest.json?v=1793677375">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793677375">
 </head>
 <body>
     <div class="bg-glow"></div>
@@ -236,11 +236,19 @@
                     </div>
                     <i class="fa-solid fa-chevron-right tab-arrow"></i>
                 </button>
-                <button class="race-tab-card active" data-race="talladega">
+                <button class="race-tab-card" data-race="talladega">
                     <span class="week-pill">W20</span>
                     <div class="race-tab-info">
                         <span class="race-tab-title">Talladega Superspeedway</span>
                         <span class="race-tab-sub">73 Laps &bull; 2x Turn-Down EOL (#62 MVP)</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right tab-arrow"></i>
+                </button>
+                <button class="race-tab-card active" data-race="kansas_2">
+                    <span class="week-pill">W21</span>
+                    <div class="race-tab-info">
+                        <span class="race-tab-title">Kansas Speedway II (Chase R2)</span>
+                        <span class="race-tab-sub">117 Laps &bull; Pit Road Blowup &amp; 4 Penalties (#17 MVP)</span>
                     </div>
                     <i class="fa-solid fa-chevron-right tab-arrow"></i>
                 </button>
@@ -251,24 +259,24 @@
         <section class="hero-section">
             <div class="hero-card track-info-card">
                 <div class="card-badge"><i class="fa-solid fa-trophy"></i> BRL STEWARDS HUB</div>
-                <h1 class="track-name" id="trackNameDisplay">Talladega Superspeedway</h1>
-                <p class="track-subtext" id="trackSubtextDisplay">Chase Opener Superspeedway Draft Battle — 73 Laps (Stages @ 21 &amp; 42)</p>
+                <h1 class="track-name" id="trackNameDisplay">Kansas Speedway II (Chase R2)</h1>
+                <p class="track-subtext" id="trackSubtextDisplay">The Wendy Jo Memorial 110 — 117 Laps in 2x GWC Overtime (Stages @ 33 &amp; 66)</p>
 
                 <div class="stats-mini-grid">
                     <div class="mini-stat">
-                        <span class="stat-num" id="totalIncidentsNum">13</span>
+                        <span class="stat-num" id="totalIncidentsNum">9</span>
                         <span class="stat-label">Reviewed Incidents</span>
                     </div>
                     <div class="mini-stat danger">
-                        <span class="stat-num" id="penaltiesNum">5</span>
+                        <span class="stat-num" id="penaltiesNum">4</span>
                         <span class="stat-label">Penalties / DQ</span>
                     </div>
                     <div class="mini-stat warning">
-                        <span class="stat-num" id="warningsNum">0</span>
+                        <span class="stat-num" id="warningsNum">2</span>
                         <span class="stat-label">Official Warnings</span>
                     </div>
                     <div class="mini-stat info">
-                        <span class="stat-num" id="racingDealsNum">6</span>
+                        <span class="stat-num" id="racingDealsNum">0</span>
                         <span class="stat-label">Racing Deals</span>
                     </div>
                 </div>
@@ -281,16 +289,16 @@
                     <span>WEEKLY WALL OF SHAME MVP</span>
                 </div>
                 <div class="mvp-driver-row">
-                    <div class="driver-number-plate mvp-plate" id="mvpCarPlate">#62</div>
+                    <div class="driver-number-plate mvp-plate" id="mvpCarPlate">#17</div>
                     <div class="mvp-driver-details">
-                        <h2 id="mvpDriverName">Car #62 (Ty Corino)</h2>
-                        <p class="mvp-summary-tag" id="mvpReason"><i class="fa-solid fa-triangle-exclamation"></i> Involved in 3 separate incidents at Talladega: drifted up with netcode into #12 (Bill Harkins) on Lap 13, turned down into race winner #15 (Matt Crockett) on Lap 37 for his 1st EOL, and turned down into #7 (Benjamin Lacy) in the middle lane on Lap 58 (thinking #7 was on the bottom) for his 2nd EOL of the night, triggering the stackup that collected #13 (Johnathon Platt)!</p>
+                        <h2 id="mvpDriverName">Car #17 (Korey Denson — formerly #36) &amp; Pit Road Short-Fuse Crew</h2>
+                        <p class="mvp-summary-tag" id="mvpReason"><i class="fa-solid fa-triangle-exclamation"></i> Switched from #36 to #17 to serve EOL #2 of 3 at the green flag, got into a Lap 32 no-yellow 'dick measuring contest' door-banging clash with #9 (Dylan McDonald), and then erupted at the Lap 66 Stage 2 break when #17, #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off with hair-trigger fuses after #17 hugged the far right of pit road and #13's comment lit the short fuse on the #17! Plus 4 on-track penalties to #4 (15-Lap Drive-Through), #36 (Lap 85 EOL), #62 (Lap 108 EOL), and #21 (Post-Race Confirmed Lap 114 Chaos Fault)!</p>
                     </div>
                 </div>
                 <div id="mvpImageContainer" style="text-align: center; margin: 15px 0;"></div>
                 <ul class="mvp-highlights-list" id="mvpHighlights">
-                    <li><i class="fa-solid fa-shield-cat"></i> 2x EOL Penalties (Lap 37 on #15 &amp; Lap 58 on #7) + Lap 13 Netcode Contact on #12!</li>
-                    <li><i class="fa-solid fa-gavel"></i> Total Penalties Issued: <strong>2x End of Line (EOL) Penalties (Lap 37 &amp; Lap 58)</strong></li>
+                    <li><i class="fa-solid fa-shield-cat"></i> Stage 2 Pit Road Short-Fuse Blowup (#17, #31, #13, #24) + Lap 32 Clash w/ #9 + Served EOL #2 of 3!</li>
+                    <li><i class="fa-solid fa-gavel"></i> Total Penalties Issued: <strong>Served EOL #2 of 3 + Lap 32 Clash w/ #9 + Stage 2 Pit Road VC Blowup</strong></li>
                 </ul>
             </div>
         </section>
@@ -405,30 +413,74 @@
             <div class="section-header" style="flex-wrap: wrap; justify-content: space-between; border-bottom: 1px solid rgba(255, 59, 48, 0.25); padding-bottom: 14px; margin-bottom: 22px;">
                 <div>
                     <h2 style="color: #fff; font-size: 1.65rem;"><i class="fa-solid fa-skull-crossbones" style="color: var(--color-penalty);"></i> Hall of Infamy: Top 5 Most Penalized Drivers</h2>
-                    <span class="section-subtitle" style="display: block; margin-top: 4px; color: var(--text-muted);">Cumulative official Stewards' penalties (EOLs, Drive-Throughs, DQs &amp; Intentional Wrecking rulings) since Wall of Shame tracking began (Weeks 10–20)</span>
+                    <span class="section-subtitle" style="display: block; margin-top: 4px; color: var(--text-muted);">Cumulative official Stewards' penalties (EOLs, Drive-Throughs, DQs &amp; Intentional Wrecking rulings) since Wall of Shame tracking began (Weeks 10–21)</span>
                 </div>
-                <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: var(--color-penalty); background: rgba(255, 59, 48, 0.12); border: 1px solid rgba(255, 59, 48, 0.35); padding: 6px 14px; border-radius: 20px; align-self: center;">ALL-TIME RAP SHEET (11 RACES)</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: var(--color-penalty); background: rgba(255, 59, 48, 0.12); border: 1px solid rgba(255, 59, 48, 0.35); padding: 6px 14px; border-radius: 20px; align-self: center;">ALL-TIME RAP SHEET (12 RACES)</span>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 14px;">
-                <!-- #1: Korey Denson (PENDING) -->
+                <!-- #1: Korey Denson (#17 / PENDING) -->
                 <div style="background: linear-gradient(135deg, rgba(45, 10, 18, 0.92), rgba(16, 18, 28, 0.96)); border: 2px solid var(--color-penalty); border-radius: 14px; padding: 18px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; box-shadow: 0 0 25px rgba(255, 59, 48, 0.22);">
                     <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
                         <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.5rem; color: #fff; background: var(--color-penalty); width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 15px rgba(255, 59, 48, 0.5);">1</div>
-                        <div class="driver-number-plate" style="font-size: 1.15rem; padding: 4px 12px; border-left: 4px solid #ff0055; flex-shrink: 0;">PENDING</div>
+                        <div class="driver-number-plate" style="font-size: 1.15rem; padding: 4px 12px; border-left: 4px solid #ff0055; flex-shrink: 0;">#17 / #36</div>
                         <div>
                             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                                 <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 900; color: #fff; margin: 0;">Korey Denson</h3>
-                                <span style="background: var(--color-mvp); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px; text-transform: uppercase;"><i class="fa-solid fa-crown"></i> Phoenix MVP</span>
-                                <span style="background: rgba(255, 204, 0, 0.18); color: var(--color-warning); border: 1px solid rgba(255, 204, 0, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">+2 Official Warnings</span>
+                                <span style="background: var(--color-mvp); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px; text-transform: uppercase;"><i class="fa-solid fa-crown"></i> 2x MVP (Phoenix &amp; Kansas II)</span>
+                                <span style="background: rgba(255, 204, 0, 0.18); color: var(--color-warning); border: 1px solid rgba(255, 204, 0, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">+3 Warnings / Comms Blowups</span>
                             </div>
                             <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
-                                <strong>Breakdown:</strong> Darlington (EOL L84) &bull; Las Vegas (EOL L101) &bull; Phoenix (EOL L131, Post-Race EOL L135, Intentional Wrecking Penalty L136) &bull; Martinsville (15-Lap Rule Drive-Through L11 + VC Conduct Warning) &bull; <em>2 Unserved EOLs Still Pending</em>
+                                <strong>Breakdown:</strong> Darlington (EOL L84) &bull; Las Vegas (EOL L101) &bull; Phoenix (EOL L131, Post-Race EOL L135, Intentional Wrecking Penalty L136) &bull; Martinsville (15-Lap Rule Drive-Through L11 + VC Warning) &bull; Kansas II as #17 (Served EOL #2 of 3 + L32 Clash w/ #9 + Stage 2 Pit Road VC Blowup; <em>1 EOL Remaining</em>)
                             </p>
                         </div>
                     </div>
                     <div style="text-align: right; flex-shrink: 0;">
                         <span style="display: block; font-family: var(--font-heading); font-size: 1.9rem; font-weight: 900; color: var(--color-penalty); line-height: 1;">6</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Penalties</span>
+                    </div>
+                </div>
+
+                <!-- #2 (Tie): Collin Anderson (#36 / #69) -->
+                <div style="background: linear-gradient(135deg, rgba(30, 20, 34, 0.9), rgba(16, 18, 28, 0.95)); border: 1px solid rgba(255, 85, 0, 0.5); border-left: 5px solid #ff5500; border-radius: 14px; padding: 16px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
+                        <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #fff; background: #ff5500; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">T2</div>
+                        <div class="driver-number-plate" style="font-size: 1.45rem; padding: 4px 14px; border-left: 4px solid #ff5500; flex-shrink: 0;">#36</div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0;">Collin Anderson</h3>
+                                <span style="background: var(--color-mvp); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px; text-transform: uppercase;"><i class="fa-solid fa-crown"></i> Martinsville MVP</span>
+                                <span style="background: rgba(255, 59, 48, 0.2); color: var(--color-penalty); border: 1px solid rgba(255, 59, 48, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">+Final Brake-Check Warning</span>
+                            </div>
+                            <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
+                                <strong>Breakdown:</strong> Phoenix (EOL L48) &bull; Martinsville (3x EOL Spree: L44, L64 Active-Track Brake Slam, L97 Spin on #28 + Final Disciplinary Warning L76 + ARCA Brake Infraction L186) &bull; Kansas II (EOL L85 Turn 2 Solo Spin)
+                            </p>
+                        </div>
+                    </div>
+                    <div style="text-align: right; flex-shrink: 0;">
+                        <span style="display: block; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #ff5500; line-height: 1;">5</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Penalties</span>
+                    </div>
+                </div>
+
+                <!-- #2 (Tie): Ty Corino (#62) -->
+                <div style="background: linear-gradient(135deg, rgba(30, 20, 34, 0.9), rgba(16, 18, 28, 0.95)); border: 1px solid rgba(255, 85, 0, 0.5); border-left: 5px solid #ff5500; border-radius: 14px; padding: 16px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
+                        <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #fff; background: #ff5500; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">T2</div>
+                        <div class="driver-number-plate" style="font-size: 1.45rem; padding: 4px 14px; border-left: 4px solid #ff5500; flex-shrink: 0;">#62</div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0;">Ty Corino</h3>
+                                <span style="background: var(--color-mvp); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px; text-transform: uppercase;"><i class="fa-solid fa-crown"></i> Talladega MVP</span>
+                                <span style="background: rgba(255, 204, 0, 0.18); color: var(--color-warning); border: 1px solid rgba(255, 204, 0, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">+2 Warnings / Infractions</span>
+                            </div>
+                            <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
+                                <strong>Breakdown:</strong> Darlington (Drive-Through Penalty L1 + ARCA Brake Warning L62) &bull; Las Vegas (Official Warning L78) &bull; Martinsville (EOL L117) &bull; Talladega (2x EOL Penalties: L37 on #15 &amp; L58 on #7) &bull; Kansas II (EOL L108 Hit #18 Avoiding #31)
+                            </p>
+                        </div>
+                    </div>
+                    <div style="text-align: right; flex-shrink: 0;">
+                        <span style="display: block; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #ff5500; line-height: 1;">5</span>
                         <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Penalties</span>
                     </div>
                 </div>
@@ -442,7 +494,7 @@
                             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                                 <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0;">Connor Gibson</h3>
                                 <span style="background: var(--color-mvp); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px; text-transform: uppercase;"><i class="fa-solid fa-crown"></i> Watkins Glen MVP</span>
-                                <span style="background: rgba(0, 229, 255, 0.15); color: var(--color-info); border: 1px solid rgba(0, 229, 255, 0.35); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">+1 Infraction</span>
+                                <span style="background: rgba(0, 229, 255, 0.15); color: var(--color-info); border: 1px solid rgba(0, 229, 255, 0.35); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">+2 Infractions / Comms</span>
                             </div>
                             <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
                                 <strong>Breakdown:</strong> Michigan (EOL L31 + Next-Race EOL Start Penalty L31 + 2nd Incident Infraction L91) &bull; Darlington (EOL L41) &bull; Watkins Glen (Wall of Shame MVP L1) &bull; Phoenix (EOL L83) &bull; Martinsville (EOL L57)
@@ -476,54 +528,10 @@
                         <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Penalties</span>
                     </div>
                 </div>
-
-                <!-- #4 (Tie): Collin Anderson (#36) -->
-                <div style="background: rgba(20, 22, 34, 0.92); border: 1px solid rgba(255, 204, 0, 0.4); border-left: 5px solid var(--color-warning); border-radius: 14px; padding: 16px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
-                    <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
-                        <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #000; background: var(--color-warning); width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">T4</div>
-                        <div class="driver-number-plate" style="font-size: 1.45rem; padding: 4px 14px; border-left: 4px solid var(--color-warning); flex-shrink: 0;">#36</div>
-                        <div>
-                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0;">Collin Anderson</h3>
-                                <span style="background: var(--color-mvp); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px; text-transform: uppercase;"><i class="fa-solid fa-crown"></i> Martinsville MVP</span>
-                                <span style="background: rgba(255, 59, 48, 0.2); color: var(--color-penalty); border: 1px solid rgba(255, 59, 48, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">+Final Brake-Check Warning</span>
-                            </div>
-                            <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
-                                <strong>Breakdown:</strong> Phoenix (EOL L48) &bull; Martinsville (3x EOL Spree: L44, L64 Active-Track Brake Slam, L97 Spin on #28 + Final Disciplinary Warning L76 + ARCA Brake Infraction L186)
-                            </p>
-                        </div>
-                    </div>
-                    <div style="text-align: right; flex-shrink: 0;">
-                        <span style="display: block; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: var(--color-warning); line-height: 1;">4</span>
-                        <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Penalties</span>
-                    </div>
-                </div>
-
-                <!-- #4 (Tie): Ty Corino (#62) -->
-                <div style="background: rgba(20, 22, 34, 0.92); border: 1px solid rgba(255, 204, 0, 0.4); border-left: 5px solid var(--color-warning); border-radius: 14px; padding: 16px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
-                    <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
-                        <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #000; background: var(--color-warning); width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">T4</div>
-                        <div class="driver-number-plate" style="font-size: 1.45rem; padding: 4px 14px; border-left: 4px solid var(--color-warning); flex-shrink: 0;">#62</div>
-                        <div>
-                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0;">Ty Corino</h3>
-                                <span style="background: var(--color-mvp); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px; text-transform: uppercase;"><i class="fa-solid fa-crown"></i> Talladega MVP</span>
-                                <span style="background: rgba(255, 204, 0, 0.18); color: var(--color-warning); border: 1px solid rgba(255, 204, 0, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">+2 Warnings / Infractions</span>
-                            </div>
-                            <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
-                                <strong>Breakdown:</strong> Darlington (Drive-Through Penalty L1 + ARCA Brake Warning L62) &bull; Las Vegas (Official Warning L78) &bull; Martinsville (EOL L117) &bull; Talladega (2x EOL Penalties: L37 on #15 &amp; L58 on #7)
-                            </p>
-                        </div>
-                    </div>
-                    <div style="text-align: right; flex-shrink: 0;">
-                        <span style="display: block; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: var(--color-warning); line-height: 1;">4</span>
-                        <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Penalties</span>
-                    </div>
-                </div>
             </div>
 
             <p style="margin-top: 12px; font-size: 0.82rem; color: var(--text-muted); text-align: right;">
-                <em>*Honorable Mention (3 Official Penalties Each): <strong>#54 Matthew Bailey</strong> (1x Drive-Through, 2x EOL + 3 Infractions/Warnings), <strong>#9 Dylan McDonald</strong> (1x DQ + 3-Wk Probation/EOLs, 2x EOL), <strong>#12 Bill Harkins</strong> (3x EOL), and <strong>#15 Matt Crockett</strong> (3x EOL).</em>
+                <em>*Honorable Mention (3 Official Penalties Each): <strong>#4 Logan Murray</strong> (1x 15-Lap Drive-Through at Kansas II, 2x EOL), <strong>#54 Matthew Bailey</strong> (1x Drive-Through, 2x EOL + 3 Infractions/Warnings), <strong>#9 Dylan McDonald</strong> (1x DQ + 3-Wk Probation/EOLs, 2x EOL), <strong>#12 Bill Harkins</strong> (3x EOL), and <strong>#15 Matt Crockett</strong> (3x EOL).</em>
             </p>
         </section>
 
@@ -534,11 +542,11 @@
                     <h2 style="color: #fff; font-size: 1.65rem;"><i class="fa-solid fa-car-burst" style="color: var(--color-info);"></i> Chaos Magnet Board: Top 5 Drivers Mentioned in Incidents</h2>
                     <span class="section-subtitle" style="display: block; margin-top: 4px; color: var(--text-muted);">Total logged appearances across all Wall of Shame incident reports (whether at-fault, innocent check-up victim, racing deal, or netcode) since Week 10</span>
                 </div>
-                <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: var(--color-info); background: rgba(0, 229, 255, 0.12); border: 1px solid rgba(0, 229, 255, 0.35); padding: 6px 14px; border-radius: 20px; align-self: center;">TOTAL INCIDENT MENTIONS (W10–W20)</span>
+                <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; color: var(--color-info); background: rgba(0, 229, 255, 0.12); border: 1px solid rgba(0, 229, 255, 0.35); padding: 6px 14px; border-radius: 20px; align-self: center;">TOTAL INCIDENT MENTIONS (W10–W21)</span>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 14px;">
-                <!-- #1: Connor Gibson (#31) — 19 Mentions -->
+                <!-- #1: Connor Gibson (#31) — 21 Mentions -->
                 <div style="background: linear-gradient(135deg, rgba(10, 32, 48, 0.92), rgba(16, 18, 28, 0.96)); border: 2px solid var(--color-info); border-radius: 14px; padding: 18px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; box-shadow: 0 0 25px rgba(0, 229, 255, 0.18);">
                     <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
                         <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.5rem; color: #000; background: var(--color-info); width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);">1</div>
@@ -546,23 +554,44 @@
                         <div>
                             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                                 <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 900; color: #fff; margin: 0;">Connor Gibson</h3>
-                                <span style="background: rgba(0, 229, 255, 0.18); color: var(--color-info); border: 1px solid rgba(0, 229, 255, 0.45); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px; text-transform: uppercase;">11 of 11 Races Mentioned (100% Streak!)</span>
+                                <span style="background: rgba(0, 229, 255, 0.18); color: var(--color-info); border: 1px solid rgba(0, 229, 255, 0.45); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px; text-transform: uppercase;">12 of 12 Races Mentioned (100% Streak!)</span>
                             </div>
                             <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
-                                <strong>By Track:</strong> Richmond (1) &bull; Michigan (3) &bull; Gateway (2) &bull; Darlington (1) &bull; Kansas (1) &bull; Texas (1) &bull; Las Vegas (1) &bull; Watkins Glen (1) &bull; Phoenix (3) &bull; Martinsville (3) &bull; Talladega (2)
+                                <strong>By Track:</strong> Richmond (1) &bull; Michigan (3) &bull; Gateway (2) &bull; Darlington (1) &bull; Kansas (1) &bull; Texas (1) &bull; Las Vegas (1) &bull; Watkins Glen (1) &bull; Phoenix (3) &bull; Martinsville (3) &bull; Talladega (2) &bull; Kansas II (2)
                             </p>
                         </div>
                     </div>
                     <div style="text-align: right; flex-shrink: 0;">
-                        <span style="display: block; font-family: var(--font-heading); font-size: 1.9rem; font-weight: 900; color: var(--color-info); line-height: 1;">19</span>
+                        <span style="display: block; font-family: var(--font-heading); font-size: 1.9rem; font-weight: 900; color: var(--color-info); line-height: 1;">21</span>
                         <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Mentions</span>
                     </div>
                 </div>
 
-                <!-- #2 (Tie): Johnathon Platt (#13) — 15 Mentions -->
+                <!-- #2: Korey Denson (#17 / #36) — 18 Mentions -->
                 <div style="background: rgba(20, 22, 34, 0.92); border: 1px solid rgba(0, 229, 255, 0.35); border-left: 5px solid #3498db; border-radius: 14px; padding: 16px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
                     <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
-                        <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #fff; background: #3498db; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">T2</div>
+                        <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #fff; background: #3498db; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+                        <div class="driver-number-plate" style="font-size: 1.15rem; padding: 4px 12px; border-left: 4px solid #3498db; flex-shrink: 0;">#17 / #36</div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0;">Korey Denson</h3>
+                                <span style="background: rgba(255, 59, 48, 0.18); color: var(--color-penalty); border: 1px solid rgba(255, 59, 48, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">7 Races Mentioned (5 Mentions at Phoenix Alone)</span>
+                            </div>
+                            <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
+                                <strong>By Track:</strong> Darlington (1) &bull; Texas (2) &bull; Las Vegas (2) &bull; Phoenix (5) &bull; Martinsville (4) &bull; Talladega (1) &bull; Kansas II as #17 (3)
+                            </p>
+                        </div>
+                    </div>
+                    <div style="text-align: right; flex-shrink: 0;">
+                        <span style="display: block; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #3498db; line-height: 1;">18</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Mentions</span>
+                    </div>
+                </div>
+
+                <!-- #3: Johnathon Platt (#13) — 17 Mentions -->
+                <div style="background: rgba(20, 22, 34, 0.92); border: 1px solid rgba(0, 229, 255, 0.35); border-left: 5px solid #3498db; border-radius: 14px; padding: 16px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
+                        <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #fff; background: #3498db; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
                         <div class="driver-number-plate" style="font-size: 1.45rem; padding: 4px 14px; border-left: 4px solid #3498db; flex-shrink: 0;">#13</div>
                         <div>
                             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -570,38 +599,17 @@
                                 <span style="background: rgba(46, 204, 113, 0.18); color: var(--color-racing-deal); border: 1px solid rgba(46, 204, 113, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">0 EOL Penalties (Wrong Place, Wrong Time Magnet)</span>
                             </div>
                             <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
-                                <strong>By Track:</strong> Richmond (3) &bull; Michigan (2) &bull; Gateway (5) &bull; Darlington (1) &bull; Phoenix (2) &bull; Talladega (2)
+                                <strong>By Track:</strong> Richmond (3) &bull; Michigan (2) &bull; Gateway (5) &bull; Darlington (1) &bull; Phoenix (2) &bull; Talladega (2) &bull; Kansas II (2)
                             </p>
                         </div>
                     </div>
                     <div style="text-align: right; flex-shrink: 0;">
-                        <span style="display: block; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #3498db; line-height: 1;">15</span>
+                        <span style="display: block; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #3498db; line-height: 1;">17</span>
                         <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Mentions</span>
                     </div>
                 </div>
 
-                <!-- #2 (Tie): Korey Denson (PENDING) — 15 Mentions -->
-                <div style="background: rgba(20, 22, 34, 0.92); border: 1px solid rgba(0, 229, 255, 0.35); border-left: 5px solid #3498db; border-radius: 14px; padding: 16px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
-                    <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
-                        <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #fff; background: #3498db; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">T2</div>
-                        <div class="driver-number-plate" style="font-size: 1.15rem; padding: 4px 12px; border-left: 4px solid #3498db; flex-shrink: 0;">PENDING</div>
-                        <div>
-                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0;">Korey Denson</h3>
-                                <span style="background: rgba(255, 59, 48, 0.18); color: var(--color-penalty); border: 1px solid rgba(255, 59, 48, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">6 Races Mentioned (5 Mentions at Phoenix Alone)</span>
-                            </div>
-                            <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
-                                <strong>By Track:</strong> Darlington (1) &bull; Texas (2) &bull; Las Vegas (2) &bull; Phoenix (5) &bull; Martinsville (4) &bull; Talladega (1)
-                            </p>
-                        </div>
-                    </div>
-                    <div style="text-align: right; flex-shrink: 0;">
-                        <span style="display: block; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #3498db; line-height: 1;">15</span>
-                        <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Mentions</span>
-                    </div>
-                </div>
-
-                <!-- #4: Dylan McDonald (#9) — 14 Mentions -->
+                <!-- #4: Dylan McDonald (#9) — 15 Mentions -->
                 <div style="background: rgba(20, 22, 34, 0.92); border: 1px solid rgba(255, 255, 255, 0.14); border-left: 5px solid #a855f7; border-radius: 14px; padding: 16px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
                     <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
                         <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #fff; background: #a855f7; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">4</div>
@@ -609,31 +617,31 @@
                         <div>
                             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                                 <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0;">Dylan McDonald</h3>
-                                <span style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">7 Races Mentioned</span>
+                                <span style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">8 Races Mentioned</span>
                             </div>
                             <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
-                                <strong>By Track:</strong> Richmond (1) &bull; Michigan (1) &bull; Darlington (4) &bull; Kansas (1) &bull; Las Vegas (3) &bull; Martinsville (2) &bull; Talladega (2)
+                                <strong>By Track:</strong> Richmond (1) &bull; Michigan (1) &bull; Darlington (4) &bull; Kansas (1) &bull; Las Vegas (3) &bull; Martinsville (2) &bull; Talladega (2) &bull; Kansas II (1)
                             </p>
                         </div>
                     </div>
                     <div style="text-align: right; flex-shrink: 0;">
-                        <span style="display: block; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #c084fc; line-height: 1;">14</span>
+                        <span style="display: block; font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #c084fc; line-height: 1;">15</span>
                         <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Mentions</span>
                     </div>
                 </div>
 
-                <!-- #5: Adam Tahan (#01 / #20) — 13 Mentions -->
+                <!-- #5 (Tie): Adam Tahan (#01 / #20), Matthew Bailey (#54) & Bill Harkins (#12) — 13 Mentions -->
                 <div style="background: rgba(20, 22, 34, 0.92); border: 1px solid rgba(255, 255, 255, 0.14); border-left: 5px solid #2ecc71; border-radius: 14px; padding: 16px 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
                     <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
-                        <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #000; background: #2ecc71; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">5</div>
-                        <div class="driver-number-plate" style="font-size: 1.35rem; padding: 4px 12px; border-left: 4px solid #2ecc71; flex-shrink: 0;">#01 / #20</div>
+                        <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; color: #000; background: #2ecc71; width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">T5</div>
+                        <div class="driver-number-plate" style="font-size: 1.15rem; padding: 4px 12px; border-left: 4px solid #2ecc71; flex-shrink: 0;">#01 / #54 / #12</div>
                         <div>
                             <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0;">Adam Tahan</h3>
-                                <span style="background: rgba(46, 204, 113, 0.18); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">5 Races Mentioned (6 at Gateway)</span>
+                                <h3 style="font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900; color: #fff; margin: 0;">Adam Tahan, Matthew Bailey &amp; Bill Harkins</h3>
+                                <span style="background: rgba(46, 204, 113, 0.18); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.4); font-size: 0.7rem; font-weight: 800; padding: 2px 9px; border-radius: 12px;">3-Way Tie at 13 Mentions</span>
                             </div>
                             <p style="color: #d1d5db; font-size: 0.86rem; margin: 6px 0 0 0; line-height: 1.45;">
-                                <strong>By Track:</strong> Richmond as #20 (3) &bull; Gateway as #01 (6) &bull; Darlington as #01 (2) &bull; Las Vegas as #01 (1) &bull; Phoenix as #01 (1)
+                                <strong>Breakdown:</strong> <strong>Adam Tahan (13)</strong>: Richmond (3), Gateway (6), Darlington (2), Vegas (1), Phoenix (1) &bull; <strong>Matthew Bailey (13)</strong>: Gateway (2), Watkins Glen (1), Phoenix (2), Martinsville (4), Talladega (3), Kansas II (1) &bull; <strong>Bill Harkins (13)</strong>: Darlington (2), Kansas (1), Vegas (1), Phoenix (2), Martinsville (4), Talladega (2), Kansas II (1)
                             </p>
                         </div>
                     </div>
@@ -645,7 +653,7 @@
             </div>
 
             <p style="margin-top: 12px; font-size: 0.82rem; color: var(--text-muted); text-align: right;">
-                <em>*Next Closest in Total Incident Mentions: <strong>#54 Matthew Bailey (12)</strong>, <strong>#12 Bill Harkins (12)</strong>, <strong>#15 Matt Crockett (10)</strong>, and <strong>#62 Ty Corino (10)</strong>.</em>
+                <em>*Next Closest in Total Incident Mentions: <strong>#62 Ty Corino (11)</strong> and <strong>#15 Matt Crockett (10)</strong>.</em>
             </p>
         </section>
 
@@ -705,8 +713,8 @@
     </div>
 
     <!-- JS Scripts -->
-    <script src="wall_of_shame_data.js?v=1793660775"></script>
-    <script src="wall_of_shame_app.js?v=1793660775"></script>
-    <script src="brl_app.js?v=1793660775"></script>
+    <script src="wall_of_shame_data.js?v=1793677375"></script>
+    <script src="wall_of_shame_app.js?v=1793677375"></script>
+    <script src="brl_app.js?v=1793677375"></script>
 </body>
 </html>

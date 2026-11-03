@@ -2,8 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // Current Active State
-    let currentRaceKey = "talladega";
-    let currentRaceData = BRL_RACES_DATA.talladega;
+    let currentRaceKey = "kansas_2";
+    let currentRaceData = BRL_RACES_DATA.kansas_2;
     let currentFilter = "all";
     let searchQuery = "";
     let isAudioEnabled = true;
@@ -666,7 +666,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return hash;
         }
 
-        return "talladega";
+        return "kansas_2";
     }
 
     // Initialize Race Week

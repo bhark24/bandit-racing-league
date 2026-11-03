@@ -221,7 +221,7 @@ def main():
         16: ("Regular Season Finale 190", 190, "57 / 114", "Martinsville Speedway"),
         17: ("The Rolling Thunder 185 (Chase Round 1)", 73, "21 / 42", "Talladega Superspeedway"),
         18: ("Wendy Jo Memorial 110 (Chase Round 2)", 110, "33 / 66", "Kansas Speedway"),
-        19: ("Mid-Ohio Showdown (Chase Round 3)", 45, "14 / 28", "Mid-Ohio Sports Car Course"),
+        19: ("Bandit Mobile App 50 at Mid-Ohio (Chase Round 3)", 50, "15 / 30", "Mid-Ohio Sports Car Course"),
         20: ("Desert Elimination 140 (Chase Round 4)", 140, "42 / 84", "Phoenix Raceway"),
         21: ("Clear Low Communications Championship Finale", 110, "33 / 66", "Homestead-Miami Speedway")
     }
@@ -249,12 +249,12 @@ def main():
         track_img = t_meta.get("track_iracing_img") or ""
 
         if race_num == 19:
-            event_name = "Mid-Ohio Showdown (Chase Round 3)"
+            event_name = "Bandit Mobile App 50 at Mid-Ohio (Chase Round 3)"
             track_name = "Mid-Ohio Sports Car Course"
             config_name = "Full Course"
             length_mi = 2.258
             turns = 13
-            track_img = ""
+            track_img = "assets/bandit-mobile-app-logo.jpg"
 
         ts = int(s.get("race_date") or 0)
         dt_obj = datetime.fromtimestamp(ts)
@@ -356,7 +356,7 @@ def main():
             entry["distanceMiles"] = round(def_laps * length_mi, 1)
             scouting_map = {
                 18: "Progressive banking (17–20°) makes the high lane against the outside wall dominant on long green-flag runs. Race 11 Kansas Winner: #47 Michael Rakes (40 laps led by #7 Benjamin Lacy).",
-                19: "Technical 2.258-mile, 13-turn road course test in Lexington, OH! Elevation changes through The Keyhole, Madness, and Thunder Valley with only 2 total tire sets allowed. S12 Mid-Ohio Winner: #2 Nick Nickerson (Pole + 39/40 laps led, 0x).",
+                19: "OFFICIAL ANNOUNCEMENT: We are at Mid-Ohio Sports Car Course this week for 50 LAPS, proudly sponsored by the BANDIT MOBILE APP for the Bandit Racing League! Technical 2.258-mile, 13-turn road course test in Lexington, OH through The Keyhole, Madness, and Thunder Valley with 2 total tire sets allowed. S12 Mid-Ohio Winner: #2 Nick Nickerson (Pole + 39/40 laps led, 0x).",
                 20: "Flat 1.0-mile desert tri-oval with the wide-open dogleg! Race 15 Phoenix Winner: #9 Dylan McDonald (with #7 Benjamin Lacy leading 57 laps).",
                 21: "Season 16 Championship Finale! High-wear 1.5-mile oval with variable 18–20° banking where rim-riding inches from the wall crowns the Season 16 Champion."
             }

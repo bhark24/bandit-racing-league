@@ -142,7 +142,7 @@
     </div>
   </div>
 
-  <script src="weekly_data.js?v=1793660775"></script>
+  <script src="weekly_data.js?v=1793677375"></script>
   <script>
     if (typeof weeklyData !== 'undefined') {
       const winnerName = weeklyData.winnerName || "TBD";
@@ -156,9 +156,9 @@
       // Update story text
       if (trackName.toLowerCase().includes("kansas")) {
         document.getElementById('dynamic-story').innerHTML = `
-          High-stakes fuel mileage strategy decided victory tonight under the lights at <span class="highlight">Kansas Speedway</span>!<br><br>
-          <span class="highlight">${winnerName}</span> (${winnerNumber}) conserved fuel impeccably to take the checkered flag as competitor trucks ran dry!<br><br>
-          <span class="highlight" style="color:#ff0055; font-size: 24px; font-style: italic;">Post-Race Notice: #9 Truck DQ'd for Intentional Wrecking (0 Pts, 3-Wk Probation, 3-Wk EOL)</span>
+          A double-overtime thriller in <span class="highlight">The Wendy Jo Memorial 110</span> at <span class="highlight">Kansas Speedway</span>!<br><br>
+          Starting 19th (+18 Hard Charger), <span class="highlight">${winnerName}</span> (${winnerNumber}) pulled off a masterpiece last-lap pass on <span class="highlight">#7 Benjamin Lacy</span> to win by 0.243s and lead a <span class="highlight">1-2-3 GFR Racing sweep</span>!<br><br>
+          <span class="highlight" style="color:#ffcc00; font-size: 24px; font-style: italic;">UP NEXT: 50 Laps at Mid-Ohio Sponsored by the BANDIT MOBILE APP (Wed, Nov 4 @ 9 PM EST)!</span>
         `;
       } else {
         document.getElementById('dynamic-story').innerHTML = `

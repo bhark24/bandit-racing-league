@@ -4,7 +4,7 @@ const weeklyData = {
   "winnerImage": "assets/truck images/truck_image_nick_nickerson.png?v=20261031b",
   "actionShots": [],
   "trackName": "Kansas Speedway",
-  "trackLogo": "",
+  "trackLogo": "Kansas.png",
   "raceDate": "Oct 28, 2026",
   "teamStandings": [
     {
@@ -71,33 +71,28 @@ const weeklyData = {
   "fantasyLeaderboard": [
     {
       "name": "Rebekah Weaver",
-      "score": 1665,
+      "score": 1542,
       "wins": 3
     },
     {
       "name": "Matt Crockett",
-      "score": 1476,
+      "score": 1336,
       "wins": 3
     },
     {
       "name": "Bhark24",
       "score": 1123,
-      "wins": 2
+      "wins": 3
     },
     {
       "name": "Lady Chaos",
-      "score": 904,
+      "score": 781,
       "wins": 3
     },
     {
       "name": "Bob Berry",
       "score": 711,
       "wins": 5
-    },
-    {
-      "name": "Michael Rakes",
-      "score": 380,
-      "wins": 2
     },
     {
       "name": "cmac",
@@ -113,6 +108,11 @@ const weeklyData = {
       "name": "Bobo",
       "score": 277,
       "wins": 0
+    },
+    {
+      "name": "Michael Rakes",
+      "score": 231,
+      "wins": 1
     },
     {
       "name": "robin allens bigest fan",

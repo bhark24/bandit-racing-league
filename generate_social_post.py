@@ -464,12 +464,19 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
         from playwright.sync_api import sync_playwright
         print("[*] Initializing Playwright...")
         
+        existing_weekly = load_js_variable(WEEKLY_DATA_PATH, "weeklyData") or {}
+
         with sync_playwright() as p:
             browser = p.chromium.launch()
             
-            # Scrape driver standings and apply self-correcting alignment
-            driver_standings = scrape_driver_standings_playwright(browser, "29722")
-            driver_standings = correct_driver_standings(driver_standings)
+            # Preserve authoritative Chase driver standings if already populated in weekly_data.js
+            existing_standings = existing_weekly.get("driverStandings", [])
+            if existing_standings and existing_standings[0].get("points", 0) >= 2000:
+                driver_standings = existing_standings
+                print("[+] Preserving authoritative Chase driver standings from weekly_data.js")
+            else:
+                driver_standings = scrape_driver_standings_playwright(browser, "29722")
+                driver_standings = correct_driver_standings(driver_standings)
             
             # 1.5. Determine Spotlight Driver based on new rules
             # Rules: 
@@ -478,7 +485,7 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
             # - Not selected in the previous 4 races (not in last 4 of spotlightHistory, matching normalized names)
             import hashlib
             spotlight_history = teams_data.get("spotlightHistory", []) if teams_data else []
-            selected_spotlight = "Kevin Foster" # Default fallback
+            selected_spotlight = existing_weekly.get("spotlightDriver") or "Bill Harkins" # Default fallback
             
             existing_spotlight = next((h["driver"] for h in spotlight_history if h["date"] == race_date), None)
             if existing_spotlight:
@@ -529,22 +536,25 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
                     selected_spotlight = "Kevin Foster"
 
             # Construct weekly data dict
-            winner_image = find_custom_winner_image(winner_name, track_name, BASE_DIR)
-            action_shots = find_track_action_shots(track_name, BASE_DIR)
-            latest_video_id = get_latest_youtube_video_id("UC8D9f0DOxaf8hdyxIuk2NeQ")
+            winner_image = existing_weekly.get("winnerImage") or find_custom_winner_image(winner_name, track_name, BASE_DIR)
+            action_shots = existing_weekly.get("actionShots") or find_track_action_shots(track_name, BASE_DIR)
+            latest_video_id = existing_weekly.get("latestBroadcastVideoId") or get_latest_youtube_video_id("UC8D9f0DOxaf8hdyxIuk2NeQ")
             weekly_data = {
                 "winnerName": winner_name,
-                "winnerNumber": winner_number,
+                "winnerNumber": winner_number or existing_weekly.get("winnerNumber", "2"),
                 "winnerImage": winner_image,
                 "actionShots": action_shots,
                 "trackName": track_name,
-                "trackLogo": track_logo,
+                "trackLogo": track_logo or existing_weekly.get("trackLogo", "Kansas.png"),
                 "raceDate": race_date,
                 "teamStandings": team_list,
                 "fantasyLeaderboard": fantasy_list,
                 "driverStandings": driver_standings,
                 "latestBroadcastVideoId": latest_video_id,
-                "spotlightDriver": selected_spotlight
+                "spotlightDriver": selected_spotlight,
+                "latestBroadcastTitle": existing_weekly.get("latestBroadcastTitle", "The Wendy Jo Memorial 110"),
+                "latestBroadcastIsUpcoming": existing_weekly.get("latestBroadcastIsUpcoming", False),
+                "latestBroadcastBanner": existing_weekly.get("latestBroadcastBanner", f"assets/BCast Banners/yt_{latest_video_id}.jpg")
             }
             
             # Write data to weekly_data.js
@@ -557,7 +567,7 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
             print("[*] Generating weekly post graphic...")
             html_path = os.path.join(BASE_DIR, "social_graphic.html")
             out_graphic_path = os.path.join(BASE_DIR, "assets", "weekly_social_update.png")
-            out_brain_path = r"C:\Users\Bill\.gemini\antigravity\brain\9ba04bcf-37da-404f-858c-21209e2562f2\weekly_social_update.png"
+            out_brain_path = r"C:\Users\Bill\.gemini\antigravity\brain\7512dc17-a3d2-4d87-b668-14df39bf2a30\weekly_social_update.png"
             
             # Ensure parent directories for output exist
             os.makedirs(os.path.dirname(out_graphic_path), exist_ok=True)
@@ -626,7 +636,7 @@ def main():
             name = clean_driver_name(d.get("name", "Driver"))
             pts = d.get("points", 0)
             pos = d.get("pos", idx + 1)
-            driver_rows.append(f"{emoji} {pos}. {name} — {pts} pts")
+            driver_rows.append(f"{emoji} {pos}. {name} — {pts:,} pts")
     else:
         driver_rows.append("No active driver standings available.")
 
@@ -640,7 +650,7 @@ def main():
             pts = t.get("points", 0)
             wins = t.get("wins", 0)
             win_suffix = f" ({wins} Win{'s' if wins != 1 else ''})" if wins > 0 else ""
-            team_rows.append(f"{emoji} {idx+1}. {name} — {pts} pts{win_suffix}")
+            team_rows.append(f"{emoji} {idx+1}. {name} — {pts:,} pts{win_suffix}")
     else:
         team_rows.append("No active team standings available.")
         
@@ -656,7 +666,7 @@ def main():
             score = fan.get("score", 0)
             wins = fan.get("wins", 0)
             win_suffix = f" ({wins} Win{'s' if wins != 1 else ''})" if wins > 0 else ""
-            fantasy_rows.append(f"{emoji} {idx+1}. {name} — {score} pts{win_suffix}")
+            fantasy_rows.append(f"{emoji} {idx+1}. {name} — {score:,} pts{win_suffix}")
     else:
         fantasy_rows.append("No active fantasy standings available.")
         
@@ -680,37 +690,47 @@ def main():
     elif "darlington" in track_name.lower():
         story_lead = f"Nickerson Tames the Lady in Black! **{winner_name}** drove a masterclass in the GFR Racing Chevrolet #2, surviving 130 grueling laps under the lights in \"Filming the Wild 130\" presented by Clear Low Communications to take the checkered flag at **{track_name}**! Benjamin Lacy finished 2nd for a GFR 1-2 sweep, while Dylan McDonald completed the podium in 3rd. Newest driver Korey Denson made his debut in the #36 car for Legacy Racing!"
     elif "kansas" in track_name.lower():
-        story_lead = f"Fuel Mileage Strategy & Major Penalties at Kansas Speedway! Tonight's race came down to extreme fuel mileage management, with driver strategy deciding victory at **{track_name}**! Meanwhile, BRL Race Control issued major disciplinary penalties following an intentional wrecking incident: the **#9 truck has been disqualified**, forfeiting all event points, placed on **probation for 3 weeks**, and assigned a **3-week EOL starting penalty**."
+        story_lead = (
+            f"Double-Overtime Thriller in **The Wendy Jo Memorial 110** (Chase Round 2) at **{track_name}**! "
+            f"The early going belonged to **Joshua L. Adams (#22 | 937 Racing)**, who rocketed out to a 5-second lead and swept both Stage 1 (Lap 33) and Stage 2 (Lap 66) while leading a race-high **66 laps** and scoring a race-high **54 points**! "
+            f"Then Stage 3 turned into a caution-filled chess match that forced **two Green-White-Checkered overtime attempts** (117 laps). Starting 19th on the grid (+18 Hard Charger), **{winner_name} (#2 | GFR Racing)** pulled off a masterpiece of a last-lap pass on teammate **Benjamin I. Lacy (#7, P2 — 34 laps led)** to win by **0.243 seconds**, with **Kevin Foster (#8, P3)** completing an all-0x **1-2-3 GFR Racing podium sweep**!\n\n"
+            f"🚨 **KANSAS II WALL OF SHAME IS LIVE:** Check out the full Race Control review on our website—including **#4's** Lap 12 15-lap-rule Drive-Thru, **#9 & #17's** Lap 32 'measuring contest,' the **Stage 2 Pit Road Short-Fuse Radio Meltdown** (#17, #31, #13, #24), late-race EOLs on **#36** and **#62**, and the Lap 114 overtime chaos!"
+        )
     else:
         story_lead = f"What a race! **{winner_name}** executed a perfect game plan, outrunning the field to secure P1 and the largest loot payout of the night at **{track_name}**!"
     
     winner_team = find_driver_team(winner_name, teams_data)
 
-    post_text = f"""**BANDIT RACING LEAGUE - WEEKLY UPDATE** 🏁
+    post_text = f"""🏁 **BANDIT RACING LEAGUE — POST-RACE UPDATE & CHASE STANDINGS** 🏁
 {story_lead}
 
-What a wild start to Season 16! Congratulations to **{winner_name}** and {winner_team} for taking the checkered flag at **{track_name}** ({race_date})! 🏆
+Congratulations to **{winner_name}** and **{winner_team}** for taking the checkered flag at **{track_name}** ({race_date})! 🏆
 
-🏆 **BRL DRIVER STANDINGS** 🏆
-Here is the current Top 10 in the Driver Championship:
+🏆 **SEASON 16 CHASE FOR THE CHAMPIONSHIP STANDINGS (TOP 10)** 🏆
+Only 33 points separate the Top 4 entering Round 3:
 {"\n".join(driver_rows)}
 
 💼 **FRANCHISE TEAM STANDINGS** 💼
-Here is how the Team Championship looks after this week:
 {"\n".join(team_rows)}
 
-🔮 **FANTASY LEAGUE LEADERBOARD** 🔮
-Here is the Top 5 for our Viewer Fantasy Challenge:
+🔮 **VIEWER FANTASY LEAGUE LEADERBOARD (TOP 5)** 🔮
 {"\n".join(fantasy_rows)}
 
-See the full results, driver statistics, and updated standings on our website:
-👉 **https://banditracingleague.net/**
+🔥 **VIEW THE KANSAS II WALL OF SHAME, FULL BOX SCORE & ODDS SHEET:**
+👉 **https://banditracingleague.net/wall-of-shame.html**
+👉 **https://banditracingleague.net/schedule.html**
 
-🗓️ **UPCOMING RACE** 🗓️
-Next week, the series travels to **{next_track}**!
-📅 {next_date}
+📱 **SPECIAL SCHEDULE ANNOUNCEMENT — UPCOMING RACE:** 📱
+This week we are at **Mid-Ohio Sports Car Course for 50 Laps Sponsored by the BANDIT MOBILE APP** for the Bandit Racing League!
+🏎️ **Event:** Bandit Mobile App 50 at Mid-Ohio (Season 16 Chase Round 3)
+📏 **Distance:** 50 Laps (112.9 Miles • Stages at Laps 15 & 30)
+📅 **Broadcast:** Wednesday, November 4th @ 9:00 PM EST (Live on SimTrax Broadcasting)
+📱 **Official Title Sponsor:** BANDIT MOBILE APP — Live Telemetry, Championship Hub, Fantasy & Pit Wall in Your Pocket!
 
-Who is your pick to win? Let us know in the comments below! 👇"""
+Who is your pick to conquer 50 laps at Mid-Ohio? Drop your predictions in the comments below! 👇"""
+
+    with open(os.path.join(BASE_DIR, "facebook_kansas2_post.txt"), "w", encoding="utf-8") as fb_f:
+        fb_f.write(post_text)
 
     print("\n" + "-" * 50)
     print("GENERATED SOCIAL POST:")

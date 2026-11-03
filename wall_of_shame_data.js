@@ -1473,6 +1473,116 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[STEWARDS] 'Inside lane checked up and 12 got into the back of 13 with no time to react—racing incident. Also noting: do not use race chat to announce how damaged your truck is.'"
             }
         ]
+    },
+
+    kansas_2: {
+        id: "kansas_2",
+        title: "Kansas Speedway II (Chase R2)",
+        subtext: "The Wendy Jo Memorial 110 — 117 Laps in 2x GWC Overtime (Stages @ 33 & 66)",
+        laps: 117,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 33 },
+            { name: "Stage 2", lap: 66 },
+            { name: "Final Stage (2x GWC)", lap: 117 }
+        ],
+        mvp: {
+            carNumber: "17",
+            driverName: "Car #17 (Korey Denson — formerly #36) & Pit Road Short-Fuse Crew",
+            title: "Wall of Shame MVP — Stage 2 Pit Road Powder Keg & Lap 32 Ego Clash 💥🎙️",
+            reason: "Switched from #36 to #17 to serve EOL #2 of 3 at the green flag, got into a Lap 32 no-yellow 'dick measuring contest' door-banging clash with #9 (Dylan McDonald), and then erupted at the Lap 66 Stage 2 break when #17, #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off with hair-trigger fuses after #17 hugged the far right of pit road and #13's comment lit the short fuse on the #17! Plus 4 on-track penalties to #4 (15-Lap Drive-Through), #36 (Lap 85 EOL), #62 (Lap 108 EOL), and #21 (Post-Race Confirmed Lap 114 Chaos Fault)!",
+            totalIncidents: 3,
+            totalPenalties: "Served EOL #2 of 3 + Lap 32 Clash w/ #9 + Stage 2 Pit Road VC Blowup",
+            image: "assets/tracks/Track Logos/Kansas.png"
+        },
+        drivers: [
+            { number: "17", name: "Driver #17 (Korey Denson — was #36)", score: 98, level: "CRITICAL", badge: "MVP / Short-Fuse VC + EOL #2/3", incidentsCount: 3, colors: ["#ff0055", "#111"] },
+            { number: "4",  name: "Driver #4 (Logan Murray)", score: 90, level: "CRITICAL", badge: "Drive-Thru Penalty (15-Lap Rule)", incidentsCount: 1, colors: ["#ff0055", "#111"] },
+            { number: "62", name: "Driver #62 (Ty Corino)", score: 86, level: "HIGH", badge: "EOL (Lap 108 Hit #18 Avoiding #31)", incidentsCount: 1, colors: ["#ff5500", "#111"] },
+            { number: "36", name: "Driver #36 (Collin Anderson)", score: 82, level: "HIGH", badge: "EOL (Lap 85 Turn 2 Solo Spin)", incidentsCount: 1, colors: ["#ff5500", "#111"] },
+            { number: "21", name: "Driver #21 (Nathan Santos)", score: 80, level: "HIGH", badge: "Post-Race Confirmed At-Fault (L114)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "31", name: "Driver #31 (Connor Gibson)", score: 70, level: "MEDIUM", badge: "Stage 2 VC Blowup & L108 Fence", incidentsCount: 2, colors: ["#e67e22", "#111"] },
+            { number: "13", name: "Driver #13 (Johnathon Platt)", score: 65, level: "MEDIUM", badge: "Lit #17's Fuse + L114 Chaos Victim", incidentsCount: 2, colors: ["#e67e22", "#111"] },
+            { number: "9",  name: "Driver #9 (Dylan McDonald)", score: 58, level: "MEDIUM", badge: "Lap 32 Ego Clash w/ #17", incidentsCount: 1, colors: ["#3498db", "#111"] },
+            { number: "24", name: "Driver #24 (Ethan Sikorski)", score: 52, level: "MEDIUM", badge: "Stage 2 Pit Road VC Blowup", incidentsCount: 1, colors: ["#3498db", "#111"] },
+            { number: "50", name: "Driver #50 (Davis Carroll)", score: 40, level: "LOW", badge: "Lap 40 Massive Netcode w/ #99", incidentsCount: 1, colors: ["#2ecc71", "#111"] },
+            { number: "99", name: "Driver #99 (Joshua Billiter)", score: 38, level: "LOW", badge: "Lap 40 Netcode Spin Victim", incidentsCount: 1, colors: ["#2ecc71", "#111"] },
+            { number: "14", name: "Driver #14 (Jason Allegrini)", score: 35, level: "LOW", badge: "Lap 12 Wall Victim (#4 Exit)", incidentsCount: 1, colors: ["#2ecc71", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 1, stage: 1, involved: ["17"], primaryCar: "17", category: "infraction",
+                title: "Pre-Race Probation EOL #2 of 3 Served: Car #36 (Now #17 Korey Denson)",
+                summary: "Car #36 (now driving Car #17, Korey Denson) dropped to the tail of the field at the start of Kansas 2 to serve his 2nd of 3 scheduled End of Line (EOL) penalties.",
+                ruling: "Scheduled EOL Penalty #2 of 3 Served (#17, formerly #36)", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Car 36—now in the 17 truck—is dropping to the back to serve EOL number 2 of 3.'"
+            },
+            {
+                id: 2, lap: 12, stage: 1, involved: ["4", "14"], primaryCar: "4", category: "penalty",
+                title: "Corner Exit Misjudgment Puts #14 in Wall & Spins #4 (15-Lap Rule)",
+                summary: "Car #4 (Logan Murray) exited the corner on a normal arc expecting Car #14 (Jason Allegrini) to drift up a little higher toward the wall. Car #14 held his line and didn't go up higher, and #4 ended up putting #14 into the wall and turning himself around inside the first 15 laps.",
+                ruling: "Drive-Through Penalty (#4 — 15-Lap Rule)", location: "Turn 2 / Corner Exit",
+                trackCoords: { x: 640, y: 240 },
+                audioTranscript: "[RACE CONTROL] '4 expected the 14 to track up higher on exit, put 14 in the wall and turned himself inside the first 15 laps. Drive-Through penalty on Car 4.'"
+            },
+            {
+                id: 3, lap: 32, stage: 1, involved: ["9", "17"], primaryCar: "17", category: "warning",
+                title: "Lap 32 Door-Banging Clash: Official 'Dick Measuring Contest' (#9 & #17)",
+                summary: "One lap before the Stage 1 break, Car #9 (Dylan McDonald) and Car #17 (Korey Denson) made heavy side-by-side contact without triggering a yellow flag in what Stewards officially summarized as a 'dick measuring contest.'",
+                ruling: "No Yellow / 'Dick Measuring Contest'", location: "Back Stretch / Turn 3",
+                trackCoords: { x: 350, y: 70 },
+                audioTranscript: "[STEWARDS] 'Contact between 9 and 17, no yellow—just a pure dick measuring contest out there.'"
+            },
+            {
+                id: 4, lap: 33, stage: 1, involved: ["22"], primaryCar: "22", category: "stage_finish",
+                title: "Stage 1 Official Finish (Won by #22 Joshua L. Adams)",
+                summary: "Stage 1 concludes at Lap 33 after Joshua L. Adams (#22) built a 5-second green-flag lead and led all 33 laps.",
+                ruling: "Stage 1 Complete", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Stage 1 complete at Lap 33! Car 22 takes the Stage 1 win.'"
+            },
+            {
+                id: 5, lap: 40, stage: 2, involved: ["50", "99"], primaryCar: "50", category: "netcode",
+                title: "Massive iRacing Netcode Turns Car #99",
+                summary: "Car #50 (Davis Carroll) and Car #99 (Joshua Billiter) suffered a massive iRacing netcode gap collision that turned the #99 truck around.",
+                ruling: "Racing Incident (Massive iRacing Netcode)", location: "Turn 2 / Back Stretch",
+                trackCoords: { x: 560, y: 80 },
+                audioTranscript: "[STEWARDS] '50 and 99 had massive netcode and 99 got turned. Confirmed racing incident.'"
+            },
+            {
+                id: 6, lap: 66, stage: 2, involved: ["17", "31", "13", "24"], primaryCar: "17", category: "mvp",
+                title: "Stage 2 Pit Road Short-Fuse Voice Chat Blowup (#17, #31, #13, #24)",
+                summary: "During the Lap 66 Stage 2 caution, Cars #17 (Korey Denson), #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off at each other with incredibly short fuses. All it seemed like was Car #17 tried to stay as far to the right of pit road as he could, and then Car #13 said something on the mic that immediately lit the very short fuse on the #17!",
+                ruling: "Stage 2 Complete + Wall of Shame Comms Highlight (Short-Fuse Pit Road Blowup)", location: "Pit Road / Stage 2 Caution",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RADIO #13 / #17 / #31 / #24] '17 tried to hug the right side of pit road, 13 made one comment and lit the worlds shortest fuse on the 17! Everybody mouthing off under the Stage 2 yellow!'"
+            },
+            {
+                id: 7, lap: 85, stage: 3, involved: ["36", "54"], primaryCar: "36", category: "penalty",
+                title: "Turn 2 Exit Snap-Loose Solo Spin (#36 & #54)",
+                summary: "Car #36 (Collin Anderson) got badly out of shape exiting Turn 2 and spun around by himself. Although there was contact with Car #54 (Matthew Bailey), Stewards noted the #36 was already going around regardless.",
+                ruling: "End of Line (EOL) Penalty (#36)", location: "Turn 2 Exit",
+                trackCoords: { x: 630, y: 260 },
+                audioTranscript: "[RACE CONTROL] '36 got out of shape bad exiting Turn 2 and wouldve been around regardless of the touch with 54. EOL penalty on Car 36.'"
+            },
+            {
+                id: 8, lap: 108, stage: 3, involved: ["62", "31", "18"], primaryCar: "62", category: "penalty",
+                title: "Turn 2 Fence Scrape Evasive Crash: Car #62 Hits #18 Avoiding #31",
+                summary: "With 2 laps left in regulation, Car #31 (Connor Gibson) got into the outside fence off Turn 2, lost speed, and was drifting slightly down the banking. While trying to avoid the slowed #31, Car #62 (Ty Corino) hit Car #18 (Victor Weaver) and chaos ensued through the pack.",
+                ruling: "End of Line (EOL) Penalty (#62)", location: "Turn 2 Exit",
+                trackCoords: { x: 610, y: 280 },
+                audioTranscript: "[RACE CONTROL] '31 got into the fence off 2 and was slower moving down slightly; 62 hit the 18 trying to avoid the 31 and chaos ensued. EOL penalty on Car 62.'"
+            },
+            {
+                id: 9, lap: 114, stage: 3, involved: ["21", "12", "13", "6"], primaryCar: "21", category: "penalty",
+                title: "Overtime Multi-Truck Chaos (#12, #13, #6, #21 — Post-Race Confirmed #21 At Fault)",
+                summary: "On the first overtime attempt at Lap 114, a whole lot of chaos erupted between Cars #12 (Bill Harkins), #13 (Johnathon Platt), #6 (Nicole Kriesel), and #21 (Nathan Santos). Originally scored as a racing deal live, post-race Stewards review confirmed Car #21 was at fault.",
+                ruling: "Called Racing Deal Live (Post-Race Confirmed: Car #21 Nathan Santos At Fault)", location: "Turn 3 & 4 / Overtime",
+                trackCoords: { x: 160, y: 200 },
+                audioTranscript: "[POST-RACE AUDIT] 'Lap 114 chaos between 12, 13, 6, and 21 was called a racing deal live, but post-race replay audit confirmed Car 21 was at fault.'"
+            }
+        ]
     }
 
 };
