@@ -10,8 +10,8 @@
 
 ### 💥🎙️ KOREY DENSON (Car #17, formerly #36) & PIT ROAD POWDER KEG (#17, #31, #13, #24)
 • **Pre-Race (Lap 1)**: Switched from #36 to #17 and dropped to the rear to serve **EOL #2 of 3**.
-• **Lap 32**: Heavy side-by-side contact between **Car #9 (Dylan McDonald)** and **Car #17 (Korey Denson)** coming to the end of Stage 1 with no yellow flag.
-  ↳ *Ruling*: **No Yellow — Official "Dick Measuring Contest"**
+• **Lap 32**: Side-by-side contact between **Car #9 (Dylan McDonald)** and **Car #17 (Korey Denson)** coming to the end of Stage 1 with no yellow flag.
+  ↳ *Ruling*: **No Yellow / Racing Contact**
 • **Lap 66 (Stage 2 Caution)**: **Cars #17 (Korey Denson)**, **#31 (Connor Gibson)**, **#13 (Johnathon Platt)**, and **#24 (Ethan Sikorski)** all started mouthing off at each other on voice chat with incredibly short fuses. All it seemed like was #17 tried to stay as far to the right of pit road as he could, and then #13 said something on the mic that immediately lit the very short fuse on the #17!
 
 ---
@@ -51,7 +51,7 @@
 | :---: | :---: | :--- | :--- |
 | **Pre-Race** | **#17 (was #36)** | Korey Denson serving scheduled probation penalty | **EOL #2 of 3 Served (#17)** |
 | **Lap 12** | **#4, #14** | #4 expected #14 to track higher on exit; put #14 in wall & spun himself | **Drive-Through #4 (15-Lap Rule)** |
-| **Lap 32** | **#9, #17** | Side-by-side contact between #9 and #17, no yellow | **Dick Measuring Contest** |
+| **Lap 32** | **#9, #17** | Side-by-side contact between #9 and #17, no yellow | **No Yellow / Racing Contact** |
 | **Lap 33** | **STAGE 1** | Stage 1 finish (won by #22 Joshua L. Adams) | **Stage 1 Complete** |
 | **Lap 40** | **#50, #99** | Massive netcode between #50 and #99 turned #99 | **Racing Incident (Netcode)** |
 | **Lap 66** | **#17, #31, #13, #24** | Stage 2 pit-entry short-fuse voice chat blowup (#13 lit #17's fuse) | **Stage 2 + Comms Highlight (MVP)** |

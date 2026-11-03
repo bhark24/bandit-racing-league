@@ -694,7 +694,7 @@ def main():
             f"Double-Overtime Thriller in **The Wendy Jo Memorial 110** (Chase Round 2) at **{track_name}**! "
             f"The early going belonged to **Joshua L. Adams (#22 | 937 Racing)**, who rocketed out to a 5-second lead and swept both Stage 1 (Lap 33) and Stage 2 (Lap 66) while leading a race-high **66 laps** and scoring a race-high **54 points**! "
             f"Then Stage 3 turned into a caution-filled chess match that forced **two Green-White-Checkered overtime attempts** (117 laps). Starting 19th on the grid (+18 Hard Charger), **{winner_name} (#2 | GFR Racing)** pulled off a masterpiece of a last-lap pass on teammate **Benjamin I. Lacy (#7, P2 — 34 laps led)** to win by **0.243 seconds**, with **Kevin Foster (#8, P3)** completing an all-0x **1-2-3 GFR Racing podium sweep**!\n\n"
-            f"🚨 **KANSAS II WALL OF SHAME IS LIVE:** Check out the full Race Control review on our website—including **#4's** Lap 12 15-lap-rule Drive-Thru, **#9 & #17's** Lap 32 'measuring contest,' the **Stage 2 Pit Road Short-Fuse Radio Meltdown** (#17, #31, #13, #24), late-race EOLs on **#36** and **#62**, and the Lap 114 overtime chaos!"
+            f"🚨 **KANSAS II WALL OF SHAME IS LIVE:** Check out the full Race Control review on our website—including **#4's** Lap 12 15-lap-rule Drive-Thru, **#9 & #17's** Lap 32 no-yellow contact, the **Stage 2 Pit Road Short-Fuse Radio Meltdown** (#17, #31, #13, #24), late-race EOLs on **#36** and **#62**, and the Lap 114 overtime chaos!"
         )
     else:
         story_lead = f"What a race! **{winner_name}** executed a perfect game plan, outrunning the field to secure P1 and the largest loot payout of the night at **{track_name}**!"

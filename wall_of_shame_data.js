@@ -1489,10 +1489,10 @@ const BRL_RACES_DATA = {
         mvp: {
             carNumber: "17",
             driverName: "Car #17 (Korey Denson — formerly #36) & Pit Road Short-Fuse Crew",
-            title: "Wall of Shame MVP — Stage 2 Pit Road Powder Keg & Lap 32 Ego Clash 💥🎙️",
-            reason: "Switched from #36 to #17 to serve EOL #2 of 3 at the green flag, got into a Lap 32 no-yellow 'dick measuring contest' door-banging clash with #9 (Dylan McDonald), and then erupted at the Lap 66 Stage 2 break when #17, #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off with hair-trigger fuses after #17 hugged the far right of pit road and #13's comment lit the short fuse on the #17! Plus 4 on-track penalties to #4 (15-Lap Drive-Through), #36 (Lap 85 EOL), #62 (Lap 108 EOL), and #21 (Post-Race Confirmed Lap 114 Chaos Fault)!",
+            title: "Wall of Shame MVP — Stage 2 Pit Road Powder Keg & Lap 32 Contact 💥🎙️",
+            reason: "Switched from #36 to #17 to serve EOL #2 of 3 at the green flag, made Lap 32 no-yellow side-by-side contact with #9 (Dylan McDonald), and then erupted at the Lap 66 Stage 2 break when #17, #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off with hair-trigger fuses after #17 hugged the far right of pit road and #13's comment lit the short fuse on the #17! Plus 4 on-track penalties to #4 (15-Lap Drive-Through), #36 (Lap 85 EOL), #62 (Lap 108 EOL), and #21 (Post-Race Confirmed Lap 114 Chaos Fault)!",
             totalIncidents: 3,
-            totalPenalties: "Served EOL #2 of 3 + Lap 32 Clash w/ #9 + Stage 2 Pit Road VC Blowup",
+            totalPenalties: "Served EOL #2 of 3 + Lap 32 Contact w/ #9 + Stage 2 Pit Road VC Blowup",
             image: "assets/tracks/Track Logos/Kansas.png"
         },
         drivers: [
@@ -1503,7 +1503,7 @@ const BRL_RACES_DATA = {
             { number: "21", name: "Driver #21 (Nathan Santos)", score: 80, level: "HIGH", badge: "Post-Race Confirmed At-Fault (L114)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
             { number: "31", name: "Driver #31 (Connor Gibson)", score: 70, level: "MEDIUM", badge: "Stage 2 VC Blowup & L108 Fence", incidentsCount: 2, colors: ["#e67e22", "#111"] },
             { number: "13", name: "Driver #13 (Johnathon Platt)", score: 65, level: "MEDIUM", badge: "Lit #17's Fuse + L114 Chaos Victim", incidentsCount: 2, colors: ["#e67e22", "#111"] },
-            { number: "9",  name: "Driver #9 (Dylan McDonald)", score: 58, level: "MEDIUM", badge: "Lap 32 Ego Clash w/ #17", incidentsCount: 1, colors: ["#3498db", "#111"] },
+            { number: "9",  name: "Driver #9 (Dylan McDonald)", score: 58, level: "MEDIUM", badge: "Lap 32 Contact w/ #17 (No Yellow)", incidentsCount: 1, colors: ["#3498db", "#111"] },
             { number: "24", name: "Driver #24 (Ethan Sikorski)", score: 52, level: "MEDIUM", badge: "Stage 2 Pit Road VC Blowup", incidentsCount: 1, colors: ["#3498db", "#111"] },
             { number: "50", name: "Driver #50 (Davis Carroll)", score: 40, level: "LOW", badge: "Lap 40 Massive Netcode w/ #99", incidentsCount: 1, colors: ["#2ecc71", "#111"] },
             { number: "99", name: "Driver #99 (Joshua Billiter)", score: 38, level: "LOW", badge: "Lap 40 Netcode Spin Victim", incidentsCount: 1, colors: ["#2ecc71", "#111"] },
@@ -1527,12 +1527,12 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RACE CONTROL] '4 expected the 14 to track up higher on exit, put 14 in the wall and turned himself inside the first 15 laps. Drive-Through penalty on Car 4.'"
             },
             {
-                id: 3, lap: 32, stage: 1, involved: ["9", "17"], primaryCar: "17", category: "warning",
-                title: "Lap 32 Door-Banging Clash: Official 'Dick Measuring Contest' (#9 & #17)",
-                summary: "One lap before the Stage 1 break, Car #9 (Dylan McDonald) and Car #17 (Korey Denson) made heavy side-by-side contact without triggering a yellow flag in what Stewards officially summarized as a 'dick measuring contest.'",
-                ruling: "No Yellow / 'Dick Measuring Contest'", location: "Back Stretch / Turn 3",
+                id: 3, lap: 32, stage: 1, involved: ["9", "17"], primaryCar: "17", category: "racing_deal",
+                title: "Lap 32 Side-by-Side Contact (#9 & #17 — No Yellow)",
+                summary: "One lap before the Stage 1 break, Car #9 (Dylan McDonald) and Car #17 (Korey Denson) made side-by-side contact without triggering a yellow flag.",
+                ruling: "No Yellow / Racing Contact", location: "Back Stretch / Turn 3",
                 trackCoords: { x: 350, y: 70 },
-                audioTranscript: "[STEWARDS] 'Contact between 9 and 17, no yellow—just a pure dick measuring contest out there.'"
+                audioTranscript: "[STEWARDS] 'Contact between 9 and 17 coming to the end of Stage 1, no yellow.'"
             },
             {
                 id: 4, lap: 33, stage: 1, involved: ["22"], primaryCar: "22", category: "stage_finish",
