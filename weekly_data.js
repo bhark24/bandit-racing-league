@@ -437,9 +437,9 @@ const weeklyData = {
       "points": 2
     }
   ],
-  "latestBroadcastVideoId": "Mvniqkv6ycU",
+  "latestBroadcastVideoId": "LiFVc8IquJ8",
   "spotlightDriver": "Bill Harkins",
-  "latestBroadcastTitle": "The Wendy Jo Memorial 110",
-  "latestBroadcastIsUpcoming": false,
-  "latestBroadcastBanner": "assets/BCast Banners/yt_Mvniqkv6ycU.jpg"
+  "latestBroadcastTitle": "The I'm Lost at Mid Ohio 175",
+  "latestBroadcastIsUpcoming": true,
+  "latestBroadcastBanner": "assets/BCast Banners/yt_LiFVc8IquJ8.jpg"
 };
