@@ -1,5 +1,5 @@
 const season16StatsData = {
-  "updatedAt": "Oct 30, 2026",
+  "updatedAt": "Nov 04, 2026",
   "drivers": [
     {
       "driverId": 50037,
@@ -2950,7 +2950,7 @@ const season16StatsData = {
       "isCompleted": true,
       "scheduledLaps": 55,
       "stageBreaks": "15 / 30",
-      "fuelCap": "100% Fuel",
+      "fuelCap": "70% Fuel Cap",
       "tireSets": "2 Total Sets (Start + 1 Pit)",
       "distanceMiles": 134.8,
       "winner": "#2 Nick Nickerson",
@@ -3261,8 +3261,6 @@ const season16StatsData = {
       "dateStr": "2026-11-04",
       "dateFormatted": "Nov 04, 2026",
       "eventName": "Bandit Mobile App 50 at Mid-Ohio (Chase Round 3)",
-      "sponsorName": "BANDIT MOBILE APP",
-      "sponsorLogo": "assets/bandit-mobile-app-logo.jpg",
       "trackName": "Mid-Ohio Sports Car Course",
       "configName": "Full Course",
       "lengthMiles": 2.258,
@@ -3272,10 +3270,12 @@ const season16StatsData = {
       "isCompleted": false,
       "scheduledLaps": 50,
       "stageBreaks": "15 / 30",
-      "fuelCap": "100% Fuel",
+      "fuelCap": "70% Fuel Cap",
       "tireSets": "2 Total Sets (Start + 1 Pit)",
+      "sponsorName": "BANDIT MOBILE APP",
+      "sponsorLogo": "assets/bandit-mobile-app-logo.jpg",
       "distanceMiles": 112.9,
-      "scoutingNotes": "OFFICIAL ANNOUNCEMENT: We are at Mid-Ohio Sports Car Course this week for 50 LAPS, proudly sponsored by the BANDIT MOBILE APP for the Bandit Racing League! Technical 2.258-mile, 13-turn road course test in Lexington, OH through The Keyhole, Madness, and Thunder Valley with only 2 total tire sets allowed. S12 Mid-Ohio Winner: #2 Nick Nickerson (Pole + 39/40 laps led, 0x)."
+      "scoutingNotes": "OFFICIAL ANNOUNCEMENT: We are at Mid-Ohio Sports Car Course this week for 50 LAPS, proudly sponsored by the BANDIT MOBILE APP for the Bandit Racing League! Technical 2.258-mile, 13-turn road course test in Lexington, OH through The Keyhole, Madness, and Thunder Valley (70% Fuel Cap \u2022 Stages at Lap 15 & Lap 30). S12 Mid-Ohio Winner: #2 Nick Nickerson (Pole + 39/40 laps led, 0x)."
     },
     {
       "raceNum": 20,

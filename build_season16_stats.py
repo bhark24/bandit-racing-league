@@ -262,7 +262,7 @@ def main():
         date_fmt = dt_obj.strftime("%b %d, %Y")
 
         is_road = turns > 5
-        fuel_cap = "100% Fuel" if is_road else "70% Fuel Cap"
+        fuel_cap = "70% Fuel Cap"
         tire_sets = "2 Total Sets (Start + 1 Pit)" if is_road else "3 Total Sets (Start + 2 Pit)"
 
         race_ids_obj = s.get("race_id") or {}
@@ -292,6 +292,10 @@ def main():
             "fuelCap": fuel_cap,
             "tireSets": tire_sets
         }
+
+        if race_num == 19:
+            entry["sponsorName"] = "BANDIT MOBILE APP"
+            entry["sponsorLogo"] = "assets/bandit-mobile-app-logo.jpg"
 
         if is_completed:
             participants = list(s_drivers[str(main_race_id)].values())
@@ -356,7 +360,7 @@ def main():
             entry["distanceMiles"] = round(def_laps * length_mi, 1)
             scouting_map = {
                 18: "Progressive banking (17–20°) makes the high lane against the outside wall dominant on long green-flag runs. Race 11 Kansas Winner: #47 Michael Rakes (40 laps led by #7 Benjamin Lacy).",
-                19: "OFFICIAL ANNOUNCEMENT: We are at Mid-Ohio Sports Car Course this week for 50 LAPS, proudly sponsored by the BANDIT MOBILE APP for the Bandit Racing League! Technical 2.258-mile, 13-turn road course test in Lexington, OH through The Keyhole, Madness, and Thunder Valley with 2 total tire sets allowed. S12 Mid-Ohio Winner: #2 Nick Nickerson (Pole + 39/40 laps led, 0x).",
+                19: "OFFICIAL ANNOUNCEMENT: We are at Mid-Ohio Sports Car Course this week for 50 LAPS, proudly sponsored by the BANDIT MOBILE APP for the Bandit Racing League! Technical 2.258-mile, 13-turn road course test in Lexington, OH through The Keyhole, Madness, and Thunder Valley (70% Fuel Cap • Stages at Lap 15 & Lap 30). S12 Mid-Ohio Winner: #2 Nick Nickerson (Pole + 39/40 laps led, 0x).",
                 20: "Flat 1.0-mile desert tri-oval with the wide-open dogleg! Race 15 Phoenix Winner: #9 Dylan McDonald (with #7 Benjamin Lacy leading 57 laps).",
                 21: "Season 16 Championship Finale! High-wear 1.5-mile oval with variable 18–20° banking where rim-riding inches from the wall crowns the Season 16 Champion."
             }
