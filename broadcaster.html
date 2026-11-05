@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793837171">
+    <link rel="stylesheet" href="styles.css?v=1793837602">
     
     <style>
         body {
@@ -461,11 +461,11 @@
             }
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793837171">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793837171">
-    <link rel="shortcut icon" href="favicon.ico?v=1793837171">
-    <link rel="manifest" href="manifest.json?v=1793837171">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793837171">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793837602">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793837602">
+    <link rel="shortcut icon" href="favicon.ico?v=1793837602">
+    <link rel="manifest" href="manifest.json?v=1793837602">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793837602">
 </head>
 <body>
 
@@ -495,22 +495,35 @@
 
     <div class="hub-container">
 
-        <!-- Top Broadcaster Mode Switcher Bar -->
+        <!-- Passcode Entry Screen (Gates the ENTIRE Broadcaster Portal) -->
+        <div id="auth-gate" class="lock-screen">
+            <h3 class="italic-heavy" style="font-size: 1.8rem; color: #fff; text-transform: uppercase; margin-bottom: 5px;">Broadcaster Portal</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">Enter the secure Broadcaster Passcode to unlock the real-time telemetry hub and tonight's race booth notes.</p>
+            
+            <input type="password" id="passcode-input" class="verify-input" style="width:100%; box-sizing:border-box; margin-bottom:20px;" placeholder="ENTER PASSCODE" onkeydown="if(event.key==='Enter') verifyBroadcasterAccess()">
+            <button class="btn-verify" onclick="verifyBroadcasterAccess()">Unlock Dashboard</button>
+            <div id="auth-status" class="status-msg" style="margin-top: 15px; color: #ff1744;"></div>
+        </div>
+
+        <!-- Unlocked Secured Broadcaster Portal Content (Hidden Until Passcode Verified) -->
+        <div id="unlocked-portal-content" style="display: none; flex-direction: column; gap: 20px;">
+
+        <!-- Top Broadcaster Mode Switcher Bar (Visible Only After Unlock) -->
         <div class="portal-topbar">
             <div>
-                <div style="font-size: 0.75rem; color: var(--neon-green); font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px;">🎙️ SIMTRAX OFFICIAL BROADCAST BOOTH PORTAL • SEASON 16 CHASE ROUND 3</div>
+                <div style="font-size: 0.75rem; color: var(--neon-green); font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px;">🔒 SECURED SIMTRAX BROADCASTER PORTAL • SEASON 16 CHASE ROUND 3</div>
                 <h1 style="margin: 2px 0 0 0; font-size: 1.65rem; font-style: italic; font-weight: 900; text-transform: uppercase; color: #fff;">
                     Bandit Mobile App 50 at Mid-Ohio <span style="color: var(--chase-yellow); font-size: 1.1rem;">(50 Laps • Stages: Lap 15 &amp; Lap 30)</span>
                 </h1>
             </div>
             <div class="portal-tab-group">
-                <button id="tab-btn-notes" class="portal-tab-btn active" onclick="switchBroadcasterTab('notes')">
-                    📋 Tonight's Booth Notes &amp; Run Sheet
-                </button>
-                <button id="tab-btn-telemetry" class="portal-tab-btn" onclick="switchBroadcasterTab('telemetry')">
+                <button id="tab-btn-telemetry" class="portal-tab-btn active" onclick="switchBroadcasterTab('telemetry')">
                     📡 Live Driver Telemetry Hub
                 </button>
-                <button class="portal-tab-btn" onclick="window.print()" style="border-color: var(--chase-yellow); color: var(--chase-yellow);">
+                <button id="tab-btn-notes" class="portal-tab-btn" onclick="switchBroadcasterTab('notes')" style="border-color: var(--chase-yellow);">
+                    📋 Open Tonight's Race Booth Notes (Stages: Lap 15 &amp; 30)
+                </button>
+                <button id="btn-print-notes" class="portal-tab-btn" onclick="window.print()" style="display: none; border-color: var(--neon-green); color: var(--neon-green);">
                     🖨️ Print Booth Sheet
                 </button>
             </div>
@@ -519,7 +532,7 @@
         <!-- ========================================================================= -->
         <!-- TAB 1: TONIGHT'S RACE BOOTH NOTES & RUN SHEET (MID-OHIO 50)               -->
         <!-- ========================================================================= -->
-        <div id="notes-tab-panel" style="display: flex; flex-direction: column; gap: 22px;">
+        <div id="notes-tab-panel" style="display: none; flex-direction: column; gap: 22px;">
 
             <!-- Top Row: Race Specs + Stage Breakdown + Live Scratchpad -->
             <div class="notes-grid-2col">
@@ -821,19 +834,9 @@
         </div>
 
         <!-- ========================================================================= -->
-        <!-- TAB 2: LIVE DRIVER TELEMETRY HUB (PASSCODE PROTECTED)                     -->
+        <!-- TAB 2: LIVE DRIVER TELEMETRY HUB                                          -->
         <!-- ========================================================================= -->
-        <div id="telemetry-tab-panel" style="display: none;">
-            <!-- Passcode Entry Screen -->
-            <div id="auth-gate" class="lock-screen">
-                <h3 class="italic-heavy" style="font-size: 1.8rem; color: #fff; text-transform: uppercase; margin-bottom: 5px;">Live Telemetry Scanner</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">Enter the secure Broadcaster Passcode to unlock the real-time driver telemetry feeds.</p>
-                
-                <input type="password" id="passcode-input" class="verify-input" style="width:100%; box-sizing:border-box; margin-bottom:20px;" placeholder="ENTER PASSCODE" onkeydown="if(event.key==='Enter') verifyBroadcasterAccess()">
-                <button class="btn-verify" onclick="verifyBroadcasterAccess()">Unlock Telemetry Hub</button>
-                <div id="auth-status" class="status-msg" style="margin-top: 15px; color: #ff1744;"></div>
-            </div>
-
+        <div id="telemetry-tab-panel" style="display: block;">
             <!-- Broadcaster Dashboard Layout -->
             <div id="broadcaster-dashboard" class="broadcast-layout">
                 
@@ -857,7 +860,7 @@
                     <div class="viewport-placeholder" id="viewport-placeholder-box">
                         <div style="font-size: 3.5rem;">🎙️</div>
                         <h3 style="margin: 0; font-style: italic; text-transform: uppercase; color: #fff;">Telemetry Viewport</h3>
-                        <p style="margin: 0; max-width: 400px; line-height: 1.5;">Select any driver from the scanned directory on the left to embed their live spotter portal telemetry here.</p>
+                        <p style="margin: 0; max-width: 400px; line-height: 1.5;">Select any driver from the scanned directory on the left to embed their live spotter portal telemetry here, or click <strong>"📋 Open Tonight's Race Booth Notes"</strong> above for tonight's Mid-Ohio stage &amp; championship notes.</p>
                     </div>
                     <iframe class="viewport-frame" id="viewport-iframe" style="display: none;"></iframe>
                 </main>
@@ -865,35 +868,38 @@
             </div>
         </div>
 
+        </div><!-- End #unlocked-portal-content -->
+
     </div>
 
     <footer>
         <div class="container footer-content">
-            <p>&copy; 2026 Bandit Racing League. SimTrax Broadcaster Portal &amp; Booth Notes.</p>
+            <p>&copy; 2026 Bandit Racing League. Broadcaster Access Level.</p>
         </div>
     </footer>
 
     <!-- Broadcaster Tab Switcher, LocalStorage Notes, and Telemetry Scanner -->
     <script>
         function switchBroadcasterTab(tab) {
+            if (sessionStorage.getItem('broadcaster_authenticated') !== 'true') return;
             const notesPanel = document.getElementById('notes-tab-panel');
             const telemetryPanel = document.getElementById('telemetry-tab-panel');
             const btnNotes = document.getElementById('tab-btn-notes');
             const btnTelemetry = document.getElementById('tab-btn-telemetry');
+            const btnPrint = document.getElementById('btn-print-notes');
 
             if (tab === 'telemetry') {
                 notesPanel.style.display = 'none';
                 telemetryPanel.style.display = 'block';
                 btnNotes.classList.remove('active');
                 btnTelemetry.classList.add('active');
-                if (sessionStorage.getItem('broadcaster_authenticated') === 'true') {
-                    unlockBroadcasterDashboard();
-                }
+                if (btnPrint) btnPrint.style.display = 'none';
             } else {
                 notesPanel.style.display = 'flex';
                 telemetryPanel.style.display = 'none';
                 btnNotes.classList.add('active');
                 btnTelemetry.classList.remove('active');
+                if (btnPrint) btnPrint.style.display = 'inline-flex';
             }
         }
 
@@ -938,9 +944,6 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             loadBoothNotes();
-            if (window.location.hash === '#telemetry') {
-                switchBroadcasterTab('telemetry');
-            }
             if (sessionStorage.getItem('broadcaster_authenticated') === 'true') {
                 unlockBroadcasterDashboard();
             }
@@ -990,8 +993,10 @@
 
         function unlockBroadcasterDashboard() {
             const gate = document.getElementById('auth-gate');
+            const unlocked = document.getElementById('unlocked-portal-content');
             const dash = document.getElementById('broadcaster-dashboard');
             if (gate) gate.style.display = 'none';
+            if (unlocked) unlocked.style.display = 'flex';
             if (dash) dash.style.display = 'grid';
             
             if (!telemetryInitialized) {
@@ -1172,6 +1177,6 @@
             popout.href = `spotter.html?driver=${driverId}&t=${cacheBuster}`;
         }
     </script>
-    <script src="brl_app.js?v=1793837171"></script>
+    <script src="brl_app.js?v=1793837602"></script>
 </body>
 </html>
