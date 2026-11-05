@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793837602">
+    <link rel="stylesheet" href="styles.css?v=1793838087">
     
     <style>
         body {
@@ -461,11 +461,11 @@
             }
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793837602">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793837602">
-    <link rel="shortcut icon" href="favicon.ico?v=1793837602">
-    <link rel="manifest" href="manifest.json?v=1793837602">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793837602">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793838087">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793838087">
+    <link rel="shortcut icon" href="favicon.ico?v=1793838087">
+    <link rel="manifest" href="manifest.json?v=1793838087">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793838087">
 </head>
 <body>
 
@@ -601,9 +601,9 @@
                     </div>
                 </div>
 
-                <!-- Right: Official Sponsor Reads & Live Booth Scratchpad -->
+                <!-- Right: Official Sponsor Reads -->
                 <div style="display: flex; flex-direction: column; gap: 18px;">
-                    <div class="booth-card" style="border-top: 4px solid var(--chase-yellow);">
+                    <div class="booth-card" style="border-top: 4px solid var(--chase-yellow); height: 100%; box-sizing: border-box;">
                         <div class="booth-card-title">
                             <span style="color: var(--chase-yellow);">🎙️ OFFICIAL BOOTH SPONSOR READS</span>
                             <span style="font-size: 0.75rem; color: #aaa; font-style: normal;">Read Pre-Race, Stage 1 (Lap 15) &amp; Stage 2 (Lap 30)</span>
@@ -629,29 +629,6 @@
                                 "Don't forget to lock in your free 4-driver lineup in the <strong>BRL Viewer Fantasy League</strong> before the green flag drops! <strong>Rebekah Weaver (1,542 pts)</strong> leads <strong>Matt Crockett (1,336 pts)</strong> and Kansas II winner <strong>Bhark24 (1,123 pts)</strong>!"
                             </p>
                         </div>
-                    </div>
-
-                    <!-- Live Booth Scratchpad (Auto-Saved in Browser) -->
-                    <div class="booth-card" style="border-top: 4px solid #00e5ff;">
-                        <div class="booth-card-title" style="margin-bottom: 10px;">
-                            <span style="color: #00e5ff;">📝 LIVE BOOTH TRACKER (AUTO-SAVES)</span>
-                            <button onclick="clearBoothNotes()" style="background: rgba(255,255,255,0.08); color: #ccc; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 3px 8px; font-size: 0.72rem; cursor: pointer;">Clear</button>
-                        </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-                            <div>
-                                <label style="font-size: 0.7rem; color: #aaa; text-transform: uppercase; font-weight: 800;">⚡ Pole Winner</label>
-                                <input id="note-pole" class="scratch-input" placeholder="e.g. #2 Nickerson" oninput="saveBoothNotes()">
-                            </div>
-                            <div>
-                                <label style="font-size: 0.7rem; color: var(--neon-green); text-transform: uppercase; font-weight: 800;">🟢 Stage 1 (Lap 15)</label>
-                                <input id="note-s1" class="scratch-input" placeholder="Stage 1 Winner" oninput="saveBoothNotes()">
-                            </div>
-                            <div>
-                                <label style="font-size: 0.7rem; color: var(--chase-yellow); text-transform: uppercase; font-weight: 800;">🟡 Stage 2 (Lap 30)</label>
-                                <input id="note-s2" class="scratch-input" placeholder="Stage 2 Winner" oninput="saveBoothNotes()">
-                            </div>
-                        </div>
-                        <textarea id="note-pad" class="scratch-input" rows="3" placeholder="Type live pit strategy splits (who pitted Lap 15 vs. Lap 30), caution laps, or storylines here..." oninput="saveBoothNotes()"></textarea>
                     </div>
                 </div>
             </div>
@@ -903,36 +880,6 @@
             }
         }
 
-        function saveBoothNotes() {
-            const data = {
-                pole: document.getElementById('note-pole')?.value || '',
-                s1: document.getElementById('note-s1')?.value || '',
-                s2: document.getElementById('note-s2')?.value || '',
-                pad: document.getElementById('note-pad')?.value || ''
-            };
-            localStorage.setItem('brl_midohio_booth_notes', JSON.stringify(data));
-        }
-
-        function loadBoothNotes() {
-            try {
-                const raw = localStorage.getItem('brl_midohio_booth_notes');
-                if (!raw) return;
-                const data = JSON.parse(raw);
-                if (document.getElementById('note-pole')) document.getElementById('note-pole').value = data.pole || '';
-                if (document.getElementById('note-s1')) document.getElementById('note-s1').value = data.s1 || '';
-                if (document.getElementById('note-s2')) document.getElementById('note-s2').value = data.s2 || '';
-                if (document.getElementById('note-pad')) document.getElementById('note-pad').value = data.pad || '';
-            } catch (e) {}
-        }
-
-        function clearBoothNotes() {
-            localStorage.removeItem('brl_midohio_booth_notes');
-            if (document.getElementById('note-pole')) document.getElementById('note-pole').value = '';
-            if (document.getElementById('note-s1')) document.getElementById('note-s1').value = '';
-            if (document.getElementById('note-s2')) document.getElementById('note-s2').value = '';
-            if (document.getElementById('note-pad')) document.getElementById('note-pad').value = '';
-        }
-
         // Custom Render telemetry relay configuration
         const RELAY_SERVER_URL = "wss://bandit-racing-league.onrender.com";
         async function sha256(message) {
@@ -943,7 +890,6 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadBoothNotes();
             if (sessionStorage.getItem('broadcaster_authenticated') === 'true') {
                 unlockBroadcasterDashboard();
             }
@@ -1177,6 +1123,6 @@
             popout.href = `spotter.html?driver=${driverId}&t=${cacheBuster}`;
         }
     </script>
-    <script src="brl_app.js?v=1793837602"></script>
+    <script src="brl_app.js?v=1793838087"></script>
 </body>
 </html>
