@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793836532">
+    <link rel="stylesheet" href="styles.css?v=1793837171">
     <style>
         .simtrax-grid {
             display: grid;
@@ -45,11 +45,11 @@
             }
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793836532">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793836532">
-    <link rel="shortcut icon" href="favicon.ico?v=1793836532">
-    <link rel="manifest" href="manifest.json?v=1793836532">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793836532">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793837171">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793837171">
+    <link rel="shortcut icon" href="favicon.ico?v=1793837171">
+    <link rel="manifest" href="manifest.json?v=1793837171">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793837171">
 </head>
 <body>
 
@@ -109,11 +109,19 @@
         
         <!-- Upcoming Race Broadcast Banner (Auto-Synced Daily from SimTrax YouTube) -->
         <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-            <div class="card neon-border" style="width: 100%; max-width: 900px; padding: 20px; text-align: center;">
-                <h2 id="simtrax-upcoming-heading" style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 10px; font-size: 1.45rem; letter-spacing: 1.5px;">🔴 Tonight's Live Broadcast &bull; The I'm Lost at Mid Ohio 175</h2>
-                <p id="simtrax-upcoming-sub" style="color: #ccc; font-size: 0.95rem; margin-bottom: 15px; line-height: 1.5;">Scheduled Live Stream (Wednesday, Nov 4, 2026 @ 9:00 PM EST &bull; Mid-Ohio Sports Car Course) &bull; <a href='https://www.youtube.com/watch?v=LiFVc8IquJ8' target='_blank' style='color: var(--neon-green); font-weight: bold;'>Click Here to Set Reminder / Watch Live on YouTube &rarr;</a></p>
+            <div class="card neon-border" style="width: 100%; max-width: 960px; padding: 24px; text-align: center;">
+                <h2 id="simtrax-upcoming-heading" style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 10px; font-size: 1.55rem; letter-spacing: 1.5px;">🔴 TONIGHT'S LIVE BROADCAST: BANDIT MOBILE APP 50 AT MID-OHIO (9:00 PM EST)</h2>
+                <p id="simtrax-upcoming-sub" style="color: #ccc; font-size: 0.98rem; margin-bottom: 16px; line-height: 1.6;">
+                    <strong>Season 16 Chase Round 3 of 5</strong> &bull; <strong>50 Laps (112.9 Miles)</strong> &bull; <strong style="color: var(--chase-yellow);">Stage Breaks: Lap 15 &amp; Lap 30</strong> &bull; <strong>2 Total Tire Sets</strong><br>
+                    Sponsored by the <strong>Bandit Racing League Mobile App</strong> &amp; Presented by <strong>Clear Low Communications</strong>
+                </p>
+                <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;">
+                    <a href="https://www.youtube.com/watch?v=LiFVc8IquJ8" target="_blank" class="btn-primary" style="padding: 10px 22px; font-weight: 900; text-decoration: none;">🔴 Watch Live on SimTrax YouTube &rarr;</a>
+                    <a href="/broadcaster.html" class="btn-primary" style="padding: 10px 22px; background: var(--chase-yellow); border-color: var(--chase-yellow); color: #000; font-weight: 900; text-decoration: none;">🎙️ Open Broadcaster Booth Notes &amp; Stage 15/30 Sheet &rarr;</a>
+                    <a href="/fantasy.html" class="btn-secondary" style="padding: 10px 20px; font-weight: 900; text-decoration: none;">🔮 Lock In Fantasy Picks &rarr;</a>
+                </div>
                 <a id="simtrax-upcoming-link" href="https://www.youtube.com/watch?v=LiFVc8IquJ8" target="_blank" style="display: block;">
-                    <img id="simtrax-upcoming-img" src="assets/BCast Banners/yt_LiFVc8IquJ8.jpg" alt="The I'm Lost at Mid Ohio 175" style="width: 100%; border-radius: 8px; box-shadow: 0 0 25px rgba(57, 255, 20, 0.25); border: 1.5px solid rgba(57, 255, 20, 0.3);">
+                    <img id="simtrax-upcoming-img" src="assets/BCast Banners/Mid_Ohio_Bandit_App_50.jpg" alt="Bandit Mobile App 50 at Mid-Ohio Sports Car Course" style="width: 100%; border-radius: 8px; box-shadow: 0 0 25px rgba(57, 255, 20, 0.25); border: 1.5px solid rgba(57, 255, 20, 0.3);">
                 </a>
             </div>
         </div>
@@ -211,13 +219,18 @@
         <!-- Broadcaster Hub Row -->
         <div style="display: flex; justify-content: center; margin-top: 50px;">
             <!-- Broadcaster Portal Card -->
-            <div class="card neon-border" style="width: 100%; max-width: 650px; padding: 35px 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; background: linear-gradient(135deg, #15161a 0%, #0d0d0f 100%);" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+            <div class="card neon-border" style="width: 100%; max-width: 720px; padding: 35px 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; background: linear-gradient(135deg, #15161a 0%, #0d0d0f 100%);" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 0 25px rgba(0,255,0,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
                 <div style="font-size: 3rem; margin-bottom: 10px;">🎙️</div>
-                <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 10px; font-size: 1.2rem; letter-spacing: 2px;">Broadcaster Telemetry Hub</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; max-width: 500px;">Access real-time telemetry dashboards for all active drivers in the league. Secured portal for SimTrax race announcers only.</p>
-                <a href="/broadcaster.html" class="btn-primary" style="text-decoration: none; padding: 12px 24px; font-weight: bold; border-radius: 4px; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 8px;">
-                    <span>🔒 SECURE LOGIN</span>
-                </a>
+                <h3 style="color: var(--neon-green); font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 10px; font-size: 1.3rem; letter-spacing: 2px;">SimTrax Broadcaster Portal &amp; Booth Notes</h3>
+                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 25px; max-width: 560px;">Complete pre-race &amp; in-race booth sheet for tonight's <strong>Bandit Mobile App 50 at Mid-Ohio (Stages: Lap 15 &amp; Lap 30)</strong>, official sponsor reads, 10-driver Chase scouting notes, live booth scratchpad, and real-time driver telemetry scanner.</p>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+                    <a href="/broadcaster.html" class="btn-primary" style="text-decoration: none; padding: 12px 24px; font-weight: 900; border-radius: 4px; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 8px;">
+                        <span>📋 OPEN RACE BOOTH NOTES (LAP 15 &amp; 30 STAGES)</span>
+                    </a>
+                    <a href="/broadcaster.html#telemetry" class="btn-secondary" style="text-decoration: none; padding: 12px 22px; font-weight: 900; border-radius: 4px; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 8px;">
+                        <span>📡 LIVE TELEMETRY SCANNER</span>
+                    </a>
+                </div>
             </div>
         </div>
     </main>
@@ -227,7 +240,7 @@
             <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
         </div>
     </footer>
-    <script src="weekly_data.js?v=1793836532"></script>
+    <script src="weekly_data.js?v=1793837171"></script>
     <script>
         // Toggle mobile navigation menu
         document.addEventListener('DOMContentLoaded', function() {
@@ -247,6 +260,6 @@
             }
         });
     </script>
-    <script src="brl_app.js?v=1793836532"></script>
+    <script src="brl_app.js?v=1793837171"></script>
 </body>
 </html>

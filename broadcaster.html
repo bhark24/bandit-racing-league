@@ -6,12 +6,12 @@
     <meta http-equiv="Expires" content="0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Broadcaster Telemetry Hub | Bandit Racing League</title>
+    <title>SimTrax Broadcaster Portal & Booth Notes | Bandit Racing League</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793836532">
+    <link rel="stylesheet" href="styles.css?v=1793837171">
     
     <style>
         body {
@@ -28,7 +28,7 @@
         .hub-container {
             max-width: 1600px;
             width: 100%;
-            margin: 110px auto 40px auto;
+            margin: 100px auto 40px auto;
             padding: 0 20px;
             box-sizing: border-box;
             flex: 1;
@@ -37,10 +37,194 @@
             gap: 20px;
         }
 
+        /* Broadcaster Top Mode Switcher Bar */
+        .portal-topbar {
+            background: linear-gradient(135deg, rgba(20, 24, 32, 0.96), rgba(10, 12, 16, 0.98));
+            border: 1.5px solid rgba(57, 255, 20, 0.45);
+            border-radius: 12px;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .portal-tab-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .portal-tab-btn {
+            background: rgba(255, 255, 255, 0.06);
+            color: #ccc;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .portal-tab-btn:hover {
+            border-color: var(--neon-green);
+            color: #fff;
+        }
+
+        .portal-tab-btn.active {
+            background: var(--neon-green);
+            color: #000;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 18px rgba(57, 255, 20, 0.35);
+        }
+
+        /* Booth Notes Grid Layout */
+        .notes-grid-2col {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 22px;
+        }
+
+        .notes-grid-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        @media (max-width: 1150px) {
+            .notes-grid-2col, .notes-grid-3col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .booth-card {
+            background: rgba(18, 20, 26, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .booth-card-title {
+            font-size: 1.25rem;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 14px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .spec-pill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .spec-pill {
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-left: 4px solid var(--neon-green);
+            border-radius: 8px;
+            padding: 12px 14px;
+        }
+
+        .spec-pill .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .spec-pill .val {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .stage-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1.5px solid rgba(255, 255, 255, 0.14);
+            border-top: 4px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .sponsor-read-box {
+            background: linear-gradient(135deg, rgba(57, 255, 20, 0.08), rgba(0, 0, 0, 0.65));
+            border: 1px solid rgba(57, 255, 20, 0.35);
+            border-left: 4px solid var(--neon-green);
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+        }
+
+        .sponsor-read-box h4 {
+            margin: 0 0 6px 0;
+            color: var(--neon-green);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .sponsor-read-box p {
+            margin: 0;
+            font-size: 0.94rem;
+            color: #e2e2e2;
+            line-height: 1.55;
+        }
+
+        .booth-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .booth-table th {
+            background: rgba(255, 204, 0, 0.15);
+            color: var(--chase-yellow);
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.8px;
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 2px solid rgba(255, 204, 0, 0.4);
+        }
+
+        .booth-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            color: #ddd;
+            vertical-align: top;
+        }
+
+        .booth-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
         /* Access Passcode Card */
         .lock-screen {
             max-width: 450px;
-            margin: 150px auto;
+            margin: 60px auto;
             background: linear-gradient(135deg, #15161a 0%, #0d0d0f 100%);
             border: 1px solid #2a2c33;
             border-radius: 12px;
@@ -57,16 +241,16 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: #ff1744; /* Alert color */
+            background: #ff1744;
             border-radius: 12px 12px 0 0;
         }
 
         /* Two-Column Broadcast Layout */
         .broadcast-layout {
-            display: none; /* Hidden by default */
+            display: none;
             grid-template-columns: 450px 1fr;
             gap: 30px;
-            height: calc(100vh - 200px);
+            height: calc(100vh - 230px);
             min-height: 650px;
         }
 
@@ -255,12 +439,33 @@
             padding: 40px;
             gap: 15px;
         }
+
+        .scratch-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        @media print {
+            .navbar, .portal-topbar, footer, #telemetry-tab-panel {
+                display: none !important;
+            }
+            .hub-container {
+                margin: 0 !important;
+            }
+        }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793836532">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793836532">
-    <link rel="shortcut icon" href="favicon.ico?v=1793836532">
-    <link rel="manifest" href="manifest.json?v=1793836532">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793836532">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793837171">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793837171">
+    <link rel="shortcut icon" href="favicon.ico?v=1793837171">
+    <link rel="manifest" href="manifest.json?v=1793837171">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793837171">
 </head>
 <body>
 
@@ -283,65 +488,447 @@
                 <li><a href="/crew-openings.html">Crew Openings</a></li>
                 <li><a href="/classifieds.html">Classifieds</a></li>
                 <li><a href="/rulebook.html">Rulebook</a></li>
+                <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle;"><span class="nav-icon-label">SimTrax</span></a></li>
             </ul>
         </div>
     </nav>
 
     <div class="hub-container">
-        
-        <!-- Passcode Entry Screen -->
-        <div id="auth-gate" class="lock-screen">
-            <h3 class="italic-heavy" style="font-size: 1.8rem; color: #fff; text-transform: uppercase; margin-bottom: 5px;">Broadcaster Portal</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">Enter the secure Broadcaster Passcode to unlock the real-time telemetry list.</p>
-            
-            <input type="password" id="passcode-input" class="verify-input" style="width:100%; box-sizing:border-box; margin-bottom:20px;" placeholder="ENTER PASSCODE" onkeydown="if(event.key==='Enter') verifyBroadcasterAccess()">
-            <button class="btn-verify" onclick="verifyBroadcasterAccess()">Unlock Dashboard</button>
-            <div id="auth-status" class="status-msg" style="margin-top: 15px; color: #ff1744;"></div>
+
+        <!-- Top Broadcaster Mode Switcher Bar -->
+        <div class="portal-topbar">
+            <div>
+                <div style="font-size: 0.75rem; color: var(--neon-green); font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px;">🎙️ SIMTRAX OFFICIAL BROADCAST BOOTH PORTAL • SEASON 16 CHASE ROUND 3</div>
+                <h1 style="margin: 2px 0 0 0; font-size: 1.65rem; font-style: italic; font-weight: 900; text-transform: uppercase; color: #fff;">
+                    Bandit Mobile App 50 at Mid-Ohio <span style="color: var(--chase-yellow); font-size: 1.1rem;">(50 Laps • Stages: Lap 15 &amp; Lap 30)</span>
+                </h1>
+            </div>
+            <div class="portal-tab-group">
+                <button id="tab-btn-notes" class="portal-tab-btn active" onclick="switchBroadcasterTab('notes')">
+                    📋 Tonight's Booth Notes &amp; Run Sheet
+                </button>
+                <button id="tab-btn-telemetry" class="portal-tab-btn" onclick="switchBroadcasterTab('telemetry')">
+                    📡 Live Driver Telemetry Hub
+                </button>
+                <button class="portal-tab-btn" onclick="window.print()" style="border-color: var(--chase-yellow); color: var(--chase-yellow);">
+                    🖨️ Print Booth Sheet
+                </button>
+            </div>
         </div>
 
-        <!-- Broadcaster Dashboard Layout -->
-        <div id="broadcaster-dashboard" class="broadcast-layout">
-            
-            <!-- Left Panel: Driver list with active pings -->
-            <aside class="directory-panel">
-                <div class="directory-header">
-                    <h3 class="directory-title">League Telemetry</h3>
-                    <button class="btn-verify" onclick="refreshTelemetryDirectory()" style="width: auto; padding: 6px 14px; font-size: 0.75rem; margin: 0; background: rgba(57, 255, 20, 0.05); border: 1.5px solid var(--neon-green); color: var(--neon-green);">🔄 Scan</button>
-                </div>
-                <div class="driver-list" id="driver-cards-container">
-                    <!-- Cards will be populated here -->
-                </div>
-            </aside>
+        <!-- ========================================================================= -->
+        <!-- TAB 1: TONIGHT'S RACE BOOTH NOTES & RUN SHEET (MID-OHIO 50)               -->
+        <!-- ========================================================================= -->
+        <div id="notes-tab-panel" style="display: flex; flex-direction: column; gap: 22px;">
 
-            <!-- Right Panel: Embedded Spotter Dashboard -->
-            <main class="viewport-panel">
-                <div class="viewport-header" id="viewport-header-bar" style="display: none;">
-                    <h4 class="viewport-title" id="active-driver-header">Active Stream: --</h4>
-                    <a id="popout-link" href="#" target="_blank" class="btn-verify" style="width: auto; padding: 6px 12px; font-size: 0.75rem; margin: 0; text-decoration: none; display: inline-block;">↗️ Pop-out</a>
-                </div>
-                <div class="viewport-placeholder" id="viewport-placeholder-box">
-                    <div style="font-size: 3.5rem;">🎙️</div>
-                    <h3 style="margin: 0; font-style: italic; text-transform: uppercase; color: #fff;">Telemetry Viewport</h3>
-                    <p style="margin: 0; max-width: 400px; line-height: 1.5;">Select any driver from the scanned directory on the left to embed their live spotter portal telemetry here.</p>
-                </div>
-                <iframe class="viewport-frame" id="viewport-iframe" style="display: none;"></iframe>
-            </main>
+            <!-- Top Row: Race Specs + Stage Breakdown + Live Scratchpad -->
+            <div class="notes-grid-2col">
 
+                <!-- Left: Official Race Specs & Stage 15 / 30 Strategy Sheet -->
+                <div class="booth-card" style="border-top: 4px solid var(--neon-green);">
+                    <div class="booth-card-title">
+                        <span style="color: var(--neon-green);">🏁 OFFICIAL RACE SPECS &amp; STAGE FORMAT (NOV 4, 2026)</span>
+                        <a href="https://www.youtube.com/watch?v=LiFVc8IquJ8" target="_blank" style="font-size: 0.82rem; color: var(--chase-yellow); text-decoration: none; font-style: normal; font-weight: 900;">🔴 Open Live YouTube Stream &rarr;</a>
+                    </div>
+
+                    <div class="spec-pill-grid">
+                        <div class="spec-pill">
+                            <span class="label">Event Title</span>
+                            <span class="val" style="color: var(--neon-green); font-size: 1rem;">Bandit Mobile App 50</span>
+                        </div>
+                        <div class="spec-pill" style="border-left-color: var(--chase-yellow);">
+                            <span class="label">Track &amp; Layout</span>
+                            <span class="val" style="font-size: 1rem;">Mid-Ohio (2.258 Mi • 13 Turns)</span>
+                        </div>
+                        <div class="spec-pill">
+                            <span class="label">Total Distance</span>
+                            <span class="val">50 Laps (112.9 Mi)</span>
+                        </div>
+                        <div class="spec-pill" style="border-left-color: #00e5ff;">
+                            <span class="label">Stage Breaks</span>
+                            <span class="val" style="color: #00e5ff;">Lap 15 &amp; Lap 30</span>
+                        </div>
+                        <div class="spec-pill" style="border-left-color: #ff0055;">
+                            <span class="label">Tire Allocation</span>
+                            <span class="val" style="color: #ff4d79;">2 Sets (Start + 1 Pit)</span>
+                        </div>
+                        <div class="spec-pill" style="border-left-color: var(--chase-yellow);">
+                            <span class="label">Fuel Cap &amp; Times</span>
+                            <span class="val" style="font-size: 0.98rem;">100% Fuel • Q: 8:50 / Green: 9:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Stage 15 / Stage 30 / Final Stage Breakdown -->
+                    <div class="notes-grid-3col" style="margin-bottom: 16px;">
+                        <div class="stage-card" style="border-top-color: var(--neon-green);">
+                            <div style="font-size: 0.72rem; color: var(--neon-green); font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">🟢 STAGE 1 (15 LAPS)</div>
+                            <div style="font-size: 1.2rem; font-weight: 900; color: #fff; margin: 4px 0;">Laps 1 – 15</div>
+                            <p style="margin: 0; font-size: 0.85rem; color: #ccc; line-height: 1.45;">
+                                Cold-tire survival into <strong>Turn 1</strong>, <strong>The Keyhole (Turn 2 hairpin)</strong>, and heavy braking at the end of the backstretch into <strong>Turn 4 / Madness</strong>. Watch who pits just before/at Lap 15 vs. stays out!
+                            </p>
+                        </div>
+                        <div class="stage-card" style="border-top-color: var(--chase-yellow);">
+                            <div style="font-size: 0.72rem; color: var(--chase-yellow); font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">🟡 STAGE 2 (15 LAPS)</div>
+                            <div style="font-size: 1.2rem; font-weight: 900; color: #fff; margin: 4px 0;">Laps 16 – 30</div>
+                            <p style="margin: 0; font-size: 0.85rem; color: #ccc; line-height: 1.45;">
+                                <strong>THE TIRE DILEMMA:</strong> Teams only have <strong>1 spare set of tires</strong> in the pit box! Pitting at Lap 15 means running 35 laps to the finish on that set; staying out means waiting until <strong>Lap 30</strong> for fresh rubber!
+                            </p>
+                        </div>
+                        <div class="stage-card" style="border-top-color: #00e5ff;">
+                            <div style="font-size: 0.72rem; color: #00e5ff; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">🏁 FINAL STAGE (20 LAPS)</div>
+                            <div style="font-size: 1.2rem; font-weight: 900; color: #fff; margin: 4px 0;">Laps 31 – 50</div>
+                            <p style="margin: 0; font-size: 0.85rem; color: #ccc; line-height: 1.45;">
+                                20-lap shootout to the checkered flag! Watch drivers who waited until Lap 30 charge on 15-lap fresher tires vs. track-position leaders trying to defend through <strong>Thunder Valley</strong> &amp; <strong>The Carousel</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(255, 204, 0, 0.1); border: 1px solid rgba(255, 204, 0, 0.45); border-radius: 8px; padding: 12px 15px; font-size: 0.9rem; color: #eee; line-height: 1.5;">
+                        <strong style="color: var(--chase-yellow);">💡 KEY BOOTH STRATEGY TALKING POINT:</strong> Because drivers only get <strong>2 total sets of tires (1 on the truck at the start + 1 in the pits)</strong> across 50 laps with stages at <strong>Lap 15</strong> and <strong>Lap 30</strong>, any driver who pits for tires at Stage 1 (Lap 15) has <strong>NO fresh tires left</strong> for Stage 2 (Lap 30) or late-race cautions!
+                    </div>
+                </div>
+
+                <!-- Right: Official Sponsor Reads & Live Booth Scratchpad -->
+                <div style="display: flex; flex-direction: column; gap: 18px;">
+                    <div class="booth-card" style="border-top: 4px solid var(--chase-yellow);">
+                        <div class="booth-card-title">
+                            <span style="color: var(--chase-yellow);">🎙️ OFFICIAL BOOTH SPONSOR READS</span>
+                            <span style="font-size: 0.75rem; color: #aaa; font-style: normal;">Read Pre-Race, Stage 1 (Lap 15) &amp; Stage 2 (Lap 30)</span>
+                        </div>
+
+                        <div class="sponsor-read-box">
+                            <h4>📱 Title Sponsor: Bandit Racing League Mobile App</h4>
+                            <p>
+                                "Tonight's 50-lap showdown at Mid-Ohio is proudly sponsored by the <strong>all-new Bandit Racing League Mobile App</strong>! Featuring the new BRL brand logo, the official app puts live Chase standings, weekly Viewer Fantasy picks, schedule &amp; box scores, the Wall of Shame, and instant push notifications right on your phone. Head to <strong>banditracingleague.net/app.html</strong> to install or update free on iPhone and Android!"
+                            </p>
+                        </div>
+
+                        <div class="sponsor-read-box" style="border-left-color: #ff1744; border-color: rgba(255, 23, 68, 0.4); background: linear-gradient(135deg, rgba(255, 23, 68, 0.1), rgba(0, 0, 0, 0.65));">
+                            <h4 style="color: #ff5252;">🔴 Season 16 Presenting Sponsor: Clear Low Communications</h4>
+                            <p>
+                                "Season 16 of the Bandit Racing League is proudly presented by <strong>Clear Low Communications</strong>—powering championship-level sim racing all season long!"
+                            </p>
+                        </div>
+
+                        <div class="sponsor-read-box" style="border-left-color: var(--chase-yellow); border-color: rgba(255, 204, 0, 0.4); background: linear-gradient(135deg, rgba(255, 204, 0, 0.08), rgba(0, 0, 0, 0.65)); margin-bottom: 0;">
+                            <h4 style="color: var(--chase-yellow);">🔮 Viewer Fantasy League Callout (banditracingleague.net/fantasy.html)</h4>
+                            <p>
+                                "Don't forget to lock in your free 4-driver lineup in the <strong>BRL Viewer Fantasy League</strong> before the green flag drops! <strong>Rebekah Weaver (1,542 pts)</strong> leads <strong>Matt Crockett (1,336 pts)</strong> and Kansas II winner <strong>Bhark24 (1,123 pts)</strong>!"
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Live Booth Scratchpad (Auto-Saved in Browser) -->
+                    <div class="booth-card" style="border-top: 4px solid #00e5ff;">
+                        <div class="booth-card-title" style="margin-bottom: 10px;">
+                            <span style="color: #00e5ff;">📝 LIVE BOOTH TRACKER (AUTO-SAVES)</span>
+                            <button onclick="clearBoothNotes()" style="background: rgba(255,255,255,0.08); color: #ccc; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 3px 8px; font-size: 0.72rem; cursor: pointer;">Clear</button>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                            <div>
+                                <label style="font-size: 0.7rem; color: #aaa; text-transform: uppercase; font-weight: 800;">⚡ Pole Winner</label>
+                                <input id="note-pole" class="scratch-input" placeholder="e.g. #2 Nickerson" oninput="saveBoothNotes()">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.7rem; color: var(--neon-green); text-transform: uppercase; font-weight: 800;">🟢 Stage 1 (Lap 15)</label>
+                                <input id="note-s1" class="scratch-input" placeholder="Stage 1 Winner" oninput="saveBoothNotes()">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.7rem; color: var(--chase-yellow); text-transform: uppercase; font-weight: 800;">🟡 Stage 2 (Lap 30)</label>
+                                <input id="note-s2" class="scratch-input" placeholder="Stage 2 Winner" oninput="saveBoothNotes()">
+                            </div>
+                        </div>
+                        <textarea id="note-pad" class="scratch-input" rows="3" placeholder="Type live pit strategy splits (who pitted Lap 15 vs. Lap 30), caution laps, or storylines here..." oninput="saveBoothNotes()"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Row: 10-Driver Championship Chase Standings & Road Course Scouting Table -->
+            <div class="booth-card" style="border-top: 4px solid var(--chase-yellow);">
+                <div class="booth-card-title">
+                    <span style="color: var(--chase-yellow);">🏆 SEASON 16 CHASE FOR THE CHAMPIONSHIP — ENTERING ROUND 3 OF 5 (NO ELIMINATIONS)</span>
+                    <span style="font-size: 0.82rem; color: var(--neon-green); font-style: normal;">Top 3 Within 16 Pts • Top 6 Within 40 Pts!</span>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="booth-table">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Driver &amp; Truck #</th>
+                                <th>Franchise Team</th>
+                                <th>Chase Pts</th>
+                                <th>Gap</th>
+                                <th>S16 Watkins Glen (R14)</th>
+                                <th>S12 Mid-Ohio</th>
+                                <th>Key Booth Talking Point for Tonight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong style="color: var(--chase-yellow); font-size: 1.05rem;">1st</strong></td>
+                                <td><strong style="color: #fff;">#7 Benjamin I. Lacy</strong> <span style="color: var(--chase-yellow); font-size: 0.75rem;">(Old Guard)</span></td>
+                                <td>GFR Racing</td>
+                                <td><strong style="color: var(--neon-green);">2,170</strong></td>
+                                <td><strong>Leader</strong></td>
+                                <td><strong style="color: var(--neon-green);">P2</strong> (Start P2, 5 LL, 0x, Stg 2 Win)</td>
+                                <td>P20 (Q23, 9x)</td>
+                                <td>Points leader after P2 at Kansas II (led 34 laps, passed on final lap by #2 Nickerson). Finished a clean 0x P2 behind Nickerson at Watkins Glen earlier this season!</td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #00e5ff; font-size: 1.05rem;">2nd</strong></td>
+                                <td><strong style="color: #fff;">#22 Joshua L. Adams</strong> <span style="color: #00e5ff; font-size: 0.75rem;">(New Blood)</span></td>
+                                <td>937 Racing</td>
+                                <td><strong style="color: var(--neon-green);">2,156</strong></td>
+                                <td><strong>-14</strong></td>
+                                <td>P15 (Start P10)</td>
+                                <td>Did Not Start</td>
+                                <td>Swept Stages 1 &amp; 2 and led a race-high 66 laps (scoring a race-high 54 pts!) at Kansas II to jump from 3rd to 2nd (-14). Needs a clean survival run on the road course tonight.</td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #00e5ff; font-size: 1.05rem;">3rd</strong></td>
+                                <td><strong style="color: #fff;">#93 Scott Sanderson</strong> <span style="color: #00e5ff; font-size: 0.75rem;">(New Blood)</span></td>
+                                <td>GFR Racing</td>
+                                <td><strong style="color: var(--neon-green);">2,154</strong></td>
+                                <td><strong>-16</strong></td>
+                                <td><strong style="color: var(--neon-green);">P3</strong> (Start P3, 5 LL, 2x, Stg 1 Win)</td>
+                                <td>Did Not Start</td>
+                                <td>Elite road course contender! Won Stage 1 and finished P3 on the podium at Watkins Glen in Race 14. Only 16 points behind teammate Benjamin Lacy.</td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: var(--chase-yellow); font-size: 1.05rem;">4th</strong></td>
+                                <td><strong style="color: #fff;">#2 Nick Nickerson</strong> <span style="color: var(--chase-yellow); font-size: 0.75rem;">(4x Champ)</span></td>
+                                <td>GFR Racing</td>
+                                <td><strong style="color: var(--neon-green);">2,137</strong></td>
+                                <td><strong>-33</strong></td>
+                                <td><strong style="color: var(--chase-yellow);">🏆 WON</strong> (Pole, 41/55 LL)</td>
+                                <td><strong style="color: var(--chase-yellow);">🏆 WON</strong> (Pole, 39/40 LL, 0x)</td>
+                                <td><strong>THE HEAVY FAVORITE TONIGHT:</strong> Coming off a 19th-to-1st last-lap overtime win at Kansas II, AND he won both S16 Watkins Glen (41 LL) and S12 Mid-Ohio (39/40 LL, 0x)!</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5th</strong></td>
+                                <td><strong style="color: #fff;">#8 Kevin Foster</strong> <span style="color: var(--chase-yellow); font-size: 0.75rem;">(2x Champ)</span></td>
+                                <td>GFR Racing</td>
+                                <td><strong>2,131</strong></td>
+                                <td><strong>-39</strong></td>
+                                <td>P7 (Clean top-10 run)</td>
+                                <td>P10</td>
+                                <td>Completed GFR Racing's 0x 1-2-3 podium sweep at Kansas II with a P3 finish. Smooth, veteran road-course racer who thrives when others overdrive Turn 4.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6th</strong></td>
+                                <td><strong style="color: #fff;">#9 Dylan McDonald</strong> <span style="color: #00e5ff; font-size: 0.75rem;">(New Blood)</span></td>
+                                <td>Legacy Racing</td>
+                                <td><strong>2,130</strong></td>
+                                <td><strong>-40</strong></td>
+                                <td><strong style="color: var(--neon-green);">P5</strong> (Charged Q24 &rarr; P5!)</td>
+                                <td>Did Not Start</td>
+                                <td>Finished P4 at Kansas II and pulled off a massive 24th-to-5th (+19) Hard Charger drive at Watkins Glen! Huge podium threat tonight.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>7th</strong></td>
+                                <td><strong style="color: #fff;">#00 Jackson Knaak</strong> <span style="color: var(--chase-yellow); font-size: 0.75rem;">(Old Guard)</span></td>
+                                <td>ESR</td>
+                                <td><strong>2,119</strong></td>
+                                <td><strong>-51</strong></td>
+                                <td><strong style="color: var(--neon-green);">P4</strong> (Start P6, Led 3 Laps)</td>
+                                <td>P7</td>
+                                <td>Finished P4 at Watkins Glen (leading 3 laps) and P7 in S12 Mid-Ohio. Mid-Ohio is his best chance to close the 51-point gap to the lead.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>8th</strong></td>
+                                <td><strong style="color: #fff;">#47 Michael Rakes</strong> <span style="color: #00e5ff; font-size: 0.75rem;">(New Blood)</span></td>
+                                <td>937 Racing</td>
+                                <td><strong>2,113</strong></td>
+                                <td><strong>-57</strong></td>
+                                <td>P14</td>
+                                <td>Did Not Start</td>
+                                <td>Charged from 18th to 5th (+13 spots) at Kansas II to go 6-for-6 in Top-10s on 1.5-mile tracks. Looking for disciplined tire management at Mid-Ohio.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>9th</strong></td>
+                                <td><strong style="color: #fff;">#13 Johnathon Platt</strong> <span style="color: #00e5ff; font-size: 0.75rem;">(New Blood)</span></td>
+                                <td>GFR Racing</td>
+                                <td><strong>2,093</strong></td>
+                                <td><strong>-77</strong></td>
+                                <td>P18</td>
+                                <td>P14</td>
+                                <td>Talladega Stage 2 winner looking to bounce back from tough luck at Kansas II with a clean strategy play at Mid-Ohio.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>10th</strong></td>
+                                <td><strong style="color: #fff;">#31 Connor Gibson</strong> <span style="color: var(--chase-yellow); font-size: 0.75rem;">(Old Guard)</span></td>
+                                <td>ZeroFoxtrot</td>
+                                <td><strong>2,070</strong></td>
+                                <td><strong>-100</strong></td>
+                                <td>P12</td>
+                                <td><strong style="color: var(--neon-green);">P5 (0x Clean Race!)</strong></td>
+                                <td><strong>ROAD COURSE SLEEPER:</strong> Finished 5th with 0x incident points in BRL's Season 12 trip to Mid-Ohio!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Bottom Row: Non-Chase Spoilers + Franchise Team Standings + Fantasy Leaderboard -->
+            <div class="notes-grid-3col">
+                <div class="booth-card">
+                    <div class="booth-card-title">
+                        <span style="color: #00e5ff;">🔥 NON-CHASE SPOILERS TO WATCH</span>
+                    </div>
+                    <ul style="margin: 0; padding-left: 18px; color: #ddd; font-size: 0.9rem; line-height: 1.75;">
+                        <li><strong>#15 Matt Crockett (Roundy Motorsports — 11th in Pts):</strong> Won Chase Round 1 at Talladega (1st career win in his 162nd start!) and sits 2nd overall in the Viewer Fantasy League.</li>
+                        <li><strong>#24 Ethan Sikorski (ZeroFoxtrot):</strong> Won the Pole Award at Kansas II last week and finished P7!</li>
+                        <li><strong>#35 Wes Fuller (Title Town Racing):</strong> Sponsored last week's Wendy Jo Memorial 110 at Kansas and backed it up with a stellar Q3 &rarr; P8 finish!</li>
+                        <li><strong>#63 Tre Ellis (Legacy Racing):</strong> Charged +11 spots (Q21 &rarr; P10) for a Top-10 at Kansas II.</li>
+                        <li><strong>#17 Korey Denson &amp; #36 Collin Anderson (Salt City Performance):</strong> Running the special <strong>#ChristieStrong</strong> number tribute.</li>
+                    </ul>
+                </div>
+
+                <div class="booth-card">
+                    <div class="booth-card-title">
+                        <span style="color: var(--neon-green);">💼 FRANCHISE TEAM STANDINGS</span>
+                    </div>
+                    <ol style="margin: 0; padding-left: 20px; color: #ddd; font-size: 0.9rem; line-height: 1.7;">
+                        <li><strong style="color: var(--neon-green);">GFR Racing</strong> — 2,588 pts (11 Wins)</li>
+                        <li><strong style="color: #fff;">937 Racing</strong> — 1,338 pts (3 Wins)</li>
+                        <li><strong style="color: #fff;">Legacy Racing</strong> — 1,290 pts (3 Wins • <em>-48 behind P2!</em>)</li>
+                        <li><strong style="color: var(--chase-yellow);">Roundy Motorsports</strong> — 1,022 pts (1 Win)</li>
+                        <li><strong style="color: var(--chase-yellow);">ZeroFoxtrot</strong> — 1,021 pts (<em>Only 1 pt behind 4th!</em>)</li>
+                        <li><strong>ESR</strong> — 897 pts</li>
+                        <li><strong>POP Motorsports</strong> — 533 pts</li>
+                        <li><strong>Carter Phillips Racing</strong> — 340 pts</li>
+                    </ol>
+                </div>
+
+                <div class="booth-card">
+                    <div class="booth-card-title">
+                        <span style="color: var(--chase-yellow);">🔮 VIEWER FANTASY TOP 5</span>
+                    </div>
+                    <p style="margin: 0 0 10px 0; font-size: 0.84rem; color: #aaa;">
+                        Last Week's Kansas II Fantasy Winner: <strong style="color: var(--neon-green);">Bhark24 (148 pts)</strong>!
+                    </p>
+                    <ol style="margin: 0; padding-left: 20px; color: #ddd; font-size: 0.92rem; line-height: 1.8;">
+                        <li>🥇 <strong style="color: var(--chase-yellow);">Rebekah Weaver</strong> — 1,542 pts (3 Wins)</li>
+                        <li>🥈 <strong style="color: #fff;">Matt Crockett</strong> — 1,336 pts (3 Wins)</li>
+                        <li>🥉 <strong style="color: var(--neon-green);">Bhark24</strong> — 1,123 pts (3 Wins)</li>
+                        <li>🏎️ <strong>Lady Chaos</strong> — 781 pts (3 Wins)</li>
+                        <li>🏎️ <strong>Bob Berry</strong> — 711 pts (5 Wins)</li>
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 2: LIVE DRIVER TELEMETRY HUB (PASSCODE PROTECTED)                     -->
+        <!-- ========================================================================= -->
+        <div id="telemetry-tab-panel" style="display: none;">
+            <!-- Passcode Entry Screen -->
+            <div id="auth-gate" class="lock-screen">
+                <h3 class="italic-heavy" style="font-size: 1.8rem; color: #fff; text-transform: uppercase; margin-bottom: 5px;">Live Telemetry Scanner</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">Enter the secure Broadcaster Passcode to unlock the real-time driver telemetry feeds.</p>
+                
+                <input type="password" id="passcode-input" class="verify-input" style="width:100%; box-sizing:border-box; margin-bottom:20px;" placeholder="ENTER PASSCODE" onkeydown="if(event.key==='Enter') verifyBroadcasterAccess()">
+                <button class="btn-verify" onclick="verifyBroadcasterAccess()">Unlock Telemetry Hub</button>
+                <div id="auth-status" class="status-msg" style="margin-top: 15px; color: #ff1744;"></div>
+            </div>
+
+            <!-- Broadcaster Dashboard Layout -->
+            <div id="broadcaster-dashboard" class="broadcast-layout">
+                
+                <!-- Left Panel: Driver list with active pings -->
+                <aside class="directory-panel">
+                    <div class="directory-header">
+                        <h3 class="directory-title">League Telemetry</h3>
+                        <button class="btn-verify" onclick="refreshTelemetryDirectory()" style="width: auto; padding: 6px 14px; font-size: 0.75rem; margin: 0; background: rgba(57, 255, 20, 0.05); border: 1.5px solid var(--neon-green); color: var(--neon-green);">🔄 Scan</button>
+                    </div>
+                    <div class="driver-list" id="driver-cards-container">
+                        <!-- Cards will be populated here -->
+                    </div>
+                </aside>
+
+                <!-- Right Panel: Embedded Spotter Dashboard -->
+                <main class="viewport-panel">
+                    <div class="viewport-header" id="viewport-header-bar" style="display: none;">
+                        <h4 class="viewport-title" id="active-driver-header">Active Stream: --</h4>
+                        <a id="popout-link" href="#" target="_blank" class="btn-verify" style="width: auto; padding: 6px 12px; font-size: 0.75rem; margin: 0; text-decoration: none; display: inline-block;">↗️ Pop-out</a>
+                    </div>
+                    <div class="viewport-placeholder" id="viewport-placeholder-box">
+                        <div style="font-size: 3.5rem;">🎙️</div>
+                        <h3 style="margin: 0; font-style: italic; text-transform: uppercase; color: #fff;">Telemetry Viewport</h3>
+                        <p style="margin: 0; max-width: 400px; line-height: 1.5;">Select any driver from the scanned directory on the left to embed their live spotter portal telemetry here.</p>
+                    </div>
+                    <iframe class="viewport-frame" id="viewport-iframe" style="display: none;"></iframe>
+                </main>
+
+            </div>
         </div>
 
     </div>
 
     <footer>
         <div class="container footer-content">
-            <p>&copy; 2026 Bandit Racing League. Broadcaster Access Level.</p>
+            <p>&copy; 2026 Bandit Racing League. SimTrax Broadcaster Portal &amp; Booth Notes.</p>
         </div>
     </footer>
 
-    <!-- Passcode verification, dynamic WebSockets scanner, and iframe loader -->
+    <!-- Broadcaster Tab Switcher, LocalStorage Notes, and Telemetry Scanner -->
     <script>
+        function switchBroadcasterTab(tab) {
+            const notesPanel = document.getElementById('notes-tab-panel');
+            const telemetryPanel = document.getElementById('telemetry-tab-panel');
+            const btnNotes = document.getElementById('tab-btn-notes');
+            const btnTelemetry = document.getElementById('tab-btn-telemetry');
+
+            if (tab === 'telemetry') {
+                notesPanel.style.display = 'none';
+                telemetryPanel.style.display = 'block';
+                btnNotes.classList.remove('active');
+                btnTelemetry.classList.add('active');
+                if (sessionStorage.getItem('broadcaster_authenticated') === 'true') {
+                    unlockBroadcasterDashboard();
+                }
+            } else {
+                notesPanel.style.display = 'flex';
+                telemetryPanel.style.display = 'none';
+                btnNotes.classList.add('active');
+                btnTelemetry.classList.remove('active');
+            }
+        }
+
+        function saveBoothNotes() {
+            const data = {
+                pole: document.getElementById('note-pole')?.value || '',
+                s1: document.getElementById('note-s1')?.value || '',
+                s2: document.getElementById('note-s2')?.value || '',
+                pad: document.getElementById('note-pad')?.value || ''
+            };
+            localStorage.setItem('brl_midohio_booth_notes', JSON.stringify(data));
+        }
+
+        function loadBoothNotes() {
+            try {
+                const raw = localStorage.getItem('brl_midohio_booth_notes');
+                if (!raw) return;
+                const data = JSON.parse(raw);
+                if (document.getElementById('note-pole')) document.getElementById('note-pole').value = data.pole || '';
+                if (document.getElementById('note-s1')) document.getElementById('note-s1').value = data.s1 || '';
+                if (document.getElementById('note-s2')) document.getElementById('note-s2').value = data.s2 || '';
+                if (document.getElementById('note-pad')) document.getElementById('note-pad').value = data.pad || '';
+            } catch (e) {}
+        }
+
+        function clearBoothNotes() {
+            localStorage.removeItem('brl_midohio_booth_notes');
+            if (document.getElementById('note-pole')) document.getElementById('note-pole').value = '';
+            if (document.getElementById('note-s1')) document.getElementById('note-s1').value = '';
+            if (document.getElementById('note-s2')) document.getElementById('note-s2').value = '';
+            if (document.getElementById('note-pad')) document.getElementById('note-pad').value = '';
+        }
+
         // Custom Render telemetry relay configuration
         const RELAY_SERVER_URL = "wss://bandit-racing-league.onrender.com";
-        // SHA-256 helper for client-side password hash check
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -349,8 +936,11 @@
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        // Check session storage on load
         window.addEventListener('DOMContentLoaded', () => {
+            loadBoothNotes();
+            if (window.location.hash === '#telemetry') {
+                switchBroadcasterTab('telemetry');
+            }
             if (sessionStorage.getItem('broadcaster_authenticated') === 'true') {
                 unlockBroadcasterDashboard();
             }
@@ -395,20 +985,23 @@
             "898549": { name: "CORDELL MCFARLIN", number: "10" }
         };
 
-        let driverDatabase = []; // Array of { id, name, number } loaded from file
+        let driverDatabase = [];
+        let telemetryInitialized = false;
 
         function unlockBroadcasterDashboard() {
-            document.getElementById('auth-gate').style.display = 'none';
+            const gate = document.getElementById('auth-gate');
             const dash = document.getElementById('broadcaster-dashboard');
-            dash.style.display = 'grid';
+            if (gate) gate.style.display = 'none';
+            if (dash) dash.style.display = 'grid';
             
-            // Load drivers and scan
-            loadDriversListAndScan();
+            if (!telemetryInitialized) {
+                telemetryInitialized = true;
+                loadDriversListAndScan();
+            }
         }
 
         async function loadDriversListAndScan() {
             try {
-                // Fetch BRL drivers list
                 const response = await fetch('Geezer_Auth_IDs.txt');
                 if (!response.ok) throw new Error("Could not load Geezer_Auth_IDs.txt");
                 
@@ -430,7 +1023,6 @@
                     });
                 });
                 
-                // Attempt to resolve any cached custom names from past live packets
                 driverDatabase.forEach(driver => {
                     const cachedName = localStorage.getItem(`driver_name_${driver.id}`);
                     if (cachedName && !KNOWN_DRIVERS[driver.id]) {
@@ -438,13 +1030,11 @@
                     }
                 });
                 
-                // Render list & scan
                 renderDriverList();
                 scanActiveTelemetries();
                 
             } catch (e) {
                 console.error("Hub init failed:", e);
-                // Fallback local list in case of network issue
                 driverDatabase = Object.keys(KNOWN_DRIVERS).map(id => ({
                     id: id,
                     name: KNOWN_DRIVERS[id].name,
@@ -484,17 +1074,12 @@
             });
         }
 
-        // Main scanner logic: attempts connection to verify if streaming
         function scanActiveTelemetries() {
-            console.log("Scanning active telemetry feeds...");
-            
             driverDatabase.forEach((driver, index) => {
-                // Stagger connections to avoid hitting concurrent connection limits
                 setTimeout(() => {
                     const pill = document.getElementById(`pill-${driver.id}`);
                     const pillText = document.getElementById(`pill-text-${driver.id}`);
                     
-                    // If socket exists, close it
                     if (driver.wsConnection) {
                         try {
                             driver.wsConnection.close();
@@ -512,7 +1097,6 @@
                             receivedPacket = true;
                             driver.status = 'online';
                             
-                            // Parse name from telemetry packet if present
                             try {
                                 const packet = JSON.parse(e.data);
                                 let playerRow = null;
@@ -528,7 +1112,6 @@
                                         const nameEl = document.querySelector(`#card-${driver.id} .driver-card-name`);
                                         if (nameEl) nameEl.innerText = resolvedName;
                                         
-                                        // Update active stream header if this driver is selected
                                         if (selectedDriverId === driver.id) {
                                             document.getElementById('active-driver-header').innerText = `Active Stream: ${resolvedName} (#${driver.id})`;
                                         }
@@ -536,20 +1119,17 @@
                                 }
                             } catch(err){}
                             
-                            // Update status visual
                             if (pill) {
                                 pill.className = "status-pill pill-online";
                                 pillText.innerText = "ONLINE";
                             }
                             
-                            // Close socket immediately to free up connection slot
                             try {
                                 tempWs.close();
                             } catch(e){}
                         }
                     };
                     
-                    // Timeout after 3.5 seconds: if no message, mark offline and close socket
                     setTimeout(() => {
                         if (!receivedPacket) {
                             driver.status = 'offline';
@@ -567,7 +1147,6 @@
         }
 
         function refreshTelemetryDirectory() {
-            // Re-scan active feeds
             scanActiveTelemetries();
         }
 
@@ -576,27 +1155,23 @@
         function selectDriverStream(driverId, driverName) {
             selectedDriverId = driverId;
 
-            // Highlight card
             document.querySelectorAll('.driver-card').forEach(c => c.classList.remove('active-selection'));
             const selectedCard = document.getElementById(`card-${driverId}`);
             if (selectedCard) selectedCard.classList.add('active-selection');
 
-            // Setup viewport
             document.getElementById('viewport-placeholder-box').style.display = 'none';
             document.getElementById('viewport-header-bar').style.display = 'flex';
             document.getElementById('active-driver-header').innerText = `Active Stream: ${driverName} (#${driverId})`;
 
-            // Bypass browser caching of iframe content using a timestamp query parameter
             const cacheBuster = Date.now();
             const frame = document.getElementById('viewport-iframe');
             frame.style.display = 'block';
             frame.src = `spotter.html?driver=${driverId}&t=${cacheBuster}`;
 
-            // Setup popout link
             const popout = document.getElementById('popout-link');
             popout.href = `spotter.html?driver=${driverId}&t=${cacheBuster}`;
         }
     </script>
-    <script src="brl_app.js?v=1793836532"></script>
+    <script src="brl_app.js?v=1793837171"></script>
 </body>
 </html>
