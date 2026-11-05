@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793838954">
+    <link rel="stylesheet" href="styles.css?v=1793853708">
     <style>
         .construction-banner {
             background: rgba(255, 204, 0, 0.05);
@@ -392,11 +392,11 @@
             text-shadow: 0 0 5px var(--neon-green-glow);
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793838954">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793838954">
-    <link rel="shortcut icon" href="favicon.ico?v=1793838954">
-    <link rel="manifest" href="manifest.json?v=1793838954">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793838954">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793853708">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793853708">
+    <link rel="shortcut icon" href="favicon.ico?v=1793853708">
+    <link rel="manifest" href="manifest.json?v=1793853708">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793853708">
 </head>
 <body>
 
@@ -805,9 +805,9 @@
     </footer>
 
     <!-- Load the JavaScript Mock Database first -->
-    <script src="supabase_config.js?v=1793838954"></script>
-    <script src="teams_data.js?v=1793838954"></script>
-    <script src="roster_data.js?v=1793838954"></script>
+    <script src="supabase_config.js?v=1793853708"></script>
+    <script src="teams_data.js?v=1793853708"></script>
+    <script src="roster_data.js?v=1793853708"></script>
     <script>
         let selectedTeamId = null;
 
@@ -993,20 +993,31 @@
             document.getElementById('telegram-track').textContent = latest.track;
             document.getElementById('telegram-date').textContent = latest.date;
 
-            // Set up action shot if available
+            // Set up winner & action shots if available
             const actionShotContainer = document.getElementById('telegram-action-shot-container');
             const actionShotImg = document.getElementById('telegram-action-shot');
             const actionShotCaption = document.getElementById('telegram-action-shot-caption');
             
-            if (!latest.isPreview && typeof weeklyData !== 'undefined' && weeklyData.actionShots && weeklyData.actionShots.length > 0) {
+            const combinedShots = [];
+            if (typeof weeklyData !== 'undefined') {
+                if (weeklyData.winnerImage) combinedShots.push(weeklyData.winnerImage);
+                if (Array.isArray(weeklyData.actionShots)) {
+                    weeklyData.actionShots.forEach(s => {
+                        if (s && !combinedShots.includes(s)) combinedShots.push(s);
+                    });
+                }
+            }
+
+            if (!latest.isPreview && combinedShots.length > 0) {
                 let currentShotIdx = 0;
-                const shots = weeklyData.actionShots;
+                const shots = combinedShots;
                 
                 const updateShot = (idx) => {
                     const shotPath = shots[idx];
                     actionShotImg.src = shotPath;
                     let filename = shotPath.split('/').pop().replace(/\.[^/.]+$/, "").replace(/_/g, " ");
-                    actionShotCaption.innerHTML = `🎥 <strong>RACE DISPATCH (${idx + 1}/${shots.length}):</strong> ${filename} <span style="color: var(--neon-green); font-size: 0.75rem; cursor: pointer; margin-left: 10px; text-decoration: underline;">(Click photo to cycle)</span>`;
+                    const labelPrefix = (idx === 0 && weeklyData.winnerImage) ? "🏆 VICTORY LANE DISPATCH" : "🎥 RACE ACTION DISPATCH";
+                    actionShotCaption.innerHTML = `${labelPrefix} <strong>(${idx + 1}/${shots.length}):</strong> ${filename} <span style="color: var(--neon-green); font-size: 0.75rem; cursor: pointer; margin-left: 10px; text-decoration: underline;">(Click photo to cycle all ${shots.length} race photos)</span>`;
                 };
                 
                 updateShot(0);
@@ -3137,6 +3148,6 @@
     </div>
 
 
-    <script src="brl_app.js?v=1793838954"></script>
+    <script src="brl_app.js?v=1793853708"></script>
 </body>
 </html>

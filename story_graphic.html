@@ -142,7 +142,7 @@
     </div>
   </div>
 
-  <script src="weekly_data.js?v=1793838954"></script>
+  <script src="weekly_data.js?v=1793853708"></script>
   <script>
     if (typeof weeklyData !== 'undefined') {
       const winnerName = weeklyData.winnerName || "TBD";
@@ -154,7 +154,13 @@
       document.getElementById('story-subtitle').innerText = `${trackName.toUpperCase()} • ${raceDate.toUpperCase()}`;
       
       // Update story text
-      if (trackName.toLowerCase().includes("kansas")) {
+      if (trackName.toLowerCase().includes("mid-ohio") || trackName.toLowerCase().includes("mid ohio")) {
+        document.getElementById('dynamic-story').innerHTML = `
+          A 50-lap road-course masterclass in the <span class="highlight">Bandit Mobile App 50</span> at <span class="highlight">Mid-Ohio Sports Car Course</span>!<br><br>
+          Starting on the Pole (1:26.0337), <span class="highlight">${winnerName}</span> (${winnerNumber}) led <span class="highlight">47 of 50 laps</span>, won Stage 2, and pulled away by 10.981s over <span class="highlight">#24 Ethan Sikorski</span> and Stage 1 winner <span class="highlight">#93 Scott Sanderson</span>!<br><br>
+          <span class="highlight" style="color:#ffcc00; font-size: 24px; font-style: italic;">UP NEXT: Chase Round 4 Elimination Cutoff at Phoenix Raceway (Wed, Nov 11 @ 9 PM EST)!</span>
+        `;
+      } else if (trackName.toLowerCase().includes("kansas")) {
         document.getElementById('dynamic-story').innerHTML = `
           A double-overtime thriller in <span class="highlight">The Wendy Jo Memorial 110</span> at <span class="highlight">Kansas Speedway</span>!<br><br>
           Starting 19th (+18 Hard Charger), <span class="highlight">${winnerName}</span> (${winnerNumber}) pulled off a masterpiece last-lap pass on <span class="highlight">#7 Benjamin Lacy</span> to win by 0.243s and lead a <span class="highlight">1-2-3 GFR Racing sweep</span>!<br><br>

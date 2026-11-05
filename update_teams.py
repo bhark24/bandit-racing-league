@@ -558,6 +558,10 @@ def main():
     fast_repairs = parse_iracing_json(args.iracing_json) if args.iracing_json else {}
     
     # Match track coordinates
+    if "mid_ohio" in teams_db.get("tracks", {}):
+        teams_db["tracks"]["mid_ohio"].setdefault("airport", "CMH")
+        teams_db["tracks"]["mid_ohio"].setdefault("distance", 430)
+
     track_key = find_track_key(track_name, teams_db["tracks"])
     if not track_key:
         print(f"Error: Could not match track '{track_name}' in teams_data.js tracks list.")
@@ -566,7 +570,7 @@ def main():
     track_info = teams_db["tracks"][track_key]
     track_lat = track_info["lat"]
     track_lon = track_info["lon"]
-    track_dist_concord = track_info["distance"]
+    track_dist_concord = track_info.get("distance", 430)
     print(f"Matched Track: {track_info['name']} (Lat: {track_lat}, Lon: {track_lon})")
     
     # Track weekly scores to calculate the weekly team winner

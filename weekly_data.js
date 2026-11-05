@@ -1,40 +1,43 @@
 const weeklyData = {
-  "winnerName": "Nick Nickerson",
-  "winnerNumber": "2",
-  "winnerImage": "assets/truck images/truck_image_nick_nickerson.png?v=20261031b",
-  "actionShots": [],
-  "trackName": "Kansas Speedway",
-  "trackLogo": "Kansas.png",
-  "raceDate": "Oct 28, 2026",
+  "winnerName": "Benjamin Lacy",
+  "winnerNumber": "7",
+  "winnerImage": "assets/WINNER IMAGES/BenLacy_Mid_Ohio.png",
+  "actionShots": [
+    "assets/race images/mid_ohio_l35.png",
+    "assets/race images/mid_ohio_l35_2.png"
+  ],
+  "trackName": "Mid-Ohio Sports Car Course",
+  "trackLogo": "MidOhio.png",
+  "raceDate": "Nov 4, 2026",
   "teamStandings": [
     {
       "name": "GFR Racing",
-      "points": 2588,
-      "wins": 11
+      "points": 2724,
+      "wins": 12
     },
     {
       "name": "937 Racing",
-      "points": 1338,
+      "points": 1439,
       "wins": 3
     },
     {
       "name": "Legacy Racing",
-      "points": 1290,
+      "points": 1343,
       "wins": 3
     },
     {
       "name": "Roundy Motorsports",
-      "points": 1022,
+      "points": 1070,
       "wins": 1
     },
     {
       "name": "ZeroFoxtrot",
-      "points": 1021,
+      "points": 1048,
       "wins": 0
     },
     {
       "name": "ESR",
-      "points": 897,
+      "points": 989,
       "wins": 0
     },
     {
@@ -76,12 +79,12 @@ const weeklyData = {
     },
     {
       "name": "Matt Crockett",
-      "score": 1336,
-      "wins": 3
+      "score": 1471,
+      "wins": 4
     },
     {
       "name": "Bhark24",
-      "score": 1123,
+      "score": 1254,
       "wins": 3
     },
     {
@@ -169,107 +172,107 @@ const weeklyData = {
     {
       "pos": 1,
       "name": "Benjamin I Lacy",
-      "points": 2170
+      "points": 2228
     },
     {
       "pos": 2,
-      "name": "Joshua L Adams",
-      "points": 2156
+      "name": "Scott Sanderson",
+      "points": 2208
     },
     {
       "pos": 3,
-      "name": "Scott Sanderson",
-      "points": 2154
+      "name": "Joshua L Adams",
+      "points": 2182
     },
     {
       "pos": 4,
+      "name": "Kevin Foster",
+      "points": 2173
+    },
+    {
+      "pos": 5,
+      "name": "Dylan McDonald",
+      "points": 2170
+    },
+    {
+      "pos": 6,
+      "name": "Jackson Knaak",
+      "points": 2156
+    },
+    {
+      "pos": 7,
+      "name": "Michael Rakes",
+      "points": 2152
+    },
+    {
+      "pos": 8,
       "name": "Nick Nickerson",
       "points": 2137
     },
     {
-      "pos": 5,
-      "name": "Kevin Foster",
-      "points": 2131
-    },
-    {
-      "pos": 6,
-      "name": "Dylan McDonald",
-      "points": 2130
-    },
-    {
-      "pos": 7,
-      "name": "Jackson Knaak",
-      "points": 2119
-    },
-    {
-      "pos": 8,
-      "name": "Michael Rakes",
-      "points": 2113
-    },
-    {
       "pos": 9,
       "name": "Johnathon Platt",
-      "points": 2093
+      "points": 2113
     },
     {
       "pos": 10,
       "name": "Connor Gibson",
-      "points": 2070
+      "points": 2112
     },
     {
       "pos": 11,
       "name": "Matt Crockett",
-      "points": 412
+      "points": 431
     },
     {
       "pos": 12,
       "name": "Davis Carroll",
-      "points": 380
+      "points": 399
     },
     {
       "pos": 13,
+      "name": "Logan A Murray",
+      "points": 358
+    },
+    {
+      "pos": 14,
       "name": "Ricky Hart Jr",
       "points": 354
     },
     {
-      "pos": 14,
-      "name": "Logan A Murray",
-      "points": 334
-    },
-    {
       "pos": 15,
       "name": "Bill Harkins",
-      "points": 327
+      "points": 352
     },
     {
       "pos": 16,
-      "name": "Tre Ellis",
-      "points": 323
+      "name": "Ethan Sikorski",
+      "points": 344
     },
     {
       "pos": 17,
-      "name": "Ty Corino",
-      "points": 320
+      "name": "Tre Ellis",
+      "points": 342
     },
     {
       "pos": 18,
-      "name": "Eddie Hagigh",
-      "points": 304
+      "name": "Victor Weaver",
+      "points": 325
     },
     {
       "pos": 19,
       "name": "Joshua Billiter",
-      "points": 302
+      "points": 321
     },
     {
       "pos": 20,
-      "name": "Victor Weaver",
-      "points": 301
+      "name": "Ty Corino",
+      "points": 320
     },
     {
       "pos": 21,
-      "name": "Ethan Sikorski",
-      "points": 299
+      "name": "Eddie Hagigh",
+      "points": 304
     },
     {
       "pos": 22,
@@ -278,23 +281,23 @@ const weeklyData = {
     },
     {
       "pos": 23,
+      "name": "Nicole Kriesel",
+      "points": 265
+    },
+    {
+      "pos": 24,
+      "name": "Nathan Santos",
+      "points": 262
+    },
+    {
+      "pos": 25,
       "name": "Bob Berry",
       "points": 252
     },
     {
-      "pos": 24,
-      "name": "Nicole Kriesel",
-      "points": 243
-    },
-    {
-      "pos": 25,
+      "pos": 26,
       "name": "Jason Allegrini",
       "points": 238
-    },
-    {
-      "pos": 26,
-      "name": "Nathan Santos",
-      "points": 230
     },
     {
       "pos": 27,
@@ -303,23 +306,23 @@ const weeklyData = {
     },
     {
       "pos": 28,
+      "name": "Chad Hartle",
+      "points": 218
+    },
+    {
+      "pos": 29,
+      "name": "Matthew Bailey",
+      "points": 213
+    },
+    {
+      "pos": 30,
       "name": "Peter Murphy",
       "points": 206
     },
     {
-      "pos": 29,
+      "pos": 31,
       "name": "Brandon Jackson",
       "points": 198
-    },
-    {
-      "pos": 30,
-      "name": "Matthew Bailey",
-      "points": 192
-    },
-    {
-      "pos": 31,
-      "name": "Chad Hartle",
-      "points": 176
     },
     {
       "pos": 32,
@@ -343,12 +346,12 @@ const weeklyData = {
     },
     {
       "pos": 36,
-      "name": "Korey Denson",
+      "name": "Curtis Yancey",
       "points": 124
     },
     {
-      "pos": 36,
-      "name": "Curtis Yancey",
+      "pos": 37,
+      "name": "Korey Denson",
       "points": 124
     },
     {
@@ -373,7 +376,7 @@ const weeklyData = {
     },
     {
       "pos": 42,
-      "name": "Cordell McFarlin",
+      "name": "Cordell Mcfarlin",
       "points": 87
     },
     {
@@ -433,13 +436,13 @@ const weeklyData = {
     },
     {
       "pos": 54,
-      "name": "Markalan Bivens",
+      "name": "MarkAlan Bivens",
       "points": 2
     }
   ],
   "latestBroadcastVideoId": "LiFVc8IquJ8",
-  "spotlightDriver": "Bill Harkins",
+  "spotlightDriver": "Nathan Santos",
   "latestBroadcastTitle": "The I'm Lost at Mid Ohio 175",
-  "latestBroadcastIsUpcoming": true,
+  "latestBroadcastIsUpcoming": false,
   "latestBroadcastBanner": "assets/BCast Banners/yt_LiFVc8IquJ8.jpg"
 };

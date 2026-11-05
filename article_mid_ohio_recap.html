@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Course Redemption at Mid-Ohio: Benjamin Lacy (#7) Wins the Pole &amp; Leads 47 of 50 Laps in the Bandit Mobile App 50! | Bandit Racing League</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,700;0,800;1,700;1,900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1793853708">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .article-hero {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.62), rgba(10,10,10,1)), url('assets/WINNER IMAGES/BenLacy_Mid_Ohio.png') center/cover no-repeat;
+            padding: 80px 5% 40px 5%;
+            text-align: center;
+            border-bottom: 3px solid var(--neon-green);
+        }
+        .article-container {
+            max-width: 980px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .article-meta {
+            color: var(--neon-green);
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            background: rgba(57, 255, 20, 0.12);
+            padding: 5px 15px;
+            border-radius: 4px;
+            border: 1px solid var(--neon-green);
+        }
+        .article-title {
+            font-size: 2.6rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-style: italic;
+            text-shadow: 0 0 20px rgba(0,255,0,0.35);
+        }
+        .article-body {
+            font-size: 1.12rem;
+            line-height: 1.85;
+            color: #ddd;
+        }
+        .article-body p {
+            margin-bottom: 24px;
+        }
+        .article-body h3 {
+            color: var(--neon-green);
+            font-size: 1.75rem;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--neon-green);
+            padding-left: 15px;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+            border-left: 4px solid var(--chase-yellow);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .podium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .podium-card {
+            background: #111;
+            border: 1px solid #282828;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .podium-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+        }
+        .podium-place {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+        .place-1 { color: #ffd700; text-shadow: 0 0 15px rgba(255,215,0,0.4); }
+        .place-2 { color: #c0c0c0; text-shadow: 0 0 15px rgba(192,192,192,0.4); }
+        .place-3 { color: #cd7f32; text-shadow: 0 0 15px rgba(205,127,50,0.4); }
+        .career-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        .career-stat-box {
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(57, 255, 20, 0.35);
+            border-radius: 8px;
+            padding: 18px 14px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.08);
+        }
+        .career-stat-val {
+            font-family: var(--font-heading);
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: var(--neon-green);
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+        .career-stat-lbl {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aaa;
+            font-weight: 700;
+        }
+        .standings-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            background: rgba(10, 12, 16, 0.95);
+            border: 1px solid rgba(255, 204, 0, 0.35);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .standings-table th {
+            background: rgba(255, 204, 0, 0.16);
+            color: var(--chase-yellow);
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 2px solid rgba(255, 204, 0, 0.4);
+        }
+        .standings-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            color: #eee;
+        }
+        .photo-showcase-card {
+            background: #0b0e13;
+            border: 1.5px solid rgba(57, 255, 20, 0.4);
+            border-radius: 10px;
+            padding: 14px;
+            margin: 26px 0;
+            box-shadow: 0 0 28px rgba(0, 0, 0, 0.65);
+        }
+        .photo-showcase-card img {
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .photo-caption {
+            margin-top: 10px;
+            font-size: 0.92rem;
+            color: #ccc;
+            line-height: 1.5;
+            padding: 4px 6px;
+        }
+        .action-shots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 20px;
+            margin: 28px 0;
+        }
+        @media (max-width: 640px) {
+            .action-shots-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793853708">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793853708">
+    <link rel="shortcut icon" href="favicon.ico?v=1793853708">
+    <link rel="manifest" href="manifest.json?v=1793853708">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793853708">
+</head>
+
+<body>
+    <!-- Top Partners Bar -->
+    <div class="sponsor-bar">
+        <div class="sponsor-bar-label">Official League Partners:</div>
+        <div class="sponsor-logos">
+            <a href="https://www.lynxguard.com" target="_blank" class="sponsor-item" title="LynxGuard"><img src="assets/lynx-logo.png" alt="LynxGuard"></a>
+            <a href="https://www.clearlow.com" target="_blank" class="sponsor-item" title="Clear Low Communications"><img src="assets/clearlow.jpg" alt="Clear Low" style="border-radius: 4px;"></a>
+            <a href="https://www.facebook.com/GeezerAuthentics/" target="_blank" class="sponsor-item" title="Geezer Authentics"><img src="assets/geezer.png" alt="Geezer Authentics"></a>
+            <a href="https://www.perfectshineautospa.com/" target="_blank" class="sponsor-item" title="Perfect Shine Auto Spa"><img src="assets/perfectshine.png" alt="Perfect Shine Auto Spa"></a>
+            <a href="https://www.irtyler.com/" target="_blank" class="sponsor-item" title="iR Tyler Setups"><img src="assets/irtyler.png" alt="iR Tyler"></a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">
+                <span class="brand-text">BANDIT <span class="accent">RACING</span></span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="standings.html">Standings</a></li>
+            <li><a href="teams.html">Teams</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="drivers.html">Drivers</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="merch.html">Merch</a></li>
+            <li><a href="wall-of-shame.html" style="color: #ff0055; font-weight: bold;"><i class="fa-solid fa-fire"></i> Wall of Shame</a></li>
+            <li><a href="https://www.youtube.com/watch?v=LiFVc8IquJ8" target="_blank" class="broadcast-btn"><i class="fa-brands fa-youtube"></i> Watch Replay</a></li>
+        </ul>
+    </nav>
+
+    <div class="article-hero">
+        <div class="article-meta">Season 16 Chase Round 3 • The Bandit Mobile App 50 at Mid-Ohio • Official Race Report</div>
+        <h1 class="article-title">Road Course Masterclass at Mid-Ohio: Benjamin Lacy (#7) Wins Pole, Stage 2 &amp; Leads 47 of 50 Laps to Conquer the Bandit Mobile App 50!</h1>
+        <p style="color: #ccc; font-size: 1.15rem; max-width: 880px; margin: 0 auto;">Silencing every memory of his 20th-place finish in Season 12, Championship leader Benjamin I. Lacy (#7 | GFR Racing RAM) puts on a 50-lap clinic in Lexington—scoring a massive 58-point night while Ethan Sikorski (#24, P2) and Stage 1 winner Scott Sanderson (#93, P3, 54 pts) lock down the podium!</p>
+    </div>
+
+    <div class="article-container">
+        <div class="article-body">
+            <!-- Featured Winner Image: Ben Lacy at Mid-Ohio -->
+            <div class="photo-showcase-card" style="border-color: var(--chase-yellow); box-shadow: 0 0 32px rgba(255, 204, 0, 0.22);">
+                <img src="assets/WINNER IMAGES/BenLacy_Mid_Ohio.png" alt="Benjamin Lacy #7 Filming the Wild GFR Racing RAM Winner at Mid-Ohio Sports Car Course">
+                <div class="photo-caption">
+                    <strong style="color: var(--chase-yellow); text-transform: uppercase; letter-spacing: 0.5px;">🏆 VICTORY LANE AT MID-OHIO:</strong> <strong>Benjamin I. Lacy (#7 | GFR Racing "Filming the Wild / Reel Earth Films" RAM)</strong> celebrates his league-leading <strong>5th victory of Season 16</strong> after sweeping the Pole (<code>1:26.0337</code>), Fastest Lap (<code>1:26.3345</code>), Stage 2, and <strong>47 of 50 laps led</strong> in the <strong>Bandit Mobile App 50</strong> at Mid-Ohio Sports Car Course!
+                </div>
+            </div>
+
+            <p><strong style="color: var(--neon-green); font-size: 1.3rem;">LEXINGTON, OH —</strong> Entering Round 3 of the Season 16 Chase for the Championship—the <strong>Bandit Mobile App 50</strong> at <strong>Mid-Ohio Sports Car Course</strong>—every scouting report circled the 2.258-mile, 13-turn road course as the one historical question mark on Championship leader <strong>Benjamin I. Lacy's (#7 | GFR Racing)</strong> resume. In the Bandit Racing League's only previous visit to Mid-Ohio back in Season 12, Lacy had qualified 23rd and finished 20th.</p>
+
+            <p>On Wednesday night in Lexington, Lacy erased that stat forever. Piloting the <strong>#7 "Filming the Wild / Reel Earth Films" GFR Racing RAM</strong>, Lacy blistered the 13-turn layout to win the <strong>Pole Position (1:26.0337)</strong> by more than seven-tenths of a second, set the <strong>Fastest Lap of the Race (1:26.3345 on Lap 21)</strong>, captured the <strong>Stage 2 victory</strong>, and paced the field for <strong>47 of the 50 laps</strong> with just <strong>3x incident points</strong>. Crossing the stripe <strong>10.981 seconds</strong> ahead of runner-up <strong>Ethan Sikorski (#24 | ESR)</strong> and Stage 1 winner <strong>Scott Sanderson (#93 | GFR Racing)</strong>, Lacy racked up a near-maximum <strong>58 total points</strong> to extend his Championship lead to <strong>20 points</strong> with two races remaining!</p>
+
+            <div class="podium-grid">
+                <div class="podium-card" style="border-color: rgba(255, 215, 0, 0.55);">
+                    <div class="podium-place place-1"><i class="fa-solid fa-trophy"></i> 1ST</div>
+                    <h4 style="font-size: 1.4rem; color: #fff; margin-bottom: 5px;">Benjamin I. Lacy</h4>
+                    <div style="color: var(--chase-yellow); font-size: 0.9rem; font-weight: bold;">#7 GFR Racing RAM (Chase #1)</div>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 10px; margin-bottom: 0;">Started: 1st (Pole: 1:26.0337)<br>Led: 47 Laps | Stage 2 Win | 3x | 58 Pts</p>
+                </div>
+                <div class="podium-card">
+                    <div class="podium-place place-2"><i class="fa-solid fa-medal"></i> 2ND</div>
+                    <h4 style="font-size: 1.4rem; color: #fff; margin-bottom: 5px;">Ethan Sikorski</h4>
+                    <div style="color: #00e5ff; font-size: 0.9rem; font-weight: bold;">#24 Ethan Sikorski Racing</div>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 10px; margin-bottom: 0;">Started: 2nd (1:26.7380) | Margin: -10.981s<br>Stage 1 P9 &amp; Stage 2 P3 | 4x | 45 Pts</p>
+                </div>
+                <div class="podium-card">
+                    <div class="podium-place place-3"><i class="fa-solid fa-award"></i> 3RD</div>
+                    <h4 style="font-size: 1.4rem; color: #fff; margin-bottom: 5px;">Scott Sanderson</h4>
+                    <div style="color: var(--neon-green); font-size: 0.9rem; font-weight: bold;">#93 GFR Racing Silverado (Chase #2)</div>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 10px; margin-bottom: 0;">Started: 3rd | Stage 1 Winner (19 Stage Pts!)<br>Led: 3 Laps | Race-Low 2x | 54 Pts</p>
+                </div>
+            </div>
+
+            <div class="career-stat-grid">
+                <div class="career-stat-box">
+                    <div class="career-stat-val">47 / 50</div>
+                    <div class="career-stat-lbl">Laps Led by #7 Benjamin Lacy</div>
+                </div>
+                <div class="career-stat-box">
+                    <div class="career-stat-val">10.981s</div>
+                    <div class="career-stat-lbl">Margin of Victory Over #24 Sikorski</div>
+                </div>
+                <div class="career-stat-box">
+                    <div class="career-stat-val">58 Pts</div>
+                    <div class="career-stat-lbl">Lacy Point Haul (40R + 16S + 2B)</div>
+                </div>
+                <div class="career-stat-box">
+                    <div class="career-stat-val">19 Stage Pts</div>
+                    <div class="career-stat-lbl">Sanderson Stage Haul (S1 P1, S2 P2)</div>
+                </div>
+                <div class="career-stat-box">
+                    <div class="career-stat-val">0</div>
+                    <div class="career-stat-lbl">On-Track Incident Cautions (Stage Breaks Only)</div>
+                </div>
+            </div>
+
+            <h3>Stage 1 (Laps 1–15) &amp; Stage 2 (Laps 16–30): Pit Strategy Chess &amp; GFR Control</h3>
+            <p>With a <strong>50-lap distance (112.9 miles)</strong>, a <strong>70% fuel cap</strong>, and stage breaks scheduled at <strong>Lap 15</strong> and <strong>Lap 30</strong>, crew chiefs had to balance track position against maximum stage points. Starting from the pole, <strong>Benjamin I. Lacy (#7)</strong> immediately checked out from the pack, pacing the first <strong>13 laps of Stage 1</strong> with zero incident points and clocking a <code>1:26.4508</code> on Lap 2 before ducking onto pit road late in the stage to set up his track position and fuel sequence—still crossing the line <strong>5th in Stage 1 (+6 stage points)</strong>.</p>
+
+            <p>That opened the door for GFR Racing teammate <strong>Scott Sanderson (#93)</strong> to take command for the final two laps of the opening segment and capture the <strong>Stage 1 Victory (+10 stage points, 0x incidents)</strong>! <strong>Dylan McDonald (#9 | Legacy Racing)</strong> powered home <strong>2nd in Stage 1 (+9 pts)</strong> after making 6 quality passes, followed by road-course ringer <strong>Connor Gibson (#31 | ZeroFoxtrot, P3, +8 pts, 0x)</strong>, <strong>Kevin Foster (#8 | GFR Racing, P4, +7 pts, 0x)</strong>, <strong>Lacy (#7, P5, +6 pts)</strong>, <strong>Jackson Knaak (#00 | ESR, P6, +5 pts)</strong>, <strong>Michael Rakes (#47 | 937 Racing, P7, +4 pts, 0x)</strong>, <strong>Chad Hartle (#37, P8, +3 pts)</strong>, <strong>Ethan Sikorski (#24, P9, +2 pts, 0x)</strong>, and <strong>Nathan Santos (#21, P10, +1 pt)</strong>.</p>
+
+            <p>In <strong>Stage 2 (Laps 16–30)</strong>, Lacy returned to the point and unleashed the fastest lap of the entire evening—a blistering <strong><code>1:26.3345</code> on Lap 21</strong>—while leading 14 of the 15 laps to claim his <strong>10th Stage Win of Season 16 (+10 stage points)</strong>! <strong>Scott Sanderson (#93)</strong> led 1 lap and finished 2.147 seconds back in <strong>2nd (+9 stage points, giving Sanderson a race-high 19 stage points on the night!)</strong>, while <strong>Ethan Sikorski (#24)</strong> charged to <strong>3rd in Stage 2 (+8 pts)</strong> ahead of <strong>Connor Gibson (#31, P4, +7 pts — 15 total stage points!)</strong>, <strong>Chad Hartle (#37, P5, +6 pts)</strong>, <strong>Michael Rakes (#47, P6, +5 pts, still 0x!)</strong>, <strong>Jackson Knaak (#00, P7, +4 pts)</strong>, <strong>Kevin Foster (#8, P8, +3 pts)</strong>, <strong>Nathan Santos (#21, P9, +2 pts)</strong>, and <strong>Logan A. Murray (#4 | Roundy Motorsports, P10, +1 pt)</strong>.</p>
+
+            <h3>Lap 35 Final-Stage Restart: Three-Wide Hornets' Nest Into Turn 1 &amp; The Keyhole!</h3>
+            <p>The defining flashpoint of the final 20-lap sprint unfolded on the <strong>Lap 35 restart</strong> following the Stage 2 break. As <strong>Benjamin Lacy (#7)</strong> got a clean launch down the frontstretch and hit his marks along the green racing line entering Turn 1 and The Keyhole, the entire top 10 fanned out three- and four-wide behind him in a desperate battle for road-course track position!</p>
+
+            <!-- In-Race Action Screenshots: Lap 35 Restart & Turn 1 / Keyhole Pack -->
+            <div class="action-shots-grid">
+                <div class="photo-showcase-card" style="margin: 0;">
+                    <img src="assets/race images/mid_ohio_l35.png" alt="Mid-Ohio Lap 35 Frontstretch 3-Wide Battle">
+                    <div class="photo-caption">
+                        <strong style="color: var(--neon-green);">📸 LAP 35 FRONTSTRETCH HORNETS' NEST:</strong> Coming past the pit exit cone on Lap 35, <strong>#31 Connor Gibson</strong>, <strong>#47 Michael Rakes</strong>, <strong>#37 Chad Hartle</strong>, <strong>#00 Jackson Knaak</strong>, and <strong>#24 Ethan Sikorski</strong> battle door-to-door in a tight pack while <strong>#93 Scott Sanderson</strong> (top) fights for room on the outside runoff and <strong>#8 Kevin Foster</strong>, <strong>#21 Nathan Santos</strong>, and <strong>#9 Dylan McDonald</strong> close in!
+                    </div>
+                </div>
+                <div class="photo-showcase-card" style="margin: 0;">
+                    <img src="assets/race images/mid_ohio_l35_2.png" alt="Mid-Ohio Lap 35 Diving Into The Keyhole as Ben Lacy Pulls Away">
+                    <div class="photo-caption">
+                        <strong style="color: var(--neon-green);">📸 LAP 35 INTO THE KEYHOLE:</strong> <strong>#7 Benjamin I. Lacy</strong> (foreground) checks out cleanly on the racing line while a 10-truck hornets' nest dives three-wide behind him—with <strong>#31 Gibson</strong>, <strong>#47 Rakes</strong>, <strong>#00 Knaak</strong>, <strong>#37 Hartle</strong>, <strong>#24 Sikorski</strong>, and <strong>#21 Santos</strong> trading paint as <strong>#93 Sanderson</strong> rallies from the outside grass and tire smoke billows in the background!
+                    </div>
+                </div>
+            </div>
+
+            <p>As captured in the Lap 35 broadcast cameras, <strong>Connor Gibson (#31)</strong>, <strong>Michael Rakes (#47)</strong>, <strong>Chad Hartle (#37)</strong>, <strong>Jackson Knaak (#00)</strong>, and <strong>Ethan Sikorski (#24)</strong> went wheel-to-wheel through the left-hander while <strong>Scott Sanderson (#93)</strong> was squeezed onto the outside grass/runoff and tire smoke billowed at the rear of the pack. Remarkably, not a single full-course caution was needed! <strong>Sikorski (#24)</strong> threaded the needle cleanly out of the Lap 35 scramble to take over 2nd place and run a personal-best <code>1:27.0763</code> on Lap 37, while <strong>Sanderson (#93)</strong> gathered his GFR Silverado back onto the asphalt with only <strong>2x total incident points all night</strong>, ripping off a <code>1:26.8649</code> on Lap 37 to reclaim <strong>3rd place on the podium</strong>!</p>
+
+            <p>Behind the podium trio, <strong>Chad Hartle (#37)</strong> turned in the <strong>Hard Charger drive of the night (+6 spots)</strong>, carving from <strong>10th on the starting grid to 4th place</strong> (42 total points, including 9 stage points) after running his fastest lap on Lap 36 (<code>1:27.9945</code>). GFR Racing's <strong>Kevin Foster (#8)</strong> delivered another textbook road-course performance—logging just <strong>4x incidents</strong> over 50 laps and setting his fastest lap on the penultimate circuit (Lap 49, <code>1:28.0748</code>) to finish <strong>5th (42 total points)</strong> and climb into <strong>4th place in the Championship Chase</strong>!</p>
+
+            <div class="highlight-box">
+                <h4 style="color: var(--chase-yellow); font-family: var(--font-heading); font-size: 1.35rem; margin-top: 0; margin-bottom: 12px; text-transform: uppercase;">
+                    📊 Mid-Ohio Top 12 Finishing Order &amp; Telemetry Notes (Race 19 of 21)
+                </h4>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.85; color: #ddd;">
+                    <li><strong>1st: #7 Benjamin I. Lacy (GFR Racing | RAM)</strong> — Started <strong>1st (Pole: 1:26.0337)</strong>, led <strong>47 of 50 laps</strong>, won <strong>Stage 2</strong>, set <strong>Fastest Lap (1:26.3345 on Lap 21)</strong>, 3x incidents, <strong>58 Total Points</strong> (40 Race + 16 Stage + 2 Bonus).</li>
+                    <li><strong>2nd: #24 Ethan Sikorski (ESR | Silverado)</strong> — Started <strong>2nd (1:26.7380)</strong>, finished <strong>-10.981s</strong> back, P9 in Stage 1 &amp; P3 in Stage 2, 4x incidents, <strong>45 Total Points</strong>.</li>
+                    <li><strong>3rd: #93 Scott Sanderson (GFR Racing | Silverado)</strong> — Started <strong>3rd</strong>, <strong>Stage 1 Winner</strong> &amp; Stage 2 Runner-Up (<strong>race-high 19 stage points!</strong>), led 3 laps, <strong>race-low 2x incidents</strong>, <strong>54 Total Points</strong>. Vaults to <strong>2nd in the Chase (-20)</strong>!</li>
+                    <li><strong>4th: #37 Chad Hartle (Silverado)</strong> — Started <strong>10th (+6 Hard Charger!)</strong>, P8 in Stage 1 &amp; P5 in Stage 2, <strong>42 Total Points</strong>.</li>
+                    <li><strong>5th: #8 Kevin Foster (GFR Racing | F-150)</strong> — Started <strong>5th</strong>, P4 in Stage 1 &amp; P8 in Stage 2, 4x incidents, fastest lap on Lap 49 (<code>1:28.0748</code>), <strong>42 Total Points</strong>. Climbs to <strong>4th in the Chase</strong>!</li>
+                    <li><strong>6th: #9 Dylan McDonald (Legacy Racing | Silverado)</strong> — Started <strong>6th</strong>, P2 in Stage 1 (+9 stage pts), fast lap of <code>1:27.4438</code> on Lap 36, <strong>40 Total Points</strong>.</li>
+                    <li><strong>7th: #47 Michael Rakes (937 Racing | F-150)</strong> — Started <strong>7th</strong>, P7 in Stage 1 &amp; P6 in Stage 2, super-clean <strong>5x incidents</strong>, <strong>39 Total Points</strong>.</li>
+                    <li><strong>8th: #21 Nathan Santos (ESR | Silverado)</strong> — Started <strong>9th (+1 spot)</strong>, scored stage points in both stages (S1 P10, S2 P9), 9x incidents, <strong>32 Total Points</strong>.</li>
+                    <li><strong>9th: #00 Jackson Knaak (ESR | Silverado)</strong> — Started <strong>8th</strong>, P6 in Stage 1 &amp; P7 in Stage 2 (+9 stage pts), <strong>37 Total Points</strong>. Climbs to <strong>6th in the Chase</strong>!</li>
+                    <li><strong>10th: #31 Connor Gibson (ZeroFoxtrot | Silverado)</strong> — Started <strong>4th</strong>, P3 in Stage 1 &amp; P4 in Stage 2 (<strong>15 stage points!</strong>), 8x incidents, <strong>42 Total Points</strong>.</li>
+                    <li><strong>11th: #22 Joshua L. Adams (937 Racing | Tundra)</strong> — Started <strong>13th (+2 spots)</strong>, completed all 50 laps on the lead lap, <strong>26 Total Points</strong> (holds <strong>3rd in the Chase</strong> at 2,182 pts).</li>
+                    <li><strong>12th: #12 Bill Harkins (Roundy Motorsports | F-150)</strong> — Started <strong>11th</strong>, completed all 50 laps on the lead lap, <strong>25 Total Points</strong>.</li>
+                </ul>
+            </div>
+
+            <h3>Official Season 16 Chase Standings (Entering Round 4 Cutoff at Phoenix)</h3>
+            <p>With three of the five Chase rounds in the books, <strong>Benjamin I. Lacy (#7 | 2,228 pts)</strong> holds a <strong>20-point lead</strong> over GFR Racing teammate <strong>Scott Sanderson (#93 | 2,208 pts)</strong>, who leapfrogged into 2nd overall thanks to his 54-point Mid-Ohio podium! <strong>Joshua L. Adams (#22 | 2,182 pts, -46)</strong> sits 3rd, while <strong>Kevin Foster (#8 | 2,173 pts, -55)</strong> and <strong>Dylan McDonald (#9 | 2,170 pts, -58)</strong> jump into the Top 5 after <strong>Nick Nickerson (#2 | 2,137 pts, -91)</strong> missed Mid-Ohio and received 19 provisional DNS points.</p>
+
+            <table class="standings-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Driver</th>
+                        <th>Franchise</th>
+                        <th>Mid-Ohio Finish &amp; Points</th>
+                        <th>Chase Points</th>
+                        <th>Gap</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: rgba(255, 204, 0, 0.08);">
+                        <td><strong style="color: var(--chase-yellow);">1st</strong></td>
+                        <td><strong>#7 Benjamin I. Lacy</strong></td>
+                        <td>GFR Racing</td>
+                        <td>🏆 <strong>P1</strong> (Q1 Pole, 47 Led, S2 Win, 3x — <strong>58 Pts</strong>)</td>
+                        <td><strong style="color: var(--neon-green);">2,228</strong></td>
+                        <td><strong>LEADER</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #c0c0c0;">2nd</strong></td>
+                        <td><strong>#93 Scott Sanderson</strong></td>
+                        <td>GFR Racing</td>
+                        <td>🥉 <strong>P3</strong> (Q3, 3 Led, S1 Win, 2x — <strong>54 Pts</strong>)</td>
+                        <td><strong>2,208</strong></td>
+                        <td style="color: var(--neon-green); font-weight: 700;">-20</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #cd7f32;">3rd</strong></td>
+                        <td><strong>#22 Joshua L. Adams</strong></td>
+                        <td>937 Racing</td>
+                        <td><strong>P11</strong> (Q13 &rarr; P11, 50 Laps — <strong>26 Pts</strong>)</td>
+                        <td><strong>2,182</strong></td>
+                        <td style="color: var(--chase-yellow); font-weight: 700;">-46</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4th</strong></td>
+                        <td><strong>#8 Kevin Foster</strong></td>
+                        <td>GFR Racing</td>
+                        <td><strong>P5</strong> (Q5, S1 P4 &amp; S2 P8, 4x — <strong>42 Pts</strong>)</td>
+                        <td><strong>2,173</strong></td>
+                        <td>-55</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5th</strong></td>
+                        <td><strong>#9 Dylan McDonald</strong></td>
+                        <td>Legacy Racing</td>
+                        <td><strong>P6</strong> (Q6, S1 P2, 50 Laps — <strong>40 Pts</strong>)</td>
+                        <td><strong>2,170</strong></td>
+                        <td>-58</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6th</strong></td>
+                        <td><strong>#00 Jackson Knaak</strong></td>
+                        <td>ESR</td>
+                        <td><strong>P9</strong> (Q8, S1 P6 &amp; S2 P7 — <strong>37 Pts</strong>)</td>
+                        <td><strong>2,156</strong></td>
+                        <td>-72</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7th</strong></td>
+                        <td><strong>#47 Michael Rakes</strong></td>
+                        <td>937 Racing</td>
+                        <td><strong>P7</strong> (Q7, S1 P7 &amp; S2 P6, 5x — <strong>39 Pts</strong>)</td>
+                        <td><strong>2,152</strong></td>
+                        <td>-76</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8th</strong></td>
+                        <td><strong>#2 Nick Nickerson</strong></td>
+                        <td>GFR Racing</td>
+                        <td>DNS Provisional (<strong>19 Pts</strong>)</td>
+                        <td><strong>2,137</strong></td>
+                        <td>-91</td>
+                    </tr>
+                    <tr>
+                        <td><strong>9th</strong></td>
+                        <td><strong>#13 Johnathon Platt</strong></td>
+                        <td>GFR Racing</td>
+                        <td><strong>P17</strong> (Q14, 6 Laps, 3x — <strong>20 Pts</strong>)</td>
+                        <td><strong>2,113</strong></td>
+                        <td>-115</td>
+                    </tr>
+                    <tr>
+                        <td><strong>10th</strong></td>
+                        <td><strong>#31 Connor Gibson</strong></td>
+                        <td>ZeroFoxtrot</td>
+                        <td><strong>P10</strong> (Q4, S1 P3 &amp; S2 P4, 15 Stage Pts — <strong>42 Pts</strong>)</td>
+                        <td><strong>2,112</strong></td>
+                        <td>-116</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Franchise Team Financials &amp; Mid-Ohio Outlaw Ledger</h3>
+            <p>On the franchise side, <strong>GFR Racing</strong> dominated the Mid-Ohio balance sheet with <strong>136 team points</strong>, banking <strong>+$225,000 in race earnings</strong> against just <strong>-$20,492 in expenses</strong> (thanks to super-clean runs by Sanderson 2x, Lacy 3x, Platt 3x, and Foster 4x) to push their league-leading treasury to <strong>$3,979,472 (2,724 pts, 12 Wins)</strong>! <strong>937 Racing</strong> scored <strong>101 team points</strong> and unlocked a <strong>+$20,184 RPM Graphics sponsor bonus</strong> for a <strong>+$160,184 gross haul</strong> (-$9,848 expenses, new balance <strong>$2,665,655</strong>), while <strong>Ethan Sikorski Racing (ESR)</strong> racked up <strong>92 team points</strong> behind Sikorski's P2, Santos's P8, and Knaak's P9—unlocking a <strong>+$23,144 SimGear Pro sponsor bonus</strong> for <strong>+$173,144 in weekly earnings</strong> (new balance <strong>$2,296,928</strong>)! <strong>Roundy Motorsports</strong> also earned an <strong>RPM Graphics sponsor bonus (+$10,640)</strong> to bank <strong>+$80,640</strong> (new balance <strong>$2,248,615</strong>).</p>
+
+            <!-- Up Next Banner: Chase Round 4 at Phoenix -->
+            <div style="background: linear-gradient(135deg, rgba(255, 204, 0, 0.14), rgba(0, 0, 0, 0.92)); border: 2px solid var(--chase-yellow); border-radius: 10px; padding: 24px; margin-top: 35px; text-align: center;">
+                <div style="color: var(--chase-yellow); font-family: var(--font-heading); font-weight: 900; font-size: 1.35rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+                    🏜️ UP NEXT: CHASE ROUND 4 ELIMINATION CUTOFF AT PHOENIX RACEWAY (WED, NOV 11 @ 9:00 PM EST)
+                </div>
+                <p style="color: #ddd; font-size: 1rem; margin-bottom: 16px;">
+                    The championship battle shifts to the 1.0-mile desert dogleg at <strong>Phoenix Raceway for 140 Laps (Stages at Lap 42 &amp; Lap 84)</strong> before the Championship Finale at Homestead-Miami!
+                </p>
+                <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                    <a href="/teams.html" class="btn-primary" style="padding: 10px 22px; font-weight: 900;">💰 View Updated Team Financials &amp; Outlaw Telegraph &rarr;</a>
+                    <a href="/standings.html" class="btn-primary" style="padding: 10px 22px; background: var(--chase-yellow); border-color: var(--chase-yellow); color: #000; font-weight: 900;">🏆 Official Chase Standings &rarr;</a>
+                    <a href="/index.html" class="btn-secondary" style="padding: 10px 22px;">&larr; Back to Homepage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="brl_app.js?v=1793853708"></script>
+</body>
+
+</html>

@@ -190,6 +190,8 @@ TRACK_LOGOS = {
     "martinsville": "Martinsville.jpg",
     "talladega": "Talladega.jpg",
     "road america": "Road America.png",
+    "mid-ohio sports car course": "MidOhio.png",
+    "mid-ohio": "MidOhio.png",
     "homestead miami": "Homestead Miami.jpg"
 }
 
@@ -246,9 +248,9 @@ def find_custom_winner_image(winner_name, track_name, base_dir):
         return ""
         
     track_norm = track_name.lower()
-    for word in ["speedway", "raceway", "international", "motor", "superspeedway", "tri-oval", "trioval", "oval"]:
+    for word in ["speedway", "raceway", "international", "motor", "superspeedway", "tri-oval", "trioval", "oval", "sports", "car", "course"]:
         track_norm = track_norm.replace(word, "")
-    track_norm = track_norm.replace(" ", "").strip()
+    track_norm = track_norm.replace(" ", "").replace("-", "").replace("_", "").strip()
 
     norm_winner = winner_name.lower().replace(" ", "").replace("3", "").replace("2", "")
     parts = winner_name.lower().split()
@@ -258,8 +260,10 @@ def find_custom_winner_image(winner_name, track_name, base_dir):
 
     # First priority: match winner name/initials AND track name keywords
     for f in os.listdir(winner_images_dir):
+        if os.path.isdir(os.path.join(winner_images_dir, f)):
+            continue
         norm_f = f.lower().replace("_", "").replace("-", "").replace(" ", "")
-        if track_norm in norm_f:
+        if track_norm and track_norm in norm_f:
             if norm_winner in norm_f or initial_last in norm_f or initial_last_no_dot in norm_f or last_name in norm_f:
                 return f"assets/WINNER IMAGES/{f}"
 
@@ -271,6 +275,8 @@ def find_custom_winner_image(winner_name, track_name, base_dir):
             
     # Third priority: match winner name parts
     for f in os.listdir(winner_images_dir):
+        if os.path.isdir(os.path.join(winner_images_dir, f)):
+            continue
         norm_f = f.lower().replace("_", "").replace("-", "")
         if norm_winner in norm_f or last_name in norm_f:
             return f"assets/WINNER IMAGES/{f}"
@@ -278,16 +284,15 @@ def find_custom_winner_image(winner_name, track_name, base_dir):
     return ""
 
 def find_track_action_shots(track_name, base_dir):
-    # Extract track keywords (e.g. "Atlanta" or "Daytona")
+    # Extract track keywords (e.g. "Atlanta" or "Daytona" or "Mid-Ohio")
     track_norm = track_name.lower()
     match = re.search(r'\((.*?)\)', track_norm)
     if match:
         track_norm = match.group(1).strip()
     else:
-        # Clean track name
-        for word in ["speedway", "raceway", "international", "motor", "superspeedway", "tri-oval", "trioval", "oval"]:
+        for word in ["speedway", "raceway", "international", "motor", "superspeedway", "tri-oval", "trioval", "oval", "sports", "car", "course"]:
             track_norm = track_norm.replace(word, "")
-        track_norm = track_norm.replace(" ", "").strip()
+        track_norm = track_norm.replace(" ", "").replace("-", "").replace("_", "").strip()
     
     # Search in both assets/race images and assets/WINNER IMAGES/action shots
     dirs_to_check = [
@@ -299,8 +304,8 @@ def find_track_action_shots(track_name, base_dir):
     for rel_path, abs_path in dirs_to_check:
         if os.path.exists(abs_path):
             for f in os.listdir(abs_path):
-                if track_norm in f.lower():
-                    # Standardize paths to use forward slashes for web consistency
+                norm_f = f.lower().replace("_", "").replace("-", "").replace(" ", "")
+                if track_norm and track_norm in norm_f:
                     matched_files.append(f"{rel_path}/{f}")
     return sorted(list(set(matched_files)))
 
@@ -469,14 +474,27 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
         with sync_playwright() as p:
             browser = p.chromium.launch()
             
-            # Preserve authoritative Chase driver standings if already populated in weekly_data.js
-            existing_standings = existing_weekly.get("driverStandings", [])
-            if existing_standings and existing_standings[0].get("points", 0) >= 2000:
-                driver_standings = existing_standings
-                print("[+] Preserving authoritative Chase driver standings from weekly_data.js")
+            # Load authoritative Chase driver standings from season16_stats_data.js if available
+            stats_js_data = load_js_variable(os.path.join(BASE_DIR, "season16_stats_data.js"), "season16StatsData")
+            if stats_js_data and stats_js_data.get("drivers"):
+                driver_standings = [
+                    {
+                        "pos": d.get("rank", idx + 1),
+                        "name": d.get("name", ""),
+                        "points": d.get("points", 0)
+                    }
+                    for idx, d in enumerate(stats_js_data["drivers"])
+                    if d.get("points", 0) > 0
+                ]
+                print(f"[+] Loaded {len(driver_standings)} authoritative driver standings from season16_stats_data.js")
             else:
-                driver_standings = scrape_driver_standings_playwright(browser, "29722")
-                driver_standings = correct_driver_standings(driver_standings)
+                existing_standings = existing_weekly.get("driverStandings", [])
+                if existing_standings and existing_standings[0].get("points", 0) >= 2000:
+                    driver_standings = existing_standings
+                    print("[+] Preserving authoritative Chase driver standings from weekly_data.js")
+                else:
+                    driver_standings = scrape_driver_standings_playwright(browser, "29722")
+                    driver_standings = correct_driver_standings(driver_standings)
             
             # 1.5. Determine Spotlight Driver based on new rules
             # Rules: 
@@ -536,24 +554,24 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
                     selected_spotlight = "Kevin Foster"
 
             # Construct weekly data dict
-            winner_image = existing_weekly.get("winnerImage") or find_custom_winner_image(winner_name, track_name, BASE_DIR)
-            action_shots = existing_weekly.get("actionShots") or find_track_action_shots(track_name, BASE_DIR)
+            winner_image = find_custom_winner_image(winner_name, track_name, BASE_DIR) or existing_weekly.get("winnerImage")
+            action_shots = find_track_action_shots(track_name, BASE_DIR) or existing_weekly.get("actionShots", [])
             latest_video_id = existing_weekly.get("latestBroadcastVideoId") or get_latest_youtube_video_id("UC8D9f0DOxaf8hdyxIuk2NeQ")
             weekly_data = {
                 "winnerName": winner_name,
-                "winnerNumber": winner_number or existing_weekly.get("winnerNumber", "2"),
+                "winnerNumber": winner_number or existing_weekly.get("winnerNumber", "7"),
                 "winnerImage": winner_image,
                 "actionShots": action_shots,
                 "trackName": track_name,
-                "trackLogo": track_logo or existing_weekly.get("trackLogo", "Kansas.png"),
+                "trackLogo": track_logo or existing_weekly.get("trackLogo", "MidOhio.png"),
                 "raceDate": race_date,
                 "teamStandings": team_list,
                 "fantasyLeaderboard": fantasy_list,
                 "driverStandings": driver_standings,
                 "latestBroadcastVideoId": latest_video_id,
                 "spotlightDriver": selected_spotlight,
-                "latestBroadcastTitle": existing_weekly.get("latestBroadcastTitle", "The Wendy Jo Memorial 110"),
-                "latestBroadcastIsUpcoming": existing_weekly.get("latestBroadcastIsUpcoming", False),
+                "latestBroadcastTitle": existing_weekly.get("latestBroadcastTitle", "The I'm Lost at Mid Ohio 175"),
+                "latestBroadcastIsUpcoming": False,
                 "latestBroadcastBanner": existing_weekly.get("latestBroadcastBanner", f"assets/BCast Banners/yt_{latest_video_id}.jpg")
             }
             
