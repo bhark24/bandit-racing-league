@@ -442,7 +442,7 @@ const weeklyData = {
   ],
   "latestBroadcastVideoId": "LiFVc8IquJ8",
   "spotlightDriver": "Nathan Santos",
-  "latestBroadcastTitle": "The I'm Lost at Mid Ohio 175",
+  "latestBroadcastTitle": "The Bandit Mobile App 50",
   "latestBroadcastIsUpcoming": false,
   "latestBroadcastBanner": "assets/BCast Banners/yt_LiFVc8IquJ8.jpg"
 };
