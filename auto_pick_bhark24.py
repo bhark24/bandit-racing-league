@@ -1,9 +1,10 @@
 import os
 import re
+import ssl
 import json
 import urllib.request
 import urllib.parse
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -35,6 +36,12 @@ BHARK24_AUTO_PICKS = {
     }
 }
 
+# Standing weekly picks for Rebekah Weaver (if not manually overridden)
+REBEKAH_WEAVER_AUTO_PICKS = {
+    "picks": ["VICTOR WEAVER", "JOSH ADAMS", "MICHAEL RAKES", "BENJAMIN LACY"],
+    "tiebreaker": 15
+}
+
 SCHEDULE = [
     {"track": "Kansas", "date": "2026-10-28"},
     {"track": "Mid-Ohio", "date": "2026-11-04"},
@@ -42,10 +49,27 @@ SCHEDULE = [
     {"track": "Homestead Miami", "date": "2026-11-18"}
 ]
 
-def get_upcoming_track():
-    now_str = datetime.now().strftime("%Y-%m-%d")
+def get_upcoming_track(after_date=None):
+    """
+    Returns the next upcoming track on the schedule.
+    If after_date (YYYY-MM-DD) is passed (e.g. the race date just scored),
+    returns the first scheduled race strictly after that date.
+    Otherwise checks current Eastern Time against each race's 9:15 PM ET lock.
+    """
+    if after_date:
+        for r in SCHEDULE:
+            if r["date"] > after_date:
+                return r["track"]
+        return "default"
+
+    now_utc = datetime.now(timezone.utc)
     for r in SCHEDULE:
-        if r["date"] >= now_str:
+        # EDT (-4) before Nov 1, EST (-5) from Nov 1 onward
+        offset_hours = 5 if r["date"] >= "2026-11-01" else 4
+        lock_utc = datetime.strptime(r["date"], "%Y-%m-%d").replace(
+            hour=21, minute=15, second=0, tzinfo=timezone.utc
+        ) + timedelta(hours=offset_hours)
+        if now_utc < lock_utc:
             return r["track"]
     return "default"
 
@@ -71,28 +95,31 @@ def get_supabase_creds():
     key = re.search(r'SUPABASE_KEY\s*=\s*"(.*?)"', c).group(1)
     return url, key
 
-def submit_bhark24_auto_pick(track_override=None, submit_google_form=True):
+def submit_bhark24_auto_pick(track_override=None, submit_google_form=True, include_rebekah=True):
     track = track_override or get_upcoming_track()
     plan = get_auto_pick_for_track(track)
     picks = plan["picks"]
     tiebreaker = plan["tiebreaker"]
 
+    ctx = ssl._create_unverified_context()
     url, key = get_supabase_creds()
     headers = {
         "apikey": key,
         "Authorization": f"Bearer {key}"
     }
     req = urllib.request.Request(f"{url}/rest/v1/league_data?id=eq.2", headers=headers)
-    res = json.loads(urllib.request.urlopen(req).read().decode("utf-8"))
+    res = json.loads(urllib.request.urlopen(req, context=ctx).read().decode("utf-8"))
     row_data = (res[0].get("data") if res and len(res) > 0 else {}) or {}
     active_picks = row_data.get("picks") or []
+
+    now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
     new_entry = {
         "name": "Bhark24",
         "picks": picks,
         "tiebreaker": tiebreaker,
         "email": "",
-        "submitted_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+        "submitted_at": now_iso
     }
 
     idx = next((i for i, p in enumerate(active_picks) if p.get("name", "").strip().lower() == "bhark24"), -1)
@@ -100,6 +127,17 @@ def submit_bhark24_auto_pick(track_override=None, submit_google_form=True):
         active_picks[idx] = new_entry
     else:
         active_picks.append(new_entry)
+
+    if include_rebekah:
+        reb_idx = next((i for i, p in enumerate(active_picks) if p.get("name", "").strip().lower() in ("rebekah weaver", "rebeka weaver")), -1)
+        if reb_idx < 0:
+            active_picks.append({
+                "name": "Rebekah Weaver",
+                "picks": REBEKAH_WEAVER_AUTO_PICKS["picks"],
+                "tiebreaker": REBEKAH_WEAVER_AUTO_PICKS["tiebreaker"],
+                "email": "",
+                "submitted_at": now_iso
+            })
 
     row_data["picks"] = active_picks
     patch_headers = {
@@ -114,7 +152,7 @@ def submit_bhark24_auto_pick(track_override=None, submit_google_form=True):
     }).encode("utf-8")
 
     patch_req = urllib.request.Request(f"{url}/rest/v1/league_data?id=eq.2", data=payload, headers=patch_headers, method="PATCH")
-    urllib.request.urlopen(patch_req)
+    urllib.request.urlopen(patch_req, context=ctx)
     print(f"[+] Locked in Bhark24 auto-picks in Supabase for {track}: {picks} (Tiebreaker: {tiebreaker})")
 
     if submit_google_form:
@@ -129,7 +167,7 @@ def submit_bhark24_auto_pick(track_override=None, submit_google_form=True):
                 "entry.900395544": str(tiebreaker)
             }).encode("utf-8")
             form_req = urllib.request.Request(form_url, data=form_data, headers={"User-Agent": "Mozilla/5.0"}, method="POST")
-            urllib.request.urlopen(form_req)
+            urllib.request.urlopen(form_req, context=ctx)
             print("[+] Also submitted Bhark24 auto-picks to Google Form backup!")
         except Exception as e:
             print(f"[*] Note: Google Form backup response: {e}")

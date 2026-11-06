@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1793853708">
+    <link rel="stylesheet" href="styles.css?v=1793926739">
     <style>
         .pool-tier-badge {
             display: inline-block;
@@ -198,11 +198,11 @@
             color: var(--text-muted);
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793853708">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793853708">
-    <link rel="shortcut icon" href="favicon.ico?v=1793853708">
-    <link rel="manifest" href="manifest.json?v=1793853708">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793853708">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1793926739">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1793926739">
+    <link rel="shortcut icon" href="favicon.ico?v=1793926739">
+    <link rel="manifest" href="manifest.json?v=1793926739">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1793926739">
 </head>
 <body>
 
@@ -730,9 +730,9 @@
     </footer>
 
     <!-- Roster Data and Standings Data -->
-    <script src="supabase_config.js?v=1793853708"></script>
-    <script src="roster_data.js?v=1793853708"></script>
-    <script src="fantasy_data.js?v=1793853708"></script>
+    <script src="supabase_config.js?v=1793926739"></script>
+    <script src="roster_data.js?v=1793926739"></script>
+    <script src="fantasy_data.js?v=1793926739"></script>
     
     <!-- Page Logic -->
     <script>
@@ -825,13 +825,34 @@
                     await initializeFantasyDatabaseRow();
                 }
 
-                // Auto-pick for Bhark24 each week if not yet submitted for the current open race
+                // Auto-pick for Bhark24 and Rebekah Weaver each week if not yet submitted for the current open race
                 const hasBhark24 = activeWeeklyPicks.some(p => p.name && p.name.trim().toLowerCase() === 'bhark24');
-                if (!hasBhark24 && !window.isFantasyLocked) {
-                    const autoPlan = getBhark24AutoPickPlan();
-                    await savePickToSupabase('Bhark24', autoPlan.picks, autoPlan.tiebreaker, '');
-                } else {
-                    renderActiveSubmissions();
+                const hasRebekah = activeWeeklyPicks.some(p => p.name && ['rebekah weaver', 'rebeka weaver'].includes(p.name.trim().toLowerCase()));
+                if (!window.isFantasyLocked) {
+                    if (!hasBhark24) {
+                        const autoPlan = getBhark24AutoPickPlan();
+                        await savePickToSupabase('Bhark24', autoPlan.picks, autoPlan.tiebreaker, '');
+                    }
+                    if (!hasRebekah) {
+                        await savePickToSupabase('Rebekah Weaver', ['VICTOR WEAVER', 'JOSH ADAMS', 'MICHAEL RAKES', 'BENJAMIN LACY'], 15, '');
+                    }
+                }
+                renderActiveSubmissions();
+
+                // Sync draft board with active Supabase entry for current user (or Bhark24 by default if empty)
+                const savedName = (localStorage.getItem('bandit_fantasy_submitted_name') || 'Bhark24').trim().toLowerCase();
+                const matchingEntry = activeWeeklyPicks.find(p => p.name && p.name.trim().toLowerCase() === savedName);
+                if (matchingEntry && Array.isArray(matchingEntry.picks) && matchingEntry.picks.length === 4) {
+                    if (currentPicks.every(p => p === null) || savedName === 'bhark24') {
+                        currentPicks = [...matchingEntry.picks];
+                        const tbEl = document.getElementById('tiebreaker');
+                        if (tbEl && !tbEl.value && matchingEntry.tiebreaker) tbEl.value = matchingEntry.tiebreaker;
+                        const nameEl = document.getElementById('fan-name');
+                        if (nameEl && !nameEl.value) nameEl.value = matchingEntry.name;
+                        updateSelectionSummary();
+                        updateDraftBoard();
+                        if (window.allEligibleDrivers) displayDriverPool(window.allEligibleDrivers);
+                    }
                 }
             } catch (e) {
                 console.error("Failed to load picks from Supabase:", e);
@@ -989,7 +1010,16 @@
                         currentRowData = getJson[0].data;
                     }
                 }
-                currentRowData.picks = activeWeeklyPicks;
+                const serverPicks = Array.isArray(currentRowData.picks) ? [...currentRowData.picks] : [];
+                const srvIdx = serverPicks.findIndex(p => p && p.name && p.name.trim().toLowerCase() === name.trim().toLowerCase());
+                if (srvIdx > -1) {
+                    serverPicks[srvIdx] = newPick;
+                } else {
+                    serverPicks.push(newPick);
+                }
+                activeWeeklyPicks = serverPicks;
+                currentRowData.picks = serverPicks;
+                renderActiveSubmissions();
 
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
                     method: 'PATCH',
@@ -1498,13 +1528,22 @@
             }
 
             const driverScores = (fantasyData.latest_race && fantasyData.latest_race.driver_scores) || {};
+            const latestRaceKey = (fantasyData.latest_race && fantasyData.latest_race.track && fantasyData.latest_race.date)
+                ? `${fantasyData.latest_race.track} (${fantasyData.latest_race.date})`
+                : '';
+            const activeScoreVals = Object.values(driverScores).map(d => d.total_points).filter(v => typeof v === 'number');
+            const dnsSafetyPts = activeScoreVals.length >= 36 ? 0 : (activeScoreVals.length > 0 ? Math.min(...activeScoreVals) - 1 : 0);
             
-            function getDriverBadge(driverName) {
+            function getDriverBadge(driverName, isLatestRace) {
                 if (!driverName) return 'N/A';
+                if (!isLatestRace) return driverName;
                 const norm = normalizeName(driverName);
                 const scoreInfo = driverScores[norm];
                 if (scoreInfo && typeof scoreInfo.total_points !== 'undefined') {
                     return `${driverName} (${scoreInfo.total_points})`;
+                }
+                if (activeScoreVals.length > 0) {
+                    return `${driverName} (${dnsSafetyPts})`;
                 }
                 return driverName;
             }
@@ -1525,13 +1564,14 @@
                 if (player.history && player.history.length > 0) {
                     const latestEntry = player.history[player.history.length - 1];
                     const picks = latestEntry.picks || [];
+                    const isLatest = !latestRaceKey || latestEntry.race === latestRaceKey;
                     
                     picksHtml = `
                         <div class="fantasy-row-picks">
-                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[0])}</span>
-                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[1])}</span>
-                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[2])}</span>
-                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[3])}</span>
+                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[0], isLatest)}</span>
+                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[1], isLatest)}</span>
+                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[2], isLatest)}</span>
+                            <span class="fantasy-row-pick-badge">${getDriverBadge(picks[3], isLatest)}</span>
                         </div>
                     `;
                 } else {
@@ -1715,6 +1755,6 @@
             }
         });
     </script>
-    <script src="brl_app.js?v=1793853708"></script>
+    <script src="brl_app.js?v=1793926739"></script>
 </body>
 </html>

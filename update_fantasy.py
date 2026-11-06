@@ -304,8 +304,13 @@ def load_picks(config, race_lock_dt):
         try:
             p_dt = datetime.fromisoformat(clean_time_str)
             from datetime import timezone, timedelta
-            # Convert to naive local time (assume EDT/EST, UTC-4)
-            p_local = p_dt.astimezone(timezone.utc).replace(tzinfo=None) - timedelta(hours=4)
+            # Convert to naive US/Eastern local time (EDT = UTC-4 before Nov 1; EST = UTC-5 from Nov 1 onward)
+            if p_dt.tzinfo is not None:
+                p_utc = p_dt.astimezone(timezone.utc).replace(tzinfo=None)
+                offset_hours = 5 if race_lock_dt.strftime("%Y-%m-%d") >= "2026-11-01" else 4
+                p_local = p_utc - timedelta(hours=offset_hours)
+            else:
+                p_local = p_dt
         except Exception as e:
             p_local = datetime.now()
             
@@ -418,14 +423,27 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
         except Exception as e:
             print(f"Warning: Could not parse existing standings, starting fresh. Details: {e}")
             
-    # Check if this race is already recorded to avoid duplicate updates
+    # Check if this race is already recorded to avoid wiping out competitors on secondary runs
     race_key = f"{track_name} ({race_date})"
-    if any(r["race"] == race_key for r in races_history):
+    existing_race = next((r for r in races_history if r["race"] == race_key), None)
+    if existing_race:
         if not fan_results:
             print(f"[!] Warning: Race '{race_key}' is already recorded and the new run has 0 picks. Skipping overwrite to prevent wiping out standings.")
             return
-        print(f"Warning: Race '{race_key}' is already recorded. Overwriting standings for this race.")
-        # Filter out the existing race from history
+        print(f"[*] Race '{race_key}' is already recorded. Merging existing competitors with new results so no picks are lost.")
+        merged_by_name = {}
+        for prev_res in existing_race.get("results", []):
+            p_name = prev_res["name"].strip().lower()
+            merged_by_name[p_name] = {
+                "name": prev_res["name"],
+                "picks": prev_res["picks"],
+                "total": prev_res["total"],
+                "tiebreaker_diff": (0, 0)
+            }
+        for new_res in fan_results:
+            n_name = new_res["name"].strip().lower()
+            merged_by_name[n_name] = new_res
+        fan_results = list(merged_by_name.values())
         races_history = [r for r in races_history if r["race"] != race_key]
         
     # Find the weekly winner (highest score)
@@ -433,15 +451,16 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
     weekly_winners = []
     
     for res in fan_results:
+        res_diff = res.get("tiebreaker_diff", (1, 9999))
         if res["total"] > best_score:
             best_score = res["total"]
             weekly_winners = [res["name"]]
         elif res["total"] == best_score:
             # Handle tie with tiebreaker (closest to caution laps without going over)
-            current_best_diff = next((x["tiebreaker_diff"] for x in fan_results if x["name"] in weekly_winners), (1, 9999))
-            if res["tiebreaker_diff"] < current_best_diff:
+            current_best_diff = next((x.get("tiebreaker_diff", (1, 9999)) for x in fan_results if x["name"] in weekly_winners), (1, 9999))
+            if res_diff < current_best_diff:
                 weekly_winners = [res["name"]]
-            elif res["tiebreaker_diff"] == current_best_diff:
+            elif res_diff == current_best_diff:
                 weekly_winners.append(res["name"])
                 
     # Record race detail in history
@@ -517,8 +536,8 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
     for rank, player in enumerate(leaderboard, 1):
         player["rank"] = rank
         
-    # Update or generate recap story
-    if not recap_story or (recap_story.get("race_key") != race_key and weekly_winners):
+    # Always keep recap story synchronized with the weekly winner of the latest scored race
+    if weekly_winners:
         recap_story = {
             "race_key": race_key,
             "title": f"{', '.join(weekly_winners)} Wins at {track_name}!",
@@ -550,32 +569,45 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
     if weekly_winners:
         print(f"Weekly Winner: {', '.join(weekly_winners)} with {best_score} points!")
 
-    # Preserve future picks in Supabase instead of wiping everything, and auto-seed Bhark24 for the next race!
+    # Preserve future picks in Supabase instead of wiping everything, and auto-seed Bhark24 & Rebekah Weaver for the next race!
     url, key = get_supabase_config()
     if url and key:
-        print(f"[*] Preserving {len(future_picks)} future picks in Supabase and seeding Bhark24 auto-pick...")
+        print(f"[*] Preserving {len(future_picks)} future picks in Supabase and seeding weekly auto-picks...")
         try:
-            from auto_pick_bhark24 import get_upcoming_track, get_auto_pick_for_track
+            from datetime import timezone
+            from auto_pick_bhark24 import get_upcoming_track, get_auto_pick_for_track, REBEKAH_WEAVER_AUTO_PICKS
+            scored_dt_str = datetime.strptime(race_date, "%b %d, %Y").strftime("%Y-%m-%d")
+            next_track = get_upcoming_track(after_date=scored_dt_str)
+            now_utc_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
             if not any(p.get("name", "").strip().lower() == "bhark24" for p in future_picks):
-                next_track = get_upcoming_track()
                 plan = get_auto_pick_for_track(next_track)
                 future_picks.append({
                     "name": "Bhark24",
                     "picks": plan["picks"],
                     "tiebreaker": plan["tiebreaker"],
                     "email": "",
-                    "submitted_at": datetime.now().isoformat() + "Z"
+                    "submitted_at": now_utc_iso
                 })
                 print(f"[+] Auto-seeded Bhark24 picks for next race ({next_track}): {plan['picks']}")
+            if not any(p.get("name", "").strip().lower() in ("rebekah weaver", "rebeka weaver") for p in future_picks):
+                future_picks.append({
+                    "name": "Rebekah Weaver",
+                    "picks": REBEKAH_WEAVER_AUTO_PICKS["picks"],
+                    "tiebreaker": REBEKAH_WEAVER_AUTO_PICKS["tiebreaker"],
+                    "email": "",
+                    "submitted_at": now_utc_iso
+                })
+                print(f"[+] Auto-seeded Rebekah Weaver picks for next race ({next_track}): {REBEKAH_WEAVER_AUTO_PICKS['picks']}")
         except Exception as e:
-            print(f"[!] Warning auto-seeding Bhark24: {e}")
+            print(f"[!] Warning auto-seeding next race picks: {e}")
 
         try:
+            ctx = ssl._create_unverified_context()
             get_headers = {'apikey': key, 'Authorization': f'Bearer {key}'}
             req_url = f"{url}/rest/v1/league_data?id=eq.2"
             existing_row_data = {}
             try:
-                with urllib.request.urlopen(urllib.request.Request(req_url, headers=get_headers)) as r_get:
+                with urllib.request.urlopen(urllib.request.Request(req_url, headers=get_headers), context=ctx) as r_get:
                     r_json = json.loads(r_get.read().decode('utf-8'))
                     if r_json and len(r_json) > 0 and r_json[0].get("data"):
                         existing_row_data = r_json[0]["data"]
@@ -594,7 +626,7 @@ def update_data_js(fan_results, track_name, race_date, caution_laps, driver_scor
             }
             req_data = json.dumps(payload).encode('utf-8')
             req = urllib.request.Request(req_url, data=req_data, headers=headers, method='PATCH')
-            with urllib.request.urlopen(req) as response:
+            with urllib.request.urlopen(req, context=ctx) as response:
                 print(f"[+] Supabase successfully updated. Preserved {len(future_picks)} future picks.")
         except Exception as e:
             print(f"[!] Error updating Supabase picks: {e}")
@@ -658,10 +690,10 @@ def main():
     # Load fan picks from Supabase/CSV, filtering out future picks
     picks, future_picks = load_picks(config, race_lock_dt)
 
-    # Ensure Bhark24 always has an active scored entry even if not manually submitted
-    if not any(row[1].strip().lower() == "bhark24" for row in picks if len(row) >= 2):
-        try:
-            from auto_pick_bhark24 import get_auto_pick_for_track
+    # Ensure Bhark24 and Rebekah Weaver always have an active scored entry even if not manually submitted
+    try:
+        from auto_pick_bhark24 import get_auto_pick_for_track, REBEKAH_WEAVER_AUTO_PICKS
+        if not any(row[1].strip().lower() == "bhark24" for row in picks if len(row) >= 2):
             plan = get_auto_pick_for_track(track_name)
             p_list = plan["picks"]
             picks.append([
@@ -671,8 +703,17 @@ def main():
                 str(plan["tiebreaker"])
             ])
             print(f"[+] Injected Bhark24 auto-pick for {track_name}: {p_list}")
-        except Exception as e:
-            print(f"[!] Warning injecting Bhark24 auto-pick: {e}")
+        if not any(row[1].strip().lower() in ("rebekah weaver", "rebeka weaver") for row in picks if len(row) >= 2):
+            r_list = REBEKAH_WEAVER_AUTO_PICKS["picks"]
+            picks.append([
+                race_lock_dt.isoformat(),
+                "Rebekah Weaver",
+                r_list[0], r_list[1], r_list[2], r_list[3],
+                str(REBEKAH_WEAVER_AUTO_PICKS["tiebreaker"])
+            ])
+            print(f"[+] Injected Rebekah Weaver standing pick for {track_name}: {r_list}")
+    except Exception as e:
+        print(f"[!] Warning injecting standing auto-picks: {e}")
     
     # Calculate scores for picks
     fan_results = score_picks(picks, driver_scores, caution_laps, config)
