@@ -440,9 +440,9 @@ const weeklyData = {
       "points": 2
     }
   ],
-  "latestBroadcastVideoId": "LiFVc8IquJ8",
+  "latestBroadcastVideoId": "v5xJxuI5zyA",
   "spotlightDriver": "Nathan Santos",
-  "latestBroadcastTitle": "The Bandit Mobile App 50",
-  "latestBroadcastIsUpcoming": false,
-  "latestBroadcastBanner": "assets/BCast Banners/yt_LiFVc8IquJ8.jpg"
+  "latestBroadcastTitle": "Legacy Towing and Travis Auto Service 140",
+  "latestBroadcastIsUpcoming": true,
+  "latestBroadcastBanner": "assets/BCast Banners/yt_v5xJxuI5zyA.jpg"
 };
