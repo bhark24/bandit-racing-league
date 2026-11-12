@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1794442680">
+    <link rel="stylesheet" href="styles.css?v=1794443033">
     <style>
         .pool-tier-badge {
             display: inline-block;
@@ -198,11 +198,11 @@
             color: var(--text-muted);
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1794442680">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1794442680">
-    <link rel="shortcut icon" href="favicon.ico?v=1794442680">
-    <link rel="manifest" href="manifest.json?v=1794442680">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1794442680">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1794443033">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1794443033">
+    <link rel="shortcut icon" href="favicon.ico?v=1794443033">
+    <link rel="manifest" href="manifest.json?v=1794443033">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1794443033">
 </head>
 <body>
 
@@ -276,10 +276,18 @@
                 <div style="margin-top: 15px; font-weight: 700; color: var(--neon-green); text-transform: uppercase; font-family: var(--font-heading);" id="lock-countdown">
                     Selections open for the next race!
                 </div>
-                <div style="margin-top: 15px; padding: 12px 16px; background: linear-gradient(135deg, rgba(255,204,0,0.12) 0%, rgba(0,255,0,0.06) 100%); border: 1px solid rgba(255,204,0,0.4); border-left: 4px solid var(--chase-yellow); border-radius: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div style="margin-top: 15px; padding: 14px 18px; background: linear-gradient(135deg, rgba(255, 0, 85, 0.2), rgba(20, 8, 14, 0.95)); border: 2px solid #ff0055; border-left: 6px solid #ff0055; border-radius: 6px; box-shadow: 0 0 20px rgba(255, 0, 85, 0.25);">
+                    <div style="color: #ff4d6d; font-family: var(--font-heading); font-weight: 900; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px;">
+                        🚨 FANTASY ROSTER ALERT: #9 DYLAN MCDONALD IS NOT AVAILABLE TO PICK!
+                    </div>
+                    <div style="color: #eee; font-size: 0.92rem; line-height: 1.5;">
+                        <strong>Dylan McDonald (#9 | Legacy Racing)</strong> has been shut down by his team for the <strong>final 2 races of Season 16</strong> (Phoenix tonight &amp; next week's Homestead-Miami finale — garage rumor mill: iRacing time-out!). The <strong>#9 truck is locked/disabled</strong> in the Draft Pool below—please make sure your 4-driver roster only includes active drivers!
+                    </div>
+                </div>
+                <div style="margin-top: 12px; padding: 12px 16px; background: linear-gradient(135deg, rgba(255,204,0,0.12) 0%, rgba(0,255,0,0.06) 100%); border: 1px solid rgba(255,204,0,0.4); border-left: 4px solid var(--chase-yellow); border-radius: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
                     <div>
-                        <strong style="color: var(--chase-yellow); font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.5px;">🎰 Need Help Picking Your 4 Drivers for Mid-Ohio?</strong>
-                        <div style="color: #ddd; font-size: 0.88rem; margin-top: 2px;">Check the official <strong>SimTrax Championship &amp; Mid-Ohio Race Odds Board</strong> (100,000 Monte Carlo simulations updated after Kansas Round 2!).</div>
+                        <strong style="color: var(--chase-yellow); font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.5px;">🎰 Need Help Picking Your 4 Drivers for Phoenix Tonight?</strong>
+                        <div style="color: #ddd; font-size: 0.88rem; margin-top: 2px;">Check the official <strong>SimTrax Championship &amp; Race Odds Board</strong> (with #9 Dylan McDonald out, only 2 races remain for the Season 16 Title!).</div>
                     </div>
                     <button type="button" onclick="switchTab('odds-tab')" class="btn-secondary" style="border-color: var(--chase-yellow); color: var(--chase-yellow); padding: 8px 16px; font-size: 0.85rem; white-space: nowrap; cursor: pointer;">View Live Odds Board &rarr;</button>
                 </div>
@@ -730,9 +738,9 @@
     </footer>
 
     <!-- Roster Data and Standings Data -->
-    <script src="supabase_config.js?v=1794442680"></script>
-    <script src="roster_data.js?v=1794442680"></script>
-    <script src="fantasy_data.js?v=1794442680"></script>
+    <script src="supabase_config.js?v=1794443033"></script>
+    <script src="roster_data.js?v=1794443033"></script>
+    <script src="fantasy_data.js?v=1794443033"></script>
     
     <!-- Page Logic -->
     <script>
@@ -859,15 +867,21 @@
             }
         }
 
+        function isDriverUnavailable(driverName) {
+            if (!driverName) return false;
+            const norm = driverName.trim().toUpperCase();
+            return norm.includes('DYLAN MCDONALD') || norm.includes('DYLAN MC DONALD');
+        }
+
         function getBhark24AutoPickPlan() {
             const headerEl = document.getElementById('submissions-header');
             const trackText = (headerEl ? headerEl.textContent : '').toLowerCase();
             if (trackText.includes('ohio') || trackText.includes('road')) {
                 return { picks: ['NICK NICKERSON', 'SCOTT SANDERSON', 'BENJAMIN LACY', 'Jackson Knaak'], tiebreaker: 8 };
             } else if (trackText.includes('phoenix')) {
-                return { picks: ['DYLAN MCDONALD', 'NICK NICKERSON', 'SCOTT SANDERSON', 'BENJAMIN LACY'], tiebreaker: 22 };
+                return { picks: ['BENJAMIN LACY', 'NICK NICKERSON', 'SCOTT SANDERSON', 'JOSH ADAMS'], tiebreaker: 22 };
             } else if (trackText.includes('homestead')) {
-                return { picks: ['BENJAMIN LACY', 'SCOTT SANDERSON', 'NICK NICKERSON', 'DYLAN MCDONALD'], tiebreaker: 18 };
+                return { picks: ['BENJAMIN LACY', 'SCOTT SANDERSON', 'NICK NICKERSON', 'JOSH ADAMS'], tiebreaker: 18 };
             }
             // Default / Kansas 1.5-mile intermediate
             return { picks: ['BENJAMIN LACY', 'NICK NICKERSON', 'SCOTT SANDERSON', 'JOSH ADAMS'], tiebreaker: 18 };
@@ -1060,7 +1074,7 @@
                     const parsed = JSON.parse(savedPicks);
                     if (parsed) {
                         if (Array.isArray(parsed)) {
-                            currentPicks = parsed;
+                            currentPicks = parsed.map(p => (p && isDriverUnavailable(p)) ? null : p);
                         } else {
                             // Convert old format to array
                             currentPicks = [
@@ -1068,7 +1082,7 @@
                                 (parsed.B && parsed.B[0]) || null,
                                 (parsed.B && parsed.B[1]) || null,
                                 parsed.C || null
-                            ];
+                            ].map(p => (p && isDriverUnavailable(p)) ? null : p);
                         }
                     }
                 } catch(e) {
@@ -1174,27 +1188,34 @@
                 card.className = 'fantasy-driver-card';
                 card.setAttribute('data-driver-name', driver.name);
                 
-                // Set class if already selected
-                const isSelected = currentPicks.includes(driver.name);
+                const unavailable = isDriverUnavailable(driver.name);
+                const isSelected = !unavailable && currentPicks.includes(driver.name);
                 
                 if (isSelected) {
                     card.classList.add('selected');
+                }
+                if (unavailable) {
+                    card.style.opacity = '0.45';
+                    card.style.borderColor = '#ff0055';
+                    card.style.background = 'rgba(255, 0, 85, 0.08)';
+                    card.style.cursor = 'not-allowed';
                 }
 
                 card.onclick = () => selectDriverCard(card, driver.name);
 
                 card.innerHTML = `
-                    <div class="fantasy-card-check">✓</div>
+                    <div class="fantasy-card-check">${unavailable ? '🚫' : '✓'}</div>
                     <div class="fantasy-driver-info">
                         <div style="height: 60px; display:flex; align-items:center;">
                             <img src="${getDriverImgPath(driver.name)}" style="max-height: 55px; max-width: 110px; object-fit: contain;" onerror="this.onerror=null; this.outerHTML='<span class=\\'fantasy-driver-num\\'>#${driver.number}</span>'">
                         </div>
                         <div>
                             <div class="fantasy-driver-name">${driver.name}</div>
+                            ${unavailable ? '<div style="color:#ff4d6d; font-size:0.72rem; font-weight:900; text-transform:uppercase; margin-top:3px;">🚫 NOT AVAILABLE (SHUT DOWN R20-21)</div>' : ''}
                         </div>
                     </div>
                     <div class="fantasy-driver-stats">
-                        <span>SimHub Stats</span>
+                        <span>${unavailable ? '<strong style="color:#ff4d6d;">UNAVAILABLE TO PICK</strong>' : 'SimHub Stats'}</span>
                         <a href="https://simracerhub.com/season_standings.php?season_id=29722" target="_blank" onclick="event.stopPropagation();" style="color: var(--neon-green);">Profile &rarr;</a>
                     </div>
                 `;
@@ -1222,6 +1243,10 @@
 
         function selectDriverCard(cardElement, driverName) {
             if (window.isFantasyLocked) return;
+            if (isDriverUnavailable(driverName)) {
+                alert("🚨 #9 Dylan McDonald has been shut down by his team for the final 2 races of Season 16 (iRacing time-out) and is NOT available to pick in Fantasy League!");
+                return;
+            }
             const index = currentPicks.indexOf(driverName);
             if (index > -1) {
                 cardElement.classList.remove('selected');
@@ -1755,6 +1780,6 @@
             }
         });
     </script>
-    <script src="brl_app.js?v=1794442680"></script>
+    <script src="brl_app.js?v=1794443033"></script>
 </body>
 </html>

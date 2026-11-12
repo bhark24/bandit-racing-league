@@ -1583,6 +1583,68 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[POST-RACE AUDIT] 'Lap 114 chaos between 12, 13, 6, and 21 was called a racing deal live, but post-race replay audit confirmed Car 21 was at fault.'"
             }
         ]
+    },
+
+    mid_ohio: {
+        id: "mid_ohio",
+        title: "Mid-Ohio Sports Car Course (Chase R3)",
+        subtext: "Bandit Mobile App 50 — 50 Laps • ZERO SHAMERS! 100% CLEAN SLATE!",
+        laps: 50,
+        trackType: "watkins_glen_rc",
+        stages: [
+            { name: "Stage 1", lap: 15 },
+            { name: "Stage 2", lap: 30 },
+            { name: "Final Stage (Clean Slate!)", lap: 50 }
+        ],
+        mvp: {
+            carNumber: "CLEAN",
+            driverName: "NO SHAMERS LAST WEEK — 100% CLEAN SLATE AT MID-OHIO! 🏆🟢",
+            title: "Wall of Shame Clean Slate Award — Zero Cautions & Zero Penalties!",
+            reason: "History made on the Wall of Shame! In Round 3 of the Season 16 Chase—the Bandit Mobile App 50 at Mid-Ohio Sports Car Course—all 50 laps ran 100% caution-free outside of the two scheduled stage breaks (Laps 15 & 30)! Even when 10 trucks fanned out three-wide into The Keyhole on the Lap 35 restart, the entire 21-truck field kept it rolling with ZERO unplanned cautions, ZERO End-of-Line penalties, ZERO drive-throughs, and NO SHAMERS for the entire week!",
+            totalIncidents: 0,
+            totalPenalties: "0 Penalties • 0 EOLs • 0 Unplanned Cautions • 100% Clean Slate!",
+            image: "assets/race images/mid_ohio_l35_2.png"
+        },
+        drivers: [
+            { number: "93", name: "Driver #93 (Scott Sanderson)", score: 5, level: "LOW", badge: "Race-Low 2x Incidents (Stage 1 Winner & P3)", incidentsCount: 0, colors: ["#2ecc71", "#111"] },
+            { number: "7",  name: "Driver #7 (Benjamin Lacy)", score: 8, level: "LOW", badge: "Clean 3x Winner (Pole & 47/50 Laps Led)", incidentsCount: 0, colors: ["#2ecc71", "#111"] },
+            { number: "24", name: "Driver #24 (Ethan Sikorski)", score: 10, level: "LOW", badge: "Clean 4x Runner-Up (Q2 -> P2)", incidentsCount: 0, colors: ["#2ecc71", "#111"] },
+            { number: "8",  name: "Driver #8 (Kevin Foster)", score: 10, level: "LOW", badge: "Clean 4x Top-5 Run (Q5 -> P5)", incidentsCount: 0, colors: ["#2ecc71", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 15, stage: 1, involved: ["93", "7"], primaryCar: "93", category: "stage_finish",
+                title: "Stage 1 Clean Finish: Zero Unplanned Cautions (#93 Sanderson Wins Stage 1)",
+                summary: "After Benjamin Lacy (#7) led the opening 13 laps from the pole and pitted early on strategy, Scott Sanderson (#93) inherited the lead on Lap 14 and took the Stage 1 checkered flag with 0x incidents and zero cautions.",
+                ruling: "100% Clean Stage 1 — Zero Penalties / Zero Cautions", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Stage 1 complete at Lap 15! Zero cautions, zero penalties—clean green-flag racing through all 13 turns!'"
+            },
+            {
+                id: 2, lap: 30, stage: 2, involved: ["7", "93", "24"], primaryCar: "7", category: "stage_finish",
+                title: "Stage 2 Clean Finish: Zero Unplanned Cautions (#7 Lacy Wins Stage 2)",
+                summary: "Benjamin Lacy (#7) cycled back to the point on Lap 17, set the fastest lap of the race on Lap 21 (1:26.3345), and led 14 of 15 laps to win Stage 2 over Scott Sanderson (#93) and Ethan Sikorski (#24) with zero cautions.",
+                ruling: "100% Clean Stage 2 — Zero Penalties / Zero Cautions", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Stage 2 complete at Lap 30! Still zero unplanned yellows and zero Stewards penalties!'"
+            },
+            {
+                id: 3, lap: 35, stage: 3, involved: ["7", "24", "93", "37", "31", "47", "00"], primaryCar: "7", category: "racing_deal",
+                title: "Lap 35 Three-Wide Keyhole Restart Pack — Saved Without a Caution!",
+                summary: "On the Lap 35 restart, a 10-truck hornets' nest fanned out three-wide down the frontstretch and into The Keyhole (#31 Gibson, #47 Rakes, #37 Hartle, #00 Knaak, #24 Sikorski, and #93 Sanderson). Even after Sanderson took a wild excursion through the outside grass, everyone gathered it up and kept the race green!",
+                ruling: "Clean Slate Highlight — No Yellow / Zero Penalties Issued", location: "Frontstretch & Turn 2 (The Keyhole)",
+                trackCoords: { x: 580, y: 160 },
+                audioTranscript: "[STEWARDS] 'Three-wide into the Keyhole on Lap 35! 93 went mowing on the outside grass and saved it—still no cautions and zero penalties!'"
+            },
+            {
+                id: 4, lap: 50, stage: 3, involved: ["7", "24", "93", "37", "8"], primaryCar: "7", category: "mvp",
+                title: "Official Stewards Audit: NO SHAMERS — 100% Clean Slate at Mid-Ohio!",
+                summary: "Benjamin Lacy (#7) takes the checkered flag 10.981 seconds ahead of Ethan Sikorski (#24) and Scott Sanderson (#93) to complete a 50-lap road course masterclass with ZERO unplanned cautions and ZERO Stewards penalties! The Wall of Shame officially records a Clean Slate for Chase Round 3!",
+                ruling: "NO SHAMERS — 100% CLEAN SLATE (0 Penalties • 0 EOLs • 0 Cautions)", location: "Mid-Ohio Victory Lane",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[STEWARDS] 'Put it in the books: zero unplanned cautions and zero penalties at Mid-Ohio! The Wall of Shame has NO SHAMERS this week—a 100% clean slate!'"
+            }
+        ]
     }
 
 };

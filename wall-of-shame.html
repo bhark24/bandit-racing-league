@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="wall_of_shame_styles.css?v=1794442680">
+    <link rel="stylesheet" href="wall_of_shame_styles.css?v=1794443033">
     <style>
         /* Unified Command Center & Web Hub Additions */
         .unified-command-center {
@@ -120,11 +120,11 @@
             padding-top: 10px;
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1794442680">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1794442680">
-    <link rel="shortcut icon" href="favicon.ico?v=1794442680">
-    <link rel="manifest" href="manifest.json?v=1794442680">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1794442680">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1794443033">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1794443033">
+    <link rel="shortcut icon" href="favicon.ico?v=1794443033">
+    <link rel="manifest" href="manifest.json?v=1794443033">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1794443033">
 </head>
 <body>
     <div class="bg-glow"></div>
@@ -244,11 +244,19 @@
                     </div>
                     <i class="fa-solid fa-chevron-right tab-arrow"></i>
                 </button>
-                <button class="race-tab-card active" data-race="kansas_2">
+                <button class="race-tab-card" data-race="kansas_2">
                     <span class="week-pill">W21</span>
                     <div class="race-tab-info">
                         <span class="race-tab-title">Kansas Speedway II (Chase R2)</span>
                         <span class="race-tab-sub">117 Laps &bull; Pit Road Blowup &amp; 4 Penalties (#17 MVP)</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right tab-arrow"></i>
+                </button>
+                <button class="race-tab-card active" data-race="mid_ohio" style="border-color: #2ecc71; box-shadow: 0 0 18px rgba(46, 204, 113, 0.25);">
+                    <span class="week-pill" style="background: #2ecc71; color: #000;">W22</span>
+                    <div class="race-tab-info">
+                        <span class="race-tab-title">Mid-Ohio (Chase R3)</span>
+                        <span class="race-tab-sub" style="color: #2ecc71; font-weight: 700;">50 Laps &bull; NO SHAMERS (100% Clean Slate!)</span>
                     </div>
                     <i class="fa-solid fa-chevron-right tab-arrow"></i>
                 </button>
@@ -259,25 +267,25 @@
         <section class="hero-section">
             <div class="hero-card track-info-card">
                 <div class="card-badge"><i class="fa-solid fa-trophy"></i> BRL STEWARDS HUB</div>
-                <h1 class="track-name" id="trackNameDisplay">Kansas Speedway II (Chase R2)</h1>
-                <p class="track-subtext" id="trackSubtextDisplay">The Wendy Jo Memorial 110 — 117 Laps in 2x GWC Overtime (Stages @ 33 &amp; 66)</p>
+                <h1 class="track-name" id="trackNameDisplay">Mid-Ohio Sports Car Course (Chase R3)</h1>
+                <p class="track-subtext" id="trackSubtextDisplay">Bandit Mobile App 50 — 50 Laps &bull; ZERO SHAMERS! 100% CLEAN SLATE!</p>
 
                 <div class="stats-mini-grid">
                     <div class="mini-stat">
-                        <span class="stat-num" id="totalIncidentsNum">9</span>
-                        <span class="stat-label">Reviewed Incidents</span>
+                        <span class="stat-num" id="totalIncidentsNum">4</span>
+                        <span class="stat-label">Reviewed Highlights</span>
                     </div>
                     <div class="mini-stat danger">
-                        <span class="stat-num" id="penaltiesNum">4</span>
+                        <span class="stat-num" id="penaltiesNum">0</span>
                         <span class="stat-label">Penalties / DQ</span>
                     </div>
                     <div class="mini-stat warning">
-                        <span class="stat-num" id="warningsNum">2</span>
+                        <span class="stat-num" id="warningsNum">0</span>
                         <span class="stat-label">Official Warnings</span>
                     </div>
                     <div class="mini-stat info">
-                        <span class="stat-num" id="racingDealsNum">0</span>
-                        <span class="stat-label">Racing Deals</span>
+                        <span class="stat-num" id="racingDealsNum">1</span>
+                        <span class="stat-label">Clean Saves</span>
                     </div>
                 </div>
             </div>
@@ -286,19 +294,19 @@
             <div class="hero-card mvp-card" id="mvpSpotlight">
                 <div class="mvp-badge-header">
                     <i class="fa-solid fa-trophy"></i>
-                    <span>WEEKLY WALL OF SHAME MVP</span>
+                    <span>WEEKLY WALL OF SHAME STATUS</span>
                 </div>
                 <div class="mvp-driver-row">
-                    <div class="driver-number-plate mvp-plate" id="mvpCarPlate">#17</div>
+                    <div class="driver-number-plate mvp-plate" id="mvpCarPlate">#CLEAN</div>
                     <div class="mvp-driver-details">
-                        <h2 id="mvpDriverName">Car #17 (Korey Denson — formerly #36) &amp; Pit Road Short-Fuse Crew</h2>
-                        <p class="mvp-summary-tag" id="mvpReason"><i class="fa-solid fa-triangle-exclamation"></i> Switched from #36 to #17 to serve EOL #2 of 3 at the green flag, made Lap 32 no-yellow side-by-side contact with #9 (Dylan McDonald), and then erupted at the Lap 66 Stage 2 break when #17, #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off with hair-trigger fuses after #17 hugged the far right of pit road and #13's comment lit the short fuse on the #17! Plus 4 on-track penalties to #4 (15-Lap Drive-Through), #36 (Lap 85 EOL), #62 (Lap 108 EOL), and #21 (Post-Race Confirmed Lap 114 Chaos Fault)!</p>
+                        <h2 id="mvpDriverName">NO SHAMERS LAST WEEK — 100% CLEAN SLATE AT MID-OHIO! 🏆🟢</h2>
+                        <p class="mvp-summary-tag" id="mvpReason"><i class="fa-solid fa-circle-check"></i> History made on the Wall of Shame! In Round 3 of the Season 16 Chase—the Bandit Mobile App 50 at Mid-Ohio Sports Car Course—all 50 laps ran 100% caution-free outside of the two scheduled stage breaks (Laps 15 &amp; 30)! Even when 10 trucks fanned out three-wide into The Keyhole on the Lap 35 restart, the entire 21-truck field kept it rolling with ZERO unplanned cautions, ZERO End-of-Line penalties, ZERO drive-throughs, and NO SHAMERS for the entire week!</p>
                     </div>
                 </div>
                 <div id="mvpImageContainer" style="text-align: center; margin: 15px 0;"></div>
                 <ul class="mvp-highlights-list" id="mvpHighlights">
-                    <li><i class="fa-solid fa-shield-cat"></i> Stage 2 Pit Road Short-Fuse Blowup (#17, #31, #13, #24) + Lap 32 Contact w/ #9 + Served EOL #2 of 3!</li>
-                    <li><i class="fa-solid fa-gavel"></i> Total Penalties Issued: <strong>Served EOL #2 of 3 + Lap 32 Contact w/ #9 + Stage 2 Pit Road VC Blowup</strong></li>
+                    <li><i class="fa-solid fa-shield-cat"></i> 50 Laps at Mid-Ohio • Zero Unplanned Cautions • Zero Stewards Penalties!</li>
+                    <li><i class="fa-solid fa-gavel"></i> Total Penalties Issued: <strong>0 Penalties • 0 EOLs • 0 Unplanned Cautions • 100% Clean Slate!</strong></li>
                 </ul>
             </div>
         </section>
@@ -713,8 +721,8 @@
     </div>
 
     <!-- JS Scripts -->
-    <script src="wall_of_shame_data.js?v=1794442680"></script>
-    <script src="wall_of_shame_app.js?v=1794442680"></script>
-    <script src="brl_app.js?v=1794442680"></script>
+    <script src="wall_of_shame_data.js?v=1794443033"></script>
+    <script src="wall_of_shame_app.js?v=1794443033"></script>
+    <script src="brl_app.js?v=1794443033"></script>
 </body>
 </html>
