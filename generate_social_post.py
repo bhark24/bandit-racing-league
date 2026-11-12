@@ -558,13 +558,15 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
             # Construct weekly data dict
             winner_image = find_custom_winner_image(winner_name, track_name, BASE_DIR) or existing_weekly.get("winnerImage")
             if "phoenix" in track_name.lower() and "nickerson" in winner_name.lower():
-                winner_image = "assets/truck images/truck_image_nick_nickerson.png"
+                winner_image = "assets/WINNER IMAGES/Nick_Nickerson_Phoenix.jpg"
             action_shots = find_track_action_shots(track_name, BASE_DIR)
-            if not action_shots and "phoenix" in track_name.lower():
+            if "phoenix" in track_name.lower():
                 action_shots = [
-                    "assets/BCast Banners/phoenixs16.png",
-                    "assets/truck images/truck_image_nick_nickerson.png",
-                    "assets/truck images/truck_image_benjamin_lacy.png"
+                    "assets/race images/phoenix_start_front_row.jpg",
+                    "assets/race images/phoenix_dogleg_pack.jpg",
+                    "assets/race images/phoenix_lacy_7.jpg",
+                    "assets/race images/phoenix_yancey_spin.jpg",
+                    "assets/race images/phoenix_gibson_harkins.jpg"
                 ]
             elif not action_shots:
                 action_shots = existing_weekly.get("actionShots", [])

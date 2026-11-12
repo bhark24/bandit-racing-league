@@ -1,11 +1,13 @@
 const weeklyData = {
   "winnerName": "Nick Nickerson",
   "winnerNumber": "2",
-  "winnerImage": "assets/truck images/truck_image_nick_nickerson.png",
+  "winnerImage": "assets/WINNER IMAGES/Nick_Nickerson_Phoenix.jpg",
   "actionShots": [
-    "assets/BCast Banners/phoenixs16.png",
-    "assets/truck images/truck_image_nick_nickerson.png",
-    "assets/truck images/truck_image_benjamin_lacy.png"
+    "assets/race images/phoenix_start_front_row.jpg",
+    "assets/race images/phoenix_dogleg_pack.jpg",
+    "assets/race images/phoenix_lacy_7.jpg",
+    "assets/race images/phoenix_yancey_spin.jpg",
+    "assets/race images/phoenix_gibson_harkins.jpg"
   ],
   "trackName": "Phoenix Raceway",
   "trackLogo": "phoenix.png",
