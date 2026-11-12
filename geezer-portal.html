@@ -237,6 +237,10 @@
         <button id="btnFontUp" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-amber-300 font-bold transition" title="Increase visualizer font size">A+</button>
       </div>
 
+      <button id="btnCycleTimeEstimator" class="px-3 py-1.5 bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/60 rounded-lg font-mono font-bold text-sm transition flex items-center gap-1.5 shadow" title="Open Haas SL-25 Cycle Time Estimator">
+        <span>⏱️ Cycle Time</span>
+      </button>
+
       <button id="btnToggleSidebar" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 rounded-lg font-mono font-bold text-sm transition flex items-center gap-1 shadow" title="Hide or show the right N-block sidebar to maximize graph width">
         <span>⇄ Max Graph Width</span>
       </button>
@@ -330,6 +334,10 @@
         </select>
 
         <div class="flex items-center gap-1.5">
+          <button id="btnCycleTimeQuick" class="px-2.5 py-1.5 bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 rounded border border-emerald-500/60 font-bold transition flex items-center gap-1 shadow" title="Open Haas SL-25 Cycle Time Estimator">
+            <span>⏱️ Cycle Time</span>
+          </button>
+
           <div class="flex items-center bg-slate-900 border border-slate-700 rounded overflow-hidden font-mono">
             <button id="btnZoomOut" class="px-3 py-1.5 hover:bg-slate-800 text-slate-200 font-bold transition" title="Zoom Out">🔍−</button>
             <button id="btnZoomIn" class="px-3 py-1.5 hover:bg-slate-800 text-amber-300 font-bold border-l border-slate-700 transition" title="Zoom In">🔍+</button>
@@ -505,6 +513,173 @@
 
     </div>
 
+  </div>
+
+  <!-- Haas SL-25 Cycle Time Estimator Modal (Hidden by default; opens only when user clicks ⏱️ Cycle Time button) -->
+  <div id="cycleTimeModal" class="hidden fixed inset-0 z-[9999] bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div class="w-full max-w-5xl max-h-[92vh] bg-slate-900 border-2 border-emerald-500/60 rounded-2xl shadow-[0_0_50px_rgba(16,185,129,0.22)] flex flex-col overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="bg-slate-950 border-b border-slate-800 px-4 py-3 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div class="flex items-center gap-2.5">
+          <div class="p-2 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-lg leading-none">⏱️</div>
+          <div>
+            <h2 class="text-base sm:text-lg font-extrabold text-white tracking-wide flex flex-wrap items-center gap-2">
+              <span>Haas SL-25 Cycle Time Estimator</span>
+              <span id="ctBadgeProg" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">4506.BH • FNT300</span>
+            </h2>
+            <p id="ctSubtitle" class="text-xs text-slate-400 font-mono">True CSS (G96) + G50 RPM Clamp + Radial/Axial Toolpath Physics</p>
+          </div>
+        </div>
+        <button id="btnCloseCycleTime" class="px-3 py-1.5 bg-slate-800 hover:bg-red-900/80 text-slate-200 hover:text-white border border-slate-700 hover:border-red-500/50 rounded-lg font-mono font-bold text-xs sm:text-sm transition flex items-center gap-1 cursor-pointer">
+          <span>✕ Close (Esc)</span>
+        </button>
+      </div>
+
+      <!-- Modal Interactive Controls Bar (Material #501, Feedrate Override, Stop Mode) -->
+      <div class="bg-slate-950/70 border-b border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs font-mono shrink-0">
+        <!-- Material #501 Selector -->
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-slate-400 font-bold uppercase">Material (#501):</span>
+          <div class="flex items-center bg-slate-900 border border-slate-700 rounded-lg overflow-hidden">
+            <button type="button" id="btnCtMat1" class="px-2.5 py-1.5 font-bold transition bg-emerald-600/35 text-emerald-200 border-r border-slate-700">
+              #501=1 (CPM: 230 SFM / .004" IPR)
+            </button>
+            <button type="button" id="btnCtMat2" class="px-2.5 py-1.5 font-bold transition text-slate-400 hover:bg-slate-800">
+              #501=2 (Std: 350 SFM / .005" IPR)
+            </button>
+          </div>
+        </div>
+
+        <!-- Haas Feedrate Override -->
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 font-bold uppercase">Feed Override:</span>
+          <div class="flex items-center bg-slate-900 border border-slate-700 rounded-lg overflow-hidden" id="ctFeedOverrideGroup">
+            <button type="button" data-ovr="50" class="ct-ovr-btn px-2 py-1 text-slate-400 hover:bg-slate-800 transition">50%</button>
+            <button type="button" data-ovr="75" class="ct-ovr-btn px-2 py-1 text-slate-400 hover:bg-slate-800 border-l border-slate-800 transition">75%</button>
+            <button type="button" data-ovr="100" class="ct-ovr-btn px-2.5 py-1 bg-amber-500/30 text-amber-300 font-bold border-l border-slate-800 transition">100%</button>
+            <button type="button" data-ovr="120" class="ct-ovr-btn px-2 py-1 text-slate-400 hover:bg-slate-800 border-l border-slate-800 transition">120%</button>
+          </div>
+        </div>
+
+        <!-- M00/M01 Stop Allowance -->
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 font-bold uppercase">Stops:</span>
+          <select id="selCtStopMode" class="bg-slate-900 border border-slate-700 text-cyan-300 rounded-lg px-2 py-1 font-mono font-bold focus:outline-none">
+            <option value="CONT" selected>Continuous Production (0s Dwell)</option>
+            <option value="M00_ONLY">Include M00 Insert Check (+20s at N6)</option>
+            <option value="PROVE_OUT">Setup Prove-Out (+8s per M1 + 20s M00)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Scrollable Modal Body -->
+      <div class="p-4 overflow-y-auto custom-scrollbar flex flex-col gap-4 text-sm font-mono">
+        
+        <!-- 4 Hero Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <!-- Total Cycle Time -->
+          <div class="bg-slate-950/90 border-2 border-emerald-500/50 rounded-xl p-3.5 flex flex-col justify-between shadow-lg">
+            <div class="text-[11px] font-sans font-bold text-emerald-400 uppercase tracking-wider flex items-center justify-between">
+              <span>Estimated Cycle Time</span>
+              <span id="ctHeroMatTag" class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]">#501=1</span>
+            </div>
+            <div id="ctHeroTotalTime" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight my-1">
+              --m --s
+            </div>
+            <div id="ctHeroTotalSub" class="text-xs text-slate-400">
+              -- min decimal &bull; -- parts/hr
+            </div>
+          </div>
+
+          <!-- In-Cut Machining Time -->
+          <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
+            <div class="text-[11px] font-sans font-bold text-blue-400 uppercase tracking-wider flex items-center justify-between">
+              <span>In-Cut Time (G1/G2/G3)</span>
+              <span id="ctHeroCutPct" class="text-xs font-mono text-blue-300 font-bold">--%</span>
+            </div>
+            <div id="ctHeroCutTime" class="text-xl sm:text-2xl font-extrabold text-blue-300 my-1">
+              --m --s
+            </div>
+            <div id="ctHeroCutDist" class="text-xs text-slate-400">
+              Cut Path: --"
+            </div>
+          </div>
+
+          <!-- Rapid, G28 & Tool Index Time -->
+          <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
+            <div class="text-[11px] font-sans font-bold text-red-400 uppercase tracking-wider flex items-center justify-between">
+              <span>Rapid / G28 / Turret</span>
+              <span id="ctHeroNonCutPct" class="text-xs font-mono text-red-300 font-bold">--%</span>
+            </div>
+            <div id="ctHeroNonCutTime" class="text-xl sm:text-2xl font-extrabold text-amber-300 my-1">
+              --m --s
+            </div>
+            <div id="ctHeroRapidDist" class="text-xs text-slate-400">
+              Rapid: --" &bull; -- Tool Idx
+            </div>
+          </div>
+
+          <!-- Spindle & Feed Physics -->
+          <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
+            <div class="text-[11px] font-sans font-bold text-amber-400 uppercase tracking-wider flex items-center justify-between">
+              <span>Spindle &amp; Feed Physics</span>
+              <span id="ctHeroClampTag" class="text-[10px] font-mono text-amber-300">G50 S500</span>
+            </div>
+            <div id="ctHeroRpmRange" class="text-lg sm:text-xl font-extrabold text-cyan-300 my-1">
+              --- – --- RPM
+            </div>
+            <div id="ctHeroFeedRange" class="text-xs text-slate-400">
+              --- – --- IPM
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage Breakdown Visual Bar & Summary Pills -->
+        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 flex flex-col gap-2.5">
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <span class="font-sans font-bold text-slate-300 uppercase tracking-wider">Cycle Time Breakdown by Process Stage</span>
+            <span id="ctComparisonBanner" class="text-emerald-300 font-semibold"></span>
+          </div>
+          
+          <!-- Stacked Progress Bar -->
+          <div class="w-full h-3.5 bg-slate-900 rounded-full overflow-hidden flex border border-slate-800" id="ctStageProgressBar">
+          </div>
+
+          <!-- Stage Legend Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 text-xs pt-1" id="ctStageCards">
+          </div>
+        </div>
+
+        <!-- Per-Block (N1 - N17) Breakdown Table -->
+        <div class="bg-slate-950/90 border border-slate-800 rounded-xl overflow-hidden flex flex-col">
+          <div class="px-3.5 py-2.5 bg-slate-900/90 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+            <span class="font-sans font-bold text-xs text-slate-200 uppercase tracking-wider">Block-by-Block Cycle Time Breakdown (Click any block to isolate on graph)</span>
+            <span id="ctTableSummary" class="text-xs text-slate-400">17 Blocks</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-950 text-slate-400 border-b border-slate-800 uppercase text-[11px]">
+                  <th class="py-2 px-3">Block</th>
+                  <th class="py-2 px-2.5">Operation / Pass Description</th>
+                  <th class="py-2 px-2.5">Tool</th>
+                  <th class="py-2 px-2.5">Avg RPM / Feed</th>
+                  <th class="py-2 px-2.5 text-right">Cut Len</th>
+                  <th class="py-2 px-2.5 text-right">Cut Time</th>
+                  <th class="py-2 px-2.5 text-right">Rapid/Idx</th>
+                  <th class="py-2 px-3 text-right">Total Block Time</th>
+                  <th class="py-2 px-3 w-28">Share</th>
+                </tr>
+              </thead>
+              <tbody id="ctBlockTableBody" class="divide-y divide-slate-800/70">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <script>
@@ -2260,6 +2435,7 @@ M30`;
       renderLiveGCodeList(code);
       restoreBlockListView();
       updateMetadataAndAuditUI(sourceFileName);
+      if (typeof syncCycleTimeMaterialFromProgram === 'function') syncCycleTimeMaterialFromProgram(code);
       if (typeof setPlayButtonAppearance === 'function') setPlayButtonAppearance(false);
       if (typeof updateOptStopBanner === 'function') updateOptStopBanner();
       updateAnimUI();
@@ -4310,6 +4486,680 @@ M30`;
         }
         setTimeout(resizeCanvas, 30);
         setTimeout(resizeCanvas, 120);
+      });
+    }
+
+    // =========================================================================
+    // HAAS SL-25 CYCLE TIME ESTIMATOR ENGINE & MODAL CONTROLLER
+    // =========================================================================
+    let ctMaterialCode = 1; // #501=1 (230 SFM / .004" IPR) or #501=2 (350 SFM / .005" IPR)
+    let ctFeedOverridePct = 100;
+    let ctStopMode = 'CONT'; // 'CONT' | 'M00_ONLY' | 'PROVE_OUT'
+
+    function formatDurationMMSS(totalSec) {
+      if (!isFinite(totalSec) || totalSec <= 0) return '0s';
+      const rounded = Math.round(totalSec);
+      const mins = Math.floor(rounded / 60);
+      const secs = rounded % 60;
+      if (mins === 0) return `${totalSec.toFixed(1)}s`;
+      return `${mins}m ${String(secs).padStart(2, '0')}s`;
+    }
+
+    function formatDurationShort(totalSec) {
+      if (!isFinite(totalSec) || totalSec <= 0) return '0.0s';
+      if (totalSec < 60) return `${totalSec.toFixed(1)}s`;
+      const mins = Math.floor(totalSec / 60);
+      const secs = Math.round(totalSec % 60);
+      if (secs === 60) return `${mins + 1}m 00s`;
+      return `${mins}m ${String(secs).padStart(2, '0')}s`;
+    }
+
+    function syncCycleTimeMaterialFromProgram(code) {
+      if (!code) return;
+      const m501 = code.match(/^\s*#501\s*=\s*(\d+)/m);
+      if (m501) {
+        const val = parseInt(m501[1], 10);
+        if (val === 1 || val === 2) {
+          ctMaterialCode = val;
+        }
+      }
+      updateCtControlButtonsUI();
+      const modal = document.getElementById('cycleTimeModal');
+      if (modal && !modal.classList.contains('hidden')) {
+        renderCycleTimeModal();
+      }
+    }
+
+    function calculateProgramCycleTime(code, options = {}) {
+      const matCode = options.materialCode || ctMaterialCode || 1;
+      const feedOvr = (options.feedOverridePct || ctFeedOverridePct || 100) / 100.0;
+      const stopMode = options.stopMode || ctStopMode || 'CONT';
+
+      // Haas SL-25 Machine Kinematics Constants
+      const EFFECTIVE_RAPID_IPM = 380.0; // Effective short-stroke X/Z rapid traverse (accounting for accel/decel ramps)
+      const RAPID_SETTLE_SEC = 0.12;     // Servo in-position check per G0 move
+      const HOME_G28_SEC = 1.35;         // G28 U0 W0 turret home return overhead
+      const TOOL_CHANGE_SEC = 2.20;      // Turret index time when switching to a different tool station
+      const SAME_TOOL_CALL_SEC = 0.25;   // Turret confirmation when re-calling the same active tool
+      const SPINDLE_CSS_SYNC_SEC = 0.45; // G96 S... M3 spindle speed sync per block
+
+      const macros = {
+        501: matCode,
+        104: (matCode === 2) ? 350 : 230,
+        105: (matCode === 2) ? 0.005 : 0.004
+      };
+
+      const lines = (code || '').split(/\r?\n/);
+      let curX = 9.5, curZ = 6.0;
+      let hasPos = false;
+      let curMode = 'G0';
+      let curBlock = 'N0';
+      let curTool = null;
+      let maxRpm = 500;       // G50 S500 default clamp
+      let spindleMode = 'G96'; // G96 CSS vs G97 RPM
+      let sVal = macros[104]; // SFM in G96 or RPM in G97
+      let feedVal = macros[105]; // IPR in G99
+
+      const blockStatsMap = {};
+      const blockOrder = [];
+
+      function ensureBlock(bName, bNum) {
+        if (!blockStatsMap[bName]) {
+          const isFinish = bNum >= 13;
+          const isFloat = (bNum === 16 || bNum === 17);
+          const stageKey = (bNum >= 1 && bNum <= 6) ? 'STAGE1_ROUGH' :
+                           (bNum >= 7 && bNum <= 12) ? 'STAGE2_ROUGH' :
+                           (bNum >= 13 && bNum <= 15) ? 'FINISH' :
+                           (bNum >= 16) ? 'FLOAT' : 'OTHER';
+          blockStatsMap[bName] = {
+            name: bName,
+            num: bNum,
+            stageKey: stageKey,
+            passType: isFloat ? 'FLOAT' : (isFinish ? 'FINISH' : 'ROUGH'),
+            comment: '',
+            tool: curTool || 'T0404',
+            sfm: sVal,
+            feedIpr: feedVal,
+            maxRpmClamp: maxRpm,
+            cutDistIn: 0,
+            rapidDistIn: 0,
+            cutTimeSec: 0,
+            rapidTimeSec: 0,
+            indexAndAuxSec: 0,
+            dwellStopSec: 0,
+            weightedRpmSum: 0,
+            weightedIpmSum: 0,
+            hasM01: false,
+            hasM00: false
+          };
+          blockOrder.push(bName);
+        }
+        return blockStatsMap[bName];
+      }
+
+      let minCutRpm = Infinity, maxCutRpm = -Infinity;
+      let minCutIpm = Infinity, maxCutIpm = -Infinity;
+      let totalToolChanges = 0;
+      let totalG28Returns = 0;
+
+      lines.forEach(rawLine => {
+        const line = rawLine.trim();
+        if (!line) return;
+
+        // Check N-block header
+        const nMatch = line.match(/^N(\d+)\b/i);
+        if (nMatch) {
+          const bNum = parseInt(nMatch[1], 10);
+          if (bNum >= 9000) return; // Skip alarm macro blocks N9991/N9992
+          curBlock = `N${bNum}`;
+          ensureBlock(curBlock, bNum);
+        }
+
+        // Capture first comment in block
+        const cMatch = line.match(/\((.*?)\)/);
+        if (cMatch && curBlock !== 'N0' && blockStatsMap[curBlock] && !blockStatsMap[curBlock].comment) {
+          blockStatsMap[curBlock].comment = cMatch[1].trim();
+        }
+
+        const codeOnly = line.replace(/\(.*?\)/g, '').trim();
+        if (!codeOnly || codeOnly.startsWith('%')) return;
+
+        // Parse conditional macro assignment: IF[#501EQ1]THEN#104=230
+        const ifMatch = codeOnly.match(/^IF\s*\[\s*#(\d+)\s*EQ\s*([+-]?(?:\d+\.?\d*|\.\d+))\s*\]\s*THEN\s*#(\d+)\s*=\s*([+-]?(?:\d+\.?\d*|\.\d+))/i);
+        if (ifMatch) {
+          const condVar = parseInt(ifMatch[1], 10);
+          const condVal = parseFloat(ifMatch[2]);
+          const targetVar = parseInt(ifMatch[3], 10);
+          const targetVal = parseFloat(ifMatch[4]);
+          // Always honor the user's selected ctMaterialCode for #501
+          const actualCondVal = (condVar === 501) ? matCode : (macros[condVar] ?? 0);
+          if (Math.abs(actualCondVal - condVal) < 1e-6) {
+            macros[targetVar] = targetVal;
+            if (curBlock !== 'N0' && blockStatsMap[curBlock]) {
+              if (targetVar === 104) blockStatsMap[curBlock].sfm = targetVal;
+              if (targetVar === 105) blockStatsMap[curBlock].feedIpr = targetVal;
+            }
+          }
+          return;
+        }
+
+        // Parse direct macro assignment: #104=230 (ignore #501=... if user explicitly toggled material code, unless syncing)
+        const macMatch = codeOnly.match(/^#(\d+)\s*=\s*([+-]?(?:\d+\.?\d*|\.\d+))/i);
+        if (macMatch) {
+          const varNum = parseInt(macMatch[1], 10);
+          const varVal = parseFloat(macMatch[2]);
+          if (varNum !== 501) {
+            macros[varNum] = varVal;
+          }
+          return;
+        }
+
+        if (codeOnly.startsWith('IF') || /^N\d+$/i.test(codeOnly)) return;
+
+        const blkObj = (curBlock !== 'N0') ? blockStatsMap[curBlock] : null;
+
+        // Check M01 / M00 stops
+        if (/^M0?1$/i.test(codeOnly)) {
+          if (blkObj) {
+            blkObj.hasM01 = true;
+            if (stopMode === 'PROVE_OUT') blkObj.dwellStopSec += 8.0;
+          }
+          return;
+        }
+        if (/^M0?0$/i.test(codeOnly)) {
+          if (blkObj) {
+            blkObj.hasM00 = true;
+            if (stopMode === 'M00_ONLY' || stopMode === 'PROVE_OUT') blkObj.dwellStopSec += 20.0;
+          }
+          return;
+        }
+
+        // Check G50 S... spindle clamp
+        const g50Match = codeOnly.match(/\bG50\s*S([+-]?(?:\d+\.?\d*|\.\d+))/i);
+        if (g50Match) {
+          maxRpm = parseFloat(g50Match[1]) || 500;
+          if (blkObj) blkObj.maxRpmClamp = maxRpm;
+          return;
+        }
+
+        // Check Tool Call Txxxx
+        const tMatch = codeOnly.match(/\bT(\d{2,4})\b/i);
+        if (tMatch && !/[XZ]/i.test(codeOnly)) {
+          const newTool = `T${tMatch[1]}`;
+          if (blkObj) {
+            blkObj.tool = newTool;
+            if (curTool !== newTool) {
+              blkObj.indexAndAuxSec += TOOL_CHANGE_SEC;
+              totalToolChanges++;
+            } else {
+              blkObj.indexAndAuxSec += SAME_TOOL_CALL_SEC;
+            }
+          }
+          curTool = newTool;
+          return;
+        }
+
+        // Check G96 / G97 spindle speed command
+        const g96Match = codeOnly.match(/\bG9([67])\s*S(?:#(\d+)|([+-]?(?:\d+\.?\d*|\.\d+)))/i);
+        if (g96Match) {
+          spindleMode = `G9${g96Match[1]}`;
+          if (g96Match[2]) {
+            const mNum = parseInt(g96Match[2], 10);
+            sVal = macros[mNum] || 230;
+          } else {
+            sVal = parseFloat(g96Match[3]) || 230;
+          }
+          if (blkObj) {
+            blkObj.sfm = sVal;
+            blkObj.indexAndAuxSec += SPINDLE_CSS_SYNC_SEC;
+          }
+          return;
+        }
+
+        // Check G28 U0 W0 machine home return
+        if (/\bG28\b/i.test(codeOnly)) {
+          const dzHome = hasPos ? Math.abs(6.0 - curZ) : 1.5;
+          const drHome = hasPos ? Math.abs(9.5 - curX) / 2.0 : 1.0;
+          const distHome = Math.hypot(dzHome, drHome);
+          const tHome = (Math.max(dzHome, drHome) / (EFFECTIVE_RAPID_IPM / 60.0)) + HOME_G28_SEC;
+          if (blkObj) {
+            blkObj.rapidDistIn += distHome;
+            blkObj.rapidTimeSec += tHome;
+          }
+          curX = 9.5;
+          curZ = 6.0;
+          hasPos = true;
+          totalG28Returns++;
+          return;
+        }
+
+        // Check G0G54 or auxiliary M-codes
+        if (/^G0*0?G5[4-9]$/i.test(codeOnly)) {
+          curMode = 'G0';
+          return;
+        }
+        if (/^M\d+$/i.test(codeOnly)) {
+          return;
+        }
+
+        // Motion mode G0 / G1 / G2 / G3
+        if (/\bG0*0(?!\d)/i.test(codeOnly)) curMode = 'G0';
+        else if (/\bG0*1(?!\d)/i.test(codeOnly)) curMode = 'G1';
+        else if (/\bG0*2(?!\d)/i.test(codeOnly)) curMode = 'G2';
+        else if (/\bG0*3(?!\d)/i.test(codeOnly)) curMode = 'G3';
+
+        // Feedword F#105 or F.004
+        const fMatch = codeOnly.match(/F(?:#(\d+)|([+-]?(?:\d+\.?\d*|\.\d+)))/i);
+        if (fMatch) {
+          if (fMatch[1]) {
+            const fMac = parseInt(fMatch[1], 10);
+            feedVal = macros[fMac] || ((matCode === 2) ? 0.005 : 0.004);
+          } else {
+            feedVal = parseFloat(fMatch[2]) || 0.004;
+          }
+          if (blkObj) blkObj.feedIpr = feedVal;
+        }
+
+        const xM = codeOnly.match(/X([+-]?(?:\d+\.?\d*|\.\d+))/i);
+        const zM = codeOnly.match(/Z([+-]?(?:\d+\.?\d*|\.\d+))/i);
+        const rM = codeOnly.match(/R([+-]?(?:\d+\.?\d*|\.\d+))/i);
+        if (!xM && !zM) return;
+
+        const targetX = xM ? parseFloat(xM[1]) : curX;
+        const targetZ = zM ? parseFloat(zM[1]) : curZ;
+        const rVal = rM ? Math.abs(parseFloat(rM[1])) : null;
+
+        if (!hasPos) {
+          curX = targetX;
+          curZ = targetZ;
+          hasPos = true;
+          return;
+        }
+
+        const dz = Math.abs(targetZ - curZ);
+        const dr = Math.abs(targetX - curX) / 2.0; // Radial travel in inches (X is diameter)
+        const linearDist = Math.hypot(dz, dr);
+
+        if (linearDist < 1e-6) return;
+
+        if (curMode === 'G0') {
+          // Haas X/Z simultaneous rapid traverse
+          const rapidSec = (Math.max(dz, dr) / (EFFECTIVE_RAPID_IPM / 60.0)) + RAPID_SETTLE_SEC;
+          if (blkObj) {
+            blkObj.rapidDistIn += linearDist;
+            blkObj.rapidTimeSec += rapidSec;
+          }
+        } else {
+          // Cutting move (G1 linear or G2/G3 circular arc)
+          let pathLen = linearDist;
+          if ((curMode === 'G2' || curMode === 'G3') && rVal && rVal > 0) {
+            const halfChordRatio = Math.min(1.0, linearDist / (2.0 * rVal));
+            const sweepRad = 2.0 * Math.asin(halfChordRatio);
+            pathLen = rVal * sweepRad;
+          }
+
+          // Average cutting diameter for CSS (G96) RPM calculation
+          const avgDia = Math.max(0.25, (Math.abs(curX) + Math.abs(targetX)) / 2.0);
+          let effRpm = maxRpm;
+          if (spindleMode === 'G96') {
+            const cssRpm = (12.0 * sVal) / (Math.PI * avgDia);
+            effRpm = Math.min(maxRpm, cssRpm);
+          } else {
+            effRpm = Math.min(maxRpm, sVal);
+          }
+
+          const effFeedIpr = feedVal * feedOvr;
+          // If feedVal <= 0.5, G99 IPR mode (IPM = RPM * IPR); otherwise G98 IPM
+          const effIpm = (feedVal <= 0.5) ? (effRpm * effFeedIpr) : ( feedVal * feedOvr );
+          const moveSec = (pathLen / Math.max(0.05, effIpm / 60.0)) + ((curMode === 'G2' || curMode === 'G3') ? 0.04 : 0.02);
+
+          minCutRpm = Math.min(minCutRpm, effRpm);
+          maxCutRpm = Math.max(maxCutRpm, effRpm);
+          minCutIpm = Math.min(minCutIpm, effIpm);
+          maxCutIpm = Math.max(maxCutIpm, effIpm);
+
+          if (blkObj) {
+            blkObj.cutDistIn += pathLen;
+            blkObj.cutTimeSec += moveSec;
+            blkObj.weightedRpmSum += effRpm * moveSec;
+            blkObj.weightedIpmSum += effIpm * moveSec;
+          }
+        }
+
+        curX = targetX;
+        curZ = targetZ;
+      });
+
+      let totalCutSec = 0;
+      let totalRapidSec = 0;
+      let totalIndexAuxSec = 0;
+      let totalDwellSec = 0;
+      let totalCutDistIn = 0;
+      let totalRapidDistIn = 0;
+
+      const stageTotals = {
+        STAGE1_ROUGH: { label: 'Stage 1 Rough (N1–N6)', sec: 0, cutIn: 0, color: 'bg-sky-500', text: 'text-sky-300', border: 'border-sky-500/40' },
+        STAGE2_ROUGH: { label: 'Stage 2 Rough (N7–N12)', sec: 0, cutIn: 0, color: 'bg-blue-500', text: 'text-blue-300', border: 'border-blue-500/40' },
+        FINISH:       { label: 'Finish Profile (N13–N15)', sec: 0, cutIn: 0, color: 'bg-emerald-500', text: 'text-emerald-300', border: 'border-emerald-500/40' },
+        FLOAT:        { label: 'Throat Float (N16–N17)', sec: 0, cutIn: 0, color: 'bg-lime-400', text: 'text-lime-300', border: 'border-lime-500/40' },
+        OTHER:        { label: 'Other Blocks', sec: 0, cutIn: 0, color: 'bg-purple-500', text: 'text-purple-300', border: 'border-purple-500/40' }
+      };
+
+      const blockRows = blockOrder.map(bName => {
+        const b = blockStatsMap[bName];
+        const avgRpm = b.cutTimeSec > 0 ? (b.weightedRpmSum / b.cutTimeSec) : 0;
+        const avgIpm = b.cutTimeSec > 0 ? (b.weightedIpmSum / b.cutTimeSec) : 0;
+        const nonCutSec = b.rapidTimeSec + b.indexAndAuxSec + b.dwellStopSec;
+        const totalBlkSec = b.cutTimeSec + nonCutSec;
+
+        totalCutSec += b.cutTimeSec;
+        totalRapidSec += b.rapidTimeSec;
+        totalIndexAuxSec += b.indexAndAuxSec;
+        totalDwellSec += b.dwellStopSec;
+        totalCutDistIn += b.cutDistIn;
+        totalRapidDistIn += b.rapidDistIn;
+
+        if (stageTotals[b.stageKey]) {
+          stageTotals[b.stageKey].sec += totalBlkSec;
+          stageTotals[b.stageKey].cutIn += b.cutDistIn;
+        }
+
+        return {
+          ...b,
+          avgRpm,
+          avgIpm,
+          nonCutSec,
+          totalBlkSec
+        };
+      });
+
+      const totalCycleSec = totalCutSec + totalRapidSec + totalIndexAuxSec + totalDwellSec;
+
+      return {
+        matCode,
+        sfm: macros[104],
+        feedIpr: macros[105] * feedOvr,
+        baseFeedIpr: macros[105],
+        feedOvrPct: Math.round(feedOvr * 100),
+        maxRpmClamp: maxRpm,
+        totalCycleSec,
+        totalCutSec,
+        totalRapidSec,
+        totalIndexAuxSec,
+        totalDwellSec,
+        totalNonCutSec: totalRapidSec + totalIndexAuxSec + totalDwellSec,
+        totalCutDistIn,
+        totalRapidDistIn,
+        totalToolChanges,
+        totalG28Returns,
+        minCutRpm: isFinite(minCutRpm) ? minCutRpm : 0,
+        maxCutRpm: isFinite(maxCutRpm) ? maxCutRpm : 0,
+        minCutIpm: isFinite(minCutIpm) ? minCutIpm : 0,
+        maxCutIpm: isFinite(maxCutIpm) ? maxCutIpm : 0,
+        stageTotals,
+        blockRows
+      };
+    }
+
+    function updateCtControlButtonsUI() {
+      const btnMat1 = document.getElementById('btnCtMat1');
+      const btnMat2 = document.getElementById('btnCtMat2');
+      if (btnMat1 && btnMat2) {
+        if (ctMaterialCode === 1) {
+          btnMat1.className = 'px-2.5 py-1.5 font-bold transition bg-emerald-600/35 text-emerald-200 border-r border-slate-700';
+          btnMat2.className = 'px-2.5 py-1.5 font-bold transition text-slate-400 hover:bg-slate-800';
+        } else {
+          btnMat1.className = 'px-2.5 py-1.5 font-bold transition text-slate-400 hover:bg-slate-800 border-r border-slate-700';
+          btnMat2.className = 'px-2.5 py-1.5 font-bold transition bg-emerald-600/35 text-emerald-200';
+        }
+      }
+
+      document.querySelectorAll('.ct-ovr-btn').forEach(btn => {
+        const ovr = parseInt(btn.getAttribute('data-ovr'), 10);
+        if (ovr === ctFeedOverridePct) {
+          btn.className = 'ct-ovr-btn px-2.5 py-1 bg-amber-500/30 text-amber-300 font-bold border-l border-slate-800 transition';
+        } else {
+          btn.className = 'ct-ovr-btn px-2 py-1 text-slate-400 hover:bg-slate-800 border-l border-slate-800 transition';
+        }
+      });
+    }
+
+    function renderCycleTimeModal() {
+      updateCtControlButtonsUI();
+      const res = calculateProgramCycleTime(gcodeText, {
+        materialCode: ctMaterialCode,
+        feedOverridePct: ctFeedOverridePct,
+        stopMode: ctStopMode
+      });
+
+      // Also compute comparison for the other #501 material code
+      const altMatCode = (ctMaterialCode === 1) ? 2 : 1;
+      const altRes = calculateProgramCycleTime(gcodeText, {
+        materialCode: altMatCode,
+        feedOverridePct: ctFeedOverridePct,
+        stopMode: ctStopMode
+      });
+
+      // Header Badges
+      const elBadgeProg = document.getElementById('ctBadgeProg');
+      if (elBadgeProg && programMeta) {
+        elBadgeProg.textContent = `${programMeta.progName || 'PROGRAM'} • ${programMeta.family || 'SL-25'}`;
+      }
+      const elSub = document.getElementById('ctSubtitle');
+      if (elSub && programMeta) {
+        const odTxt = programMeta.finishedOd ? `Ø${programMeta.finishedOd.toFixed(4)}"` : '';
+        elSub.textContent = `Part: ${programMeta.partNumber || '--'} ${odTxt ? '• Finished OD: ' + odTxt : ''} • CSS G96 S${res.sfm} (G50 S${res.maxRpmClamp}) • Feed F${res.feedIpr.toFixed(4)}" IPR (${res.feedOvrPct}%)`;
+      }
+
+      // Hero Card 1: Total Cycle Time
+      const elMatTag = document.getElementById('ctHeroMatTag');
+      if (elMatTag) elMatTag.textContent = `#501=${res.matCode} (${res.sfm} SFM)`;
+      const elTotalTime = document.getElementById('ctHeroTotalTime');
+      if (elTotalTime) elTotalTime.textContent = formatDurationMMSS(res.totalCycleSec);
+      const elTotalSub = document.getElementById('ctHeroTotalSub');
+      if (elTotalSub) {
+        const decMin = (res.totalCycleSec / 60.0).toFixed(2);
+        const partsPerHr = res.totalCycleSec > 0 ? (3600.0 / res.totalCycleSec).toFixed(1) : '--';
+        elTotalSub.innerHTML = `<span class="text-emerald-300 font-bold">${decMin} min</span> &bull; ~${partsPerHr} pcs/hr`;
+      }
+
+      // Hero Card 2: In-Cut Time
+      const cutPct = res.totalCycleSec > 0 ? Math.round((res.totalCutSec / res.totalCycleSec) * 100) : 0;
+      const elCutPct = document.getElementById('ctHeroCutPct');
+      if (elCutPct) elCutPct.textContent = `${cutPct}% of Cycle`;
+      const elCutTime = document.getElementById('ctHeroCutTime');
+      if (elCutTime) elCutTime.textContent = formatDurationMMSS(res.totalCutSec);
+      const elCutDist = document.getElementById('ctHeroCutDist');
+      if (elCutDist) elCutDist.textContent = `Total Cut Path: ${res.totalCutDistIn.toFixed(3)}"`;
+
+      // Hero Card 3: Rapid / G28 / Turret Index
+      const nonCutPct = Math.max(0, 100 - cutPct);
+      const elNonCutPct = document.getElementById('ctHeroNonCutPct');
+      if (elNonCutPct) elNonCutPct.textContent = `${nonCutPct}% of Cycle`;
+      const elNonCutTime = document.getElementById('ctHeroNonCutTime');
+      if (elNonCutTime) elNonCutTime.textContent = formatDurationMMSS(res.totalNonCutSec);
+      const elRapidDist = document.getElementById('ctHeroRapidDist');
+      if (elRapidDist) {
+        const dwellNote = res.totalDwellSec > 0 ? ` • +${Math.round(res.totalDwellSec)}s Stops` : '';
+        elRapidDist.textContent = `Rapid: ${res.totalRapidDistIn.toFixed(1)}" • ${res.totalToolChanges} Tool Idx • ${res.totalG28Returns} G28${dwellNote}`;
+      }
+
+      // Hero Card 4: Spindle & Feed Physics
+      const elClamp = document.getElementById('ctHeroClampTag');
+      if (elClamp) elClamp.textContent = `G96 S${res.sfm} / G50 S${res.maxRpmClamp}`;
+      const elRpmRange = document.getElementById('ctHeroRpmRange');
+      if (elRpmRange) {
+        elRpmRange.textContent = `${Math.round(res.minCutRpm)} – ${Math.round(res.maxCutRpm)} RPM`;
+      }
+      const elFeedRange = document.getElementById('ctHeroFeedRange');
+      if (elFeedRange) {
+        elFeedRange.textContent = `Linear Feed: ${res.minCutIpm.toFixed(2)} – ${res.maxCutIpm.toFixed(2)} IPM (F${res.feedIpr.toFixed(4)}")`;
+      }
+
+      // Comparison Banner between #501=1 and #501=2
+      const elComp = document.getElementById('ctComparisonBanner');
+      if (elComp) {
+        const diffSec = Math.abs(res.totalCycleSec - altRes.totalCycleSec);
+        if (res.matCode === 1) {
+          elComp.innerHTML = `💡 #501=2 (350 SFM / .005" IPR) runs in <b>${formatDurationMMSS(altRes.totalCycleSec)}</b> (saves ${formatDurationMMSS(diffSec)})`;
+        } else {
+          elComp.innerHTML = `💡 #501=1 (230 SFM / .004" IPR) runs in <b>${formatDurationMMSS(altRes.totalCycleSec)}</b> (+${formatDurationMMSS(diffSec)} for CPM)`;
+        }
+      }
+
+      // Stage Progress Bar & Cards
+      const barEl = document.getElementById('ctStageProgressBar');
+      const cardsEl = document.getElementById('ctStageCards');
+      if (barEl && cardsEl) {
+        barEl.innerHTML = '';
+        cardsEl.innerHTML = '';
+        ['STAGE1_ROUGH', 'STAGE2_ROUGH', 'FINISH', 'FLOAT'].forEach(key => {
+          const st = res.stageTotals[key];
+          if (!st || st.sec <= 0) return;
+          const pct = res.totalCycleSec > 0 ? (st.sec / res.totalCycleSec) * 100 : 0;
+
+          const segDiv = document.createElement('div');
+          segDiv.className = `${st.color} h-full transition-all duration-300`;
+          segDiv.style.width = `${Math.max(2, pct).toFixed(1)}%`;
+          segDiv.title = `${st.label}: ${formatDurationShort(st.sec)} (${pct.toFixed(1)}%)`;
+          barEl.appendChild(segDiv);
+
+          const card = document.createElement('div');
+          card.className = `bg-slate-900/90 border ${st.border} rounded-lg p-2.5 flex flex-col justify-between`;
+          card.innerHTML = `
+            <div class="flex items-center justify-between gap-1">
+              <span class="font-bold ${st.text} truncate">${st.label}</span>
+              <span class="text-[11px] text-slate-400 font-bold">${pct.toFixed(1)}%</span>
+            </div>
+            <div class="flex items-baseline justify-between mt-1">
+              <span class="text-sm font-extrabold text-white">${formatDurationShort(st.sec)}</span>
+              <span class="text-[11px] text-slate-400">${st.cutIn.toFixed(3)}" cut</span>
+            </div>
+          `;
+          cardsEl.appendChild(card);
+        });
+      }
+
+      // Per-Block Table
+      const tbody = document.getElementById('ctBlockTableBody');
+      const tblSum = document.getElementById('ctTableSummary');
+      if (tblSum) {
+        tblSum.textContent = `${res.blockRows.length} Blocks • Click any row to view pass on graph`;
+      }
+      if (tbody) {
+        tbody.innerHTML = '';
+        res.blockRows.forEach(row => {
+          const sharePct = res.totalCycleSec > 0 ? (row.totalBlkSec / res.totalCycleSec) * 100 : 0;
+          const isFin = row.passType === 'FINISH';
+          const isFlt = row.passType === 'FLOAT';
+          const badgeClass = isFlt
+            ? 'bg-lime-500/20 text-lime-300 border-lime-500/40'
+            : (isFin ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-sky-500/20 text-sky-300 border-sky-500/40');
+          const barColor = isFlt ? 'bg-lime-400' : (isFin ? 'bg-emerald-500' : 'bg-sky-500');
+          const stopTag = row.hasM00
+            ? `<span class="ml-1 px-1.5 py-0.5 text-[10px] rounded bg-red-500/25 text-red-300 border border-red-500/40 font-bold">M00</span>`
+            : '';
+
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-800/70 transition cursor-pointer';
+          tr.title = `Click to isolate ${row.name} on the visualizer graph`;
+          tr.innerHTML = `
+            <td class="py-2 px-3 font-extrabold text-white whitespace-nowrap">${row.name}${stopTag}</td>
+            <td class="py-2 px-2.5 text-slate-300 truncate max-w-[240px]">${escapeHtmlStr(row.comment || row.passType)}</td>
+            <td class="py-2 px-2.5 whitespace-nowrap">
+              <span class="px-1.5 py-0.5 rounded border text-[11px] font-bold ${badgeClass}">${row.tool} • ${row.passType}</span>
+            </td>
+            <td class="py-2 px-2.5 text-slate-300 whitespace-nowrap">
+              <span class="text-cyan-300 font-bold">${Math.round(row.avgRpm)} RPM</span>
+              <span class="text-slate-500">•</span>
+              <span class="text-amber-300">${row.avgIpm.toFixed(2)} IPM</span>
+            </td>
+            <td class="py-2 px-2.5 text-right text-slate-200 font-semibold whitespace-nowrap">${row.cutDistIn.toFixed(3)}"</td>
+            <td class="py-2 px-2.5 text-right text-blue-300 font-bold whitespace-nowrap">${formatDurationShort(row.cutTimeSec)}</td>
+            <td class="py-2 px-2.5 text-right text-slate-400 whitespace-nowrap">${row.nonCutSec.toFixed(1)}s</td>
+            <td class="py-2 px-3 text-right font-extrabold text-emerald-300 whitespace-nowrap">${formatDurationShort(row.totalBlkSec)}</td>
+            <td class="py-2 px-3">
+              <div class="flex items-center gap-1.5">
+                <div class="w-16 h-2 bg-slate-900 rounded-full overflow-hidden border border-slate-800 shrink-0">
+                  <div class="${barColor} h-full" style="width: ${Math.min(100, Math.max(3, sharePct * 2.5)).toFixed(1)}%"></div>
+                </div>
+                <span class="text-[11px] text-slate-400 w-9 text-right">${sharePct.toFixed(1)}%</span>
+              </div>
+            </td>
+          `;
+          tr.addEventListener('click', () => {
+            closeCycleTimeModal();
+            if (selBlockFilter) {
+              selBlockFilter.value = row.name;
+              selBlockFilter.dispatchEvent(new Event('change'));
+            }
+          });
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    function openCycleTimeModal() {
+      const modal = document.getElementById('cycleTimeModal');
+      if (!modal) return;
+      renderCycleTimeModal();
+      modal.classList.remove('hidden');
+    }
+
+    function closeCycleTimeModal() {
+      const modal = document.getElementById('cycleTimeModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+    }
+
+    const btnCycleTimeEstimator = document.getElementById('btnCycleTimeEstimator');
+    const btnCycleTimeQuick = document.getElementById('btnCycleTimeQuick');
+    const btnCloseCycleTime = document.getElementById('btnCloseCycleTime');
+    const cycleTimeModalEl = document.getElementById('cycleTimeModal');
+
+    if (btnCycleTimeEstimator) btnCycleTimeEstimator.addEventListener('click', openCycleTimeModal);
+    if (btnCycleTimeQuick) btnCycleTimeQuick.addEventListener('click', openCycleTimeModal);
+    if (btnCloseCycleTime) btnCloseCycleTime.addEventListener('click', closeCycleTimeModal);
+
+    if (cycleTimeModalEl) {
+      cycleTimeModalEl.addEventListener('click', (e) => {
+        if (e.target === cycleTimeModalEl) closeCycleTimeModal();
+      });
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && cycleTimeModalEl && !cycleTimeModalEl.classList.contains('hidden')) {
+        closeCycleTimeModal();
+      }
+    });
+
+    const btnCtMat1 = document.getElementById('btnCtMat1');
+    const btnCtMat2 = document.getElementById('btnCtMat2');
+    if (btnCtMat1) {
+      btnCtMat1.addEventListener('click', () => {
+        ctMaterialCode = 1;
+        renderCycleTimeModal();
+      });
+    }
+    if (btnCtMat2) {
+      btnCtMat2.addEventListener('click', () => {
+        ctMaterialCode = 2;
+        renderCycleTimeModal();
+      });
+    }
+
+    document.querySelectorAll('.ct-ovr-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        ctFeedOverridePct = parseInt(btn.getAttribute('data-ovr'), 10) || 100;
+        renderCycleTimeModal();
+      });
+    });
+
+    const selCtStopMode = document.getElementById('selCtStopMode');
+    if (selCtStopMode) {
+      selCtStopMode.addEventListener('change', (e) => {
+        ctStopMode = e.target.value || 'CONT';
+        renderCycleTimeModal();
       });
     }
 
