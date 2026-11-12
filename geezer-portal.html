@@ -237,7 +237,7 @@
         <button id="btnFontUp" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-amber-300 font-bold transition" title="Increase visualizer font size">A+</button>
       </div>
 
-      <button id="btnCycleTimeEstimator" class="px-3 py-1.5 bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/60 rounded-lg font-mono font-bold text-sm transition flex items-center gap-1.5 shadow" title="Open Haas SL-25 Cycle Time Estimator">
+      <button id="btnCycleTimeEstimator" class="px-3 py-1.5 bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 border border-emerald-500/60 rounded-lg font-mono font-bold text-sm transition flex items-center gap-1.5 shadow" title="Open SL25 Cycle Time Estimator">
         <span>⏱️ Cycle Time</span>
       </button>
 
@@ -334,7 +334,7 @@
         </select>
 
         <div class="flex items-center gap-1.5">
-          <button id="btnCycleTimeQuick" class="px-2.5 py-1.5 bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 rounded border border-emerald-500/60 font-bold transition flex items-center gap-1 shadow" title="Open Haas SL-25 Cycle Time Estimator">
+          <button id="btnCycleTimeQuick" class="px-2.5 py-1.5 bg-emerald-600/25 hover:bg-emerald-600/40 text-emerald-300 rounded border border-emerald-500/60 font-bold transition flex items-center gap-1 shadow" title="Open SL25 Cycle Time Estimator">
             <span>⏱️ Cycle Time</span>
           </button>
 
@@ -515,7 +515,7 @@
 
   </div>
 
-  <!-- Haas SL-25 Cycle Time Estimator Modal (Hidden by default; opens only when user clicks ⏱️ Cycle Time button) -->
+  <!-- SL25 Cycle Time Estimator Modal (Hidden by default; opens only when user clicks ⏱️ Cycle Time button) -->
   <div id="cycleTimeModal" class="hidden fixed inset-0 z-[9999] bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
     <div class="w-full max-w-5xl max-h-[92vh] bg-slate-900 border-2 border-emerald-500/60 rounded-2xl shadow-[0_0_50px_rgba(16,185,129,0.22)] flex flex-col overflow-hidden">
       
@@ -525,10 +525,11 @@
           <div class="p-2 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-lg leading-none">⏱️</div>
           <div>
             <h2 class="text-base sm:text-lg font-extrabold text-white tracking-wide flex flex-wrap items-center gap-2">
-              <span>Haas SL-25 Cycle Time Estimator</span>
+              <span>SL25 Cycle Time Estimator</span>
               <span id="ctBadgeProg" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">4506.BH • FNT300</span>
+              <span id="ctBadgeDryRunHeader" class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">DRY RUN: ON</span>
             </h2>
-            <p id="ctSubtitle" class="text-xs text-slate-400 font-mono">True CSS (G96) + G50 RPM Clamp + Radial/Axial Toolpath Physics</p>
+            <p id="ctSubtitle" class="text-xs text-slate-400 font-mono">SL25 CSS (G96) + G50 S500 Clamp + Dry Run ON + Material Feed Override</p>
           </div>
         </div>
         <button id="btnCloseCycleTime" class="px-3 py-1.5 bg-slate-800 hover:bg-red-900/80 text-slate-200 hover:text-white border border-slate-700 hover:border-red-500/50 rounded-lg font-mono font-bold text-xs sm:text-sm transition flex items-center gap-1 cursor-pointer">
@@ -536,29 +537,39 @@
         </button>
       </div>
 
-      <!-- Modal Interactive Controls Bar (Material #501, Feedrate Override, Stop Mode) -->
-      <div class="bg-slate-950/70 border-b border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs font-mono shrink-0">
-        <!-- Material #501 Selector -->
+      <!-- Modal Interactive Controls Bar (Material Preset, Dry Run Button, Feedrate Override, Stop Mode) -->
+      <div class="bg-slate-950/70 border-b border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-2.5 text-xs font-mono shrink-0">
+        <!-- Material Selector (Auto-selects shop Feed Override: 60% for A11/CPM, 70% for D2, 100% for Ampco) -->
         <div class="flex flex-wrap items-center gap-1.5">
-          <span class="text-slate-400 font-bold uppercase">Material (#501):</span>
-          <div class="flex items-center bg-slate-900 border border-slate-700 rounded-lg overflow-hidden">
+          <span class="text-slate-400 font-bold uppercase">Material:</span>
+          <div class="flex flex-wrap items-center bg-slate-900 border border-slate-700 rounded-lg overflow-hidden">
             <button type="button" id="btnCtMat1" class="px-2.5 py-1.5 font-bold transition bg-emerald-600/35 text-emerald-200 border-r border-slate-700">
-              #501=1 (CPM: 230 SFM / .004" IPR)
+              A11 / CPM (#501=1: S230 F.004 @ 60%)
             </button>
-            <button type="button" id="btnCtMat2" class="px-2.5 py-1.5 font-bold transition text-slate-400 hover:bg-slate-800">
-              #501=2 (Std: 350 SFM / .005" IPR)
+            <button type="button" id="btnCtMat2" class="px-2.5 py-1.5 font-bold transition text-slate-400 hover:bg-slate-800 border-r border-slate-700">
+              D2 (#501=2: S350 F.005 @ 70%)
+            </button>
+            <button type="button" id="btnCtMat3" class="px-2.5 py-1.5 font-bold transition text-slate-400 hover:bg-slate-800">
+              AMPCO (S430 F.0035)
             </button>
           </div>
         </div>
 
-        <!-- Haas Feedrate Override -->
-        <div class="flex items-center gap-1.5">
-          <span class="text-slate-400 font-bold uppercase">Feed Override:</span>
-          <div class="flex items-center bg-slate-900 border border-slate-700 rounded-lg overflow-hidden" id="ctFeedOverrideGroup">
-            <button type="button" data-ovr="50" class="ct-ovr-btn px-2 py-1 text-slate-400 hover:bg-slate-800 transition">50%</button>
-            <button type="button" data-ovr="75" class="ct-ovr-btn px-2 py-1 text-slate-400 hover:bg-slate-800 border-l border-slate-800 transition">75%</button>
-            <button type="button" data-ovr="100" class="ct-ovr-btn px-2.5 py-1 bg-amber-500/30 text-amber-300 font-bold border-l border-slate-800 transition">100%</button>
-            <button type="button" data-ovr="120" class="ct-ovr-btn px-2 py-1 text-slate-400 hover:bg-slate-800 border-l border-slate-800 transition">120%</button>
+        <!-- SL25 Dry Run Button & Feedrate Override -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" id="btnCtDryRun" class="px-2.5 py-1.5 rounded-lg font-bold transition bg-amber-500/25 border-2 border-amber-400 text-amber-200 flex items-center gap-1.5 shadow cursor-pointer" title="SL25 Dry Run Button (Controls G00/G28 traverse rate via Feed Override dial)">
+            <span id="dotCtDryRun" class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span id="lblCtDryRun">DRY RUN: ON</span>
+          </button>
+
+          <div class="flex items-center gap-1">
+            <span class="text-slate-400 font-bold uppercase">Feed Ovr:</span>
+            <div class="flex items-center bg-slate-900 border border-slate-700 rounded-lg overflow-hidden" id="ctFeedOverrideGroup">
+              <button type="button" data-ovr="60" class="ct-ovr-btn px-2.5 py-1 bg-amber-500/30 text-amber-300 font-bold transition">60% (CPM)</button>
+              <button type="button" data-ovr="70" class="ct-ovr-btn px-2.5 py-1 text-slate-400 hover:bg-slate-800 border-l border-slate-800 transition">70% (D2)</button>
+              <button type="button" data-ovr="80" class="ct-ovr-btn px-2 py-1 text-slate-400 hover:bg-slate-800 border-l border-slate-800 transition">80%</button>
+              <button type="button" data-ovr="100" class="ct-ovr-btn px-2.5 py-1 text-slate-400 hover:bg-slate-800 border-l border-slate-800 transition">100%</button>
+            </div>
           </div>
         </div>
 
@@ -566,9 +577,9 @@
         <div class="flex items-center gap-1.5">
           <span class="text-slate-400 font-bold uppercase">Stops:</span>
           <select id="selCtStopMode" class="bg-slate-900 border border-slate-700 text-cyan-300 rounded-lg px-2 py-1 font-mono font-bold focus:outline-none">
-            <option value="CONT" selected>Continuous Production (0s Dwell)</option>
-            <option value="M00_ONLY">Include M00 Insert Check (+20s at N6)</option>
-            <option value="PROVE_OUT">Setup Prove-Out (+8s per M1 + 20s M00)</option>
+            <option value="CONT" selected>Continuous Run (0s Dwell)</option>
+            <option value="M00_ONLY">+M00 Insert Check (+20s at N6)</option>
+            <option value="PROVE_OUT">+M1 Stops (+8s/M1 + 20s M00)</option>
           </select>
         </div>
       </div>
@@ -582,7 +593,7 @@
           <div class="bg-slate-950/90 border-2 border-emerald-500/50 rounded-xl p-3.5 flex flex-col justify-between shadow-lg">
             <div class="text-[11px] font-sans font-bold text-emerald-400 uppercase tracking-wider flex items-center justify-between">
               <span>Estimated Cycle Time</span>
-              <span id="ctHeroMatTag" class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]">#501=1</span>
+              <span id="ctHeroMatTag" class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px]">A11/CPM (60%)</span>
             </div>
             <div id="ctHeroTotalTime" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight my-1">
               --m --s
@@ -606,11 +617,11 @@
             </div>
           </div>
 
-          <!-- Rapid, G28 & Tool Index Time -->
+          <!-- Dry Run G00 / G28 & Tool Index Time -->
           <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
-            <div class="text-[11px] font-sans font-bold text-red-400 uppercase tracking-wider flex items-center justify-between">
-              <span>Rapid / G28 / Turret</span>
-              <span id="ctHeroNonCutPct" class="text-xs font-mono text-red-300 font-bold">--%</span>
+            <div class="text-[11px] font-sans font-bold text-amber-400 uppercase tracking-wider flex items-center justify-between">
+              <span id="ctHeroNonCutTitle">Dry Run G0 / G28 / Idx</span>
+              <span id="ctHeroNonCutPct" class="text-xs font-mono text-amber-300 font-bold">--%</span>
             </div>
             <div id="ctHeroNonCutTime" class="text-xl sm:text-2xl font-extrabold text-amber-300 my-1">
               --m --s
@@ -622,8 +633,8 @@
 
           <!-- Spindle & Feed Physics -->
           <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
-            <div class="text-[11px] font-sans font-bold text-amber-400 uppercase tracking-wider flex items-center justify-between">
-              <span>Spindle &amp; Feed Physics</span>
+            <div class="text-[11px] font-sans font-bold text-cyan-400 uppercase tracking-wider flex items-center justify-between">
+              <span>SL25 Speed &amp; Feed</span>
               <span id="ctHeroClampTag" class="text-[10px] font-mono text-amber-300">G50 S500</span>
             </div>
             <div id="ctHeroRpmRange" class="text-lg sm:text-xl font-extrabold text-cyan-300 my-1">
@@ -4490,11 +4501,22 @@ M30`;
     }
 
     // =========================================================================
-    // HAAS SL-25 CYCLE TIME ESTIMATOR ENGINE & MODAL CONTROLLER
+    // SL25 CYCLE TIME ESTIMATOR ENGINE & MODAL CONTROLLER
     // =========================================================================
-    let ctMaterialCode = 1; // #501=1 (230 SFM / .004" IPR) or #501=2 (350 SFM / .005" IPR)
-    let ctFeedOverridePct = 100;
-    let ctStopMode = 'CONT'; // 'CONT' | 'M00_ONLY' | 'PROVE_OUT'
+    // Material Presets:
+    //   1 = A11 / CPM (#501=1): S230 (230 SFM), F.0040" IPR @ 60% Feed Override (Dry Run ON)
+    //   2 = D2        (#501=2): S350 (350 SFM), F.0050" IPR @ 70% Feed Override (Dry Run ON)
+    //   3 = AMPCO     (#501=3): S430 (430 SFM), F.0035" IPR @ 100% Feed Override (Dry Run ON)
+    const SL25_MATERIAL_PRESETS = {
+      1: { code: 1, name: 'A11 / CPM', tag: '#501=1 • A11/CPM', sfm: 230, ipr: 0.0040, defaultOvr: 60 },
+      2: { code: 2, name: 'D2',        tag: '#501=2 • D2',      sfm: 350, ipr: 0.0050, defaultOvr: 70 },
+      3: { code: 3, name: 'AMPCO',     tag: 'AMPCO Bronze',     sfm: 430, ipr: 0.0035, defaultOvr: 100 }
+    };
+
+    let ctMaterialCode = 1;      // 1 = A11/CPM, 2 = D2, 3 = AMPCO
+    let ctFeedOverridePct = 60;  // 60% for A11/CPM, 70% for D2, 100% for AMPCO
+    let ctDryRunOn = true;       // SL25 Dry Run button turned ON by default
+    let ctStopMode = 'CONT';     // 'CONT' | 'M00_ONLY' | 'PROVE_OUT'
 
     function formatDurationMMSS(totalSec) {
       if (!isFinite(totalSec) || totalSec <= 0) return '0s';
@@ -4519,10 +4541,18 @@ M30`;
       const m501 = code.match(/^\s*#501\s*=\s*(\d+)/m);
       if (m501) {
         const val = parseInt(m501[1], 10);
-        if (val === 1 || val === 2) {
+        if (SL25_MATERIAL_PRESETS[val]) {
           ctMaterialCode = val;
+          ctFeedOverridePct = SL25_MATERIAL_PRESETS[val].defaultOvr;
         }
+      } else if (/AMPCO/i.test(code) || /\bS430\b/i.test(code)) {
+        ctMaterialCode = 3;
+        ctFeedOverridePct = SL25_MATERIAL_PRESETS[3].defaultOvr;
+      } else {
+        ctMaterialCode = 1;
+        ctFeedOverridePct = SL25_MATERIAL_PRESETS[1].defaultOvr;
       }
+      ctDryRunOn = true;
       updateCtControlButtonsUI();
       const modal = document.getElementById('cycleTimeModal');
       if (modal && !modal.classList.contains('hidden')) {
@@ -4532,21 +4562,28 @@ M30`;
 
     function calculateProgramCycleTime(code, options = {}) {
       const matCode = options.materialCode || ctMaterialCode || 1;
-      const feedOvr = (options.feedOverridePct || ctFeedOverridePct || 100) / 100.0;
+      const preset = SL25_MATERIAL_PRESETS[matCode] || SL25_MATERIAL_PRESETS[1];
+      const feedOvrPct = options.feedOverridePct || ctFeedOverridePct || preset.defaultOvr;
+      const feedOvr = feedOvrPct / 100.0;
+      const dryRunOn = (options.dryRunOn !== undefined) ? options.dryRunOn : ctDryRunOn;
       const stopMode = options.stopMode || ctStopMode || 'CONT';
 
-      // Haas SL-25 Machine Kinematics Constants
-      const EFFECTIVE_RAPID_IPM = 380.0; // Effective short-stroke X/Z rapid traverse (accounting for accel/decel ramps)
+      // SL25 Machine Kinematics Constants
+      // When DRY RUN is ON, SL25 G00 and G28 moves traverse at Dry Run base rate (100 IPM) scaled by Feed Override (e.g. 60 IPM @ 60%, 70 IPM @ 70%, 100 IPM @ 100%)
+      const DRY_RUN_BASE_IPM = 100.0;
+      const EFFECTIVE_RAPID_IPM = 380.0; // Normal production rapid when Dry Run is OFF
+      const activeRapidIpm = dryRunOn ? Math.max(10.0, DRY_RUN_BASE_IPM * feedOvr) : EFFECTIVE_RAPID_IPM;
+
       const RAPID_SETTLE_SEC = 0.12;     // Servo in-position check per G0 move
-      const HOME_G28_SEC = 1.35;         // G28 U0 W0 turret home return overhead
+      const HOME_G28_SEC = 1.35;         // G28 U0 W0 turret home decel/confirm overhead
       const TOOL_CHANGE_SEC = 2.20;      // Turret index time when switching to a different tool station
       const SAME_TOOL_CALL_SEC = 0.25;   // Turret confirmation when re-calling the same active tool
       const SPINDLE_CSS_SYNC_SEC = 0.45; // G96 S... M3 spindle speed sync per block
 
       const macros = {
         501: matCode,
-        104: (matCode === 2) ? 350 : 230,
-        105: (matCode === 2) ? 0.005 : 0.004
+        104: preset.sfm,
+        105: preset.ipr
       };
 
       const lines = (code || '').split(/\r?\n/);
@@ -4557,8 +4594,8 @@ M30`;
       let curTool = null;
       let maxRpm = 500;       // G50 S500 default clamp
       let spindleMode = 'G96'; // G96 CSS vs G97 RPM
-      let sVal = macros[104]; // SFM in G96 or RPM in G97
-      let feedVal = macros[105]; // IPR in G99
+      let sVal = preset.sfm;   // SFM in G96 or RPM in G97
+      let feedVal = preset.ipr; // IPR in G99
 
       const blockStatsMap = {};
       const blockOrder = [];
@@ -4643,13 +4680,19 @@ M30`;
           return;
         }
 
-        // Parse direct macro assignment: #104=230 (ignore #501=... if user explicitly toggled material code, unless syncing)
+        // Parse direct macro assignment: #104=230 (ignore #501=... and preserve preset #104/#105 when Ampco #501=3 is selected)
         const macMatch = codeOnly.match(/^#(\d+)\s*=\s*([+-]?(?:\d+\.?\d*|\.\d+))/i);
         if (macMatch) {
           const varNum = parseInt(macMatch[1], 10);
           const varVal = parseFloat(macMatch[2]);
           if (varNum !== 501) {
-            macros[varNum] = varVal;
+            if (matCode === 3 && (varNum === 104 || varNum === 105)) {
+              // Keep Ampco S430 F.0035 preset
+              macros[104] = preset.sfm;
+              macros[105] = preset.ipr;
+            } else {
+              macros[varNum] = varVal;
+            }
           }
           return;
         }
@@ -4705,9 +4748,10 @@ M30`;
           spindleMode = `G9${g96Match[1]}`;
           if (g96Match[2]) {
             const mNum = parseInt(g96Match[2], 10);
-            sVal = macros[mNum] || 230;
+            sVal = (matCode === 3 && mNum === 104) ? preset.sfm : (macros[mNum] || preset.sfm);
           } else {
-            sVal = parseFloat(g96Match[3]) || 230;
+            // If user selected a material preset in the estimator, use the material's SFM for G96
+            sVal = (spindleMode === 'G96') ? preset.sfm : (parseFloat(g96Match[3]) || preset.sfm);
           }
           if (blkObj) {
             blkObj.sfm = sVal;
@@ -4721,7 +4765,8 @@ M30`;
           const dzHome = hasPos ? Math.abs(6.0 - curZ) : 1.5;
           const drHome = hasPos ? Math.abs(9.5 - curX) / 2.0 : 1.0;
           const distHome = Math.hypot(dzHome, drHome);
-          const tHome = (Math.max(dzHome, drHome) / (EFFECTIVE_RAPID_IPM / 60.0)) + HOME_G28_SEC;
+          const travDist = dryRunOn ? distHome : Math.max(dzHome, drHome);
+          const tHome = (travDist / (activeRapidIpm / 60.0)) + HOME_G28_SEC;
           if (blkObj) {
             blkObj.rapidDistIn += distHome;
             blkObj.rapidTimeSec += tHome;
@@ -4753,9 +4798,10 @@ M30`;
         if (fMatch) {
           if (fMatch[1]) {
             const fMac = parseInt(fMatch[1], 10);
-            feedVal = macros[fMac] || ((matCode === 2) ? 0.005 : 0.004);
+            feedVal = (matCode === 3 && fMac === 105) ? preset.ipr : (macros[fMac] || preset.ipr);
           } else {
-            feedVal = parseFloat(fMatch[2]) || 0.004;
+            const rawF = parseFloat(fMatch[2]) || preset.ipr;
+            feedVal = (rawF <= 0.05) ? preset.ipr : rawF;
           }
           if (blkObj) blkObj.feedIpr = feedVal;
         }
@@ -4783,8 +4829,9 @@ M30`;
         if (linearDist < 1e-6) return;
 
         if (curMode === 'G0') {
-          // Haas X/Z simultaneous rapid traverse
-          const rapidSec = (Math.max(dz, dr) / (EFFECTIVE_RAPID_IPM / 60.0)) + RAPID_SETTLE_SEC;
+          // SL25 G0 traverse: When Dry Run is ON, moves at Dry Run feedrate (100 IPM * Feed Override); when OFF, rapid traverse
+          const travDist = dryRunOn ? linearDist : Math.max(dz, dr);
+          const rapidSec = (travDist / (activeRapidIpm / 60.0)) + RAPID_SETTLE_SEC;
           if (blkObj) {
             blkObj.rapidDistIn += linearDist;
             blkObj.rapidTimeSec += rapidSec;
@@ -4810,7 +4857,7 @@ M30`;
 
           const effFeedIpr = feedVal * feedOvr;
           // If feedVal <= 0.5, G99 IPR mode (IPM = RPM * IPR); otherwise G98 IPM
-          const effIpm = (feedVal <= 0.5) ? (effRpm * effFeedIpr) : ( feedVal * feedOvr );
+          const effIpm = (feedVal <= 0.5) ? (effRpm * effFeedIpr) : (feedVal * feedOvr);
           const moveSec = (pathLen / Math.max(0.05, effIpm / 60.0)) + ((curMode === 'G2' || curMode === 'G3') ? 0.04 : 0.02);
 
           minCutRpm = Math.min(minCutRpm, effRpm);
@@ -4877,10 +4924,13 @@ M30`;
 
       return {
         matCode,
+        preset,
         sfm: macros[104],
         feedIpr: macros[105] * feedOvr,
         baseFeedIpr: macros[105],
         feedOvrPct: Math.round(feedOvr * 100),
+        dryRunOn,
+        activeRapidIpm,
         maxRpmClamp: maxRpm,
         totalCycleSec,
         totalCutSec,
@@ -4904,13 +4954,42 @@ M30`;
     function updateCtControlButtonsUI() {
       const btnMat1 = document.getElementById('btnCtMat1');
       const btnMat2 = document.getElementById('btnCtMat2');
-      if (btnMat1 && btnMat2) {
-        if (ctMaterialCode === 1) {
-          btnMat1.className = 'px-2.5 py-1.5 font-bold transition bg-emerald-600/35 text-emerald-200 border-r border-slate-700';
-          btnMat2.className = 'px-2.5 py-1.5 font-bold transition text-slate-400 hover:bg-slate-800';
+      const btnMat3 = document.getElementById('btnCtMat3');
+      const matButtons = [
+        { el: btnMat1, code: 1, border: 'border-r border-slate-700' },
+        { el: btnMat2, code: 2, border: 'border-r border-slate-700' },
+        { el: btnMat3, code: 3, border: '' }
+      ];
+      matButtons.forEach(item => {
+        if (!item.el) return;
+        if (ctMaterialCode === item.code) {
+          item.el.className = `px-2.5 py-1.5 font-bold transition bg-emerald-600/35 text-emerald-200 ${item.border}`;
         } else {
-          btnMat1.className = 'px-2.5 py-1.5 font-bold transition text-slate-400 hover:bg-slate-800 border-r border-slate-700';
-          btnMat2.className = 'px-2.5 py-1.5 font-bold transition bg-emerald-600/35 text-emerald-200';
+          item.el.className = `px-2.5 py-1.5 font-bold transition text-slate-400 hover:bg-slate-800 ${item.border}`;
+        }
+      });
+
+      const btnDryRun = document.getElementById('btnCtDryRun');
+      const dotDryRun = document.getElementById('dotCtDryRun');
+      const lblDryRun = document.getElementById('lblCtDryRun');
+      const hdrDryRun = document.getElementById('ctBadgeDryRunHeader');
+      if (btnDryRun && dotDryRun && lblDryRun) {
+        if (ctDryRunOn) {
+          btnDryRun.className = 'px-2.5 py-1.5 rounded-lg font-bold transition bg-amber-500/25 border-2 border-amber-400 text-amber-200 flex items-center gap-1.5 shadow cursor-pointer';
+          dotDryRun.className = 'w-2 h-2 rounded-full bg-amber-400';
+          lblDryRun.textContent = 'DRY RUN: ON';
+          if (hdrDryRun) {
+            hdrDryRun.textContent = 'DRY RUN: ON';
+            hdrDryRun.className = 'text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40';
+          }
+        } else {
+          btnDryRun.className = 'px-2.5 py-1.5 rounded-lg font-bold transition bg-slate-900 border border-slate-700 text-slate-400 hover:bg-slate-800 flex items-center gap-1.5 cursor-pointer';
+          dotDryRun.className = 'w-2 h-2 rounded-full bg-slate-600';
+          lblDryRun.textContent = 'DRY RUN: OFF';
+          if (hdrDryRun) {
+            hdrDryRun.textContent = 'DRY RUN: OFF';
+            hdrDryRun.className = 'text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700';
+          }
         }
       }
 
@@ -4919,7 +4998,7 @@ M30`;
         if (ovr === ctFeedOverridePct) {
           btn.className = 'ct-ovr-btn px-2.5 py-1 bg-amber-500/30 text-amber-300 font-bold border-l border-slate-800 transition';
         } else {
-          btn.className = 'ct-ovr-btn px-2 py-1 text-slate-400 hover:bg-slate-800 border-l border-slate-800 transition';
+          btn.className = 'ct-ovr-btn px-2.5 py-1 text-slate-400 hover:bg-slate-800 border-l border-slate-800 transition';
         }
       });
     }
@@ -4929,31 +5008,45 @@ M30`;
       const res = calculateProgramCycleTime(gcodeText, {
         materialCode: ctMaterialCode,
         feedOverridePct: ctFeedOverridePct,
+        dryRunOn: ctDryRunOn,
         stopMode: ctStopMode
       });
 
-      // Also compute comparison for the other #501 material code
-      const altMatCode = (ctMaterialCode === 1) ? 2 : 1;
-      const altRes = calculateProgramCycleTime(gcodeText, {
-        materialCode: altMatCode,
-        feedOverridePct: ctFeedOverridePct,
+      // Compute all 3 SL25 standard material benchmarks with Dry Run ON for the comparison banner
+      const resCpm = calculateProgramCycleTime(gcodeText, {
+        materialCode: 1,
+        feedOverridePct: 60,
+        dryRunOn: true,
+        stopMode: ctStopMode
+      });
+      const resD2 = calculateProgramCycleTime(gcodeText, {
+        materialCode: 2,
+        feedOverridePct: 70,
+        dryRunOn: true,
+        stopMode: ctStopMode
+      });
+      const resAmpco = calculateProgramCycleTime(gcodeText, {
+        materialCode: 3,
+        feedOverridePct: 100,
+        dryRunOn: true,
         stopMode: ctStopMode
       });
 
       // Header Badges
       const elBadgeProg = document.getElementById('ctBadgeProg');
       if (elBadgeProg && programMeta) {
-        elBadgeProg.textContent = `${programMeta.progName || 'PROGRAM'} • ${programMeta.family || 'SL-25'}`;
+        elBadgeProg.textContent = `${programMeta.progName || 'PROGRAM'} • ${programMeta.family || 'SL25'}`;
       }
       const elSub = document.getElementById('ctSubtitle');
       if (elSub && programMeta) {
         const odTxt = programMeta.finishedOd ? `Ø${programMeta.finishedOd.toFixed(4)}"` : '';
-        elSub.textContent = `Part: ${programMeta.partNumber || '--'} ${odTxt ? '• Finished OD: ' + odTxt : ''} • CSS G96 S${res.sfm} (G50 S${res.maxRpmClamp}) • Feed F${res.feedIpr.toFixed(4)}" IPR (${res.feedOvrPct}%)`;
+        const dryTxt = res.dryRunOn ? `Dry Run ON (${Math.round(res.activeRapidIpm)} IPM G0)` : 'Dry Run OFF';
+        elSub.textContent = `Part: ${programMeta.partNumber || '--'} ${odTxt ? '• OD: ' + odTxt : ''} • ${res.preset.name}: G96 S${res.sfm} (G50 S${res.maxRpmClamp}) • Base F${res.baseFeedIpr.toFixed(4)}" @ ${res.feedOvrPct}% Ovr (Eff F${res.feedIpr.toFixed(4)}") • ${dryTxt}`;
       }
 
       // Hero Card 1: Total Cycle Time
       const elMatTag = document.getElementById('ctHeroMatTag');
-      if (elMatTag) elMatTag.textContent = `#501=${res.matCode} (${res.sfm} SFM)`;
+      if (elMatTag) elMatTag.textContent = `${res.preset.name} • ${res.feedOvrPct}% Ovr`;
       const elTotalTime = document.getElementById('ctHeroTotalTime');
       if (elTotalTime) elTotalTime.textContent = formatDurationMMSS(res.totalCycleSec);
       const elTotalSub = document.getElementById('ctHeroTotalSub');
@@ -4972,8 +5065,12 @@ M30`;
       const elCutDist = document.getElementById('ctHeroCutDist');
       if (elCutDist) elCutDist.textContent = `Total Cut Path: ${res.totalCutDistIn.toFixed(3)}"`;
 
-      // Hero Card 3: Rapid / G28 / Turret Index
+      // Hero Card 3: Dry Run G00 / G28 / Turret Index
       const nonCutPct = Math.max(0, 100 - cutPct);
+      const elNonCutTitle = document.getElementById('ctHeroNonCutTitle');
+      if (elNonCutTitle) {
+        elNonCutTitle.textContent = res.dryRunOn ? `Dry Run G0 (${Math.round(res.activeRapidIpm)} IPM) / Idx` : 'Rapid G0 / G28 / Idx';
+      }
       const elNonCutPct = document.getElementById('ctHeroNonCutPct');
       if (elNonCutPct) elNonCutPct.textContent = `${nonCutPct}% of Cycle`;
       const elNonCutTime = document.getElementById('ctHeroNonCutTime');
@@ -4981,7 +5078,7 @@ M30`;
       const elRapidDist = document.getElementById('ctHeroRapidDist');
       if (elRapidDist) {
         const dwellNote = res.totalDwellSec > 0 ? ` • +${Math.round(res.totalDwellSec)}s Stops` : '';
-        elRapidDist.textContent = `Rapid: ${res.totalRapidDistIn.toFixed(1)}" • ${res.totalToolChanges} Tool Idx • ${res.totalG28Returns} G28${dwellNote}`;
+        elRapidDist.textContent = `G0/G28: ${res.totalRapidDistIn.toFixed(1)}" • ${res.totalToolChanges} Tool Idx • ${res.totalG28Returns} G28${dwellNote}`;
       }
 
       // Hero Card 4: Spindle & Feed Physics
@@ -4993,18 +5090,13 @@ M30`;
       }
       const elFeedRange = document.getElementById('ctHeroFeedRange');
       if (elFeedRange) {
-        elFeedRange.textContent = `Linear Feed: ${res.minCutIpm.toFixed(2)} – ${res.maxCutIpm.toFixed(2)} IPM (F${res.feedIpr.toFixed(4)}")`;
+        elFeedRange.textContent = `Feed: ${res.minCutIpm.toFixed(2)} – ${res.maxCutIpm.toFixed(2)} IPM (F${res.baseFeedIpr.toFixed(4)}" @ ${res.feedOvrPct}% = ${res.feedIpr.toFixed(4)}")`;
       }
 
-      // Comparison Banner between #501=1 and #501=2
+      // Comparison Banner across A11/CPM (60%), D2 (70%), and Ampco (S430 F.0035) with Dry Run ON
       const elComp = document.getElementById('ctComparisonBanner');
       if (elComp) {
-        const diffSec = Math.abs(res.totalCycleSec - altRes.totalCycleSec);
-        if (res.matCode === 1) {
-          elComp.innerHTML = `💡 #501=2 (350 SFM / .005" IPR) runs in <b>${formatDurationMMSS(altRes.totalCycleSec)}</b> (saves ${formatDurationMMSS(diffSec)})`;
-        } else {
-          elComp.innerHTML = `💡 #501=1 (230 SFM / .004" IPR) runs in <b>${formatDurationMMSS(altRes.totalCycleSec)}</b> (+${formatDurationMMSS(diffSec)} for CPM)`;
-        }
+        elComp.innerHTML = `Dry Run ON Benchmarks &mdash; <span class="text-emerald-300">A11/CPM (60%): <b>${formatDurationMMSS(resCpm.totalCycleSec)}</b></span> &bull; <span class="text-cyan-300">D2 (70%): <b>${formatDurationMMSS(resD2.totalCycleSec)}</b></span> &bull; <span class="text-amber-300">Ampco (S430 F.0035): <b>${formatDurationMMSS(resAmpco.totalCycleSec)}</b></span>`;
       }
 
       // Stage Progress Bar & Cards
@@ -5135,15 +5227,33 @@ M30`;
 
     const btnCtMat1 = document.getElementById('btnCtMat1');
     const btnCtMat2 = document.getElementById('btnCtMat2');
+    const btnCtMat3 = document.getElementById('btnCtMat3');
     if (btnCtMat1) {
       btnCtMat1.addEventListener('click', () => {
         ctMaterialCode = 1;
+        ctFeedOverridePct = SL25_MATERIAL_PRESETS[1].defaultOvr; // 60% for A11 / CPM
         renderCycleTimeModal();
       });
     }
     if (btnCtMat2) {
       btnCtMat2.addEventListener('click', () => {
         ctMaterialCode = 2;
+        ctFeedOverridePct = SL25_MATERIAL_PRESETS[2].defaultOvr; // 70% for D2
+        renderCycleTimeModal();
+      });
+    }
+    if (btnCtMat3) {
+      btnCtMat3.addEventListener('click', () => {
+        ctMaterialCode = 3;
+        ctFeedOverridePct = SL25_MATERIAL_PRESETS[3].defaultOvr; // 100% for Ampco (S430 F.0035)
+        renderCycleTimeModal();
+      });
+    }
+
+    const btnCtDryRun = document.getElementById('btnCtDryRun');
+    if (btnCtDryRun) {
+      btnCtDryRun.addEventListener('click', () => {
+        ctDryRunOn = !ctDryRunOn;
         renderCycleTimeModal();
       });
     }
