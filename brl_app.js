@@ -1739,52 +1739,45 @@
             const isNewDailyVisitor = localStorage.getItem(visitorKey) !== today;
             localStorage.setItem(visitorKey, today);
 
-            const res = await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.3`, {
+            const res = await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
                 headers: {
                     'apikey': BRL_SUPABASE_KEY,
                     'Authorization': `Bearer ${BRL_SUPABASE_KEY}`
                 }
             });
-            let rowData = { totalViews: 0, totalUniqueDailyVisitors: 0, daily: {}, pages: {}, lastUpdated: null };
-            let exists = false;
-            if (res.ok) {
-                const rows = await res.json();
-                if (Array.isArray(rows) && rows.length > 0 && rows[0].data) {
-                    rowData = Object.assign(rowData, rows[0].data);
-                    exists = true;
-                }
-            }
-            rowData.totalViews = (rowData.totalViews || 0) + 1;
-            if (isNewDailyVisitor) {
-                rowData.totalUniqueDailyVisitors = (rowData.totalUniqueDailyVisitors || 0) + 1;
-            }
-            if (!rowData.daily) rowData.daily = {};
-            if (!rowData.daily[today]) rowData.daily[today] = { views: 0, uniques: 0 };
-            rowData.daily[today].views = (rowData.daily[today].views || 0) + 1;
-            if (isNewDailyVisitor) {
-                rowData.daily[today].uniques = (rowData.daily[today].uniques || 0) + 1;
-            }
-            if (!rowData.pages) rowData.pages = {};
-            rowData.pages[path] = (rowData.pages[path] || 0) + 1;
-            rowData.lastUpdated = new Date().toISOString();
+            if (!res.ok) return;
+            const rows = await res.json();
+            if (!Array.isArray(rows) || rows.length === 0 || !rows[0].data) return;
 
-            const method = exists ? 'PATCH' : 'POST';
-            const url = exists
-                ? `${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.3`
-                : `${BRL_SUPABASE_URL}/rest/v1/league_data`;
-            const payload = exists
-                ? { data: rowData, updated_at: new Date().toISOString() }
-                : { id: 3, data: rowData, updated_at: new Date().toISOString() };
+            const fullData = rows[0].data;
+            const stats = Object.assign(
+                { totalViews: 0, totalUniqueDailyVisitors: 0, daily: {}, pages: {}, lastUpdated: null },
+                fullData.siteAnalytics || {}
+            );
+            stats.totalViews = (stats.totalViews || 0) + 1;
+            if (isNewDailyVisitor) {
+                stats.totalUniqueDailyVisitors = (stats.totalUniqueDailyVisitors || 0) + 1;
+            }
+            if (!stats.daily) stats.daily = {};
+            if (!stats.daily[today]) stats.daily[today] = { views: 0, uniques: 0 };
+            stats.daily[today].views = (stats.daily[today].views || 0) + 1;
+            if (isNewDailyVisitor) {
+                stats.daily[today].uniques = (stats.daily[today].uniques || 0) + 1;
+            }
+            if (!stats.pages) stats.pages = {};
+            stats.pages[path] = (stats.pages[path] || 0) + 1;
+            stats.lastUpdated = new Date().toISOString();
+            fullData.siteAnalytics = stats;
 
-            await fetch(url, {
-                method,
+            await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                method: 'PATCH',
                 headers: {
                     'apikey': BRL_SUPABASE_KEY,
                     'Authorization': `Bearer ${BRL_SUPABASE_KEY}`,
                     'Content-Type': 'application/json',
                     'Prefer': 'return=minimal'
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({ data: fullData, updated_at: new Date().toISOString() })
             });
         } catch (err) {
             // Silently ignore analytics network errors
