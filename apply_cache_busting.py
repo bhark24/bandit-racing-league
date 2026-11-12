@@ -9,6 +9,16 @@ META_TAGS = f'''    <meta http-equiv="Cache-Control" content="no-cache, no-store
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">'''
 
+GA_MEASUREMENT_ID = 'G-W4CCL120NY'
+GA_TAG = f'''    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={GA_MEASUREMENT_ID}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', '{GA_MEASUREMENT_ID}');
+    </script>'''
+
 PWA_HEAD_TAGS = f'''    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v={TIMESTAMP}">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v={TIMESTAMP}">
     <link rel="shortcut icon" href="favicon.ico?v={TIMESTAMP}">
@@ -41,6 +51,12 @@ def process_html_file(filepath):
         head_match = re.search(r'(<head[^>]*>)', content, re.IGNORECASE)
         if head_match:
             content = content[:head_match.end()] + '\n' + META_TAGS + content[head_match.end():]
+
+    # 1a. Ensure Google Analytics (G-W4CCL120NY) exists in <head> on public pages
+    if filename not in SKIP_PWA_FILES and GA_MEASUREMENT_ID not in content:
+        head_match = re.search(r'(<head[^>]*>)', content, re.IGNORECASE)
+        if head_match:
+            content = content[:head_match.end()] + '\n' + GA_TAG + content[head_match.end():]
 
     # 1b. Ensure PWA manifest, favicons, apple-touch-icon, and brl_app.js exist on public pages
     if filename not in SKIP_PWA_FILES:

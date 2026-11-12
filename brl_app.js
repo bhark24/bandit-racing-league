@@ -1730,12 +1730,74 @@
         if (btn) btn.style.display = 'flex';
     });
 
+    async function recordSitePageview() {
+        try {
+            if (navigator.webdriver || /bot|crawler|spider|headless/i.test(navigator.userAgent || '')) return;
+            const today = new Date().toISOString().slice(0, 10);
+            const path = (window.location.pathname || '/index.html').replace(/\/+$/, '') || '/index.html';
+            const visitorKey = 'brl_visitor_date_v1';
+            const isNewDailyVisitor = localStorage.getItem(visitorKey) !== today;
+            localStorage.setItem(visitorKey, today);
+
+            const res = await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.3`, {
+                headers: {
+                    'apikey': BRL_SUPABASE_KEY,
+                    'Authorization': `Bearer ${BRL_SUPABASE_KEY}`
+                }
+            });
+            let rowData = { totalViews: 0, totalUniqueDailyVisitors: 0, daily: {}, pages: {}, lastUpdated: null };
+            let exists = false;
+            if (res.ok) {
+                const rows = await res.json();
+                if (Array.isArray(rows) && rows.length > 0 && rows[0].data) {
+                    rowData = Object.assign(rowData, rows[0].data);
+                    exists = true;
+                }
+            }
+            rowData.totalViews = (rowData.totalViews || 0) + 1;
+            if (isNewDailyVisitor) {
+                rowData.totalUniqueDailyVisitors = (rowData.totalUniqueDailyVisitors || 0) + 1;
+            }
+            if (!rowData.daily) rowData.daily = {};
+            if (!rowData.daily[today]) rowData.daily[today] = { views: 0, uniques: 0 };
+            rowData.daily[today].views = (rowData.daily[today].views || 0) + 1;
+            if (isNewDailyVisitor) {
+                rowData.daily[today].uniques = (rowData.daily[today].uniques || 0) + 1;
+            }
+            if (!rowData.pages) rowData.pages = {};
+            rowData.pages[path] = (rowData.pages[path] || 0) + 1;
+            rowData.lastUpdated = new Date().toISOString();
+
+            const method = exists ? 'PATCH' : 'POST';
+            const url = exists
+                ? `${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.3`
+                : `${BRL_SUPABASE_URL}/rest/v1/league_data`;
+            const payload = exists
+                ? { data: rowData, updated_at: new Date().toISOString() }
+                : { id: 3, data: rowData, updated_at: new Date().toISOString() };
+
+            await fetch(url, {
+                method,
+                headers: {
+                    'apikey': BRL_SUPABASE_KEY,
+                    'Authorization': `Bearer ${BRL_SUPABASE_KEY}`,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(payload)
+            });
+        } catch (err) {
+            // Silently ignore analytics network errors
+        }
+    }
+
     function initBrlApp() {
         injectPwaHeadTags();
         registerServiceWorker();
         buildAppWidgetUI();
         fetchAndProcessNotifications(true);
         checkScheduledRaceWindows();
+        recordSitePageview();
 
         setInterval(() => {
             fetchAndProcessNotifications(false);
