@@ -1,5 +1,5 @@
 // Bandit Racing League — Official Service Worker (PWA & Live Alerts)
-const CACHE_NAME = 'brl-pwa-cache-v4';
+const CACHE_NAME = 'brl-pwa-cache-v5';
 const ICON_URL = '/assets/app-icon-192.png?v=20261031';
 const PRECACHE_ASSETS = [
     '/manifest.json?v=20261031',

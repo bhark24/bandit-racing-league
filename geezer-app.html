@@ -31,7 +31,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1794505415">
+    <link rel="stylesheet" href="styles.css?v=1794506291">
     
     <style>
         /* Custom layout for landing page */
@@ -1060,11 +1060,11 @@
 }
 
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1794505415">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1794505415">
-    <link rel="shortcut icon" href="favicon.ico?v=1794505415">
-    <link rel="manifest" href="manifest.json?v=1794505415">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1794505415">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1794506291">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1794506291">
+    <link rel="shortcut icon" href="favicon.ico?v=1794506291">
+    <link rel="manifest" href="manifest.json?v=1794506291">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1794506291">
 </head>
 <body>
 
@@ -1115,7 +1115,23 @@
         <div class="header-content" style="display: flex; flex-direction: column; align-items: center;">
             <h2 class="italic-heavy text-light" style="text-transform: uppercase; font-size: 1.4rem; letter-spacing: 2px; color: #00ff00; text-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.4); margin-bottom: 20px;">The official app for the BANDIT RACING LEAGUE.</h2>
             <!-- App Logo (will degrade to text if not found) -->
-            <img src="assets/geezer-logo.png" alt="Geezer Authentic's App" style="max-width: 500px; width: 100%; margin-bottom: 5px; filter: drop-shadow(0 0 25px rgba(0, 255, 0, 0.25));" onerror="this.onerror=null; this.outerHTML='<h1 class=\'italic-heavy accent title-massive\'>GEEZER AUTHENTICS</h1>'">
+            <img src="assets/geezer-logo.png" alt="Geezer Authentic's App" style="max-width: 500px; width: 100%; margin-bottom: 18px; filter: drop-shadow(0 0 25px rgba(0, 255, 0, 0.25));" onerror="this.onerror=null; this.outerHTML='<h1 class=\'italic-heavy accent title-massive\'>GEEZER AUTHENTICS</h1>'">
+
+            <!-- Above-the-Fold Geezer Authentics Development Portal Callout -->
+            <div style="max-width: 620px; width: 100%; background: linear-gradient(135deg, rgba(16, 26, 18, 0.96), rgba(10, 14, 12, 0.98)); border: 2px solid var(--neon-green); border-radius: 12px; padding: 18px 24px; margin-top: 8px; box-shadow: 0 0 30px rgba(57, 255, 20, 0.25); text-align: center;">
+                <div style="display: inline-block; background: rgba(57, 255, 20, 0.16); border: 1px solid rgba(57, 255, 20, 0.5); color: var(--neon-green); font-family: var(--font-heading); font-size: 0.75rem; font-weight: 900; padding: 3px 12px; border-radius: 12px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;">
+                    🔒 PIN PROTECTED &bull; ZERO-INSTALL WEB WORKSTATION
+                </div>
+                <h3 class="italic-heavy" style="font-size: 1.5rem; color: #fff; text-transform: uppercase; margin: 0 0 6px 0; letter-spacing: 0.5px;">
+                    Geezer Authentics <span style="color: var(--neon-green);">Development Portal</span>
+                </h3>
+                <p style="color: #ccc; font-size: 0.9rem; margin: 0 0 14px 0; font-family: sans-serif; line-height: 1.4;">
+                    Full-monitor interactive development &amp; 3D/2D contour visualization workstation. Runs 100% in your browser with no installation required.
+                </p>
+                <a href="/geezer-portal.html" class="btn-verify" style="display: inline-block; text-decoration: none; padding: 14px 28px; font-size: 1.05rem; margin-top: 0; box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);">
+                    🔐 Launch Geezer Authentics Development Portal &rarr;
+                </a>
+            </div>
         </div>
     </header>
 
@@ -1142,6 +1158,9 @@
             <button id="verify-btn" class="btn-verify" onclick="verifyDriverId()">Verify & Unlock Download</button>
             <button class="btn-download" style="margin-top: 10px; border-color: #ff9800; color: #ff9800; background: rgba(255, 152, 0, 0.02); font-weight: 900; font-family: var(--font-heading); text-transform: uppercase;" onclick="launchGeezerDemo()">Launch Geezer App Demo</button>
             <button class="btn-download" style="margin-top: 10px; border-color: #39ff14; color: #39ff14; background: rgba(57, 255, 20, 0.02); font-weight: 900; font-family: var(--font-heading); text-transform: uppercase;" onclick="launchSpotterDemo()">Launch Spotter Demo</button>
+            <a href="/geezer-portal.html" class="btn-verify" style="display: block; text-decoration: none; text-align: center; padding: 14px; font-size: 0.95rem; margin-top: 10px;">
+                🔐 Launch Geezer Authentics Development Portal (PIN) &rarr;
+            </a>
             
             <div class="spinner" id="verify-spinner"></div>
             <div id="verification-status" class="status-msg"></div>
@@ -1151,22 +1170,6 @@
                 <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px; margin-top: 0; font-family: sans-serif;">Are you a spotter looking to connect to your driver's live feed?</p>
                 <a href="spotter.html" class="btn-download" style="display: block; text-decoration: none; padding: 12px; font-size: 0.85rem; margin-top: 0; background: rgba(57, 255, 20, 0.02);">
                     Open Spotter Portal
-                </a>
-            </div>
-
-            <!-- Geezer Authentics Development Portal (PIN Protected) -->
-            <div style="margin-top: 15px; padding-top: 18px; border-top: 1px dashed rgba(57,255,20,0.3); text-align: center;">
-                <div style="display: inline-block; background: rgba(57, 255, 20, 0.12); border: 1px solid rgba(57, 255, 20, 0.4); color: var(--neon-green); font-family: var(--font-heading); font-size: 0.7rem; font-weight: 900; padding: 2px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;">
-                    🔒 PIN PROTECTED &bull; ZERO-INSTALL WEB WORKSTATION
-                </div>
-                <h4 class="italic-heavy" style="font-size: 1.25rem; color: #fff; text-transform: uppercase; margin: 0 0 6px 0; letter-spacing: 0.5px;">
-                    Geezer Authentics <span style="color: var(--neon-green);">Development Portal</span>
-                </h4>
-                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0 0 12px 0; font-family: sans-serif; line-height: 1.4;">
-                    Full-monitor interactive development &amp; contour visualization suite. Runs 100% in the browser with no local installation required.
-                </p>
-                <a href="geezer-portal.html" class="btn-verify" style="display: block; text-decoration: none; padding: 13px; font-size: 0.92rem; margin-top: 0;">
-                    🔐 Launch Geezer Authentics Development Portal &rarr;
                 </a>
             </div>
 
@@ -2468,7 +2471,7 @@
         <span id="val-lr-i">0</span><span id="val-lr-m">0</span><span id="val-lr-o">0</span>
         <span id="val-rr-i">0</span><span id="val-rr-m">0</span><span id="val-rr-o">0</span>
     </div>
-    <script src="app.js?v=1794505415"></script>
-    <script src="brl_app.js?v=1794505415"></script>
+    <script src="app.js?v=1794506291"></script>
+    <script src="brl_app.js?v=1794506291"></script>
 </body>
 </html>
