@@ -1,0 +1,4484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SL-25 Visualizer">
+  <meta name="theme-color" content="#0b0f19">
+  <title>GEEZER AUTHENTICS DEVELOPMENT PORTAL | Bandit Racing League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,500;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      user-select: none;
+      background-color: #0b0f19;
+      color: #f1f5f9;
+    }
+    #contourCanvas {
+      touch-action: pan-y;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.65);
+      border-radius: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.9);
+    }
+    @keyframes portalShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-10px); }
+      40%, 80% { transform: translateX(10px); }
+    }
+    .portal-shake {
+      animation: portalShake 0.38s ease-in-out;
+    }
+    .pin-dot {
+      width: 54px;
+      height: 62px;
+      border-radius: 12px;
+      background: rgba(5, 8, 17, 0.9);
+      border: 2px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: monospace;
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: #39ff14;
+      transition: all 0.15s ease;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
+    }
+    .pin-dot.filled {
+      border-color: #39ff14;
+      box-shadow: 0 0 16px rgba(57, 255, 20, 0.35), inset 0 0 8px rgba(57, 255, 20, 0.15);
+      text-shadow: 0 0 10px rgba(57, 255, 20, 0.8);
+    }
+    .pin-dot.error {
+      border-color: #ef4444;
+      color: #ef4444;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.45);
+    }
+    .keypad-btn {
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 10px;
+      height: 52px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #f8fafc;
+      transition: all 0.12s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .keypad-btn:hover {
+      border-color: #39ff14;
+      color: #39ff14;
+      box-shadow: 0 0 14px rgba(57, 255, 20, 0.25);
+      transform: translateY(-1px);
+    }
+    .keypad-btn:active {
+      transform: translateY(1px);
+      background: rgba(57, 255, 20, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-slate-100 antialiased min-h-screen lg:h-screen lg:max-h-screen overflow-y-auto lg:overflow-hidden flex flex-col font-sans p-1.5 lg:p-2 gap-1.5 lg:gap-2">
+
+  <!-- GEEZER AUTHENTICS DEVELOPMENT PORTAL — SECURITY PIN LOCK SCREEN (PIN: 7223) -->
+  <div id="geezerPortalLockScreen" class="fixed inset-0 z-[99999] bg-[#060911] flex flex-col items-center justify-center p-4 overflow-y-auto" style="background-image: radial-gradient(circle at 50% 25%, rgba(57, 255, 20, 0.10) 0%, rgba(6, 9, 17, 0.98) 65%);">
+    <div id="geezerPortalCard" class="w-full max-w-md bg-slate-900/95 border-2 border-[#39ff14]/60 rounded-2xl p-6 sm:p-8 shadow-[0_0_50px_rgba(57,255,20,0.18)] flex flex-col items-center text-center relative overflow-hidden">
+      <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-[#39ff14] to-emerald-500"></div>
+
+      <img src="assets/geezer-logo.png" alt="Geezer Authentics" class="max-w-[270px] w-full mb-3 drop-shadow-[0_0_20px_rgba(57,255,20,0.35)]" onerror="this.style.display='none'">
+
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/90 border border-[#39ff14]/50 text-[#39ff14] text-[11px] font-mono font-bold tracking-widest uppercase mb-2">
+        <span>🔒</span>
+        <span>Protected Engineering Environment</span>
+      </div>
+
+      <h1 style="font-family: 'Outfit', sans-serif;" class="text-2xl sm:text-3xl font-black italic uppercase tracking-wide text-white leading-tight">
+        GEEZER AUTHENTICS <span class="text-[#39ff14] drop-shadow-[0_0_12px_rgba(57,255,20,0.5)]">DEVELOPMENT PORTAL</span>
+      </h1>
+      <p class="text-xs sm:text-sm text-slate-400 font-mono mt-1.5 mb-5">
+        SL-25 CNC Contour &amp; Insert Radius Compensation Suite &bull; Enter 4-Digit Security PIN
+      </p>
+
+      <!-- 4-Digit Visual PIN Display Boxes -->
+      <div class="flex items-center justify-center gap-3 mb-3" id="pinDotsContainer">
+        <div class="pin-dot" id="pinDot0"></div>
+        <div class="pin-dot" id="pinDot1"></div>
+        <div class="pin-dot" id="pinDot2"></div>
+        <div class="pin-dot" id="pinDot3"></div>
+      </div>
+
+      <!-- Hidden/Accessible Keyboard Input for Direct Typing -->
+      <input type="password" id="portalPinInput" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="Enter 4-Digit PIN" class="sr-only">
+
+      <div id="portalPinStatus" class="min-h-[22px] text-xs font-mono font-bold tracking-wider uppercase text-slate-400 mb-3">
+        Type PIN on keyboard or use keypad below
+      </div>
+
+      <!-- Interactive Numeric Keypad -->
+      <div class="grid grid-cols-3 gap-2.5 w-full max-w-[290px] mb-5">
+        <button type="button" class="keypad-btn" data-digit="1">1</button>
+        <button type="button" class="keypad-btn" data-digit="2">2</button>
+        <button type="button" class="keypad-btn" data-digit="3">3</button>
+        <button type="button" class="keypad-btn" data-digit="4">4</button>
+        <button type="button" class="keypad-btn" data-digit="5">5</button>
+        <button type="button" class="keypad-btn" data-digit="6">6</button>
+        <button type="button" class="keypad-btn" data-digit="7">7</button>
+        <button type="button" class="keypad-btn" data-digit="8">8</button>
+        <button type="button" class="keypad-btn" data-digit="9">9</button>
+        <button type="button" id="btnPinClear" class="keypad-btn !text-xs !font-mono !text-red-300 hover:!border-red-400 hover:!text-red-200">CLR</button>
+        <button type="button" class="keypad-btn" data-digit="0">0</button>
+        <button type="button" id="btnPinBack" class="keypad-btn !text-base !font-mono !text-amber-300 hover:!border-amber-400">⌫</button>
+      </div>
+
+      <button type="button" id="btnPortalUnlock" style="font-family: 'Outfit', sans-serif;" class="w-full max-w-[290px] py-3 rounded-xl bg-[#39ff14] hover:bg-[#2ce60f] text-slate-950 font-black uppercase tracking-wider text-base shadow-[0_0_20px_rgba(57,255,20,0.35)] transition cursor-pointer">
+        🔓 UNLOCK PORTAL
+      </button>
+
+      <div class="mt-5 pt-4 border-t border-slate-800 w-full flex items-center justify-between text-xs font-mono text-slate-400">
+        <a href="geezer-app.html" class="hover:text-[#39ff14] transition">&larr; Back to Geezer App</a>
+        <a href="index.html" class="hover:text-white transition">Bandit Racing League Home</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Section (Compact on Mobile, Full Bar on Desktop) -->
+  <header class="bg-slate-900/95 border border-slate-800 rounded-xl px-2.5 py-1.5 lg:px-3 lg:py-2 shadow-xl flex flex-wrap justify-between items-center gap-2 shrink-0">
+    <div class="flex items-center gap-2">
+      <div class="hidden sm:block p-1.5 bg-blue-600/20 border border-blue-500/30 rounded-lg text-blue-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12H4z" />
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-sm lg:text-base font-bold tracking-wide text-white flex flex-wrap items-center gap-1.5">
+          <span class="text-[#39ff14] font-extrabold tracking-wider">GEEZER DEV PORTAL</span><span class="text-slate-600">&bull;</span><span>SL-25 Visualizer</span>
+          <span id="badgeProgramFamily" class="text-[10px] lg:text-[11px] font-semibold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Stage 12J</span>
+          <span id="badgeInspectionStatus" class="text-[10px] lg:text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-700/60">✓ 0 Flags</span>
+        </h1>
+        <p id="lblHeaderSubtitle" class="hidden lg:block text-[11px] text-slate-400 font-mono">Program: 4506.BH (FNT300) &bull; Part: 145250-01 CPM SW &bull; Assembled Width: 3.0000" (2x 1.4275" + .145" Fin) &bull; Finished OD: 5.2390"</p>
+      </div>
+    </div>
+
+    <!-- Mobile Quick Drawer Toggle Button (Visible only < lg) -->
+    <div class="flex lg:hidden items-center gap-1.5">
+      <button id="btnLockPortalMobile" class="px-2 py-1 bg-red-950/90 border border-red-500/50 text-red-200 rounded-lg font-mono font-bold text-xs shadow" title="Lock Portal">
+        🔒
+      </button>
+      <button id="btnMobilePanToggle" class="px-2.5 py-1 bg-slate-800 border border-slate-600 text-slate-200 rounded-lg font-mono font-bold text-xs shadow" title="Toggle 1-finger graph drag vs normal page scroll">
+        🔒 Graph Locked
+      </button>
+      <button id="btnMobileToolsToggle" class="px-2.5 py-1 bg-blue-600/30 border border-blue-400 text-blue-200 rounded-lg font-mono font-bold text-xs shadow">
+        ⚙️ Tools &amp; Filters
+      </button>
+    </div>
+
+    <!-- Program Loader / File Picker Controls -->
+    <div id="headerProgramControls" class="hidden lg:flex flex-wrap items-center gap-2 bg-slate-950/80 border border-slate-800 px-2.5 py-1.5 rounded-lg text-xs w-full lg:w-auto">
+      <label for="selPresetProgram" class="text-slate-400 font-mono font-semibold">Program:</label>
+      <select id="selPresetProgram" class="bg-slate-900 border border-slate-700 text-amber-300 font-mono font-bold text-xs rounded px-2 py-1 focus:outline-none focus:border-blue-500">
+        <option value="PROG4506_STAGE12J" selected>PROG4506 (4506.BH — FNT300 Stage 12J)</option>
+        <option value="PROG4512_SAMPLE">PROG4512 (4512.BH — FNB101 Sample)</option>
+      </select>
+      <label class="px-2.5 py-1 bg-blue-600 hover:bg-blue-500 text-white font-mono font-bold rounded cursor-pointer transition flex items-center gap-1 shadow">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+        <span>Load G-Code</span>
+        <input type="file" id="fileInputGCode" accept=".txt,.nc,.bh,.cnc,.gcode" class="hidden">
+      </label>
+      <span id="lblLoadedFileName" class="text-[11px] font-mono text-slate-400 max-w-[180px] truncate" title="PROG4506_FNT300_STAGE12J_GRAPH_REVIEW_ONLY.txt">PROG4506_FNT300_STAGE12J_GRAPH_REVIEW_ONLY.txt</span>
+    </div>
+
+    <!-- Fullscreen & Sidebar Toggle + Compact Color Legend -->
+    <div id="headerViewControls" class="hidden lg:flex flex-wrap items-center gap-2 text-xs font-medium w-full lg:w-auto">
+      <div class="hidden 2xl:flex items-center gap-1.5">
+        <div class="flex items-center gap-1.5 bg-emerald-950/60 border border-emerald-800/80 px-2 py-1 rounded text-emerald-300">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ffffff]"></span>
+          <span class="font-bold text-[11px]">Profile (White)</span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-blue-950/60 border border-blue-800/80 px-2 py-1 rounded text-blue-300">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#00bcff]"></span>
+          <span class="font-bold text-[11px]">Rough (Blue)</span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-emerald-950/60 border border-emerald-800/80 px-2 py-1 rounded text-emerald-300">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#00e676]"></span>
+          <span class="font-bold text-[11px]">Finish (Green)</span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-red-950/60 border border-red-800/80 px-2 py-1 rounded text-red-300">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ff3333]"></span>
+          <span class="font-bold text-[11px]">Rapid (Red)</span>
+        </div>
+      </div>
+
+      <div class="flex items-center bg-slate-950 border border-slate-700 rounded-lg overflow-hidden font-mono text-sm">
+        <button id="btnFontDown" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold transition" title="Decrease visualizer font size">A-</button>
+        <span id="lblFontScale" class="px-2 py-1 text-amber-300 font-bold text-xs border-x border-slate-800">Font 135%</span>
+        <button id="btnFontUp" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-amber-300 font-bold transition" title="Increase visualizer font size">A+</button>
+      </div>
+
+      <button id="btnToggleSidebar" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 rounded-lg font-mono font-bold text-sm transition flex items-center gap-1 shadow" title="Hide or show the right N-block sidebar to maximize graph width">
+        <span>⇄ Max Graph Width</span>
+      </button>
+
+      <button id="btnFullscreen" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-mono font-bold text-sm transition flex items-center gap-1.5 shadow-lg" title="Toggle Full Screen (F11)">
+        <span>⛶ FULL SCREEN</span>
+      </button>
+      <button id="btnLockPortal" class="px-3 py-1.5 bg-red-950/90 hover:bg-red-900 text-red-200 border border-red-500/50 rounded-lg font-mono font-bold text-sm transition flex items-center gap-1 shadow" title="Lock Geezer Authentics Development Portal">
+        <span>🔒 Lock</span>
+      </button>
+      <a href="geezer-app.html" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-lg font-mono font-bold text-xs transition flex items-center gap-1" title="Return to Geezer Authentics Page">
+        <span>&larr; BRL</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Grid Area -->
+  <div id="mainGridArea" class="grid grid-cols-1 lg:grid-cols-4 gap-2 flex-1 min-h-0">
+    
+    <!-- Left Visualizer Canvas Area (3 Cols) -->
+    <div id="leftCanvasPanel" class="lg:col-span-3 bg-slate-900/90 border border-slate-800 rounded-xl p-2 lg:p-2.5 shadow-xl flex flex-col gap-2 relative min-h-0">
+      
+      <!-- Canvas Control Toolbar (Collapsible on Mobile via ⚙️ Tools & Filters button, Always Visible on Desktop lg:) -->
+      <div id="canvasControlToolbar" class="hidden lg:flex flex-wrap items-center justify-between gap-2 bg-slate-950/80 border border-slate-800 rounded-lg px-3 py-2 text-sm shrink-0">
+        
+        <!-- Pass Visibility Toggles -->
+        <div class="flex flex-wrap items-center gap-4">
+          <label class="flex items-center gap-1.5 cursor-pointer text-emerald-300 hover:text-white transition">
+            <input type="checkbox" id="chkShowPartContour" class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-white focus:ring-0">
+            <span class="font-bold text-slate-300">Show Machined Surface Profile</span>
+          </label>
+          <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white transition">
+            <input type="checkbox" id="chkRough" checked class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-blue-500 focus:ring-0">
+            <span class="text-blue-400 font-bold">Roughing Passes</span>
+          </label>
+          <label class="flex items-center gap-1.5 cursor-pointer text-slate-300 hover:text-white transition">
+            <input type="checkbox" id="chkFinish" checked class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-emerald-500 focus:ring-0">
+            <span class="text-emerald-400 font-bold">Finishing Passes</span>
+          </label>
+          <label class="flex items-center gap-1.5 cursor-pointer text-slate-400 hover:text-white transition">
+            <input type="checkbox" id="chkRapid" checked class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-red-500 focus:ring-0">
+            <span class="text-red-400 font-bold">Show G0 Rapid Moves</span>
+          </label>
+          <label class="flex items-center gap-1.5 cursor-pointer text-slate-400 hover:text-white transition">
+            <input type="checkbox" id="chkShowInsertEnvelope" class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-amber-500 focus:ring-0">
+            <span class="font-bold text-amber-400/80">Insert Radius Envelope</span>
+          </label>
+        </div>
+
+        <!-- View Zoom Mode & Block Filter -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <!-- Touch-off Reference Mode -->
+          <div class="flex items-center bg-slate-900 border border-slate-700 rounded overflow-hidden">
+            <button id="btnRefTouchOff" class="px-2.5 py-1 text-amber-300 hover:bg-slate-800 font-mono transition bg-amber-600/30 font-bold">9 / 3 / 6 o'Clock Touch-off</button>
+            <button id="btnRefCenter" class="px-2.5 py-1 text-slate-400 hover:bg-slate-800 font-mono transition">Insert Center</button>
+          </div>
+
+          <!-- Axis Scale Mode -->
+          <div class="flex items-center bg-slate-900 border border-slate-700 rounded overflow-hidden">
+            <button id="btnScaleRadius" class="px-2.5 py-1 text-slate-300 hover:bg-slate-800 font-mono transition bg-slate-800 font-semibold">Radius (X/2)</button>
+            <button id="btnScaleDiameter" class="px-2.5 py-1 text-slate-400 hover:bg-slate-800 font-mono transition">Diameter (X)</button>
+          </div>
+
+          <!-- Focus Zoom Toggle -->
+          <div class="flex items-center bg-slate-900 border border-slate-700 rounded overflow-hidden">
+            <button id="btnZoomCutting" class="px-3 py-1 text-blue-300 hover:bg-slate-800 font-mono transition bg-blue-600/30 font-bold">Focus Cutting Region</button>
+            <button id="btnZoomFull" class="px-3 py-1 text-slate-400 hover:bg-slate-800 font-mono transition">Full Program View</button>
+          </div>
+
+          <!-- Point-to-Point & Arc Radius Caliper Measure Tools -->
+          <div class="flex items-center gap-1.5">
+            <button id="btnMeasureMode" class="px-3 py-1 bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-500/50 rounded font-mono font-bold transition flex items-center gap-1 shadow" title="Click two points on the graph (or Shift+Click anytime) to measure ΔZ, ΔX (Dia), ΔR (Radial), and Distance">
+              <span>📏 Pt-to-Pt: OFF</span>
+            </button>
+            <button id="btnMeasureRadius" class="px-3 py-1 bg-slate-900 hover:bg-slate-800 text-fuchsia-300 border border-fuchsia-500/50 rounded font-mono font-bold transition flex items-center gap-1 shadow" title="Hover/Click any G2/G3 arc to inspect its Radius & Center, or click 3 points (P1->P2->P3) to fit a circle radius">
+              <span>⭕ Measure Radius: OFF</span>
+            </button>
+            <button id="btnClearMeasure" class="hidden px-2.5 py-1 bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-500/50 rounded font-mono font-bold transition text-xs" title="Clear marked measurement points (Esc)">
+              ✕ Clear
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Always-Visible Quick Bar: Block Selector + Zoom/Pan Controls -->
+      <div class="flex flex-wrap items-center justify-between gap-1.5 bg-slate-950/90 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs lg:text-sm font-mono shrink-0">
+        <select id="selBlockFilter" class="flex-1 min-w-[165px] bg-slate-900 border border-slate-700 text-amber-300 text-xs lg:text-sm rounded px-2 py-1.5 font-mono font-bold focus:outline-none focus:border-blue-500">
+          <option value="ALL">Show All Blocks (N1 - N17)</option>
+          <option value="ROUGH_ONLY">Show Roughing Passes Only</option>
+          <option value="FINISH_ONLY">Show Finishing Passes Only</option>
+        </select>
+
+        <div class="flex items-center gap-1.5">
+          <div class="flex items-center bg-slate-900 border border-slate-700 rounded overflow-hidden font-mono">
+            <button id="btnZoomOut" class="px-3 py-1.5 hover:bg-slate-800 text-slate-200 font-bold transition" title="Zoom Out">🔍−</button>
+            <button id="btnZoomIn" class="px-3 py-1.5 hover:bg-slate-800 text-amber-300 font-bold border-l border-slate-700 transition" title="Zoom In">🔍+</button>
+          </div>
+
+          <button id="btnResetView" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded border border-slate-700 font-semibold transition flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Canvas Plot Viewport (Clean, unobstructed view on both portrait & landscape mobile!) -->
+      <div class="relative flex-1 h-[52vh] min-h-[260px] max-h-[52vh] lg:h-auto lg:max-h-none lg:min-h-0 w-full bg-[#050811] border border-slate-800 rounded-lg overflow-hidden cursor-crosshair">
+        <canvas id="contourCanvas" class="w-full h-full block" width="1000" height="600"></canvas>
+        
+        <!-- Live Coordinate Inspector Overlay (Inside canvas on Desktop lg:, Compact bar outside canvas on Mobile) -->
+        <div id="coordOverlay" class="hidden lg:flex absolute bottom-2.5 left-2.5 bg-slate-950/95 border-2 border-slate-700 backdrop-blur-md px-4 py-2 rounded-lg text-sm md:text-base font-mono text-slate-200 pointer-events-none shadow-2xl flex-wrap items-center gap-4">
+          <div><span class="text-slate-400 font-semibold">Z:</span> <span id="lblCoordZ" class="text-amber-300 font-extrabold text-base md:text-lg">0.0000</span></div>
+          <div><span class="text-slate-400 font-semibold">X (Dia):</span> <span id="lblCoordX" class="text-cyan-300 font-extrabold text-base md:text-lg">0.0000</span></div>
+          <div><span class="text-slate-400 font-semibold">Touch:</span> <span id="lblTouchPoint" class="text-emerald-300 font-bold">9 o'clock / 6 o'clock</span></div>
+          <div><span class="text-slate-400 font-semibold">Insert R:</span> <span id="lblInsertRadius" class="text-amber-300 font-bold">.0581" / .0585"</span></div>
+          <div><span id="lblStatusPrefix" class="text-slate-400 font-semibold">Status:</span> <span id="lblHoverBlock" class="text-emerald-300 font-extrabold text-base md:text-lg">Program complete</span></div>
+          <div><span id="lblModePrefix" class="text-slate-400 font-semibold">End:</span> <span id="lblHoverMode" class="text-indigo-300 font-bold">M30 (17/17 Blocks)</span></div>
+        </div>
+
+        <!-- M01 Optional Stop / M00 Program Stop Banner Overlay -->
+        <div id="optStopBanner" class="hidden absolute top-2 left-2 right-2 lg:right-auto bg-amber-950/95 border-2 border-amber-400 px-3 py-1.5 lg:px-4 lg:py-2 rounded-lg text-xs lg:text-base font-mono text-amber-200 shadow-2xl flex items-center gap-2 z-10">
+          <span class="w-3 h-3 rounded-full bg-amber-400 animate-ping shrink-0"></span>
+          <span id="lblOptStopMessage" class="font-extrabold tracking-wide">M01 OPTIONAL STOP — End of N1</span>
+        </div>
+
+        <!-- Helper Badge (Desktop only so it never clutters mobile canvas) -->
+        <div id="lblCanvasHelper" class="hidden lg:block absolute top-2.5 right-2.5 bg-slate-950/90 border border-slate-700 px-3 py-1.5 rounded text-xs md:text-sm font-mono text-amber-300 pointer-events-none font-bold shadow">
+          🔍 Scroll: Zoom &bull; Drag: Pan &bull; Shift+Click or 📏/⭕: Measure
+        </div>
+      </div>
+
+      <!-- Point-to-Point & Radius Measurement Readout Bar (Sits BELOW the canvas on Mobile so it NEVER covers the selected radius!) -->
+      <div id="measureOverlay" class="hidden lg:absolute lg:bottom-28 lg:left-5 bg-slate-950/95 border-2 border-cyan-400 backdrop-blur-md px-3 py-2 lg:px-4 lg:py-2.5 rounded-lg text-xs lg:text-base font-mono text-slate-100 shadow-2xl flex flex-wrap items-center gap-2 lg:gap-4 z-10">
+        <div class="font-extrabold text-cyan-300">📏 INSPECT:</div>
+        <div id="lblMeasurePts" class="text-slate-200 font-semibold">P1: -- &rarr; P2: --</div>
+        <div id="lblMeasureDeltas" class="text-amber-300 font-extrabold text-xs lg:text-lg">ΔZ: -- | ΔX(Dia): -- | ΔR(Rad): -- | Dist: --</div>
+      </div>
+
+      <!-- Mobile Compact Status & Coordinate Readout Strip (Outside canvas so it never blocks the graph!) -->
+      <div class="flex lg:hidden flex-wrap items-center justify-between gap-x-3 gap-y-1 bg-slate-950 border border-slate-800 px-2.5 py-1.5 rounded-lg text-xs font-mono">
+        <div><span class="text-slate-400">Z:</span> <span id="lblCoordZMobile" class="text-amber-300 font-bold">0.0000</span></div>
+        <div><span class="text-slate-400">X:</span> <span id="lblCoordXMobile" class="text-cyan-300 font-bold">0.0000</span></div>
+        <div><span class="text-slate-400">Active:</span> <span id="lblHoverBlockMobile" class="text-emerald-300 font-extrabold">Program complete</span></div>
+        <div class="truncate max-w-full"><span id="lblHoverModeMobile" class="text-indigo-300 font-bold">M30 (17/17 Blocks)</span></div>
+      </div>
+
+      <!-- Toolpath Animation Player Bar -->
+      <div class="bg-slate-950/90 border border-slate-800 rounded-lg px-3.5 py-2 flex flex-wrap items-center gap-2.5 text-sm font-mono shrink-0">
+        <button id="btnPlayPause" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold transition flex items-center gap-1.5 shadow-lg">
+          <svg id="iconPlay" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6V4z"/></svg>
+          <span id="lblPlayText">Cycle Start / Play (N1)</span>
+        </button>
+
+        <button id="btnOptStopM01" class="px-3.5 py-1.5 bg-amber-500/25 border-2 border-amber-400 text-amber-300 hover:bg-amber-500/35 rounded font-bold transition flex items-center gap-1.5 shadow" title="Pause automatically at M1 (M01 Optional Stop) at the end of each N-block">
+          <span id="dotOptStopM01" class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+          <span id="lblOptStopM01">OPT STOP (M1): ON</span>
+        </button>
+
+        <button id="btnNextBlockM01" class="px-3.5 py-1.5 bg-blue-600/30 hover:bg-blue-600/50 text-blue-200 border border-blue-500/50 rounded transition font-bold" title="Run/Jump to the M1 at the end of the next N-block">
+          Next N-Block (M1) &#9197;
+        </button>
+        
+        <button id="btnRestart" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded transition border border-slate-700 flex items-center gap-1 font-semibold">
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          Reset to N1 (0%)
+        </button>
+
+        <button id="btnStep" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded transition border border-slate-700 font-semibold" title="Step 1 single G-code move forward">
+          Step Move &rarr;
+        </button>
+
+        <button id="btnToggleProgressive" class="px-3 py-1.5 bg-purple-600/30 border border-purple-500/50 text-purple-300 hover:bg-purple-600/50 font-bold rounded transition">
+          Mode: Progressive Pass-by-Pass (ON)
+        </button>
+
+        <div class="flex-1 min-w-[140px] flex items-center gap-2">
+          <span class="text-slate-400 text-xs font-semibold">Progress:</span>
+          <input type="range" id="animProgress" min="0" max="100" value="0" class="flex-1 accent-blue-500 bg-slate-800 h-2.5 rounded cursor-pointer">
+          <span id="lblProgressPct" class="text-slate-200 w-11 text-right font-bold">0%</span>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 text-xs font-semibold">Speed:</span>
+          <select id="selSpeed" class="bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded px-2 py-1 font-mono font-bold">
+            <option value="1">1x</option>
+            <option value="2" selected>2x</option>
+            <option value="4">4x</option>
+            <option value="8">8x</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Sidebar: Program Blocks (1 Col) -->
+    <div id="rightSidebarPanel" class="lg:col-span-1 bg-slate-900/90 border border-slate-800 rounded-xl p-3 shadow-xl flex flex-col gap-2.5 min-h-0 overflow-y-auto custom-scrollbar">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-2 shrink-0">
+        <h2 class="font-bold text-base text-slate-100 flex items-center gap-2">
+          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+          <span id="lblRightPaneTitle">Program Blocks (M1 Stops)</span>
+        </h2>
+        <span class="text-xs font-mono font-bold text-slate-300" id="lblSegmentCount">0 Moves</span>
+      </div>
+
+      <!-- Quick Move Counter Stats -->
+      <div class="flex items-center justify-between bg-slate-950/80 border border-slate-800/80 px-3 py-2 rounded-lg text-sm font-mono shrink-0">
+        <div class="text-red-400 font-semibold">Rapid: <b id="statRapids" class="text-white text-base">0</b></div>
+        <div class="text-blue-400 font-semibold">Rough: <b id="statRoughs" class="text-white text-base">0</b></div>
+        <div class="text-emerald-400 font-semibold">Finish: <b id="statFinishes" class="text-white text-base">0</b></div>
+      </div>
+
+      <!-- Scrollable Block List (Shown before playback and restored at program end / reset) -->
+      <div id="blockList" class="flex-1 min-h-[220px] max-h-[260px] lg:max-h-none custom-scrollbar overflow-y-auto flex flex-col gap-2 pr-1 text-sm">
+      </div>
+
+      <!-- Live G-Code Viewer (Shown during playback and at M1/M00 stops) -->
+      <div id="liveGCodeList" class="hidden flex-1 min-h-[220px] max-h-[260px] lg:max-h-none custom-scrollbar overflow-y-auto bg-slate-950/95 border border-slate-800 rounded-lg p-2 font-mono text-sm flex flex-col gap-1 pr-1">
+      </div>
+
+      <!-- OD Throat-Crossing Rapid & Move Inspection Audit Panel -->
+      <div class="bg-slate-950/90 border border-slate-800 rounded-lg p-3 flex flex-col gap-1.5 text-sm font-mono text-slate-200 shrink-0">
+        <div class="flex items-center justify-between border-b border-slate-800/80 pb-1">
+          <span class="text-xs font-sans font-bold text-emerald-400 uppercase tracking-wider">OD Throat Rapid &amp; Move Audit</span>
+          <span id="lblAuditSummaryBadge" class="px-2 py-0.5 text-xs rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">5/5 CONST-X</span>
+        </div>
+        <div id="odRapidAuditList" class="flex flex-col gap-1 text-xs md:text-sm"></div>
+        <div id="flaggedMovesContainer" class="hidden border-t border-red-800/60 pt-1.5 mt-1 flex flex-col gap-1">
+          <div class="text-red-400 font-bold text-xs">⚠ FLAGGED FOR INSPECTION:</div>
+          <div id="flaggedMovesList" class="flex flex-col gap-1 max-h-[110px] overflow-y-auto custom-scrollbar text-xs text-amber-300"></div>
+        </div>
+      </div>
+
+      <!-- Insert Offset Reference Panel -->
+      <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-3 flex flex-col gap-2 text-sm font-mono text-slate-200 mt-auto">
+        <div class="text-xs font-sans font-bold text-amber-400 uppercase tracking-wider border-b border-slate-800/80 pb-1">Machine Part Datum Setup</div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Part Z-Zero:</span>
+          <span class="text-cyan-300 font-bold">Left Face (Z = 0.000")</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Right Part Face:</span>
+          <span id="lblDatumRightFace" class="text-blue-300 font-bold">Z = +3.000" (Assembled)</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Finished OD / Width:</span>
+          <span id="lblDatumOdWidth" class="text-white font-bold">Ø5.2390" / 1.4275" (x2 + .145")</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Throat Trough Radius:</span>
+          <span id="lblDatumTroughRad" class="text-emerald-300 font-bold">R.0631 (4-Arc FNT300)</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Throat Wall &amp; Entry:</span>
+          <span id="lblDatumWallEntry" class="text-cyan-300 font-bold">R.0893 &amp; R.2209</span>
+        </div>
+        <div class="flex justify-between pt-1 border-t border-slate-800/60">
+          <span class="text-slate-400">T0404 / T0505 Insert R:</span>
+          <span id="lblDatumOdInsertR" class="text-amber-300 font-bold">0.0585"</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">T0202 / T0303 Insert R:</span>
+          <span id="lblDatumThrInsertR" class="text-amber-300 font-semibold">0.0581"</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    const prog4506Stage12JText = `(6T1-6T3 R.279-R.0312-R.063 .500 OD RT-LFT X+.07 PRCS)
+(145250-01 CPM SW)
+(9-21-26V CPM)
+(FNT300)
+(CNVTD W- PCS_FNT300_STAGE12E_PRE_BENCHMARK_AUDIT)
+(CONVERTED - REVIEW REQUIRED)
+(.063 OCR)
+(.279 RAD)
+(.0312 CR)
+(5.239 DIA)
+(.02 CLE)
+(1.4275 WIDTH)
+(.0725 OFFSET)
+(.145 DUM_FIN_WID)
+(4 RGH_OD TL#)
+(.0585 RGH_OD TRAD)
+(2 RGH_THR TL#)
+(.0581 RGH_THR TRAD)
+(5 FIN_OD TL#)
+(.0585 FIN_OD TRAD)
+(3 FIN_THR TL#)
+(.0581 FIN_THR TRAD)
+(4506.BH PRG#)
+#501=1
+
+N1
+(STG1 RGH OD RT-LFT X+.065 .0585W)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0404
+G96S#104M3
+G0X9.5
+G0Z3.1
+G0X5.0610
+G1Z3.0000F#105M8
+G3X5.3040Z2.8785R.1215
+G1Z1.6490
+G0Z1.2340
+G1Z.0045
+G3X5.0610Z-.1170R.1215
+G1Z-.1220
+G0X9.5
+M1
+
+N2
+(STG1 RGH OD LFT-RT X+.045 .0585W)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0404
+G96S#104M3
+G0X9.5
+G0Z-.1220
+G0X5.3390
+G1X5.0410F#105M8
+G1Z-.1170
+G2X5.2840Z.0045R.1215
+G1Z1.2340
+G0Z1.6490
+G1Z2.8785
+G2X5.0410Z3.0000R.1215
+G1Z3.1000
+G0X9.5
+G0Z6.
+G28U0W0
+M1
+
+N3
+(STG1 RGH RT THRT RT-LFT X+.065 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.7494
+G0X5.4040
+G1X5.3040F#105M8
+G3X5.1491Z1.6608R.0893
+G2X4.7795Z1.4961R.2209
+G2X4.7757Z1.4806R.0631
+G2X4.8033Z1.4412R.0631
+G0X9.5
+G0Z1.1344
+M1
+
+N4
+(STG1 RGH LFT THRT LFT-RT X+.065 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.1344
+G0X5.4040
+G1X5.3040F#105M8
+G2X5.1491Z1.2230R.0893
+G3X4.7795Z1.3877R.2209
+G3X4.7757Z1.4032R.0631
+G3X4.8033Z1.4426R.0631
+G0X9.5
+G0Z1.1344
+M1
+
+N5
+(STG1 RGH LFT THRT LFT-RT X+.045 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.1344
+G0X5.3840
+G1X5.2840F#105M8
+G2X5.1291Z1.2230R.0893
+G3X4.7595Z1.3877R.2209
+G3X4.7557Z1.4032R.0631
+G3X4.7833Z1.4426R.0631
+G0X9.5
+G0Z1.7494
+M1
+
+N6
+(STG1 RGH RT THRT RT-LFT X+.045 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.7494
+G0X5.3840
+G1X5.2840F#105M8
+G3X5.1291Z1.6608R.0893
+G2X4.7595Z1.4961R.2209
+G2X4.7557Z1.4806R.0631
+G2X4.7833Z1.4412R.0631
+M9
+G0X9.5
+G0Z6.
+G28U0W0
+M1
+(CHECK T0404/T0202 ROUGH INSERTS FOR BREAKAGE)
+M00
+
+N7
+(STG2 RGH OD RT-LFT X+.030 .0585W)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0404
+G96S#104M3
+G0X9.5
+G0Z3.1
+G0X5.0260
+G1Z3.0000F#105M8
+G3X5.2690Z2.8785R.1215
+G1Z1.6490
+G0Z1.2340
+G1Z.0045
+G3X5.0260Z-.1170R.1215
+G1Z-.1220
+G0X9.5
+M1
+
+N8
+(STG2 RGH OD LFT-RT X+.010 .0585W)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0404
+G96S#104M3
+G0X9.5
+G0Z-.1220
+G0X5.3390
+G1X5.0060F#105M8
+G1Z-.1170
+G2X5.2490Z.0045R.1215
+G1Z1.2340
+G0Z1.6490
+G1Z2.8785
+G2X5.0060Z3.0000R.1215
+G1Z3.1000
+G0X9.5
+G0Z6.
+G28U0W0
+M1
+
+N9
+(STG2 RGH RT THRT RT-LFT X+.030 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.7494
+G0X5.3690
+G1X5.2690F#105M8
+G3X5.1141Z1.6608R.0893
+G2X4.7445Z1.4961R.2209
+G2X4.7407Z1.4806R.0631
+G2X4.7683Z1.4412R.0631
+G0X9.5
+G0Z1.1344
+M1
+
+N10
+(STG2 RGH LFT THRT LFT-RT X+.030 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.1344
+G0X5.3690
+G1X5.2690F#105M8
+G2X5.1141Z1.2230R.0893
+G3X4.7445Z1.3877R.2209
+G3X4.7407Z1.4032R.0631
+G3X4.7683Z1.4426R.0631
+G0X9.5
+G0Z1.1344
+M1
+
+N11
+(STG2 RGH LFT THRT LFT-RT X+.010 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.1344
+G0X5.3490
+G1X5.2490F#105M8
+G2X5.0941Z1.2230R.0893
+G3X4.7245Z1.3877R.2209
+G3X4.7207Z1.4032R.0631
+G3X4.7483Z1.4426R.0631
+G0X9.5
+G0Z1.7494
+M1
+
+N12
+(STG2 RGH RT THRT RT-LFT X+.010 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.7494
+G0X5.3490
+G1X5.2490F#105M8
+G3X5.0941Z1.6608R.0893
+G2X4.7245Z1.4961R.2209
+G2X4.7207Z1.4806R.0631
+G2X4.7483Z1.4412R.0631
+G0X9.5
+G0Z6.
+G28U0W0
+M1
+
+N13
+(FINISH OD RT-LFT .0585W)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0505
+G96S#104M3
+M33
+G0X9.5
+G0Z3.1
+G0X4.9960
+G1Z3.0000F#105M8
+G3X5.2390Z2.8785R.1215
+G1Z1.6490
+G0Z1.2340
+G1Z.0045
+G3X4.9960Z-.1170R.1215
+G1Z-.1220
+G0X9.5
+G0Z6.
+G28U0W0
+M1
+
+N14
+(FINISH RT THRT RT-LFT .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0303
+G96S#104M3
+G0X9.5
+G0Z1.7494
+G0X5.3390
+G1X5.2390F#105M8
+G3X5.0841Z1.6608R.0893
+G2X4.7145Z1.4961R.2209
+G2X4.7107Z1.4806R.0631
+G2X4.7383Z1.4412R.0631
+G0X9.5
+G0Z1.1344
+M1
+
+N15
+(FINISH LFT THRT LFT-RT .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0303
+G96S#104M3
+G0X9.5
+G0Z1.1344
+G0X5.3390
+G1X5.2390F#105M8
+G2X5.0841Z1.2230R.0893
+G3X4.7145Z1.3877R.2209
+G3X4.7107Z1.4032R.0631
+G3X4.7383Z1.4426R.0631
+G0X9.5
+G0Z1.1344
+M1
+
+N16
+(FLT LFT THRT LFT-RT X+.0005 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0303
+G96S#104M3
+G0X9.5
+G0Z1.1344
+G0X5.3395
+G1X5.2395F#105M8
+G2X5.0846Z1.2230R.0893
+G3X4.7150Z1.3877R.2209
+G3X4.7112Z1.4032R.0631
+G3X4.7388Z1.4426R.0631
+G0X9.5
+G0Z1.7494
+M1
+
+N17
+(FLT RT THRT RT-LFT X+.0005 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+IF[#501LT1]GOTO9991
+IF[#501GT2]GOTO9991
+IF[#104EQ0]GOTO9992
+IF[#105EQ0]GOTO9992
+G0G54
+G50S500
+T0303
+G96S#104M3
+G0X9.5
+G0Z1.7494
+G0X5.3395
+G1X5.2395F#105M8
+G3X5.0846Z1.6608R.0893
+G2X4.7150Z1.4961R.2209
+G2X4.7112Z1.4806R.0631
+G2X4.7388Z1.4412R.0631
+M9
+G0X9.5
+G28U0W0
+M1
+M34
+M30
+
+N9991#3000=1(INVALID MATERIAL CODE - CHECK #501)
+M30
+N9992#3000=2(SPEED OR FEED MACRO NOT SET)
+M30`;
+
+    const prog4512SampleText = `(8B R.269-R.0312-R.063 .5 OD RT-LFT X+.07 PRCS)
+(145250-01 CPM SW)
+(9-21-26V CPM)
+(FNB101)
+(CNVTD W- PCS_FNB101_APPROVED_CONVERSION)
+(CONVERTED - REVIEW REQUIRED)
+(.063 OCR)
+(.269 RAD)
+(.0312 CR)
+(5.242 THR DIA)
+(.02 CLE)
+(3. WIDTH)
+(4 RGH_OD TL#)
+(.0585 RGH_OD TRAD)
+(2 RGH_THR TL#)
+(.0581 RGH_THR TRAD)
+(5 FIN_OD TL#)
+(.0585 FIN_OD TRAD)
+(3 FIN_THR TL#)
+(.0581 FIN_THR TRAD)
+(4512.BH PRG#)
+#501=1
+
+N1
+(STG1 RGH OD RT-LFT X+.065 .0585W)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0404
+G96S#104M3
+G0X9.5
+G0Z3.1
+G0X5.5820
+G1Z3.0000F#105M8
+G3X5.8250Z2.8785R.1215
+G1Z1.6389
+G0Z1.2441
+G1Z.0045
+G3X5.5820Z-.1170R.1215
+G1Z-.1220
+G0X9.5
+M1
+
+N2
+(STG1 RGH OD LFT-RT X+.045 .0585W)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0404
+G96S#104M3
+G0X9.5
+G0Z-.1220
+G0X5.8600
+G1X5.5620F#105M8
+G1Z-.1170
+G2X5.8050Z.0045R.1215
+G1Z1.2441
+G0Z1.6389
+G1Z2.8785
+G2X5.5620Z3.0000R.1215
+G1Z3.1000
+G0X9.5
+G0Z6.
+G28U0W0
+M1
+
+N3
+(STG1 RGH RT THRT RT-LFT X+.065 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.7393
+G0X5.9250
+G1X5.8250F#105M8
+G3X5.6709Z1.6508R.0893
+G2X5.3070Z1.4419R.2109
+G2X5.3159Z1.4082R.1302
+G1X5.3676
+G0X9.5
+G0Z1.1445
+M1
+
+N4
+(STG1 RGH LFT THRT LFT-RT X+.065 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.1445
+G0X5.9250
+G1X5.8250F#105M8
+G2X5.6709Z1.2330R.0893
+G3X5.3070Z1.4419R.2109
+G3X5.3159Z1.4756R.1302
+G1X5.3676
+G0X9.5
+G0Z1.1445
+M1
+
+N5
+(STG1 RGH LFT THRT LFT-RT X+.045 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.1445
+G0X5.9050
+G1X5.8050F#105M8
+G2X5.6509Z1.2330R.0893
+G3X5.2870Z1.4419R.2109
+G3X5.2959Z1.4756R.1302
+G1X5.3476
+G0X9.5
+G0Z1.7393
+M1
+
+N6
+(STG1 RGH RT THRT RT-LFT X+.045 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.7393
+G0X5.9050
+G1X5.8050F#105M8
+G3X5.6509Z1.6508R.0893
+G2X5.2870Z1.4419R.2109
+G2X5.2959Z1.4082R.1302
+G1X5.3476
+M9
+G0X9.5
+G0Z6.
+G28U0W0
+M1
+
+N7
+(STG2 RGH OD RT-LFT X+.030 .0585W)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0404
+G96S#104M3
+G0X9.5
+G0Z3.1
+G0X5.5470
+G1Z3.0000F#105M8
+G3X5.7900Z2.8785R.1215
+G1Z1.6389
+G0Z1.2441
+G1Z.0045
+G3X5.5470Z-.1170R.1215
+G1Z-.1220
+G0X9.5
+M1
+
+N8
+(STG2 RGH OD LFT-RT X+.010 .0585W)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0404
+G96S#104M3
+G0X9.5
+G0Z-.1220
+G0X5.8600
+G1X5.5270F#105M8
+G1Z-.1170
+G2X5.7700Z.0045R.1215
+G1Z1.2441
+G0Z1.6389
+G1Z2.8785
+G2X5.5270Z3.0000R.1215
+G1Z3.1000
+G0X9.5
+G0Z6.
+G28U0W0
+M1
+
+N9
+(STG2 RGH RT THRT RT-LFT X+.030 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.7393
+G0X5.8900
+G1X5.7900F#105M8
+G3X5.6359Z1.6508R.0893
+G2X5.2720Z1.4419R.2109
+G2X5.2809Z1.4082R.1302
+G1X5.3326
+G0X9.5
+G0Z1.1445
+M1
+
+N10
+(STG2 RGH LFT THRT LFT-RT X+.030 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.1445
+G0X5.8900
+G1X5.7900F#105M8
+G2X5.6359Z1.2330R.0893
+G3X5.2720Z1.4419R.2109
+G3X5.2809Z1.4756R.1302
+G1X5.3326
+G0X9.5
+G0Z1.1445
+M1
+
+N11
+(STG2 RGH LFT THRT LFT-RT X+.010 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.1445
+G0X5.8700
+G1X5.7700F#105M8
+G2X5.6159Z1.2330R.0893
+G3X5.2520Z1.4419R.2109
+G3X5.2609Z1.4756R.1302
+G1X5.3126
+G0X9.5
+G0Z1.7393
+M1
+
+N12
+(STG2 RGH RT THRT RT-LFT X+.010 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0202
+G96S#104M3
+G0X9.5
+G0Z1.7393
+G0X5.8700
+G1X5.7700F#105M8
+G3X5.6159Z1.6508R.0893
+G2X5.2520Z1.4419R.2109
+G2X5.2609Z1.4082R.1302
+G1X5.3126
+G0X9.5
+G0Z6.
+G28U0W0
+M1
+
+N13
+(FINISH OD RT-LFT .0585W)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0505
+G96S#104M3
+M33
+G0X9.5
+G0Z3.1
+G0X5.5170
+G1Z3.0000F#105M8
+G3X5.7600Z2.8785R.1215
+G1Z1.6389
+G0Z1.2441
+G1Z.0045
+G3X5.5170Z-.1170R.1215
+G1Z-.1220
+G0X9.5
+G0Z6.
+G28U0W0
+M1
+
+N14
+(FINISH RT THRT RT-LFT .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0303
+G96S#104M3
+G0X9.5
+G0Z1.7393
+G0X5.8600
+G1X5.7600F#105M8
+G3X5.6059Z1.6508R.0893
+G2X5.2420Z1.4419R.2109
+G2X5.2509Z1.4082R.1302
+G1X5.3026
+G0X9.5
+G0Z1.1445
+M1
+
+N15
+(FINISH LFT THRT LFT-RT .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0303
+G96S#104M3
+G0X9.5
+G0Z1.1445
+G0X5.8600
+G1X5.7600F#105M8
+G2X5.6059Z1.2330R.0893
+G3X5.2420Z1.4419R.2109
+G3X5.2509Z1.4756R.1302
+G1X5.3026
+G0X9.5
+G0Z1.1445
+M1
+
+N16
+(FLT LFT THRT LFT-RT X+.0005 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0303
+G96S#104M3
+G0X9.5
+G0Z1.1445
+G0X5.8605
+G1X5.7605F#105M8
+G2X5.6064Z1.2330R.0893
+G3X5.2425Z1.4419R.2109
+G3X5.2514Z1.4756R.1302
+G1X5.3031
+G0X9.5
+G0Z1.7393
+M1
+
+N17
+(FLT RT THRT RT-LFT X+.0005 .0581S)
+#104=0
+#105=0
+IF[#501EQ1]THEN#104=230
+IF[#501EQ1]THEN#105=.004
+IF[#501EQ2]THEN#104=350
+IF[#501EQ2]THEN#105=.005
+G0G54
+G50S500
+T0303
+G96S#104M3
+G0X9.5
+G0Z1.7393
+G0X5.8605
+G1X5.7605F#105M8
+G3X5.6064Z1.6508R.0893
+G2X5.2425Z1.4419R.2109
+G2X5.2514Z1.4082R.1302
+G1X5.3031
+M9
+G0X9.5
+G28U0W0
+M1
+M34
+M30`;
+
+    let gcodeText = prog4506Stage12JText;
+    let segments = [];
+    let blocks = {};
+    let programMeta = {};
+    let flaggedMoves = [];
+    let odThroatRapids = [];
+    let masterPartContour = [];
+
+    let activePassMode = 'Radius';
+    let viewZoomMode = 'CUTTING';
+    let touchOffMode = 'TOUCH_OFF';
+    let isProgressiveMode = true; // Image develops pass-by-pass as program moves
+    let optStopM01Enabled = true; // M01 Optional Stop enabled by default so each N-block stops at its M1
+    let pausedAtM01 = false;
+    let showInsertEnvelope = false; // Off by default to keep toolpath canvas clean
+    let showPartContour = false; // Off by default so finish passes are completely unobstructed
+    let selectedBlock = 'ALL';
+    let filterRapids = true; // Show all G0 rapid moves by default as vibrant red lines
+    let filterRoughs = true;
+    let filterFinishes = true;
+
+    let zoom = 1;
+    let panX = 0;
+    let panY = 0;
+    let isDragging = false;
+    let startDragX = 0;
+    let startDragY = 0;
+
+    let isPlaying = false;
+    let animIndex = 0;
+    let animTimer = null;
+
+    const toolRadiusMap = {
+      'T0404': 0.0585,
+      'T0505': 0.0585,
+      'T0202': 0.0581,
+      'T0303': 0.0581
+    };
+
+    function parseGCodeProgram(code) {
+      const lines = code.split(/\r?\n/);
+      let curX = 0, curZ = 0;
+      let hasPosition = false;
+      let curMode = 'G0';
+      let curBlock = 'N0';
+      let curPassType = 'ROUGH';
+      let curTool = 'T0404';
+      let blockMap = {};
+      let segs = [];
+      let flagged = [];
+
+      const meta = {
+        progName: 'UNKNOWN',
+        family: 'UNKNOWN',
+        partNumber: '145250-01 CPM SW',
+        ocr: null,
+        rad: null,
+        cr: null,
+        dia: null,
+        thrDia: null,
+        width: null,
+        offset: null,
+        dumFinWid: null,
+        assembledWidth: 3.0000,
+        finishedOd: null,
+        rghOdTrad: 0.0585,
+        rghThrTrad: 0.0581,
+        finOdTrad: 0.0585,
+        finThrTrad: 0.0581
+      };
+
+      lines.forEach((lineRaw, idx) => {
+        const line = lineRaw.trim();
+        if (!line) return;
+
+        // Parse top header metadata comments
+        if (curBlock === 'N0' && line.startsWith('(') && line.endsWith(')')) {
+          const inner = line.slice(1, -1).trim();
+          if (/^FNT\d+|^FNB\d+|^SF\d+/i.test(inner)) meta.family = inner.toUpperCase();
+          else if (/PRG#$/i.test(inner)) meta.progName = inner.replace(/\s*PRG#$/i, '').trim();
+          else if (/CPM\s+SW/i.test(inner)) meta.partNumber = inner;
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+OCR$/i.test(inner)) meta.ocr = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+RAD$/i.test(inner)) meta.rad = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+CR$/i.test(inner)) meta.cr = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+THR\s+DIA$/i.test(inner)) meta.thrDia = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+DIA$/i.test(inner)) meta.dia = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+WIDTH$/i.test(inner)) meta.width = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+OFFSET$/i.test(inner)) meta.offset = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+DUM_FIN_WID$/i.test(inner)) meta.dumFinWid = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+RGH_OD\s+TRAD$/i.test(inner)) meta.rghOdTrad = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+RGH_THR\s+TRAD$/i.test(inner)) meta.rghThrTrad = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+FIN_OD\s+TRAD$/i.test(inner)) meta.finOdTrad = parseFloat(inner);
+          else if (/^([+-]?(?:\d+\.?\d*|\.\d+))\s+FIN_THR\s+TRAD$/i.test(inner)) meta.finThrTrad = parseFloat(inner);
+        }
+
+        const nMatch = line.match(/^N(\d+)/i);
+        if (nMatch) {
+          const bNum = parseInt(nMatch[1], 10);
+          if (bNum < 9000) {
+            curBlock = `N${bNum}`;
+            curPassType = (bNum >= 13) ? 'FINISH' : 'ROUGH';
+            if (!blockMap[curBlock]) {
+              blockMap[curBlock] = {
+                name: curBlock,
+                num: bNum,
+                comment: '',
+                tool: curTool,
+                passType: curPassType,
+                segmentCount: 0,
+                hasM01: false,
+                hasM00: false,
+                m01Line: null
+              };
+            }
+          }
+        }
+
+        const cMatch = line.match(/\((.*?)\)/);
+        if (cMatch && curBlock !== 'N0') {
+          if (blockMap[curBlock] && !blockMap[curBlock].comment) {
+            blockMap[curBlock].comment = cMatch[1];
+          }
+        }
+
+        const tMatch = line.match(/^T(\d{2,4})$/i) || line.replace(/\(.*?\)/g, '').match(/\bT(\d{2,4})\b/i);
+        if (tMatch) {
+          curTool = `T${tMatch[1]}`;
+          if (blockMap[curBlock]) blockMap[curBlock].tool = curTool;
+          if (['T0505', 'T0303'].includes(curTool)) curPassType = 'FINISH';
+          else if (['T0404', 'T0202'].includes(curTool)) curPassType = 'ROUGH';
+        }
+
+        const codeOnly = line.replace(/\(.*?\)/g, '').trim();
+        if (!codeOnly) return;
+
+        // Skip macro assignments, conditionals, program delimiters, and macro alarm blocks
+        if (
+          codeOnly.startsWith('#') ||
+          codeOnly.startsWith('IF') ||
+          codeOnly.startsWith('%') ||
+          /^N999\d/i.test(codeOnly) ||
+          /^N\d+$/i.test(codeOnly)
+        ) {
+          return;
+        }
+
+        // Tag M1 (M01 Optional Stop) and M00 (Program Stop) onto the last segment of the current N-block
+        if (/^M0?1$/i.test(codeOnly)) {
+          if (segs.length > 0) {
+            segs[segs.length - 1].m01Stop = true;
+            segs[segs.length - 1].m01Line = idx + 1;
+          }
+          if (blockMap[curBlock]) {
+            blockMap[curBlock].hasM01 = true;
+            blockMap[curBlock].m01Line = idx + 1;
+          }
+          return;
+        }
+        if (/^M0?0$/i.test(codeOnly)) {
+          if (segs.length > 0) {
+            segs[segs.length - 1].m00Stop = true;
+            segs[segs.length - 1].m00Line = idx + 1;
+          }
+          if (blockMap[curBlock]) {
+            blockMap[curBlock].hasM00 = true;
+          }
+          return;
+        }
+
+        // Recognize known non-motion machine setup / auxiliary commands
+        if (
+          /^G0*0?G5[4-9]$/i.test(codeOnly) ||
+          /^G50S(?:\d+\.?\d*|\.\d+)$/i.test(codeOnly) ||
+          /^T\d{2,4}$/i.test(codeOnly) ||
+          /^G9[67]S(#?\d+|\d+\.?\d*|\.\d+)(M0?[34])?$/i.test(codeOnly) ||
+          /^G28U0(?:\.0*)?W0(?:\.0*)?$/i.test(codeOnly) ||
+          /^M0?[0134589]$|^M3[034]$/i.test(codeOnly)
+        ) {
+          if (/^G0*0?G5[4-9]$/i.test(codeOnly)) curMode = 'G0';
+          return;
+        }
+
+        // Check for unrecognized G-codes on this line
+        const gTokens = codeOnly.match(/G\d+/gi) || [];
+        let hasUnknownG = false;
+        gTokens.forEach(gt => {
+          const gNum = parseInt(gt.slice(1), 10);
+          if (![0, 1, 2, 3, 28, 50, 54, 55, 56, 57, 58, 59, 96, 97, 99].includes(gNum)) {
+            hasUnknownG = true;
+          }
+        });
+        if (hasUnknownG) {
+          flagged.push({
+            lineNum: idx + 1,
+            block: curBlock,
+            raw: line,
+            reason: `Unrecognized G-code in "${codeOnly}"`,
+            z: curZ,
+            x: curX
+          });
+          return;
+        }
+
+        if (/\bG0*0(?!\d)/i.test(codeOnly)) curMode = 'G0';
+        else if (/\bG0*1(?!\d)/i.test(codeOnly)) curMode = 'G1';
+        else if (/\bG0*2(?!\d)/i.test(codeOnly)) curMode = 'G2';
+        else if (/\bG0*3(?!\d)/i.test(codeOnly)) curMode = 'G3';
+
+        const xM = codeOnly.match(/X([+-]?(?:\d+\.?\d*|\.\d+))/i);
+        const zM = codeOnly.match(/Z([+-]?(?:\d+\.?\d*|\.\d+))/i);
+        const rM = codeOnly.match(/R([+-]?(?:\d+\.?\d*|\.\d+))/i);
+        const ikM = codeOnly.match(/[IK]([+-]?(?:\d+\.?\d*|\.\d+))/i);
+        const uwM = codeOnly.match(/[UW]([+-]?(?:\d+\.?\d*|\.\d+))/i);
+
+        // Check for incremental U/W or I/K arc center words not supported by absolute X/Z/R backplotter
+        if (uwM || ikM) {
+          flagged.push({
+            lineNum: idx + 1,
+            block: curBlock,
+            raw: line,
+            reason: uwM ? 'Incremental U/W move requires manual inspection' : 'I/K arc center word requires manual inspection',
+            z: curZ,
+            x: curX
+          });
+          return;
+        }
+
+        // Strip valid tokens to see if any unparsed garbage tokens remain
+        const residual = codeOnly
+          .replace(/G0*[0123]/gi, '')
+          .replace(/X[+-]?(?:\d+\.?\d*|\.\d+)/gi, '')
+          .replace(/Z[+-]?(?:\d+\.?\d*|\.\d+)/gi, '')
+          .replace(/R[+-]?(?:\d+\.?\d*|\.\d+)/gi, '')
+          .replace(/F(#\d+|[+-]?(?:\d+\.?\d*|\.\d+))/gi, '')
+          .replace(/M0?[0134589]|M3[034]/gi, '')
+          .trim();
+
+        if (residual.length > 0 || (!xM && !zM)) {
+          flagged.push({
+            lineNum: idx + 1,
+            block: curBlock,
+            raw: line,
+            reason: residual.length > 0 ? `Uninterpreted token "${residual}"` : `No X/Z motion coordinates on move line`,
+            z: curZ,
+            x: curX
+          });
+          return;
+        }
+
+        const targetX = xM ? parseFloat(xM[1]) : curX;
+        const targetZ = zM ? parseFloat(zM[1]) : curZ;
+        const rVal = rM ? parseFloat(rM[1]) : null;
+
+        if (isNaN(targetX) || isNaN(targetZ) || (rM && isNaN(rVal))) {
+          flagged.push({
+            lineNum: idx + 1,
+            block: curBlock,
+            raw: line,
+            reason: 'Malformed numeric coordinate or radius',
+            z: curZ,
+            x: curX
+          });
+          return;
+        }
+
+        // Validate arc geometry on G2/G3 moves
+        let moveFlagReason = null;
+        if (curMode === 'G2' || curMode === 'G3') {
+          if (rVal === null || rVal <= 0) {
+            moveFlagReason = `${curMode} arc missing valid positive R word`;
+          } else if (hasPosition) {
+            const dz = targetZ - curZ;
+            const dxRad = (targetX - curX) / 2.0;
+            const chord = Math.hypot(dz, dxRad);
+            if (chord > 2.0 * Math.abs(rVal) + 0.0015) {
+              moveFlagReason = `${curMode} arc chord (${chord.toFixed(4)}") exceeds diameter 2R (${(2 * Math.abs(rVal)).toFixed(4)}")`;
+            }
+          }
+        }
+
+        if (moveFlagReason) {
+          flagged.push({
+            lineNum: idx + 1,
+            block: curBlock,
+            raw: line,
+            reason: moveFlagReason,
+            z: targetZ,
+            x: targetX
+          });
+        }
+
+        if (!meta.totalMoveCommands) meta.totalMoveCommands = 0;
+        if (!meta.zeroDispRapids) meta.zeroDispRapids = 0;
+        meta.totalMoveCommands++;
+
+        if (!hasPosition || targetX !== curX || targetZ !== curZ) {
+          const segType = (curMode === 'G0') ? 'RAPID' : curPassType;
+          const rInsert = (curTool === 'T0404') ? meta.rghOdTrad :
+                          (curTool === 'T0505') ? meta.finOdTrad :
+                          (curTool === 'T0202') ? meta.rghThrTrad :
+                          (curTool === 'T0303') ? meta.finThrTrad :
+                          (toolRadiusMap[curTool] || 0.0581);
+
+          segs.push({
+            id: segs.length,
+            block: curBlock,
+            lineNum: idx + 1,
+            mode: curMode,
+            passType: curPassType,
+            segType: segType,
+            tool: curTool,
+            rInsert: rInsert,
+            start: { z: hasPosition ? curZ : targetZ, x: hasPosition ? curX : targetX },
+            end: { z: targetZ, x: targetX },
+            r: rVal,
+            raw: line,
+            flaggedReason: moveFlagReason
+          });
+
+          if (blockMap[curBlock]) blockMap[curBlock].segmentCount++;
+
+          curX = targetX;
+          curZ = targetZ;
+          hasPosition = true;
+        } else {
+          meta.zeroDispRapids++;
+        }
+      });
+
+      // Derive finished OD and assembled width from N13 if present
+      const n13Segs = segs.filter(s => s.block === 'N13' && s.segType === 'FINISH');
+      if (n13Segs.length > 0) {
+        const odProfs = n13Segs.filter(s => s.mode === 'G1' && Math.abs(s.start.x - s.end.x) < 1e-6 && Math.abs(s.end.z - s.start.z) > 0.5);
+        if (odProfs.length > 0) {
+          meta.finishedOd = odProfs[0].start.x;
+        }
+      }
+      if (!meta.finishedOd) {
+        meta.finishedOd = meta.dia || (meta.thrDia ? meta.thrDia + 0.5180 : 5.2390);
+      }
+      if (meta.width && meta.dumFinWid) {
+        meta.assembledWidth = 2.0 * meta.width + meta.dumFinWid;
+      } else if (meta.width) {
+        meta.assembledWidth = meta.width;
+      }
+
+      // Audit OD Throat-Crossing Rapids across all OD blocks (N1, N2, N7, N8, N13)
+      const odBlocks = ['N1', 'N2', 'N7', 'N8', 'N13'];
+      const odAudit = [];
+      odBlocks.forEach(bName => {
+        const bInfo = blockMap[bName];
+        if (!bInfo) return;
+        const bSegs = segs.filter(s => s.block === bName);
+        // Find the mid-pass G0 rapid across the throat (where both start.x < 7.0 and end.x < 7.0 and |dz| > 0.1)
+        const throatRapid = bSegs.find(s =>
+          s.mode === 'G0' &&
+          s.start.x < 7.0 &&
+          s.end.x < 7.0 &&
+          s.start.z > 0.5 && s.start.z < 2.5 &&
+          s.end.z > 0.5 && s.end.z < 2.5 &&
+          Math.abs(s.end.z - s.start.z) > 0.1
+        );
+        const isReversePass = /LFT-RT/i.test(bInfo.comment || '');
+        const expectedDir = isReversePass ? 'LFT-RT' : 'RT-LFT';
+        if (throatRapid) {
+          const isConstX = Math.abs(throatRapid.start.x - throatRapid.end.x) < 1e-6;
+          const actualDir = (throatRapid.end.z > throatRapid.start.z) ? 'LFT-RT' : 'RT-LFT';
+          const dirMatches = (actualDir === expectedDir);
+          odAudit.push({
+            block: bName,
+            lineNum: throatRapid.lineNum,
+            x: throatRapid.start.x,
+            startZ: throatRapid.start.z,
+            endZ: throatRapid.end.z,
+            isConstX: isConstX,
+            actualDir: actualDir,
+            expectedDir: expectedDir,
+            ok: isConstX && dirMatches
+          });
+        } else {
+          odAudit.push({
+            block: bName,
+            lineNum: null,
+            ok: false,
+            missing: true,
+            expectedDir: expectedDir
+          });
+        }
+      });
+
+      return { segments: segs, blocks: blockMap, meta: meta, flaggedMoves: flagged, odThroatRapids: odAudit };
+    }
+
+    // Construct Master Machined Part Surface Profile dynamically from Finish Blocks (N13, N14, N15)
+    function buildFinishedWorkpieceContour(segs, meta) {
+      if (meta && meta.family === 'FNB101') {
+        // Exact locked 10-segment profile for 4512.BH (FNB101)
+        return [
+          { block: 'N13', mode: 'G1', start: { z: 3.1, x: 5.5170 }, end: { z: 3.0000, x: 5.5170 } },
+          { block: 'N13', mode: 'G3', start: { z: 3.0000, x: 5.5170 }, end: { z: 2.8785, x: 5.7600 }, r: 0.1215 },
+          { block: 'N13', mode: 'G1', start: { z: 2.8785, x: 5.7600 }, end: { z: 1.7393, x: 5.7600 } },
+          { block: 'N14', mode: 'G3', start: { z: 1.7393, x: 5.7600 }, end: { z: 1.6508, x: 5.6059 }, r: 0.0893 },
+          { block: 'N14', mode: 'G2', start: { z: 1.6508, x: 5.6059 }, end: { z: 1.4419, x: 5.2420 }, r: 0.2109 },
+          { block: 'N15', mode: 'G2', start: { z: 1.4419, x: 5.2420 }, end: { z: 1.2330, x: 5.6059 }, r: 0.2109 },
+          { block: 'N15', mode: 'G3', start: { z: 1.2330, x: 5.6059 }, end: { z: 1.1445, x: 5.7600 }, r: 0.0893 },
+          { block: 'N13', mode: 'G1', start: { z: 1.1445, x: 5.7600 }, end: { z: 0.0045, x: 5.7600 } },
+          { block: 'N13', mode: 'G3', start: { z: 0.0045, x: 5.7600 }, end: { z: -0.1170, x: 5.5170 }, r: 0.1215 },
+          { block: 'N13', mode: 'G1', start: { z: -0.1170, x: 5.5170 }, end: { z: -0.1220, x: 5.5170 } }
+        ];
+      }
+
+      const n13 = segs.filter(s => s.block === 'N13' && s.segType === 'FINISH');
+      const n14Arcs = segs.filter(s => s.block === 'N14' && (s.mode === 'G2' || s.mode === 'G3'));
+      const n15Arcs = segs.filter(s => s.block === 'N15' && (s.mode === 'G2' || s.mode === 'G3'));
+
+      if (n13.length >= 5 && n14Arcs.length > 0 && n15Arcs.length > 0) {
+        const profile = [];
+        const rtThroatStartZ = n14Arcs[0].start.z;
+        const lftThroatStartZ = n15Arcs[0].start.z;
+        const finOdX = n14Arcs[0].start.x;
+
+        // 1. Right Face & Right Corner Arc from N13
+        profile.push({ block: 'N13', mode: n13[0].mode, start: { ...n13[0].start }, end: { ...n13[0].end }, r: n13[0].r });
+        profile.push({ block: 'N13', mode: n13[1].mode, start: { ...n13[1].start }, end: { ...n13[1].end }, r: n13[1].r });
+
+        // 2. Right OD Cylinder up to N14 Throat Entry Z
+        profile.push({ block: 'N13', mode: 'G1', start: { z: n13[1].end.z, x: finOdX }, end: { z: rtThroatStartZ, x: finOdX } });
+
+        // 3. N14 Right Throat Arcs (R-to-L)
+        n14Arcs.forEach(arc => {
+          profile.push({ block: 'N14', mode: arc.mode, start: { ...arc.start }, end: { ...arc.end }, r: arc.r });
+        });
+
+        // 4. Bridge tiny center trough gap if N14 and N15 stop within a few thousandths
+        const n14End = n14Arcs[n14Arcs.length - 1].end;
+        const n15End = n15Arcs[n15Arcs.length - 1].end;
+        if (Math.hypot(n14End.z - n15End.z, n14End.x - n15End.x) > 1e-5) {
+          profile.push({ block: 'N15', mode: 'G1', start: { ...n14End }, end: { ...n15End } });
+        }
+
+        // 5. N15 Left Throat Arcs reversed so contour runs continuously R-to-L
+        for (let i = n15Arcs.length - 1; i >= 0; i--) {
+          const arc = n15Arcs[i];
+          const revMode = (arc.mode === 'G2') ? 'G3' : 'G2';
+          profile.push({ block: 'N15', mode: revMode, start: { ...arc.end }, end: { ...arc.start }, r: arc.r });
+        }
+
+        // 6. Left OD Cylinder from N15 Left Throat Entry Z to Left Corner Arc
+        const leftCornerArc = n13[n13.length - 2];
+        const leftFaceEnd = n13[n13.length - 1];
+        profile.push({ block: 'N13', mode: 'G1', start: { z: lftThroatStartZ, x: finOdX }, end: { ...leftCornerArc.start } });
+        profile.push({ block: 'N13', mode: leftCornerArc.mode, start: { ...leftCornerArc.start }, end: { ...leftCornerArc.end }, r: leftCornerArc.r });
+        profile.push({ block: 'N13', mode: leftFaceEnd.mode, start: { ...leftFaceEnd.start }, end: { ...leftFaceEnd.end }, r: leftFaceEnd.r });
+
+        return profile;
+      }
+
+      // Fallback: all FINISH feed/arc segments
+      return segs.filter(s => s.segType === 'FINISH').map(s => ({
+        block: s.block,
+        mode: s.mode,
+        start: { ...s.start },
+        end: { ...s.end },
+        r: s.r
+      }));
+    }
+
+    const canvas = document.getElementById('contourCanvas');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+
+    let fullBounds = { minZ: 999, maxZ: -999, minX: 999, maxX: -999 };
+    let cuttingBounds = { minZ: 999, maxZ: -999, minX: 999, maxX: -999 };
+
+    function computeBounds() {
+      fullBounds = { minZ: 999, maxZ: -999, minX: 999, maxX: -999 };
+      cuttingBounds = { minZ: 999, maxZ: -999, minX: 999, maxX: -999 };
+
+      segments.forEach(s => {
+        fullBounds.minZ = Math.min(fullBounds.minZ, s.start.z, s.end.z);
+        fullBounds.maxZ = Math.max(fullBounds.maxZ, s.start.z, s.end.z);
+        fullBounds.minX = Math.min(fullBounds.minX, s.start.x, s.end.x);
+        fullBounds.maxX = Math.max(fullBounds.maxX, s.start.x, s.end.x);
+
+        if (s.start.x < 7.0 && s.end.x < 7.0) {
+          cuttingBounds.minZ = Math.min(cuttingBounds.minZ, s.start.z, s.end.z);
+          cuttingBounds.maxZ = Math.max(cuttingBounds.maxZ, s.start.z, s.end.z);
+          cuttingBounds.minX = Math.min(cuttingBounds.minX, s.start.x, s.end.x);
+          cuttingBounds.maxX = Math.max(cuttingBounds.maxX, s.start.x, s.end.x);
+        }
+      });
+    }
+
+    function updateMetadataAndAuditUI(sourceFileName) {
+      const elFile = document.getElementById('lblLoadedFileName');
+      if (elFile && sourceFileName) {
+        elFile.textContent = sourceFileName;
+        elFile.title = sourceFileName;
+      }
+
+      const elFamily = document.getElementById('badgeProgramFamily');
+      if (elFamily) {
+        elFamily.textContent = `${programMeta.family !== 'UNKNOWN' ? programMeta.family : 'CNC'} • ${programMeta.progName}`;
+      }
+
+      const elSub = document.getElementById('lblHeaderSubtitle');
+      if (elSub) {
+        const odStr = programMeta.finishedOd ? `${programMeta.finishedOd.toFixed(4)}"` : '--';
+        const widthDetail = (programMeta.width && programMeta.dumFinWid)
+          ? `${programMeta.assembledWidth.toFixed(4)}" (2x ${programMeta.width}" + ${programMeta.dumFinWid}" Fin)`
+          : `${programMeta.assembledWidth.toFixed(4)}"`;
+        elSub.innerHTML = `Program: <b>${programMeta.progName}</b> (${programMeta.family}) &bull; Part: ${programMeta.partNumber} &bull; Assembled Width: <b>${widthDetail}</b> &bull; Finished OD: <b>${odStr}</b>`;
+      }
+
+      // Datum Sidebar Updates
+      const elRightFace = document.getElementById('lblDatumRightFace');
+      if (elRightFace) elRightFace.textContent = `Z = +${programMeta.assembledWidth.toFixed(4)}"`;
+
+      const elOdWidth = document.getElementById('lblDatumOdWidth');
+      if (elOdWidth) {
+        const odStr = programMeta.finishedOd ? `Ø${programMeta.finishedOd.toFixed(4)}"` : '--';
+        const wStr = programMeta.width ? `${programMeta.width}"` : `${programMeta.assembledWidth.toFixed(4)}"`;
+        elOdWidth.textContent = `${odStr} / W ${wStr}`;
+      }
+
+      const elTrough = document.getElementById('lblDatumTroughRad');
+      const elWallEntry = document.getElementById('lblDatumWallEntry');
+      if (programMeta.family === 'FNB101') {
+        if (elTrough) elTrough.textContent = 'R.1302 (Bottom Trough)';
+        if (elWallEntry) elWallEntry.textContent = 'R.0893 & R.2109';
+      } else {
+        if (elTrough) elTrough.textContent = 'R.0631 (Paired 4-Arc Trough)';
+        const rWall = programMeta.rad ? (programMeta.rad - programMeta.finThrTrad).toFixed(4).replace(/^0+/, '') : '.2209';
+        const rEntry = programMeta.cr ? (programMeta.cr + programMeta.finThrTrad).toFixed(4).replace(/^0+/, '') : '.0893';
+        if (elWallEntry) elWallEntry.textContent = `R${rEntry} & R${rWall}`;
+      }
+
+      const elOdR = document.getElementById('lblDatumOdInsertR');
+      if (elOdR) elOdR.textContent = `${programMeta.finOdTrad.toFixed(4)}"`;
+      const elThrR = document.getElementById('lblDatumThrInsertR');
+      if (elThrR) elThrR.textContent = `${programMeta.finThrTrad.toFixed(4)}"`;
+
+      // Move Inspection Badge & Container
+      const badgeInsp = document.getElementById('badgeInspectionStatus');
+      const flagBox = document.getElementById('flaggedMovesContainer');
+      const flagList = document.getElementById('flaggedMovesList');
+      const totalCmds = (programMeta && programMeta.totalMoveCommands) ? programMeta.totalMoveCommands : segments.length;
+      if (flaggedMoves.length === 0) {
+        if (badgeInsp) {
+          badgeInsp.className = 'text-xs font-mono font-semibold px-2.5 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-700/60';
+          badgeInsp.textContent = `✓ 0 Flagged Moves (${totalCmds} Cmds / ${segments.length} Drawn)`;
+        }
+        if (flagBox) flagBox.classList.add('hidden');
+      } else {
+        if (badgeInsp) {
+          badgeInsp.className = 'text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-red-950/90 text-amber-300 border border-red-500 animate-pulse';
+          badgeInsp.textContent = `⚠ ${flaggedMoves.length} Move(s) Flagged for Inspection`;
+        }
+        if (flagBox && flagList) {
+          flagBox.classList.remove('hidden');
+          flagList.innerHTML = '';
+          flaggedMoves.forEach(fm => {
+            const d = document.createElement('div');
+            d.className = 'p-1 rounded bg-red-950/50 border border-red-800/50';
+            d.innerHTML = `<span class="text-red-300 font-bold">L${fm.lineNum} (${fm.block}):</span> <span>${fm.reason}</span> <code class="text-slate-400">[${fm.raw}]</code>`;
+            flagList.appendChild(d);
+          });
+        }
+      }
+
+      // OD Throat-Crossing Rapid Audit List
+      const auditList = document.getElementById('odRapidAuditList');
+      const auditBadge = document.getElementById('lblAuditSummaryBadge');
+      if (auditList) {
+        auditList.innerHTML = '';
+        let passCount = 0;
+        odThroatRapids.forEach(item => {
+          if (item.ok) passCount++;
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between px-1.5 py-0.5 rounded bg-slate-900/90 border border-slate-800/80';
+          if (item.missing) {
+            row.innerHTML = `<span class="text-amber-300 font-bold">${item.block}</span><span class="text-red-400">No throat G0Z rapid found</span>`;
+          } else {
+            const dirBadge = item.actualDir === 'LFT-RT'
+              ? '<span class="text-amber-300 font-semibold">LFT&rarr;RT (REV)</span>'
+              : '<span class="text-cyan-300">RT&rarr;LFT</span>';
+            const statusIcon = item.ok ? '<span class="text-emerald-400 font-bold">✓</span>' : '<span class="text-red-400 font-bold">✗</span>';
+            row.innerHTML = `
+              <span class="text-white font-bold">${item.block} <span class="text-slate-500 font-normal">X${item.x.toFixed(4)}</span></span>
+              <span>Z${item.startZ.toFixed(4)}&rarr;Z${item.endZ.toFixed(4)} ${dirBadge} ${statusIcon}</span>
+            `;
+          }
+          auditList.appendChild(row);
+        });
+        if (auditBadge) {
+          const allOk = passCount === odThroatRapids.length && odThroatRapids.length > 0;
+          auditBadge.className = allOk
+            ? 'px-1.5 py-0.5 text-[10px] rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold'
+            : 'px-1.5 py-0.5 text-[10px] rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold';
+          auditBadge.textContent = `${passCount}/${odThroatRapids.length} CONST-X OK`;
+        }
+      }
+    }
+
+    let savedBlockListScrollTop = 0;
+    let isLiveGCodeViewActive = false;
+    let lastHighlightedGCodeLine = null;
+
+    function escapeHtmlStr(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function renderLiveGCodeList(code) {
+      const gcodeContainer = document.getElementById('liveGCodeList');
+      if (!gcodeContainer) return;
+      gcodeContainer.innerHTML = '';
+      lastHighlightedGCodeLine = null;
+
+      const rawLines = code.replace(/\r/g, '').split('\n');
+      const frag = document.createDocumentFragment();
+
+      rawLines.forEach((rawLine, idx) => {
+        const lineNum = idx + 1;
+        const trimmed = rawLine.trim();
+        const codeNoComment = trimmed.replace(/\(.*?\)/g, '').trim();
+        const row = document.createElement('div');
+        row.id = `gcode-row-${lineNum}`;
+        row.setAttribute('data-line', String(lineNum));
+
+        const isRapidLine = /^(?:G0*0(?!\d)|G28\b)/i.test(codeNoComment) && !/^G0*0?G5[4-9]$/i.test(codeNoComment);
+        if (isRapidLine) {
+          row.setAttribute('data-is-rapid', '1');
+        }
+
+        let textClass = 'text-slate-300';
+        if (isRapidLine) {
+          textClass = 'text-red-400 font-semibold bg-red-950/20';
+        } else if (/^N\d+\b/i.test(trimmed) && !/GOTO/i.test(trimmed)) {
+          textClass = 'text-cyan-300 font-bold';
+        } else if (/^M0?1$/i.test(trimmed)) {
+          textClass = 'text-amber-300 font-bold';
+        } else if (/^M0?0$/i.test(trimmed) || /^M30$/i.test(trimmed)) {
+          textClass = 'text-red-300 font-bold';
+        } else if (trimmed.startsWith('(')) {
+          textClass = 'text-slate-500 italic';
+        } else if (trimmed.startsWith('#') || trimmed.startsWith('IF')) {
+          textClass = 'text-purple-300/80';
+        }
+
+        row.className = `px-2.5 py-1 rounded flex items-center gap-2.5 transition-colors duration-75 border-l-4 border-transparent text-sm ${textClass}`;
+        row.setAttribute('data-base-class', row.className);
+        row.innerHTML = `
+          <span class="w-10 text-right text-xs ${isRapidLine ? 'text-red-400/90 font-bold' : 'text-slate-400'} select-none shrink-0 font-semibold">${lineNum}</span>
+          <span class="flex-1 truncate font-medium">${escapeHtmlStr(rawLine || ' ')}</span>
+          <span class="gcode-row-badge hidden ml-auto px-2 py-0.5 text-xs font-extrabold rounded shrink-0"></span>
+        `;
+        frag.appendChild(row);
+      });
+
+      gcodeContainer.appendChild(frag);
+    }
+
+    function switchToLiveGCodeView() {
+      const blockListEl = document.getElementById('blockList');
+      const liveGCodeEl = document.getElementById('liveGCodeList');
+      const titleEl = document.getElementById('lblRightPaneTitle');
+      if (!blockListEl || !liveGCodeEl) return;
+
+      if (!isLiveGCodeViewActive && !blockListEl.classList.contains('hidden')) {
+        savedBlockListScrollTop = blockListEl.scrollTop;
+      }
+      isLiveGCodeViewActive = true;
+      blockListEl.classList.add('hidden');
+      liveGCodeEl.classList.remove('hidden');
+      if (titleEl) titleEl.textContent = 'Live G-Code (Source & Stops)';
+    }
+
+    function restoreBlockListView() {
+      const blockListEl = document.getElementById('blockList');
+      const liveGCodeEl = document.getElementById('liveGCodeList');
+      const titleEl = document.getElementById('lblRightPaneTitle');
+      if (!blockListEl || !liveGCodeEl) return;
+
+      isLiveGCodeViewActive = false;
+      liveGCodeEl.classList.add('hidden');
+      blockListEl.classList.remove('hidden');
+      if (titleEl) titleEl.textContent = 'Program Blocks (M1 Stops)';
+
+      // Restore exact previous scroll position
+      blockListEl.scrollTop = savedBlockListScrollTop;
+      requestAnimationFrame(() => {
+        blockListEl.scrollTop = savedBlockListScrollTop;
+      });
+    }
+
+    function highlightLiveGCodeLine(lineNum, mode = 'ACTIVE', blockLabel = '') {
+      const liveGCodeEl = document.getElementById('liveGCodeList');
+      if (!liveGCodeEl || !lineNum) return;
+
+      if (lastHighlightedGCodeLine && lastHighlightedGCodeLine !== lineNum) {
+        const prevRow = document.getElementById(`gcode-row-${lastHighlightedGCodeLine}`);
+        if (prevRow) {
+          prevRow.className = prevRow.getAttribute('data-base-class') || 'px-2.5 py-1 rounded flex items-center gap-2.5 border-l-4 border-transparent text-sm text-slate-300';
+          const prevBadge = prevRow.querySelector('.gcode-row-badge');
+          if (prevBadge) {
+            prevBadge.className = 'gcode-row-badge hidden ml-auto px-2 py-0.5 text-xs font-extrabold rounded shrink-0';
+            prevBadge.textContent = '';
+          }
+        }
+      }
+
+      const curRow = document.getElementById(`gcode-row-${lineNum}`);
+      if (!curRow) return;
+      lastHighlightedGCodeLine = lineNum;
+
+      const isRapidRow = curRow.getAttribute('data-is-rapid') === '1';
+      const badge = curRow.querySelector('.gcode-row-badge');
+      if (mode === 'M00') {
+        curRow.className = 'px-2.5 py-1.5 rounded flex items-center gap-2.5 border-l-4 border-red-400 bg-red-500/30 text-white text-base font-extrabold ring-1 ring-red-400/60 shadow';
+        if (badge) {
+          badge.className = 'gcode-row-badge ml-auto px-2 py-0.5 text-xs font-extrabold rounded shrink-0 bg-red-500 text-white';
+          badge.textContent = `🛑 M00 STOP (${blockLabel})`;
+        }
+      } else if (mode === 'M01') {
+        curRow.className = 'px-2.5 py-1.5 rounded flex items-center gap-2.5 border-l-4 border-amber-400 bg-amber-500/30 text-amber-100 text-base font-extrabold ring-1 ring-amber-400/60 shadow';
+        if (badge) {
+          badge.className = 'gcode-row-badge ml-auto px-2 py-0.5 text-xs font-extrabold rounded shrink-0 bg-amber-400 text-slate-950';
+          badge.textContent = `⏸ M1 STOP (${blockLabel})`;
+        }
+      } else if (isRapidRow) {
+        curRow.className = 'px-2.5 py-1.5 rounded flex items-center gap-2.5 border-l-4 border-red-500 bg-red-500/30 text-red-200 text-base font-extrabold ring-1 ring-red-500/60 shadow';
+        if (badge) {
+          badge.className = 'gcode-row-badge ml-auto px-2 py-0.5 text-xs font-extrabold rounded shrink-0 bg-red-600 text-white';
+          badge.textContent = blockLabel ? `▶ ${blockLabel} RAPID` : '▶ RAPID';
+        }
+      } else {
+        curRow.className = 'px-2.5 py-1.5 rounded flex items-center gap-2.5 border-l-4 border-emerald-400 bg-emerald-500/25 text-white text-base font-extrabold ring-1 ring-emerald-500/50 shadow';
+        if (badge) {
+          badge.className = 'gcode-row-badge ml-auto px-2 py-0.5 text-xs font-extrabold rounded shrink-0 bg-emerald-500/30 text-emerald-200 border border-emerald-400/50';
+          badge.textContent = blockLabel ? `▶ ${blockLabel}` : '▶ ACTIVE';
+        }
+      }
+
+      // Scroll liveGCodeEl to keep curRow centered and visible
+      const containerHeight = liveGCodeEl.clientHeight;
+      if (containerHeight > 0) {
+        const targetScroll = curRow.offsetTop - liveGCodeEl.offsetTop - (containerHeight / 2) + (curRow.clientHeight / 2);
+        liveGCodeEl.scrollTop = Math.max(0, targetScroll);
+      }
+    }
+
+    function loadGCodeProgramText(code, sourceFileName) {
+      if (isPlaying) togglePlay();
+      gcodeText = code;
+      const parsedData = parseGCodeProgram(code);
+      segments = parsedData.segments;
+      blocks = parsedData.blocks;
+      programMeta = parsedData.meta;
+      flaggedMoves = parsedData.flaggedMoves;
+      odThroatRapids = parsedData.odThroatRapids;
+      masterPartContour = buildFinishedWorkpieceContour(segments, programMeta);
+
+      selectedBlock = 'ALL';
+      pausedAtM01 = false;
+      savedBlockListScrollTop = 0;
+      animIndex = Math.max(0, segments.length - 1);
+      computeBounds();
+      renderBlockList();
+      renderLiveGCodeList(code);
+      restoreBlockListView();
+      updateMetadataAndAuditUI(sourceFileName);
+      if (typeof setPlayButtonAppearance === 'function') setPlayButtonAppearance(false);
+      if (typeof updateOptStopBanner === 'function') updateOptStopBanner();
+      updateAnimUI();
+      resetView();
+    }
+
+    function renderBlockList() {
+      const container = document.getElementById('blockList');
+      const selectFilter = document.getElementById('selBlockFilter');
+      if (!container) return;
+
+      if (!container.dataset.scrollBound) {
+        container.addEventListener('scroll', () => {
+          if (!container.classList.contains('hidden')) {
+            savedBlockListScrollTop = container.scrollTop;
+          }
+        });
+        container.dataset.scrollBound = '1';
+      }
+
+      container.innerHTML = '';
+      if (selectFilter) {
+        selectFilter.innerHTML = `
+          <option value="ALL">Show All Blocks (N1 - N17)</option>
+          <option value="ROUGH_ONLY">Show Roughing Passes Only</option>
+          <option value="FINISH_ONLY">Show Finishing Passes Only</option>
+        `;
+      }
+
+      Object.values(blocks).forEach(b => {
+        const isFinish = b.passType === 'FINISH';
+        const badgeBg = isFinish ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-blue-500/20 text-blue-300 border-blue-500/40';
+        const m1Badge = b.hasM00
+          ? `<span class="px-2 py-0.5 text-xs font-extrabold rounded bg-red-500/25 text-red-300 border border-red-500/50">M1+M00</span>`
+          : (b.hasM01 ? `<span class="px-2 py-0.5 text-xs font-extrabold rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">M1</span>` : '');
+        
+        const card = document.createElement('div');
+        card.className = `p-3 rounded-lg border border-slate-800 bg-slate-950/80 hover:border-blue-500/60 transition cursor-pointer flex flex-col gap-1.5 item-block-card`;
+        card.setAttribute('data-block', b.name);
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-1.5">
+            <span class="font-extrabold text-white font-mono text-base">${b.name}</span>
+            <div class="flex items-center gap-1.5">
+              ${m1Badge}
+              <span class="px-2 py-0.5 text-xs font-extrabold rounded border ${badgeBg}">${b.passType} &bull; ${b.tool}</span>
+            </div>
+          </div>
+          <p class="text-sm text-slate-300 font-mono truncate">${b.comment || 'Cutting Block'}</p>
+        `;
+        card.onclick = () => {
+          if (isPlaying) {
+            isPlaying = false;
+            clearInterval(animTimer);
+          }
+          savedBlockListScrollTop = container.scrollTop;
+          if (selectFilter) selectFilter.value = b.name;
+          selectedBlock = b.name;
+          // Jump animIndex to the M1 end of the selected block so it is drawn completely
+          for (let i = segments.length - 1; i >= 0; i--) {
+            if (segments[i].block === b.name) {
+              animIndex = i;
+              pausedAtM01 = false;
+              break;
+            }
+          }
+          if (typeof setPlayButtonAppearance === 'function') setPlayButtonAppearance(false);
+          if (typeof updateOptStopBanner === 'function') updateOptStopBanner();
+          updateAnimUI();
+          highlightBlockCard(b.name);
+          drawCanvas();
+        };
+        container.appendChild(card);
+
+        if (selectFilter) {
+          const opt = document.createElement('option');
+          opt.value = b.name;
+          opt.textContent = `${b.name}: ${b.comment ? b.comment.substring(0, 28) : b.tool}`;
+          selectFilter.appendChild(opt);
+        }
+      });
+
+      const totalCmds = (programMeta && programMeta.totalMoveCommands) ? programMeta.totalMoveCommands : segments.length;
+      const zeroDisp = (programMeta && programMeta.zeroDispRapids) ? programMeta.zeroDispRapids : 0;
+      const drawnRapids = segments.filter(s => s.segType === 'RAPID').length;
+
+      const elSegCount = document.getElementById('lblSegmentCount');
+      if (elSegCount) elSegCount.textContent = `${totalCmds} Cmds (${segments.length} Drawn)`;
+
+      const elRapids = document.getElementById('statRapids');
+      if (elRapids) elRapids.textContent = zeroDisp > 0 ? `${drawnRapids + zeroDisp} (${drawnRapids})` : `${drawnRapids}`;
+
+      const elRoughs = document.getElementById('statRoughs');
+      if (elRoughs) elRoughs.textContent = segments.filter(s => s.segType === 'ROUGH').length;
+
+      const elFinishes = document.getElementById('statFinishes');
+      if (elFinishes) elFinishes.textContent = segments.filter(s => s.segType === 'FINISH').length;
+    }
+
+    function highlightBlockCard(blockName) {
+      document.querySelectorAll('.item-block-card').forEach(c => {
+        if (c.getAttribute('data-block') === blockName) {
+          c.classList.add('border-blue-500', 'bg-blue-950/60', 'ring-1', 'ring-blue-500');
+        } else {
+          c.classList.remove('border-blue-500', 'bg-blue-950/60', 'ring-1', 'ring-blue-500');
+        }
+      });
+    }
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      
+      const rect = parent.getBoundingClientRect();
+      const w = rect.width > 0 ? rect.width : 1000;
+      const h = rect.height > 0 ? rect.height : 600;
+      
+      canvas.width = w;
+      canvas.height = h;
+      drawCanvas();
+    }
+
+    function resetView() {
+      zoom = 1;
+      panX = 0;
+      panY = 0;
+      drawCanvas();
+    }
+
+    // High resolution 72-step 2D circular arc interpolator
+    function getArcPoints(startZ, startX_dia, endZ, endX_dia, rVal, isG3) {
+      const p1 = { z: startZ, x: startX_dia / 2.0 };
+      const p2 = { z: endZ, x: endX_dia / 2.0 };
+      
+      const dz = p2.z - p1.z;
+      const dx = p2.x - p1.x;
+      const dist = Math.hypot(dz, dx);
+
+      let r = Math.abs(rVal);
+      if (dist === 0) return [{ z: p1.z, x: p1.x * 2 }, { z: p2.z, x: p2.x * 2 }];
+      if (r < dist / 2.0) {
+        r = dist / 2.0 + 0.00001;
+      }
+
+      const h = Math.sqrt(Math.max(0, r * r - (dist / 2.0) * (dist / 2.0)));
+      const mid = { z: (p1.z + p2.z) / 2.0, x: (p1.x + p2.x) / 2.0 };
+      const perp = { z: -dx / dist, x: dz / dist };
+
+      const c1 = { z: mid.z + h * perp.z, x: mid.x + h * perp.x };
+      const c2 = { z: mid.z - h * perp.z, x: mid.x - h * perp.x };
+
+      const cp1 = (p1.z - c1.z) * (p2.x - c1.x) - (p1.x - c1.x) * (p2.z - c1.z);
+      const center = (isG3 ? cp1 > 0 : cp1 < 0) ? c1 : c2;
+
+      let a1 = Math.atan2(p1.x - center.x, p1.z - center.z);
+      let a2 = Math.atan2(p2.x - center.x, p2.z - center.z);
+
+      if (isG3) {
+        if (a2 <= a1) a2 += Math.PI * 2;
+      } else {
+        if (a1 <= a2) a1 += Math.PI * 2;
+      }
+
+      const points = [];
+      const numSteps = 72; // High resolution arc curve interpolation
+      for (let i = 0; i <= numSteps; i++) {
+        const t = i / numSteps;
+        const ang = a1 + (a2 - a1) * t;
+        const ptZ = center.z + r * Math.cos(ang);
+        const ptX_rad = center.x + r * Math.sin(ang);
+        points.push({
+          z: ptZ,
+          x: ptX_rad * 2.0
+        });
+      }
+      return points;
+    }
+
+    function isMasterSegmentCut(sIdx, maxAnimIdx) {
+      if (!isProgressiveMode) return true;
+      if (!segments || segments.length === 0) return false;
+      if (maxAnimIdx >= segments.length - 1) return true;
+
+      const executedBlocks = new Set();
+      for (let i = 0; i <= maxAnimIdx && i < segments.length; i++) {
+        executedBlocks.add(segments[i].block);
+      }
+
+      const segObj = masterPartContour[sIdx];
+      const reqBlock = (segObj && segObj.block) ? segObj.block : 'N13';
+      return executedBlocks.has(reqBlock);
+    }
+
+    let uiFontScale = 1.35; // Default 135% larger canvas/readout text on desktop
+    let effFontScale = 1.35;
+    function cFont(basePx, weight = 'bold') {
+      return `${weight} ${Math.round(basePx * effFontScale)}px monospace`;
+    }
+
+    function drawCanvas() {
+      if (!canvas || !ctx || !canvas.width || !canvas.height) return;
+
+      const w = canvas.width;
+      const h = canvas.height;
+      const isCompactCanvas = (window.innerWidth < 1024) && (w < 960 || h < 420);
+      effFontScale = isCompactCanvas ? 0.78 : uiFontScale;
+      const isRadiusMode = (activePassMode === 'Radius');
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = '#050811';
+      ctx.fillRect(0, 0, w, h);
+
+      const activeBounds = (viewZoomMode === 'CUTTING') ? cuttingBounds : fullBounds;
+
+      const minZ = activeBounds.minZ - (viewZoomMode === 'CUTTING' ? 0.3 : 0.6);
+      const maxZ = activeBounds.maxZ + (viewZoomMode === 'CUTTING' ? 0.3 : 0.6);
+      const rawMinX = activeBounds.minX - (viewZoomMode === 'CUTTING' ? 0.12 : 0.6);
+      const rawMaxX = activeBounds.maxX + (viewZoomMode === 'CUTTING' ? 0.12 : 0.6);
+      
+      const minX = isRadiusMode ? rawMinX / 2 : rawMinX;
+      const maxX = isRadiusMode ? rawMaxX / 2 : rawMaxX;
+
+      const rangeZ = maxZ - minZ;
+      const rangeX = maxX - minX;
+
+      const padding = isCompactCanvas ? 30 : 115;
+      const scaleZ = (w - padding * 2) / rangeZ * zoom;
+      const scaleX = (h - padding * 2) / rangeX * zoom;
+      const scale = Math.min(scaleZ, scaleX);
+
+      function toScreen(z, x) {
+        const xVal = isRadiusMode ? x / 2 : x;
+        const sx = padding + (z - minZ) * scale + panX + (w - padding * 2 - rangeZ * scale) / 2;
+        const sy = h - (padding + (xVal - minX) * scale + panY + (h - padding * 2 - rangeX * scale) / 2);
+        return { x: sx, y: sy };
+      }
+
+      // Grid Lines (Z Axis)
+      ctx.strokeStyle = '#111827';
+      ctx.lineWidth = 1;
+
+      const stepZ = (viewZoomMode === 'CUTTING') ? 0.25 : 1.0;
+      const zStartGrid = Math.floor(minZ / stepZ) * stepZ;
+      for (let zG = zStartGrid; zG <= maxZ + stepZ; zG += stepZ) {
+        const p1 = toScreen(zG, minX);
+        const p2 = toScreen(zG, maxX);
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+
+        if (!isCompactCanvas || Math.abs(zG % 0.5) < 0.001) {
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = cFont(11.5, 'bold');
+          ctx.fillText(`Z ${zG.toFixed(2)}"`, p1.x - (isCompactCanvas ? 18 : 26), h - (isCompactCanvas ? 6 : 18));
+        }
+      }
+
+      // Left-Axis X Reference Lines & Labels — ONLY actual X diameters cut by the G-code (no arbitrary uncapped grid values)
+      const isSingleBlk = (selectedBlock !== 'ALL' && selectedBlock !== 'ROUGH_ONLY' && selectedBlock !== 'FINISH_ONLY');
+      const cutXMap = new Map(); // key: rounded 4-dec string -> { x, priority, isFinish }
+
+      function registerCutX(xVal, priority, isFin) {
+        if (typeof xVal !== 'number' || isNaN(xVal)) return;
+        const key = xVal.toFixed(4);
+        const existing = cutXMap.get(key);
+        if (!existing || priority < existing.priority || (isFin && !existing.isFinish)) {
+          cutXMap.set(key, {
+            x: parseFloat(key),
+            priority: existing ? Math.min(existing.priority, priority) : priority,
+            isFinish: existing ? (existing.isFinish || isFin) : isFin
+          });
+        }
+      }
+
+      let minCutX = Infinity;
+      let maxCutX = -Infinity;
+
+      segments.forEach((seg, idx) => {
+        if (isProgressiveMode && idx > animIndex) return;
+        if (seg.segType === 'RAPID') return; // Only actual cutting passes (G1/G2/G3)
+        if (seg.segType === 'ROUGH' && !filterRoughs) return;
+        if (seg.segType === 'FINISH' && !filterFinishes) return;
+        if (selectedBlock === 'ROUGH_ONLY' && seg.passType !== 'ROUGH') return;
+        if (selectedBlock === 'FINISH_ONLY' && seg.passType !== 'FINISH') return;
+        if (isSingleBlk && seg.block !== selectedBlock) return;
+
+        const isFin = (seg.segType === 'FINISH');
+        const isFloat = (seg.block === 'N16' || seg.block === 'N17');
+        const basePrio = (isFin && !isFloat) ? 1 : (isFin ? 2 : 2);
+
+        minCutX = Math.min(minCutX, seg.start.x, seg.end.x);
+        maxCutX = Math.max(maxCutX, seg.start.x, seg.end.x);
+
+        registerCutX(seg.start.x, basePrio, isFin);
+        registerCutX(seg.end.x, basePrio, isFin);
+      });
+
+      if (minCutX < Infinity) registerCutX(minCutX, 0, true);
+      if (maxCutX > -Infinity) registerCutX(maxCutX, 0, false);
+      if (programMeta && programMeta.finishedOd && selectedBlock === 'ALL' && filterFinishes) {
+        registerCutX(programMeta.finishedOd, 0, true);
+      }
+
+      // Sort by priority first, then by X value so key boundaries (deepest throat X, finish OD X, max rough X) always win label space
+      const cutXEntries = Array.from(cutXMap.values()).sort((a, b) => {
+        if (a.priority !== b.priority) return a.priority - b.priority;
+        return b.x - a.x;
+      });
+
+      const placedLabelYs = [];
+      const minLabelSpacingPx = Math.round(14.5 * effFontScale);
+
+      cutXEntries.forEach(entry => {
+        const p1 = toScreen(minZ, entry.x);
+        const p2 = toScreen(maxZ, entry.x);
+        if (p1.y < (isCompactCanvas ? 12 : 22) || p1.y > h - (isCompactCanvas ? 20 : 36)) return;
+
+        const canPlaceLabel = placedLabelYs.every(py => Math.abs(py - p1.y) >= minLabelSpacingPx);
+        if (canPlaceLabel) {
+          placedLabelYs.push(p1.y);
+          ctx.save();
+          ctx.strokeStyle = entry.isFinish ? 'rgba(16, 185, 129, 0.20)' : 'rgba(56, 189, 248, 0.14)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+
+          const xFontPx = Math.round(11.5 * effFontScale);
+          ctx.font = `bold ${xFontPx}px monospace`;
+          const lblTxt = `X ${entry.x.toFixed(4)}"`;
+          const txtW = ctx.measureText(lblTxt).width;
+          ctx.fillStyle = 'rgba(5, 8, 17, 0.88)';
+          ctx.fillRect(4, p1.y - xFontPx + 2, txtW + 6, xFontPx + 4);
+
+          ctx.fillStyle = entry.isFinish ? '#4ade80' : '#7dd3fc';
+          ctx.fillText(lblTxt, 7, p1.y + Math.round(xFontPx * 0.28));
+          ctx.restore();
+        }
+      });
+
+      // Machine Setup & Part Datum Overlays
+      ctx.save();
+      const pZ0_top = toScreen(0.0000, rawMaxX);
+      const pZ0_bot = toScreen(0.0000, rawMinX);
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.55)';
+      ctx.lineWidth = 1.2;
+      ctx.setLineDash([5, 4]);
+      ctx.beginPath();
+      ctx.moveTo(pZ0_top.x, pZ0_top.y);
+      ctx.lineTo(pZ0_bot.x, pZ0_bot.y);
+      ctx.stroke();
+
+      const rightFaceZ = (programMeta && programMeta.assembledWidth) ? programMeta.assembledWidth : 3.0000;
+      const pZ3_top = toScreen(rightFaceZ, rawMaxX);
+      const pZ3_bot = toScreen(rightFaceZ, rawMinX);
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.55)';
+      ctx.lineWidth = 1.2;
+      ctx.setLineDash([5, 4]);
+      ctx.beginPath();
+      ctx.moveTo(pZ3_top.x, pZ3_top.y);
+      ctx.lineTo(pZ3_bot.x, pZ3_bot.y);
+      ctx.stroke();
+
+      // Part Width Span Dimension — Positioned BELOW the cutting path to keep tool motion area uncluttered
+      const pBelowCut = toScreen(0.0000, activeBounds.minX - (viewZoomMode === 'CUTTING' ? 0.075 : 0.35));
+      const dimY = Math.min(h - (isCompactCanvas ? 22 : 46), Math.max(pBelowCut.y, pZ0_bot.y - (isCompactCanvas ? 4 : 12)));
+      ctx.setLineDash([]);
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(pZ0_bot.x, dimY);
+      ctx.lineTo(pZ3_bot.x, dimY);
+      ctx.stroke();
+
+      // Dimension Arrows (Below Cutting Path)
+      ctx.fillStyle = '#f59e0b';
+      ctx.beginPath();
+      ctx.moveTo(pZ0_bot.x, dimY);
+      ctx.lineTo(pZ0_bot.x + 8, dimY - 4);
+      ctx.lineTo(pZ0_bot.x + 8, dimY + 4);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(pZ3_bot.x, dimY);
+      ctx.lineTo(pZ3_bot.x - 8, dimY - 4);
+      ctx.lineTo(pZ3_bot.x - 8, dimY + 4);
+      ctx.fill();
+
+      // Left / Right Face Datum Labels placed down by the lower dimension bar (Desktop only to prevent mobile clutter)
+      if (!isCompactCanvas) {
+        ctx.fillStyle = '#00f0ff';
+        ctx.font = cFont(11, 'bold');
+        ctx.fillText('◀ Z = 0.0000" (LEFT FACE)', pZ0_bot.x + 10, dimY - 8);
+
+        ctx.fillStyle = '#38bdf8';
+        ctx.font = cFont(11, 'bold');
+        ctx.textAlign = 'right';
+        ctx.fillText(`RIGHT FACE (Z = +${rightFaceZ.toFixed(4)}") ▶`, pZ3_bot.x - 10, dimY - 8);
+        ctx.textAlign = 'left';
+      }
+
+      const midZ_x = (pZ0_bot.x + pZ3_bot.x) / 2;
+      ctx.fillStyle = '#fbbf24';
+      ctx.font = cFont(12, 'bold');
+      ctx.textAlign = 'center';
+      const dimText = (programMeta && programMeta.width && programMeta.dumFinWid)
+        ? `ASSEMBLED WIDTH: ${rightFaceZ.toFixed(4)}" (2x ${programMeta.width}" + ${programMeta.dumFinWid}" FIN)`
+        : `PART WIDTH: ${rightFaceZ.toFixed(4)}"`;
+      ctx.fillText(dimText, midZ_x, dimY + Math.round(13 * effFontScale));
+      ctx.textAlign = 'left';
+
+      // Chuck / Spindle Visual Block (Z < 0)
+      const pChuckTop = toScreen(-0.25, rawMaxX + 0.15);
+      const pChuckBot = toScreen(0.0000, rawMinX - 0.05);
+      const pChuckZ0 = toScreen(0.0000, rawMaxX + 0.15);
+
+      ctx.fillStyle = 'rgba(30, 41, 59, 0.35)';
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.rect(pChuckTop.x, pChuckTop.y, pChuckZ0.x - pChuckTop.x, pChuckBot.y - pChuckTop.y);
+      ctx.fill();
+      ctx.stroke();
+
+      if (!isCompactCanvas) {
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = cFont(11, 'bold');
+        ctx.fillText('CHUCK / SPINDLE (Z < 0)', pChuckTop.x + 8, (pChuckTop.y + pChuckBot.y) / 2);
+      }
+      ctx.restore();
+
+      // Optional Machined Surface Profile Reference (Thin, zero-glow reference line when checked)
+      if (showPartContour) {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
+        ctx.lineWidth = 1.1;
+        ctx.shadowBlur = 0;
+
+        ctx.beginPath();
+        masterPartContour.forEach((seg, sIdx) => {
+          if (!isMasterSegmentCut(sIdx, animIndex)) return;
+
+          if (seg.r && (seg.mode === 'G2' || seg.mode === 'G3')) {
+            const pts = getArcPoints(seg.start.z, seg.start.x, seg.end.z, seg.end.x, seg.r, seg.mode === 'G3');
+            pts.forEach((pt, pIdx) => {
+              const sc = toScreen(pt.z, pt.x);
+              if (pIdx === 0) ctx.moveTo(sc.x, sc.y);
+              else ctx.lineTo(sc.x, sc.y);
+            });
+          } else {
+            const sp = toScreen(seg.start.z, seg.start.x);
+            const ep = toScreen(seg.end.z, seg.end.x);
+            ctx.moveTo(sp.x, sp.y);
+            ctx.lineTo(ep.x, ep.y);
+          }
+        });
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      const annotatedBlocks = new Set();
+
+      // Render Program Toolpaths — Crisp, thin, zero-glow CAD strokes so every pass is clearly visible
+      segments.forEach((seg, idx) => {
+        if (isProgressiveMode && idx > animIndex) return;
+
+        if (seg.segType === 'RAPID' && !filterRapids) return;
+        if (seg.segType === 'ROUGH' && !filterRoughs) return;
+        if (seg.segType === 'FINISH' && !filterFinishes) return;
+
+        if (selectedBlock === 'ROUGH_ONLY' && seg.passType !== 'ROUGH') return;
+        if (selectedBlock === 'FINISH_ONLY' && seg.passType !== 'FINISH') return;
+        
+        const isSingleBlockFilter = (selectedBlock !== 'ALL' && selectedBlock !== 'ROUGH_ONLY' && selectedBlock !== 'FINISH_ONLY');
+        const isBlockSelected = (isSingleBlockFilter && seg.block === selectedBlock);
+        if (isSingleBlockFilter && !isBlockSelected) return;
+
+        ctx.globalAlpha = 1.0;
+
+        const isFloatPass = (seg.block === 'N16' || seg.block === 'N17');
+        let strokeColor = '#38bdf8'; // ROUGH: Crisp Sky Blue
+        let lineWidth = 1.25;
+        let isDashed = false;
+
+        if (seg.segType === 'RAPID') {
+          strokeColor = '#ef4444'; // RAPID: Always Red and stays Red
+          lineWidth = 1.25;
+          isDashed = true;
+          ctx.globalAlpha = 0.95;
+        } else if (seg.segType === 'FINISH') {
+          // Distinguish Finish (N13-N15: Emerald Green) vs Float (N16-N17: Crisp Lime) so .0005" passes are distinct
+          strokeColor = isFloatPass ? '#a3e635' : '#10b981';
+          lineWidth = 1.35;
+        }
+
+        if (seg.flaggedReason) {
+          strokeColor = '#ff00ff';
+          lineWidth = 2.5;
+          isDashed = false;
+          ctx.globalAlpha = 1.0;
+        }
+
+        if (isBlockSelected) {
+          // Keep RAPID in red and cutting moves in their crisp pass color, slightly emphasized
+          lineWidth = (seg.segType === 'RAPID') ? 1.5 : 1.75;
+          ctx.globalAlpha = 1.0;
+        }
+
+        if (isPlaying && idx === animIndex) {
+          // Keep active RAPID in bright red; highlight active cutting move in crisp white/bright pass color
+          strokeColor = (seg.segType === 'RAPID') ? '#ff4444' : '#ffffff';
+          lineWidth = 2.1;
+          ctx.globalAlpha = 1.0;
+        }
+
+        ctx.save();
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.shadowBlur = 0; // Zero glow so overlapping/adjacent passes stay razor-sharp
+        if (isDashed) ctx.setLineDash([5, 4]);
+
+        ctx.beginPath();
+        if (seg.r && (seg.mode === 'G2' || seg.mode === 'G3')) {
+          const pts = getArcPoints(seg.start.z, seg.start.x, seg.end.z, seg.end.x, seg.r, seg.mode === 'G3');
+          pts.forEach((pt, pIdx) => {
+            const sc = toScreen(pt.z, pt.x);
+            if (pIdx === 0) ctx.moveTo(sc.x, sc.y);
+            else ctx.lineTo(sc.x, sc.y);
+          });
+        } else {
+          const sp = toScreen(seg.start.z, seg.start.x);
+          const ep = toScreen(seg.end.z, seg.end.x);
+          ctx.moveTo(sp.x, sp.y);
+          ctx.lineTo(ep.x, ep.y);
+        }
+        ctx.stroke();
+        ctx.restore();
+
+        // Optional Insert Radius Envelope (Clean Outline)
+        if (showInsertEnvelope && seg.segType !== 'RAPID' && seg.start.x < 6.5) {
+          ctx.save();
+          ctx.strokeStyle = '#f59e0b';
+          ctx.lineWidth = 0.9;
+          ctx.globalAlpha = 0.25;
+          const ep = toScreen(seg.end.z, seg.end.x);
+          const scrR = seg.rInsert * scale;
+          ctx.beginPath();
+          ctx.arc(ep.x, ep.y, scrR, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        ctx.globalAlpha = 1.0;
+
+        if (!annotatedBlocks.has(seg.block) && seg.segType !== 'RAPID' && seg.start.x < 6.5) {
+          annotatedBlocks.add(seg.block);
+          const lblPt = toScreen(seg.end.z, seg.end.x);
+          
+          ctx.fillStyle = (seg.passType === 'ROUGH') ? '#7dd3fc' : (isFloatPass ? '#d9f99d' : '#4ade80');
+          ctx.font = cFont(11, 'bold');
+          ctx.fillText(seg.block, lblPt.x + 6, lblPt.y - 6);
+        }
+      });
+
+      // Render Flagged Move Callout Markers on Canvas if any exist
+      if (flaggedMoves && flaggedMoves.length > 0) {
+        flaggedMoves.forEach(fm => {
+          if (typeof fm.z === 'number' && typeof fm.x === 'number') {
+            const fp = toScreen(fm.z, fm.x);
+            ctx.save();
+            ctx.strokeStyle = '#ff0055';
+            ctx.fillStyle = 'rgba(255, 0, 85, 0.25)';
+            ctx.lineWidth = 2.0;
+            ctx.beginPath();
+            ctx.arc(fp.x, fp.y, 10, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = '#ff80ab';
+            ctx.font = cFont(12, 'bold');
+            ctx.fillText(`⚠ L${fm.lineNum} (${fm.block}): ${fm.reason}`, fp.x + 15, fp.y + 4);
+            ctx.restore();
+          }
+        });
+      }
+
+      // Animated Tool Insert Representation (Crisp outline, no blur)
+      if (segments[animIndex]) {
+        const curSeg = segments[animIndex];
+        const pt = toScreen(curSeg.end.z, curSeg.end.x);
+        const rInst = curSeg.rInsert;
+        const scrR = Math.max(6, rInst * scale);
+
+        ctx.save();
+        ctx.fillStyle = 'rgba(245, 158, 11, 0.28)';
+        ctx.strokeStyle = '#fbbf24';
+        ctx.lineWidth = 1.4;
+        ctx.shadowBlur = 0;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, scrR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // 9 o'clock, 3 o'clock, 6 o'clock Touch-Off Reference Crosshairs
+        // 9 o'clock (Left edge in Z)
+        ctx.beginPath();
+        ctx.arc(pt.x - scrR, pt.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fill();
+
+        // 3 o'clock (Right edge in Z)
+        ctx.beginPath();
+        ctx.arc(pt.x + scrR, pt.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#4ade80';
+        ctx.fill();
+
+        // 6 o'clock (Bottom edge in X)
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y + scrR, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#f59e0b';
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // Render Point-to-Point & Arc Radius Measurement Markers, Rubber-Band Line & Callout
+      if ((measureMode || measureRadiusMode || isShiftDown || measurePt1) && measureHoverPt && !measurePt2) {
+        const hp = toScreen(measureHoverPt.z, measureHoverPt.x);
+        ctx.save();
+        ctx.strokeStyle = measureRadiusMode ? '#e879f9' : (measureHoverPt.snapped ? '#22d3ee' : '#fbbf24');
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.arc(hp.x, hp.y, measureHoverPt.snapped ? 7 : 5, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(hp.x - 10, hp.y);
+        ctx.lineTo(hp.x + 10, hp.y);
+        ctx.moveTo(hp.x, hp.y - 10);
+        ctx.lineTo(hp.x, hp.y + 10);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // Render Active / Locked G-Code Arc Radius Inspection Overlay
+      const activeArcSeg = lockedArcSeg || ((measureRadiusMode && measureHoverPt && measureHoverPt.arcSeg) ? measureHoverPt.arcSeg : null);
+      if (activeArcSeg) {
+        const arcInfo = computeArcGeometry(activeArcSeg);
+        if (arcInfo) {
+          ctx.save();
+          // Highlight the inspected arc curve
+          ctx.strokeStyle = '#e879f9';
+          ctx.lineWidth = 2.8;
+          ctx.beginPath();
+          const pts = getArcPoints(activeArcSeg.start.z, activeArcSeg.start.x, activeArcSeg.end.z, activeArcSeg.end.x, activeArcSeg.r, activeArcSeg.mode === 'G3');
+          pts.forEach((pt, idx) => {
+            const sc = toScreen(pt.z, pt.x);
+            if (idx === 0) ctx.moveTo(sc.x, sc.y);
+            else ctx.lineTo(sc.x, sc.y);
+          });
+          ctx.stroke();
+
+          // Draw Arc Center Crosshair & Radial Spoke Line to Midpoint of Arc
+          const cScr = toScreen(arcInfo.centerZ, arcInfo.centerX_dia);
+          const midArcPt = pts[Math.floor(pts.length / 2)] || activeArcSeg.end;
+          const mScr = toScreen(midArcPt.z, midArcPt.x);
+
+          ctx.strokeStyle = '#f0abfc';
+          ctx.lineWidth = 1.6;
+          ctx.setLineDash([4, 3]);
+          ctx.beginPath();
+          ctx.moveTo(cScr.x, cScr.y);
+          ctx.lineTo(mScr.x, mScr.y);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Center crosshair
+          ctx.strokeStyle = '#e879f9';
+          ctx.fillStyle = '#0f172a';
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          ctx.arc(cScr.x, cScr.y, 5.5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(cScr.x - 8, cScr.y);
+          ctx.lineTo(cScr.x + 8, cScr.y);
+          ctx.moveTo(cScr.x, cScr.y - 8);
+          ctx.lineTo(cScr.x, cScr.y + 8);
+          ctx.stroke();
+
+          // Operator-Friendly Callout Box near the arc (Desktop only; on Mobile, #measureOverlay below the canvas displays this cleanly so the arc is never covered!)
+          if (!isCompactCanvas) {
+            ctx.fillStyle = '#f0abfc';
+            ctx.font = cFont(11, 'bold');
+            ctx.fillText(`ARC CTR (Zc ${arcInfo.centerZ.toFixed(4)}", Xc ${arcInfo.centerX_dia.toFixed(4)}")`, cScr.x + 10, cScr.y + 5);
+
+            const line1Text = `⭕ ${arcInfo.featureTitle}:  ${arcInfo.radiusLabel} = R ${arcInfo.partR.toFixed(4)}"   (${activeArcSeg.block} • L${activeArcSeg.lineNum})`;
+            const line2Text = `Math:  ${arcInfo.plainMath}`;
+
+            ctx.font = cFont(12, 'bold');
+            const w1 = ctx.measureText(line1Text).width;
+            ctx.font = cFont(10.5, 'bold');
+            const w2 = ctx.measureText(line2Text).width;
+
+            const boxW = Math.max(w1, w2) + Math.round(28 * effFontScale);
+            const boxH = Math.round(50 * effFontScale);
+            const bx = Math.min(Math.max(12, mScr.x - boxW / 2), w - boxW - 12);
+            const by = Math.max(16, Math.min(mScr.y - boxH - 16, h - boxH - 55));
+
+            ctx.fillStyle = 'rgba(10, 15, 30, 0.96)';
+            ctx.strokeStyle = '#4ade80';
+            ctx.lineWidth = 2.0;
+            ctx.beginPath();
+            ctx.rect(bx, by, boxW, boxH);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#4ade80';
+            ctx.font = cFont(12, 'bold');
+            ctx.fillText(line1Text, bx + 12, by + Math.round(19 * effFontScale));
+
+            ctx.fillStyle = '#e2e8f0';
+            ctx.font = cFont(10.5, 'bold');
+            ctx.fillText(line2Text, bx + 12, by + Math.round(38 * effFontScale));
+          }
+          ctx.restore();
+        }
+      }
+
+      // Render 3-Point Fitted Circle if 3 points are marked (or 2 points + cursor in Measure Radius Mode)
+      const pt3Target = measurePt3 || ((measureRadiusMode && measurePt1 && measurePt2 && measureHoverPt) ? measureHoverPt : null);
+      if (measurePt1 && measurePt2 && pt3Target) {
+        const fit = computeThreePointCircle(measurePt1, measurePt2, pt3Target);
+        if (fit) {
+          ctx.save();
+          // Draw fitted circle using 72 points in (Z, X_dia) space
+          ctx.strokeStyle = 'rgba(232, 121, 249, 0.7)';
+          ctx.lineWidth = 1.5;
+          ctx.setLineDash([4, 4]);
+          ctx.beginPath();
+          for (let i = 0; i <= 72; i++) {
+            const ang = (i / 72) * Math.PI * 2;
+            const cz = fit.centerZ + fit.r * Math.cos(ang);
+            const cxDia = (fit.centerR + fit.r * Math.sin(ang)) * 2.0;
+            const sc = toScreen(cz, cxDia);
+            if (i === 0) ctx.moveTo(sc.x, sc.y);
+            else ctx.lineTo(sc.x, sc.y);
+          }
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          const cScr = toScreen(fit.centerZ, fit.centerX_dia);
+          const p3s = toScreen(pt3Target.z, pt3Target.x);
+
+          // Spoke from center to P3
+          ctx.strokeStyle = '#e879f9';
+          ctx.lineWidth = 1.6;
+          ctx.beginPath();
+          ctx.moveTo(cScr.x, cScr.y);
+          ctx.lineTo(p3s.x, p3s.y);
+          ctx.stroke();
+
+          // Center marker
+          ctx.fillStyle = '#e879f9';
+          ctx.font = cFont(11, 'bold');
+          ctx.beginPath();
+          ctx.arc(cScr.x, cScr.y, 4.5, 0, Math.PI * 2);
+          ctx.fill();
+          if (!isCompactCanvas) {
+            ctx.fillText(`3-PT R = ${fit.r.toFixed(4)}" (Dia ${(fit.r * 2).toFixed(4)}")`, cScr.x + 10, cScr.y - 7);
+          }
+
+          // P3 marker
+          ctx.strokeStyle = '#e879f9';
+          ctx.fillStyle = '#0f172a';
+          ctx.lineWidth = 2.0;
+          ctx.beginPath();
+          ctx.arc(p3s.x, p3s.y, 6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          if (!isCompactCanvas) {
+            ctx.fillStyle = '#f5d0fe';
+            ctx.font = cFont(11, 'bold');
+            ctx.fillText(`P3 (Z${pt3Target.z.toFixed(4)}", X${pt3Target.x.toFixed(4)}")`, p3s.x + 10, p3s.y + Math.round(14 * effFontScale));
+          }
+          ctx.restore();
+        }
+      }
+
+      if (measurePt1 && !activeArcSeg) {
+        const p1s = toScreen(measurePt1.z, measurePt1.x);
+        const activeTarget = measurePt2 || measureHoverPt;
+
+        ctx.save();
+        if (activeTarget) {
+          const p2s = toScreen(activeTarget.z, activeTarget.x);
+
+          // Draw right-angle ΔZ (horizontal) and ΔX (vertical) dashed component legs
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.55)';
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([3, 3]);
+          ctx.beginPath();
+          ctx.moveTo(p1s.x, p1s.y);
+          ctx.lineTo(p2s.x, p1s.y);
+          ctx.lineTo(p2s.x, p2s.y);
+          ctx.stroke();
+
+          // Draw direct P1 -> P2 measurement vector
+          ctx.strokeStyle = measurePt2 ? '#22d3ee' : '#fde047';
+          ctx.lineWidth = 1.8;
+          ctx.setLineDash(measurePt2 ? [] : [5, 4]);
+          ctx.beginPath();
+          ctx.moveTo(p1s.x, p1s.y);
+          ctx.lineTo(p2s.x, p2s.y);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Draw P2 marker
+          ctx.strokeStyle = '#fbbf24';
+          ctx.fillStyle = '#0f172a';
+          ctx.lineWidth = 2.0;
+          ctx.beginPath();
+          ctx.arc(p2s.x, p2s.y, 6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          if (!isCompactCanvas) {
+            ctx.fillStyle = '#fde047';
+            ctx.font = cFont(11, 'bold');
+            ctx.fillText(`P2 (Z${activeTarget.z.toFixed(4)}", X${activeTarget.x.toFixed(4)}")`, p2s.x + 10, p2s.y + Math.round(14 * effFontScale));
+
+            // Compute distances
+            const dZ = activeTarget.z - measurePt1.z;
+            const dX = activeTarget.x - measurePt1.x;
+            const absDZ = Math.abs(dZ);
+            const absDX = Math.abs(dX);
+            const absDR = absDX / 2.0;
+            const distZR = Math.hypot(absDZ, absDR);
+
+            // Draw on-canvas callout pill near midpoint (Desktop only; on Mobile, #measureOverlay below the canvas shows this!)
+            const midX = (p1s.x + p2s.x) / 2;
+            const midY = (p1s.y + p2s.y) / 2;
+            const boxW = Math.round(315 * effFontScale);
+            const boxH = Math.round(42 * effFontScale);
+            const bx = Math.min(Math.max(12, midX - boxW / 2), w - boxW - 12);
+            const by = Math.max(16, midY - boxH - 12);
+
+            ctx.fillStyle = 'rgba(2, 6, 23, 0.94)';
+            ctx.strokeStyle = measurePt2 ? '#22d3ee' : '#fbbf24';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            ctx.rect(bx, by, boxW, boxH);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#e2e8f0';
+            ctx.font = cFont(11, 'bold');
+            ctx.fillText(`ΔZ: ${absDZ.toFixed(4)}" (${dZ >= 0 ? '+' : ''}${dZ.toFixed(4)}") | ΔX Dia: ${absDX.toFixed(4)}"`, bx + 9, by + Math.round(16 * effFontScale));
+            ctx.fillStyle = '#22d3ee';
+            ctx.fillText(`ΔR Rad: ${absDR.toFixed(4)}" | 2D Dist: ${distZR.toFixed(4)}"`, bx + 9, by + Math.round(33 * effFontScale));
+          }
+        }
+
+        // Draw P1 marker on top
+        ctx.strokeStyle = '#22d3ee';
+        ctx.fillStyle = '#0f172a';
+        ctx.lineWidth = 2.0;
+        ctx.beginPath();
+        ctx.arc(p1s.x, p1s.y, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        if (!isCompactCanvas) {
+          ctx.fillStyle = '#22d3ee';
+          ctx.font = cFont(11, 'bold');
+          ctx.fillText(`P1 (Z${measurePt1.z.toFixed(4)}", X${measurePt1.x.toFixed(4)}")`, p1s.x + 10, p1s.y - 8);
+        }
+        ctx.restore();
+      }
+    }
+
+    let measureMode = false;
+    let measureRadiusMode = false;
+    let isShiftDown = false;
+    let measurePt1 = null;
+    let measurePt2 = null;
+    let measurePt3 = null;
+    let lockedArcSeg = null;
+    let measureHoverPt = null;
+    let mouseDownClient = null;
+
+    function computeArcGeometry(seg) {
+      if (!seg || !seg.r || (seg.mode !== 'G2' && seg.mode !== 'G3')) return null;
+      const p1 = { z: seg.start.z, x: seg.start.x / 2.0 };
+      const p2 = { z: seg.end.z, x: seg.end.x / 2.0 };
+      const dz = p2.z - p1.z;
+      const dx = p2.x - p1.x;
+      const dist = Math.hypot(dz, dx);
+      if (dist === 0) return null;
+
+      let r = Math.abs(seg.r);
+      if (r < dist / 2.0) r = dist / 2.0 + 0.00001;
+      const h = Math.sqrt(Math.max(0, r * r - (dist / 2.0) * (dist / 2.0)));
+      const mid = { z: (p1.z + p2.z) / 2.0, x: (p1.x + p2.x) / 2.0 };
+      const perp = { z: -dx / dist, x: dz / dist };
+
+      const c1 = { z: mid.z + h * perp.z, x: mid.x + h * perp.x };
+      const c2 = { z: mid.z - h * perp.z, x: mid.x - h * perp.x };
+      const cp1 = (p1.z - c1.z) * (p2.x - c1.x) - (p1.x - c1.x) * (p2.z - c1.z);
+      const isG3 = (seg.mode === 'G3');
+      const center = (isG3 ? cp1 > 0 : cp1 < 0) ? c1 : c2;
+
+      let a1 = Math.atan2(p1.x - center.x, p1.z - center.z);
+      let a2 = Math.atan2(p2.x - center.x, p2.z - center.z);
+      if (isG3) {
+        if (a2 <= a1) a2 += Math.PI * 2;
+      } else {
+        if (a1 <= a2) a1 += Math.PI * 2;
+      }
+      const sweepDeg = Math.abs(a2 - a1) * (180 / Math.PI);
+
+      // Compute True Part Surface Radius accounting for insert nose radius (rInsert)
+      const rIns = seg.rInsert || 0.0581;
+      const isFinishPass = (seg.passType === 'FINISH');
+      // If center is radially outside the arc (center.x > max(p1.x, p2.x)), it's a concave throat flank (Part R = Toolpath R + Insert R)
+      // If center is radially inside the arc (center.x < min(p1.x, p2.x)), it's a convex corner (Part R = Toolpath R - Insert R)
+      const isConcaveFlank = (center.x > Math.max(p1.x, p2.x) && r > 0.14);
+      const partR = isConcaveFlank ? (r + rIns) : Math.max(0, r - rIns);
+
+      const featureTitle = isConcaveFlank
+        ? (isFinishPass ? 'THROAT RADIUS' : 'ROUGH THROAT ARC')
+        : (isFinishPass ? 'CORNER RADIUS' : 'ROUGH CORNER BREAK');
+      const radiusLabel = isFinishPass ? 'PRINT CALLOUT' : 'PART RADIUS';
+      const targetName = isFinishPass ? 'Print R' : 'Part R';
+      const plainMath = isConcaveFlank
+        ? `${r.toFixed(4)}" (G-Code R) + ${rIns.toFixed(4)}" (Tool Nose) = ${partR.toFixed(4)}" (${targetName})`
+        : `${r.toFixed(4)}" (G-Code R) - ${rIns.toFixed(4)}" (Tool Nose) = ${partR.toFixed(4)}" (${targetName})`;
+      const compLabel = isConcaveFlank ? `R + ${rIns}" Ins` : `R - ${rIns}" Ins`;
+
+      return {
+        centerZ: center.z,
+        centerR: center.x,
+        centerX_dia: center.x * 2.0,
+        r: r,
+        partR: partR,
+        featureTitle: featureTitle,
+        radiusLabel: radiusLabel,
+        plainMath: plainMath,
+        compLabel: compLabel,
+        sweepDeg: sweepDeg,
+        chordLen: dist
+      };
+    }
+
+    function computeThreePointCircle(p1, p2, p3) {
+      // Fit circle in physical lathe (Z, R = X/2) coordinates
+      const x1 = p1.z, y1 = p1.x / 2.0;
+      const x2 = p2.z, y2 = p2.x / 2.0;
+      const x3 = p3.z, y3 = p3.x / 2.0;
+
+      const D = 2 * (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
+      if (Math.abs(D) < 1e-9) return null; // Collinear
+
+      const ux = ((x1 * x1 + y1 * y1) * (y2 - y3) + (x2 * x2 + y2 * y2) * (y3 - y1) + (x3 * x3 + y3 * y3) * (y1 - y2)) / D;
+      const uy = ((x1 * x1 + y1 * y1) * (x3 - x2) + (x2 * x2 + y2 * y2) * (x1 - x3) + (x3 * x3 + y3 * y3) * (x2 - x1)) / D;
+      const r = Math.hypot(x1 - ux, y1 - uy);
+
+      return {
+        centerZ: ux,
+        centerR: uy,
+        centerX_dia: uy * 2.0,
+        r: r
+      };
+    }
+
+    function updateMeasureUI() {
+      const btnMode = document.getElementById('btnMeasureMode');
+      const btnRadMode = document.getElementById('btnMeasureRadius');
+      const btnClear = document.getElementById('btnClearMeasure');
+      const overlay = document.getElementById('measureOverlay');
+      const lblPts = document.getElementById('lblMeasurePts');
+      const lblDeltas = document.getElementById('lblMeasureDeltas');
+
+      if (btnMode) {
+        if (measureMode) {
+          btnMode.className = "px-2.5 py-1 bg-cyan-500/25 hover:bg-cyan-500/35 text-cyan-200 border-2 border-cyan-400 rounded font-mono font-bold transition flex items-center gap-1 shadow";
+          btnMode.innerHTML = `<span>📏 Pt-to-Pt: ON (Click P1&rarr;P2)</span>`;
+        } else {
+          btnMode.className = "px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-500/50 rounded font-mono font-bold transition flex items-center gap-1 shadow";
+          btnMode.innerHTML = `<span>📏 Pt-to-Pt: OFF</span>`;
+        }
+      }
+
+      if (btnRadMode) {
+        if (measureRadiusMode) {
+          btnRadMode.className = "px-2.5 py-1 bg-fuchsia-500/25 hover:bg-fuchsia-500/35 text-fuchsia-200 border-2 border-fuchsia-400 rounded font-mono font-bold transition flex items-center gap-1 shadow";
+          btnRadMode.innerHTML = `<span>⭕ Measure Radius: ON (Click Arc or 3 Pts)</span>`;
+        } else {
+          btnRadMode.className = "px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-fuchsia-300 border border-fuchsia-500/50 rounded font-mono font-bold transition flex items-center gap-1 shadow";
+          btnRadMode.innerHTML = `<span>⭕ Measure Radius: OFF</span>`;
+        }
+      }
+
+      if (btnClear) {
+        if (measurePt1 || measurePt2 || measurePt3 || lockedArcSeg) btnClear.classList.remove('hidden');
+        else btnClear.classList.add('hidden');
+      }
+
+      if (!overlay || !lblPts || !lblDeltas) return;
+
+      // Priority 1: 3-Point Circle Fit
+      const pt3Target = measurePt3 || ((measureRadiusMode && measurePt1 && measurePt2 && measureHoverPt) ? measureHoverPt : null);
+      if (measurePt1 && measurePt2 && pt3Target) {
+        const fit = computeThreePointCircle(measurePt1, measurePt2, pt3Target);
+        if (fit) {
+          lblPts.innerHTML = `<span class="text-fuchsia-300 font-bold">⭕ 3-POINT RADIUS:</span> P1 &rarr; P2 &rarr; ${measurePt3 ? 'P3' : 'Cursor'}`;
+          lblDeltas.innerHTML = `Measured R: <span class="text-emerald-300 text-base">${fit.r.toFixed(4)}"</span> (Dia: ${(fit.r * 2).toFixed(4)}") &bull; Center: Zc <span class="text-white">${fit.centerZ.toFixed(4)}"</span>, Xc(Dia) <span class="text-white">${fit.centerX_dia.toFixed(4)}"</span>`;
+          overlay.classList.remove('hidden');
+          return;
+        }
+      }
+
+      // Priority 2: Locked or Hovered G-Code Arc
+      const activeArc = lockedArcSeg || ((measureRadiusMode && measureHoverPt && measureHoverPt.arcSeg) ? measureHoverPt.arcSeg : null);
+      if (activeArc && !measurePt1) {
+        const arcInfo = computeArcGeometry(activeArc);
+        if (arcInfo) {
+          lblPts.innerHTML = `<span class="text-emerald-300 font-extrabold text-base">⭕ ${arcInfo.featureTitle}: ${arcInfo.radiusLabel} = R ${arcInfo.partR.toFixed(4)}"</span> <span class="text-slate-300 font-semibold">(${activeArc.block} • Line ${activeArc.lineNum})</span>`;
+          lblDeltas.innerHTML = `<span class="text-amber-300 font-semibold">${arcInfo.plainMath}</span> &bull; Arc Center: Zc <span class="text-white">${arcInfo.centerZ.toFixed(4)}"</span>, Xc <span class="text-white">${arcInfo.centerX_dia.toFixed(4)}"</span>`;
+          overlay.classList.remove('hidden');
+          return;
+        }
+      }
+
+      // Priority 3: Standard Pt-to-Pt Measurement
+      const target = measurePt2 || (measurePt1 ? measureHoverPt : null);
+      if (measurePt1 && target) {
+        const dZ = target.z - measurePt1.z;
+        const dX = target.x - measurePt1.x;
+        const absDZ = Math.abs(dZ);
+        const absDX = Math.abs(dX);
+        const absDR = absDX / 2.0;
+        const distZR = Math.hypot(absDZ, absDR);
+        const distZX = Math.hypot(absDZ, absDX);
+
+        const p2Tag = measurePt2 ? 'P2' : 'Cursor';
+        lblPts.innerHTML = `<span class="text-cyan-300 font-bold">P1</span>(Z${measurePt1.z.toFixed(4)}", X${measurePt1.x.toFixed(4)}") &rarr; <span class="text-amber-300 font-bold">${p2Tag}</span>(Z${target.z.toFixed(4)}", X${target.x.toFixed(4)}")`;
+        lblDeltas.innerHTML = `ΔZ: <span class="text-white">${absDZ.toFixed(4)}"</span> (${dZ >= 0 ? '+' : ''}${dZ.toFixed(4)}") &bull; ΔX(Dia): <span class="text-white">${absDX.toFixed(4)}"</span> &bull; ΔR(Rad): <span class="text-white">${absDR.toFixed(4)}"</span> &bull; 2D Dist(Z-R): <span class="text-emerald-300">${distZR.toFixed(4)}"</span> <span class="text-slate-400 font-normal">(Z-Dia: ${distZX.toFixed(4)}")</span>`;
+        overlay.classList.remove('hidden');
+      } else if (measurePt1) {
+        lblPts.innerHTML = `<span class="text-cyan-300 font-bold">P1</span>(Z${measurePt1.z.toFixed(4)}", X${measurePt1.x.toFixed(4)}") &rarr; <span class="text-amber-300">Move cursor &amp; click P2...</span>`;
+        lblDeltas.textContent = '';
+        overlay.classList.remove('hidden');
+      } else {
+        overlay.classList.add('hidden');
+      }
+    }
+
+    function applyFontScaleUI() {
+      const lblFont = document.getElementById('lblFontScale');
+      if (lblFont) lblFont.textContent = `Font ${Math.round(uiFontScale * 100)}%`;
+      const scaleRatio = uiFontScale / 1.35;
+      const gcodeEl = document.getElementById('liveGCodeList');
+      const blockEl = document.getElementById('blockList');
+      const coordEl = document.getElementById('coordOverlay');
+      const measEl = document.getElementById('measureOverlay');
+      if (gcodeEl) gcodeEl.style.zoom = String(scaleRatio);
+      if (blockEl) blockEl.style.zoom = String(scaleRatio);
+      if (coordEl) coordEl.style.zoom = String(scaleRatio);
+      if (measEl) measEl.style.zoom = String(scaleRatio);
+      drawCanvas();
+    }
+
+    const btnFontDown = document.getElementById('btnFontDown');
+    if (btnFontDown) {
+      btnFontDown.addEventListener('click', () => {
+        uiFontScale = Math.max(0.95, Math.round((uiFontScale - 0.15) * 100) / 100);
+        applyFontScaleUI();
+      });
+    }
+
+    const btnFontUp = document.getElementById('btnFontUp');
+    if (btnFontUp) {
+      btnFontUp.addEventListener('click', () => {
+        uiFontScale = Math.min(2.25, Math.round((uiFontScale + 0.15) * 100) / 100);
+        applyFontScaleUI();
+      });
+    }
+
+    const btnMeasureMode = document.getElementById('btnMeasureMode');
+    if (btnMeasureMode) {
+      btnMeasureMode.addEventListener('click', () => {
+        measureMode = !measureMode;
+        if (measureMode) measureRadiusMode = false;
+        updateMeasureUI();
+        drawCanvas();
+      });
+    }
+
+    const btnMeasureRadius = document.getElementById('btnMeasureRadius');
+    if (btnMeasureRadius) {
+      btnMeasureRadius.addEventListener('click', () => {
+        measureRadiusMode = !measureRadiusMode;
+        if (measureRadiusMode) measureMode = false;
+        updateMeasureUI();
+        drawCanvas();
+      });
+    }
+
+    const btnClearMeasure = document.getElementById('btnClearMeasure');
+    if (btnClearMeasure) {
+      btnClearMeasure.addEventListener('click', () => {
+        measurePt1 = null;
+        measurePt2 = null;
+        measurePt3 = null;
+        lockedArcSeg = null;
+        updateMeasureUI();
+        drawCanvas();
+      });
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Shift') {
+        isShiftDown = true;
+        drawCanvas();
+      } else if (e.key === 'Escape') {
+        if (measurePt1 || measurePt2 || measurePt3 || lockedArcSeg || measureMode || measureRadiusMode) {
+          measurePt1 = null;
+          measurePt2 = null;
+          measurePt3 = null;
+          lockedArcSeg = null;
+          measureMode = false;
+          measureRadiusMode = false;
+          updateMeasureUI();
+          drawCanvas();
+        }
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'Shift') {
+        isShiftDown = false;
+        drawCanvas();
+      }
+    });
+
+    if (canvas) {
+      canvas.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const zoomFactor = e.deltaY < 0 ? 1.15 : 0.85;
+        zoom = Math.max(0.4, Math.min(20, zoom * zoomFactor));
+        drawCanvas();
+      });
+
+      canvas.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        mouseDownClient = { x: e.clientX, y: e.clientY };
+        startDragX = e.clientX - panX;
+        startDragY = e.clientY - panY;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (isDragging && mouseDownClient) {
+          const moved = Math.hypot(e.clientX - mouseDownClient.x, e.clientY - mouseDownClient.y);
+          if (moved > 3) {
+            panX = e.clientX - startDragX;
+            panY = e.clientY - startDragY;
+            drawCanvas();
+          }
+        }
+
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+
+        if (mx >= 0 && mx <= canvas.width && my >= 0 && my <= canvas.height) {
+          const w = canvas.width;
+          const h = canvas.height;
+          const isRadiusMode = (activePassMode === 'Radius');
+
+          const activeBounds = (viewZoomMode === 'CUTTING') ? cuttingBounds : fullBounds;
+          const minZ = activeBounds.minZ - (viewZoomMode === 'CUTTING' ? 0.3 : 0.6);
+          const maxZ = activeBounds.maxZ + (viewZoomMode === 'CUTTING' ? 0.3 : 0.6);
+          const rawMinX = activeBounds.minX - (viewZoomMode === 'CUTTING' ? 0.12 : 0.6);
+          const rawMaxX = activeBounds.maxX + (viewZoomMode === 'CUTTING' ? 0.12 : 0.6);
+
+          const minX = isRadiusMode ? rawMinX / 2 : rawMinX;
+          const maxX = isRadiusMode ? rawMaxX / 2 : rawMaxX;
+
+          const rangeZ = maxZ - minZ;
+          const rangeX = maxX - minX;
+          const isCompactCanvas = (window.innerWidth < 1024) && (w < 960 || h < 420);
+          const padding = isCompactCanvas ? 30 : 115;
+
+          const scaleZ = (w - padding * 2) / rangeZ * zoom;
+          const scaleX = (h - padding * 2) / rangeX * zoom;
+          const scale = Math.min(scaleZ, scaleX);
+
+          function toScrLocal(z, x) {
+            const xVal = isRadiusMode ? x / 2 : x;
+            const sx = padding + (z - minZ) * scale + panX + (w - padding * 2 - rangeZ * scale) / 2;
+            const sy = h - (padding + (xVal - minX) * scale + panY + (h - padding * 2 - rangeX * scale) / 2);
+            return { x: sx, y: sy };
+          }
+
+          const hoverZ = minZ + (mx - padding - panX - (w - padding * 2 - rangeZ * scale) / 2) / scale;
+          const hoverXVal = minX + (h - my - padding - panY - (h - padding * 2 - rangeX * scale) / 2) / scale;
+          const diaX = isRadiusMode ? hoverXVal * 2 : hoverXVal;
+
+          // Check for nearby G-code endpoint or arc vertex (larger finger snap radius on mobile!)
+          let bestSnap = null;
+          let bestDistPx = isCompactCanvas ? 28.0 : 12.0;
+          let bestArcSnap = null;
+          let bestArcDistPx = isCompactCanvas ? 34.0 : 16.0;
+          const isSingleBlk = (selectedBlock !== 'ALL' && selectedBlock !== 'ROUGH_ONLY' && selectedBlock !== 'FINISH_ONLY');
+
+          segments.forEach((seg, idx) => {
+            if (isProgressiveMode && idx > animIndex) return;
+            if (seg.segType === 'RAPID' && !filterRapids) return;
+            if (seg.segType === 'ROUGH' && !filterRoughs) return;
+            if (seg.segType === 'FINISH' && !filterFinishes) return;
+            if (selectedBlock === 'ROUGH_ONLY' && seg.passType !== 'ROUGH') return;
+            if (selectedBlock === 'FINISH_ONLY' && seg.passType !== 'FINISH') return;
+            if (isSingleBlk && seg.block !== selectedBlock) return;
+
+            const isArc = !!(seg.r && (seg.mode === 'G2' || seg.mode === 'G3'));
+            const candPts = [seg.start, seg.end];
+            if (isArc) {
+              const arcPts = getArcPoints(seg.start.z, seg.start.x, seg.end.z, seg.end.x, seg.r, seg.mode === 'G3');
+              for (let k = 2; k < arcPts.length; k += 2) candPts.push(arcPts[k]);
+            }
+            candPts.forEach(pt => {
+              const sp = toScrLocal(pt.z, pt.x);
+              const dPx = Math.hypot(sp.x - mx, sp.y - my);
+              const snapObj = {
+                z: pt.z,
+                x: pt.x,
+                snapped: true,
+                block: seg.block,
+                mode: seg.mode,
+                segType: seg.segType,
+                lineNum: seg.lineNum,
+                r: seg.r || null,
+                arcSeg: isArc ? seg : null
+              };
+              if (dPx < bestDistPx) {
+                bestDistPx = dPx;
+                bestSnap = snapObj;
+              }
+              if (isArc && dPx < bestArcDistPx) {
+                bestArcDistPx = dPx;
+                bestArcSnap = snapObj;
+              }
+            });
+          });
+
+          // In Measure Radius mode (or on mobile tap), prioritize snapping to G2/G3 arcs if one is nearby
+          if ((measureRadiusMode || (!measureMode && isCompactCanvas)) && bestArcSnap) {
+            bestSnap = bestArcSnap;
+          }
+
+          measureHoverPt = bestSnap || { z: hoverZ, x: diaX, snapped: false, arcSeg: null };
+
+          const elZ = document.getElementById('lblCoordZ');
+          if (elZ) elZ.textContent = measureHoverPt.z.toFixed(4) + (measureHoverPt.snapped ? ' [SNAP]' : '');
+          const elZM = document.getElementById('lblCoordZMobile');
+          if (elZM) elZM.textContent = measureHoverPt.z.toFixed(4) + (measureHoverPt.snapped ? ' [SNAP]' : '');
+          
+          const elX = document.getElementById('lblCoordX');
+          if (elX) elX.textContent = measureHoverPt.x.toFixed(4);
+          const elXM = document.getElementById('lblCoordXMobile');
+          if (elXM) elXM.textContent = measureHoverPt.x.toFixed(4);
+
+          if (measureHoverPt.snapped && !isPlaying) {
+            const elStatPref = document.getElementById('lblStatusPrefix');
+            if (elStatPref) elStatPref.textContent = 'Selected move:';
+            const elBlk = document.getElementById('lblHoverBlock');
+            if (elBlk) elBlk.textContent = `${measureHoverPt.block} • L${measureHoverPt.lineNum}`;
+            const elBlkM = document.getElementById('lblHoverBlockMobile');
+            if (elBlkM) elBlkM.textContent = `${measureHoverPt.block} • L${measureHoverPt.lineNum}`;
+            const elMdPref = document.getElementById('lblModePrefix');
+            if (elMdPref) elMdPref.textContent = 'Details:';
+            const elMd = document.getElementById('lblHoverMode');
+            const elMdM = document.getElementById('lblHoverModeMobile');
+            let modeTxt = '';
+            if (measureHoverPt.arcSeg) {
+              const aInfo = computeArcGeometry(measureHoverPt.arcSeg);
+              if (aInfo) {
+                modeTxt = `${aInfo.featureTitle}: Print R ${aInfo.partR.toFixed(4)}" (G-Code R ${measureHoverPt.r.toFixed(4)}")`;
+              } else {
+                modeTxt = `${measureHoverPt.mode} (${measureHoverPt.segType}) • R ${measureHoverPt.r.toFixed(4)}"`;
+              }
+            } else {
+              modeTxt = `${measureHoverPt.mode} (${measureHoverPt.segType})`;
+            }
+            if (elMd) elMd.textContent = modeTxt;
+            if (elMdM) elMdM.textContent = modeTxt;
+          } else if (!isPlaying) {
+            // Cursor is not snapped to a move: restore status bar to 'Program complete' (or current playback/locked state)
+            updateAnimUI();
+          }
+
+          if (measureMode || measureRadiusMode || isShiftDown || (measurePt1 && !measurePt2) || (measureRadiusMode && measurePt1 && measurePt2 && !measurePt3)) {
+            updateMeasureUI();
+            drawCanvas();
+          }
+        }
+      });
+
+      window.addEventListener('mouseup', (e) => {
+        if (isDragging && mouseDownClient) {
+          const moved = Math.hypot(e.clientX - mouseDownClient.x, e.clientY - mouseDownClient.y);
+          const rect = canvas.getBoundingClientRect();
+          const insideCanvas = (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom);
+          if (moved <= 6 && insideCanvas && measureHoverPt) {
+            if (measureRadiusMode) {
+              // If user clicks/taps a G2/G3 arc, lock that arc's radius callout and clear any P1/P2 points so boxes never overlap!
+              if (measureHoverPt.arcSeg) {
+                lockedArcSeg = (lockedArcSeg === measureHoverPt.arcSeg) ? null : measureHoverPt.arcSeg;
+                measurePt1 = null;
+                measurePt2 = null;
+                measurePt3 = null;
+              } else {
+                // 3-Point Circle Radius measurement (P1 -> P2 -> P3)
+                lockedArcSeg = null;
+                if (!measurePt1 || (measurePt1 && measurePt2 && measurePt3)) {
+                  measurePt1 = { ...measureHoverPt };
+                  measurePt2 = null;
+                  measurePt3 = null;
+                } else if (!measurePt2) {
+                  measurePt2 = { ...measureHoverPt };
+                } else {
+                  measurePt3 = { ...measureHoverPt };
+                }
+              }
+              updateMeasureUI();
+              updateAnimUI();
+              drawCanvas();
+            } else if (measureMode || e.shiftKey) {
+              lockedArcSeg = null;
+              measurePt3 = null;
+              if (!measurePt1 || (measurePt1 && measurePt2)) {
+                measurePt1 = { ...measureHoverPt };
+                measurePt2 = null;
+              } else {
+                measurePt2 = { ...measureHoverPt };
+              }
+              updateMeasureUI();
+              updateAnimUI();
+              drawCanvas();
+            } else if (measureHoverPt.arcSeg) {
+              // Operator clicked/tapped directly on an arc in normal mode: toggle its plain-English Radius Callout and clear P1/P2!
+              lockedArcSeg = (lockedArcSeg === measureHoverPt.arcSeg) ? null : measureHoverPt.arcSeg;
+              measurePt1 = null;
+              measurePt2 = null;
+              measurePt3 = null;
+              updateMeasureUI();
+              updateAnimUI();
+              drawCanvas();
+            } else if (lockedArcSeg) {
+              // Clicked empty space while an arc was locked: clear the callout
+              lockedArcSeg = null;
+              updateMeasureUI();
+              updateAnimUI();
+              drawCanvas();
+            }
+          }
+        }
+        isDragging = false;
+        mouseDownClient = null;
+      });
+
+      // Mobile Touchscreen Support:
+      // By default on mobile (mobilePanEnabled = false), 1-finger swipe scrolls the page smoothly and does NOT move the graph!
+      // 1-finger tap still snaps/inspects arcs, 2-finger pinch/drag zooms & pans, or toggle "✋ Pan Graph" to pan with 1 finger.
+      let mobilePanEnabled = false;
+      let touchStartDist = null;
+      let touchStartZoom = 1;
+      let touchStartMid = null;
+      let touchStartPanX = 0;
+      let touchStartPanY = 0;
+      let touchDownClient = null;
+
+      const btnMobilePanToggle = document.getElementById('btnMobilePanToggle');
+      if (btnMobilePanToggle) {
+        btnMobilePanToggle.addEventListener('click', () => {
+          mobilePanEnabled = !mobilePanEnabled;
+          if (mobilePanEnabled) {
+            canvas.style.touchAction = 'none';
+            btnMobilePanToggle.textContent = '✋ Pan Graph: ON';
+            btnMobilePanToggle.className = 'px-2.5 py-1 bg-amber-600 border border-amber-400 text-white rounded-lg font-mono font-bold text-xs shadow';
+          } else {
+            canvas.style.touchAction = 'pan-y';
+            btnMobilePanToggle.textContent = '🔒 Graph Locked';
+            btnMobilePanToggle.className = 'px-2.5 py-1 bg-slate-800 border border-slate-600 text-slate-200 rounded-lg font-mono font-bold text-xs shadow';
+          }
+        });
+      }
+
+      const btnMobileToolsToggle = document.getElementById('btnMobileToolsToggle');
+      const canvasControlToolbar = document.getElementById('canvasControlToolbar');
+      const headerProgramControls = document.getElementById('headerProgramControls');
+      const headerViewControls = document.getElementById('headerViewControls');
+      let mobileToolsOpen = false;
+      if (btnMobileToolsToggle) {
+        btnMobileToolsToggle.addEventListener('click', () => {
+          mobileToolsOpen = !mobileToolsOpen;
+          [canvasControlToolbar, headerProgramControls, headerViewControls].forEach(el => {
+            if (!el) return;
+            if (mobileToolsOpen) {
+              el.classList.remove('hidden');
+              el.classList.add('flex');
+            } else {
+              el.classList.add('hidden');
+              el.classList.remove('flex');
+            }
+          });
+          btnMobileToolsToggle.textContent = mobileToolsOpen ? '✕ Hide Tools' : '⚙️ Tools & Filters';
+          setTimeout(resizeCanvas, 50);
+        });
+      }
+
+      canvas.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          isDragging = false;
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          touchStartDist = Math.hypot(dx, dy);
+          touchStartZoom = zoom;
+          touchStartMid = {
+            x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+            y: (e.touches[0].clientY + e.touches[1].clientY) / 2
+          };
+          touchStartPanX = panX;
+          touchStartPanY = panY;
+        } else if (e.touches.length === 1) {
+          const t = e.touches[0];
+          touchDownClient = { x: t.clientX, y: t.clientY };
+          if (mobilePanEnabled) {
+            e.preventDefault();
+            isDragging = true;
+            mouseDownClient = { x: t.clientX, y: t.clientY };
+            startDragX = t.clientX - panX;
+            startDragY = t.clientY - panY;
+            window.dispatchEvent(new MouseEvent('mousemove', { clientX: t.clientX, clientY: t.clientY }));
+          }
+        }
+      }, { passive: false });
+
+      canvas.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 2 && touchStartDist) {
+          e.preventDefault();
+          const dx = e.touches[0].clientX - e.touches[1].clientX;
+          const dy = e.touches[0].clientY - e.touches[1].clientY;
+          const newDist = Math.hypot(dx, dy);
+          const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+          const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+          if (newDist > 5) {
+            zoom = Math.max(0.4, Math.min(20, touchStartZoom * (newDist / touchStartDist)));
+          }
+          if (touchStartMid) {
+            panX = touchStartPanX + (midX - touchStartMid.x);
+            panY = touchStartPanY + (midY - touchStartMid.y);
+          }
+          drawCanvas();
+        } else if (e.touches.length === 1 && mobilePanEnabled && isDragging) {
+          e.preventDefault();
+          const t = e.touches[0];
+          window.dispatchEvent(new MouseEvent('mousemove', { clientX: t.clientX, clientY: t.clientY }));
+        }
+      }, { passive: false });
+
+      canvas.addEventListener('touchend', (e) => {
+        if (e.touches.length < 2) {
+          touchStartDist = null;
+          touchStartMid = null;
+        }
+        if (e.touches.length === 0 && touchDownClient) {
+          const t = e.changedTouches[0];
+          const moved = Math.hypot(t.clientX - touchDownClient.x, t.clientY - touchDownClient.y);
+          if (moved <= 10) {
+            // Single tap on canvas -> snap & toggle radius callout!
+            isDragging = true;
+            mouseDownClient = { x: t.clientX, y: t.clientY };
+            window.dispatchEvent(new MouseEvent('mousemove', { clientX: t.clientX, clientY: t.clientY }));
+            window.dispatchEvent(new MouseEvent('mouseup', { clientX: t.clientX, clientY: t.clientY }));
+          } else {
+            isDragging = false;
+            mouseDownClient = null;
+          }
+          touchDownClient = null;
+        }
+      });
+    }
+
+    const btnZoomIn = document.getElementById('btnZoomIn');
+    const btnZoomOut = document.getElementById('btnZoomOut');
+    if (btnZoomIn) {
+      btnZoomIn.addEventListener('click', () => {
+        zoom = Math.max(0.4, Math.min(20, zoom * 1.25));
+        drawCanvas();
+      });
+    }
+    if (btnZoomOut) {
+      btnZoomOut.addEventListener('click', () => {
+        zoom = Math.max(0.4, Math.min(20, zoom * 0.8));
+        drawCanvas();
+      });
+    }
+
+    // Checkboxes
+    const chkPartContour = document.getElementById('chkShowPartContour');
+    if (chkPartContour) chkPartContour.addEventListener('change', (e) => { showPartContour = e.target.checked; drawCanvas(); });
+
+    const chkRapid = document.getElementById('chkRapid');
+    if (chkRapid) chkRapid.addEventListener('change', (e) => { filterRapids = e.target.checked; drawCanvas(); });
+
+    const chkRough = document.getElementById('chkRough');
+    if (chkRough) chkRough.addEventListener('change', (e) => { filterRoughs = e.target.checked; drawCanvas(); });
+
+    const chkFinish = document.getElementById('chkFinish');
+    if (chkFinish) chkFinish.addEventListener('change', (e) => { filterFinishes = e.target.checked; drawCanvas(); });
+
+    const chkEnv = document.getElementById('chkShowInsertEnvelope');
+    if (chkEnv) chkEnv.addEventListener('change', (e) => { showInsertEnvelope = e.target.checked; drawCanvas(); });
+
+    // Buttons
+    const btnRefTouchOff = document.getElementById('btnRefTouchOff');
+    const btnRefCenter = document.getElementById('btnRefCenter');
+    if (btnRefTouchOff) {
+      btnRefTouchOff.addEventListener('click', () => {
+        touchOffMode = 'TOUCH_OFF';
+        btnRefTouchOff.className = "px-2.5 py-1 text-amber-300 hover:bg-slate-800 font-mono transition bg-amber-600/30 font-bold";
+        if (btnRefCenter) btnRefCenter.className = "px-2.5 py-1 text-slate-400 hover:bg-slate-800 font-mono transition";
+        drawCanvas();
+      });
+    }
+    if (btnRefCenter) {
+      btnRefCenter.addEventListener('click', () => {
+        touchOffMode = 'CENTER';
+        btnRefCenter.className = "px-2.5 py-1 text-amber-300 hover:bg-slate-800 font-mono transition bg-amber-600/30 font-bold";
+        if (btnRefTouchOff) btnRefTouchOff.className = "px-2.5 py-1 text-slate-400 hover:bg-slate-800 font-mono transition";
+        drawCanvas();
+      });
+    }
+
+    const btnZoomCutting = document.getElementById('btnZoomCutting');
+    const btnZoomFull = document.getElementById('btnZoomFull');
+    if (btnZoomCutting) {
+      btnZoomCutting.addEventListener('click', () => {
+        viewZoomMode = 'CUTTING';
+        btnZoomCutting.className = "px-3 py-1 text-blue-300 hover:bg-slate-800 font-mono transition bg-blue-600/30 font-bold";
+        if (btnZoomFull) btnZoomFull.className = "px-3 py-1 text-slate-400 hover:bg-slate-800 font-mono transition";
+        resetView();
+      });
+    }
+    if (btnZoomFull) {
+      btnZoomFull.addEventListener('click', () => {
+        viewZoomMode = 'FULL';
+        btnZoomFull.className = "px-3 py-1 text-blue-300 hover:bg-slate-800 font-mono transition bg-blue-600/30 font-bold";
+        if (btnZoomCutting) btnZoomCutting.className = "px-3 py-1 text-slate-400 hover:bg-slate-800 font-mono transition";
+        resetView();
+      });
+    }
+
+    const btnScaleRad = document.getElementById('btnScaleRadius');
+    const btnScaleDia = document.getElementById('btnScaleDiameter');
+    if (btnScaleRad) {
+      btnScaleRad.addEventListener('click', () => {
+        activePassMode = 'Radius';
+        btnScaleRad.className = "px-2.5 py-1 text-slate-300 hover:bg-slate-800 font-mono transition bg-slate-800 font-semibold";
+        if (btnScaleDia) btnScaleDia.className = "px-2.5 py-1 text-slate-400 hover:bg-slate-800 font-mono transition";
+        drawCanvas();
+      });
+    }
+    if (btnScaleDia) {
+      btnScaleDia.addEventListener('click', () => {
+        activePassMode = 'Diameter';
+        btnScaleDia.className = "px-2.5 py-1 text-slate-300 hover:bg-slate-800 font-mono transition bg-slate-800 font-semibold";
+        if (btnScaleRad) btnScaleRad.className = "px-2.5 py-1 text-slate-400 hover:bg-slate-800 font-mono transition";
+        drawCanvas();
+      });
+    }
+
+    const selBlockFilter = document.getElementById('selBlockFilter');
+    if (selBlockFilter) {
+      selBlockFilter.addEventListener('change', (e) => {
+        if (isPlaying) {
+          isPlaying = false;
+          clearInterval(animTimer);
+        }
+        selectedBlock = e.target.value;
+        if (selectedBlock !== 'ALL' && selectedBlock !== 'ROUGH_ONLY' && selectedBlock !== 'FINISH_ONLY') {
+          for (let i = segments.length - 1; i >= 0; i--) {
+            if (segments[i].block === selectedBlock) {
+              animIndex = i;
+              pausedAtM01 = false;
+              break;
+            }
+          }
+        } else {
+          animIndex = Math.max(0, segments.length - 1);
+          pausedAtM01 = false;
+        }
+        setPlayButtonAppearance(false);
+        updateOptStopBanner();
+        updateAnimUI();
+        highlightBlockCard(selectedBlock);
+        drawCanvas();
+      });
+    }
+
+    const btnResetView = document.getElementById('btnResetView');
+    if (btnResetView) btnResetView.addEventListener('click', resetView);
+
+    const btnPlayPause = document.getElementById('btnPlayPause');
+    const animProgress = document.getElementById('animProgress');
+    const lblProgressPct = document.getElementById('lblProgressPct');
+    const btnOptStopM01 = document.getElementById('btnOptStopM01');
+    const btnNextBlockM01 = document.getElementById('btnNextBlockM01');
+    const optStopBanner = document.getElementById('optStopBanner');
+    const lblOptStopMessage = document.getElementById('lblOptStopMessage');
+
+    function getNextBlockNameAfter(idx) {
+      const curBlock = segments[idx] ? segments[idx].block : '';
+      for (let i = idx + 1; i < segments.length; i++) {
+        if (segments[i].block !== curBlock) return segments[i].block;
+      }
+      return 'END (M30)';
+    }
+
+    function updateOptStopBanner() {
+      if (!optStopBanner || !lblOptStopMessage) return;
+      const curSeg = segments[animIndex];
+      if (!isPlaying && pausedAtM01 && curSeg && (curSeg.m01Stop || curSeg.m00Stop)) {
+        const nextBlk = getNextBlockNameAfter(animIndex);
+        if (curSeg.m00Stop) {
+          lblOptStopMessage.textContent = `🛑 M00 PROGRAM STOP — End of ${curSeg.block} (Line ${curSeg.m00Line || curSeg.m01Line}: M1 / M00 Check Inserts) — Press Cycle Start for ${nextBlk}`;
+        } else {
+          lblOptStopMessage.textContent = `⏸ M01 OPTIONAL STOP — End of ${curSeg.block} (Line ${curSeg.m01Line}: M1) — Press Cycle Start for ${nextBlk}`;
+        }
+        optStopBanner.classList.remove('hidden');
+      } else {
+        optStopBanner.classList.add('hidden');
+      }
+    }
+
+    function setPlayButtonAppearance(playing) {
+      const elText = document.getElementById('lblPlayText');
+      if (playing) {
+        if (btnPlayPause) btnPlayPause.className = "px-4 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded font-bold transition flex items-center gap-1.5 shadow-lg";
+        if (elText) elText.textContent = "Feed Hold / Pause";
+      } else {
+        if (btnPlayPause) btnPlayPause.className = "px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold transition flex items-center gap-1.5 shadow-lg";
+        const curSeg = segments[animIndex];
+        if (pausedAtM01 && curSeg) {
+          const nextBlk = getNextBlockNameAfter(animIndex);
+          if (elText) elText.textContent = `Cycle Start (${nextBlk})`;
+        } else {
+          if (elText) elText.textContent = "Cycle Start / Play";
+        }
+      }
+    }
+
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        if (pausedAtM01 && animIndex >= segments.length - 1) {
+          // Resuming from the final N-block's M1 stop into M30 program end:
+          // Complete program and restore the Program Blocks list at its saved scroll position
+          isPlaying = false;
+          pausedAtM01 = false;
+          clearInterval(animTimer);
+          restoreBlockListView();
+          setPlayButtonAppearance(false);
+          updateOptStopBanner();
+          updateAnimUI();
+          drawCanvas();
+          return;
+        }
+        const wasInBlockListView = !isLiveGCodeViewActive;
+        switchToLiveGCodeView();
+        if (wasInBlockListView) {
+          if (selectedBlock !== 'ALL' && selectedBlock !== 'ROUGH_ONLY' && selectedBlock !== 'FINISH_ONLY') {
+            const firstIdx = segments.findIndex(s => s.block === selectedBlock);
+            animIndex = firstIdx !== -1 ? firstIdx : 0;
+          } else if (animIndex >= segments.length - 1) {
+            animIndex = 0;
+          }
+          pausedAtM01 = false;
+        } else if (animIndex >= segments.length - 1) {
+          animIndex = 0;
+          pausedAtM01 = false;
+        } else if (pausedAtM01) {
+          // Advance past the M1 stop into the first move of the next N-block
+          animIndex++;
+          pausedAtM01 = false;
+          // If the user had isolated a single block (e.g. N6) and pressed Cycle Start (N7), follow into N7
+          if (selectedBlock !== 'ALL' && selectedBlock !== 'ROUGH_ONLY' && selectedBlock !== 'FINISH_ONLY' && segments[animIndex]) {
+            selectedBlock = segments[animIndex].block;
+            if (selBlockFilter) selBlockFilter.value = selectedBlock;
+          }
+        }
+        setPlayButtonAppearance(true);
+        updateOptStopBanner();
+        updateAnimUI();
+        drawCanvas();
+        runAnimation();
+      } else {
+        clearInterval(animTimer);
+        setPlayButtonAppearance(false);
+        updateOptStopBanner();
+        updateAnimUI();
+      }
+    }
+
+    function runAnimation() {
+      clearInterval(animTimer);
+      const elSpeed = document.getElementById('selSpeed');
+      const speed = elSpeed ? (parseInt(elSpeed.value) || 2) : 2;
+      const intervalMs = Math.max(25, 180 / speed);
+
+      animTimer = setInterval(() => {
+        if (animIndex < segments.length - 1) {
+          animIndex++;
+        } else {
+          // Reached end of program (M30) — restore block list at previous scroll position
+          isPlaying = false;
+          pausedAtM01 = false;
+          clearInterval(animTimer);
+          restoreBlockListView();
+          setPlayButtonAppearance(false);
+          updateOptStopBanner();
+          updateAnimUI();
+          drawCanvas();
+          return;
+        }
+
+        const curSeg = segments[animIndex];
+
+        // Check if this segment is the end of an N-block with M00 or (M01 with OPT STOP enabled)
+        if (curSeg && (curSeg.m00Stop || (optStopM01Enabled && curSeg.m01Stop))) {
+          isPlaying = false;
+          pausedAtM01 = true;
+          clearInterval(animTimer);
+          highlightBlockCard(curSeg.block);
+          setPlayButtonAppearance(false);
+          updateOptStopBanner();
+          updateAnimUI();
+          drawCanvas();
+          return;
+        }
+
+        updateAnimUI();
+        drawCanvas();
+      }, intervalMs);
+    }
+
+    function updateAnimUI() {
+      if (!segments.length) return;
+      const pct = Math.round((animIndex / Math.max(1, segments.length - 1)) * 100);
+      if (animProgress) animProgress.value = pct;
+      if (lblProgressPct) lblProgressPct.textContent = `${pct}%`;
+      
+      const curSeg = segments[animIndex];
+      const elStatPref = document.getElementById('lblStatusPrefix');
+      const elBlock = document.getElementById('lblHoverBlock');
+      const elBlockM = document.getElementById('lblHoverBlockMobile');
+      const elMdPref = document.getElementById('lblModePrefix');
+      const elMode = document.getElementById('lblHoverMode');
+      const elModeM = document.getElementById('lblHoverModeMobile');
+      const elInsert = document.getElementById('lblInsertRadius');
+
+      const isSingleBlk = (selectedBlock !== 'ALL' && selectedBlock !== 'ROUGH_ONLY' && selectedBlock !== 'FINISH_ONLY');
+      const isCompleteState = (!isPlaying && !pausedAtM01 && animIndex >= segments.length - 1 && !isSingleBlk);
+
+      if (lockedArcSeg && !isPlaying) {
+        const aInfo = computeArcGeometry(lockedArcSeg);
+        if (elStatPref) elStatPref.textContent = 'Selected move:';
+        const blkTxt = `${lockedArcSeg.block} • L${lockedArcSeg.lineNum}`;
+        if (elBlock) elBlock.textContent = blkTxt;
+        if (elBlockM) elBlockM.textContent = blkTxt;
+        if (elMdPref) elMdPref.textContent = 'Feature:';
+        const mdTxt = aInfo
+          ? `${aInfo.featureTitle} (Print R ${aInfo.partR.toFixed(4)}")`
+          : `${lockedArcSeg.mode} (R ${lockedArcSeg.r.toFixed(4)}")`;
+        if (elMode) elMode.textContent = mdTxt;
+        if (elModeM) elModeM.textContent = mdTxt;
+      } else if (isCompleteState) {
+        if (elStatPref) elStatPref.textContent = 'Status:';
+        if (elBlock) elBlock.textContent = 'Program complete';
+        if (elBlockM) elBlockM.textContent = 'Program complete';
+        if (elMdPref) elMdPref.textContent = 'End:';
+        if (elMode) elMode.textContent = 'M30 (All 17 Blocks Cut)';
+        if (elModeM) elModeM.textContent = 'M30 (All 17 Blocks Cut)';
+      } else if (curSeg) {
+        if (elStatPref) {
+          elStatPref.textContent = (isPlaying || pausedAtM01) ? 'Playback:' : (isSingleBlk ? 'Isolated block:' : 'Selected move:');
+        }
+        const mTag = curSeg.m00Stop ? ' [M1/M00 STOP]' : (curSeg.m01Stop ? ' [M1 STOP]' : '');
+        const blkTxt = `${curSeg.block}${mTag}`;
+        if (elBlock) elBlock.textContent = blkTxt;
+        if (elBlockM) elBlockM.textContent = blkTxt;
+        if (elMdPref) {
+          elMdPref.textContent = (isPlaying || pausedAtM01) ? 'Active move:' : 'Selected move:';
+        }
+        const mdTxt = `${curSeg.mode} (${curSeg.segType}) • L${curSeg.lineNum}`;
+        if (elMode) elMode.textContent = mdTxt;
+        if (elModeM) elModeM.textContent = mdTxt;
+      }
+
+      if (curSeg) {
+        if (elInsert && curSeg.tool) {
+          elInsert.textContent = `${curSeg.tool} (R ${curSeg.rInsert}")`;
+        }
+        highlightBlockCard(isCompleteState ? 'ALL' : curSeg.block);
+
+        if (isLiveGCodeViewActive) {
+          if (!isPlaying && pausedAtM01 && (curSeg.m01Stop || curSeg.m00Stop)) {
+            if (curSeg.m00Stop) {
+              highlightLiveGCodeLine(curSeg.m00Line || curSeg.m01Line || curSeg.lineNum, 'M00', curSeg.block);
+            } else {
+              highlightLiveGCodeLine(curSeg.m01Line || curSeg.lineNum, 'M01', curSeg.block);
+            }
+          } else {
+            highlightLiveGCodeLine(curSeg.lineNum, 'ACTIVE', curSeg.block);
+          }
+        }
+      }
+    }
+
+    if (btnPlayPause) btnPlayPause.addEventListener('click', togglePlay);
+
+    if (btnOptStopM01) {
+      btnOptStopM01.addEventListener('click', () => {
+        optStopM01Enabled = !optStopM01Enabled;
+        if (optStopM01Enabled) {
+          btnOptStopM01.className = "px-3 py-1.5 bg-amber-500/25 border border-amber-400 text-amber-300 hover:bg-amber-500/35 font-bold rounded transition flex items-center gap-1.5 shadow";
+          btnOptStopM01.textContent = "OPT STOP (M1): ON";
+        } else {
+          btnOptStopM01.className = "px-3 py-1.5 bg-slate-800 border border-slate-700 text-slate-400 hover:bg-slate-700 font-medium rounded transition flex items-center gap-1.5";
+          btnOptStopM01.textContent = "OPT STOP (M1): OFF";
+          pausedAtM01 = false;
+          updateOptStopBanner();
+          setPlayButtonAppearance(isPlaying);
+          updateAnimUI();
+        }
+      });
+    }
+
+    if (btnNextBlockM01) {
+      btnNextBlockM01.addEventListener('click', () => {
+        if (!segments.length) return;
+        if (isPlaying) {
+          isPlaying = false;
+          clearInterval(animTimer);
+        }
+        // If we are currently stopped on an M1 at the end of a block, start searching from animIndex + 1
+        let startSearch = (pausedAtM01 && animIndex < segments.length - 1) ? animIndex + 1 : animIndex;
+        let foundIdx = -1;
+        for (let i = startSearch; i < segments.length; i++) {
+          if (segments[i].m01Stop || segments[i].m00Stop) {
+            foundIdx = i;
+            break;
+          }
+        }
+        if (foundIdx === -1) {
+          // Wrap around to the first N-block's M1
+          for (let i = 0; i < segments.length; i++) {
+            if (segments[i].m01Stop || segments[i].m00Stop) {
+              foundIdx = i;
+              break;
+            }
+          }
+        }
+        if (foundIdx !== -1) {
+          switchToLiveGCodeView();
+          animIndex = foundIdx;
+          pausedAtM01 = true;
+          // If the user had filtered to a single block, update filter or keep ALL so they see the block
+          if (selectedBlock !== 'ALL' && selectedBlock !== 'ROUGH_ONLY' && selectedBlock !== 'FINISH_ONLY') {
+            selectedBlock = segments[foundIdx].block;
+            if (selBlockFilter) selBlockFilter.value = selectedBlock;
+          }
+          setPlayButtonAppearance(false);
+          updateOptStopBanner();
+          updateAnimUI();
+          drawCanvas();
+        }
+      });
+    }
+
+    const btnRestart = document.getElementById('btnRestart');
+    if (btnRestart) {
+      btnRestart.addEventListener('click', () => {
+        if (isPlaying) {
+          isPlaying = false;
+          clearInterval(animTimer);
+        }
+        animIndex = 0;
+        pausedAtM01 = false;
+        selectedBlock = 'ALL';
+        if (selBlockFilter) selBlockFilter.value = 'ALL';
+        restoreBlockListView();
+        setPlayButtonAppearance(false);
+        updateOptStopBanner();
+        updateAnimUI();
+        drawCanvas();
+      });
+    }
+
+    const btnToggleProgressive = document.getElementById('btnToggleProgressive');
+    if (btnToggleProgressive) {
+      btnToggleProgressive.addEventListener('click', () => {
+        isProgressiveMode = !isProgressiveMode;
+        if (isProgressiveMode) {
+          btnToggleProgressive.className = "px-3 py-1.5 bg-purple-600/30 border border-purple-500/50 text-purple-300 hover:bg-purple-600/50 font-bold rounded transition";
+          btnToggleProgressive.textContent = "Mode: Progressive Pass-by-Pass (ON)";
+        } else {
+          btnToggleProgressive.className = "px-3 py-1.5 bg-slate-800 border border-slate-700 text-slate-400 hover:bg-slate-700 font-medium rounded transition";
+          btnToggleProgressive.textContent = "Mode: Full Complete Map (OFF)";
+        }
+        drawCanvas();
+      });
+    }
+
+    const btnStep = document.getElementById('btnStep');
+    if (btnStep) {
+      btnStep.addEventListener('click', () => {
+        if (isPlaying) {
+          isPlaying = false;
+          clearInterval(animTimer);
+        }
+        if (animIndex + 1 >= segments.length) {
+          animIndex = 0;
+          pausedAtM01 = false;
+          restoreBlockListView();
+        } else {
+          switchToLiveGCodeView();
+          animIndex = animIndex + 1;
+          const curSeg = segments[animIndex];
+          pausedAtM01 = !!(curSeg && (curSeg.m01Stop || curSeg.m00Stop));
+        }
+        setPlayButtonAppearance(false);
+        updateOptStopBanner();
+        updateAnimUI();
+        drawCanvas();
+      });
+    }
+
+    if (animProgress) {
+      animProgress.addEventListener('input', (e) => {
+        const pct = parseInt(e.target.value);
+        animIndex = Math.floor((pct / 100) * (segments.length - 1));
+        const curSeg = segments[animIndex];
+        pausedAtM01 = !!(curSeg && (curSeg.m01Stop || curSeg.m00Stop));
+        setPlayButtonAppearance(isPlaying);
+        updateOptStopBanner();
+        updateAnimUI();
+        drawCanvas();
+      });
+    }
+
+    // Preset Selector & File Picker Listeners
+    const selPresetProgram = document.getElementById('selPresetProgram');
+    if (selPresetProgram) {
+      selPresetProgram.addEventListener('change', (e) => {
+        const val = e.target.value;
+        if (val === 'PROG4512_SAMPLE') {
+          loadGCodeProgramText(prog4512SampleText, 'PROG4512_FNB101_SAMPLE_BENCHMARK.nc');
+        } else if (val === 'PROG4506_STAGE12J') {
+          loadGCodeProgramText(prog4506Stage12JText, 'PROG4506_FNT300_STAGE12J_GRAPH_REVIEW_ONLY.txt');
+        }
+      });
+    }
+
+    const fileInputGCode = document.getElementById('fileInputGCode');
+    if (fileInputGCode) {
+      fileInputGCode.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          const content = evt.target.result;
+          if (typeof content === 'string') {
+            if (selPresetProgram) {
+              let customOpt = selPresetProgram.querySelector('option[value="CUSTOM_FILE"]');
+              if (!customOpt) {
+                customOpt = document.createElement('option');
+                customOpt.value = 'CUSTOM_FILE';
+                selPresetProgram.appendChild(customOpt);
+              }
+              customOpt.textContent = `Loaded File: ${file.name}`;
+              selPresetProgram.value = 'CUSTOM_FILE';
+            }
+            loadGCodeProgramText(content, file.name);
+          }
+        };
+        reader.readAsText(file);
+      });
+    }
+
+    // Full Screen & Sidebar Width Toggle Listeners
+    const btnFullscreen = document.getElementById('btnFullscreen');
+    if (btnFullscreen) {
+      btnFullscreen.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      });
+      document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+          btnFullscreen.innerHTML = '<span>⛶ EXIT FULL SCREEN (ESC)</span>';
+          btnFullscreen.className = 'px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded-lg font-mono font-bold transition flex items-center gap-1.5 shadow-lg';
+        } else {
+          btnFullscreen.innerHTML = '<span>⛶ FULL SCREEN</span>';
+          btnFullscreen.className = 'px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-mono font-bold transition flex items-center gap-1.5 shadow-lg';
+        }
+        setTimeout(resizeCanvas, 50);
+        setTimeout(resizeCanvas, 200);
+      });
+    }
+
+    const btnToggleSidebar = document.getElementById('btnToggleSidebar');
+    const rightSidebarPanel = document.getElementById('rightSidebarPanel');
+    const leftCanvasPanel = document.getElementById('leftCanvasPanel');
+    let sidebarHidden = false;
+    if (btnToggleSidebar && rightSidebarPanel && leftCanvasPanel) {
+      btnToggleSidebar.addEventListener('click', () => {
+        sidebarHidden = !sidebarHidden;
+        if (sidebarHidden) {
+          rightSidebarPanel.classList.add('hidden');
+          leftCanvasPanel.classList.remove('lg:col-span-3');
+          leftCanvasPanel.classList.add('lg:col-span-4');
+          btnToggleSidebar.innerHTML = '<span>⇄ Show Blocks Sidebar</span>';
+          btnToggleSidebar.className = 'px-2.5 py-1.5 bg-cyan-600/30 hover:bg-cyan-600/50 text-cyan-200 border border-cyan-400 rounded-lg font-mono font-bold transition flex items-center gap-1 shadow';
+        } else {
+          rightSidebarPanel.classList.remove('hidden');
+          leftCanvasPanel.classList.remove('lg:col-span-4');
+          leftCanvasPanel.classList.add('lg:col-span-3');
+          btnToggleSidebar.innerHTML = '<span>⇄ Max Graph Width</span>';
+          btnToggleSidebar.className = 'px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 rounded-lg font-mono font-bold transition flex items-center gap-1 shadow';
+        }
+        setTimeout(resizeCanvas, 30);
+        setTimeout(resizeCanvas, 120);
+      });
+    }
+
+    // Initialize UI and Canvas with Stage 12J Review Copy (PROG4506)
+    loadGCodeProgramText(prog4506Stage12JText, 'PROG4506_FNT300_STAGE12J_GRAPH_REVIEW_ONLY.txt');
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('load', resizeCanvas);
+    document.addEventListener('DOMContentLoaded', resizeCanvas);
+    setTimeout(resizeCanvas, 50);
+    setTimeout(resizeCanvas, 200);
+
+    // =========================================================================
+    // GEEZER AUTHENTICS DEVELOPMENT PORTAL — PIN LOCK CONTROLLER (PIN: 7223)
+    // =========================================================================
+    (function() {
+      const PORTAL_PIN = '7223';
+      const SESSION_KEY = 'geezer_dev_portal_unlocked_v1';
+      const lockScreen = document.getElementById('geezerPortalLockScreen');
+      const portalCard = document.getElementById('geezerPortalCard');
+      const statusEl = document.getElementById('portalPinStatus');
+      const btnUnlock = document.getElementById('btnPortalUnlock');
+      const btnClear = document.getElementById('btnPinClear');
+      const btnBack = document.getElementById('btnPinBack');
+      const btnLockDesktop = document.getElementById('btnLockPortal');
+      const btnLockMobile = document.getElementById('btnLockPortalMobile');
+      const dots = [
+        document.getElementById('pinDot0'),
+        document.getElementById('pinDot1'),
+        document.getElementById('pinDot2'),
+        document.getElementById('pinDot3')
+      ];
+
+      let enteredPin = '';
+      let isPortalUnlocked = false;
+
+      function renderPinDots(isError = false) {
+        for (let i = 0; i < 4; i++) {
+          const d = dots[i];
+          if (!d) continue;
+          d.classList.remove('filled', 'error');
+          if (i < enteredPin.length) {
+            d.textContent = '•';
+            d.classList.add(isError ? 'error' : 'filled');
+          } else {
+            d.textContent = '';
+          }
+        }
+      }
+
+      function unlockPortal() {
+        isPortalUnlocked = true;
+        try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
+        if (lockScreen) {
+          lockScreen.classList.add('hidden');
+        }
+        setTimeout(resizeCanvas, 30);
+        setTimeout(resizeCanvas, 150);
+      }
+
+      function lockPortal() {
+        isPortalUnlocked = false;
+        enteredPin = '';
+        try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
+        renderPinDots(false);
+        if (statusEl) {
+          statusEl.textContent = 'Portal Locked • Enter 4-Digit Security PIN';
+          statusEl.className = 'min-h-[22px] text-xs font-mono font-bold tracking-wider uppercase text-slate-400 mb-3';
+        }
+        if (lockScreen) {
+          lockScreen.classList.remove('hidden');
+        }
+      }
+
+      function verifyPinAttempt() {
+        if (enteredPin === PORTAL_PIN) {
+          if (statusEl) {
+            statusEl.textContent = '✓ ACCESS GRANTED — LAUNCHING WORKSTATION...';
+            statusEl.className = 'min-h-[22px] text-xs font-mono font-extrabold tracking-wider uppercase text-[#39ff14] mb-3';
+          }
+          setTimeout(unlockPortal, 180);
+        } else {
+          renderPinDots(true);
+          if (statusEl) {
+            statusEl.textContent = '✕ ACCESS DENIED — INVALID SECURITY PIN';
+            statusEl.className = 'min-h-[22px] text-xs font-mono font-extrabold tracking-wider uppercase text-red-400 mb-3';
+          }
+          if (portalCard) {
+            portalCard.classList.remove('portal-shake');
+            void portalCard.offsetWidth;
+            portalCard.classList.add('portal-shake');
+          }
+          setTimeout(() => {
+            enteredPin = '';
+            renderPinDots(false);
+          }, 550);
+        }
+      }
+
+      function pushDigit(digit) {
+        if (isPortalUnlocked) return;
+        if (enteredPin.length >= 4) return;
+        enteredPin += String(digit);
+        renderPinDots(false);
+        if (enteredPin.length === 4) {
+          verifyPinAttempt();
+        }
+      }
+
+      document.querySelectorAll('.keypad-btn[data-digit]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          pushDigit(btn.getAttribute('data-digit'));
+        });
+      });
+
+      if (btnClear) {
+        btnClear.addEventListener('click', () => {
+          enteredPin = '';
+          renderPinDots(false);
+          if (statusEl) {
+            statusEl.textContent = 'PIN Cleared • Enter 4-Digit Security PIN';
+            statusEl.className = 'min-h-[22px] text-xs font-mono font-bold tracking-wider uppercase text-slate-400 mb-3';
+          }
+        });
+      }
+
+      if (btnBack) {
+        btnBack.addEventListener('click', () => {
+          enteredPin = enteredPin.slice(0, -1);
+          renderPinDots(false);
+        });
+      }
+
+      if (btnUnlock) {
+        btnUnlock.addEventListener('click', () => {
+          verifyPinAttempt();
+        });
+      }
+
+      if (btnLockDesktop) btnLockDesktop.addEventListener('click', lockPortal);
+      if (btnLockMobile) btnLockMobile.addEventListener('click', lockPortal);
+
+      // Global keyboard support while lock screen is visible
+      window.addEventListener('keydown', (e) => {
+        if (isPortalUnlocked) return;
+        if (e.key >= '0' && e.key <= '9') {
+          e.preventDefault();
+          pushDigit(e.key);
+        } else if (e.key === 'Backspace') {
+          e.preventDefault();
+          enteredPin = enteredPin.slice(0, -1);
+          renderPinDots(false);
+        } else if (e.key === 'Escape' || e.key === 'Delete') {
+          e.preventDefault();
+          enteredPin = '';
+          renderPinDots(false);
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          verifyPinAttempt();
+        }
+      });
+
+      // Keep unlocked during same browser tab refresh if already authenticated in this tab
+      try {
+        if (sessionStorage.getItem(SESSION_KEY) === '1') {
+          unlockPortal();
+        }
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>

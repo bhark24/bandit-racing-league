@@ -36,7 +36,8 @@ SKIP_PWA_FILES = {
     'simhub.html',
     'srh_gateway_363216.html',
     'bandit-roster.html',
-    'geezer-app-preview.html'
+    'geezer-app-preview.html',
+    'geezer-portal.html'
 }
 
 def process_html_file(filepath):
