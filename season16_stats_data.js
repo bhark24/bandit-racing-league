@@ -3326,7 +3326,7 @@ const season16StatsData = {
       "scheduleId": "363238",
       "dateStr": "2026-11-11",
       "dateFormatted": "Nov 11, 2026",
-      "eventName": "Desert Elimination 140 (Chase Round 4)",
+      "eventName": "Legacy Towing & Travis Auto Service 140 (Chase Round 4)",
       "trackName": "Phoenix Raceway",
       "configName": "Oval w/open dogleg",
       "lengthMiles": 1.0,
@@ -3338,8 +3338,9 @@ const season16StatsData = {
       "stageBreaks": "42 / 84",
       "fuelCap": "70% Fuel Cap",
       "tireSets": "3 Total Sets (Start + 2 Pit)",
+      "sponsorName": "Legacy Towing & Travis Auto Service",
       "distanceMiles": 140.0,
-      "scoutingNotes": "Flat 1.0-mile desert tri-oval with the wide-open dogleg! Race 15 Phoenix Winner: #9 Dylan McDonald (with #7 Benjamin Lacy leading 57 laps)."
+      "scoutingNotes": "Penultimate Race of Season 16! Sponsored by Legacy Towing (260-410-9407) & Travis Auto Service. BREAKING NEWS: Race 15 Phoenix Winner #9 Dylan McDonald has been shut down by his team for the final 2 races (rumor mill: iRacing time-out from another league!), leaving the desert wide open!"
     },
     {
       "raceNum": 21,

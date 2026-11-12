@@ -4,7 +4,6 @@ import shutil
 import ctypes
 import webbrowser
 from ctypes import wintypes
-from PIL import Image, ImageDraw, ImageFont
 
 def copy_to_clipboard(text):
     CF_UNICODETEXT = 13
@@ -60,139 +59,86 @@ def copy_to_clipboard(text):
         user32.CloseClipboard()
 
 
-def build_combined_facebook_graphic(banner_path, cstrong_path, out_path):
-    """
-    Creates a Facebook promo graphic where Wes Fuller's 'The Wendy Jo Memorial 110'
-    race banner is the full-size centerpiece (1280x720) at the top, and a compact
-    secondary footer strip (1280x110) below it displays the much smaller ChristieStrong
-    logo alongside the Salt City Racing Team number change note.
-    """
-    banner = Image.open(banner_path).convert("RGBA")
-    bw, bh = banner.size  # 1280 x 720
-    footer_h = 108
-    total_h = bh + footer_h
-
-    canvas = Image.new("RGBA", (bw, total_h), (10, 12, 16, 255))
-    canvas.paste(banner, (0, 0))
-
-    draw = ImageDraw.Draw(canvas)
-    # Subtle divider line & dark pink-accented footer bar
-    draw.rectangle([0, bh, bw, total_h], fill=(14, 10, 18, 255))
-    draw.line([(0, bh), (bw, bh)], fill=(255, 105, 180, 180), width=3)
-
-    # Load and resize ChristieStrong logo so it is much smaller than the race banner
-    cstrong = Image.open(cstrong_path).convert("RGBA")
-    target_logo_h = 84
-    target_logo_w = int(cstrong.width * (target_logo_h / cstrong.height))
-    cstrong_small = cstrong.resize((target_logo_w, target_logo_h), Image.Resampling.LANCZOS)
-
-    logo_x = 34
-    logo_y = bh + (footer_h - target_logo_h) // 2
-    canvas.paste(cstrong_small, (logo_x, logo_y), cstrong_small)
-
-    # Load fonts
-    try:
-        font_title = ImageFont.truetype("C:/Windows/Fonts/arialbd.ttf", 18)
-        font_sub = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 16)
-    except Exception:
-        font_title = ImageFont.load_default()
-        font_sub = ImageFont.load_default()
-
-    text_x = logo_x + target_logo_w + 22
-    line1 = "SALT CITY RACING TEAM NUMBER CHANGE • #17 KOREY DENSON & #36 COLLIN ANDERSON"
-    line2 = "Running in honor of Korey's good friend bravely fighting the battle • #ChristieStrong"
-
-    draw.text((text_x, bh + 28), line1, fill=(255, 115, 190, 255), font=font_title)
-    draw.text((text_x, bh + 56), line2, fill=(230, 230, 235, 255), font=font_sub)
-
-    canvas.convert("RGB").save(out_path, quality=95)
-
-
 def main():
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding='utf-8')
 
-    print("=" * 70)
-    print("   BRL THE WENDY JO MEMORIAL 110 (KANSAS CHASE ROUND 2) PREVIEW")
-    print("=" * 70)
+    print("=" * 72)
+    print("   BRL LEGACY TOWING & TRAVIS AUTO SERVICE 140 AT PHOENIX PREVIEW")
+    print("=" * 72)
     
-    post_text = """🏁 **TONIGHT IN THE BANDIT RACING LEAGUE: THE WENDY JO MEMORIAL 110 AT KANSAS SPEEDWAY!** 🏁
-🩵 **Sponsored by Wes Fuller (#35) in Loving Memory of Wendy Jo Jackson (1975–2020)** 🩵
-✨ **Presented by JoKa Creations 3D Printing & Clear Low Communications** ✨
-📺 **Watch Live on SimTrax YouTube:** https://www.youtube.com/watch?v=Mvniqkv6ycU
+    post_text = """🏁 **TONIGHT IN THE BANDIT RACING LEAGUE: THE LEGACY TOWING & TRAVIS AUTO SERVICE 140 AT PHOENIX RACEWAY!** 🏜️🔥
+🚛 **Sponsored by Legacy Towing (Call 260-410-9407) & Travis Auto Service** 🔧
+✨ **Season 16 Proudly Presented by Clear Low Communications** ✨
+📺 **Watch Live on SimTrax YouTube:** https://www.youtube.com/watch?v=v5xJxuI5zyA
 🌐 **SimTrax Broadcast Hub:** https://banditracingleague.net/simtrax.html
-⏰ **Green Flag Broadcast:** Tonight (Wednesday, Oct 28) @ 9:00 PM EST!
+⏰ **Green Flag Broadcast:** Tonight (Wednesday, Nov 11) @ 9:00 PM EST!
 
-The **Season 16 Chase for the Championship** storms into **Round 2 of 5** tonight under the lights at **Kansas Speedway** for **The Wendy Jo Memorial 110**! 🏆🔥
+We are down to the **FINAL 2 RACES** for the **Season 16 Bandit Racing League Championship**! Tonight, the Chase for the Championship storms into the Arizona desert for **Round 4 of 5**—the **Legacy Towing & Travis Auto Service 140** under the lights at **Phoenix Raceway**! 🏆🌵
 
-Proudly sponsored by **Wes Fuller (#35 | Title Town Racing)** in loving memory of **Wendy Jo Jackson (1975–2020)** and presented by **JoKa Creations 3D Printing** alongside official Season 16 presenting sponsor **Clear Low Communications**, 110 high-speed laps (165 miles) await on Kansas Speedway's progressive-banked (17–20°) 1.5-mile tri-oval!
+🚨 **BREAKING GARAGE NEWS FLASH — #9 DYLAN MCDONALD SHUT DOWN FOR FINAL 2 RACES!** 🚨
+Shockwaves hit the Bandit Racing League garage earlier today: **Dylan McDonald (#9 | Legacy Racing)**—who sits **5th in the Chase standings (2,170 pts)** and dominated earlier this season at Phoenix Raceway (leading 73 laps to win Race 15)—**will NOT make the final 2 races of Season 16**!
+• His team has officially **shut down the #9 truck for the final two races** of the year.
+• **Garage Rumor Mill:** Word around the paddock is that somebody in a different league may have tattled to the **iRacing Gods**, landing McDonald an official **iRacing time-out ("vacation")** right before the penultimate race of the Championship!
+• Even wilder? With his own **Legacy Towing** banner on the marquee for tonight's 140-lapper, the defending Phoenix winner is parked on the sidelines—leaving the desert throne wide open tonight!
 
-⚙️ **TONIGHT'S RACE SPECS & STRATEGY CHALLENGE:**
-• **Distance:** 110 Laps (165.0 Miles) | **Stage Breaks:** Laps 33 & 66
+🏆 **2 RACES LEFT FOR THE SEASON 16 CHAMPIONSHIP — CHASE STANDINGS ENTERING PHOENIX:**
+*(Penultimate Race Tonight at Phoenix -> Championship Finale Next Week at Homestead-Miami!)*
+1️⃣ **#7 Benjamin I. Lacy (GFR Racing)** — **2,228 pts (Leader)** | Coming off a 58-pt Mid-Ohio clinic (Pole, 47/50 laps led); won the Pole & led 57 laps at Phoenix in Race 15!
+2️⃣ **#93 Scott Sanderson (GFR Racing)** — **2,208 pts (-20)** | P3 & Stage 1 Winner at Mid-Ohio (54 pts, 2x); finished Top-5 at Phoenix earlier this season!
+3️⃣ **#22 Joshua L. Adams (937 Racing)** — **2,182 pts (-46)** | 7 Poles in S16; looking to rebound and close the gap before Homestead!
+4️⃣ **#8 Kevin Foster (GFR Racing)** — **2,173 pts (-55)** | 2x BRL Champion; back-to-back Top-5s at Kansas (P3) & Mid-Ohio (P5).
+5️⃣ **#9 Dylan McDonald (Legacy Racing)** — **2,170 pts (-58)** | 🚨 *SHUT DOWN FOR FINAL 2 RACES (iRacing Time-Out)*
+6️⃣ **#00 Jackson Knaak (ESR)** — **2,156 pts (-72)** | Started 3rd & finished 4th at Phoenix in Race 15!
+7️⃣ **#47 Michael Rakes (937 Racing)** — **2,152 pts (-76)** | P5 at Kansas II & P7 at Mid-Ohio; moves into Top-6 contention with the #9 parked!
+8️⃣ **#2 Nick Nickerson (GFR Racing)** — **2,137 pts (-91)** | 4x BRL Champion; Kansas II Winner & finished 2nd (Stage 1 Winner) at Phoenix in Race 15!
+9️⃣ **#13 Johnathon Platt (GFR Racing)** — **2,113 pts (-115)** | 4 Stage Wins in Season 16.
+🔟 **#31 Connor Gibson (ZeroFoxtrot)** — **2,112 pts (-116)** | Coming off a 42-point Top-10 run at Mid-Ohio!
+
+⚙️ **TONIGHT'S RACE SPECS & DESERT STRATEGY:**
+• **Track:** Phoenix Raceway (1.0-Mile Tri-Oval w/ Open Dogleg)
+• **Distance:** 140 Laps (140.0 Miles) | **Stage Breaks:** Laps 42 & 84
 • **Fuel & Tires:** 70% Fuel Cap | **3 Total Tire Sets (Start + 2 Pit)**
-• **Track Dynamic:** High-line momentum inches off the outside wall vs. fuel mileage and tire preservation! When we visited Kansas in Race 11, **Michael Rakes (#47 | 937 Racing)** pulled off a fuel-strategy masterclass to win over 2x Champion **Kevin Foster (#8)** while points leader **Benjamin Lacy (#7)** led a race-high 40 laps!
+• **What to Watch:** Five-wide Chaos through the dogleg on restarts, flat-track brake management, and short-pitting strategy with only 2 pit tire sets! With Race 15 Phoenix winner Dylan McDonald out, look for **Benjamin Lacy (#7)**, **Nick Nickerson (#2)**, **Scott Sanderson (#93)**, **Jackson Knaak (#00)**, and Race 15 podium finisher **Brandon Jackson (#91)** to battle for control of the desert!
 
-🏆 **SEASON 16 CHASE STANDINGS ENTERING ROUND 2 (ONLY 3 PTS SEPARATE 1ST & 2ND!):**
-*5 Playoff Veterans (The Old Guard) vs. 5 First-Time Contenders (The New Blood) — No Eliminations!*
-1️⃣ **#7 Benjamin I. Lacy (GFR)** — **2,119 pts (Leader)** | Led 40 Laps (P5) in Kansas 1
-2️⃣ **#93 Scott Sanderson (GFR)** — **2,116 pts (-3)** | Cut Lacy's lead from 25 to 3 pts at Talladega!
-3️⃣ **#22 Joshua L. Adams (937 Racing)** — **2,102 pts (-17)** | 6 Poles, Led 14 Laps (P8) in Kansas 1
-4️⃣ **#9 Dylan McDonald (Legacy Racing)** — **2,095 pts (-24)** | +3 Spots at Dega (53 pts & Stg 1 Win)
-5️⃣ **#2 Nick Nickerson (GFR)** — **2,086 pts (-33)** | 4x BRL Champ, Led 13 Laps (P6) in Kansas 1
-6️⃣ **#8 Kevin Foster (GFR)** — **2,085* pts (-34)** | 2x BRL Champ, Finished P2 in Kansas 1
-7️⃣ **#00 Jackson Knaak (ESR)** — **2,085 pts (-34)** | P2 by 0.010s at Dega, Led 5 Laps in Kansas 1
-8️⃣ **#47 Michael Rakes (937 Racing)** — **2,081 pts (-38)** | 🏆 Defending Race 11 Kansas Winner!
-9️⃣ **#13 Johnathon Platt (GFR)** — **2,075 pts (-44)** | Dega Stage 2 Winner (11 Laps Led, P8)
-🔟 **#31 Connor Gibson (ZeroFoxtrot)** — **2,054 pts (-65)** | Finished P7 in Kansas 1
-
-🔥 **PLUS:** Fresh off his historic **1st career BRL win in his 162nd start** (by 0.0105 seconds at Talladega!), **#15 Matt Crockett (Roundy Motorsports)** rolls into Kansas where he scored his previous career-best finish (P2)!
-
-🎗️ **TEAM NOTE — SALT CITY RACING TEAM NUMBER CHANGE (#CHRISTIESTRONG):**
-**Salt City Performance** has performed a special team number change—with team owner/driver **Korey Denson** moving to the **#17** truck (and teammate **Collin Anderson** moving to **#36**)—in honor of Korey's good friend who has been bravely fighting the battle!
-
-🔮 **VIEWER FANTASY LEAGUE — LOCK IN YOUR PICKS BEFORE 9:10 PM EST!** 🔮
-Pick your 4-driver lineup before the green flag drops—100% FREE to play!
+🔮 **VIEWER FANTASY LEAGUE — LOCK IN YOUR PICKS BEFORE GREEN FLAG!** 🔮
+⚠️ *Fantasy Heads-Up: Do NOT pick the #9 truck tonight!* Pick your 4-driver lineup before 9:10 PM EST—100% FREE to play!
 👉 **Submit Fantasy Picks:** https://banditracingleague.net/fantasy.html
-📖 **Full 10-Driver Chase Scouting Report:** https://banditracingleague.net/article_chase_preview.html
+📖 **Full Chase Hub & Standings:** https://banditracingleague.net/article_chase_preview.html
 
-🗓️ **TONIGHT'S RACE SCHEDULE (WEDNESDAY, OCT 28):**
+🗓️ **TONIGHT'S RACE SCHEDULE (WEDNESDAY, NOV 11):**
 🕗 **Pit Gates / Practice:** 8:00 PM EST
 ⏱️ **Qualifying:** 8:50 PM EST
 🟢 **Live SimTrax Broadcast:** 9:00 PM EST
-▶️ **Set Reminder / Watch Live:** https://www.youtube.com/watch?v=Mvniqkv6ycU
+▶️ **Set Reminder / Watch Live:** https://www.youtube.com/watch?v=v5xJxuI5zyA
 
-Who takes the checkered flag in **The Wendy Jo Memorial 110** at Kansas tonight? Drop your predictions in the comments! 👇
+Who takes the checkered flag in the **Legacy Towing & Travis Auto Service 140** at Phoenix tonight, and who locks themselves into striking distance for next week's Championship Finale? Drop your predictions in the comments! 👇
 
-#BanditRacingLeague #WendyJoMemorial110 #WesFuller #JoKaCreations #ClearLowCommunications #ChristieStrong #SimTraxBroadcasting #KansasSpeedway #iRacing #CraftsmanTrucks #SimRacing"""
+#BanditRacingLeague #PhoenixRaceway #LegacyTowing #TravisAutoService #ClearLowCommunications #SimTraxBroadcasting #ChaseForTheChampionship #iRacing #CraftsmanTrucks #SimRacing"""
 
-    print("\n" + "-" * 65)
+    print("\n" + "-" * 68)
     print("GENERATED FACEBOOK PROMO POST:")
-    print("-" * 65)
+    print("-" * 68)
     print(post_text)
-    print("-" * 65)
+    print("-" * 68)
     
     base_dir = os.path.dirname(os.path.abspath(__file__))
     desktop = os.path.join(os.path.expanduser("~"), "Desktop")
 
     # Save text file on Desktop
-    out_file_desktop = os.path.join(desktop, "brl_kansas_facebook_post.txt")
+    out_file_desktop = os.path.join(desktop, "brl_phoenix_facebook_post.txt")
     with open(out_file_desktop, "w", encoding="utf-8") as f:
         f.write(post_text)
     print(f"\n[+] SUCCESS: Saved post to Desktop: {out_file_desktop}")
 
-    # Build combined promo graphic where Wendy Jo Memorial 110 banner is full size (1280x720)
-    # and ChristieStrong logo is a much smaller footer badge (84px tall) below it
-    banner_src = os.path.join(base_dir, "assets", "BCast Banners", "yt_Mvniqkv6ycU.jpg")
-    cstrong_src = os.path.join(base_dir, "assets", "christiestrong-logo.png")
-    combined_repo_path = os.path.join(base_dir, "assets", "BCast Banners", "kansas_wendy_jo_facebook_promo.jpg")
-    combined_desktop_path = os.path.join(desktop, "BRL_Wendy_Jo_Memorial_110_Kansas_Promo.jpg")
+    # Copy broadcast banner to Desktop for easy drag-and-drop into Facebook
+    banner_src = os.path.join(base_dir, "assets", "BCast Banners", "phoenixs16.png")
+    banner_desktop_path = os.path.join(desktop, "BRL_Phoenix_140_Facebook_Promo.png")
+    if os.path.exists(banner_src):
+        shutil.copy(banner_src, banner_desktop_path)
+        print(f"[+] SUCCESS: Copied Phoenix broadcast banner to Desktop: {banner_desktop_path}")
 
-    if os.path.exists(banner_src) and os.path.exists(cstrong_src):
-        build_combined_facebook_graphic(banner_src, cstrong_src, combined_repo_path)
-        shutil.copy(combined_repo_path, combined_desktop_path)
-        print(f"[+] SUCCESS: Saved combined promo graphic to Desktop: {combined_desktop_path}")
-
-    # Save to local workspace files
+    # Save to local workspace file
     out_file_local = os.path.join(base_dir, "facebook_promo_post.txt")
     with open(out_file_local, "w", encoding="utf-8") as f:
         f.write(post_text)
@@ -213,7 +159,7 @@ Who takes the checkered flag in **The Wendy Jo Memorial 110** at Kansas tonight?
     except Exception as e:
         print(f"[!] Could not open browser: {e}")
 
-    print("=" * 70)
+    print("=" * 72)
 
 if __name__ == "__main__":
     main()
