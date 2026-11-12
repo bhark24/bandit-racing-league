@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1794446375">
+    <link rel="stylesheet" href="styles.css?v=1794446812">
     <style>
         .pool-tier-badge {
             display: inline-block;
@@ -198,11 +198,11 @@
             color: var(--text-muted);
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1794446375">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1794446375">
-    <link rel="shortcut icon" href="favicon.ico?v=1794446375">
-    <link rel="manifest" href="manifest.json?v=1794446375">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1794446375">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1794446812">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1794446812">
+    <link rel="shortcut icon" href="favicon.ico?v=1794446812">
+    <link rel="manifest" href="manifest.json?v=1794446812">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1794446812">
 </head>
 <body>
 
@@ -744,9 +744,9 @@
     </footer>
 
     <!-- Roster Data and Standings Data -->
-    <script src="supabase_config.js?v=1794446375"></script>
-    <script src="roster_data.js?v=1794446375"></script>
-    <script src="fantasy_data.js?v=1794446375"></script>
+    <script src="supabase_config.js?v=1794446812"></script>
+    <script src="roster_data.js?v=1794446812"></script>
+    <script src="fantasy_data.js?v=1794446812"></script>
     
     <!-- Page Logic -->
     <script>
@@ -840,10 +840,12 @@
                 }
 
                 // Auto-pick for Bhark24 and Rebekah Weaver each week if not yet submitted for the current open race
-                const hasBhark24 = activeWeeklyPicks.some(p => p.name && p.name.trim().toLowerCase() === 'bhark24');
+                const bharkEntry = activeWeeklyPicks.find(p => p.name && p.name.trim().toLowerCase() === 'bhark24');
+                const hasBhark24 = Boolean(bharkEntry);
+                const bharkHasUnavailable = bharkEntry && Array.isArray(bharkEntry.picks) && bharkEntry.picks.some(drv => isDriverUnavailable(drv));
                 const hasRebekah = activeWeeklyPicks.some(p => p.name && ['rebekah weaver', 'rebeka weaver'].includes(p.name.trim().toLowerCase()));
                 if (!window.isFantasyLocked) {
-                    if (!hasBhark24) {
+                    if (!hasBhark24 || bharkHasUnavailable) {
                         const autoPlan = getBhark24AutoPickPlan();
                         await savePickToSupabase('Bhark24', autoPlan.picks, autoPlan.tiebreaker, '');
                     }
@@ -857,10 +859,11 @@
                 const savedName = (localStorage.getItem('bandit_fantasy_submitted_name') || 'Bhark24').trim().toLowerCase();
                 const matchingEntry = activeWeeklyPicks.find(p => p.name && p.name.trim().toLowerCase() === savedName);
                 if (matchingEntry && Array.isArray(matchingEntry.picks) && matchingEntry.picks.length === 4) {
-                    if (currentPicks.every(p => p === null) || savedName === 'bhark24') {
-                        currentPicks = [...matchingEntry.picks];
+                    if (currentPicks.every(p => p === null) || currentPicks.some(p => p === null) || savedName === 'bhark24') {
+                        currentPicks = matchingEntry.picks.map(p => (p && isDriverUnavailable(p)) ? null : p);
+                        localStorage.setItem('bandit_fantasy_submitted_picks', JSON.stringify(currentPicks));
                         const tbEl = document.getElementById('tiebreaker');
-                        if (tbEl && !tbEl.value && matchingEntry.tiebreaker) tbEl.value = matchingEntry.tiebreaker;
+                        if (tbEl && matchingEntry.tiebreaker) tbEl.value = matchingEntry.tiebreaker;
                         const nameEl = document.getElementById('fan-name');
                         if (nameEl && !nameEl.value) nameEl.value = matchingEntry.name;
                         updateSelectionSummary();
@@ -1786,6 +1789,6 @@
             }
         });
     </script>
-    <script src="brl_app.js?v=1794446375"></script>
+    <script src="brl_app.js?v=1794446812"></script>
 </body>
 </html>
