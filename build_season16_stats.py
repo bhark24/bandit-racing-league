@@ -74,10 +74,13 @@ def main():
         if tm.get("isForSale") or tm.get("isSuspended"):
             continue
         tname = tm.get("name")
-        for d in tm.get("primaryDrivers", []):
+        drv_obj = tm.get("drivers", {}) if isinstance(tm.get("drivers"), dict) else {}
+        prim_list = tm.get("primaryDrivers") or drv_obj.get("primary") or []
+        back_list = tm.get("backupDrivers") or drv_obj.get("backup") or []
+        for d in prim_list:
             if d and d != "VACANT":
                 driver_to_team[norm(d)] = tname
-        for d in tm.get("backupDrivers", []):
+        for d in back_list:
             if d and d != "VACANT":
                 driver_to_team[norm(d)] = f"{tname} (Backup)"
 

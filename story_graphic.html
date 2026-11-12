@@ -142,7 +142,7 @@
     </div>
   </div>
 
-  <script src="weekly_data.js?v=1794456031"></script>
+  <script src="weekly_data.js?v=1794457536"></script>
   <script>
     if (typeof weeklyData !== 'undefined') {
       const winnerName = weeklyData.winnerName || "TBD";
@@ -154,7 +154,13 @@
       document.getElementById('story-subtitle').innerText = `${trackName.toUpperCase()} • ${raceDate.toUpperCase()}`;
       
       // Update story text
-      if (trackName.toLowerCase().includes("mid-ohio") || trackName.toLowerCase().includes("mid ohio")) {
+      if (trackName.toLowerCase().includes("phoenix")) {
+        document.getElementById('dynamic-story').innerHTML = `
+          A 147-lap overtime desert duel in the <span class="highlight">Legacy Towing &amp; Travis Auto Service 140</span> at <span class="highlight">Phoenix Raceway</span>!<br><br>
+          <span class="highlight">${winnerName}</span> (${winnerNumber}) led 27 laps and held off <span class="highlight">#7 Benjamin Lacy</span> by 0.1342s for his 5th win of S16, while Lacy's 62-pt night (Pole, Stage 1 &amp; 2 Sweep, 91 Led, 0x) sets up an all-GFR title showdown vs <span class="highlight">#93 Scott Sanderson (-46)</span>!<br><br>
+          <span class="highlight" style="color:#ffcc00; font-size: 24px; font-style: italic;">UP NEXT: Season 16 Championship Finale at Homestead-Miami (Wed, Nov 18 @ 9 PM EST)!</span>
+        `;
+      } else if (trackName.toLowerCase().includes("mid-ohio") || trackName.toLowerCase().includes("mid ohio")) {
         document.getElementById('dynamic-story').innerHTML = `
           A 50-lap road-course masterclass in the <span class="highlight">Bandit Mobile App 50</span> at <span class="highlight">Mid-Ohio Sports Car Course</span>!<br><br>
           Starting on the Pole (1:26.0337), <span class="highlight">${winnerName}</span> (${winnerNumber}) led <span class="highlight">47 of 50 laps</span>, won Stage 2, and pulled away by 10.981s over <span class="highlight">#24 Ethan Sikorski</span> and Stage 1 winner <span class="highlight">#93 Scott Sanderson</span>!<br><br>

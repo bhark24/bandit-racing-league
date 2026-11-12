@@ -187,12 +187,14 @@ TRACK_LOGOS = {
     "texas": "Texas Motorspeedway.png",
     "las vegas": "Vegas.png",
     "phoenix": "phoenix.png",
+    "phoenix raceway": "phoenix.png",
     "martinsville": "Martinsville.jpg",
     "talladega": "Talladega.jpg",
     "road america": "Road America.png",
     "mid-ohio sports car course": "MidOhio.png",
     "mid-ohio": "MidOhio.png",
-    "homestead miami": "Homestead Miami.jpg"
+    "homestead miami": "Homestead Miami.jpg",
+    "homestead miami speedway": "Homestead Miami.jpg"
 }
 
 def normalize_name(name):
@@ -555,7 +557,17 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
 
             # Construct weekly data dict
             winner_image = find_custom_winner_image(winner_name, track_name, BASE_DIR) or existing_weekly.get("winnerImage")
-            action_shots = find_track_action_shots(track_name, BASE_DIR) or existing_weekly.get("actionShots", [])
+            if "phoenix" in track_name.lower() and "nickerson" in winner_name.lower():
+                winner_image = "assets/truck images/truck_image_nick_nickerson.png"
+            action_shots = find_track_action_shots(track_name, BASE_DIR)
+            if not action_shots and "phoenix" in track_name.lower():
+                action_shots = [
+                    "assets/BCast Banners/phoenixs16.png",
+                    "assets/truck images/truck_image_nick_nickerson.png",
+                    "assets/truck images/truck_image_benjamin_lacy.png"
+                ]
+            elif not action_shots:
+                action_shots = existing_weekly.get("actionShots", [])
             latest_video_id = existing_weekly.get("latestBroadcastVideoId") or get_latest_youtube_video_id("UC8D9f0DOxaf8hdyxIuk2NeQ")
             weekly_data = {
                 "winnerName": winner_name,
@@ -563,14 +575,14 @@ def generate_social_graphic(winner_name, track_name, race_date, teams_data, fant
                 "winnerImage": winner_image,
                 "actionShots": action_shots,
                 "trackName": track_name,
-                "trackLogo": track_logo or existing_weekly.get("trackLogo", "MidOhio.png"),
+                "trackLogo": track_logo or existing_weekly.get("trackLogo", "phoenix.png"),
                 "raceDate": race_date,
                 "teamStandings": team_list,
                 "fantasyLeaderboard": fantasy_list,
                 "driverStandings": driver_standings,
                 "latestBroadcastVideoId": latest_video_id,
                 "spotlightDriver": selected_spotlight,
-                "latestBroadcastTitle": existing_weekly.get("latestBroadcastTitle", "The I'm Lost at Mid Ohio 175"),
+                "latestBroadcastTitle": existing_weekly.get("latestBroadcastTitle", "Legacy Towing and Travis Auto Service 140"),
                 "latestBroadcastIsUpcoming": False,
                 "latestBroadcastBanner": existing_weekly.get("latestBroadcastBanner", f"assets/BCast Banners/yt_{latest_video_id}.jpg")
             }
@@ -643,17 +655,18 @@ def main():
         winner_name, track_name, race_date = parse_simhub_results()
         print(f"[+] Race Winner parsed from simhub.html: {winner_name} at {track_name}")
     
-    # 2b. Fetch Driver Standings from weekly_data.js (Top 10)
+    # 2b. Fetch Driver Standings from season16_stats_data.js or weekly_data.js (Top 10)
     driver_rows = []
+    stats_js_data = load_js_variable(os.path.join(BASE_DIR, "season16_stats_data.js"), "season16StatsData")
     weekly_data = load_js_variable(WEEKLY_DATA_PATH, "weeklyData")
-    if weekly_data and "driverStandings" in weekly_data:
-        sorted_drivers = weekly_data["driverStandings"][:10] # Top 10
+    source_drivers = (stats_js_data.get("drivers", [])[:10] if stats_js_data and stats_js_data.get("drivers") else (weekly_data.get("driverStandings", [])[:10] if weekly_data else []))
+    if source_drivers:
         emojis = ["🥇", "🥈", "🥉", "🏎️", "🏎️", "🏎️", "🏎️", "🏎️", "🏎️", "🏎️"]
-        for idx, d in enumerate(sorted_drivers):
+        for idx, d in enumerate(source_drivers):
             emoji = emojis[idx] if idx < len(emojis) else "🏎️"
             name = clean_driver_name(d.get("name", "Driver"))
             pts = d.get("points", 0)
-            pos = d.get("pos", idx + 1)
+            pos = d.get("rank", d.get("pos", idx + 1))
             driver_rows.append(f"{emoji} {pos}. {name} — {pts:,} pts")
     else:
         driver_rows.append("No active driver standings available.")
@@ -707,6 +720,12 @@ def main():
         story_lead = f"Closest Finish in BRL History! **{winner_name}** and GFR teammate Nick Nickerson hooked up in the draft to separate from the field, leading to a breathtaking final-lap dash. Lacy edged Nickerson by just **0.0002 seconds (0.2 milliseconds)**—less than 3/4 of an inch—in the closest finish in league history! Dylan McDonald finished a strong 3rd for Legacy Racing."
     elif "darlington" in track_name.lower():
         story_lead = f"Nickerson Tames the Lady in Black! **{winner_name}** drove a masterclass in the GFR Racing Chevrolet #2, surviving 130 grueling laps under the lights in \"Filming the Wild 130\" presented by Clear Low Communications to take the checkered flag at **{track_name}**! Benjamin Lacy finished 2nd for a GFR 1-2 sweep, while Dylan McDonald completed the podium in 3rd. Newest driver Korey Denson made his debut in the #36 car for Legacy Racing!"
+    elif "phoenix" in track_name.lower():
+        story_lead = (
+            f"Overtime Desert Duel in the **Legacy Towing & Travis Auto Service 140** (Chase Round 4) at **{track_name}**! "
+            f"Starting on the front row separated by just 0.0046s, GFR Racing teammates **{winner_name} (#2)** and **Benjamin I. Lacy (#7)** combined to lead 118 of 147 laps! "
+            f"While Lacy won the Pole (`26.9746s`), swept both Stage 1 and Stage 2, led a race-high **91 laps**, and recorded **0x incidents** for a massive **62-point night**, **{winner_name} (#2)** unleashed the Fastest Lap of the Race (`27.1093s`), led **27 laps**, and held off Lacy by **0.1342 seconds** in overtime for his **5th win of Season 16 (58 pts)**! **Jackson Knaak (#00 | ESR)** finished 3rd (-0.3836s, 2x) to jump into 4th in the Chase!"
+        )
     elif "kansas" in track_name.lower():
         story_lead = (
             f"Double-Overtime Thriller in **The Wendy Jo Memorial 110** (Chase Round 2) at **{track_name}**! "
@@ -724,8 +743,8 @@ def main():
 
 Congratulations to **{winner_name}** and **{winner_team}** for taking the checkered flag at **{track_name}** ({race_date})! 🏆
 
-🏆 **SEASON 16 CHASE FOR THE CHAMPIONSHIP STANDINGS (TOP 10)** 🏆
-Only 33 points separate the Top 4 entering Round 3:
+🏆 **SEASON 16 CHASE FOR THE CHAMPIONSHIP STANDINGS (ENTERING HOMESTEAD FINALE)** 🏆
+An All-GFR Racing Two-Man Title Showdown: #7 Benjamin Lacy leads #93 Scott Sanderson by 46 points entering Homestead-Miami!
 {"\n".join(driver_rows)}
 
 💼 **FRANCHISE TEAM STANDINGS** 💼
@@ -734,18 +753,17 @@ Only 33 points separate the Top 4 entering Round 3:
 🔮 **VIEWER FANTASY LEAGUE LEADERBOARD (TOP 5)** 🔮
 {"\n".join(fantasy_rows)}
 
-🔥 **VIEW THE KANSAS II WALL OF SHAME, FULL BOX SCORE & ODDS SHEET:**
-👉 **https://banditracingleague.net/wall-of-shame.html**
-👉 **https://banditracingleague.net/schedule.html**
+🔥 **READ THE FULL PHOENIX 140 RACE RECAP & BOX SCORE:**
+👉 **https://banditracingleague.net/article_phoenix_recap.html**
+👉 **https://banditracingleague.net/standings.html**
 
-📱 **SPECIAL SCHEDULE ANNOUNCEMENT — UPCOMING RACE:** 📱
-This week we are at **Mid-Ohio Sports Car Course for 50 Laps Sponsored by the BANDIT MOBILE APP** for the Bandit Racing League!
-🏎️ **Event:** Bandit Mobile App 50 at Mid-Ohio (Season 16 Chase Round 3)
-📏 **Distance:** 50 Laps (112.9 Miles • Stages at Laps 15 & 30)
-📅 **Broadcast:** Wednesday, November 4th @ 9:00 PM EST (Live on SimTrax Broadcasting)
-📱 **Official Title Sponsor:** BANDIT MOBILE APP — Live Telemetry, Championship Hub, Fantasy & Pit Wall in Your Pocket!
+🌴 **UP NEXT — SEASON 16 CHAMPIONSHIP FINALE:** 🌴
+Next week we crown our Season 16 Champion under the lights at **Homestead-Miami Speedway**!
+🏎️ **Event:** Season 16 Championship Finale at Homestead-Miami (Chase Round 5)
+📏 **Distance:** 110 Laps (165.0 Miles)
+📅 **Broadcast:** Wednesday, November 18th @ 9:00 PM EST (Live on SimTrax Broadcasting)
 
-Who is your pick to conquer 50 laps at Mid-Ohio? Drop your predictions in the comments below! 👇"""
+Who takes home the Season 16 Championship trophy at Homestead-Miami? Drop your predictions in the comments below! 👇"""
 
     with open(os.path.join(BASE_DIR, "facebook_kansas2_post.txt"), "w", encoding="utf-8") as fb_f:
         fb_f.write(post_text)

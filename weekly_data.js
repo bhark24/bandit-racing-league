@@ -1,13 +1,14 @@
 const weeklyData = {
   "winnerName": "Nick Nickerson",
   "winnerNumber": "2",
-  "winnerImage": "assets/WINNER IMAGES/N.Nickerson_WatkinsGlen.png",
+  "winnerImage": "assets/truck images/truck_image_nick_nickerson.png",
   "actionShots": [
-    "assets/race images/mid_ohio_l35.png",
-    "assets/race images/mid_ohio_l35_2.png"
+    "assets/BCast Banners/phoenixs16.png",
+    "assets/truck images/truck_image_nick_nickerson.png",
+    "assets/truck images/truck_image_benjamin_lacy.png"
   ],
   "trackName": "Phoenix Raceway",
-  "trackLogo": "MidOhio.png",
+  "trackLogo": "phoenix.png",
   "raceDate": "Nov 11, 2026",
   "teamStandings": [
     {
@@ -172,102 +173,102 @@ const weeklyData = {
     {
       "pos": 1,
       "name": "Benjamin I Lacy",
-      "points": 2228
+      "points": 2290
     },
     {
       "pos": 2,
       "name": "Scott Sanderson",
-      "points": 2208
+      "points": 2244
     },
     {
       "pos": 3,
       "name": "Joshua L Adams",
-      "points": 2182
+      "points": 2229
     },
     {
       "pos": 4,
-      "name": "Kevin Foster",
-      "points": 2173
+      "name": "Jackson Knaak",
+      "points": 2202
     },
     {
       "pos": 5,
-      "name": "Dylan McDonald",
-      "points": 2170
+      "name": "Kevin Foster",
+      "points": 2201
     },
     {
       "pos": 6,
-      "name": "Jackson Knaak",
-      "points": 2156
+      "name": "Nick Nickerson",
+      "points": 2195
     },
     {
       "pos": 7,
       "name": "Michael Rakes",
-      "points": 2152
+      "points": 2190
     },
     {
       "pos": 8,
-      "name": "Nick Nickerson",
-      "points": 2137
+      "name": "Dylan McDonald",
+      "points": 2170
     },
     {
       "pos": 9,
+      "name": "Connor Gibson",
+      "points": 2148
+    },
+    {
+      "pos": 10,
       "name": "Johnathon Platt",
       "points": 2113
     },
     {
-      "pos": 10,
-      "name": "Connor Gibson",
-      "points": 2112
-    },
-    {
       "pos": 11,
       "name": "Matt Crockett",
-      "points": 431
+      "points": 457
     },
     {
       "pos": 12,
       "name": "Davis Carroll",
-      "points": 399
+      "points": 421
     },
     {
       "pos": 13,
-      "name": "Logan A Murray",
-      "points": 358
+      "name": "Bill Harkins",
+      "points": 375
     },
     {
       "pos": 14,
+      "name": "Logan A Murray",
+      "points": 375
+    },
+    {
+      "pos": 15,
+      "name": "Ethan Sikorski",
+      "points": 372
+    },
+    {
+      "pos": 16,
+      "name": "Tre Ellis",
+      "points": 368
+    },
+    {
+      "pos": 17,
       "name": "Ricky Hart Jr",
       "points": 354
     },
     {
-      "pos": 15,
-      "name": "Bill Harkins",
-      "points": 352
-    },
-    {
-      "pos": 16,
-      "name": "Ethan Sikorski",
-      "points": 344
-    },
-    {
-      "pos": 17,
-      "name": "Tre Ellis",
-      "points": 342
-    },
-    {
       "pos": 18,
+      "name": "Ty Corino",
+      "points": 337
+    },
+    {
+      "pos": 19,
       "name": "Victor Weaver",
       "points": 325
     },
     {
-      "pos": 19,
+      "pos": 20,
       "name": "Joshua Billiter",
       "points": 321
-    },
-    {
-      "pos": 20,
-      "name": "Ty Corino",
-      "points": 320
     },
     {
       "pos": 21,
@@ -276,18 +277,18 @@ const weeklyData = {
     },
     {
       "pos": 22,
-      "name": "Garret Bobo",
-      "points": 269
+      "name": "Nicole Kriesel",
+      "points": 285
     },
     {
       "pos": 23,
-      "name": "Nicole Kriesel",
-      "points": 265
+      "name": "Nathan Santos",
+      "points": 283
     },
     {
       "pos": 24,
-      "name": "Nathan Santos",
-      "points": 262
+      "name": "Garret Bobo",
+      "points": 269
     },
     {
       "pos": 25,
@@ -296,28 +297,28 @@ const weeklyData = {
     },
     {
       "pos": 26,
+      "name": "Chad Hartle",
+      "points": 244
+    },
+    {
+      "pos": 27,
+      "name": "Peter Murphy",
+      "points": 242
+    },
+    {
+      "pos": 28,
       "name": "Jason Allegrini",
       "points": 238
     },
     {
-      "pos": 27,
+      "pos": 29,
       "name": "Adam Tahan",
       "points": 224
     },
     {
-      "pos": 28,
-      "name": "Chad Hartle",
-      "points": 218
-    },
-    {
-      "pos": 29,
+      "pos": 30,
       "name": "Matthew Bailey",
       "points": 213
-    },
-    {
-      "pos": 30,
-      "name": "Peter Murphy",
-      "points": 206
     },
     {
       "pos": 31,
@@ -326,28 +327,28 @@ const weeklyData = {
     },
     {
       "pos": 32,
+      "name": "Jon Osborne",
+      "points": 188
+    },
+    {
+      "pos": 33,
       "name": "Wes Fuller",
       "points": 171
     },
     {
-      "pos": 33,
-      "name": "Jon Osborne",
-      "points": 165
+      "pos": 34,
+      "name": "Curtis Yancey",
+      "points": 160
     },
     {
-      "pos": 34,
+      "pos": 35,
       "name": "Jackson C Duke",
       "points": 142
     },
     {
-      "pos": 35,
+      "pos": 36,
       "name": "Joey Cruz",
       "points": 136
-    },
-    {
-      "pos": 36,
-      "name": "Curtis Yancey",
-      "points": 124
     },
     {
       "pos": 37,
@@ -443,6 +444,6 @@ const weeklyData = {
   "latestBroadcastVideoId": "v5xJxuI5zyA",
   "spotlightDriver": "Joshua Adams",
   "latestBroadcastTitle": "Legacy Towing and Travis Auto Service 140",
-  "latestBroadcastIsUpcoming": true,
+  "latestBroadcastIsUpcoming": false,
   "latestBroadcastBanner": "assets/BCast Banners/yt_v5xJxuI5zyA.jpg"
 };
