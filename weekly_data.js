@@ -1,43 +1,43 @@
 const weeklyData = {
-  "winnerName": "Benjamin Lacy",
-  "winnerNumber": "7",
-  "winnerImage": "assets/WINNER IMAGES/BenLacy_Mid_Ohio.png",
+  "winnerName": "Nick Nickerson",
+  "winnerNumber": "2",
+  "winnerImage": "assets/WINNER IMAGES/N.Nickerson_WatkinsGlen.png",
   "actionShots": [
     "assets/race images/mid_ohio_l35.png",
     "assets/race images/mid_ohio_l35_2.png"
   ],
-  "trackName": "Mid-Ohio Sports Car Course",
+  "trackName": "Phoenix Raceway",
   "trackLogo": "MidOhio.png",
-  "raceDate": "Nov 4, 2026",
+  "raceDate": "Nov 11, 2026",
   "teamStandings": [
     {
       "name": "GFR Racing",
-      "points": 2724,
-      "wins": 12
+      "points": 2864,
+      "wins": 13
     },
     {
       "name": "937 Racing",
-      "points": 1439,
+      "points": 1502,
       "wins": 3
     },
     {
       "name": "Legacy Racing",
-      "points": 1343,
+      "points": 1385,
       "wins": 3
     },
     {
-      "name": "Roundy Motorsports",
-      "points": 1070,
-      "wins": 1
-    },
-    {
       "name": "ZeroFoxtrot",
-      "points": 1048,
+      "points": 1129,
       "wins": 0
     },
     {
+      "name": "Roundy Motorsports",
+      "points": 1117,
+      "wins": 1
+    },
+    {
       "name": "ESR",
-      "points": 989,
+      "points": 1072,
       "wins": 0
     },
     {
@@ -74,28 +74,33 @@ const weeklyData = {
   "fantasyLeaderboard": [
     {
       "name": "Rebekah Weaver",
-      "score": 1542,
+      "score": 1933,
       "wins": 3
     },
     {
       "name": "Matt Crockett",
-      "score": 1471,
-      "wins": 4
+      "score": 1763,
+      "wins": 5
     },
     {
       "name": "Bhark24",
-      "score": 1254,
-      "wins": 3
+      "score": 1397,
+      "wins": 2
     },
     {
       "name": "Lady Chaos",
-      "score": 781,
+      "score": 1047,
       "wins": 3
     },
     {
       "name": "Bob Berry",
       "score": 711,
       "wins": 5
+    },
+    {
+      "name": "Michael Rakes",
+      "score": 380,
+      "wins": 2
     },
     {
       "name": "cmac",
@@ -111,11 +116,6 @@ const weeklyData = {
       "name": "Bobo",
       "score": 277,
       "wins": 0
-    },
-    {
-      "name": "Michael Rakes",
-      "score": 231,
-      "wins": 1
     },
     {
       "name": "robin allens bigest fan",
@@ -441,7 +441,7 @@ const weeklyData = {
     }
   ],
   "latestBroadcastVideoId": "v5xJxuI5zyA",
-  "spotlightDriver": "Nathan Santos",
+  "spotlightDriver": "Joshua Adams",
   "latestBroadcastTitle": "Legacy Towing and Travis Auto Service 140",
   "latestBroadcastIsUpcoming": true,
   "latestBroadcastBanner": "assets/BCast Banners/yt_v5xJxuI5zyA.jpg"
