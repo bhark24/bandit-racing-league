@@ -841,7 +841,6 @@ const fantasyData = {
           "picks": [
             "DYLAN MCDONALD",
             "KEVIN FOSTER",
-            "KOREY DENSON",
             "SCOTT SANDERSON"
           ]
         },
@@ -2007,7 +2006,6 @@ const fantasyData = {
           "picks": [
             "DYLAN MCDONALD",
             "KEVIN FOSTER",
-            "KOREY DENSON",
             "SCOTT SANDERSON"
           ],
           "total": 125

@@ -20,7 +20,6 @@
 • **Lap 186 Caution:** Noted for heavy **ARCA braking** into the late-race caution scene alongside Car #1.
 
 ### ⏱️ 15-Lap Rule Drive-Through & Voice Chat Conduct Warning
-⏱️ **KOREY DENSON (Car #36) — DRIVE-THROUGH PENALTY + VERBAL VC WARNING**
 • **Lap 11:** Self-spun out of Turn 4 within the opening 15 laps.
 ↳ **Ruling:** Assessed **Drive-Through Penalty** (per the 15-Lap Rule).
 • **Lap 97 Caution (Voice Chat Conduct):** Under yellow, Car #36 stated *"we don't like questions here"* and told Car #31 (Connor Gibson) *"why don't you learn how to drive before you open your mouth."*
@@ -29,7 +28,6 @@
 ### 🔄 Pre-Race Probation & EOL Penalties Served
 🟢 **VICTOR WEAVER (Car #18)**
 • **Status:** Successfully **SERVED EOL 2 of 3** at Martinsville (1 week remaining).
-🟢 **KOREY DENSON (Car #36)**
 • **Status:** Successfully **SERVED EOL 1 of 3** at Martinsville (2 weeks remaining).
 
 ### ⚠️ At-Fault Incidents & EOL Penalties
@@ -79,7 +77,6 @@
 • **Victor Weaver (#18) & Bill Harkins (#12)** — *Lap 21:* #18 had trouble holding the bottom and braked harder than #12 expected; #12 had no time to react and turned #18 *(Racing Deal)*
 • **Joshua L. Adams (#22) & Dylan McDonald (#9)** — *Lap 33:* #22 got to the rear of #9 late and turned him *(Racing Deal)*
 • **Outside Line Restart Stackup** — *Lap 39:* Outside lane checked up entering Turn 1 on the restart; severe accordion effect through the pack *(Racing Deal)*
-• **Korey Denson (#36) & Joey Cruz (#28)** — *Lap 76:* #36 got into the back of #28 after #28 made a late move to cover him off and immediately started braking *(Racing Deal)*
 • **Kevin Foster (#8) & Tre Ellis (#63)** — *Lap 124:* #8 came down slightly while #63 exited the corner; met in the middle *(Racing Deal)*
 • **Joey Cruz (#28) & Matthew Bailey (#54)** — *Lap 139:* #54 was trying to let cars by and #28 thought he was clear *(Racing Deal)*
 • **Innocent Victims:** #4 Logan Murray (L44), #6 Nicole Kriesel (L64), #12 Bill Harkins (L68), #15 Matt Crockett (L57 & L84), #24 Ethan Sikorski (L133), #28 Joey Cruz (L97), #31 Connor Gibson (L64), #47 Michael Rakes (L186), #50 Davis Carroll (L110 & L117), #54 Matthew Bailey (L76 yellow).
@@ -87,7 +84,6 @@
 ### 📊 Official Penalty Summary List
 ```
 #69  Collin Anderson  | 3x EOL + WARN | L44, L64, L97 EOLs + L64 Track Stop + L76 Yellow Brake-Check + L186 ARCA Brake
-#36  Korey Denson     | DRIVE-THRU    | L11 Self-Spin (15-Lap Rule) + L97 Verbal Warning (Voice Chat) + Served EOL 1/3
 #12  Bill Harkins     | 2x EOL        | L110 Turn 3 Drift into #50 + L186 Wall Pinch on #47
 #31  Connor Gibson    | EOL PENALTY   | L57 Late Dive into Closing Gap on #15 (Stage 1 Ended Early)
 #9   Dylan McDonald   | EOL PENALTY   | L68 Hot Turn 3 Entry into #12

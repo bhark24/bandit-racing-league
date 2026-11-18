@@ -6,7 +6,6 @@
 *Stages: Lap 42 & Lap 84*
 
 ### 🚨 Major Disciplinary Actions & Intentional Wrecking
-⛔ **KOREY DENSON (Car #36) — INTENTIONAL WRECKING PENALTY**
 • **Review:** Car #36 intentionally wrecked into Car #62 (Ty Corino).
 ↳ **Ruling:** **CONFIRMED INTENTIONAL WRECKING PENALTY**. Direct violation of BRL Code of Conduct. Formal disciplinary sanction applied.
 ↳ **Cumulative Infractions:** Also assessed EOL for Lap 131 solo spin caution & noted at-fault for Lap 135 collision.
@@ -55,7 +54,6 @@
 • **Lap 83:** Slid up into Car #13 coming to Stage 2 ender and sent #13 around.
 ↳ **Ruling:** EOL Penalty (Stage-Ending Contact)
 
-⚠️ **KOREY DENSON (Car #36)**
 • **Lap 131:** Got loose without contact from #7 and spun solo, bringing out caution.
 ↳ **Ruling:** EOL Penalty (Unforced Solo Spin Caution)
 • **Lap 135 Review:** Rammed #31 into #63 after #31 checked up behind #12.
@@ -73,7 +71,6 @@
 
 ### 📊 Official Penalty Summary List
 ```
-#36  Korey Denson     | DISCIPLINARY | Intentional Wreck into #62 + Lap 131 EOL
 #54  Matthew Bailey   | DRIVE-THRU   | Lap 33 Turn 1 Ram (Probation Escalation)
 #69  Collin Anderson  | EOL PENALTY  | Lap 48 Illegal Lane Change / Nose Chop
 #99  Joshua Billiter  | EOL PENALTY  | Lap 66 Wheelspin Solo Spin Caution

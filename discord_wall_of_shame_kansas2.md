@@ -2,17 +2,13 @@
 
 **Event:** BRL Kansas 2 — The Wendy Jo Memorial 110 (117 Laps in Double Overtime)
 **Stages:** Laps 33 & 66
-**Pre-Race Probation / EOL Note:** Car #36 (now #17 Korey Denson) served EOL #2 of 3 at the green flag.
 
 ---
 
 ## 🚨 Wall of Shame MVP & Pit Road Short-Fuse Blowup
 
-### 💥🎙️ KOREY DENSON (Car #17, formerly #36) & PIT ROAD POWDER KEG (#17, #31, #13, #24)
 • **Pre-Race (Lap 1)**: Switched from #36 to #17 and dropped to the rear to serve **EOL #2 of 3**.
-• **Lap 32**: Side-by-side contact between **Car #9 (Dylan McDonald)** and **Car #17 (Korey Denson)** coming to the end of Stage 1 with no yellow flag.
   ↳ *Ruling*: **No Yellow / Racing Contact**
-• **Lap 66 (Stage 2 Caution)**: **Cars #17 (Korey Denson)**, **#31 (Connor Gibson)**, **#13 (Johnathon Platt)**, and **#24 (Ethan Sikorski)** all started mouthing off at each other on voice chat with incredibly short fuses. All it seemed like was #17 tried to stay as far to the right of pit road as he could, and then #13 said something on the mic that immediately lit the very short fuse on the #17!
 
 ---
 
@@ -49,7 +45,6 @@
 
 | Lap | Cars Involved | Incident Summary | Official Stewards' Ruling |
 | :---: | :---: | :--- | :--- |
-| **Pre-Race** | **#17 (was #36)** | Korey Denson serving scheduled probation penalty | **EOL #2 of 3 Served (#17)** |
 | **Lap 12** | **#4, #14** | #4 expected #14 to track higher on exit; put #14 in wall & spun himself | **Drive-Through #4 (15-Lap Rule)** |
 | **Lap 32** | **#9, #17** | Side-by-side contact between #9 and #17, no yellow | **No Yellow / Racing Contact** |
 | **Lap 33** | **STAGE 1** | Stage 1 finish (won by #22 Joshua L. Adams) | **Stage 1 Complete** |

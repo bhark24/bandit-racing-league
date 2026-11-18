@@ -276,7 +276,7 @@ const rosterData = {
     "status": "part-time"
   },
   "PENDING": {
-    "driver": "KOREY DENSON",
+    "driver": "OPEN",
     "status": "part-time"
   }
 };

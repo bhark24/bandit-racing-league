@@ -967,7 +967,7 @@ const BRL_RACES_DATA = {
         ],
         mvp: {
             carNumber: "36",
-            driverName: "Car #36 (Korey Denson)",
+            driverName: "Car #54 (Matthew Bailey)",
             title: "Wall of Shame MVP — Intentional Wreck & Incident Spree 💥🏁",
             reason: "Flagrant intentional wreck into Car #62 (Ty Corino), Lap 131 solo spin caution, and Lap 135 accordion crash into #31 & #63. Crowned Wall of Shame MVP for unsportsmanlike retaliation!",
             totalIncidents: 3,
@@ -975,7 +975,6 @@ const BRL_RACES_DATA = {
             image: "assets/BCast Banners/phoenix_s16.png"
         },
         drivers: [
-            { number: "36", name: "Driver #36 (Korey Denson)", score: 100, level: "CRITICAL", badge: "MVP / Intentional Wreck into #62", incidentsCount: 3, colors: ["#ff0055", "#111"] },
             { number: "54", name: "Driver #54 (Matthew Bailey)", score: 90, level: "CRITICAL", badge: "Drive-Through (Probation Violation)", incidentsCount: 1, colors: ["#ff0055", "#111"] },
             { number: "69", name: "Driver #69 (Collin Anderson)", score: 80, level: "HIGH", badge: "EOL (Illegal Restart Lane Change)", incidentsCount: 1, colors: ["#ff5500", "#111"] },
             { number: "99", name: "Driver #99 (Joshua Billiter)", score: 75, level: "HIGH", badge: "EOL (Wheelspin Solo Spin)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
@@ -1007,7 +1006,7 @@ const BRL_RACES_DATA = {
             {
                 id: 3, lap: 33, stage: 1, involved: ["54", "36"], primaryCar: "54", category: "penalty",
                 title: "Car 54 Overdrives Turn 1 & Runs Over Car 36",
-                summary: "Car 54 (Matthew Bailey) completely ran over Car 36 (Korey Denson) into Turn 1. No caution flew, but Car 54 was 100% at fault. Because Car 54 is on probation/watch without improvement, stewards assessed an escalated Drive-Through.",
+                summary: "Car 54 (Matthew Bailey) completely ran over Car 36 into Turn 1. No caution flew, but Car 54 was 100% at fault. Because Car 54 is on probation/watch without improvement, stewards assessed an escalated Drive-Through.",
                 ruling: "Drive-Through Penalty (Probation Escalation)", location: "Turn 1",
                 trackCoords: { x: 670, y: 160 },
                 audioTranscript: "[RACE CONTROL] 'Car 54 ran the 36 over in Turn 1. Driver on probation with no improvement: Drive-Through Penalty car 54.'"
@@ -1055,7 +1054,7 @@ const BRL_RACES_DATA = {
             {
                 id: 9, lap: 73, stage: 2, involved: ["2", "36"], primaryCar: "2", category: "penalty",
                 title: "Car 2 Slides Up Into Car 36",
-                summary: "Car 2 (Nick Nickerson) got loose in the corner and slid up the track into Car 36 (Korey Denson).",
+                summary: "Car 2 (Nick Nickerson) got loose in the corner and slid up the track into Car 36.",
                 ruling: "End of Line (EOL) Penalty (#2)", location: "Turn 4",
                 trackCoords: { x: 160, y: 120 },
                 audioTranscript: "[STEWARDS] 'Car 2 got loose and washed up into the 36. EOL penalty car 2.'"
@@ -1085,28 +1084,12 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[STEWARDS] '31 turned in, 14 entered middle, went for same spot. Racing deal.'"
             },
             {
-                id: 13, lap: 131, stage: 3, involved: ["36", "7"], primaryCar: "36", category: "penalty",
-                title: "Unforced Solo Spin Caution",
-                summary: "Car 36 (Korey Denson) got loose solo with no contact from Car 7 (Benjamin Lacy) and spun around, triggering a full-course yellow.",
-                ruling: "End of Line (EOL) Penalty (#36)", location: "Turn 2",
-                trackCoords: { x: 650, y: 270 },
-                audioTranscript: "[RACE CONTROL] 'Car 36 lost it solo off Turn 2. No contact from the 7. Yellow is out. EOL penalty car 36.'"
-            },
-            {
                 id: 14, lap: 135, stage: 3, involved: ["36", "31", "12", "63"], primaryCar: "36", category: "penalty",
                 title: "Rear-End Check-Up Pileup",
                 summary: "Car 31 touched Car 12 which checked him up. Car 36 tried to force a run and rammed the 31, sending #31 into Car 63 and around. Initially racing deal live; post-race review confirms 36 at fault.",
                 ruling: "At-Fault Incident (Should have been EOL car 36)", location: "Turn 3",
                 trackCoords: { x: 130, y: 260 },
                 audioTranscript: "[STEWARDS REVIEW] '31 checked up behind 12, 36 just rammed him into 63. Deemed at-fault incident on car 36.'"
-            },
-            {
-                id: 15, lap: 136, stage: 3, involved: ["36", "62"], primaryCar: "36", category: "mvp",
-                title: "RETALIATION & INTENTIONAL WRECK: Car 36 Wrecks Car 62",
-                summary: "Car 36 (Korey Denson) intentionally wrecked into Car 62 (Ty Corino). Direct retaliation and flagrant breach of league regulations. Confirmed Intentional Wrecking Penalty.",
-                ruling: "CONFIRMED INTENTIONAL WRECKING PENALTY (#36)", location: "Front Stretch",
-                trackCoords: { x: 400, y: 330 },
-                audioTranscript: "[RACE CONTROL] 'Confirmed intentional wreck by Car 36 into the 62. Disciplinary action confirmed. Wall of Shame MVP.'"
             },
             {
                 id: 16, lap: 137, stage: 3, involved: ["93", "91"], primaryCar: "93", category: "warning",
@@ -1141,7 +1124,6 @@ const BRL_RACES_DATA = {
         },
         drivers: [
             { number: "69", name: "Driver #69 (Collin Anderson)", score: 100, level: "CRITICAL", badge: "MVP / 3x EOL + Brake-Checking", incidentsCount: 6, colors: ["#ff0055", "#111"] },
-            { number: "36", name: "Driver #36 (Korey Denson)", score: 92, level: "CRITICAL", badge: "Drive-Thru (15-Lap Rule) + VC Warning", incidentsCount: 3, colors: ["#ff0055", "#111"] },
             { number: "12", name: "Driver #12 (Bill Harkins)", score: 85, level: "HIGH", badge: "2x EOL Penalties (L110 & L186)", incidentsCount: 5, colors: ["#ff5500", "#111"] },
             { number: "31", name: "Driver #31 (Connor Gibson)", score: 75, level: "HIGH", badge: "EOL (Stage 1 Ender on #15)", incidentsCount: 2, colors: ["#ffaa00", "#111"] },
             { number: "9",  name: "Driver #9 (Dylan McDonald)", score: 72, level: "HIGH", badge: "EOL (Lap 68 Dive on #12)", incidentsCount: 2, colors: ["#ffaa00", "#111"] },
@@ -1157,7 +1139,7 @@ const BRL_RACES_DATA = {
             {
                 id: 1, lap: 1, stage: 1, involved: ["18", "36"], primaryCar: "18", category: "racing_deal",
                 title: "Pre-Race Probation & EOL Penalties Served (#18 & #36)",
-                summary: "Cars #18 (Victor Weaver) and #36 (Korey Denson) dropped to the rear at the start to serve scheduled EOL penalties. This marked Car #18's 2nd EOL of 3 and Car #36's 1st EOL of 3.",
+                summary: "Cars #18 (Victor Weaver) and #36 dropped to the rear at the start to serve scheduled EOL penalties. This marked Car #18's 2nd EOL of 3 and Car #36's 1st EOL of 3.",
                 ruling: "Probation EOL Penalties Served (#18: 2 of 3 | #36: 1 of 3)", location: "Start / Finish Line",
                 trackCoords: { x: 400, y: 330 },
                 audioTranscript: "[RACE CONTROL] 'Cars 18 and 36 serving pre-race EOL penalties at the tail of the field. 18 on 2 of 3, 36 on 1 of 3.'"
@@ -1169,14 +1151,6 @@ const BRL_RACES_DATA = {
                 ruling: "Racing Deal (No Reaction Time)", location: "Turn 2",
                 trackCoords: { x: 650, y: 260 },
                 audioTranscript: "[STEWARDS] '12 checked up for 82 and hit the curb, 63 had nowhere to go. Racing deal.'"
-            },
-            {
-                id: 3, lap: 11, stage: 1, involved: ["36"], primaryCar: "36", category: "penalty",
-                title: "Turn 4 Unforced Self-Spin (15-Lap Rule Drive-Through)",
-                summary: "Car #36 (Korey Denson) self-spun coming out of Turn 4 on Lap 11. Under the league's opening 15-lap caution rule, an automatic Drive-Through penalty was assessed.",
-                ruling: "Drive-Through Penalty (#36 — 15-Lap Rule)", location: "Turn 4 Exit",
-                trackCoords: { x: 220, y: 80 },
-                audioTranscript: "[RACE CONTROL] 'Car 36 solo spin off Turn 4 inside the first 15 laps. Drive-Through penalty on the 36.'"
             },
             {
                 id: 4, lap: 21, stage: 1, involved: ["18", "12"], primaryCar: "12", category: "racing_deal",
@@ -1237,7 +1211,7 @@ const BRL_RACES_DATA = {
             {
                 id: 11, lap: 76, stage: 2, involved: ["36", "28", "69", "54"], primaryCar: "69", category: "warning",
                 title: "Late Block Check-Up & Caution Flag Brake-Check by Car #69 on #54!",
-                summary: "Car #36 (Korey Denson) got into the back of Car #28 (Joey Cruz) after #28 made a late defensive move to cover him off and immediately started braking (deemed Racing Deal). Under the ensuing caution flag, Car #69 (Collin Anderson) appeared to intentionally brake-check Car #54 (Matthew Bailey)!",
+                summary: "Car #36 got into the back of Car #28 (Joey Cruz) after #28 made a late defensive move to cover him off and immediately started braking (deemed Racing Deal). Under the ensuing caution flag, Car #69 (Collin Anderson) appeared to intentionally brake-check Car #54 (Matthew Bailey)!",
                 ruling: "Racing Deal (#36/#28) | FINAL WARNING (#69): Next Pace-Lap Brake-Check = Parked / Removed from Session", location: "Front Stretch / Caution",
                 trackCoords: { x: 450, y: 330 },
                 audioTranscript: "[RACE CONTROL] '36 and 28 is a racing deal on a late block. Car 69: do NOT brake-check the 54 under yellow! One more stunt like that and you are removed from the session!'"
@@ -1253,7 +1227,7 @@ const BRL_RACES_DATA = {
             {
                 id: 13, lap: 97, stage: 2, involved: ["69", "28", "36", "31"], primaryCar: "69", category: "warning",
                 title: "Car #69 3rd EOL (Dumps #28) + Car #36 Voice Chat Conduct Warning!",
-                summary: "Car #69 (Collin Anderson) ran into Car #28 (Joey Cruz), shoved him up the banking, and then hooked his left-rear to spin him out (69's 3rd EOL of the night!). Under caution, Car #36 (Korey Denson) snapped on voice chat at Car #31 (Connor Gibson), saying 'we don't like questions here' and 'why don't you learn how to drive before you open your mouth.'",
+                summary: "Car #69 (Collin Anderson) ran into Car #28 (Joey Cruz), shoved him up the banking, and then hooked his left-rear to spin him out (69's 3rd EOL of the night!). Under caution, Car #36 snapped on voice chat at Car #31 (Connor Gibson), saying 'we don't like questions here' and 'why don't you learn how to drive before you open your mouth.'",
                 ruling: "EOL Penalty (#69) + Official Verbal Warning (#36 — Next VC Violation = Voice Chat Mute)", location: "Turn 2",
                 trackCoords: { x: 620, y: 280 },
                 audioTranscript: "[RADIO #36] 'Why don't you learn how to drive before you open your mouth!' -> [RACE CONTROL] 'EOL on 69! And 36, consider this your verbal warning—repeat that conduct and your voice chat is gone!'"
@@ -1358,7 +1332,6 @@ const BRL_RACES_DATA = {
             { number: "54", name: "Driver #54 (Matthew Bailey)", score: 88, level: "HIGH", badge: "EOL (Lap 54 Clip on #9) + 3 Incidents", incidentsCount: 3, colors: ["#ff5500", "#111"] },
             { number: "75", name: "Driver #75 (Bob Berry)", score: 82, level: "HIGH", badge: "EOL (Lap 64 Late Block on #9) + ARCA Note", incidentsCount: 2, colors: ["#ff5500", "#111"] },
             { number: "24", name: "Driver #24 (Ethan Sikorski)", score: 74, level: "HIGH", badge: "EOL (Lap 21 Tri-Oval Contact w/ #2)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
-            { number: "36", name: "Driver #36 (Korey Denson)", score: 65, level: "MEDIUM", badge: "DNS — 2 EOL Penalties Remaining", incidentsCount: 1, colors: ["#e67e22", "#111"] },
             { number: "31", name: "Driver #31 (Connor Gibson)", score: 55, level: "MEDIUM", badge: "2x Racing Deals (L30 Checkup & L42 Stage)", incidentsCount: 2, colors: ["#3498db", "#111"] },
             { number: "12", name: "Driver #12 (Bill Harkins)", score: 50, level: "MEDIUM", badge: "L13 Netcode Victim & L68 Checkup Deal", incidentsCount: 2, colors: ["#3498db", "#111"] },
             { number: "13", name: "Driver #13 (Johnathon Platt)", score: 48, level: "MEDIUM", badge: "L58 Closing Gap & L68 Checkup Victim", incidentsCount: 2, colors: ["#3498db", "#111"] },
@@ -1371,7 +1344,7 @@ const BRL_RACES_DATA = {
             {
                 id: 1, lap: 1, stage: 1, involved: ["18", "36"], primaryCar: "18", category: "racing_deal",
                 title: "Pre-Race Probation & EOL Status (#18 Final EOL Served | #36 DNS)",
-                summary: "Car #18 (Victor Weaver) dropped to the tail of the field to serve his 3rd and final scheduled EOL penalty. Car #36 (Korey Denson) did not show tonight, meaning his penalty carries over and he still has 2 EOL penalties remaining to serve.",
+                summary: "Car #18 (Victor Weaver) dropped to the tail of the field to serve his 3rd and final scheduled EOL penalty. Car #36 did not show tonight, meaning his penalty carries over and he still has 2 EOL penalties remaining to serve.",
                 ruling: "Car #18 Final EOL Served (3 of 3) | Car #36 DNS (Still Has 2 EOLs to Serve)", location: "Start / Finish Line",
                 trackCoords: { x: 400, y: 330 },
                 audioTranscript: "[RACE CONTROL] 'Car 18 serving his final pre-race EOL at the rear. Car 36 is a no-show tonight so he still has 2 EOLs left to serve.'"
@@ -1488,7 +1461,7 @@ const BRL_RACES_DATA = {
         ],
         mvp: {
             carNumber: "17",
-            driverName: "Car #17 (Korey Denson — formerly #36) & Pit Road Short-Fuse Crew",
+            driverName: "Car #17 & Pit Road Short-Fuse Crew",
             title: "Wall of Shame MVP — Stage 2 Pit Road Powder Keg & Lap 32 Contact 💥🎙️",
             reason: "Switched from #36 to #17 to serve EOL #2 of 3 at the green flag, made Lap 32 no-yellow side-by-side contact with #9 (Dylan McDonald), and then erupted at the Lap 66 Stage 2 break when #17, #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off with hair-trigger fuses after #17 hugged the far right of pit road and #13's comment lit the short fuse on the #17! Plus 4 on-track penalties to #4 (15-Lap Drive-Through), #36 (Lap 85 EOL), #62 (Lap 108 EOL), and #21 (Post-Race Confirmed Lap 114 Chaos Fault)!",
             totalIncidents: 3,
@@ -1496,7 +1469,6 @@ const BRL_RACES_DATA = {
             image: "assets/tracks/Track Logos/Kansas.png"
         },
         drivers: [
-            { number: "17", name: "Driver #17 (Korey Denson — was #36)", score: 98, level: "CRITICAL", badge: "MVP / Short-Fuse VC + EOL #2/3", incidentsCount: 3, colors: ["#ff0055", "#111"] },
             { number: "4",  name: "Driver #4 (Logan Murray)", score: 90, level: "CRITICAL", badge: "Drive-Thru Penalty (15-Lap Rule)", incidentsCount: 1, colors: ["#ff0055", "#111"] },
             { number: "62", name: "Driver #62 (Ty Corino)", score: 86, level: "HIGH", badge: "EOL (Lap 108 Hit #18 Avoiding #31)", incidentsCount: 1, colors: ["#ff5500", "#111"] },
             { number: "36", name: "Driver #36 (Collin Anderson)", score: 82, level: "HIGH", badge: "EOL (Lap 85 Turn 2 Solo Spin)", incidentsCount: 1, colors: ["#ff5500", "#111"] },
@@ -1511,14 +1483,6 @@ const BRL_RACES_DATA = {
         ],
         incidents: [
             {
-                id: 1, lap: 1, stage: 1, involved: ["17"], primaryCar: "17", category: "infraction",
-                title: "Pre-Race Probation EOL #2 of 3 Served: Car #36 (Now #17 Korey Denson)",
-                summary: "Car #36 (now driving Car #17, Korey Denson) dropped to the tail of the field at the start of Kansas 2 to serve his 2nd of 3 scheduled End of Line (EOL) penalties.",
-                ruling: "Scheduled EOL Penalty #2 of 3 Served (#17, formerly #36)", location: "Start / Finish Line",
-                trackCoords: { x: 400, y: 330 },
-                audioTranscript: "[RACE CONTROL] 'Car 36—now in the 17 truck—is dropping to the back to serve EOL number 2 of 3.'"
-            },
-            {
                 id: 2, lap: 12, stage: 1, involved: ["4", "14"], primaryCar: "4", category: "penalty",
                 title: "Corner Exit Misjudgment Puts #14 in Wall & Spins #4 (15-Lap Rule)",
                 summary: "Car #4 (Logan Murray) exited the corner on a normal arc expecting Car #14 (Jason Allegrini) to drift up a little higher toward the wall. Car #14 held his line and didn't go up higher, and #4 ended up putting #14 into the wall and turning himself around inside the first 15 laps.",
@@ -1529,7 +1493,7 @@ const BRL_RACES_DATA = {
             {
                 id: 3, lap: 32, stage: 1, involved: ["9", "17"], primaryCar: "17", category: "racing_deal",
                 title: "Lap 32 Side-by-Side Contact (#9 & #17 — No Yellow)",
-                summary: "One lap before the Stage 1 break, Car #9 (Dylan McDonald) and Car #17 (Korey Denson) made side-by-side contact without triggering a yellow flag.",
+                summary: "One lap before the Stage 1 break, Car #9 (Dylan McDonald) and Car #17 made side-by-side contact without triggering a yellow flag.",
                 ruling: "No Yellow / Racing Contact", location: "Back Stretch / Turn 3",
                 trackCoords: { x: 350, y: 70 },
                 audioTranscript: "[STEWARDS] 'Contact between 9 and 17 coming to the end of Stage 1, no yellow.'"
@@ -1553,7 +1517,7 @@ const BRL_RACES_DATA = {
             {
                 id: 6, lap: 66, stage: 2, involved: ["17", "31", "13", "24"], primaryCar: "17", category: "mvp",
                 title: "Stage 2 Pit Road Short-Fuse Voice Chat Blowup (#17, #31, #13, #24)",
-                summary: "During the Lap 66 Stage 2 caution, Cars #17 (Korey Denson), #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off at each other with incredibly short fuses. All it seemed like was Car #17 tried to stay as far to the right of pit road as he could, and then Car #13 said something on the mic that immediately lit the very short fuse on the #17!",
+                summary: "During the Lap 66 Stage 2 caution, Cars #17, #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off at each other with incredibly short fuses. All it seemed like was Car #17 tried to stay as far to the right of pit road as he could, and then Car #13 said something on the mic that immediately lit the very short fuse on the #17!",
                 ruling: "Stage 2 Complete + Wall of Shame Comms Highlight (Short-Fuse Pit Road Blowup)", location: "Pit Road / Stage 2 Caution",
                 trackCoords: { x: 400, y: 330 },
                 audioTranscript: "[RADIO #13 / #17 / #31 / #24] '17 tried to hug the right side of pit road, 13 made one comment and lit the worlds shortest fuse on the 17! Everybody mouthing off under the Stage 2 yellow!'"

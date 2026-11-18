@@ -353,11 +353,6 @@ const weeklyData = {
       "points": 136
     },
     {
-      "pos": 37,
-      "name": "Korey Denson",
-      "points": 124
-    },
-    {
       "pos": 38,
       "name": "Michael R Ramos",
       "points": 116
