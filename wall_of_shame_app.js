@@ -666,7 +666,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return hash;
         }
 
-        return "kansas_2";
+        return "phoenix_2";
     }
 
     // Initialize Race Week
