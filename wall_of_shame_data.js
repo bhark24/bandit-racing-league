@@ -1545,6 +1545,125 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[STEWARDS] 'Put it in the books: zero unplanned cautions and zero penalties at Mid-Ohio! The Wall of Shame has NO SHAMERS this week—a 100% clean slate!'"
             }
         ]
+    },
+
+    phoenix_2: {
+        id: "phoenix_2",
+        title: "Phoenix Raceway II (Chase R4)",
+        subtext: "Legacy Towing & Travis Auto Service 140 — 147 Laps (OT) • 6 EOLs & Ego Checks!",
+        laps: 147,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 42 },
+            { name: "Stage 2", lap: 84 },
+            { name: "Final Stage (OT)", lap: 147 }
+        ],
+        mvp: {
+            carNumber: "15",
+            driverName: "Car #15 (Matt Crockett)",
+            title: "Wall of Shame MVP",
+            reason: "2 Late-Race EOL Penalties (Lap 130 Contact w/ #51 & Lap 142 Move Down Into #63)",
+            totalIncidents: 2,
+            totalPenalties: "2 End of Line (EOL) Penalties"
+        },
+        drivers: [
+            { number: "15", name: "Driver #15 (Matt Crockett)", score: 94, level: "CRITICAL", badge: "MVP / 2x Late EOLs", incidentsCount: 2, colors: ["#ff0055", "#111"] },
+            { number: "93", name: "Driver #93 (Scott Sanderson)", score: 88, level: "HIGH", badge: "EOL (L72) + Ego Check (#51)", incidentsCount: 3, colors: ["#ff5500", "#111"] },
+            { number: "51", name: "Driver #51 (Curtis Yancey)", score: 88, level: "HIGH", badge: "EOL (L79) + Ego Check (#93)", incidentsCount: 3, colors: ["#ff5500", "#111"] },
+            { number: "00", name: "Driver #00 (Jackson Knaak)", score: 75, level: "HIGH", badge: "3-Wide Wall Squeeze (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "22", name: "Driver #22 (Joshua Adams)", score: 72, level: "HIGH", badge: "Gap Clip on #50 (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "2",  name: "Driver #2 (Nick Nickerson)", score: 10, level: "LOW", badge: "Restart Penalty Cleared", incidentsCount: 1, colors: ["#2ecc71", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 42, stage: 1, involved: ["7"], primaryCar: "7", category: "stage_finish",
+                title: "Stage 1 Break Yellow",
+                summary: "Scheduled Stage 1 caution at Lap 42.",
+                ruling: "Stage Break Yellow", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Lap 42 Stage 1 yellow is out.'"
+            },
+            {
+                id: 2, lap: 47, stage: 2, involved: ["2"], primaryCar: "2", category: "racing_deal",
+                title: "Lap 46–47 Restart Penalty Cleared (#2 Nickerson)",
+                summary: "Cleared penalty for Car #2 (Nick Nickerson) on the Lap 46–47 restart for 'jumping the start'—he was only speeding up to maintain a side-by-side position with the leader.",
+                ruling: "Penalty Cleared (No Infraction)", location: "Frontstretch Restart Zone",
+                trackCoords: { x: 450, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Penalty cleared on Car 2—just maintaining side-by-side with the leader on the restart.'"
+            },
+            {
+                id: 3, lap: 47, stage: 2, involved: ["00", "2"], primaryCar: "00", category: "penalty",
+                title: "3-Wide Squeeze Forces #2 Into the Wall",
+                summary: "Car #00 (Jackson Knaak) forced Car #2 (Nick Nickerson) up into the wall when there was a truck to his outside; stated he didn't know they were 3-wide.",
+                ruling: "End of Line (EOL) Penalty (#00)", location: "Turns 1–2",
+                trackCoords: { x: 640, y: 200 },
+                audioTranscript: "[STEWARDS] '00 forced the 2 up into the wall 3-wide. EOL penalty Car 00.'"
+            },
+            {
+                id: 4, lap: 72, stage: 2, involved: ["93", "51"], primaryCar: "93", category: "penalty",
+                title: "Left-Rear Tap Sends #51 Around",
+                summary: "Car #93 (Scott Sanderson) tapped the left rear of Car #51 (Curtis Yancey), sending #51 spinning.",
+                ruling: "End of Line (EOL) Penalty (#93)", location: "Corner Entry",
+                trackCoords: { x: 200, y: 260 },
+                audioTranscript: "[RACE CONTROL] '93 tapped the left rear of 51 and sent him around. EOL penalty Car 93.'"
+            },
+            {
+                id: 5, lap: 79, stage: 2, involved: ["51", "93"], primaryCar: "51", category: "penalty",
+                title: "Stage-Ender Apron Misjudgment",
+                summary: "Stage-ending caution: Car #51 (Curtis Yancey) thought Car #93 (Scott Sanderson) was going onto the apron; Car #93 did not, nor did he have to.",
+                ruling: "End of Line (EOL) Penalty (#51)", location: "Dogleg / Turn 3",
+                trackCoords: { x: 260, y: 120 },
+                audioTranscript: "[RACE CONTROL] '93 doesn't have to drop to the apron there. EOL penalty Car 51.'"
+            },
+            {
+                id: 6, lap: 83, stage: 2, involved: ["93", "21"], primaryCar: "93", category: "racing_deal",
+                title: "Turn 3 Contact Sends #21 Around",
+                summary: "Car #93 (Scott Sanderson) and Car #21 (Nathan Santos) made contact entering Turn 3, sending #21 around.",
+                ruling: "Racing Deal", location: "Turn 3",
+                trackCoords: { x: 160, y: 220 },
+                audioTranscript: "[STEWARDS] 'Contact into Turn 3 between 93 and 21—deemed a racing deal.'"
+            },
+            {
+                id: 7, lap: 89, stage: 3, involved: ["12", "11"], primaryCar: "12", category: "racing_deal",
+                title: "Netcode / Tight Quarters Contact (#12 & #11)",
+                summary: "Contact between Car #12 (Bill Harkins) and Car #11 (Jon Osborne); a little bit of netcode between them, though they possibly would have made contact anyway.",
+                ruling: "Racing Deal", location: "Backstretch / Dogleg",
+                trackCoords: { x: 390, y: 80 },
+                audioTranscript: "[STEWARDS] 'Bit of netcode between 12 and 11, racing deal.'"
+            },
+            {
+                id: 8, lap: 115, stage: 3, involved: ["93", "51", "31"], primaryCar: "93", category: "warning",
+                title: "Ego Checks Between #93 & #51 Turn Innocent #31!",
+                summary: "On Laps 114–115, Cars #93 (Scott Sanderson) and #51 (Curtis Yancey) both started throwing ego checks at each other over earlier incidents and ended up turning Car #31 (Connor Gibson). Completely avoidable racing incident where both #93 and #51 are equally at fault.",
+                ruling: "Avoidable Incident — Equal Fault (#93 & #51)", location: "Frontstretch / Turn 1",
+                trackCoords: { x: 560, y: 280 },
+                audioTranscript: "[STEWARDS] '93 and 51 trading ego checks and turned the 31. Completely avoidable—both equally at fault!'"
+            },
+            {
+                id: 9, lap: 120, stage: 3, involved: ["22", "50"], primaryCar: "22", category: "penalty",
+                title: "Tight Gap Clip Sends #50 Around",
+                summary: "Car #22 (Joshua Adams) had a run and went for an open gap, but barely clipped Car #50 (Davis Carroll) and sent him spinning.",
+                ruling: "End of Line (EOL) Penalty (#22)", location: "Turn 2 Exit",
+                trackCoords: { x: 580, y: 120 },
+                audioTranscript: "[RACE CONTROL] '22 barely clipped the 50 going for the gap. EOL penalty Car 22.'"
+            },
+            {
+                id: 10, lap: 130, stage: 3, involved: ["15", "51"], primaryCar: "15", category: "penalty",
+                title: "Late-Race Contact With #51",
+                summary: "Car #15 (Matt Crockett) and Car #51 (Curtis Yancey) made contact on Lap 130, resulting in an EOL penalty on #15.",
+                ruling: "End of Line (EOL) Penalty (#15)", location: "Turn 4",
+                trackCoords: { x: 220, y: 280 },
+                audioTranscript: "[RACE CONTROL] 'Contact between 15 and 51—EOL penalty Car 15.'"
+            },
+            {
+                id: 11, lap: 142, stage: 3, involved: ["15", "63"], primaryCar: "15", category: "mvp",
+                title: "Overtime Setup Contact With #63 (2nd EOL for #15)",
+                summary: "Car #15 (Matt Crockett) tried coming down the track when Car #63 (Tre Ellis) was already holding his line, earning #15 his 2nd EOL of the night.",
+                ruling: "End of Line (EOL) Penalty (#15 — 2nd of Night)", location: "Backstretch",
+                trackCoords: { x: 410, y: 90 },
+                audioTranscript: "[RACE CONTROL] '15 came down when 63 wasn't moving—2nd EOL on Car 15!'"
+            }
+        ]
     }
 
 };
