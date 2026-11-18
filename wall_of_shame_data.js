@@ -1564,7 +1564,8 @@ const BRL_RACES_DATA = {
             title: "Wall of Shame MVP",
             reason: "2 Late-Race EOL Penalties (Lap 130 Contact w/ #51 & Lap 142 Move Down Into #63)",
             totalIncidents: 2,
-            totalPenalties: "2 End of Line (EOL) Penalties"
+            totalPenalties: "2 End of Line (EOL) Penalties",
+            image: "assets/truck images/truck_image_matt_crockett.png"
         },
         drivers: [
             { number: "15", name: "Driver #15 (Matt Crockett)", score: 94, level: "CRITICAL", badge: "MVP / 2x Late EOLs", incidentsCount: 2, colors: ["#ff0055", "#111"] },
