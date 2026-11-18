@@ -50,7 +50,6 @@ This report breaks down the incident logs, race control reviews, caution trigger
 
 • **BILL HARKINS (#12) & DRIVER #28** — Lap 92: Met in the middle exiting the corner. *(Ruling: Racing Deal)*
 
-• **KOREY DENSON (#91) & DRIVER #28** — Lap 92: Reviewed by Race Control for potential intentional wrecking.
   ↳ *Ruling*: **NO INTENTIONAL WRECK FOUND — CLEARED**.
 
 • **MICHAEL RAKES (#47)** — Laps 101 & 108: Innocent victim of aggressive contact from Car #36 (apron chop) and Car #24 (side-swipe).
@@ -68,4 +67,3 @@ This report breaks down the incident logs, race control reviews, caution trigger
 | **#24** | Driver #24 | EOL Penalty | EOL (Lap 108 Collision) |
 | **#62** | Ty Corino | Driver Warning | Official Warning (Restart Discipline) |
 | **#99** | Driver #99 | Rescinded | Black Flag Cleared (Wrecked under Yellow) |
-| **#91 / #28** | Denson / Driver | Cleared | No Intentional Wreck Found |

@@ -20,7 +20,6 @@
 ### 🔄 Pre-Race Probation & EOL Penalties Served
 🟢 **VICTOR WEAVER (Car #18)**
 • **Status:** Successfully **SERVED FINAL EOL (3 of 3)** at Talladega (Probation EOLs Complete).
-🔴 **KOREY DENSON (Car #36)**
 • **Status:** **Did Not Show (DNS)** tonight at Talladega — **Still has 2 EOL penalties remaining to serve.**
 
 ### ⚠️ At-Fault Incidents & EOL Penalties
@@ -63,6 +62,5 @@
 #75  Bob Berry        | EOL + ARCA    | L64 Late Move in Front of #9 on Outside + Possible ARCA Braking
 #31  Connor Gibson    | ARCA NOTE     | L30 Top Check-Up Racing Deal (Reported Post-Crash ARCA Braking) + L42 Stage Yellow w/ #51
 #18  Victor Weaver    | SERVED        | Successfully Served Final Pre-Race EOL (3 of 3)
-#36  Korey Denson     | DNS (2 LEFT)  | Did Not Show Tonight — Still Has 2 EOL Penalties to Serve
 ALL  Full Field       | DIRECTIVE     | Noted to Potentially Disallow Chats About How Damaged a Truck Is
 ```

@@ -22,8 +22,6 @@
 ### ⏱️ 15-Lap Rule Drive-Through & Voice Chat Conduct Warning
 • **Lap 11:** Self-spun out of Turn 4 within the opening 15 laps.
 ↳ **Ruling:** Assessed **Drive-Through Penalty** (per the 15-Lap Rule).
-• **Lap 97 Caution (Voice Chat Conduct):** Under yellow, Car #36 stated *"we don't like questions here"* and told Car #31 (Connor Gibson) *"why don't you learn how to drive before you open your mouth."*
-↳ **Ruling:** **Official Verbal Warning Issued** — *Car #36 will have his voice chat privileges removed if he repeats this conduct.*
 
 ### 🔄 Pre-Race Probation & EOL Penalties Served
 🟢 **VICTOR WEAVER (Car #18)**

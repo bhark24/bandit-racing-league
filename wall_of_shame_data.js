@@ -1004,14 +1004,6 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[CHAT LOG] Car 5: 'fuck you peter' -> Car 5 disconnected -> [STEWARDS] 'Official warning for chat conduct.'"
             },
             {
-                id: 3, lap: 33, stage: 1, involved: ["54", "36"], primaryCar: "54", category: "penalty",
-                title: "Car 54 Overdrives Turn 1 & Runs Over Car 36",
-                summary: "Car 54 (Matthew Bailey) completely ran over Car 36 into Turn 1. No caution flew, but Car 54 was 100% at fault. Because Car 54 is on probation/watch without improvement, stewards assessed an escalated Drive-Through.",
-                ruling: "Drive-Through Penalty (Probation Escalation)", location: "Turn 1",
-                trackCoords: { x: 670, y: 160 },
-                audioTranscript: "[RACE CONTROL] 'Car 54 ran the 36 over in Turn 1. Driver on probation with no improvement: Drive-Through Penalty car 54.'"
-            },
-            {
                 id: 4, lap: 42, stage: 1, involved: ["ALL"], primaryCar: "7", category: "stage_finish",
                 title: "Stage 1 Conclusion (Stage Yellow)",
                 summary: "Stage 1 concludes on Lap 42 under scheduled yellow flag conditions.",
@@ -1052,14 +1044,6 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RACE CONTROL] 'Car 99 claiming the yellow on wheelspin. Car 2 had nowhere to go. EOL car 99.'"
             },
             {
-                id: 9, lap: 73, stage: 2, involved: ["2", "36"], primaryCar: "2", category: "penalty",
-                title: "Car 2 Slides Up Into Car 36",
-                summary: "Car 2 (Nick Nickerson) got loose in the corner and slid up the track into Car 36.",
-                ruling: "End of Line (EOL) Penalty (#2)", location: "Turn 4",
-                trackCoords: { x: 160, y: 120 },
-                audioTranscript: "[STEWARDS] 'Car 2 got loose and washed up into the 36. EOL penalty car 2.'"
-            },
-            {
                 id: 10, lap: 77, stage: 2, involved: ["01", "21"], primaryCar: "01", category: "penalty",
                 title: "Blinking Interference Turns Car 21",
                 summary: "Car 01 (Adam Tahan) started blinking heavily and completely disappeared from server telemetry, turning Car 21 (Nathan Santos) while invisible.",
@@ -1082,14 +1066,6 @@ const BRL_RACES_DATA = {
                 ruling: "Racing Deal (Contested Space)", location: "Turn 1 Entry",
                 trackCoords: { x: 610, y: 320 },
                 audioTranscript: "[STEWARDS] '31 turned in, 14 entered middle, went for same spot. Racing deal.'"
-            },
-            {
-                id: 14, lap: 135, stage: 3, involved: ["36", "31", "12", "63"], primaryCar: "36", category: "penalty",
-                title: "Rear-End Check-Up Pileup",
-                summary: "Car 31 touched Car 12 which checked him up. Car 36 tried to force a run and rammed the 31, sending #31 into Car 63 and around. Initially racing deal live; post-race review confirms 36 at fault.",
-                ruling: "At-Fault Incident (Should have been EOL car 36)", location: "Turn 3",
-                trackCoords: { x: 130, y: 260 },
-                audioTranscript: "[STEWARDS REVIEW] '31 checked up behind 12, 36 just rammed him into 63. Deemed at-fault incident on car 36.'"
             },
             {
                 id: 16, lap: 137, stage: 3, involved: ["93", "91"], primaryCar: "93", category: "warning",
@@ -1139,7 +1115,7 @@ const BRL_RACES_DATA = {
             {
                 id: 1, lap: 1, stage: 1, involved: ["18", "36"], primaryCar: "18", category: "racing_deal",
                 title: "Pre-Race Probation & EOL Penalties Served (#18 & #36)",
-                summary: "Cars #18 (Victor Weaver) and #36 dropped to the rear at the start to serve scheduled EOL penalties. This marked Car #18's 2nd EOL of 3 and Car #36's 1st EOL of 3.",
+                summary: "Car #18 (Victor Weaver) dropped to the rear at the start to serve his 2nd of 3 scheduled EOL penalties.",
                 ruling: "Probation EOL Penalties Served (#18: 2 of 3 | #36: 1 of 3)", location: "Start / Finish Line",
                 trackCoords: { x: 400, y: 330 },
                 audioTranscript: "[RACE CONTROL] 'Cars 18 and 36 serving pre-race EOL penalties at the tail of the field. 18 on 2 of 3, 36 on 1 of 3.'"
@@ -1209,28 +1185,12 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RACE CONTROL] 'Car 9 went into Turn 3 hot and hit the 12. EOL penalty car 9.'"
             },
             {
-                id: 11, lap: 76, stage: 2, involved: ["36", "28", "69", "54"], primaryCar: "69", category: "warning",
-                title: "Late Block Check-Up & Caution Flag Brake-Check by Car #69 on #54!",
-                summary: "Car #36 got into the back of Car #28 (Joey Cruz) after #28 made a late defensive move to cover him off and immediately started braking (deemed Racing Deal). Under the ensuing caution flag, Car #69 (Collin Anderson) appeared to intentionally brake-check Car #54 (Matthew Bailey)!",
-                ruling: "Racing Deal (#36/#28) | FINAL WARNING (#69): Next Pace-Lap Brake-Check = Parked / Removed from Session", location: "Front Stretch / Caution",
-                trackCoords: { x: 450, y: 330 },
-                audioTranscript: "[RACE CONTROL] '36 and 28 is a racing deal on a late block. Car 69: do NOT brake-check the 54 under yellow! One more stunt like that and you are removed from the session!'"
-            },
-            {
                 id: 12, lap: 84, stage: 2, involved: ["7", "15"], primaryCar: "7", category: "penalty",
                 title: "Outside Line Check-Up Punt (Post-Race Admin Review: Should Be EOL #7)",
                 summary: "A check-up on the outside lane resulted in Car #15 (Matt Crockett) getting hit and spun by Car #7 (Benjamin Lacy). Originally called a racing deal live, post-race Admin audit confirmed this should have been an EOL penalty on Car #7.",
                 ruling: "Post-Race Admin Audit: Confirmed At-Fault EOL on Car #7 (Called Racing Deal Live)", location: "Turn 1",
                 trackCoords: { x: 670, y: 160 },
                 audioTranscript: "[ADMIN AUDIT] 'Reviewed Lap 84 outside check-up between 7 and 15 post-race. Admins confirmed this should have been an EOL penalty on Car 7.'"
-            },
-            {
-                id: 13, lap: 97, stage: 2, involved: ["69", "28", "36", "31"], primaryCar: "69", category: "warning",
-                title: "Car #69 3rd EOL (Dumps #28) + Car #36 Voice Chat Conduct Warning!",
-                summary: "Car #69 (Collin Anderson) ran into Car #28 (Joey Cruz), shoved him up the banking, and then hooked his left-rear to spin him out (69's 3rd EOL of the night!). Under caution, Car #36 snapped on voice chat at Car #31 (Connor Gibson), saying 'we don't like questions here' and 'why don't you learn how to drive before you open your mouth.'",
-                ruling: "EOL Penalty (#69) + Official Verbal Warning (#36 — Next VC Violation = Voice Chat Mute)", location: "Turn 2",
-                trackCoords: { x: 620, y: 280 },
-                audioTranscript: "[RADIO #36] 'Why don't you learn how to drive before you open your mouth!' -> [RACE CONTROL] 'EOL on 69! And 36, consider this your verbal warning—repeat that conduct and your voice chat is gone!'"
             },
             {
                 id: 14, lap: 110, stage: 2, involved: ["12", "50"], primaryCar: "12", category: "penalty",
@@ -1341,14 +1301,6 @@ const BRL_RACES_DATA = {
             { number: "18", name: "Driver #18 (Victor Weaver)", score: 25, level: "LOW", badge: "Served Final EOL (3 of 3 Complete)", incidentsCount: 1, colors: ["#2ecc71", "#111"] }
         ],
         incidents: [
-            {
-                id: 1, lap: 1, stage: 1, involved: ["18", "36"], primaryCar: "18", category: "racing_deal",
-                title: "Pre-Race Probation & EOL Status (#18 Final EOL Served | #36 DNS)",
-                summary: "Car #18 (Victor Weaver) dropped to the tail of the field to serve his 3rd and final scheduled EOL penalty. Car #36 did not show tonight, meaning his penalty carries over and he still has 2 EOL penalties remaining to serve.",
-                ruling: "Car #18 Final EOL Served (3 of 3) | Car #36 DNS (Still Has 2 EOLs to Serve)", location: "Start / Finish Line",
-                trackCoords: { x: 400, y: 330 },
-                audioTranscript: "[RACE CONTROL] 'Car 18 serving his final pre-race EOL at the rear. Car 36 is a no-show tonight so he still has 2 EOLs left to serve.'"
-            },
             {
                 id: 2, lap: 5, stage: 1, involved: ["54", "6"], primaryCar: "54", category: "racing_deal",
                 title: "Bump-Draft Push & Closing Hole Contact (No Yellow)",
@@ -1461,7 +1413,7 @@ const BRL_RACES_DATA = {
         ],
         mvp: {
             carNumber: "17",
-            driverName: "Car #17 & Pit Road Short-Fuse Crew",
+            driverName: "Pit Road Short-Fuse Crew (#31, #13, #24)",
             title: "Wall of Shame MVP — Stage 2 Pit Road Powder Keg & Lap 32 Contact 💥🎙️",
             reason: "Switched from #36 to #17 to serve EOL #2 of 3 at the green flag, made Lap 32 no-yellow side-by-side contact with #9 (Dylan McDonald), and then erupted at the Lap 66 Stage 2 break when #17, #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off with hair-trigger fuses after #17 hugged the far right of pit road and #13's comment lit the short fuse on the #17! Plus 4 on-track penalties to #4 (15-Lap Drive-Through), #36 (Lap 85 EOL), #62 (Lap 108 EOL), and #21 (Post-Race Confirmed Lap 114 Chaos Fault)!",
             totalIncidents: 3,
@@ -1491,14 +1443,6 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RACE CONTROL] '4 expected the 14 to track up higher on exit, put 14 in the wall and turned himself inside the first 15 laps. Drive-Through penalty on Car 4.'"
             },
             {
-                id: 3, lap: 32, stage: 1, involved: ["9", "17"], primaryCar: "17", category: "racing_deal",
-                title: "Lap 32 Side-by-Side Contact (#9 & #17 — No Yellow)",
-                summary: "One lap before the Stage 1 break, Car #9 (Dylan McDonald) and Car #17 made side-by-side contact without triggering a yellow flag.",
-                ruling: "No Yellow / Racing Contact", location: "Back Stretch / Turn 3",
-                trackCoords: { x: 350, y: 70 },
-                audioTranscript: "[STEWARDS] 'Contact between 9 and 17 coming to the end of Stage 1, no yellow.'"
-            },
-            {
                 id: 4, lap: 33, stage: 1, involved: ["22"], primaryCar: "22", category: "stage_finish",
                 title: "Stage 1 Official Finish (Won by #22 Joshua L. Adams)",
                 summary: "Stage 1 concludes at Lap 33 after Joshua L. Adams (#22) built a 5-second green-flag lead and led all 33 laps.",
@@ -1513,14 +1457,6 @@ const BRL_RACES_DATA = {
                 ruling: "Racing Incident (Massive iRacing Netcode)", location: "Turn 2 / Back Stretch",
                 trackCoords: { x: 560, y: 80 },
                 audioTranscript: "[STEWARDS] '50 and 99 had massive netcode and 99 got turned. Confirmed racing incident.'"
-            },
-            {
-                id: 6, lap: 66, stage: 2, involved: ["17", "31", "13", "24"], primaryCar: "17", category: "mvp",
-                title: "Stage 2 Pit Road Short-Fuse Voice Chat Blowup (#17, #31, #13, #24)",
-                summary: "During the Lap 66 Stage 2 caution, Cars #17, #31 (Connor Gibson), #13 (Johnathon Platt), and #24 (Ethan Sikorski) all started mouthing off at each other with incredibly short fuses. All it seemed like was Car #17 tried to stay as far to the right of pit road as he could, and then Car #13 said something on the mic that immediately lit the very short fuse on the #17!",
-                ruling: "Stage 2 Complete + Wall of Shame Comms Highlight (Short-Fuse Pit Road Blowup)", location: "Pit Road / Stage 2 Caution",
-                trackCoords: { x: 400, y: 330 },
-                audioTranscript: "[RADIO #13 / #17 / #31 / #24] '17 tried to hug the right side of pit road, 13 made one comment and lit the worlds shortest fuse on the 17! Everybody mouthing off under the Stage 2 yellow!'"
             },
             {
                 id: 7, lap: 85, stage: 3, involved: ["36", "54"], primaryCar: "36", category: "penalty",

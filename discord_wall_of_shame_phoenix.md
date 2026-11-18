@@ -6,13 +6,11 @@
 *Stages: Lap 42 & Lap 84*
 
 ### 🚨 Major Disciplinary Actions & Intentional Wrecking
-• **Review:** Car #36 intentionally wrecked into Car #62 (Ty Corino).
 ↳ **Ruling:** **CONFIRMED INTENTIONAL WRECKING PENALTY**. Direct violation of BRL Code of Conduct. Formal disciplinary sanction applied.
 ↳ **Cumulative Infractions:** Also assessed EOL for Lap 131 solo spin caution & noted at-fault for Lap 135 collision.
 
 ### ⏱️ Driver Probation & Drive-Through Penalties
 ⏱️ **MATTHEW BAILEY (Car #54) — DRIVE-THROUGH PENALTY**
-• **Lap 33:** Overdrove Turn 1 and ran over Car #36 (no caution, but #54 at fault).
 ↳ **Ruling:** Assessed **Drive-Through Penalty**. Car #54 was already on driver watch/probation and has failed to show required improvement.
 
 ### 📢 Driver Conduct Warnings & Behavioral Notes
@@ -43,7 +41,6 @@
 ↳ **Ruling:** EOL Penalty (Self-Spin / Causing Caution)
 
 ⚠️ **NICK NICKERSON (Car #2)**
-• **Lap 73:** Got loose in corner and slid up the track into Car #36.
 ↳ **Ruling:** EOL Penalty (Loss of Control / Contact)
 
 ⚠️ **ADAM TAHAN (Car #01)**
