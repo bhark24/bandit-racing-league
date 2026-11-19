@@ -8,6 +8,8 @@ services:
     buildFilter:
       paths:
         - relay-server/**
+        - send_brl_notification.py
+        - supabase_config.js
     envVars:
       - key: PORT
         value: 10000

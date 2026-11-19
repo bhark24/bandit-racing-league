@@ -131,6 +131,9 @@ def push_brl_notification(title, body, target_url="/index.html", category="websi
         auto_keys[dedup_key] = et_now.isoformat()
         row_data["autoFiredKeys"] = auto_keys
 
+    new_notif["webPushSent"] = True
+    dispatch_web_push_to_subscribers(row_data, new_notif)
+
     notifs.insert(0, new_notif)
     row_data["appNotifications"] = notifs[:25]
 
@@ -168,6 +171,151 @@ def push_brl_notification(title, body, target_url="/index.html", category="websi
     if webhook_url:
         post_to_discord_webhook(webhook_url, new_notif)
 
+VAPID_PUBLIC_KEY = "BK12QhxrAnUPmvkn5iwGe-a5V-BZhEyrHLa-jEDz34f3J-n7WlsnzL4IffSix875YCBgAxWP-9O3wOK3sbf-uck"
+VAPID_PRIVATE_KEY = os.environ.get("BRL_VAPID_PRIVATE_KEY", "5tArwSXnV7oClCSB9N21EkIHtOCSzgHJoL_6DRzx1gY")
+VAPID_CLAIMS = {"sub": "mailto:admin@banditracingleague.net"}
+
+def should_deliver_to_subscriber(sub, notif):
+    if not sub or not isinstance(sub, dict):
+        return False
+    if sub.get("enabled") is False:
+        return False
+    prefs = sub.get("prefs") or {}
+    cat = notif.get("category", "website_update")
+    text_upper = f"{notif.get('title', '')} {notif.get('body', '')}".upper()
+
+    notif_driver = (notif.get("driver") or "").strip().upper()
+    user_driver_enabled = prefs.get("driverEnabled", True)
+    user_driver_target = (prefs.get("driverTarget") or "ALL").strip().upper()
+
+    if cat == "driver_alert" or notif_driver:
+        if not user_driver_enabled:
+            return False
+        if user_driver_target == "ALL":
+            return True
+        return notif_driver == user_driver_target or (user_driver_target in text_upper)
+
+    notif_team = (notif.get("team") or "").strip().upper()
+    user_team_enabled = prefs.get("teamEnabled", True)
+    user_team_target = (prefs.get("teamTarget") or "ALL").strip().upper()
+
+    if cat == "team_alert" or notif_team:
+        if not user_team_enabled:
+            return False
+        if user_team_target == "ALL":
+            return True
+        return notif_team == user_team_target or (user_team_target in text_upper)
+
+    if user_driver_enabled and user_driver_target != "ALL" and user_driver_target in text_upper:
+        return True
+    if user_team_enabled and user_team_target != "ALL" and user_team_target in text_upper:
+        return True
+
+    if cat in ("practice_open", "pit_gate_open", "fantasy_lock"):
+        return prefs.get("practiceGate", True)
+    if cat in ("race_live", "outlaw_challenge"):
+        return prefs.get("raceLive", True)
+    return prefs.get("siteUpdates", True)
+
+def dispatch_web_push_to_subscribers(row_data, notif):
+    """Dispatches encrypted W3C Web Push (VAPID) packets to subscribed iOS & Android devices even when the app is closed."""
+    subs = row_data.get("pushSubscriptions", [])
+    if not isinstance(subs, list) or not subs:
+        return 0, False
+    try:
+        from pywebpush import webpush, WebPushException
+    except ImportError:
+        print("[!] Note: pywebpush not installed; skipping direct Web Push dispatch.")
+        return 0, False
+
+    push_payload = json.dumps({
+        "id": notif.get("id") or int(time.time() * 1000),
+        "category": notif.get("category", "website_update"),
+        "title": notif.get("title", "🏁 Bandit Racing League Alert"),
+        "body": notif.get("body", "Tap to view the latest Bandit Racing League update."),
+        "url": notif.get("url", "/index.html"),
+        "tag": f"brl-notif-{notif.get('id') or int(time.time() * 1000)}"
+    })
+
+    sent_count = 0
+    dead_endpoints = set()
+    for sub in subs:
+        if not isinstance(sub, dict) or not sub.get("endpoint") or not sub.get("keys"):
+            continue
+        if not should_deliver_to_subscriber(sub, notif):
+            continue
+        try:
+            webpush(
+                subscription_info={"endpoint": sub["endpoint"], "keys": sub["keys"]},
+                data=push_payload,
+                vapid_private_key=VAPID_PRIVATE_KEY,
+                vapid_claims=dict(VAPID_CLAIMS),
+                ttl=86400
+            )
+            sent_count += 1
+        except WebPushException as ex:
+            status_code = getattr(getattr(ex, "response", None), "status_code", None)
+            if status_code in (404, 410):
+                dead_endpoints.add(sub["endpoint"])
+        except Exception:
+            pass
+
+    pruned = False
+    if dead_endpoints:
+        row_data["pushSubscriptions"] = [
+            s for s in subs if isinstance(s, dict) and s.get("endpoint") not in dead_endpoints
+        ]
+        pruned = True
+    if sent_count > 0:
+        print(f"[+] Delivered {sent_count} background Web Push (VAPID) lock-screen notification(s)!")
+    return sent_count, pruned
+
+def flush_pending_web_pushes():
+    """Finds any recent notification queued from the browser Commissioner Push Console (webPushSent=False) and sends Web Push."""
+    try:
+        url, key = get_supabase_config()
+        req = urllib.request.Request(
+            f"{url}/rest/v1/league_data?id=eq.2",
+            headers={"apikey": key, "Authorization": f"Bearer {key}"}
+        )
+        with urllib.request.urlopen(req) as resp:
+            rows = json.loads(resp.read().decode("utf-8"))
+        row_data = rows[0].get("data", {}) if rows else {}
+        notifs = row_data.get("appNotifications", [])
+        if not isinstance(notifs, list) or not notifs:
+            return
+        now_ms = int(time.time() * 1000)
+        changed = False
+        for n in notifs[:5]:
+            if isinstance(n, dict) and n.get("webPushSent") is False:
+                nid = int(n.get("id") or 0)
+                if now_ms - nid < 3 * 3600 * 1000:
+                    _, pruned = dispatch_web_push_to_subscribers(row_data, n)
+                    if pruned:
+                        changed = True
+                n["webPushSent"] = True
+                changed = True
+        if changed:
+            payload = json.dumps({
+                "data": row_data,
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }).encode("utf-8")
+            patch_req = urllib.request.Request(
+                f"{url}/rest/v1/league_data?id=eq.2",
+                data=payload,
+                headers={
+                    "apikey": key,
+                    "Authorization": f"Bearer {key}",
+                    "Content-Type": "application/json",
+                    "Prefer": "return=minimal"
+                },
+                method="PATCH"
+            )
+            with urllib.request.urlopen(patch_req) as _:
+                pass
+    except Exception as e:
+        print(f"[!] Note: Pending Web Push flush check skipped: {e}")
+
 def main():
     parser = argparse.ArgumentParser(description="Send a real-time push notification to BRL Mobile App users.")
     parser.add_argument("--title", type=str, help="Notification title")
@@ -188,6 +336,7 @@ def main():
     total_mins = et_now.hour * 60 + et_now.minute
 
     if args.auto_cron:
+        flush_pending_web_pushes()
         # 1. Check Tuesday Night Practice Open (Tuesday 8:00 PM - 10:30 PM ET)
         if today_str in TUESDAY_PRACTICES and (20 * 60 <= total_mins <= 22 * 60 + 30):
             track, rnd = TUESDAY_PRACTICES[today_str]

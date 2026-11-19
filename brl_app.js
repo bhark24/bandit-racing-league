@@ -200,11 +200,26 @@
         mTitle.content = 'Bandit Racing League';
     }
 
-    // 2. Register Service Worker & Periodic Background Sync
+    const VAPID_PUBLIC_KEY = 'BK12QhxrAnUPmvkn5iwGe-a5V-BZhEyrHLa-jEDz34f3J-n7WlsnzL4IffSix875YCBgAxWP-9O3wOK3sbf-uck';
+    const RELAY_PUSH_URL = 'https://bandit-racing-league.onrender.com/push-broadcast';
+    let lastSyncedPushEndpoint = '';
+
+    function urlBase64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+        const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+    }
+
+    // 2. Register Service Worker, W3C Web Push Subscription & Periodic Background Sync
     async function registerServiceWorker() {
         if ('serviceWorker' in navigator) {
             try {
-                swRegistration = await navigator.serviceWorker.register('/sw.js?v=20261031', { scope: '/' });
+                swRegistration = await navigator.serviceWorker.register('/sw.js?v=20261118', { scope: '/' });
                 swRegistration.update().catch(() => {});
                 if (swRegistration.periodicSync) {
                     try {
@@ -213,10 +228,97 @@
                         });
                     } catch (e) {}
                 }
+                if (isAlertsEnabled()) {
+                    ensureWebPushSubscription(false).catch(() => {});
+                }
             } catch (err) {
                 console.warn('BRL Service Worker registration note:', err);
             }
         }
+    }
+
+    async function ensureWebPushSubscription(forceSync) {
+        try {
+            if (!('serviceWorker' in navigator) || !('PushManager' in window)) return null;
+            const reg = swRegistration || await navigator.serviceWorker.ready;
+            if (!reg || !reg.pushManager) return null;
+
+            let sub = await reg.pushManager.getSubscription();
+            if (!sub && ('Notification' in window) && Notification.permission === 'granted') {
+                sub = await reg.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+                });
+                forceSync = true;
+            }
+            if (sub) {
+                const subJson = sub.toJSON ? sub.toJSON() : JSON.parse(JSON.stringify(sub));
+                if (forceSync || lastSyncedPushEndpoint !== subJson.endpoint) {
+                    lastSyncedPushEndpoint = subJson.endpoint;
+                    await syncPushSubscriptionToSupabase(subJson, isAlertsEnabled());
+                }
+            }
+            return sub;
+        } catch (err) {
+            console.warn('Web Push subscription note:', err);
+            return null;
+        }
+    }
+
+    async function syncPushSubscriptionToSupabase(subJson, enabledFlag) {
+        try {
+            if (!subJson || !subJson.endpoint || !subJson.keys) return;
+            const getResp = await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                headers: {
+                    'apikey': BRL_SUPABASE_KEY,
+                    'Authorization': `Bearer ${BRL_SUPABASE_KEY}`
+                },
+                cache: 'no-store'
+            });
+            if (!getResp.ok) return;
+            const rows = await getResp.json();
+            const rowData = (rows && rows[0] && rows[0].data) ? rows[0].data : {};
+            const subs = Array.isArray(rowData.pushSubscriptions) ? rowData.pushSubscriptions : [];
+
+            const entry = {
+                endpoint: subJson.endpoint,
+                keys: subJson.keys,
+                enabled: enabledFlag !== false,
+                prefs: {
+                    siteUpdates: prefSiteUpdates(),
+                    practiceGate: prefPracticeGate(),
+                    raceLive: prefRaceLive(),
+                    driverEnabled: prefDriverEnabled(),
+                    driverTarget: prefDriverTarget(),
+                    teamEnabled: prefTeamEnabled(),
+                    teamTarget: prefTeamTarget()
+                },
+                ua: (navigator.userAgent || '').slice(0, 140),
+                updatedAt: new Date().toISOString()
+            };
+
+            const idx = subs.findIndex(s => s && s.endpoint === subJson.endpoint);
+            if (idx >= 0) {
+                subs[idx] = entry;
+            } else {
+                subs.unshift(entry);
+            }
+            rowData.pushSubscriptions = subs.slice(0, 300);
+
+            await fetch(`${BRL_SUPABASE_URL}/rest/v1/league_data?id=eq.2`, {
+                method: 'PATCH',
+                headers: {
+                    'apikey': BRL_SUPABASE_KEY,
+                    'Authorization': `Bearer ${BRL_SUPABASE_KEY}`,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({
+                    data: rowData,
+                    updated_at: new Date().toISOString()
+                })
+            });
+        } catch (e) {}
     }
 
     // 3. Preference Helpers
@@ -1287,25 +1389,38 @@
         document.getElementById('brl-driver-select-wrap').style.opacity = chkDriver.checked ? '1' : '0.45';
         document.getElementById('brl-team-select-wrap').style.opacity = chkTeam.checked ? '1' : '0.45';
 
-        chkSite.onchange = () => localStorage.setItem(STORAGE_KEYS.PREF_SITE_UPDATES, String(chkSite.checked));
-        chkPracGate.onchange = () => localStorage.setItem(STORAGE_KEYS.PREF_PRACTICE_GATE, String(chkPracGate.checked));
-        chkRace.onchange = () => localStorage.setItem(STORAGE_KEYS.PREF_RACE_LIVE, String(chkRace.checked));
+        chkSite.onchange = () => {
+            localStorage.setItem(STORAGE_KEYS.PREF_SITE_UPDATES, String(chkSite.checked));
+            ensureWebPushSubscription(true).catch(() => {});
+        };
+        chkPracGate.onchange = () => {
+            localStorage.setItem(STORAGE_KEYS.PREF_PRACTICE_GATE, String(chkPracGate.checked));
+            ensureWebPushSubscription(true).catch(() => {});
+        };
+        chkRace.onchange = () => {
+            localStorage.setItem(STORAGE_KEYS.PREF_RACE_LIVE, String(chkRace.checked));
+            ensureWebPushSubscription(true).catch(() => {});
+        };
         chkDriver.onchange = () => {
             localStorage.setItem(STORAGE_KEYS.PREF_DRIVER_ALERTS, String(chkDriver.checked));
             document.getElementById('brl-driver-select-wrap').style.opacity = chkDriver.checked ? '1' : '0.45';
+            ensureWebPushSubscription(true).catch(() => {});
         };
         selDriver.onchange = () => {
             localStorage.setItem(STORAGE_KEYS.PREF_DRIVER_TARGET, selDriver.value);
             renderMyBrlProfileCard();
+            ensureWebPushSubscription(true).catch(() => {});
         };
 
         chkTeam.onchange = () => {
             localStorage.setItem(STORAGE_KEYS.PREF_TEAM_ALERTS, String(chkTeam.checked));
             document.getElementById('brl-team-select-wrap').style.opacity = chkTeam.checked ? '1' : '0.45';
+            ensureWebPushSubscription(true).catch(() => {});
         };
         selTeam.onchange = () => {
             localStorage.setItem(STORAGE_KEYS.PREF_TEAM_TARGET, selTeam.value);
             renderMyBrlProfileCard();
+            ensureWebPushSubscription(true).catch(() => {});
         };
 
         const adminDrv = document.getElementById('brl-admin-target-driver');
@@ -1439,6 +1554,7 @@
         if (isAlertsEnabled()) {
             localStorage.setItem(STORAGE_KEYS.ALERTS_ENABLED, 'false');
             refreshAlertUIState();
+            ensureWebPushSubscription(true).catch(() => {});
             if (fb) {
                 fb.style.display = 'block';
                 fb.style.color = '#aaa';
@@ -1460,14 +1576,15 @@
         if (perm === 'granted') {
             localStorage.setItem(STORAGE_KEYS.ALERTS_ENABLED, 'true');
             refreshAlertUIState();
+            await ensureWebPushSubscription(true);
             if (fb) {
                 fb.style.display = 'block';
                 fb.style.color = '#39ff14';
-                fb.textContent = '✅ BRL Live Alerts Enabled! Sending confirmation notification...';
+                fb.textContent = '✅ BRL Background Lock-Screen Alerts Enabled! Sending confirmation notification...';
             }
             await triggerNativeNotification(
                 '🏁 Bandit Racing League Alerts Active!',
-                'You will now be notified for Website Updates, Practice/Pit Gate, Fantasy Locks, Live Races, and your followed Drivers & Teams!',
+                'Background push notifications are enabled! You will receive lock-screen alerts even when the app is closed.',
                 '/index.html',
                 'brl-welcome-notif'
             );
@@ -1484,6 +1601,8 @@
         const fb = document.getElementById('brl-alert-feedback');
         if ('Notification' in window && Notification.permission !== 'granted') {
             await handleToggleAlerts();
+        } else if (isAlertsEnabled()) {
+            await ensureWebPushSubscription(true);
         }
         const drv = prefDriverTarget();
         const tm = prefTeamTarget();
@@ -1497,7 +1616,7 @@
             driver: drv !== 'ALL' ? drv : undefined,
             team: tm !== 'ALL' ? tm : undefined,
             title: '🔴 TEST ALERT: Bandit Racing League App!',
-            body: `Your BRL App notifications are active! ${subInfo}`,
+            body: `Your BRL App background & lock-screen notifications are active! ${subInfo}`,
             url: '/simtrax.html'
         };
         showInAppToast(testObj);
@@ -1506,7 +1625,7 @@
             fb.style.display = 'block';
             fb.style.color = '#39ff14';
             fb.textContent = sent
-                ? '✅ Test notification sent to your device lock screen & banner!'
+                ? '✅ Test notification sent to your device lock screen & background push subscription synced!'
                 : '✅ In-app alert banner triggered! (Enable browser notifications above for lock-screen alerts.)';
         }
     }
@@ -1671,7 +1790,8 @@
                 title,
                 body,
                 url,
-                dateLabel: nowStr
+                dateLabel: nowStr,
+                webPushSent: false
             };
             if (mode === 'custom' && targetDriver) newAlert.driver = targetDriver;
             if (mode === 'custom' && targetTeam) newAlert.team = targetTeam;
@@ -1707,6 +1827,13 @@
                 })
             });
 
+            // Trigger background W3C Web Push (VAPID) delivery via relay endpoint for closed phones
+            fetch(RELAY_PUSH_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ notification: newAlert })
+            }).catch(() => {});
+
             const activeWebhook = webhookInputVal || rowData.discordWebhookUrl;
             if (activeWebhook) {
                 await postAlertToDiscordWebhook(activeWebhook, newAlert);
@@ -1714,8 +1841,8 @@
 
             msgEl.style.color = '#39ff14';
             msgEl.textContent = activeWebhook
-                ? '✅ Alert broadcasted live to BRL App users + synced to Discord!'
-                : '✅ Alert broadcasted live to BRL App users!';
+                ? '✅ Alert broadcasted live to BRL App users (including background lock-screen push) + synced to Discord!'
+                : '✅ Alert broadcasted live to BRL App users (including background lock-screen push)!';
             await fetchAndProcessNotifications(false);
         } catch (err) {
             msgEl.style.color = '#ff4d6d';

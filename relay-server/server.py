@@ -65,14 +65,45 @@ async def health_check(request):
         status=200, 
         headers={
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET"
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
         }
     )
+
+async def options_handler(request):
+    return web.Response(
+        status=204,
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+        }
+    )
+
+async def push_broadcast_handler(request):
+    cors_headers = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
+    }
+    try:
+        import sys
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        if parent_dir not in sys.path:
+            sys.path.insert(0, parent_dir)
+        import send_brl_notification
+        loop = asyncio.get_running_loop()
+        await loop.run_in_executor(None, send_brl_notification.flush_pending_web_pushes)
+        return web.json_response({"status": "ok"}, headers=cors_headers)
+    except Exception as e:
+        return web.json_response({"status": "error", "detail": str(e)}, status=500, headers=cors_headers)
 
 app = web.Application()
 app.router.add_get('/', health_check)
 app.router.add_get('/ws/{driver_id}', ws_handler)
 app.router.add_get('/health', health_check)
+app.router.add_options('/push-broadcast', options_handler)
+app.router.add_post('/push-broadcast', push_broadcast_handler)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))
