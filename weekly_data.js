@@ -438,9 +438,9 @@ const weeklyData = {
       "points": 2
     }
   ],
-  "latestBroadcastVideoId": "v5xJxuI5zyA",
+  "latestBroadcastVideoId": "1L9Qdra6whY",
   "spotlightDriver": "Joshua Adams",
-  "latestBroadcastTitle": "Legacy Towing and Travis Auto Service 140",
+  "latestBroadcastTitle": "The Big Red Propane 110 Season Finale",
   "latestBroadcastIsUpcoming": false,
-  "latestBroadcastBanner": "assets/BCast Banners/yt_v5xJxuI5zyA.jpg"
+  "latestBroadcastBanner": "assets/BCast Banners/yt_1L9Qdra6whY.jpg"
 };
