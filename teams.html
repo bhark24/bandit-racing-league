@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1795064386">
+    <link rel="stylesheet" href="styles.css?v=1795064960">
     <style>
         .construction-banner {
             background: rgba(255, 204, 0, 0.05);
@@ -400,11 +400,11 @@
             text-shadow: 0 0 5px var(--neon-green-glow);
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795064386">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795064386">
-    <link rel="shortcut icon" href="favicon.ico?v=1795064386">
-    <link rel="manifest" href="manifest.json?v=1795064386">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795064386">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795064960">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795064960">
+    <link rel="shortcut icon" href="favicon.ico?v=1795064960">
+    <link rel="manifest" href="manifest.json?v=1795064960">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795064960">
 </head>
 <body>
 
@@ -813,9 +813,9 @@
     </footer>
 
     <!-- Load the JavaScript Mock Database first -->
-    <script src="supabase_config.js?v=1795064386"></script>
-    <script src="teams_data.js?v=1795064386"></script>
-    <script src="roster_data.js?v=1795064386"></script>
+    <script src="supabase_config.js?v=1795064960"></script>
+    <script src="teams_data.js?v=1795064960"></script>
+    <script src="roster_data.js?v=1795064960"></script>
     <script>
         let selectedTeamId = null;
 
@@ -935,24 +935,27 @@
                 // Format balance to currency
                 const formattedBalance = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(team.balance);
                 const isForSale = team.isForSale || false;
+                const isClosed = team.isClosed || false;
                 const isSuspended = team.isSuspended || false;
 
                 const homeBaseBadge = isForSale 
                     ? ''
+                    : isClosed
+                    ? `<span style="font-size:0.65rem; background:#ff1744; color:#fff; padding:4px 8px; border-radius:4px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px;">CLOSED</span>`
                     : isSuspended
                     ? `<span style="font-size:0.65rem; background:#ff1744; color:#fff; padding:4px 8px; border-radius:4px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px;">SUSPENDED</span>`
                     : `<span style="font-size:0.75rem; background:rgba(255,255,255,0.05); padding:4px 8px; border-radius:4px; color:var(--text-muted); font-weight:700; text-transform:uppercase;">${team.homeBase}</span>`;
 
                 const teamNameStyle = isForSale
                     ? 'color: #00ff00; font-family: var(--font-heading); font-size: 1.3rem; margin: 5px 0; font-style: italic; font-weight: 900; text-transform: uppercase;'
-                    : isSuspended
+                    : (isClosed || isSuspended)
                     ? 'color: #888; font-family: var(--font-heading); font-size: 1.3rem; margin: 5px 0; font-style: italic;'
                     : 'color: #fff; font-family: var(--font-heading); font-size: 1.3rem; margin: 5px 0; font-style: italic;';
                 const teamNameText = isForSale ? 'FRANCHISE AVAILABLE' : team.name;
 
                 card.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <img src="${team.logo}" alt="${team.name}" class="team-overview-logo" style="height: 45px; ${(isForSale || isSuspended) ? 'filter: grayscale(1) opacity(0.35);' : ''}" onerror="handleTeamLogoError(this, '${team.id}')">
+                        <img src="${team.logo}" alt="${team.name}" class="team-overview-logo" style="height: 45px; ${(isForSale || isClosed || isSuspended) ? 'filter: grayscale(1) opacity(0.35);' : ''}" onerror="handleTeamLogoError(this, '${team.id}')">
                         ${homeBaseBadge}
                     </div>
                     <h3 style="${teamNameStyle}">${teamNameText}</h3>
@@ -964,6 +967,11 @@
                             <img src="assets/bandit_realty_sign.png" alt="Bandit Realty Sign" style="height: 48px; width: auto; object-fit: contain; margin-bottom: 4px; filter: drop-shadow(0 0 4px rgba(255,204,0,0.25)); z-index: 2;">
                             <div style="font-size: 0.65rem; color: #fff; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; z-index: 2;">Listed by Bandit Realty</div>
                         </div>
+                    ` : isClosed ? `
+                        <div style="background: rgba(255, 23, 68, 0.08); border: 2px dashed #ff1744; border-radius: 6px; padding: 12px; margin: 10px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255,23,68,0.12);">
+                            <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.15rem; color: #ff1744; text-shadow: 0 0 8px rgba(255,23,68,0.4); text-transform: uppercase; line-height: 1.1; font-style: italic; text-align: center; margin-bottom: 4px; letter-spacing: 0.5px;">FRANCHISE CLOSED</div>
+                            <div style="font-size: 0.65rem; color: #bbb; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Operations Closed</div>
+                        </div>
                     ` : isSuspended ? `
                         <div style="background: rgba(255, 23, 68, 0.08); border: 2px dashed #ff1744; border-radius: 6px; padding: 12px; margin: 10px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255,23,68,0.12);">
                             <div style="font-family: var(--font-heading); font-weight: 900; font-size: 1.15rem; color: #ff1744; text-shadow: 0 0 8px rgba(255,23,68,0.4); text-transform: uppercase; line-height: 1.1; font-style: italic; text-align: center; margin-bottom: 4px; letter-spacing: 0.5px;">SUSPENDED OPERATIONS</div>
@@ -972,10 +980,10 @@
                     ` : ''}
 
                     ${isForSale ? '' : `<p style="font-size:0.85rem; color:var(--text-muted); margin:0;">Owner: ${team.owner}</p>`}
-                    <div class="team-overview-balance" style="${isForSale ? 'color: var(--chase-yellow); font-size: 1.35rem; margin-top: 5px;' : isSuspended ? 'color: #777; text-shadow: none;' : ''}">${isForSale ? 'ACQUISITION VAL: $1,937,028' : formattedBalance}</div>
+                    <div class="team-overview-balance" style="${isForSale ? 'color: var(--chase-yellow); font-size: 1.35rem; margin-top: 5px;' : (isClosed || isSuspended) ? 'color: #777; text-shadow: none;' : ''}">${isForSale ? 'ACQUISITION VAL: $1,937,028' : formattedBalance}</div>
                     <div style="font-size:0.8rem; color:var(--text-muted); border-top:1px solid #1c1c1c; padding-top:10px; margin-top:auto; display:flex; justify-content:space-between;">
                         <span>RACE CHASSIS:</span>
-                        <strong style="${(isForSale || isSuspended) ? 'color: #ff1744;' : 'color:var(--neon-green);'}">${isForSale ? 'LIQUIDATED' : isSuspended ? 'SUSPENDED' : calculateFleetCondition(team) + '% Avg'}</strong>
+                        <strong style="${(isForSale || isClosed || isSuspended) ? 'color: #ff1744;' : 'color:var(--neon-green);'}">${isForSale ? 'LIQUIDATED' : isClosed ? 'CLOSED' : isSuspended ? 'SUSPENDED' : calculateFleetCondition(team) + '% Avg'}</strong>
                     </div>
                 `;
                 container.appendChild(card);
@@ -1246,17 +1254,21 @@
 
             // Update Panel Headers
             const isForSale = team.isForSale || false;
+            const isClosed = team.isClosed || false;
             const isSuspended = team.isSuspended || false;
             if (isForSale) {
                 document.getElementById('detail-team-name').innerHTML = `<span style="color: #00ff00; font-family: var(--font-heading); font-style: italic; font-weight: 900; text-transform: uppercase;">FRANCHISE AVAILABLE</span> <span style="font-size:0.8rem; background:var(--chase-yellow); color:#000; padding:2px 6px; border-radius:3px; font-weight:bold; margin-left:10px; vertical-align:middle; font-family:var(--font-heading); font-style:normal;">FOR SALE</span>`;
                 document.getElementById('detail-team-owner').innerHTML = `<span style="color:#888; font-style:italic;">None (Liquidated)</span>`;
                 document.getElementById('detail-team-balance-large').textContent = 'ACQUISITION VALUE: $1,937,028';
                 document.getElementById('detail-team-logo').style.filter = 'grayscale(1) opacity(0.4)';
-            } else if (isSuspended) {
-                document.getElementById('detail-team-name').innerHTML = `<span style="color: #888; font-family: var(--font-heading); font-style: italic;">${team.name}</span> <span style="font-size:0.8rem; background:#ff1744; color:#fff; padding:2px 8px; border-radius:3px; font-weight:bold; margin-left:10px; vertical-align:middle; font-family:var(--font-heading); font-style:normal;">SUSPENDED OPERATIONS</span>`;
-                document.getElementById('detail-team-owner').innerHTML = `<span style="color:#aaa;">${team.owner}</span> <span style="color:#ff1744; margin-left:6px; font-weight:bold; font-size:0.85rem;">(INACTIVE)</span>`;
+            } else if (isClosed || isSuspended) {
+                const statusText = isClosed ? 'FRANCHISE CLOSED' : 'SUSPENDED OPERATIONS';
+                const tagText = isClosed ? '(CLOSED)' : '(INACTIVE)';
+                const balTag = isClosed ? '(CLOSED)' : '(FROZEN)';
+                document.getElementById('detail-team-name').innerHTML = `<span style="color: #888; font-family: var(--font-heading); font-style: italic;">${team.name}</span> <span style="font-size:0.8rem; background:#ff1744; color:#fff; padding:2px 8px; border-radius:3px; font-weight:bold; margin-left:10px; vertical-align:middle; font-family:var(--font-heading); font-style:normal;">${statusText}</span>`;
+                document.getElementById('detail-team-owner').innerHTML = `<span style="color:#aaa;">${team.owner}</span> <span style="color:#ff1744; margin-left:6px; font-weight:bold; font-size:0.85rem;">${tagText}</span>`;
                 const formattedBalance = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(team.balance);
-                document.getElementById('detail-team-balance-large').textContent = `${formattedBalance} (FROZEN)`;
+                document.getElementById('detail-team-balance-large').textContent = `${formattedBalance} ${balTag}`;
                 document.getElementById('detail-team-logo').style.filter = 'grayscale(1) opacity(0.4)';
             } else {
                 document.getElementById('detail-team-name').textContent = team.name;
@@ -1278,10 +1290,18 @@
                 }
             }
 
-            // Toggle Suspended Operations Banner
+            // Toggle Suspended / Closed Operations Banner
             const suspendedBanner = document.getElementById('team-suspended-alert-banner');
             if (suspendedBanner) {
-                if (isSuspended) {
+                if (isClosed || isSuspended) {
+                    const bannerTitle = suspendedBanner.querySelector('h3');
+                    const bannerText = suspendedBanner.querySelector('p');
+                    if (bannerTitle) bannerTitle.textContent = isClosed ? 'FRANCHISE CLOSED' : 'SUSPENDED OPERATIONS';
+                    if (bannerText) {
+                        bannerText.textContent = isClosed
+                            ? 'This franchise has officially closed and ceased racing operations. All weekly race operations, driver signings, and fleet garage transactions are permanently locked.'
+                            : 'This franchise has officially suspended racing operations. All weekly race operations, driver signings, and fleet garage transactions are currently frozen.';
+                    }
                     suspendedBanner.style.display = 'flex';
                 } else {
                     suspendedBanner.style.display = 'none';
@@ -1387,18 +1407,24 @@
                 const suffix = (index + 1) === 1 ? 'st' : (index + 1) === 2 ? 'nd' : (index + 1) === 3 ? 'rd' : 'th';
                 const rankColor = index === 0 ? 'var(--neon-green)' : index === 1 ? '#eee' : 'var(--text-muted)';
                 const rankDisplay = `<span style="color:${rankColor}; font-weight:700;">${index + 1}${suffix}</span>`;
+                const isClosed = team.isClosed || false;
                 const isSuspended = team.isSuspended || false;
-                const statusBadge = isSuspended ? `<span style="font-size:0.65rem; background:#ff1744; color:#fff; padding:2px 6px; border-radius:3px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px; margin-left:8px;">SUSPENDED OPERATIONS</span>` : '';
+                const isInactive = isClosed || isSuspended;
+                const statusBadge = isClosed
+                    ? `<span style="font-size:0.65rem; background:#ff1744; color:#fff; padding:2px 6px; border-radius:3px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px; margin-left:8px;">CLOSED</span>`
+                    : isSuspended
+                    ? `<span style="font-size:0.65rem; background:#ff1744; color:#fff; padding:2px 6px; border-radius:3px; font-weight:900; text-transform:uppercase; letter-spacing:0.5px; margin-left:8px;">SUSPENDED OPERATIONS</span>`
+                    : '';
                 
                 tr.innerHTML = `
                     <td style="font-family:var(--font-heading); font-weight:700; font-size:1.1rem; padding:12px 15px;">${rankDisplay}</td>
                     <td style="display:flex; align-items:center; gap:15px; padding:12px 15px;">
-                        <img src="${team.logo}" alt="${team.name}" style="height:35px; max-width:80px; object-fit:contain; ${isSuspended ? 'filter: grayscale(1) opacity(0.4);' : ''}" onerror="handleTeamLogoError(this, '${team.id}')">
-                        <strong style="color:${isSuspended ? '#777' : '#fff'}; font-size:1.05rem; font-style: italic;">${team.name}</strong>${statusBadge}
+                        <img src="${team.logo}" alt="${team.name}" style="height:35px; max-width:80px; object-fit:contain; ${isInactive ? 'filter: grayscale(1) opacity(0.4);' : ''}" onerror="handleTeamLogoError(this, '${team.id}')">
+                        <strong style="color:${isInactive ? '#777' : '#fff'}; font-size:1.05rem; font-style: italic;">${team.name}</strong>${statusBadge}
                     </td>
                     <td style="color:var(--text-muted); padding:12px 15px;">${team.owner}</td>
-                    <td style="text-align:center; font-weight:bold; color:${isSuspended ? '#777' : '#fff'}; padding:12px 15px;">${team.wins}</td>
-                    <td style="text-align:right; font-family:var(--font-heading); font-size:1.2rem; font-weight:900; color:${isSuspended ? '#777' : 'var(--neon-green)'}; ${isSuspended ? '' : 'text-shadow:0 0 5px var(--neon-green-glow);'} padding:12px 15px;">${team.points}</td>
+                    <td style="text-align:center; font-weight:bold; color:${isInactive ? '#777' : '#fff'}; padding:12px 15px;">${team.wins}</td>
+                    <td style="text-align:right; font-family:var(--font-heading); font-size:1.2rem; font-weight:900; color:${isInactive ? '#777' : 'var(--neon-green)'}; ${isInactive ? '' : 'text-shadow:0 0 5px var(--neon-green-glow);'} padding:12px 15px;">${team.points}</td>
                 `;
                 body.appendChild(tr);
             });
@@ -3156,6 +3182,6 @@
     </div>
 
 
-    <script src="brl_app.js?v=1795064386"></script>
+    <script src="brl_app.js?v=1795064960"></script>
 </body>
 </html>

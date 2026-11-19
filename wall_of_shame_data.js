@@ -1665,6 +1665,111 @@ const BRL_RACES_DATA = {
                 audioTranscript: "[RACE CONTROL] '15 came down when 63 wasn't moving—2nd EOL on Car 15!'"
             }
         ]
+    },
+
+    homestead: {
+        id: "homestead",
+        title: "Homestead-Miami Speedway (Finale)",
+        subtext: "Season 16 Championship Finale — 110 Laps • 4 EOLs & Checkered Flag Spin (#24 MVP)!",
+        laps: 111,
+        trackType: "gateway_oval",
+        stages: [
+            { name: "Stage 1", lap: 33 },
+            { name: "Stage 2", lap: 66 },
+            { name: "Final Stage", lap: 110 }
+        ],
+        mvp: {
+            carNumber: "24",
+            driverName: "Car #24 (Ethan Sikorski)",
+            title: "Wall of Shame MVP",
+            reason: "2 EOL Penalties (Lap 35 Weird Half-Block on #01 & Lap 44 Self-Spin From Damage)",
+            totalIncidents: 3,
+            totalPenalties: "2 End of Line (EOL) Penalties",
+            image: "assets/truck images/truck_image_ethan_sikorski.png"
+        },
+        drivers: [
+            { number: "24", name: "Driver #24 (Ethan Sikorski)", score: 92, level: "CRITICAL", badge: "MVP / 2x EOLs", incidentsCount: 3, colors: ["#ff0055", "#111"] },
+            { number: "28", name: "Driver #28 (Joey Cruz)", score: 74, level: "HIGH", badge: "Clear-Down EOL (L30)", incidentsCount: 2, colors: ["#ff5500", "#111"] },
+            { number: "50", name: "Driver #50 (Davis Carroll)", score: 70, level: "HIGH", badge: "Restart Spin EOL (L39)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
+            { number: "01", name: "Driver #01 (Adam Tahan)", score: 30, level: "LOW", badge: "Checkered Flag Spin (L111)", incidentsCount: 3, colors: ["#3b82f6", "#111"] },
+            { number: "38", name: "Driver #38 (Peter Murphy)", score: 15, level: "LOW", badge: "L3 Racing Deal", incidentsCount: 1, colors: ["#2ecc71", "#111"] },
+            { number: "18", name: "Driver #18 (Victor Weaver)", score: 15, level: "LOW", badge: "L23 Racing Deal", incidentsCount: 1, colors: ["#2ecc71", "#111"] },
+            { number: "22", name: "Driver #22 (Joshua Adams)", score: 10, level: "LOW", badge: "Collected #50 on Restart", incidentsCount: 1, colors: ["#2ecc71", "#111"] }
+        ],
+        incidents: [
+            {
+                id: 1, lap: 3, stage: 1, involved: ["24", "38"], primaryCar: "24", category: "racing_deal",
+                title: "Corner Entry Lift Contact (#24 & #38)",
+                summary: "Car #24 (Ethan Sikorski) went to enter the corner and lifted while Car #38 (Peter Murphy) was right on his bumper; #38 had no time to react.",
+                ruling: "Racing Deal", location: "Corner Entry",
+                trackCoords: { x: 640, y: 200 },
+                audioTranscript: "[STEWARDS] '24 lifted on entry with 38 right on his bumper—38 had no time to react. Racing deal.'"
+            },
+            {
+                id: 2, lap: 23, stage: 1, involved: ["28", "18"], primaryCar: "28", category: "racing_deal",
+                title: "Shaky Backstretch Lines Send #18 Around",
+                summary: "Cars #28 (Joey Cruz) and #18 (Victor Weaver) both had shaky lines down the backstretch and met in the middle, sending #18 around.",
+                ruling: "Racing Deal", location: "Backstretch",
+                trackCoords: { x: 400, y: 80 },
+                audioTranscript: "[STEWARDS] 'Both 28 and 18 had shaky lines down the backstretch and met in the middle—racing deal.'"
+            },
+            {
+                id: 3, lap: 30, stage: 1, involved: ["28", "01"], primaryCar: "28", category: "penalty",
+                title: "Premature Clear-Down Into #01",
+                summary: "Car #28 (Joey Cruz) tried to clear down the track when Car #01 (Adam Tahan) was already holding the lane.",
+                ruling: "End of Line (EOL) Penalty (#28)", location: "Turn 2 / Backstretch",
+                trackCoords: { x: 560, y: 120 },
+                audioTranscript: "[RACE CONTROL] '28 tried to clear down and 01 was there. Car 28 EOL.'"
+            },
+            {
+                id: 4, lap: 33, stage: 1, involved: ["12"], primaryCar: "12", category: "stage_finish",
+                title: "Stage 1 Break Yellow",
+                summary: "Scheduled Stage 1 caution at Lap 33.",
+                ruling: "Stage Break Yellow", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Lap 33 Stage 1 yellow is out.'"
+            },
+            {
+                id: 5, lap: 35, stage: 2, involved: ["24", "01"], primaryCar: "24", category: "penalty",
+                title: "Weird Half-Block on #01's Run",
+                summary: "Car #24 (Ethan Sikorski) tried to block Car #01's (Adam Tahan) run and threw a weird half-block. #01 lifted slightly, but had such a run he still hit #24.",
+                ruling: "End of Line (EOL) Penalty (#24)", location: "Frontstretch / Turn 1",
+                trackCoords: { x: 580, y: 290 },
+                audioTranscript: "[RACE CONTROL] '24 threw a weird half-block on 01's run. 24 EOL.'"
+            },
+            {
+                id: 6, lap: 39, stage: 2, involved: ["50", "22"], primaryCar: "50", category: "penalty",
+                title: "Restart Loose Spin Collected by #22",
+                summary: "Car #50 (Davis Carroll) got loose on the restart and got hit by Car #22 (Joshua Adams).",
+                ruling: "End of Line (EOL) Penalty (#50)", location: "Restart Zone / Turn 1",
+                trackCoords: { x: 500, y: 320 },
+                audioTranscript: "[RACE CONTROL] '50 got loose on the restart and got hit by 22. 50 EOL.'"
+            },
+            {
+                id: 7, lap: 44, stage: 2, involved: ["24"], primaryCar: "24", category: "mvp",
+                title: "Self-Spin From Yellow Damage (2nd EOL for #24)",
+                summary: "Car #24 (Ethan Sikorski) self-spun from damage sustained during an earlier yellow flag period, earning his 2nd EOL of the night and Wall of Shame MVP.",
+                ruling: "End of Line (EOL) Penalty (#24 — 2nd of Night)", location: "Turns 3–4",
+                trackCoords: { x: 200, y: 240 },
+                audioTranscript: "[RACE CONTROL] 'Self-spin 24 from damage sustained in a yellow—EOL 24!'"
+            },
+            {
+                id: 8, lap: 66, stage: 2, involved: ["12"], primaryCar: "12", category: "stage_finish",
+                title: "Stage 2 Break Yellow",
+                summary: "Scheduled Stage 2 caution at Lap 66.",
+                ruling: "Stage Break Yellow", location: "Start / Finish Line",
+                trackCoords: { x: 400, y: 330 },
+                audioTranscript: "[RACE CONTROL] 'Lap 66 Stage 2 yellow is out.'"
+            },
+            {
+                id: 9, lap: 111, stage: 3, involved: ["01"], primaryCar: "01", category: "racing_deal",
+                title: "Post-Race Checkered Flag Spin (#01)",
+                summary: "On Lap 111 (technically post-race), Car #01 (Adam Tahan) spun himself across the finish line as he was taking the checkered flag.",
+                ruling: "Post-Race Highlight (No Penalty)", location: "Start / Finish Line",
+                trackCoords: { x: 420, y: 330 },
+                audioTranscript: "[RACE CONTROL] '01 spun himself across the finish line taking the checkered flag!'"
+            }
+        ]
     }
 
 };

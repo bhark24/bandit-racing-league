@@ -10881,7 +10881,8 @@ const teamsData = {
         "Craftsman Tools",
         "Octane Apparel"
       ],
-      "isSuspended": false,
+      "isSuspended": true,
+      "isClosed": true,
       "passcodeHash": "7c80456012d9a93fbfd574ba3b0204b364d3e52c7370b8921f7fa69fd70bddfa",
       "transactions": []
     },

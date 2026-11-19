@@ -54,7 +54,6 @@
         ["esr", "ESR"],
         ["carter-phillips-racing", "Carter Phillips Racing"],
         ["salt-city-performance", "Salt City Performance"],
-        ["title-town-racing", "Title Town Racing"],
         ["pop-motorsports", "POP Motorsports"]
     ];
 
@@ -125,7 +124,7 @@
     function getActiveTeamsList() {
         if (typeof teamsData !== 'undefined' && teamsData && Array.isArray(teamsData.teams)) {
             const list = teamsData.teams
-                .filter(t => !t.isForSale && !t.isSuspended)
+                .filter(t => !t.isForSale && !t.isSuspended && !t.isClosed)
                 .map(t => [t.id, t.name]);
             if (list.length > 0) return list;
         }
@@ -862,7 +861,7 @@
 
             let teamObj = null;
             if (typeof teamsData !== 'undefined' && Array.isArray(teamsData.teams)) {
-                const activeTeams = teamsData.teams.filter(t => !t.isForSale && !t.isSuspended);
+                const activeTeams = teamsData.teams.filter(t => !t.isForSale && !t.isSuspended && !t.isClosed);
                 if (teamTarget && teamTarget !== 'ALL') {
                     const tNorm = normName(teamTarget);
                     teamObj = activeTeams.find(t => normName(t.name) === tNorm || normName(t.id) === tNorm);

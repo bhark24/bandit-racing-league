@@ -2,8 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // Current Active State
-    let currentRaceKey = "phoenix_2";
-    let currentRaceData = BRL_RACES_DATA.phoenix_2;
+    let currentRaceKey = "homestead";
+    let currentRaceData = BRL_RACES_DATA.homestead;
     let currentFilter = "all";
     let searchQuery = "";
     let isAudioEnabled = true;
@@ -666,7 +666,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return hash;
         }
 
-        return "phoenix_2";
+        return "homestead";
     }
 
     // Initialize Race Week
