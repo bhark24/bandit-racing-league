@@ -60,14 +60,14 @@
       font-family: monospace;
       font-size: 1.75rem;
       font-weight: 900;
-      color: #39ff14;
+      color: #ff1e2d;
       transition: all 0.15s ease;
       box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
     }
     .pin-dot.filled {
-      border-color: #39ff14;
-      box-shadow: 0 0 16px rgba(57, 255, 20, 0.35), inset 0 0 8px rgba(57, 255, 20, 0.15);
-      text-shadow: 0 0 10px rgba(57, 255, 20, 0.8);
+      border-color: #ff1e2d;
+      box-shadow: 0 0 16px rgba(255, 30, 45, 0.35), inset 0 0 8px rgba(255, 30, 45, 0.15);
+      text-shadow: 0 0 10px rgba(255, 30, 45, 0.8);
     }
     .pin-dot.error {
       border-color: #ef4444;
@@ -90,33 +90,33 @@
       cursor: pointer;
     }
     .keypad-btn:hover {
-      border-color: #39ff14;
-      color: #39ff14;
-      box-shadow: 0 0 14px rgba(57, 255, 20, 0.25);
+      border-color: #ff1e2d;
+      color: #ff1e2d;
+      box-shadow: 0 0 14px rgba(255, 30, 45, 0.25);
       transform: translateY(-1px);
     }
     .keypad-btn:active {
       transform: translateY(1px);
-      background: rgba(57, 255, 20, 0.2);
+      background: rgba(255, 30, 45, 0.2);
     }
   </style>
 </head>
 <body class="bg-[#0b0f19] text-slate-100 antialiased min-h-screen lg:h-screen lg:max-h-screen overflow-y-auto lg:overflow-hidden flex flex-col font-sans p-1.5 lg:p-2 gap-1.5 lg:gap-2">
 
   <!-- GEEZER AUTHENTICS DEVELOPMENT PORTAL — SECURITY PIN LOCK SCREEN (PIN: 7223) -->
-  <div id="geezerPortalLockScreen" class="fixed inset-0 z-[99999] bg-[#060911] flex flex-col items-center justify-center p-4 overflow-y-auto" style="background-image: radial-gradient(circle at 50% 25%, rgba(57, 255, 20, 0.10) 0%, rgba(6, 9, 17, 0.98) 65%);">
-    <div id="geezerPortalCard" class="w-full max-w-md bg-slate-900/95 border-2 border-[#39ff14]/60 rounded-2xl p-6 sm:p-8 shadow-[0_0_50px_rgba(57,255,20,0.18)] flex flex-col items-center text-center relative overflow-hidden">
-      <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-[#39ff14] to-emerald-500"></div>
+  <div id="geezerPortalLockScreen" class="fixed inset-0 z-[99999] bg-[#060911] flex flex-col items-center justify-center p-4 overflow-y-auto" style="background-image: radial-gradient(circle at 50% 25%, rgba(255, 30, 45, 0.10) 0%, rgba(6, 9, 17, 0.98) 65%);">
+    <div id="geezerPortalCard" class="w-full max-w-md bg-slate-900/95 border-2 border-[#ff1e2d]/60 rounded-2xl p-6 sm:p-8 shadow-[0_0_50px_rgba(255, 30, 45,0.18)] flex flex-col items-center text-center relative overflow-hidden">
+      <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-[#ff1e2d] to-emerald-500"></div>
 
-      <img src="assets/geezer-logo.png" alt="Geezer Authentics" class="max-w-[270px] w-full mb-3 drop-shadow-[0_0_20px_rgba(57,255,20,0.35)]" onerror="this.style.display='none'">
+      <img src="assets/geezer-logo.png" alt="Geezer Authentics" class="max-w-[270px] w-full mb-3 drop-shadow-[0_0_20px_rgba(255, 30, 45,0.35)]" onerror="this.style.display='none'">
 
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/90 border border-[#39ff14]/50 text-[#39ff14] text-[11px] font-mono font-bold tracking-widest uppercase mb-2">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/90 border border-[#ff1e2d]/50 text-[#ff1e2d] text-[11px] font-mono font-bold tracking-widest uppercase mb-2">
         <span>🔒</span>
         <span>Protected Engineering Environment</span>
       </div>
 
       <h1 style="font-family: 'Outfit', sans-serif;" class="text-2xl sm:text-3xl font-black italic uppercase tracking-wide text-white leading-tight">
-        GEEZER AUTHENTICS <span class="text-[#39ff14] drop-shadow-[0_0_12px_rgba(57,255,20,0.5)]">DEVELOPMENT PORTAL</span>
+        GEEZER AUTHENTICS <span class="text-[#ff1e2d] drop-shadow-[0_0_12px_rgba(255, 30, 45,0.5)]">DEVELOPMENT PORTAL</span>
       </h1>
       <p class="text-xs sm:text-sm text-slate-400 font-mono mt-1.5 mb-5">
         SL-25 CNC Contour &amp; Insert Radius Compensation Suite &bull; Enter 4-Digit Security PIN
@@ -153,12 +153,12 @@
         <button type="button" id="btnPinBack" class="keypad-btn !text-base !font-mono !text-amber-300 hover:!border-amber-400">⌫</button>
       </div>
 
-      <button type="button" id="btnPortalUnlock" style="font-family: 'Outfit', sans-serif;" class="w-full max-w-[290px] py-3 rounded-xl bg-[#39ff14] hover:bg-[#2ce60f] text-slate-950 font-black uppercase tracking-wider text-base shadow-[0_0_20px_rgba(57,255,20,0.35)] transition cursor-pointer">
+      <button type="button" id="btnPortalUnlock" style="font-family: 'Outfit', sans-serif;" class="w-full max-w-[290px] py-3 rounded-xl bg-[#ff1e2d] hover:bg-[#2ce60f] text-slate-950 font-black uppercase tracking-wider text-base shadow-[0_0_20px_rgba(255, 30, 45,0.35)] transition cursor-pointer">
         🔓 UNLOCK PORTAL
       </button>
 
       <div class="mt-5 pt-4 border-t border-slate-800 w-full flex items-center justify-between text-xs font-mono text-slate-400">
-        <a href="geezer-app.html" class="hover:text-[#39ff14] transition">&larr; Back to Geezer App</a>
+        <a href="geezer-app.html" class="hover:text-[#ff1e2d] transition">&larr; Back to Geezer App</a>
         <a href="index.html" class="hover:text-white transition">Bandit Racing League Home</a>
       </div>
     </div>
@@ -174,7 +174,7 @@
       </div>
       <div>
         <h1 class="text-sm lg:text-base font-bold tracking-wide text-white flex flex-wrap items-center gap-1.5">
-          <span class="text-[#39ff14] font-extrabold tracking-wider">GEEZER DEV PORTAL</span><span class="text-slate-600">&bull;</span><span>SL-25 Visualizer</span>
+          <span class="text-[#ff1e2d] font-extrabold tracking-wider">GEEZER DEV PORTAL</span><span class="text-slate-600">&bull;</span><span>SL-25 Visualizer</span>
           <span id="badgeProgramFamily" class="text-[10px] lg:text-[11px] font-semibold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Stage 12J</span>
           <span id="badgeInspectionStatus" class="text-[10px] lg:text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-700/60">✓ 0 Flags</span>
         </h1>
@@ -5348,7 +5348,7 @@ M30`;
         if (enteredPin === PORTAL_PIN) {
           if (statusEl) {
             statusEl.textContent = '✓ ACCESS GRANTED — LAUNCHING WORKSTATION...';
-            statusEl.className = 'min-h-[22px] text-xs font-mono font-extrabold tracking-wider uppercase text-[#39ff14] mb-3';
+            statusEl.className = 'min-h-[22px] text-xs font-mono font-extrabold tracking-wider uppercase text-[#ff1e2d] mb-3';
           }
           setTimeout(unlockPortal, 180);
         } else {

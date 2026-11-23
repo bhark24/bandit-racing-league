@@ -448,9 +448,9 @@
         const isDriver = notif.category === 'driver_alert' || !!notif.driver;
         const isTeam = notif.category === 'team_alert' || !!notif.team;
 
-        let borderCol = '#39ff14';
-        let badgeBg = 'rgba(57,255,20,0.2)';
-        let badgeColor = '#39ff14';
+        let borderCol = '#ff1e2d';
+        let badgeBg = 'rgba(255, 30, 45,0.2)';
+        let badgeColor = '#ff1e2d';
         let badgeLabel = '🔄 WEBSITE UPDATED';
 
         if (isLive) {
@@ -469,9 +469,9 @@
             badgeColor = '#ffab40';
             badgeLabel = '⚠️ FANTASY PICKS LOCK REMINDER';
         } else if (isPractice) {
-            borderCol = '#39ff14';
-            badgeBg = 'rgba(57,255,20,0.25)';
-            badgeColor = '#39ff14';
+            borderCol = '#ff1e2d';
+            badgeBg = 'rgba(255, 30, 45,0.25)';
+            badgeColor = '#ff1e2d';
             badgeLabel = '🟢 TUESDAY PRACTICE OPEN';
         } else if (isPitGate) {
             borderCol = '#ffcc00';
@@ -504,7 +504,7 @@
             border-radius: 12px;
             padding: 14px 16px;
             z-index: 99999;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.85), 0 0 25px rgba(57,255,20,0.22);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.85), 0 0 25px rgba(255, 30, 45,0.22);
             color: #fff;
             font-family: 'Roboto', sans-serif;
             display: flex;
@@ -891,14 +891,14 @@
                     </div>
                     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
                         <div style="font-family:'Outfit',sans-serif; font-weight:900; font-size:1.05rem; color:#fff;">
-                            <span style="color:#39ff14;">#${drvObj.carNumber}</span> ${drvObj.name}
+                            <span style="color:#ff1e2d;">#${drvObj.carNumber}</span> ${drvObj.name}
                             ${drvObj.isChase ? '<span style="background:#ffcc00; color:#000; font-size:0.62rem; padding:1px 6px; border-radius:4px; margin-left:6px; vertical-align:middle;">🏆 CHASE</span>' : ''}
                         </div>
-                        <span style="font-size:0.78rem; color:#ccc; font-weight:700;">Rank: <strong style="color:#39ff14;">P${drvObj.rank}</strong> &bull; <strong style="color:#fff;">${drvObj.points.toLocaleString()} pts</strong></span>
+                        <span style="font-size:0.78rem; color:#ccc; font-weight:700;">Rank: <strong style="color:#ff1e2d;">P${drvObj.rank}</strong> &bull; <strong style="color:#fff;">${drvObj.points.toLocaleString()} pts</strong></span>
                     </div>
                     <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:6px; text-align:center; background:rgba(0,0,0,0.45); padding:6px; border-radius:6px;">
                         <div><div style="font-size:0.62rem; color:#888; text-transform:uppercase;">Starts</div><div style="font-size:0.82rem; font-weight:900; color:#fff;">${drvObj.starts}</div></div>
-                        <div><div style="font-size:0.62rem; color:#888; text-transform:uppercase;">Wins</div><div style="font-size:0.82rem; font-weight:900; color:#39ff14;">${drvObj.wins}</div></div>
+                        <div><div style="font-size:0.62rem; color:#888; text-transform:uppercase;">Wins</div><div style="font-size:0.82rem; font-weight:900; color:#ff1e2d;">${drvObj.wins}</div></div>
                         <div><div style="font-size:0.62rem; color:#888; text-transform:uppercase;">Top 5</div><div style="font-size:0.82rem; font-weight:900; color:#00d4ff;">${drvObj.top5}</div></div>
                         <div><div style="font-size:0.62rem; color:#888; text-transform:uppercase;">Top 10</div><div style="font-size:0.82rem; font-weight:900; color:#fff;">${drvObj.top10}</div></div>
                         <div><div style="font-size:0.62rem; color:#888; text-transform:uppercase;">Avg Fin</div><div style="font-size:0.82rem; font-weight:900; color:#ffcc00;">${drvObj.avgFinish || '--'}</div></div>
@@ -923,7 +923,7 @@
                         <div style="font-family:'Outfit',sans-serif; font-weight:900; font-size:1rem; color:#fff;">
                             ${teamObj.name} <span style="font-size:0.72rem; color:#aaa; font-weight:400;">(Owner: ${teamObj.owner || 'TBD'})</span>
                         </div>
-                        <span style="font-size:0.8rem; font-weight:900; color:#39ff14;">Bank: ${bankVal}</span>
+                        <span style="font-size:0.8rem; font-weight:900; color:#ff1e2d;">Bank: ${bankVal}</span>
                     </div>
                     <div style="font-size:0.75rem; color:#bbb;">
                         <strong>Points:</strong> ${(teamObj.points || 0).toLocaleString()} &bull; <strong>Home:</strong> ${teamObj.homeLocation || 'USA'}<br>
@@ -974,8 +974,8 @@
                 to { transform: translateY(0); opacity: 1; }
             }
             @keyframes brlPulseGlow {
-                0%, 100% { box-shadow: 0 6px 24px rgba(0,0,0,0.8), 0 0 14px rgba(57, 255, 20, 0.35); }
-                50% { box-shadow: 0 6px 28px rgba(0,0,0,0.9), 0 0 24px rgba(57, 255, 20, 0.7); }
+                0%, 100% { box-shadow: 0 6px 24px rgba(0,0,0,0.8), 0 0 14px rgba(255, 30, 45, 0.35); }
+                50% { box-shadow: 0 6px 28px rgba(0,0,0,0.9), 0 0 24px rgba(255, 30, 45, 0.7); }
             }
             #brl-app-fab {
                 position: fixed;
@@ -984,7 +984,7 @@
                 z-index: 9998;
                 background: linear-gradient(135deg, #10141d 0%, #090b10 100%);
                 color: #fff;
-                border: 2px solid #39ff14;
+                border: 2px solid #ff1e2d;
                 border-radius: 50px;
                 padding: 10px 18px;
                 font-family: 'Outfit', sans-serif;
@@ -1029,7 +1029,7 @@
             }
             #brl-app-drawer {
                 background: linear-gradient(145deg, #12151f 0%, #090b10 100%);
-                border: 2px solid #39ff14;
+                border: 2px solid #ff1e2d;
                 border-radius: 16px;
                 width: 100%;
                 max-width: 560px;
@@ -1038,7 +1038,7 @@
                 padding: 22px;
                 color: #fff;
                 font-family: 'Roboto', sans-serif;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.95), 0 0 35px rgba(57,255,20,0.2);
+                box-shadow: 0 20px 60px rgba(0,0,0,0.95), 0 0 35px rgba(255, 30, 45,0.2);
                 position: relative;
             }
             .brl-app-section {
@@ -1066,9 +1066,9 @@
                 gap: 8px;
             }
             .brl-app-btn-green {
-                background: #39ff14;
+                background: #ff1e2d;
                 color: #000;
-                box-shadow: 0 0 15px rgba(57,255,20,0.35);
+                box-shadow: 0 0 15px rgba(255, 30, 45,0.35);
             }
             .brl-app-btn-green:hover {
                 background: #52ff33;
@@ -1079,8 +1079,8 @@
                 border: 1px solid rgba(255,255,255,0.25);
             }
             .brl-app-btn-outline:hover {
-                border-color: #39ff14;
-                color: #39ff14;
+                border-color: #ff1e2d;
+                color: #ff1e2d;
             }
             .brl-app-select {
                 width: 100%;
@@ -1132,12 +1132,12 @@
 
         backdrop.innerHTML = `
             <div id="brl-app-drawer">
-                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(57,255,20,0.25); padding-bottom:12px; margin-bottom:14px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255, 30, 45,0.25); padding-bottom:12px; margin-bottom:14px;">
                     <div style="display:flex; align-items:center; gap:12px;">
-                        <img src="/assets/app-icon-192.png?v=20261031" alt="BRL App" style="width:44px; height:44px; border-radius:10px; border:1px solid #39ff14;">
+                        <img src="/assets/app-icon-192.png?v=20261031" alt="BRL App" style="width:44px; height:44px; border-radius:10px; border:1px solid #ff1e2d;">
                         <div>
                             <h3 style="margin:0; font-family:'Outfit',sans-serif; font-size:1.3rem; font-style:italic; text-transform:uppercase; color:#fff;">
-                                BANDIT <span style="color:#39ff14;">MOBILE APP</span> &amp; ALERTS
+                                BANDIT <span style="color:#ff1e2d;">MOBILE APP</span> &amp; ALERTS
                             </h3>
                             <span style="font-size:0.76rem; color:#aaa;">Official League Companion &bull; Live Profile, Fantasy &amp; Push Alerts</span>
                         </div>
@@ -1175,9 +1175,9 @@
                 </div>
 
                 <!-- STEP 1: INSTALL APP TO HOME SCREEN -->
-                <div class="brl-app-section" style="border-color: rgba(57,255,20,0.35); ${isStandalone ? 'display:none;' : ''}">
+                <div class="brl-app-section" style="border-color: rgba(255, 30, 45,0.35); ${isStandalone ? 'display:none;' : ''}">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                        <span style="font-family:'Outfit',sans-serif; font-size:0.8rem; font-weight:900; color:#39ff14; text-transform:uppercase; letter-spacing:1px;">
+                        <span style="font-family:'Outfit',sans-serif; font-size:0.8rem; font-weight:900; color:#ff1e2d; text-transform:uppercase; letter-spacing:1px;">
                             📲 Install BRL App to Your Phone
                         </span>
                         <span id="brl-install-status-pill" style="font-size:0.7rem; padding:2px 8px; border-radius:12px; background:rgba(255,204,0,0.15); color:#ffcc00; font-weight:700;">
@@ -1212,12 +1212,12 @@
 
                     <div style="display:flex; flex-direction:column; gap:9px; margin-bottom:10px; padding:11px; background:rgba(0,0,0,0.45); border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
                         <label style="display:flex; align-items:center; gap:10px; font-size:0.84rem; color:#eee; cursor:pointer;">
-                            <input type="checkbox" id="brl-chk-site-updates" style="accent-color:#39ff14; width:17px; height:17px;">
+                            <input type="checkbox" id="brl-chk-site-updates" style="accent-color:#ff1e2d; width:17px; height:17px;">
                             <span><strong>🔄 Website Update Alerts</strong> (Standings, Fantasy &amp; Recaps)</span>
                         </label>
 
                         <label style="display:flex; align-items:center; gap:10px; font-size:0.84rem; color:#eee; cursor:pointer;">
-                            <input type="checkbox" id="brl-chk-practice-gate" style="accent-color:#39ff14; width:17px; height:17px;">
+                            <input type="checkbox" id="brl-chk-practice-gate" style="accent-color:#ff1e2d; width:17px; height:17px;">
                             <span><strong>🟢 Practice, Pit Gate &amp; Fantasy Lock</strong> (Tue/Wed @ 7:30 &amp; 8:00 PM EST)</span>
                         </label>
 
@@ -1258,7 +1258,7 @@
                     <button id="brl-test-alert-btn" class="brl-app-btn brl-app-btn-outline" style="font-size:0.78rem; padding:8px 12px;">
                         📨 Send Test Notification to My Device
                     </button>
-                    <div id="brl-alert-feedback" style="display:none; margin-top:8px; font-size:0.82rem; color:#39ff14; text-align:center; font-weight:bold;"></div>
+                    <div id="brl-alert-feedback" style="display:none; margin-top:8px; font-size:0.82rem; color:#ff1e2d; text-align:center; font-weight:bold;"></div>
                 </div>
 
                 <!-- STEP 3: RECENT LEAGUE ALERTS FEED -->
@@ -1267,7 +1267,7 @@
                         <span style="font-family:'Outfit',sans-serif; font-size:0.85rem; font-weight:900; color:#fff; text-transform:uppercase; letter-spacing:1px;">
                             📡 Recent League Alerts &amp; Broadcasts
                         </span>
-                        <span style="font-size:0.72rem; color:#39ff14;">● Live Sync</span>
+                        <span style="font-size:0.72rem; color:#ff1e2d;">● Live Sync</span>
                     </div>
                     <div id="brl-notif-feed-list" style="display:flex; flex-direction:column; gap:8px; max-height:190px; overflow-y:auto;">
                         <div style="color:#888; font-size:0.84rem; text-align:center; padding:14px;">Loading live league alerts...</div>
@@ -1284,7 +1284,7 @@
 
                         <!-- Quick Session Broadcast Buttons -->
                         <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
-                            <button type="button" id="brl-admin-tue-prac-btn" class="brl-app-btn" style="background:rgba(57,255,20,0.18); border:1px solid #39ff14; color:#39ff14; font-size:0.7rem; padding:8px 6px;">
+                            <button type="button" id="brl-admin-tue-prac-btn" class="brl-app-btn" style="background:rgba(255, 30, 45,0.18); border:1px solid #ff1e2d; color:#ff1e2d; font-size:0.7rem; padding:8px 6px;">
                                 🟢 Tue Practice
                             </button>
                             <button type="button" id="brl-admin-fantasy-lock-btn" class="brl-app-btn" style="background:rgba(255,145,0,0.18); border:1px solid #ff9100; color:#ffab40; font-size:0.7rem; padding:8px 6px;">
@@ -1500,8 +1500,8 @@
         const enabled = isAlertsEnabled();
         if (enabled) {
             pill.textContent = '🟢 Alerts Active';
-            pill.style.background = 'rgba(57,255,20,0.2)';
-            pill.style.color = '#39ff14';
+            pill.style.background = 'rgba(255, 30, 45,0.2)';
+            pill.style.color = '#ff1e2d';
             btn.textContent = '🔕 Disable Lock-Screen Alerts';
             btn.className = 'brl-app-btn brl-app-btn-outline';
         } else {
@@ -1526,18 +1526,18 @@
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             if (guide) {
                 guide.style.display = 'block';
-                guide.style.background = 'rgba(57, 255, 20, 0.14)';
-                guide.style.border = '2px solid #39ff14';
+                guide.style.background = 'rgba(255, 30, 45, 0.14)';
+                guide.style.border = '2px solid #ff1e2d';
                 if (isIOS) {
                     guide.innerHTML = `
-                        <strong style="color:#39ff14; font-size:0.95rem; display:block; margin-bottom:6px;">📲 PUT THE BRL ICON ON YOUR IPHONE HOME SCREEN:</strong>
+                        <strong style="color:#ff1e2d; font-size:0.95rem; display:block; margin-bottom:6px;">📲 PUT THE BRL ICON ON YOUR IPHONE HOME SCREEN:</strong>
                         1. Make sure you opened <strong>banditracingleague.net</strong> in <strong>Safari</strong>.<br>
                         2. Tap the <strong>Share button</strong> <span style="background:rgba(255,255,255,0.2); padding:2px 7px; border-radius:4px;">⎋</span> at the bottom of the screen.<br>
                         3. Scroll down and tap <strong>"Add to Home Screen"</strong> &rarr; tap <strong>"Add"</strong> in the top-right corner!
                     `;
                 } else {
                     guide.innerHTML = `
-                        <strong style="color:#39ff14; font-size:0.95rem; display:block; margin-bottom:6px;">📲 PUT THE BRL ICON ON YOUR ANDROID HOME SCREEN:</strong>
+                        <strong style="color:#ff1e2d; font-size:0.95rem; display:block; margin-bottom:6px;">📲 PUT THE BRL ICON ON YOUR ANDROID HOME SCREEN:</strong>
                         1. Tap the <strong>3 dots menu (⋮)</strong> in the <strong>top-right corner</strong> of your screen.<br>
                         2. If you are inside a chat app, tap <strong>"Open in Chrome"</strong> first.<br>
                         3. In Chrome, tap the <strong>3 dots (⋮)</strong> at top-right &rarr; tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong>!
@@ -1578,7 +1578,7 @@
             await ensureWebPushSubscription(true);
             if (fb) {
                 fb.style.display = 'block';
-                fb.style.color = '#39ff14';
+                fb.style.color = '#ff1e2d';
                 fb.textContent = '✅ BRL Background Lock-Screen Alerts Enabled! Sending confirmation notification...';
             }
             await triggerNativeNotification(
@@ -1622,7 +1622,7 @@
         const sent = await triggerNativeNotification(testObj.title, testObj.body, testObj.url, 'brl-test-' + Date.now());
         if (fb) {
             fb.style.display = 'block';
-            fb.style.color = '#39ff14';
+            fb.style.color = '#ff1e2d';
             fb.textContent = sent
                 ? '✅ Test notification sent to your device lock screen & background push subscription synced!'
                 : '✅ In-app alert banner triggered! (Enable browser notifications above for lock-screen alerts.)';
@@ -1647,7 +1647,7 @@
             const isDriver = n.category === 'driver_alert' || !!n.driver;
             const isTeam = n.category === 'team_alert' || !!n.team;
 
-            let badgeCol = '#39ff14';
+            let badgeCol = '#ff1e2d';
             let badgeText = '🔄 SITE UPDATE';
             if (isLive) {
                 badgeCol = '#ff1744';
@@ -1659,7 +1659,7 @@
                 badgeCol = '#ff9100';
                 badgeText = '⚠️ FANTASY LOCK';
             } else if (isPractice) {
-                badgeCol = '#39ff14';
+                badgeCol = '#ff1e2d';
                 badgeText = '🟢 TUESDAY PRACTICE OPEN';
             } else if (isPitGate) {
                 badgeCol = '#ffcc00';
@@ -1765,7 +1765,7 @@
             }
         }
 
-        msgEl.style.color = '#39ff14';
+        msgEl.style.color = '#ff1e2d';
         msgEl.textContent = '⏳ Broadcasting push alert to BRL App users...';
 
         try {
@@ -1838,7 +1838,7 @@
                 await postAlertToDiscordWebhook(activeWebhook, newAlert);
             }
 
-            msgEl.style.color = '#39ff14';
+            msgEl.style.color = '#ff1e2d';
             msgEl.textContent = activeWebhook
                 ? '✅ Alert broadcasted live to BRL App users (including background lock-screen push) + synced to Discord!'
                 : '✅ Alert broadcasted live to BRL App users (including background lock-screen push)!';

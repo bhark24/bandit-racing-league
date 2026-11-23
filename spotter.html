@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1795402245">
+    <link rel="stylesheet" href="styles.css?v=1795403328">
     
     <style>
         /* Custom layout for Spotter Dashboard */
@@ -81,7 +81,7 @@
             font-size: 1.5rem;
             color: #000;
             border: 2px solid var(--neon-green);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.35);
+            box-shadow: 0 0 15px rgba(255, 30, 45, 0.35);
             font-family: 'Outfit', sans-serif;
             font-style: italic;
         }
@@ -119,10 +119,10 @@
         }
 
         .status-online {
-            background: rgba(57, 255, 20, 0.1);
+            background: rgba(255, 30, 45, 0.1);
             color: var(--neon-green);
             border: 1px solid var(--neon-green);
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.15);
+            box-shadow: 0 0 10px rgba(255, 30, 45, 0.15);
         }
 
         .status-offline {
@@ -242,7 +242,7 @@
         }
 
         .relative-row.highlight {
-            background: rgba(57, 255, 20, 0.08);
+            background: rgba(255, 30, 45, 0.08);
             border-left: 3px solid var(--neon-green);
         }
 
@@ -358,7 +358,7 @@
             transition: box-shadow 0.3s ease;
         }
 
-        .flag-state-green { box-shadow: inset 0 0 20px 4px rgba(0, 255, 0, 0.35) !important; }
+        .flag-state-green { box-shadow: inset 0 0 20px 4px rgba(255, 30, 45, 0.35) !important; }
         .flag-state-yellow { box-shadow: inset 0 0 20px 4px rgba(255, 235, 59, 0.35) !important; animation: flag-flash-yellow 1s infinite !important; }
         .flag-state-blue { box-shadow: inset 0 0 20px 4px rgba(33, 150, 243, 0.35) !important; }
         .flag-state-white { box-shadow: inset 0 0 20px 4px rgba(255, 255, 255, 0.3) !important; }
@@ -554,11 +554,11 @@
             }
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795402245">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795402245">
-    <link rel="shortcut icon" href="favicon.ico?v=1795402245">
-    <link rel="manifest" href="manifest.json?v=1795402245">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795402245">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795403328">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795403328">
+    <link rel="shortcut icon" href="favicon.ico?v=1795403328">
+    <link rel="manifest" href="manifest.json?v=1795403328">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795403328">
 </head>
 <body>
 
@@ -579,8 +579,8 @@
                 <li><a href="/crew-openings.html">Crew Openings</a></li>
                 <li><a href="/classifieds.html">Classifieds</a></li>
                 <li><a href="/rulebook.html">Rulebook</a></li>
-                <li><a data-tooltip="Fantasy League" href="/fantasy.html"><img src="assets/fantasy-icon.png" alt="Fantasy League" style="height: 42px; width: 42px; border-radius: 50%; border: 1.5px solid var(--neon-green); vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.4)); object-fit: cover;"><span class="nav-icon-label">Fantasy League</span></a></li>
-                <li><a data-tooltip="Geezer App" href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(0,255,0,0.5));"><span class="nav-icon-label">Geezer App</span></a></li>
+                <li><a data-tooltip="Fantasy League" href="/fantasy.html"><img src="assets/fantasy-icon.png" alt="Fantasy League" style="height: 42px; width: 42px; border-radius: 50%; border: 1.5px solid var(--neon-green); vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255, 30, 45,0.4)); object-fit: cover;"><span class="nav-icon-label">Fantasy League</span></a></li>
+                <li><a data-tooltip="Geezer App" href="/geezer-app.html"><img src="assets/geezer-icon.png" alt="Geezer App" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255, 30, 45,0.5));"><span class="nav-icon-label">Geezer App</span></a></li>
                 <li><a data-tooltip="SimTrax Broadcasting" href="/simtrax.html"><img src="assets/simtrax-logo.png" alt="SimTrax Broadcasting" style="height: 42px; vertical-align: middle; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));"><span class="nav-icon-label">SimTrax Broadcasting</span></a></li>
             </ul>
         </div>
@@ -599,7 +599,7 @@
             <button class="btn-verify" onclick="connectDriverPortal()" style="margin-bottom:10px;">Connect Dashboard</button>
             <button class="btn-secondary" onclick="activateDemoMode()" style="width: 100%; border:1px solid #ff9800; color:#ff9800; margin-bottom: 20px;">Launch Visual Demo</button>
 
-            <div style="padding: 12px 15px; background: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.2); border-radius: 8px; text-align: left; font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">
+            <div style="padding: 12px 15px; background: rgba(255, 30, 45, 0.05); border: 1px solid rgba(255, 30, 45, 0.2); border-radius: 8px; text-align: left; font-size: 0.85rem; color: var(--text-muted); line-height: 1.45;">
                 <strong style="color: var(--neon-green); display: block; margin-bottom: 4px;">💡 Spotter Quick Guide:</strong>
                 Your driver must have the <a href="geezer-app.html" style="color: var(--neon-green); text-decoration: underline;">Geezer Dashboard App</a> running on their PC and be loaded into their iRacing session for live telemetry to stream to your screen.
             </div>
@@ -624,7 +624,7 @@
                 </div>
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <button id="btn-spotter-disconnect" class="btn-secondary" style="width: auto; padding: 10px 18px; font-size: 0.85rem; margin: 0; border: 2px solid #ff1744; color: #ff1744;" onclick="disconnectDriverPortal()">Disconnect</button>
-                    <button id="btn-spotter-fullscreen" class="btn-verify" style="width: auto; padding: 10px 18px; font-size: 0.85rem; margin: 0; background: rgba(57, 255, 20, 0.05); border: 2px solid var(--neon-green); color: var(--neon-green);">📺 Fullscreen</button>
+                    <button id="btn-spotter-fullscreen" class="btn-verify" style="width: auto; padding: 10px 18px; font-size: 0.85rem; margin: 0; background: rgba(255, 30, 45, 0.05); border: 2px solid var(--neon-green); color: var(--neon-green);">📺 Fullscreen</button>
                     <div class="status-badge status-offline" id="connection-badge">
                         <div class="status-dot"></div>
                         <span id="connection-status-text">OFFLINE</span>
@@ -721,7 +721,7 @@
                         <!-- Pit Stop Stats Section (Hidden by Default, Horizontal Layout) -->
                         <div id="pit-stats-container" style="display: none; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%;">
                             <!-- Stationary Timer -->
-                            <div style="background: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.15); padding: 5px; border-radius: 6px; text-align: center;">
+                            <div style="background: rgba(255, 30, 45, 0.05); border: 1px solid rgba(255, 30, 45, 0.15); padding: 5px; border-radius: 6px; text-align: center;">
                                 <div id="pit-stationary-timer" style="font-size: 1.15rem; font-weight: 900; color: var(--neon-green); font-style: italic; font-family: 'Outfit', sans-serif; line-height: 1.2;">0.0s</div>
                                 <div style="font-size: 0.6rem; color: var(--neon-green); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px;">Stationary</div>
                             </div>
@@ -1946,6 +1946,6 @@
             });
         });
     </script>
-    <script src="brl_app.js?v=1795402245"></script>
+    <script src="brl_app.js?v=1795403328"></script>
 </body>
 </html>

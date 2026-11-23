@@ -597,7 +597,7 @@ const BRL_RACES_DATA = {
             { number: "12", name: "Driver #12", score: 75, level: "HIGH", badge: "Clip & Spin (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
             { number: "35", name: "Driver #35", score: 50, level: "MEDIUM", badge: "Stage Finish Contact", incidentsCount: 1, colors: ["#ffcc00", "#111"] },
             { number: "31", name: "Driver #31", score: 40, level: "MEDIUM", badge: "Contact Review Request", incidentsCount: 1, colors: ["#3498db", "#111"] },
-            { number: "47", name: "Driver #47 (Michael Rakes)", score: 10, level: "LOW", badge: "Fuel Master / Winner", incidentsCount: 0, colors: ["#00ff00", "#111"] }
+            { number: "47", name: "Driver #47 (Michael Rakes)", score: 10, level: "LOW", badge: "Fuel Master / Winner", incidentsCount: 0, colors: ["#ff1e2d", "#111"] }
         ],
         incidents: [
             {
@@ -792,10 +792,10 @@ const BRL_RACES_DATA = {
             { number: "24", name: "Driver #24", score: 70, level: "HIGH", badge: "Side-Swipe Crash (EOL)", incidentsCount: 1, colors: ["#ffaa00", "#111"] },
             { number: "62", name: "Driver #62 (Ty Corino)", score: 45, level: "MEDIUM", badge: "Restart Line Warning", incidentsCount: 1, colors: ["#e67e22", "#111"] },
             { number: "22", name: "Driver #22 (Joshua Adams)", score: 30, level: "LOW", badge: "Stage Finish Contact", incidentsCount: 1, colors: ["#3498db", "#111"] },
-            { number: "9",  name: "Driver #9 (Dylan McDonald)", score: 0, level: "CLEARED", badge: "Penalty Rescinded on Appeal", incidentsCount: 0, colors: ["#00ff00", "#111"] },
+            { number: "9",  name: "Driver #9 (Dylan McDonald)", score: 0, level: "CLEARED", badge: "Penalty Rescinded on Appeal", incidentsCount: 0, colors: ["#ff1e2d", "#111"] },
             { number: "91", name: "Driver #91", score: 20, level: "LOW", badge: "Cleared of Intent Wrecking", incidentsCount: 2, colors: ["#2ecc71", "#111"] },
             { number: "28", name: "Driver #28", score: 20, level: "LOW", badge: "Cleared of Intent Wrecking", incidentsCount: 2, colors: ["#2ecc71", "#111"] },
-            { number: "99", name: "Driver #99", score: 10, level: "LOW", badge: "Yellow Penalty Cleared", incidentsCount: 1, colors: ["#00ff00", "#111"] }
+            { number: "99", name: "Driver #99", score: 10, level: "LOW", badge: "Yellow Penalty Cleared", incidentsCount: 1, colors: ["#ff1e2d", "#111"] }
         ],
         incidents: [
             {

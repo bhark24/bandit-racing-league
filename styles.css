@@ -12,7 +12,7 @@
     --text-muted: #b0b6c2;
     
     /* Status Colors */
-    --status-available: #39ff14;
+    --status-available: #ff1e2d;
     --status-fulltime: #00e5ff;
     --status-parttime: #ffea00;
     --status-reserved: #ff1744;
@@ -1767,7 +1767,7 @@ footer {
     }
 }
 
-/* Crew Openings (Blinking Brilliant Red) & Classifieds (#00ff00) Nav Selectors */
+/* Crew Openings (Blinking Brilliant Red) & Classifieds (#ff1e2d) Nav Selectors */
 @keyframes blink-brilliant-red {
     0%, 100% {
         color: #ff0022;
@@ -1793,13 +1793,13 @@ footer {
 }
 
 .nav-links a[href="/classifieds.html"] {
-    color: #00ff00 !important;
+    color: #ff1e2d !important;
     font-weight: 900 !important;
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.45);
+    text-shadow: 0 0 8px rgba(255, 30, 45, 0.45);
 }
 
 .nav-links a[href="/classifieds.html"]::after {
-    background-color: #00ff00 !important;
+    background-color: #ff1e2d !important;
 }
 
 

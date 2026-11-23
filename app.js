@@ -1830,7 +1830,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Stint Analytics
-const STINT_COLORS = ['#FF007F', '#FFD700', '#00FF00', '#FF8C00', '#B026FF'];
+const STINT_COLORS = ['#FF007F', '#FFD700', '#ff1e2d', '#FF8C00', '#B026FF'];
 
 function generateRealisticTrace(lapTime, lapNum) {
     let samples = [];

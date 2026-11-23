@@ -31,8 +31,8 @@
             --bg-dark: #030303;
             --bg-panel: #0a0a0a;
             --bg-panel-hover: #121212;
-            --neon-green: #00ff00;
-            --neon-green-glow: rgba(0, 255, 0, 0.6);
+            --neon-green: #ff1e2d;
+            --neon-green-glow: rgba(255, 30, 45, 0.6);
             --chase-yellow: #ffcc00;
             --chase-yellow-glow: rgba(255, 204, 0, 0.6);
             --neon-red: #ff1744;
@@ -58,7 +58,7 @@
             overflow-x: hidden;
             background-image: 
                 radial-gradient(at 0% 0%, rgba(255, 23, 68, 0.08) 0px, transparent 40%),
-                radial-gradient(at 100% 100%, rgba(0, 255, 0, 0.08) 0px, transparent 40%),
+                radial-gradient(at 100% 100%, rgba(255, 30, 45, 0.08) 0px, transparent 40%),
                 linear-gradient(rgba(5, 5, 5, 0.95) 0%, rgba(2, 2, 2, 0.99) 100%),
                 url('assets/carbon_fiber_texture.png');
             background-repeat: repeat;
@@ -365,8 +365,8 @@
 
         @keyframes textGlitch {
             0%, 95%, 100% { text-shadow: 0 0 25px var(--neon-green-glow), 0 5px 15px rgba(0,0,0,1); transform: scale(1.05) rotate(-1deg); }
-            96% { text-shadow: -3px 0 #00ff00, 3px 0 #adff2f; transform: scale(1.08) skewX(-15deg); }
-            98% { text-shadow: 3px 0 #00ff00, -3px 0 #adff2f; transform: scale(1.02) skewX(10deg); }
+            96% { text-shadow: -3px 0 #ff1e2d, 3px 0 #adff2f; transform: scale(1.08) skewX(-15deg); }
+            98% { text-shadow: 3px 0 #ff1e2d, -3px 0 #adff2f; transform: scale(1.02) skewX(10deg); }
         }
 
         /* Warning screen flash */
@@ -405,9 +405,9 @@
         }
 
         .light-bulb.green {
-            background: #39ff14;
+            background: #ff1e2d;
             border-color: #9cff8a;
-            box-shadow: 0 0 40px rgba(57,255,20,0.8), inset 0 0 8px #fff;
+            box-shadow: 0 0 40px rgba(255, 30, 45,0.8), inset 0 0 8px #fff;
         }
 
         /* Extreme Action zoom truck */
@@ -533,7 +533,7 @@
 
         .play-btn-large:hover {
             transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 0 55px rgba(0, 255, 0, 0.9);
+            box-shadow: 0 0 55px rgba(255, 30, 45, 0.9);
         }
 
         .recording .play-overlay {
@@ -597,7 +597,7 @@
             font-family: var(--font-heading);
             letter-spacing: 1px;
             text-transform: uppercase;
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+            text-shadow: 0 0 5px rgba(255, 30, 45, 0.5);
         }
 
         /* Broadcast Mode styles */
@@ -717,7 +717,7 @@
             position: absolute;
             width: 2px;
             height: 20px;
-            background: rgba(0, 255, 0, 0.4);
+            background: rgba(255, 30, 45, 0.4);
             top: 5px;
         }
 
@@ -784,7 +784,7 @@
 
         .ctrl-btn.btn-play:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(0, 255, 0, 0.8);
+            box-shadow: 0 0 25px rgba(255, 30, 45, 0.8);
             background: #66ff66;
             color: #000;
         }
@@ -890,7 +890,7 @@
         .sidebar-card {
             display: none;
             background: var(--bg-panel);
-            border: 2px solid rgba(0, 255, 0, 0.15);
+            border: 2px solid rgba(255, 30, 45, 0.15);
             border-radius: var(--border-radius);
             padding: 20px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.8);
@@ -905,7 +905,7 @@
             color: var(--neon-green);
             text-shadow: 0 0 10px var(--neon-green-glow);
             margin-bottom: 15px;
-            border-bottom: 2px solid rgba(0, 255, 0, 0.15);
+            border-bottom: 2px solid rgba(255, 30, 45, 0.15);
             padding-bottom: 8px;
             font-style: italic;
             font-weight: 900;
@@ -929,7 +929,7 @@
             background: rgba(0,0,0,0.2);
         }
         .scene-list::-webkit-scrollbar-thumb {
-            background: rgba(0,255,0,0.15);
+            background: rgba(255, 30, 45,0.15);
             border-radius: 3px;
         }
         .scene-list::-webkit-scrollbar-thumb:hover {
@@ -951,9 +951,9 @@
         }
 
         .scene-item.active {
-            background: rgba(0, 255, 0, 0.04);
+            background: rgba(255, 30, 45, 0.04);
             border-color: var(--neon-green);
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 10px rgba(255, 30, 45, 0.1);
         }
 
         .scene-item-header {
@@ -981,7 +981,7 @@
             font-size: 0.8rem;
             color: var(--neon-green);
             font-weight: 900;
-            background: rgba(0, 255, 0, 0.1);
+            background: rgba(255, 30, 45, 0.1);
             padding: 2px 6px;
             border-radius: 2px;
         }
@@ -1072,7 +1072,7 @@
             border: 2px solid var(--neon-green);
             padding: 15px;
             border-radius: 4px;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.25);
+            box-shadow: 0 0 20px rgba(255, 30, 45, 0.25);
         }
         .schedule-item {
             font-family: var(--font-heading);
@@ -1193,7 +1193,7 @@
             border: 2px solid var(--neon-green);
             padding: 15px;
             border-radius: 6px;
-            box-shadow: 0 0 20px rgba(57,255,20,0.2);
+            box-shadow: 0 0 20px rgba(255, 30, 45,0.2);
         }
         .geezer-dial {
             display: flex;
@@ -1246,11 +1246,11 @@
         }
 
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795402245">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795402245">
-    <link rel="shortcut icon" href="favicon.ico?v=1795402245">
-    <link rel="manifest" href="manifest.json?v=1795402245">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795402245">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795403328">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795403328">
+    <link rel="shortcut icon" href="favicon.ico?v=1795403328">
+    <link rel="manifest" href="manifest.json?v=1795403328">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795403328">
 </head>
 <body class="broadcast-mode">
 
@@ -1308,10 +1308,10 @@
                         <!-- Part 1: BRL Logo (0 - 2s) -->
                         <div id="scene1Part1" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; transition: opacity 0.25s ease-in-out; opacity: 1; z-index: 2;">
                             <div class="scene-bg" style="background-image: url('assets/carbon_fiber_texture.png'); opacity: 0.35;"></div>
-                            <div class="scene-overlay" style="background: radial-gradient(circle, rgba(0,255,0,0.1) 0%, rgba(0,0,0,0.95) 100%);"></div>
+                            <div class="scene-overlay" style="background: radial-gradient(circle, rgba(255, 30, 45,0.1) 0%, rgba(0,0,0,0.95) 100%);"></div>
                             <div class="scene-content" style="justify-content: center; gap: 20px;">
-                                <img src="assets/main-logo.png" alt="Bandit Racing League Logo" style="max-height: 400px; filter: drop-shadow(0 0 35px rgba(0,255,0,0.65)); transform: scale(1.0); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" id="scene1Logo">
-                                <h2 class="scene-title accent-green" style="font-size: 2.4rem; margin: 0; text-shadow: 0 0 15px rgba(0,255,0,0.5); text-transform: uppercase;">Bandit Racing League</h2>
+                                <img src="assets/main-logo.png" alt="Bandit Racing League Logo" style="max-height: 400px; filter: drop-shadow(0 0 35px rgba(255, 30, 45,0.65)); transform: scale(1.0); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" id="scene1Logo">
+                                <h2 class="scene-title accent-green" style="font-size: 2.4rem; margin: 0; text-shadow: 0 0 15px rgba(255, 30, 45,0.5); text-transform: uppercase;">Bandit Racing League</h2>
                                 <p style="font-family: var(--font-heading); color: var(--neon-green); font-weight: 900; font-style: italic; font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; margin: 0;">16 season's of competitive iRacing</p>
                             </div>
                         </div>
@@ -1408,7 +1408,7 @@
                     <!-- Scene 9: Closing CTA (50 - 60s) -->
                     <div class="viewport-scene" id="scene9" style="background-color: #000;">
                         <div class="scene-bg" style="background-image: url('assets/carbon_fiber_texture.png'); opacity: 0.35;"></div>
-                        <div class="scene-overlay" style="background: radial-gradient(circle, rgba(0, 255, 0, 0.08) 0%, rgba(0,0,0,0.98) 100%);"></div>
+                        <div class="scene-overlay" style="background: radial-gradient(circle, rgba(255, 30, 45, 0.08) 0%, rgba(0,0,0,0.98) 100%);"></div>
                         <div class="scene-content" style="justify-content: center; gap: 20px; padding: 40px;">
                             <img src="assets/main-logo.png" alt="BRL Logo" style="max-height: 380px; filter: drop-shadow(0 0 45px var(--neon-green-glow));" onerror="this.outerHTML='<h2 style=&quot;color: var(--neon-green); font-style: italic; font-weight: 900; font-family: var(--font-heading); font-size: 4rem;&quot;>BANDIT RACING LEAGUE</h2>'">
                             <h2 class="scene-title accent-green" style="font-size: 4rem; margin: 10px 0 5px 0; font-weight: 900; text-transform: uppercase; font-family: var(--font-heading); font-style: italic; letter-spacing: 1px;">www.banditracingleague.net</h2>
@@ -1423,7 +1423,7 @@
                                     <img src="assets/sponsor_simtrax.png" alt="SimTrax Broadcasting" style="max-height: 85px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.15));" onerror="this.style.display='none'">
                                     <img src="assets/sponsor_lat_oils.png" alt="LAT Racing Oils" style="max-height: 85px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.15));" onerror="this.style.display='none'">
                                 </div>
-                                <p style="font-family: var(--font-body); color: var(--neon-green); font-size: 0.72rem; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; margin: 25px 0 0 0; opacity: 0.85; text-shadow: 0 0 5px rgba(0,255,0,0.3);">MUSIC PRODUCED BY AND USED WITH PERMISSION OF BENJAMIN LACY 7-13-26</p>
+                                <p style="font-family: var(--font-body); color: var(--neon-green); font-size: 0.72rem; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; margin: 25px 0 0 0; opacity: 0.85; text-shadow: 0 0 5px rgba(255, 30, 45,0.3);">MUSIC PRODUCED BY AND USED WITH PERMISSION OF BENJAMIN LACY 7-13-26</p>
                             </div>
                         </div>
                     </div>
@@ -2471,7 +2471,7 @@
                     btn.style.background = "rgba(0, 0, 0, 0.75)";
                     btn.style.borderColor = "var(--neon-green)";
                     btn.style.color = "var(--neon-green)";
-                    btn.style.boxShadow = "0 0 10px rgba(0, 255, 0, 0.3)";
+                    btn.style.boxShadow = "0 0 10px rgba(255, 30, 45, 0.3)";
                 }
             }
             if (effects) {
@@ -2754,6 +2754,6 @@
         }
 
     </script>
-    <script src="brl_app.js?v=1795402245"></script>
+    <script src="brl_app.js?v=1795403328"></script>
 </body>
 </html>
