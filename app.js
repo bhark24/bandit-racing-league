@@ -2199,7 +2199,7 @@ function drawStintPaceLine(ctx, dataArr, defaultColor, isCurrent, yMin, yMax, pa
         ctx.lineTo(p2.x, p2.y);
         ctx.lineWidth = isCurrent ? 3.5 : 2;
         if (isCurrent) {
-            ctx.strokeStyle = p2.time <= p1.time ? "#00E676" : "#FF1744"; // Green if faster, Red if slower
+            ctx.strokeStyle = p2.time <= p1.time ? "#ff1e2d" : "#FF1744"; // Green if faster, Red if slower
         } else {
             ctx.strokeStyle = defaultColor;
         }
@@ -2605,7 +2605,7 @@ function drawTraceAnalytics(ctx, canvas) {
     ctx.textAlign = "left";
     
     // Throttle & Brake Header
-    ctx.fillStyle = "#00E676";
+    ctx.fillStyle = "#ff1e2d";
     ctx.fillText("■ THROTTLE", padL + 10, yPedalsTop + 14);
     ctx.fillStyle = "#FF1744";
     ctx.fillText("■ BRAKE", padL + 95, yPedalsTop + 14);
@@ -2667,7 +2667,7 @@ function drawTraceAnalytics(ctx, canvas) {
     let thrGrad = ctx.createLinearGradient(0, yPedalsTop, 0, yPedalsBottom);
     thrGrad.addColorStop(0, "rgba(0, 230, 118, 0.25)");
     thrGrad.addColorStop(1, "rgba(0, 230, 118, 0.0)");
-    plotSeries(primaryTrace.samples, s => s.throttle, yPedalsTop, yPedalsBottom, 0, 1, "#00E676", 2.5, false, thrGrad);
+    plotSeries(primaryTrace.samples, s => s.throttle, yPedalsTop, yPedalsBottom, 0, 1, "#ff1e2d", 2.5, false, thrGrad);
 
     // Brake fill gradient
     let brkGrad = ctx.createLinearGradient(0, yPedalsTop, 0, yPedalsBottom);
@@ -2713,7 +2713,7 @@ function drawTraceAnalytics(ctx, canvas) {
             ctx.stroke();
         }
 
-        drawDot(pVal.throttle, 0, 1, yPedalsTop, yPedalsBottom, "#00E676");
+        drawDot(pVal.throttle, 0, 1, yPedalsTop, yPedalsBottom, "#ff1e2d");
         if (pVal.brake > 0.01) drawDot(pVal.brake, 0, 1, yPedalsTop, yPedalsBottom, "#FF1744");
         drawDot(pVal.steering, -steerLimit, steerLimit, ySteerTop, ySteerBottom, "#00E5FF");
         drawDot(pVal.speed, minSpeed, maxSpeed, ySpeedTop, ySpeedBottom, "#FFD700");
@@ -2824,7 +2824,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnZoom.style.display = (currentGraphMode === 'pace') ? 'inline-block' : 'none';
             if (paceZoomEnabled) {
                 btnZoom.textContent = '🔍 PACE ZOOM: ON';
-                btnZoom.style.background = 'rgba(0, 255, 102, 0.2)';
+                btnZoom.style.background = 'rgba(255, 30, 45, 0.2)';
                 btnZoom.style.borderColor = 'var(--neon-green)';
                 btnZoom.style.color = 'var(--neon-green)';
             } else {

@@ -222,7 +222,7 @@
           <span class="font-bold text-[11px]">Rough (Blue)</span>
         </div>
         <div class="flex items-center gap-1.5 bg-emerald-950/60 border border-emerald-800/80 px-2 py-1 rounded text-emerald-300">
-          <span class="w-2.5 h-2.5 rounded-full bg-[#00e676]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ff1e2d]"></span>
           <span class="font-bold text-[11px]">Finish (Green)</span>
         </div>
         <div class="flex items-center gap-1.5 bg-red-950/60 border border-red-800/80 px-2 py-1 rounded text-red-300">
@@ -2783,7 +2783,7 @@ M30`;
           ctx.fillStyle = 'rgba(5, 8, 17, 0.88)';
           ctx.fillRect(4, p1.y - xFontPx + 2, txtW + 6, xFontPx + 4);
 
-          ctx.fillStyle = entry.isFinish ? '#4ade80' : '#7dd3fc';
+          ctx.fillStyle = entry.isFinish ? '#ff1e2d' : '#7dd3fc';
           ctx.fillText(lblTxt, 7, p1.y + Math.round(xFontPx * 0.28));
           ctx.restore();
         }
@@ -2940,7 +2940,7 @@ M30`;
           ctx.globalAlpha = 0.95;
         } else if (seg.segType === 'FINISH') {
           // Distinguish Finish (N13-N15: Emerald Green) vs Float (N16-N17: Crisp Lime) so .0005" passes are distinct
-          strokeColor = isFloatPass ? '#a3e635' : '#10b981';
+          strokeColor = isFloatPass ? '#a3e635' : '#ff1e2d';
           lineWidth = 1.35;
         }
 
@@ -3009,7 +3009,7 @@ M30`;
           annotatedBlocks.add(seg.block);
           const lblPt = toScreen(seg.end.z, seg.end.x);
           
-          ctx.fillStyle = (seg.passType === 'ROUGH') ? '#7dd3fc' : (isFloatPass ? '#d9f99d' : '#4ade80');
+          ctx.fillStyle = (seg.passType === 'ROUGH') ? '#7dd3fc' : (isFloatPass ? '#d9f99d' : '#ff1e2d');
           ctx.font = cFont(11, 'bold');
           ctx.fillText(seg.block, lblPt.x + 6, lblPt.y - 6);
         }
@@ -3063,7 +3063,7 @@ M30`;
         // 3 o'clock (Right edge in Z)
         ctx.beginPath();
         ctx.arc(pt.x + scrR, pt.y, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#4ade80';
+        ctx.fillStyle = '#ff1e2d';
         ctx.fill();
 
         // 6 o'clock (Bottom edge in X)
@@ -3160,14 +3160,14 @@ M30`;
             const by = Math.max(16, Math.min(mScr.y - boxH - 16, h - boxH - 55));
 
             ctx.fillStyle = 'rgba(10, 15, 30, 0.96)';
-            ctx.strokeStyle = '#4ade80';
+            ctx.strokeStyle = '#ff1e2d';
             ctx.lineWidth = 2.0;
             ctx.beginPath();
             ctx.rect(bx, by, boxW, boxH);
             ctx.fill();
             ctx.stroke();
 
-            ctx.fillStyle = '#4ade80';
+            ctx.fillStyle = '#ff1e2d';
             ctx.font = cFont(12, 'bold');
             ctx.fillText(line1Text, bx + 12, by + Math.round(19 * effFontScale));
 

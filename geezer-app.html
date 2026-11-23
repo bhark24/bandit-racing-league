@@ -31,7 +31,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1795403328">
+    <link rel="stylesheet" href="styles.css?v=1795403412">
     
     <style>
         /* Custom layout for landing page */
@@ -275,13 +275,13 @@
     <!-- GEEZER TELEMETRY DEMO STYLES -->
     <style id="geezer-demo-styles">
 :root {
-    --neon-green: #00ff66;
+    --neon-green: #ff1e2d;
     --neon-yellow: #ffff00;
     --neon-blue: #00ccff;
     --neon-red: #ff3333;
     --neon-purple: #d942f5;
     --bg-dark: rgba(10, 14, 18, 0.84);
-    --glass-border: rgba(0, 255, 102, 0.4);
+    --glass-border: rgba(255, 30, 45, 0.4);
     --text-main: #f0f5ff;
     --text-muted: #7f8a9e;
     --glass-blur: blur(35px);
@@ -339,7 +339,7 @@
     -webkit-backdrop-filter: var(--glass-blur);
     border: 2px solid var(--glass-border);
     border-radius: 16px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(0, 255, 102, 0.12), inset 0 2px 4px rgba(255,255,255,0.03);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(255, 30, 45, 0.12), inset 0 2px 4px rgba(255,255,255,0.03);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -451,7 +451,7 @@
 }
 #geezer-demo-container .vertical-gauge-fill.throttle {
     background: var(--neon-green);
-    box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+    box-shadow: 0 0 10px rgba(255, 30, 45, 0.4);
 }
 #geezer-demo-container .vertical-gauge-fill.brake {
     background: var(--neon-red);
@@ -502,7 +502,7 @@
     height: 100%;
     width: 0%;
     background: linear-gradient(to right, #00ccff 0%, #ff1e2d 100%);
-    box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+    box-shadow: 0 0 8px rgba(255, 30, 45, 0.3);
     transition: width 0.05s linear;
 }
 
@@ -555,7 +555,7 @@
     font-weight: 700;
     font-size: 12px;
     color: var(--neon-green);
-    border-bottom: 2px solid rgba(0, 255, 102, 0.3);
+    border-bottom: 2px solid rgba(255, 30, 45, 0.3);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border-left: none;
@@ -564,7 +564,7 @@
     margin-bottom: 4px;
 }
 #geezer-demo-container .standings-row-grid.player {
-    background: rgba(0, 255, 102, 0.14);
+    background: rgba(255, 30, 45, 0.14);
     border-left-color: var(--neon-green);
     color: var(--neon-green);
     font-weight: 700;
@@ -722,7 +722,7 @@
     font-weight: 600;
 }
 #geezer-demo-container .tire-svg {
-    filter: drop-shadow(0 0 4px rgba(0, 255, 102, 0.3));
+    filter: drop-shadow(0 0 4px rgba(255, 30, 45, 0.3));
     width: 26px;
     height: 42px;
     transition: all 0.3s ease;
@@ -734,8 +734,8 @@
     grid-template-columns: 120px 1fr 1fr;
     grid-template-rows: repeat(9, 1fr);
     gap: 1px;
-    background: rgba(0, 255, 102, 0.25);
-    border: 1.5px solid rgba(0, 255, 102, 0.4);
+    background: rgba(255, 30, 45, 0.25);
+    border: 1.5px solid rgba(255, 30, 45, 0.4);
     border-radius: 6px;
     overflow: hidden;
     flex: 1;
@@ -757,7 +757,7 @@
     color: var(--neon-green);
     font-size: 12px;
     text-transform: uppercase;
-    background: rgba(0, 255, 102, 0.05);
+    background: rgba(255, 30, 45, 0.05);
 }
 #geezer-demo-container .fuel-projections-cell.row-label {
     font-family: var(--font-header);
@@ -797,7 +797,7 @@
 #geezer-demo-container .brake-bias-slider-fill {
     height: 100%;
     background: var(--neon-green);
-    box-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+    box-shadow: 0 0 8px rgba(255, 30, 45, 0.5);
     width: 50%;
     transition: width 0.1s ease;
 }
@@ -822,7 +822,7 @@
 }
 #geezer-demo-container .pit-custom-check:hover {
     border-color: var(--neon-green);
-    background: rgba(0, 255, 102, 0.05);
+    background: rgba(255, 30, 45, 0.05);
 }
 #geezer-demo-container .pit-custom-check input {
     margin-right: 8px;
@@ -851,8 +851,8 @@
 
 /* Flag border override classes */
 #geezer-demo-container .glass-panel.theme-green {
-    border-color: rgba(0, 255, 102, 0.8) !important;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(0, 255, 102, 0.3) !important;
+    border-color: rgba(255, 30, 45, 0.8) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 18px rgba(255, 30, 45, 0.3) !important;
 }
 #geezer-demo-container .glass-panel.theme-yellow {
     border-color: rgba(255, 255, 0, 0.8) !important;
@@ -947,7 +947,7 @@
 /* Dragging visual helpers */
 #geezer-demo-container .module.dragging {
     opacity: 0.82;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 255, 102, 0.3) !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 30, 45, 0.3) !important;
     transform: scale(1.015);
     transition: none !important;
 }
@@ -995,20 +995,20 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255,255,255,0.03);
 }
 #geezer-demo-container .glass-button:hover {
-    background: rgba(0, 255, 102, 0.12);
+    background: rgba(255, 30, 45, 0.12);
     border-color: var(--neon-green);
-    box-shadow: 0 0 15px rgba(0, 255, 102, 0.25), inset 0 0 5px rgba(0, 255, 102, 0.1);
+    box-shadow: 0 0 15px rgba(255, 30, 45, 0.25), inset 0 0 5px rgba(255, 30, 45, 0.1);
     color: var(--neon-green);
     transform: translateY(-1.5px);
 }
 #geezer-demo-container .glass-button:active {
     transform: translateY(0);
-    background: rgba(0, 255, 102, 0.22);
+    background: rgba(255, 30, 45, 0.22);
 }
 
 /* Pit Speed Limit Display Warning States */
 #geezer-demo-container .pit-limit-safe {
-    background: rgba(0, 255, 102, 0.12) !important;
+    background: rgba(255, 30, 45, 0.12) !important;
     border-color: var(--neon-green) !important;
     color: var(--neon-green) !important;
     text-shadow: 0 0 10px var(--neon-green) !important;
@@ -1050,8 +1050,8 @@
 }
 #geezer-demo-container .pit-custom-check-center:hover {
     border-color: var(--neon-green);
-    background: rgba(0, 255, 102, 0.08);
-    box-shadow: 0 0 10px rgba(0, 255, 102, 0.15);
+    background: rgba(255, 30, 45, 0.08);
+    box-shadow: 0 0 10px rgba(255, 30, 45, 0.15);
 }
 #geezer-demo-container .pit-custom-check-center input {
     margin-right: 10px;
@@ -1060,11 +1060,11 @@
 }
 
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795403328">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795403328">
-    <link rel="shortcut icon" href="favicon.ico?v=1795403328">
-    <link rel="manifest" href="manifest.json?v=1795403328">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795403328">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795403412">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795403412">
+    <link rel="shortcut icon" href="favicon.ico?v=1795403412">
+    <link rel="manifest" href="manifest.json?v=1795403412">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795403412">
 </head>
 <body>
 
@@ -1755,7 +1755,7 @@
                     brake = 0;
                     rpm = 3200;
                     document.getElementById("pit-speed-box").style.borderColor = "var(--neon-green)";
-                    document.getElementById("pit-speed-box").style.background = "rgba(0, 255, 102, 0.05)";
+                    document.getElementById("pit-speed-box").style.background = "rgba(255, 30, 45, 0.05)";
                 } else if (pitPos < 0.7) {
                     speed = 0;
                     gear = "N";
@@ -1807,7 +1807,7 @@
                     rpm = 4500;
                     
                     document.getElementById("pit-speed-box").style.borderColor = "var(--neon-green)";
-                    document.getElementById("pit-speed-box").style.background = "rgba(0, 255, 102, 0.05)";
+                    document.getElementById("pit-speed-box").style.background = "rgba(255, 30, 45, 0.05)";
                     stintLaps = 0;
                 }
                 
@@ -1883,7 +1883,7 @@
         <div class="glass-panel" style="padding: 40px; border-radius: 20px; display: flex; flex-direction: column; align-items: center; background: rgba(20, 20, 25, 0.95); max-width: 600px; text-align: center; border: 2px solid var(--neon-green);">
             <h2 style="font-family: 'Outfit'; font-size: 31px; margin-bottom: 10px; color: #fff;">VR OVERLAY MANAGER</h2>
             <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 30px;">Choose how you want to display the dashboard in your VR headset.</p>
-            <button id="btn-vr-full" style="width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(0, 255, 102, 0.15); border: 1px solid var(--neon-green); color: #FFF; font-family: 'Inter'; font-weight: 800; font-size: 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s;">ENABLE FULL-SCREEN VR MODE</button>
+            <button id="btn-vr-full" style="width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255, 30, 45, 0.15); border: 1px solid var(--neon-green); color: #FFF; font-family: 'Inter'; font-weight: 800; font-size: 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s;">ENABLE FULL-SCREEN VR MODE</button>
             <button id="btn-close-vr" style="padding: 12px 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: #FFF; font-family: 'Inter'; font-weight: 800; border-radius: 8px; cursor: pointer; transition: all 0.2s;">CLOSE</button>
         </div>
     </div>
@@ -1902,7 +1902,7 @@
                         <button id="btn-graph-apex" style="padding: 8px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2); color: #AAA; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">🏎️ APEX SPEEDS</button>
                         <button id="btn-graph-fuel" style="padding: 8px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2); color: #AAA; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">FUEL USAGE</button>
                         <button id="btn-graph-traces" style="padding: 8px 16px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.2); color: #AAA; font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s;">INPUT TRACES</button>
-                        <button id="btn-pace-zoom" style="padding: 8px 14px; background: rgba(0, 255, 102, 0.2); border: 1px solid var(--neon-green); color: var(--neon-green); font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s; margin-left: 8px;">🔍 PACE ZOOM: ON</button>
+                        <button id="btn-pace-zoom" style="padding: 8px 14px; background: rgba(255, 30, 45, 0.2); border: 1px solid var(--neon-green); color: var(--neon-green); font-family: 'Inter'; font-weight: 800; border-radius: 6px; cursor: pointer; transition: all 0.2s; margin-left: 8px;">🔍 PACE ZOOM: ON</button>
                     </div>
                     <!-- Trace Controls Sub-Bar -->
                     <div id="trace-controls-bar" style="display: none; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 8px 14px; margin-bottom: 10px; font-size: 13px;">
@@ -2032,13 +2032,13 @@
 
                 <!-- Centered Logo inside Dashboard Card -->
                 <div style="display: flex; justify-content: center; align-items: center; margin-top: auto; flex: 1; min-height: 85px; padding: 15px 0 5px 0; overflow: hidden; width: 100%;">
-                    <img id="app-logo-img" src="assets/geezer-logo.png" style="width: 78%; max-height: 130px; max-width: 100%; object-fit: contain; opacity: 0.88; filter: drop-shadow(0 0 10px rgba(0, 255, 102, 0.25));" alt="Geezer Performance Logo">
+                    <img id="app-logo-img" src="assets/geezer-logo.png" style="width: 78%; max-height: 130px; max-width: 100%; object-fit: contain; opacity: 0.88; filter: drop-shadow(0 0 10px rgba(255, 30, 45, 0.25));" alt="Geezer Performance Logo">
                 </div>
             </div>
 
             <!-- Metadata Panel -->
             <div class="glass-panel module" id="mod-raceinfo">
-                <div class="panel-header-row" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(0, 255, 102, 0.3); padding-bottom: 12px; margin-bottom: 12px;">
+                <div class="panel-header-row" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(255, 30, 45, 0.3); padding-bottom: 12px; margin-bottom: 12px;">
                     <span id="val-trackName" style="font-family: 'Outfit'; font-size: 22px; font-weight: 900; font-style: italic; color: #fff; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px;">AWAITING CON.</span>
                     <span id="val-clock" style="font-family: 'Roboto Mono'; font-size: 20px; font-weight: 700; color: var(--neon-blue);">12:00 AM</span>
                 </div>
@@ -2147,7 +2147,7 @@
                 <div class="panel-title">Pit Road Manager</div>
                 
                 <!-- Speedometer / Limit warning box -->
-                <div id="pit-speed-box" class="pit-limit-safe" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px 20px; border-radius: 12px; border: 3px solid; margin-bottom: 20px; text-shadow: 0 0 10px rgba(0, 255, 102, 0.4); box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+                <div id="pit-speed-box" class="pit-limit-safe" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px 20px; border-radius: 12px; border: 3px solid; margin-bottom: 20px; text-shadow: 0 0 10px rgba(255, 30, 45, 0.4); box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
                     <div style="font-size: 84px; font-weight: 900; font-family: 'Roboto Mono'; line-height: 1; color: #fff;">
                         <span id="val-pit-speed">0</span>
                     </div>
@@ -2213,13 +2213,13 @@
                         <div class="tire-graphics">
                             <span class="tire-title">LF</span>
                             <svg class="tire-svg" id="svg-lf" viewBox="0 0 34 60" width="34" height="60">
-                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#00ff66" stroke-width="2" />
-                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#ff1e2d" stroke-width="2" />
+                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#ff1e2d" stroke-width="1.5" />
                             </svg>
                         </div>
                         <div class="tire-grid-data">
@@ -2246,13 +2246,13 @@
                         <div class="tire-graphics">
                             <span class="tire-title">RF</span>
                             <svg class="tire-svg" id="svg-rf" viewBox="0 0 34 60" width="34" height="60">
-                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#00ff66" stroke-width="2" />
-                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#ff1e2d" stroke-width="2" />
+                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#ff1e2d" stroke-width="1.5" />
                             </svg>
                         </div>
                         <div class="tire-grid-data">
@@ -2279,13 +2279,13 @@
                         <div class="tire-graphics">
                             <span class="tire-title">LR</span>
                             <svg class="tire-svg" id="svg-lr" viewBox="0 0 34 60" width="34" height="60">
-                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#00ff66" stroke-width="2" />
-                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#ff1e2d" stroke-width="2" />
+                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#ff1e2d" stroke-width="1.5" />
                             </svg>
                         </div>
                         <div class="tire-grid-data">
@@ -2312,13 +2312,13 @@
                         <div class="tire-graphics">
                             <span class="tire-title">RR</span>
                             <svg class="tire-svg" id="svg-rr" viewBox="0 0 34 60" width="34" height="60">
-                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#00ff66" stroke-width="2" />
-                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#00ff66" stroke-width="1.5" />
-                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#00ff66" stroke-width="1.5" />
+                                <rect x="1.5" y="1.5" width="31" height="57" rx="6" fill="rgba(0,0,0,0.5)" stroke="#ff1e2d" stroke-width="2" />
+                                <line x1="1.5" y1="12" x2="8" y2="12" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="12" x2="32.5" y2="12" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="1.5" y1="30" x2="8" y2="30" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="30" x2="32.5" y2="30" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="1.5" y1="48" x2="8" y2="48" stroke="#ff1e2d" stroke-width="1.5" />
+                                <line x1="26" y1="48" x2="32.5" y2="48" stroke="#ff1e2d" stroke-width="1.5" />
                             </svg>
                         </div>
                         <div class="tire-grid-data">
@@ -2348,7 +2348,7 @@
                 
                 <!-- Top Row: Large Vitals -->
                 <div class="fuel-vitals-row" style="display: flex; gap: 15px; margin-bottom: 12px; border-bottom: 1.5px solid rgba(255,255,255,0.06); padding-bottom: 10px;">
-                    <div class="fuel-vital-card" style="flex: 1; background: rgba(0,0,0,0.3); border: 1.5px solid rgba(0, 255, 102, 0.2); border-radius: 8px; padding: 8px 12px; text-align: center;">
+                    <div class="fuel-vital-card" style="flex: 1; background: rgba(0,0,0,0.3); border: 1.5px solid rgba(255, 30, 45, 0.2); border-radius: 8px; padding: 8px 12px; text-align: center;">
                         <span style="display: block; font-family: var(--font-header); font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;">Laps In Tank</span>
                         <span id="fuel-worst-intank" style="font-family: var(--font-data); font-size: 26px; font-weight: 700; color: var(--neon-yellow); text-shadow: 0 0 8px rgba(255, 235, 59, 0.25);">0.0</span>
                     </div>
@@ -2359,11 +2359,11 @@
                 </div>
                 
                 <!-- Middle Table: Projections -->
-                <div class="fuel-table-redesign" style="display: grid; grid-template-columns: 120px 1fr 1fr; gap: 1px; background: rgba(0, 255, 102, 0.2); border: 1.5px solid rgba(0, 255, 102, 0.3); border-radius: 8px; overflow: hidden; margin-bottom: 12px;">
+                <div class="fuel-table-redesign" style="display: grid; grid-template-columns: 120px 1fr 1fr; gap: 1px; background: rgba(255, 30, 45, 0.2); border: 1.5px solid rgba(255, 30, 45, 0.3); border-radius: 8px; overflow: hidden; margin-bottom: 12px;">
                     <!-- Header -->
-                    <div class="fuel-cell header" style="background: rgba(0, 255, 102, 0.05); padding: 5px 8px; font-family: var(--font-header); font-weight: 700; color: var(--neon-green); font-size: 11px; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center;">METRIC</div>
-                    <div class="fuel-cell header" style="background: rgba(0, 255, 102, 0.05); padding: 5px 8px; font-family: var(--font-header); font-weight: 700; color: var(--neon-green); font-size: 11px; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center;">WORST LAP</div>
-                    <div class="fuel-cell header" style="background: rgba(0, 255, 102, 0.05); padding: 5px 8px; font-family: var(--font-header); font-weight: 700; color: var(--neon-green); font-size: 11px; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center;">2-LAP AVG</div>
+                    <div class="fuel-cell header" style="background: rgba(255, 30, 45, 0.05); padding: 5px 8px; font-family: var(--font-header); font-weight: 700; color: var(--neon-green); font-size: 11px; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center;">METRIC</div>
+                    <div class="fuel-cell header" style="background: rgba(255, 30, 45, 0.05); padding: 5px 8px; font-family: var(--font-header); font-weight: 700; color: var(--neon-green); font-size: 11px; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center;">WORST LAP</div>
+                    <div class="fuel-cell header" style="background: rgba(255, 30, 45, 0.05); padding: 5px 8px; font-family: var(--font-header); font-weight: 700; color: var(--neon-green); font-size: 11px; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center;">2-LAP AVG</div>
 
                     <!-- Fuel To Finish (Gal) -->
                     <div class="fuel-cell label" style="background: rgba(10, 14, 18, 0.94); padding: 6px 10px; font-family: var(--font-header); font-weight: 600; color: var(--text-muted); font-size: 13px; text-align: left; display: flex; align-items: center; justify-content: flex-start;">To Finish (gal)</div>
@@ -2469,7 +2469,7 @@
         <span id="val-lr-i">0</span><span id="val-lr-m">0</span><span id="val-lr-o">0</span>
         <span id="val-rr-i">0</span><span id="val-rr-m">0</span><span id="val-rr-o">0</span>
     </div>
-    <script src="app.js?v=1795403328"></script>
-    <script src="brl_app.js?v=1795403328"></script>
+    <script src="app.js?v=1795403412"></script>
+    <script src="brl_app.js?v=1795403412"></script>
 </body>
 </html>

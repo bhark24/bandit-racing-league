@@ -928,7 +928,7 @@ body {
     padding: 14px;
     font-family: var(--font-mono);
     font-size: 0.9rem;
-    color: #00ffaa;
+    color: #ff1e2d;
     margin-bottom: 14px;
 }
 
@@ -951,7 +951,7 @@ body {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
     padding: 16px;
-    color: #00ffaa;
+    color: #ff1e2d;
     font-family: var(--font-mono);
     font-size: 0.85rem;
     resize: none;
