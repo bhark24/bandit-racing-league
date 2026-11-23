@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Teko:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1795388771">
+    <link rel="stylesheet" href="styles.css?v=1795398955">
     <style>
         .card {
             padding: 0;
@@ -141,12 +141,83 @@
             display: flex;
             flex-direction: column;
         }
+        .driver-team-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+            padding: 8px 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 8px;
+        }
+        .driver-team-logo {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 3px;
+            flex-shrink: 0;
+        }
+        .driver-team-meta {
+            min-width: 0;
+            flex: 1;
+        }
+        .driver-team-name {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 0.82rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .driver-team-role {
+            font-size: 0.68rem;
+            color: var(--neon-green);
+            font-weight: 700;
+            margin-left: 4px;
+        }
+        .driver-team-base {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-top: 1px;
+        }
+        .driver-team-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 5px;
+        }
+        .team-stat-pill {
+            font-family: var(--font-heading);
+            font-size: 0.68rem;
+            font-weight: 800;
+            color: #ddd;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 2px 6px;
+            white-space: nowrap;
+        }
+        .team-stat-pill.highlight {
+            color: var(--chase-yellow);
+            border-color: rgba(255, 204, 0, 0.35);
+            background: rgba(255, 204, 0, 0.08);
+        }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795388771">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795388771">
-    <link rel="shortcut icon" href="favicon.ico?v=1795388771">
-    <link rel="manifest" href="manifest.json?v=1795388771">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795388771">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795398955">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795398955">
+    <link rel="shortcut icon" href="favicon.ico?v=1795398955">
+    <link rel="manifest" href="manifest.json?v=1795398955">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795398955">
 </head>
 <body>
     <!-- Navbar -->
@@ -167,7 +238,6 @@
                 <li><a href="/schedule.html">Schedule</a></li>
                 <li><a href="/results.html">Results</a></li>
                 <li><a class="active" href="/drivers.html">Drivers</a></li>
-                <li><a href="/teams.html">Teams</a></li>
                 <li><a href="/wall-of-shame.html">Wall of Shame</a></li>
                 <li><a href="/season17.html" style="color: var(--chase-yellow); font-weight: 900;">Season 17</a></li>
                 <li><a href="/crew-openings.html">Crew Openings</a></li>
@@ -246,10 +316,10 @@
         </div>
     </section>
 
-    <script src="supabase_config.js?v=1795388771"></script>
-    <script src="teams_data.js?v=1795388771"></script>
-    <script src="roster_data.js?v=1795388771"></script>
-    <script src="season16_stats_data.js?v=1795388771"></script>
+    <script src="supabase_config.js?v=1795398955"></script>
+    <script src="teams_data.js?v=1795398955"></script>
+    <script src="roster_data.js?v=1795398955"></script>
+    <script src="season16_stats_data.js?v=1795398955"></script>
     <script>
         const grid = document.getElementById('driver-grid');
 
@@ -481,6 +551,38 @@
             return matchedTeams;
         }
 
+        function getTeamStats(team) {
+            const rosterNames = new Set([
+                ...(team.drivers.primary || []).map(normalizeName),
+                ...(team.drivers.backup || []).map(normalizeName)
+            ].filter(Boolean));
+
+            let wins = 0;
+            let points = 0;
+            let top5 = 0;
+            let lapsLed = 0;
+
+            if (typeof season16StatsData !== 'undefined' && Array.isArray(season16StatsData.drivers)) {
+                for (const d of season16StatsData.drivers) {
+                    const normD = normalizeName(d.rosterName || d.name);
+                    if (rosterNames.has(normD)) {
+                        wins += Number(d.wins) || 0;
+                        points += Number(d.points) || 0;
+                        top5 += Number(d.top5) || 0;
+                        lapsLed += Number(d.lapsLed) || 0;
+                    }
+                }
+            }
+
+            return {
+                wins: Math.max(wins, Number(team.wins) || 0),
+                points: points || Number(team.points) || 0,
+                top5,
+                lapsLed,
+                driversCount: rosterNames.size
+            };
+        }
+
         let lastRosterJson = '';
 
         function renderDriverGrid() {
@@ -506,8 +608,10 @@
                     const matches = findTeamsForDriver(data.driver);
                     if (matches.length > 0) {
                         const team = matches[0].team;
+                        const role = matches[0].role;
+                        const tStats = getTeamStats(team);
                         let name = team.name.toUpperCase();
-                        let base = team.homeBase.toUpperCase();
+                        let base = (team.homeBase || '').toUpperCase();
                         
                         const stateMap = {
                             'OH': 'OHIO',
@@ -538,10 +642,28 @@
                                 break;
                             }
                         }
-                        
+
+                        const logoHtml = team.logo
+                            ? `<img src="${team.logo}" alt="${name}" class="driver-team-logo" onerror="this.style.display='none'">`
+                            : '';
+
+                        const roleBadge = role === 'Backup'
+                            ? `<span class="driver-team-role" style="color: var(--chase-yellow);">• BACKUP</span>`
+                            : `<span class="driver-team-role">• PRIMARY</span>`;
+
                         teamInfoHtml = `
-                            <div class="driver-team" style="font-style: italic; font-weight: bold; font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
-                                TEAM: ${name}, ${base}
+                            <div class="driver-team-card">
+                                ${logoHtml}
+                                <div class="driver-team-meta">
+                                    <div class="driver-team-name" title="${name}">${name}${roleBadge}</div>
+                                    ${base ? `<div class="driver-team-base">${base}</div>` : ''}
+                                    <div class="driver-team-stats">
+                                        <span class="team-stat-pill ${tStats.wins > 0 ? 'highlight' : ''}">🏆 ${tStats.wins}W</span>
+                                        <span class="team-stat-pill">⭐ ${tStats.points.toLocaleString()} PTS</span>
+                                        ${tStats.top5 > 0 ? `<span class="team-stat-pill">🔥 ${tStats.top5} T5</span>` : ''}
+                                        ${tStats.lapsLed > 0 ? `<span class="team-stat-pill">🏁 ${tStats.lapsLed.toLocaleString()} LED</span>` : ''}
+                                    </div>
+                                </div>
                             </div>
                         `;
                     }
@@ -851,6 +973,6 @@
             <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
         </div>
     </footer>
-    <script src="brl_app.js?v=1795388771"></script>
+    <script src="brl_app.js?v=1795398955"></script>
 </body>
 </html>
