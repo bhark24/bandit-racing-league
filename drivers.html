@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Teko:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=1795398955">
+    <link rel="stylesheet" href="styles.css?v=1795399038">
     <style>
         .card {
             padding: 0;
@@ -213,11 +213,11 @@
             background: rgba(255, 204, 0, 0.08);
         }
     </style>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795398955">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795398955">
-    <link rel="shortcut icon" href="favicon.ico?v=1795398955">
-    <link rel="manifest" href="manifest.json?v=1795398955">
-    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795398955">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png?v=1795399038">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png?v=1795399038">
+    <link rel="shortcut icon" href="favicon.ico?v=1795399038">
+    <link rel="manifest" href="manifest.json?v=1795399038">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=1795399038">
 </head>
 <body>
     <!-- Navbar -->
@@ -316,10 +316,10 @@
         </div>
     </section>
 
-    <script src="supabase_config.js?v=1795398955"></script>
-    <script src="teams_data.js?v=1795398955"></script>
-    <script src="roster_data.js?v=1795398955"></script>
-    <script src="season16_stats_data.js?v=1795398955"></script>
+    <script src="supabase_config.js?v=1795399038"></script>
+    <script src="teams_data.js?v=1795399038"></script>
+    <script src="roster_data.js?v=1795399038"></script>
+    <script src="season16_stats_data.js?v=1795399038"></script>
     <script>
         const grid = document.getElementById('driver-grid');
 
@@ -647,15 +647,11 @@
                             ? `<img src="${team.logo}" alt="${name}" class="driver-team-logo" onerror="this.style.display='none'">`
                             : '';
 
-                        const roleBadge = role === 'Backup'
-                            ? `<span class="driver-team-role" style="color: var(--chase-yellow);">• BACKUP</span>`
-                            : `<span class="driver-team-role">• PRIMARY</span>`;
-
                         teamInfoHtml = `
                             <div class="driver-team-card">
                                 ${logoHtml}
                                 <div class="driver-team-meta">
-                                    <div class="driver-team-name" title="${name}">${name}${roleBadge}</div>
+                                    <div class="driver-team-name" title="${name}">${name}</div>
                                     ${base ? `<div class="driver-team-base">${base}</div>` : ''}
                                     <div class="driver-team-stats">
                                         <span class="team-stat-pill ${tStats.wins > 0 ? 'highlight' : ''}">🏆 ${tStats.wins}W</span>
@@ -973,6 +969,6 @@
             <p>&copy; 2026 Bandit Racing League. All rights reserved.</p>
         </div>
     </footer>
-    <script src="brl_app.js?v=1795398955"></script>
+    <script src="brl_app.js?v=1795399038"></script>
 </body>
 </html>
